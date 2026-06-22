@@ -1,0 +1,71 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <record id="opd_ticket_tree_view" model="ir.ui.view">
+        <field name="name">opd_ticket.tree</field>
+        <field name="model">opd.ticket</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name" />
+                <field name="mobile" />
+                <field name="patient_id" />
+                <field name="patient_name" />
+                <field name="address" />
+                <field name="age" />
+                <field name="sex" />
+                <field name="already_collected" />
+                <field name="date" />
+                <field name="ref_doctors" />
+                <field name="user_id" />
+                <field name="state" />
+                <field name="total" />
+                <field name="with_doctor_total" />
+                <field name="prescription_count" />
+            </list>
+        </field>
+    </record>
+    <record id="opd_ticket_form_view" model="ir.ui.view">
+        <field name="name">opd_ticket.form</field>
+        <field name="model">opd.ticket</field>
+        <field name="arch" type="xml">
+            <form string="OPD Ticket">
+                <header>
+                    <button name="action_create_prescription" type="object" string="Create Prescription" class="btn-primary" />
+                    <button name="action_view_prescriptions" type="object" string="Prescriptions" class="btn-secondary" />
+                </header>
+                <sheet>
+                    <group string="Information">
+                        <group>
+                            <field name="name" />
+                            <field name="patient_id" />
+                            <field name="address" />
+                            <field name="sex" />
+                            <field name="date" />
+                            <field name="user_id" />
+                            <field name="total" />
+                            <field name="prescription_count" readonly="1" />
+                        </group>
+                        <group>
+                            <field name="mobile" />
+                            <field name="patient_name" />
+                            <field name="age" />
+                            <field name="already_collected" />
+                            <field name="ref_doctors" />
+                            <field name="state" />
+                            <field name="with_doctor_total" />
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Opd Ticket Line">
+                            <field name="opd_ticket_line_id" />
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="opd_ticket_action" model="ir.actions.act_window">
+        <field name="name">opd_ticket</field>
+        <field name="res_model">opd.ticket</field>
+        <field name="view_mode">list,form</field>
+    </record>
+</odoo>

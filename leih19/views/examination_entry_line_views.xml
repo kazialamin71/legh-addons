@@ -1,0 +1,78 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <record id="examination_entry_line_tree_view" model="ir.ui.view">
+        <field name="name">examination_entry_line.tree</field>
+        <field name="model">examination.entry.line</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="examinationentry_id"/>
+                <field name="sequence"/>
+                <field name="name" />
+                <field name="result_type"/>
+                <field name="uom"/>
+                <field name="reference_value" />
+                <field name="reference_value_male"/>
+                <field name="reference_value_female"/>
+                <field name="reference_value_child"/>
+                <field name="bold" />
+                <field name="group_by" />
+                <field name="is_group_header"/>
+            </list>
+        </field>
+    </record>
+    <record id="examination_entry_line_form_view" model="ir.ui.view">
+        <field name="name">examination_entry_line.form</field>
+        <field name="model">examination.entry.line</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group string="Information">
+                        <group>
+                            <field name="examinationentry_id"/>
+                            <field name="name" />
+                            <field name="sequence"/>
+                            <field name="result_type"/>
+                            <field name="uom"/>
+                            <field name="default_value"/>
+                        </group>
+                        <group>
+                            <field name="reference_value" />
+                            <field name="reference_value_male"/>
+                            <field name="reference_value_female"/>
+                            <field name="reference_value_child"/>
+                            <field name="ref_low" invisible="result_type != 'numeric'"/>
+                            <field name="ref_high" invisible="result_type != 'numeric'"/>
+                            <field name="critical_low" invisible="result_type != 'numeric'"/>
+                            <field name="critical_high" invisible="result_type != 'numeric'"/>
+                            <field name="bold" />
+                            <field name="group_by" />
+                            <field name="is_group_header"/>
+                            <field name="others" />
+                        </group>
+                    </group>
+                    <group string="Conditional Display">
+                        <field name="parent_line_id"/>
+                        <field name="show_when_value_id" invisible="not parent_line_id"/>
+                    </group>
+                    <notebook>
+                        <page string="Possible Values"
+                              invisible="result_type != 'selection'">
+                            <field name="possible_value_ids">
+                                <list editable="bottom">
+                                    <field name="sequence" widget="handle"/>
+                                    <field name="name"/>
+                                    <field name="is_default"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="examination_entry_line_action" model="ir.actions.act_window">
+        <field name="name">examination_entry_line</field>
+        <field name="res_model">examination.entry.line</field>
+        <field name="view_mode">list,form</field>
+    </record>
+</odoo>

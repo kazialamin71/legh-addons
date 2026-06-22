@@ -1,0 +1,64 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <record id="leih_money_receipt_tree_view" model="ir.ui.view">
+        <field name="name">leih_money_receipt.tree</field>
+        <field name="model">leih.money.receipt</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name" />
+                <field name="date" />
+                <field name="bill_id" />
+                <field name="admission_id" />
+                <field name="general_admission_id" />
+                <field name="optics_sale_id" />
+                <field name="amount" />
+                <field name="bill_total_amount" />
+                <field name="due_amount" />
+                <field name="p_type" />
+                <field name="already_collected" />
+                <field name="diagonostic_bill" />
+                <field name="type" />
+                <field name="user_id" />
+                <field name="state" />
+            </list>
+        </field>
+    </record>
+    <record id="leih_money_receipt_form_view" model="ir.ui.view">
+        <field name="name">leih_money_receipt.form</field>
+        <field name="model">leih.money.receipt</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <field name="state" widget="statusbar" />
+                </header>
+                <sheet>
+                    <group string="Information">
+                        <group>
+                            <field name="name" />
+                            <field name="bill_id" />
+                            <field name="general_admission_id" />
+                            <field name="amount" />
+                            <field name="due_amount" />
+                            <field name="already_collected" />
+                            <field name="type" />
+                        </group>
+                        <group>
+                            <field name="date" />
+                            <field name="admission_id" />
+                            <field name="optics_sale_id" />
+                            <field name="bill_total_amount" />
+                            <field name="p_type" />
+                            <field name="diagonostic_bill" />
+                            <field name="user_id" />
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="leih_money_receipt_action" model="ir.actions.act_window">
+        <field name="name">leih_money_receipt</field>
+        <field name="res_model">leih.money.receipt</field>
+        <field name="view_mode">list,form</field>
+    </record>
+</odoo>

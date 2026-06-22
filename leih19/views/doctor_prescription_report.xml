@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="action_report_doctor_prescription" model="ir.actions.report">
+        <field name="name">Doctor Prescription</field>
+        <field name="model">doctor.prescription</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">leis_migrated_models.report_doctor_prescription_template</field>
+        <field name="report_file">leis_migrated_models.report_doctor_prescription_template</field>
+        <field name="binding_model_id" ref="model_doctor_prescription"/>
+        <field name="binding_type">report</field>
+    </record>
+
+    <template id="report_doctor_prescription_template">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <h2 style="text-align:center;">Prescription</h2>
+                        <table style="width:100%; margin-bottom:16px;">
+                            <tr>
+                                <td><strong>No:</strong> <span t-field="o.name"/></td>
+                                <td><strong>Date:</strong> <span t-field="o.date"/></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Patient:</strong> <span t-field="o.patient_id"/></td>
+                                <td><strong>Patient ID:</strong> <span t-field="o.patient_code"/></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Age/Sex:</strong> <span t-field="o.age"/> / <span t-field="o.sex"/></td>
+                                <td><strong>Mobile:</strong> <span t-field="o.mobile"/></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2"><strong>Address:</strong> <span t-field="o.address"/></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Doctor:</strong> <span t-field="o.doctor_id"/></td>
+                                <td><strong>Department:</strong> <span t-field="o.department"/></td>
+                            </tr>
+                        </table>
+
+                        <div style="margin-bottom:12px;">
+                            <strong>Chief Complaint:</strong>
+                            <div t-field="o.chief_complaint"/>
+                        </div>
+                        <div style="margin-bottom:12px;">
+                            <strong>Diagnosis:</strong>
+                            <div t-field="o.diagnosis"/>
+                        </div>
+
+                        <h3>Medicine</h3>
+                        <table class="table table-sm table-bordered" style="width:100%; margin-bottom:16px;">
+                            <thead>
+                                <tr>
+                                    <th>Medicine</th>
+                                    <th>Dosage</th>
+                                    <th>Frequency</th>
+                                    <th>Duration</th>
+                                    <th>Instruction</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr t-foreach="o.medicine_line_ids" t-as="line">
+                                    <td><span t-field="line.medicine_name"/></td>
+                                    <td><span t-field="line.dosage"/></td>
+                                    <td><span t-field="line.frequency"/></td>
+                                    <td><span t-field="line.duration"/></td>
+                                    <td><span t-field="line.instruction"/></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <h3>Advice</h3>
+                        <ul>
+                            <li t-foreach="o.advice_line_ids" t-as="line"><span t-field="line.advice"/></li>
+                        </ul>
+
+                        <h3>Tests</h3>
+                        <ul>
+                            <li t-foreach="o.test_line_ids" t-as="line">
+                                <span t-field="line.test_name"/> - <span t-field="line.note"/>
+                            </li>
+                        </ul>
+
+                        <div style="margin-top:16px;">
+                            <strong>Follow Up:</strong>
+                            <span t-field="o.followup_date"/> - <span t-field="o.followup_note"/>
+                        </div>
+
+                        <div style="margin-top:48px; text-align:right;">
+                            <strong>Doctor Signature</strong>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

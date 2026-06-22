@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo noupdate="1">
+
+    <!-- ================================================================= -->
+    <!-- Mantoux Test (Tuberculin Skin Test / TST) — standard configuration -->
+    <!--   Layout: 'special' (label/value form)                              -->
+    <!--   In-vivo test: no specimen / tube needed                           -->
+    <!-- ================================================================= -->
+
+    <record id="diagnosis_department_clinical_pathology" model="diagnosis.department">
+        <field name="name">Clinical Pathology</field>
+    </record>
+
+    <record id="lab_method_mantoux" model="lab.method">
+        <field name="name">Mantoux Technique – Intradermal PPD (10 TU / 0.1 mL)</field>
+        <field name="code">MANTOUX</field>
+        <field name="sequence">10</field>
+        <field name="description">0.1 mL Purified Protein Derivative (10 TU) injected intradermally on the volar forearm; read at 48–72 hours.</field>
+    </record>
+
+    <record id="examination_entry_mantoux" model="examination.entry">
+        <field name="name">Mantoux Test (Tuberculin Skin Test)</field>
+        <field name="department" ref="diagnosis_department_clinical_pathology"/>
+        <field name="category">pathology</field>
+        <field name="report_type">other</field>
+        <field name="report_layout">special</field>
+        <field name="default_method_id" ref="lab_method_mantoux"/>
+        <field name="sample_req" eval="False"/>
+        <field name="required_time">3</field>
+    </record>
+
+    <!-- ============ Administration ============ -->
+    <record id="mantoux_line_grp_admin" model="examination.entry.line">
+        <field name="name">Administration</field>
+        <field name="examinationentry_id" ref="examination_entry_mantoux"/>
+        <field name="is_group_header" eval="True"/>
+        <field name="sequence">10</field>
+    </record>
+
+    <record id="mantoux_line_antigen" model="examination.entry.line">
+        <field name="name">Antigen &amp; Dose</field>
+        <field name="examinationentry_id" ref="examination_entry_mantoux"/>
+        <field name="result_type">text</field>
+        <field name="default_value">0.1 mL PPD (10 TU), intradermal</field>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="mantoux_line_site" model="examination.entry.line">
+        <field name="name">Site of Injection</field>
+        <field name="examinationentry_id" ref="examination_entry_mantoux"/>
+        <field name="result_type">text</field>
+        <field name="default_value">Left forearm (volar aspect)</field>
+        <field name="sequence">30</field>
+    </record>
+
+    <record id="mantoux_line_dt_given" model="examination.entry.line">
+        <field name="name">Date &amp; Time Administered</field>
+        <field name="examinationentry_id" ref="examination_entry_mantoux"/>
+        <field name="result_type">text</field>
+        <field name="sequence">40</field>
+    </record>
+
+    <!-- ============ Reading (48–72 hrs) ============ -->
+    <record id="mantoux_line_grp_reading" model="examination.entry.line">
+        <field name="name">Reading (48–72 hrs)</field>
+        <field name="examinationentry_id" ref="examination_entry_mantoux"/>
+        <field name="is_group_header" eval="True"/>
+        <field name="sequence">50</field>
+    </record>
+
+    <record id="mantoux_line_dt_read" model="examination.entry.line">
+        <field name="name">Date &amp; Time of Reading</field>
+        <field name="examinationentry_id" ref="examination_entry_mantoux"/>
+        <field name="result_type">text</field>
+        <field name="default_value">48–72 hours after administration</field>
+        <field name="sequence">60</field>
+    </record>
+
+    <record id="mantoux_line_induration" model="examination.entry.line">
+        <field name="name">Induration (transverse diameter)</field>
+        <field name="examinationentry_id" ref="examination_entry_mantoux"/>
+        <field name="result_type">numeric</field>
+        <field name="uom">mm</field>
+        <field name="reference_value">&lt; 5 mm: Negative | 5–9 mm: Doubtful | ≥ 10 mm: Positive</field>
+        <field name="sequence">70</field>
+    </record>
+
+    <record id="mantoux_line_erythema" model="examination.entry.line">
+        <field name="name">Erythema</field>
+        <field name="examinationentry_id" ref="examination_entry_mantoux"/>
+        <field name="result_type">numeric</field>
+        <field name="uom">mm</field>
+        <field name="sequence">80</field>
+    </record>
+
+    <record id="mantoux_line_interpretation" model="examination.entry.line">
+        <field name="name">Interpretation</field>
+        <field name="examinationentry_id" ref="examination_entry_mantoux"/>
+        <field name="result_type">selection</field>
+        <field name="reference_value">&lt; 5 mm: Negative | 5–9 mm: Doubtful | ≥ 10 mm: Positive</field>
+        <field name="sequence">90</field>
+    </record>
+
+    <record id="mantoux_pv_negative" model="examination.possible.value">
+        <field name="name">Negative</field>
+        <field name="examination_line_id" ref="mantoux_line_interpretation"/>
+        <field name="sequence">10</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="mantoux_pv_doubtful" model="examination.possible.value">
+        <field name="name">Doubtful</field>
+        <field name="examination_line_id" ref="mantoux_line_interpretation"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="mantoux_pv_positive" model="examination.possible.value">
+        <field name="name">Positive</field>
+        <field name="examination_line_id" ref="mantoux_line_interpretation"/>
+        <field name="sequence">30</field>
+    </record>
+
+    <!-- Interpretation criteria printed as a note row -->
+    <record id="mantoux_line_criteria" model="examination.entry.line">
+        <field name="name">Interpretation Criteria</field>
+        <field name="examinationentry_id" ref="examination_entry_mantoux"/>
+        <field name="result_type">text</field>
+        <field name="default_value">&lt; 5 mm: Negative | 5–9 mm: Doubtful | ≥ 10 mm: Positive</field>
+        <field name="sequence">100</field>
+    </record>
+
+</odoo>

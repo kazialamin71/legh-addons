@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo noupdate="1">
+
+    <record id="diagnosis_department_biochemistry" model="diagnosis.department">
+        <field name="name">Biochemistry</field>
+    </record>
+
+    <record id="tube_color_lavender" model="tube.color">
+        <field name="name">Lavender</field>
+        <field name="code">#B57EDC</field>
+        <field name="sequence">20</field>
+        <field name="description">EDTA tube</field>
+    </record>
+
+    <record id="examination_entry_rbs" model="examination.entry">
+        <field name="name">RBS</field>
+        <field name="department" ref="diagnosis_department_biochemistry"/>
+        <field name="tube_color_id" ref="tube_color_lavender"/>
+        <field name="report_type">pathology</field>
+        <field name="sample_req" eval="True"/>
+    </record>
+
+    <record id="examination_entry_line_rbs" model="examination.entry.line">
+        <field name="name">RBS</field>
+        <field name="examinationentry_id" ref="examination_entry_rbs"/>
+        <field name="reference_value">up to 8</field>
+        <field name="uom">mmol/L</field>
+        <field name="result_type">numeric</field>
+        <field name="sequence">10</field>
+    </record>
+
+    <!-- Selection-type sample: HBsAg (Serology) -->
+    <record id="diagnosis_department_serology" model="diagnosis.department">
+        <field name="name">Serology</field>
+    </record>
+
+    <record id="tube_color_yellow" model="tube.color">
+        <field name="name">Yellow</field>
+        <field name="code">#FFD700</field>
+        <field name="sequence">30</field>
+        <field name="description">SST / clot activator tube</field>
+    </record>
+
+    <record id="examination_entry_hbsag" model="examination.entry">
+        <field name="name">HBsAg</field>
+        <field name="department" ref="diagnosis_department_serology"/>
+        <field name="tube_color_id" ref="tube_color_yellow"/>
+        <field name="report_type">pathology</field>
+        <field name="sample_req" eval="True"/>
+    </record>
+
+    <record id="examination_entry_line_hbsag" model="examination.entry.line">
+        <field name="name">HBsAg</field>
+        <field name="examinationentry_id" ref="examination_entry_hbsag"/>
+        <field name="result_type">selection</field>
+        <field name="reference_value">Negative</field>
+        <field name="sequence">10</field>
+    </record>
+
+    <record id="possible_value_hbsag_negative" model="examination.possible.value">
+        <field name="name">Negative</field>
+        <field name="examination_line_id" ref="examination_entry_line_hbsag"/>
+        <field name="sequence">10</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="possible_value_hbsag_positive" model="examination.possible.value">
+        <field name="name">Positive</field>
+        <field name="examination_line_id" ref="examination_entry_line_hbsag"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="possible_value_hbsag_equivocal" model="examination.possible.value">
+        <field name="name">Equivocal</field>
+        <field name="examination_line_id" ref="examination_entry_line_hbsag"/>
+        <field name="sequence">30</field>
+    </record>
+
+    <!-- Microbiology sample: Urine Culture with antibiogram + conditional comment -->
+    <record id="diagnosis_department_microbiology" model="diagnosis.department">
+        <field name="name">Microbiology</field>
+    </record>
+
+    <record id="examination_entry_urine_culture" model="examination.entry">
+        <field name="name">Urine Culture &amp; Sensitivity</field>
+        <field name="department" ref="diagnosis_department_microbiology"/>
+        <field name="tube_color_id" ref="tube_color_yellow"/>
+        <field name="category">microbiology</field>
+        <field name="report_type">pathology</field>
+        <field name="sample_req" eval="True"/>
+        <field name="default_incubation_hours">48</field>
+        <field name="default_incubation_temp_c">37.0</field>
+        <field name="default_culture_medium">MacConkey / Blood Agar</field>
+        <field name="antibiotic_ids" eval="[(6, 0, [
+            ref('antibiotic_amoxiclav'),
+            ref('antibiotic_piptaz'),
+            ref('antibiotic_ceftriaxone'),
+            ref('antibiotic_cefepime'),
+            ref('antibiotic_meropenem'),
+            ref('antibiotic_ciprofloxacin'),
+            ref('antibiotic_levofloxacin'),
+            ref('antibiotic_gentamicin'),
+            ref('antibiotic_amikacin'),
+            ref('antibiotic_cotrimoxazole'),
+            ref('antibiotic_nitrofurantoin'),
+        ])]"/>
+    </record>
+
+    <record id="examination_entry_line_uc_result" model="examination.entry.line">
+        <field name="name">Result</field>
+        <field name="examinationentry_id" ref="examination_entry_urine_culture"/>
+        <field name="result_type">selection</field>
+        <field name="sequence">10</field>
+    </record>
+
+    <record id="possible_value_uc_growth" model="examination.possible.value">
+        <field name="name">Growth</field>
+        <field name="examination_line_id" ref="examination_entry_line_uc_result"/>
+        <field name="sequence">10</field>
+    </record>
+    <record id="possible_value_uc_no_growth" model="examination.possible.value">
+        <field name="name">No Growth</field>
+        <field name="examination_line_id" ref="examination_entry_line_uc_result"/>
+        <field name="sequence">20</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="examination_entry_line_uc_organism" model="examination.entry.line">
+        <field name="name">Organism Identified</field>
+        <field name="examinationentry_id" ref="examination_entry_urine_culture"/>
+        <field name="result_type">text</field>
+        <field name="sequence">20</field>
+        <field name="parent_line_id" ref="examination_entry_line_uc_result"/>
+        <field name="show_when_value_id" ref="possible_value_uc_growth"/>
+    </record>
+
+    <record id="examination_entry_line_uc_comment" model="examination.entry.line">
+        <field name="name">Comment</field>
+        <field name="examinationentry_id" ref="examination_entry_urine_culture"/>
+        <field name="result_type">text</field>
+        <field name="sequence">30</field>
+        <field name="parent_line_id" ref="examination_entry_line_uc_result"/>
+        <field name="show_when_value_id" ref="possible_value_uc_no_growth"/>
+        <field name="default_value">No growth shown after 48 hours of incubation at 37°C.</field>
+    </record>
+
+    <!-- Pathology multi-component sample: Lipid Profile -->
+    <record id="examination_entry_lipid_profile" model="examination.entry">
+        <field name="name">Lipid Profile</field>
+        <field name="department" ref="diagnosis_department_biochemistry"/>
+        <field name="tube_color_id" ref="tube_color_yellow"/>
+        <field name="category">pathology</field>
+        <field name="report_type">pathology</field>
+        <field name="sample_req" eval="True"/>
+    </record>
+
+    <record id="examination_entry_line_lp_header" model="examination.entry.line">
+        <field name="name">Lipid Profile</field>
+        <field name="examinationentry_id" ref="examination_entry_lipid_profile"/>
+        <field name="sequence">10</field>
+        <field name="is_group_header" eval="True"/>
+        <field name="bold" eval="True"/>
+    </record>
+
+    <record id="examination_entry_line_lp_tc" model="examination.entry.line">
+        <field name="name">Total Cholesterol</field>
+        <field name="examinationentry_id" ref="examination_entry_lipid_profile"/>
+        <field name="result_type">numeric</field>
+        <field name="uom">mg/dL</field>
+        <field name="sequence">20</field>
+        <field name="reference_value">&lt; 200</field>
+        <field name="ref_high">200.0</field>
+        <field name="critical_high">300.0</field>
+    </record>
+
+    <record id="examination_entry_line_lp_tg" model="examination.entry.line">
+        <field name="name">Triglycerides</field>
+        <field name="examinationentry_id" ref="examination_entry_lipid_profile"/>
+        <field name="result_type">numeric</field>
+        <field name="uom">mg/dL</field>
+        <field name="sequence">30</field>
+        <field name="reference_value">&lt; 150</field>
+        <field name="ref_high">150.0</field>
+        <field name="critical_high">500.0</field>
+    </record>
+
+    <record id="examination_entry_line_lp_hdl" model="examination.entry.line">
+        <field name="name">HDL Cholesterol</field>
+        <field name="examinationentry_id" ref="examination_entry_lipid_profile"/>
+        <field name="result_type">numeric</field>
+        <field name="uom">mg/dL</field>
+        <field name="sequence">40</field>
+        <field name="reference_value">&gt; 40 (M), &gt; 50 (F)</field>
+        <field name="ref_low">40.0</field>
+    </record>
+
+    <record id="examination_entry_line_lp_ldl" model="examination.entry.line">
+        <field name="name">LDL Cholesterol</field>
+        <field name="examinationentry_id" ref="examination_entry_lipid_profile"/>
+        <field name="result_type">numeric</field>
+        <field name="uom">mg/dL</field>
+        <field name="sequence">50</field>
+        <field name="reference_value">&lt; 130</field>
+        <field name="ref_high">130.0</field>
+        <field name="critical_high">190.0</field>
+    </record>
+
+    <record id="examination_entry_line_lp_vldl" model="examination.entry.line">
+        <field name="name">VLDL Cholesterol</field>
+        <field name="examinationentry_id" ref="examination_entry_lipid_profile"/>
+        <field name="result_type">numeric</field>
+        <field name="uom">mg/dL</field>
+        <field name="sequence">60</field>
+        <field name="reference_value">&lt; 30</field>
+        <field name="ref_high">30.0</field>
+    </record>
+
+    <record id="examination_entry_line_lp_ratio" model="examination.entry.line">
+        <field name="name">Total Cholesterol / HDL Ratio</field>
+        <field name="examinationentry_id" ref="examination_entry_lipid_profile"/>
+        <field name="result_type">numeric</field>
+        <field name="uom"></field>
+        <field name="sequence">70</field>
+        <field name="reference_value">&lt; 5</field>
+        <field name="ref_high">5.0</field>
+    </record>
+
+    <!-- Microbiology sample 2: Blood Culture & Sensitivity -->
+    <record id="tube_color_blood_culture" model="tube.color">
+        <field name="name">Blood Culture Bottle</field>
+        <field name="code">#2E7D32</field>
+        <field name="sequence">40</field>
+        <field name="description">Aerobic / Anaerobic culture bottles (BacT/Alert FAN)</field>
+    </record>
+
+    <record id="examination_entry_blood_culture" model="examination.entry">
+        <field name="name">Blood Culture &amp; Sensitivity</field>
+        <field name="department" ref="diagnosis_department_microbiology"/>
+        <field name="tube_color_id" ref="tube_color_blood_culture"/>
+        <field name="category">microbiology</field>
+        <field name="report_type">pathology</field>
+        <field name="sample_req" eval="True"/>
+        <field name="default_incubation_hours">120</field>
+        <field name="default_incubation_temp_c">37.0</field>
+        <field name="default_culture_medium">BHI broth / BacT/Alert FAN bottles (aerobic + anaerobic)</field>
+        <field name="antibiotic_ids" eval="[(6, 0, [
+            ref('antibiotic_ampicillin'),
+            ref('antibiotic_amoxiclav'),
+            ref('antibiotic_piptaz'),
+            ref('antibiotic_ceftriaxone'),
+            ref('antibiotic_cefepime'),
+            ref('antibiotic_meropenem'),
+            ref('antibiotic_imipenem'),
+            ref('antibiotic_ciprofloxacin'),
+            ref('antibiotic_levofloxacin'),
+            ref('antibiotic_gentamicin'),
+            ref('antibiotic_amikacin'),
+            ref('antibiotic_doxycycline'),
+            ref('antibiotic_vancomycin'),
+            ref('antibiotic_linezolid'),
+        ])]"/>
+    </record>
+
+    <record id="examination_entry_line_bc_gram_stain" model="examination.entry.line">
+        <field name="name">Gram Stain</field>
+        <field name="examinationentry_id" ref="examination_entry_blood_culture"/>
+        <field name="result_type">text</field>
+        <field name="sequence">10</field>
+        <field name="default_value">No organisms seen.</field>
+    </record>
+
+    <record id="examination_entry_line_bc_result" model="examination.entry.line">
+        <field name="name">Result</field>
+        <field name="examinationentry_id" ref="examination_entry_blood_culture"/>
+        <field name="result_type">selection</field>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="possible_value_bc_growth" model="examination.possible.value">
+        <field name="name">Growth</field>
+        <field name="examination_line_id" ref="examination_entry_line_bc_result"/>
+        <field name="sequence">10</field>
+    </record>
+    <record id="possible_value_bc_no_growth" model="examination.possible.value">
+        <field name="name">No Growth</field>
+        <field name="examination_line_id" ref="examination_entry_line_bc_result"/>
+        <field name="sequence">20</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="examination_entry_line_bc_organism" model="examination.entry.line">
+        <field name="name">Organism Identified</field>
+        <field name="examinationentry_id" ref="examination_entry_blood_culture"/>
+        <field name="result_type">text</field>
+        <field name="sequence">30</field>
+        <field name="parent_line_id" ref="examination_entry_line_bc_result"/>
+        <field name="show_when_value_id" ref="possible_value_bc_growth"/>
+    </record>
+
+    <record id="examination_entry_line_bc_comment" model="examination.entry.line">
+        <field name="name">Comment</field>
+        <field name="examinationentry_id" ref="examination_entry_blood_culture"/>
+        <field name="result_type">text</field>
+        <field name="sequence">40</field>
+        <field name="parent_line_id" ref="examination_entry_line_bc_result"/>
+        <field name="show_when_value_id" ref="possible_value_bc_no_growth"/>
+        <field name="default_value">No growth after 5 days of incubation at 37°C in aerobic and anaerobic bottles.</field>
+    </record>
+
+</odoo>

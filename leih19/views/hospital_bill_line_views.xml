@@ -1,0 +1,60 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <record id="hospital_bill_line_tree_view" model="ir.ui.view">
+        <field name="name">hospital_bill_line.tree</field>
+        <field name="model">hospital.bill.line</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name" />
+                <field name="hospital_admission_id" />
+                <field name="item_name" />
+                <field name="product_qty" />
+                <field name="bill_created_date" />
+                <field name="delivery_date" />
+                <field name="department" />
+                <field name="date" />
+                <field name="price" />
+                <field name="discount" />
+                <field name="flat_discount" />
+                <field name="total_discount" />
+                <field name="discount_percent" />
+                <field name="total_amount" />
+            </list>
+        </field>
+    </record>
+    <record id="hospital_bill_line_form_view" model="ir.ui.view">
+        <field name="name">hospital_bill_line.form</field>
+        <field name="model">hospital.bill.line</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group string="Information">
+                        <group>
+                            <field name="name" />
+                            <field name="item_name" />
+                            <field name="bill_created_date" />
+                            <field name="department" />
+                            <field name="price" />
+                            <field name="flat_discount" />
+                            <field name="discount_percent" />
+                        </group>
+                        <group>
+                            <field name="hospital_admission_id" />
+                            <field name="product_qty" />
+                            <field name="delivery_date" />
+                            <field name="date" />
+                            <field name="discount" />
+                            <field name="total_discount" />
+                            <field name="total_amount" />
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="hospital_bill_line_action" model="ir.actions.act_window">
+        <field name="name">hospital_bill_line</field>
+        <field name="res_model">hospital.bill.line</field>
+        <field name="view_mode">list,form</field>
+    </record>
+</odoo>

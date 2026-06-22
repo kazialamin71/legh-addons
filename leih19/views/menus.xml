@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+  <menuitem id="menu_leis_root" name="LEIS" sequence="10"/>
+  <menuitem id="menu_leis_configuration" name="Configuration" parent="menu_leis_root" sequence="11"/>
+  <menuitem id="menu_leis_hospital" name="Hospital" parent="menu_leis_root" sequence="20"/>
+  <menuitem id="menu_leis_billing" name="Billing" parent="menu_leis_root" sequence="30"/>
+  <menuitem id="menu_leis_opd" name="OPD" parent="menu_leis_root" sequence="40"/>
+  <menuitem id="menu_leis_admission" name="Admission" parent="menu_leis_root" sequence="50"/>
+  <menuitem id="menu_leis_hospital_admission" name="Hospital Admission" parent="menu_leis_root" sequence="60"/>
+  <menuitem id="menu_leis_lab" name="Lab" parent="menu_leis_root" sequence="70"/>
+  <menuitem id="menu_leis_discount" name="Discount" parent="menu_leis_root" sequence="80"/>
+  <menuitem id="menu_leis_emergency" name="Emergency" parent="menu_leis_root" sequence="90"/>
+  <menuitem id="menu_leis_blood_bank" name="Blood Bank" parent="menu_leis_root" sequence="100"/>
+  <menuitem id="menu_leis_appointment" name="Appointment" parent="menu_leis_root" sequence="110"/>
+  <menuitem id="menu_leis_laundry" name="Laundry and Linen" parent="menu_leis_root" sequence="120"/>
+  <menuitem id="menu_leis_expense" name="Expense" parent="menu_leis_root" sequence="130"/>
+  <menuitem id="menu_leis_requisition" name="Requisition" parent="menu_leis_root" sequence="140"/>
+  <menuitem id="menu_leis_inventory_product_entry" name="Inventory Product Entry" parent="menu_leis_root" sequence="150"/>
+  <menuitem id="menu_leis_others" name="Others" parent="menu_leis_root" sequence="160"/>
+  <menuitem id="menu_lab_sample_collection" name="Sample Collection" parent="menu_leis_lab" action="action_lab_sample_collection" sequence="10"/>
+  <menuitem id="menu_lab_pending" name="Pending in Lab" parent="menu_leis_lab" action="diagnosis_sticker_lab_action" sequence="11"/>
+  <menuitem id="menu_lab_specimens" name="Lab Specimens" parent="menu_leis_lab" action="lab_specimen_action" sequence="11"/>
+  <menuitem id="menu_lab_results" name="Lab Results" parent="menu_leis_lab" action="examination_result_action" sequence="12"/>
+  <menuitem id="menu_discount_pending" name="Pending Discount" parent="menu_leis_discount" action="discount_pending_action" sequence="10"/>
+  <menuitem id="menu_discount_approved" name="Approved Discount" parent="menu_leis_discount" action="discount_approved_action" sequence="11"/>
+  <menuitem id="menu_discount_cancelled" name="Cancelled Discount" parent="menu_leis_discount" action="discount_cancelled_action" sequence="12"/>
+  <menuitem id="menu_emergency_pending" name="Pending Emergency" parent="menu_leis_emergency" action="leih_emergency_pending_action" sequence="10"/>
+  <menuitem id="menu_emergency_activated" name="Activated Emergency" parent="menu_leis_emergency" action="leih_emergency_activated_action" sequence="11"/>
+  <menuitem id="menu_emergency_released" name="Released Emergency" parent="menu_leis_emergency" action="leih_emergency_released_action" sequence="12"/>
+  <menuitem id="menu_diagnosis_department" name="Department" parent="menu_leis_configuration" action="diagnosis_department_action" sequence="11"/>
+  <menuitem id="menu_leis_profile" name="Profile" parent="menu_leis_root" sequence="12"/>
+  <menuitem id="menu_diagonosis" name="Diagonosis" parent="menu_leis_others" action="diagonosis_action" sequence="13"/>
+  <menuitem id="menu_brokers_info" name="BrokersInfo" parent="menu_leis_profile" action="brokers_info_action" sequence="1"/>
+  <menuitem id="menu_doctors_profile" name="DoctorsProfile" parent="menu_leis_profile" action="doctors_profile_action" sequence="2"/>
+  <menuitem id="menu_diagnosis_group" name="Group" parent="menu_leis_configuration" action="diagnosis_group_action" sequence="12"/>
+  <menuitem id="menu_patient_info" name="Patient Info" parent="menu_leis_profile" action="patient_info_action" sequence="3"/>
+ <menuitem id="menu_leih_admission" name="Add new" parent="menu_leis_admission" action="leih_admission_action" sequence="15"/>
+  <menuitem id="menu_leih_admission_line" name="LeihAdmissionLine" parent="menu_leis_others" action="leih_admission_line_action" sequence="18"/>
+  <menuitem id="menu_bill_register_admission_line" name="BillRegisterAdmissionLine" parent="menu_leis_others" action="bill_register_admission_line_action" sequence="19"/>
+  <menuitem id="menu_admission_payment_line" name="AdmissionPaymentLine" parent="menu_leis_others" action="admission_payment_line_action" sequence="20"/>
+  <menuitem id="menu_patient_guarantor" name="PatientGuarantor" parent="menu_leis_others" action="patient_guarantor_action" sequence="21"/>
+  <menuitem id="menu_admission_payment" name="Admission Payment" parent="menu_leis_admission" action="admission_payment_action" sequence="20"/>
+  <menuitem id="menu_bill_register_payment" name="Bill Payment" parent="menu_leis_admission" action="bill_register_payment_action" sequence="21"/>
+  <menuitem id="menu_admission_payment_configuration" name="Admission Payment Configuration" parent="menu_leis_admission" action="admission_payment_configuration_action" sequence="22"/>
+  <menuitem id="menu_optics_sale_payment" name="Optics Payment" parent="menu_leis_admission" action="optics_sale_payment_action" sequence="23"/>
+  <menuitem id="menu_admission_payment_configuration_line" name="AdmissionPaymentConfigurationLine" parent="menu_leis_others" action="admission_payment_configuration_line_action" sequence="24"/>
+  <menuitem id="menu_advance_cash" name="Advance Cash" parent="menu_leis_billing" action="advance_cash_action" sequence="90"/>
+  <menuitem id="menu_ambulance_registration" name="AmbulanceRegistration" parent="menu_leis_others" action="ambulance_registration_action" sequence="27"/>
+  <menuitem id="menu_ambulance_booking" name="AmbulanceBooking" parent="menu_leis_others" action="ambulance_booking_action" sequence="28"/>
+  <menuitem id="menu_ambulance_expense" name="AmbulanceExpense" parent="menu_leis_others" action="ambulance_expense_action" sequence="29"/>
+  <menuitem id="menu_appointment_booking" name="Appointment Booking" parent="menu_leis_appointment" action="appointment_booking_action" sequence="10"/>
+  <menuitem id="menu_appointment_paid" name="Appointment Paid" parent="menu_leis_appointment" action="appointment_paid_action" sequence="11"/>
+  <menuitem id="menu_appointment_payment" name="Appointment payment" parent="menu_leis_appointment" action="appointment_payment_action" sequence="12"/>
+  <menuitem id="menu_appointment_payment_line" name="AppointmentPaymentLine" parent="menu_leis_others" action="appointment_payment_line_action" sequence="33"/>
+  <menuitem id="menu_add_bill" name="AddBill" parent="menu_leis_others" action="add_bill_action" sequence="34"/>
+  
+  
+   <menuitem id="menu_bill_register_payment_line" name="BillRegisterPaymentLine" parent="menu_leis_others" action="bill_register_payment_line_action" sequence="37"/>
+  <menuitem id="menu_bill_journal_relation" name="BillJournalRelation" parent="menu_leis_others" action="bill_journal_relation_action" sequence="38"/>
+  <menuitem id="menu_investigation_payment" name="investigation payment" parent="menu_leis_appointment" action="investigation_payment_action" sequence="13"/>
+  <menuitem id="menu_investigation_payment_line" name="Investigation Line" parent="menu_leis_billing" action="investigation_payment_line_action" sequence="75"/>
+  <menuitem id="menu_blood_donar" name="Blood Donar" parent="menu_leis_blood_bank" action="blood_donar_action" sequence="10"/>
+  <menuitem id="menu_blood_receiver" name="Blood Receiver" parent="menu_leis_blood_bank" action="blood_receiver_action" sequence="11"/>
+  <menuitem id="menu_cash_collection" name="Pending Cash Collection" parent="menu_leis_hospital" action="cash_collection_action" sequence="20"/>
+  <menuitem id="menu_cash_collection_line" name="Confirmed Cash Collection" parent="menu_leis_hospital" action="cash_collection_line_action" sequence="30"/>
+  <menuitem id="menu_custom_report_wiz" name="CustomReportWiz" parent="menu_leis_others" action="custom_report_wiz_action" sequence="53"/>
+  <menuitem id="menu_hospital_dashboard" name="HospitalDashboard" parent="menu_leis_others" action="hospital_dashboard_action" sequence="54"/>
+  <menuitem id="menu_diagnosis_room" name="DiagnosisRoom" parent="menu_leis_others" action="diagnosis_room_action" sequence="55"/>
+  <menuitem id="menu_corporate_discount" name="Corporate Discount" parent="menu_leis_billing" action="corporate_discount_action" sequence="50"/>
+  <menuitem id="menu_discount" name="All Discount" parent="menu_leis_discount" action="discount_action" sequence="20"/>
+  <menuitem id="menu_discount_line" name="DiscountLine" parent="menu_leis_others" action="discount_line_action" sequence="58"/>
+  <menuitem id="menu_discount_category" name="Discount Category" parent="menu_leis_billing" action="discount_category_action" sequence="30"/>
+  <menuitem id="menu_discount_configuration" name="Discount Configuration" parent="menu_leis_billing" action="discount_configuration_action" sequence="40"/>
+  <menuitem id="menu_discount_configuration_line" name="DiscountConfigurationLine" parent="menu_leis_others" action="discount_configuration_line_action" sequence="61"/>
+  <menuitem id="menu_examination_entry" name="Item Entry" parent="menu_leis_configuration" action="examination_entry_action" sequence="13"/>
+  <menuitem id="menu_examination_entry_line" name="ExaminationEntryLine" parent="menu_leis_others" action="examination_entry_line_action" sequence="63"/>
+  <menuitem id="menu_examination_merge_line" name="ExaminationMergeLine" parent="menu_leis_others" action="examination_merge_line_action" sequence="64"/>
+  <menuitem id="menu_sample_type" name="SampleType" parent="menu_leis_others" action="sample_type_action" sequence="65"/>
+  <menuitem id="menu_tube_color" name="Tube Color" parent="menu_leis_configuration" action="tube_color_action" sequence="18"/>
+  <menuitem id="menu_examination_report_template" name="Report Templates" parent="menu_leis_configuration" action="examination_report_template_action" sequence="19"/>
+  <menuitem id="menu_lab_method" name="Lab Methods" parent="menu_leis_configuration" action="lab_method_action" sequence="20"/>
+  <menuitem id="menu_lab_instrument" name="Lab Instruments" parent="menu_leis_configuration" action="lab_instrument_action" sequence="21"/>
+  <menuitem id="menu_lab_antibiotic" name="Antibiotics" parent="menu_leis_configuration" action="lab_antibiotic_action" sequence="22"/>
+  <menuitem id="menu_leih_expense" name="Expense" parent="menu_leis_expense" action="leih_expense_action" sequence="10"/>
+  <menuitem id="menu_leih_expense_approved" name="Approved Expense" parent="menu_leis_expense" action="leih_expense_approved_action" sequence="11"/>
+  <menuitem id="menu_leih_expense_cancelled" name="Expense Cancel" parent="menu_leis_expense" action="leih_expense_cancelled_action" sequence="12"/>
+  <menuitem id="menu_hospital_admission_pending" name="Hospital Pending Admission" parent="menu_leis_hospital_admission" action="hospital_admission_pending_action" sequence="10"/>
+  <menuitem id="menu_hospital_admission_activated" name="Hospital Activated Admission" parent="menu_leis_hospital_admission" action="hospital_admission_activated_action" sequence="11"/>
+  <menuitem id="menu_hospital_admission_released" name="Hospital Released Admission" parent="menu_leis_hospital_admission" action="hospital_admission_released_action" sequence="12"/>
+  <menuitem id="menu_hospital_admission_cancelled" name="Hospital Cancelled Admission" parent="menu_leis_hospital_admission" action="hospital_admission_cancelled_action" sequence="13"/>
+  <menuitem id="menu_hospital_admission_line" name="HospitalAdmissionLine" parent="menu_leis_others" action="hospital_admission_line_action" sequence="68"/>
+  <menuitem id="menu_bill_register_general_admission_line" name="BillRegisterGeneralAdmissionLine" parent="menu_leis_others" action="bill_register_general_admission_line_action" sequence="69"/>
+  <menuitem id="menu_general_admission_payment_line" name="GeneralAdmissionPaymentLine" parent="menu_leis_others" action="general_admission_payment_line_action" sequence="70"/>
+  <menuitem id="menu_hospital_bed_line" name="HospitalBedLine" parent="menu_leis_others" action="hospital_bed_line_action" sequence="71"/>
+  <menuitem id="menu_doctor_profile_admission_line" name="DoctorProfileAdmissionLine" parent="menu_leis_others" action="doctor_profile_admission_line_action" sequence="72"/>
+  <menuitem id="menu_hospital_medicine_line" name="HospitalMedicineLine" parent="menu_leis_others" action="hospital_medicine_line_action" sequence="73"/>
+  <menuitem id="menu_hospital_bill_line" name="HospitalBillLine" parent="menu_leis_others" action="hospital_bill_line_action" sequence="74"/>
+
+  <menuitem id="menu_hospital_bed" name="Hospital Bed" parent="menu_leis_configuration" action="hospital_bed_action" sequence="16"/>
+  <menuitem id="menu_hospital_patient_guarantor" name="HospitalPatientGuarantor" parent="menu_leis_others" action="hospital_patient_guarantor_action" sequence="77"/>
+  <menuitem id="menu_hospital_medicine" name="Hospital Medicine" parent="menu_leis_configuration" action="hospital_medicine_action" sequence="17"/>
+  <menuitem id="menu_hospital_admission_payment" name="HospitalAdmissionPayment" parent="menu_leis_others" action="hospital_admission_payment_action" sequence="79"/>
+  <menuitem id="menu_general_admission_release" name="GeneralAdmissionRelease" parent="menu_leis_others" action="general_admission_release_action" sequence="80"/>
+  <menuitem id="menu_inventory_product_entry_pending" name="Pending Inventory Product Entry" parent="menu_leis_inventory_product_entry" action="inventory_product_entry_pending_action" sequence="10"/>
+  <menuitem id="menu_inventory_product_entry_confirmed" name="Confirmed Inventory Product Entry" parent="menu_leis_inventory_product_entry" action="inventory_product_entry_confirmed_action" sequence="11"/>
+  <menuitem id="menu_inventory_product_entry_verified" name="Verified Inventory Product Entry" parent="menu_leis_inventory_product_entry" action="inventory_product_entry_verified_action" sequence="12"/>
+  <menuitem id="menu_inventory_product_entry" name="Inventory Product Entry" parent="menu_leis_inventory_product_entry" action="inventory_product_entry_action" sequence="13"/>
+  <menuitem id="menu_inventory_product_entry_line" name="InventoryProductEntryLine" parent="menu_leis_others" action="inventory_product_entry_line_action" sequence="82"/>
+  <menuitem id="menu_inventory_requisition" name="Inventory Requisition" parent="menu_leis_requisition" action="inventory_requisition_action" sequence="10"/>
+  <menuitem id="menu_inventory_requisition_line" name="InventoryRequisitionLine" parent="menu_leis_others" action="inventory_requisition_line_action" sequence="84"/>
+  <menuitem id="menu_laundry_clean" name="Linen Entry" parent="menu_leis_laundry" action="laundry_clean_action" sequence="10"/>
+  <menuitem id="menu_laundry_clean_line" name="LaundryCleanLine" parent="menu_leis_others" action="laundry_clean_line_action" sequence="86"/>
+  <menuitem id="menu_laundry_receive" name="Receive from Laundry" parent="menu_leis_laundry" action="laundry_receive_action" sequence="12"/>
+  <menuitem id="menu_laundry_laundry" name="Send to Laundry" parent="menu_leis_laundry" action="laundry_laundry_action" sequence="11"/>
+  <menuitem id="menu_laundry_product" name="LaundryProduct" parent="menu_leis_others" action="laundry_product_action" sequence="89"/>
+  <menuitem id="menu_leih_money_receipt" name="Money Receipt" parent="menu_leis_billing" action="leih_money_receipt_action" sequence="20"/>
+  <menuitem id="menu_bill_register"
+            name="Bill Register"
+            parent="menu_leis_billing"
+            action="action_bill_register"
+            sequence="35"/>
+  <menuitem id="menu_bill_register_line_report"
+            name="Service Income Report"
+            parent="menu_leis_billing"
+            action="action_bill_register_line_report"
+            sequence="36"/>
+  <menuitem id="menu_opd_ticket" name="OPD Ticket" parent="menu_leis_opd" action="opd_ticket_action" sequence="10"/>
+  <menuitem id="menu_opd_ticket_line" name="OpdTicketLine" parent="menu_leis_others" action="opd_ticket_line_action" sequence="92"/>
+  <menuitem id="menu_opd_ticket_entry" name="OPD Ticket Entry" parent="menu_leis_configuration" action="opd_ticket_entry_action" sequence="15"/>
+  <menuitem id="menu_optics_sale" name="Optics Sale" parent="menu_leis_billing" action="optics_sale_action" sequence="60"/>
+  <menuitem id="menu_optics_lens_sale_line" name="OpticsLensSaleLine" parent="menu_leis_others" action="optics_lens_sale_line_action" sequence="95"/>
+  <menuitem id="menu_optics_sale_payment_line" name="OpticsSalePaymentLine" parent="menu_leis_others" action="optics_sale_payment_line_action" sequence="96"/>
+  <menuitem id="menu_product_lens" name="Lens" parent="menu_leis_billing" action="product_lens_action" sequence="70"/>
+  <menuitem id="menu_examine_package" name="Package" parent="menu_leis_configuration" action="examine_package_action" sequence="14"/>
+  <menuitem id="menu_examine_package_line" name="ExaminePackageLine" parent="menu_leis_others" action="examine_package_line_action" sequence="100"/>
+  <menuitem id="menu_payment_type" name="Payment type" parent="menu_leis_opd" action="payment_type_action" sequence="20"/>
+  <menuitem id="menu_diagnosis_sticker" name="DiagnosisSticker" parent="menu_leis_others" action="diagnosis_sticker_action" sequence="102"/>
+  <menuitem id="menu_diagnosis_sticker_line" name="DiagnosisStickerLine" parent="menu_leis_others" action="diagnosis_sticker_line_action" sequence="103"/>
+  <menuitem id="menu_ward_managment" name="Ward" parent="menu_leis_hospital" action="ward_managment_action" sequence="10"/>
+  <menuitem id="menu_cc_collection" name="CC Collection Report" parent="menu_leis_hospital" action="cc_collection_action" sequence="40"/>
+  <menuitem id="menu_detail_component" name="DetailComponent" parent="menu_leis_others" action="detail_component_action" sequence="106"/>
+  <menuitem id="menu_optics_daily_collection" name="Optics Report" parent="menu_leis_hospital" action="optics_daily_collection_action" sequence="50"/>
+</odoo>

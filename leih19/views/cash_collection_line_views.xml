@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <record id="cash_collection_line_tree_view" model="ir.ui.view">
+        <field name="name">cash_collection_line.tree</field>
+        <field name="model">cash.collection.line</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="cash_collection_line_id" />
+                <field name="mr_no" />
+                <field name="opd_id" />
+                <field name="bill_admission_opd_id" />
+                <field name="amount" />
+            </list>
+        </field>
+    </record>
+    <record id="cash_collection_line_form_view" model="ir.ui.view">
+        <field name="name">cash_collection_line.form</field>
+        <field name="model">cash.collection.line</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group string="Information">
+                        <group>
+                            <field name="cash_collection_line_id" />
+                            <field name="opd_id" />
+                            <field name="amount" />
+                        </group>
+                        <group>
+                            <field name="mr_no" />
+                            <field name="bill_admission_opd_id" />
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="cash_collection_line_action" model="ir.actions.act_window">
+        <field name="name">cash_collection_line</field>
+        <field name="res_model">cash.collection.line</field>
+        <field name="view_mode">list,form</field>
+    </record>
+</odoo>

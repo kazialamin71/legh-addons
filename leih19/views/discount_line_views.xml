@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <record id="discount_line_tree_view" model="ir.ui.view">
+        <field name="name">discount_line.tree</field>
+        <field name="model">discount.line</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="category" />
+                <field name="ref" />
+                <field name="accounts" />
+                <field name="fixed_amount" />
+                <field name="percent_amount" />
+                <field name="discount_id" />
+            </list>
+        </field>
+    </record>
+    <record id="discount_line_form_view" model="ir.ui.view">
+        <field name="name">discount_line.form</field>
+        <field name="model">discount.line</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group string="Information">
+                        <group>
+                            <field name="category" />
+                            <field name="accounts" />
+                            <field name="percent_amount" />
+                        </group>
+                        <group>
+                            <field name="ref" />
+                            <field name="fixed_amount" />
+                            <field name="discount_id" />
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="discount_line_action" model="ir.actions.act_window">
+        <field name="name">discount_line</field>
+        <field name="res_model">discount.line</field>
+        <field name="view_mode">list,form</field>
+    </record>
+</odoo>

@@ -1,0 +1,364 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="paperformat_lab_report" model="report.paperformat">
+        <field name="name">Lab Report A4</field>
+        <field name="format">A4</field>
+        <field name="orientation">Portrait</field>
+        <field name="margin_top">8</field>
+        <field name="margin_bottom">8</field>
+        <field name="margin_left">8</field>
+        <field name="margin_right">8</field>
+        <field name="header_spacing">0</field>
+        <field name="header_line" eval="False"/>
+        <field name="dpi">90</field>
+    </record>
+
+    <record id="action_report_examination_result" model="ir.actions.report">
+        <field name="name">Lab Report</field>
+        <field name="model">examination.result</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">leih19.report_examination_result</field>
+        <field name="report_file">leih19.report_examination_result</field>
+        <field name="print_report_name">'Lab Report - %s' % (object.patient_id.name or object.name)</field>
+        <field name="paperformat_id" ref="paperformat_lab_report"/>
+        <field name="binding_model_id" ref="model_examination_result"/>
+        <field name="binding_type">report</field>
+    </record>
+
+    <!-- Embedded stylesheet (wkhtmltopdf honors inline <style>; external asset
+         bundles are not loaded in this report, so all styling lives here). -->
+    <template id="report_examination_result_style">
+        <style>
+            .lp-page { width:190mm; margin:0 auto; font-family:Arial, sans-serif; font-size:13px; color:#000; }
+            .lp-head { width:100%; border-collapse:collapse; border:2px solid #000; }
+            .lp-head td { border:1px solid #cfcfcf; padding:7px 10px; font-size:13.5px; line-height:1.4; }
+            .lp-head .k { font-weight:bold; white-space:nowrap; }
+            .lp-head .v { color:#1a3c8c; }
+            .lp-dept { text-align:center; font-size:19px; font-weight:bold; letter-spacing:.5px; margin:18px 0 4px; }
+            .lp-meta { text-align:center; font-size:12px; color:#666; margin:0 0 12px; }
+            .lp-tbl { width:100%; border-collapse:collapse; font-size:13.5px; }
+            .lp-tbl th { background:#ececec; border:1px solid #c8c8c8; padding:9px 11px; text-align:center; }
+            .lp-tbl td { border:1px solid #dcdcdc; padding:9px 11px; vertical-align:top; }
+            .lp-tbl td.c { text-align:center; }
+            .lp-tbl tr.grp td { background:#f5f5f5; font-weight:bold; }
+            .lp-res { font-weight:bold; text-align:center; }
+            .lp-cp { width:100%; border-collapse:collapse; font-size:13px; }
+            .lp-cp td { border:1px solid #e2e2e2; padding:7px 9px; vertical-align:top; }
+            .lp-cp tr.grp td { background:#f0f0f0; font-weight:bold; }
+            .lp-kv { border-collapse:collapse; font-size:13px; }
+            .lp-kv td { padding:5px 9px; vertical-align:top; }
+            .lp-foot { width:100%; margin-top:55px; font-size:13px; }
+            .lp-foot td { width:50%; vertical-align:top; }
+            .lp-foot td.r { text-align:right; }
+            .muted { color:#666; }
+            .crit { color:#b00; font-weight:bold; }
+            .abn { color:#c80; font-weight:bold; }
+        </style>
+    </template>
+
+    <!-- ============================================================= -->
+    <!-- House-style header: bordered patient/sample grid + barcode     -->
+    <!-- ============================================================= -->
+    <template id="report_examination_result_header">
+        <t t-set="sex_label" t-value="dict(result.patient_id._fields['sex'].selection).get(result.patient_sex, '-')"/>
+        <t t-set="barcode_value" t-value="result.specimen_id.name or result.bill_register_id.name or result.name"/>
+
+        <div style="text-align:right; margin-bottom:4px;">
+            <img t-if="barcode_value"
+                 t-att-src="'/report/barcode/Code128/%s' % barcode_value"
+                 style="width:240px; height:46px;"/>
+        </div>
+
+        <table class="lp-head" style="width:100%; border-collapse:collapse; border:2px solid #000;">
+            <tr>
+                <td class="k" style="width:15%;">Patient Name:</td>
+                <td class="v" style="width:35%;"><t t-out="result.patient_id.name or '-'"/></td>
+                <td class="k" style="width:18%;">Sample No:</td>
+                <td class="v" style="width:32%;"><t t-out="result.specimen_id.name or '-'"/></td>
+            </tr>
+            <tr>
+                <td class="k">Age:</td>
+                <td><t t-out="result.patient_age or '-'"/></td>
+                <td class="k">Invoice/Order No:</td>
+                <td class="v"><t t-out="result.bill_register_id.name or '-'"/></td>
+            </tr>
+            <tr>
+                <td class="k">Gender:</td>
+                <td><t t-out="sex_label"/></td>
+                <td class="k">Invoice Date:</td>
+                <td class="v"><t t-out="result.bill_register_id.date and result.bill_register_id.date.strftime('%Y-%m-%d %H:%M:%S') or '-'"/></td>
+            </tr>
+            <tr>
+                <td class="k">Contact No:</td>
+                <td><t t-out="result.patient_id.mobile or '-'"/></td>
+                <td class="k">Investigations:</td>
+                <td class="v"><t t-out="page_tests or result.entry_id.name or '-'"/></td>
+            </tr>
+            <tr>
+                <td class="k">Print Date:</td>
+                <td><t t-out="datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')"/></td>
+                <td class="k">Sample Type:</td>
+                <td class="v"><t t-out="result.entry_id.sample_type.name or '-'"/></td>
+            </tr>
+            <tr>
+                <td class="k">Referred By:</td>
+                <td class="v" colspan="3"><t t-out="result.doctor_id.name or '-'"/></td>
+            </tr>
+        </table>
+    </template>
+
+    <!-- ============================================================= -->
+    <!-- Footer: Prepared By (left)  /  Pathologist (right)             -->
+    <!-- ============================================================= -->
+    <template id="report_examination_result_footer">
+        <t t-set="signatory" t-value="result.department_id.signatory_id or result.reported_by_id"/>
+        <table class="lp-foot" style="width:100%; margin-top:55px; font-size:13px;">
+            <tr>
+                <td style="width:50%; vertical-align:top; text-align:left;">
+                    Prepared By:<br/>
+                    <strong t-out="result.create_uid.name or ''"/><br/>
+                    <span class="muted">Medical Technologist</span>
+                </td>
+                <td class="r" style="width:50%; vertical-align:top; text-align:right;">
+                    <strong t-out="signatory.name or ''"/><br/>
+                    <span t-if="signatory.degree" t-out="signatory.degree"/>
+                    <br t-if="signatory.degree"/>
+                    <span t-if="signatory.designation" t-out="signatory.designation"/>
+                </td>
+            </tr>
+        </table>
+    </template>
+
+    <!-- Two-column clinical-pathology column renderer -->
+    <template id="report_exam_cp_column">
+        <t t-set="cp_td" t-value="'border:1px solid #e2e2e2; padding:7px 9px; vertical-align:top;'"/>
+        <table class="lp-cp" style="width:100%; border-collapse:collapse; font-size:13px;">
+            <tbody>
+                <t t-foreach="lines" t-as="line">
+                    <tr t-if="line.is_group_header" class="grp">
+                        <td colspan="2" t-attf-style="#{cp_td} background:#f0f0f0; font-weight:bold;"><t t-out="line.name"/></td>
+                    </tr>
+                    <tr t-else="">
+                        <td t-attf-style="#{cp_td} width:55%;"><t t-out="line.name"/></td>
+                        <td t-attf-style="#{cp_td} #{line.flag in ('HH','LL') and 'color:#b00; font-weight:bold;' or (line.flag in ('H','L','A') and 'color:#c80; font-weight:bold;' or '')}">
+                            <t t-out="line.display_value"/>
+                        </td>
+                    </tr>
+                </t>
+            </tbody>
+        </table>
+    </template>
+
+    <!-- ============================================================= -->
+    <!-- Main report                                                    -->
+    <!-- ============================================================= -->
+    <template id="report_examination_result">
+        <t t-call="web.html_container">
+            <t t-call="leih19.report_examination_result_style"/>
+            <!-- Group results into pages: same department + tube color share a
+                 page; 'Individual' tests get their own page. -->
+            <t t-set="pages" t-value="docs._report_page_groups()"/>
+            <t t-foreach="pages" t-as="page">
+                <div class="lp-page"
+                     t-att-style="not page_first and 'page-break-before: always;' or ''">
+
+                    <t t-set="result" t-value="page[0]"/>
+                    <t t-set="page_tests" t-value="', '.join(page.mapped('entry_id.name'))"/>
+
+                    <t t-call="leih19.report_examination_result_header"/>
+
+                    <div class="lp-dept" style="text-align:center; font-size:19px; font-weight:bold; margin:18px 0 4px;"><t t-out="result.department_id.name or result.entry_id.name"/></div>
+
+                    <t t-foreach="page" t-as="result">
+                    <div style="page-break-inside: avoid; margin-bottom:10px;">
+
+                    <!-- effective layout (fallback for legacy data) -->
+                    <t t-set="layout" t-value="result.report_layout or (result.category == 'microbiology' and 'microbiology') or (result.category in ('descriptive', 'radiology') and 'narrative') or 'tabular'"/>
+
+                    <!-- test name heading (only when several tests share the page) -->
+                    <div t-if="len(page) &gt; 1" style="text-align:center; font-size:14px; font-weight:bold; margin:10px 0 2px;"><t t-out="result.entry_id.name"/></div>
+
+                    <!-- Method / Instrument context line -->
+                    <div class="lp-meta" style="text-align:center; font-size:12px; color:#666; margin:0 0 12px;" t-if="result.method_id or result.instrument_id">
+                        <span t-if="result.method_id">Method: <t t-out="result.method_id.name"/></span>
+                        <span t-if="result.method_id and result.instrument_id"> | </span>
+                        <span t-if="result.instrument_id">Instrument: <t t-out="result.instrument_id.name"/></span>
+                    </div>
+
+                    <!-- ============ TABULAR (grouped) ============ -->
+                    <table class="lp-tbl" t-if="layout == 'tabular'" style="width:100%; border-collapse:collapse;">
+                        <thead>
+                            <tr>
+                                <th style="width:34%; text-align:left; background:#ececec; border:1px solid #c8c8c8; padding:9px 11px;">Test Name</th>
+                                <th style="width:18%; text-align:center; background:#ececec; border:1px solid #c8c8c8; padding:9px 11px;">Test Method</th>
+                                <th style="width:16%; text-align:center; background:#ececec; border:1px solid #c8c8c8; padding:9px 11px;">Result</th>
+                                <th style="width:12%; text-align:center; background:#ececec; border:1px solid #c8c8c8; padding:9px 11px;">Unit</th>
+                                <th style="width:20%; text-align:left; background:#ececec; border:1px solid #c8c8c8; padding:9px 11px;">Reference Range</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-set="td_s" t-value="'border:1px solid #dcdcdc; padding:9px 11px; vertical-align:top;'"/>
+                            <t t-foreach="result.result_line_ids.filtered(lambda l: l.is_visible and (l.is_group_header or l.name or l.has_value))" t-as="line">
+                                <t t-set="ref" t-value="(result.patient_sex == 'male' and line.reference_value_male) or (result.patient_sex == 'female' and line.reference_value_female) or line.reference_value or ''"/>
+                                <tr t-if="line.is_group_header" class="grp">
+                                    <td colspan="5" t-attf-style="#{td_s} background:#f5f5f5; font-weight:bold;"><t t-out="line.name"/></td>
+                                </tr>
+                                <tr t-else="">
+                                    <td t-att-style="td_s"><t t-out="line.name"/></td>
+                                    <td t-attf-style="#{td_s} text-align:center;"><t t-out="result.method_id.name or ''"/></td>
+                                    <td t-attf-style="#{td_s} text-align:center; font-weight:bold; #{line.flag in ('HH','LL') and 'color:#b00;' or (line.flag in ('H','L','A') and 'color:#c80;' or '')}">
+                                        <t t-out="line.display_value"/>
+                                        <t t-if="line.flag"> (<t t-out="line.flag"/>)</t>
+                                    </td>
+                                    <td t-attf-style="#{td_s} text-align:center;"><t t-out="line.uom or ''"/></td>
+                                    <td t-att-style="td_s"><t t-out="ref"/></td>
+                                </tr>
+                            </t>
+                        </tbody>
+                    </table>
+
+                    <!-- ============ TWO-COLUMN CLINICAL PATHOLOGY ============ -->
+                    <t t-if="layout == 'two_column'">
+                        <t t-set="cols" t-value="result._report_two_columns()"/>
+                        <table style="width:100%; border-collapse:collapse;">
+                            <tr>
+                                <td style="width:50%; vertical-align:top; padding-right:6px;">
+                                    <t t-call="leih19.report_exam_cp_column">
+                                        <t t-set="lines" t-value="cols[0]"/>
+                                    </t>
+                                </td>
+                                <td style="width:50%; vertical-align:top; padding-left:6px;">
+                                    <t t-call="leih19.report_exam_cp_column">
+                                        <t t-set="lines" t-value="cols[1]"/>
+                                    </t>
+                                </td>
+                            </tr>
+                        </table>
+                    </t>
+
+                    <!-- ============ NARRATIVE / DESCRIPTIVE ============ -->
+                    <div t-if="layout == 'narrative'" style="margin-top:8px;">
+                        <div t-field="result.narrative_html"/>
+                    </div>
+
+                    <!-- ============ MICROBIOLOGY ============ -->
+                    <t t-if="layout == 'microbiology'">
+                        <table class="lp-tbl" style="width:100%; border-collapse:collapse; margin-bottom:8px;">
+                            <tr>
+                                <td style="width:20%;"><strong>Incubation:</strong></td>
+                                <td style="width:30%;"><t t-out="result.incubation_hours or 0"/> hrs @ <t t-out="result.incubation_temp_c or 0"/>°C</td>
+                                <td style="width:20%;"><strong>Medium:</strong></td>
+                                <td style="width:30%;"><t t-out="result.culture_medium or '-'"/></td>
+                            </tr>
+                        </table>
+                        <table class="lp-tbl" style="width:100%; border-collapse:collapse;">
+                            <tbody>
+                                <t t-foreach="result.result_line_ids.filtered(lambda l: l.is_visible and (l.name or l.has_value))" t-as="line">
+                                    <tr>
+                                        <td style="width:30%;"><strong t-out="line.name"/></td>
+                                        <td><t t-out="line.display_value"/></td>
+                                    </tr>
+                                </t>
+                                <tr t-if="result.organism_identified">
+                                    <td><strong>Organism Identified</strong></td>
+                                    <td><em t-out="result.organism_identified"/></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <t t-set="ab_lines" t-value="result.antibiogram_line_ids.filtered('sensitivity')"/>
+                        <div t-if="result.show_antibiogram and ab_lines">
+                            <h6 style="margin:12px 0 4px;">Antibiogram</h6>
+                            <table class="lp-tbl" style="width:100%; border-collapse:collapse;">
+                                <thead>
+                                    <tr>
+                                        <th style="width:50%; text-align:left;">Antibiotic</th>
+                                        <th style="width:30%;">Class</th>
+                                        <th style="width:20%;">Sensitivity</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-foreach="ab_lines" t-as="ab">
+                                        <tr>
+                                            <td>
+                                                <t t-out="ab.antibiotic_id.name"/>
+                                                <span class="muted" t-if="ab.code"> (<t t-out="ab.code"/>)</span>
+                                            </td>
+                                            <td class="c"><t t-out="ab.drug_class or ''"/></td>
+                                            <td class="c" style="font-weight:bold;" t-attf-style="#{ab.sensitivity == 'R' and 'color:#b00;' or ab.sensitivity == 'S' and 'color:#080;' or 'color:#c80;'}">
+                                                <t t-out="ab.sensitivity"/>
+                                                <span class="muted"> (<t t-out="dict(ab._fields['sensitivity'].selection).get(ab.sensitivity, '')"/>)</span>
+                                            </td>
+                                        </tr>
+                                    </t>
+                                </tbody>
+                            </table>
+                        </div>
+                    </t>
+
+                    <!-- ============ TRANSFUSION / CROSS MATCHING ============ -->
+                    <t t-if="layout == 'transfusion'">
+                        <table class="lp-kv" style="width:60%;">
+                            <tr><td style="width:35%;"><strong>Donor Name</strong></td><td>: <t t-out="result.donor_name or ''"/></td></tr>
+                            <tr><td><strong>Age</strong></td><td>: <t t-out="result.donor_age or ''"/></td></tr>
+                            <tr><td><strong>Gender</strong></td><td>: <t t-out="result.donor_sex or ''"/></td></tr>
+                        </table>
+
+                        <table class="lp-kv" style="margin-top:10px;">
+                            <tr><td style="width:45%;">Patient's Blood Group (ABO):</td><td><strong t-out="result.patient_blood_group or ''"/></td></tr>
+                            <tr><td>Donor Blood Group (ABO):</td><td><strong t-out="result.donor_blood_group or ''"/></td></tr>
+                            <tr><td>Type of Donation:</td><td><t t-out="result.donation_type or ''"/></td></tr>
+                            <tr><td>Type of Blood Component:</td><td><t t-out="result.blood_component or ''"/></td></tr>
+                            <tr><td>Cross Match Status at RT &amp; 37°C ICT Method:</td><td><strong t-out="result.cross_match_status or ''"/></td></tr>
+                            <tr><td>Bag No:</td><td><strong t-out="result.bag_no or ''"/></td></tr>
+                        </table>
+
+                        <t t-set="screen_lines" t-value="result.result_line_ids.filtered(lambda l: l.is_visible and (l.name or l.has_value))"/>
+                        <div t-if="screen_lines">
+                            <h5 style="text-decoration:underline; margin-top:14px;">Donor Screening Tests:</h5>
+                            <table class="lp-kv" style="width:70%;">
+                                <t t-foreach="screen_lines" t-as="line">
+                                    <tr>
+                                        <td style="width:8%;"><t t-out="line_index + 1"/>.</td>
+                                        <td style="width:52%;"><t t-out="line.name"/></td>
+                                        <td style="font-weight:bold;"><t t-out="line.display_value"/></td>
+                                    </tr>
+                                </t>
+                            </table>
+                        </div>
+                        <p t-if="result.transfusion_note" style="margin-top:12px;"><strong>Note: </strong><t t-out="result.transfusion_note"/></p>
+                    </t>
+
+                    <!-- ============ SPECIAL FORM (Mantoux / HLA-B27) ============ -->
+                    <t t-if="layout == 'special'">
+                        <table class="lp-tbl" style="width:100%;">
+                            <tbody>
+                                <t t-foreach="result.result_line_ids.filtered(lambda l: l.is_visible and (l.is_group_header or l.name or l.has_value))" t-as="line">
+                                    <tr t-if="line.is_group_header" class="grp">
+                                        <td colspan="2"><t t-out="line.name"/></td>
+                                    </tr>
+                                    <tr t-else="">
+                                        <td style="width:45%;"><strong t-out="line.name"/></td>
+                                        <td t-att-class="line.flag in ('HH','LL') and 'crit' or (line.flag in ('H','L','A') and 'abn' or '')">
+                                            <t t-out="line.display_value"/>
+                                            <t t-if="line.uom and line.has_value"> <t t-out="line.uom"/></t>
+                                        </td>
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
+                    </t>
+
+                    <p t-if="result.clinical_note" style="margin-top:8px;"><em>Note: <t t-out="result.clinical_note"/></em></p>
+
+                    </div>
+                    </t>
+
+                    <t t-set="result" t-value="page[0]"/>
+                    <t t-call="leih19.report_examination_result_footer"/>
+                </div>
+            </t>
+        </t>
+    </template>
+
+</odoo>

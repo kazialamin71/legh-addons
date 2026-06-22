@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <record id="laundry_product_tree_view" model="ir.ui.view">
+        <field name="name">laundry_product.tree</field>
+        <field name="model">laundry.product</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name" />
+                <field name="color" />
+                <field name="quantity" />
+                <field name="type" />
+                <field name="others" />
+            </list>
+        </field>
+    </record>
+    <record id="laundry_product_form_view" model="ir.ui.view">
+        <field name="name">laundry_product.form</field>
+        <field name="model">laundry.product</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group string="Information">
+                        <group>
+                            <field name="name" />
+                            <field name="quantity" />
+                            <field name="others" />
+                        </group>
+                        <group>
+                            <field name="color" />
+                            <field name="type" />
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="laundry_product_action" model="ir.actions.act_window">
+        <field name="name">laundry_product</field>
+        <field name="res_model">laundry.product</field>
+        <field name="view_mode">list,form</field>
+    </record>
+</odoo>

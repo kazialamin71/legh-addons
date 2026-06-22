@@ -1,0 +1,255 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <record id="hospital_admission_tree_view" model="ir.ui.view">
+        <field name="name">hospital.admission.list</field>
+        <field name="model">hospital.admission</field>
+        <field name="arch" type="xml">
+            <list string="Hospital Admission">
+                <field name="name" />
+                <field name="mobile" />
+                <field name="patient_id" />
+                <field name="patient_name" />
+                <field name="address" />
+                <field name="age" />
+                <field name="sex" />
+                <field name="ref_doctors" />
+                <field name="operation_date" />
+                <field name="release_note_date" />
+                <field name="release_note" />
+                <field name="package_name" />
+                <field name="emergency" />
+                <field name="total_without_discount" />
+                <field name="total" />
+                <field name="doctors_discounts" />
+                <field name="after_discount" />
+                <field name="other_discount" />
+                <field name="discount_remarks" />
+                <field name="grand_total" />
+                <field name="investigation_total" />
+                <field name="investigation_paid" />
+                <field name="advance" />
+                <field name="paid" />
+                <field name="due" />
+                <field name="type" />
+                <field name="card_no" />
+                <field name="bank_name" />
+                <field name="date" />
+                <field name="user_id" />
+                <field name="state" />
+                <field name="emergency_covert_time" />
+                <field name="old_journal" />
+                <field name="payment_type" />
+                <field name="service_charge" />
+                <field name="to_be_paid" />
+                <field name="account_number" />
+                <field name="father_name" />
+                <field name="mother_name" />
+                <field name="spouse_name" />
+                <field name="religion" />
+                <field name="blood_group" />
+                <field name="reffered_to_hospital" />
+                <field name="occupation" />
+                <field name="business_address" />
+                <field name="admitting_doctor" />
+                <field name="bed" />
+                <field name="prescription_count" readonly="1" />
+                <field name="received_by" />
+                <field name="clinic_diagnosis" />
+            </list>
+        </field>
+    </record>
+    <record id="hospital_admission_form_view" model="ir.ui.view">
+        <field name="name">hospital.admission.form</field>
+        <field name="model">hospital.admission</field>
+        <field name="arch" type="xml">
+            <form string="Hospital Admission">
+                <header>
+                    <button string="Confirm and Print" type="object" name="hospital_change_status" groups="base.group_user" />
+                    <button string="Final Settlement" type="object" name="btn_final_settlement" groups="base.group_user" />
+                    <button string="Payment" type="object" name="btn_pay" groups="base.group_user" />
+                    <button string="Calculate" type="object" name="calculate_bill" groups="base.group_user" />
+                    <button string="Bill Investigation" type="object" name="btn_bill" groups="base.group_user" />
+                    <button string="Cancel" type="object" name="admission_cancel" groups="leih.group_admission_button_cancel" />
+                    <button string="Create Prescription" type="object" name="action_create_prescription" class="btn-primary" />
+                    <button string="Prescriptions" type="object" name="action_view_prescriptions" class="btn-secondary" />
+                    <field name="state" widget="statusbar" />
+                </header>
+                <sheet>
+                    <group string="Information">
+                        <group>
+                            <field name="name" />
+                            <field name="patient_id" />
+                            <field name="address" />
+                            <field name="sex" />
+                            <field name="operation_date" />
+                            <field name="release_note" />
+                            <field name="emergency" />
+                            <field name="total" />
+                            <field name="after_discount" />
+                            <field name="discount_remarks" />
+                            <field name="investigation_total" />
+                            <field name="advance" />
+                            <field name="due" />
+                            <field name="card_no" />
+                            <field name="date" />
+                            <field name="emergency_covert_time" />
+                            <field name="payment_type" />
+                            <field name="to_be_paid" />
+                            <field name="father_name" />
+                            <field name="spouse_name" />
+                            <field name="blood_group" />
+                            <field name="occupation" />
+                            <field name="admitting_doctor" />
+                            <field name="prescription_count" readonly="1" />
+                            <field name="clinic_diagnosis" />
+                        </group>
+                        <group>
+                            <field name="mobile" />
+                            <field name="patient_name" />
+                            <field name="age" />
+                            <field name="ref_doctors" placeholder="Select Doctor Name" options="{'no_quick_create': True, 'no_create_edit': True}" />
+                            <field name="release_note_date" />
+                            <field name="package_name" />
+                            <field name="total_without_discount" />
+                            <field name="doctors_discounts" />
+                            <field name="other_discount" />
+                            <field name="grand_total" />
+                            <field name="investigation_paid" />
+                            <field name="paid" />
+                            <field name="type" />
+                            <field name="bank_name" />
+                            <field name="user_id" />
+                            <field name="old_journal" />
+                            <field name="service_charge" />
+                            <field name="account_number" />
+                            <field name="mother_name" />
+                            <field name="religion" />
+                            <field name="reffered_to_hospital" />
+                            <field name="business_address" />
+                            <field name="bed" />
+                            <field name="received_by" />
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Leih Admission Line">
+                            <field name="leih_admission_line_id">
+                                <list editable="bottom">
+                                    <field name="name" />
+                                    <field name="department" />
+                                    <field name="product_qty" />
+                                    <field name="price" />
+                                    <field name="discount" />
+                                    <field name="discount_percent" />
+                                    <field name="flat_discount" />
+                                    <field name="total_discount" />
+                                    <field name="total_amount" />
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Guarantor Line">
+                            <field name="guarantor_line_id">
+                                <list editable="top">
+                                    <field name="name" />
+                                    <field name="address" />
+                                    <field name="relationship" />
+                                    <field name="contact" />
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Bill Register Admission Line">
+                            <field name="bill_register_admission_line_id" />
+                        </page>
+                        <page string="Admission Payment Line">
+                            <field name="admission_payment_line_id" />
+                        </page>
+                        <page string="Admission Journal Relation">
+                            <field name="admission_journal_relation_id">
+                                <list editable="top">
+                                    <field name="journal_id" />
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Hospital Doctor Line">
+                            <field name="hospital_doctor_line_id">
+                                <list editable="bottom">
+                                    <field name="doctor_profile_id" />
+                                    <field name="doctor_visit_qty" />
+                                    <field name="visit_fee" />
+                                    <field name="total_amount" />
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Hospital Medicine Line">
+                            <field name="hospital_medicine_line_id">
+                                <list editable="bottom">
+                                    <field name="product_name" />
+                                    <field name="product_qty" />
+                                    <field name="unit_price" />
+                                    <field name="total_price" />
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Hospital Bed Line">
+                            <field name="hospital_bed_line_id">
+                                <list editable="bottom">
+                                    <field name="bed_no" />
+                                    <field name="start_date" />
+                                    <field name="end_date" />
+                                    <field name="bed_qty" />
+                                    <field name="perday_charge" />
+                                    <field name="total_amount" />
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Hospital Bill Line">
+                            <field name="hospital_bill_line_id">
+                                <list editable="bottom">
+                                    <field name="item_name" />
+                                    <field name="department" />
+                                    <field name="bill_created_date" />
+                                    <field name="price" />
+                                    <field name="discount" />
+                                    <field name="discount_percent" />
+                                    <field name="flat_discount" />
+                                    <field name="total_discount" />
+                                    <field name="total_amount" />
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Money Receipt">
+                            <field name="money_receipt_ids" readonly="1">
+                                <list>
+                                    <field name="name" />
+                                    <field name="date" />
+                                    <field name="amount" />
+                                    <field name="p_type" />
+                                    <field name="type" />
+                                    <field name="bill_total_amount" />
+                                    <field name="due_amount" />
+                                    <field name="state" />
+                                    <field name="user_id" />
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="hospital_admission_graph_view" model="ir.ui.view">
+        <field name="name">hospital.admission.graph</field>
+        <field name="model">hospital.admission</field>
+        <field name="arch" type="xml">
+            <graph string="Admission Graph">
+                <field name="patient_name" />
+            </graph>
+        </field>
+    </record>
+    <record id="hospital_admission_action" model="ir.actions.act_window">
+        <field name="name">Admission Form</field>
+        <field name="res_model">hospital.admission</field>
+        <field name="view_mode">list,form,graph</field>
+        <field name="domain">[('state','=','pending'),('emergency','=',False)]</field>
+        <field name="context">{}</field>
+    </record>
+</odoo>

@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <record id="opd_ticket_entry_tree_view" model="ir.ui.view">
+        <field name="name">opd_ticket_entry.tree</field>
+        <field name="model">opd.ticket.entry</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name" />
+                <field name="department" />
+                <field name="fee" />
+                <field name="accounts_id" />
+                <field name="total_cash" />
+            </list>
+        </field>
+    </record>
+    <record id="opd_ticket_entry_form_view" model="ir.ui.view">
+        <field name="name">opd_ticket_entry.form</field>
+        <field name="model">opd.ticket.entry</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group string="Information">
+                        <group>
+                            <field name="name" />
+                            <field name="fee" />
+                            <field name="total_cash" />
+                        </group>
+                        <group>
+                            <field name="department" />
+                            <field name="accounts_id" />
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="opd_ticket_entry_action" model="ir.actions.act_window">
+        <field name="name">opd_ticket_entry</field>
+        <field name="res_model">opd.ticket.entry</field>
+        <field name="view_mode">list,form</field>
+    </record>
+</odoo>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="action_report_patient_id_card" model="ir.actions.report">
+        <field name="name">Patient ID Card</field>
+        <field name="model">patient.info</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">leih19.report_patient_id_card</field>
+        <field name="report_file">leih19.report_patient_id_card</field>
+        <field name="print_report_name">'Patient ID Card - %s' % object.name</field>
+    </record>
+
+    <template id="report_patient_id_card">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <div style="width:340px; height:210px; border:2px solid #000; padding:10px; font-family:Arial;">
+                    <h3 style="text-align:center; margin:0 0 8px 0;">Patient ID Card</h3>
+
+                    <div style="display:flex;">
+                        <div style="width:90px;">
+                            <t t-if="o.photo">
+                                <img t-att-src="image_data_uri(o.photo)"
+                                     style="width:80px; height:90px; object-fit:cover; border:1px solid #000;"/>
+                            </t>
+                            <t t-else="">
+                                <div style="width:80px; height:90px; border:1px solid #000; text-align:center; line-height:90px;">
+                                    No Photo
+                                </div>
+                            </t>
+                        </div>
+
+                        <div style="font-size:13px;">
+                            <p><strong>ID:</strong> <span t-field="o.patient_id"/></p>
+                            <p><strong>Name:</strong> <span t-field="o.name"/></p>
+                            <p><strong>Age:</strong> <span t-field="o.age"/></p>
+                            <p><strong>Sex:</strong> <span t-field="o.sex"/></p>
+                            <p><strong>Print Date:</strong> <span t-esc="datetime.datetime.now().strftime('%d-%m-%Y')"/></p>
+                        </div>
+                    </div>
+
+                    <div style="text-align:center; margin-top:8px;">
+                        <img t-att-src="'/report/barcode/Code128/%s' % o.patient_id"
+                             style="width:260px; height:45px;"/>
+                    </div>
+                </div>
+            </t>
+        </t>
+    </template>
+
+</odoo>

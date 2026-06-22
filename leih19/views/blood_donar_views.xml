@@ -1,0 +1,52 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <record id="blood_donar_tree_view" model="ir.ui.view">
+        <field name="name">blood_donar.tree</field>
+        <field name="model">blood.donar</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name" />
+                <field name="doner_name" />
+                <field name="mobile_no" />
+                <field name="date" />
+                <field name="receive_date" />
+                <field name="description" />
+                <field name="group" />
+                <field name="cost" />
+                <field name="active" />
+                <field name="donated" />
+            </list>
+        </field>
+    </record>
+    <record id="blood_donar_form_view" model="ir.ui.view">
+        <field name="name">blood_donar.form</field>
+        <field name="model">blood.donar</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group string="Information">
+                        <group>
+                            <field name="name" />
+                            <field name="mobile_no" />
+                            <field name="receive_date" />
+                            <field name="group" />
+                            <field name="active" />
+                        </group>
+                        <group>
+                            <field name="doner_name" />
+                            <field name="date" />
+                            <field name="description" />
+                            <field name="cost" />
+                            <field name="donated" />
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="blood_donar_action" model="ir.actions.act_window">
+        <field name="name">blood_donar</field>
+        <field name="res_model">blood.donar</field>
+        <field name="view_mode">list,form</field>
+    </record>
+</odoo>

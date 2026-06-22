@@ -1,0 +1,128 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <record id="optics_sale_tree_view" model="ir.ui.view">
+        <field name="name">optics_sale.tree</field>
+        <field name="model">optics.sale</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name" />
+                <field name="mobile" />
+                <field name="patient_id" />
+                <field name="patient_name" />
+                <field name="address" />
+                <field name="age" />
+                <field name="sex" />
+                <field name="right_eye_sph" />
+                <field name="right_eye_cyl" />
+                <field name="right_eye_axis" />
+                <field name="right_eye_sph_n" />
+                <field name="right_eye_cyl_n" />
+                <field name="right_eye_axis_n" />
+                <field name="left_eye_sph" />
+                <field name="left_eye_cyl" />
+                <field name="left_eye_axis" />
+                <field name="left_eye_sph_n" />
+                <field name="left_eye_cyl_n" />
+                <field name="left_eye_axis_n" />
+                <field name="delivery_date" />
+                <field name="hard_cover" />
+                <field name="cell_pad" />
+                <field name="frame_id" />
+                <field name="quantity" />
+                <field name="qty_available" />
+                <field name="delivery_id" />
+                <field name="price" />
+                <field name="total" />
+                <field name="doctors_discounts" />
+                <field name="after_discount" />
+                <field name="other_discount" />
+                <field name="grand_total" />
+                <field name="paid" />
+                <field name="type" />
+                <field name="card_no" />
+                <field name="bank_name" />
+                <field name="due" />
+                <field name="date" />
+                <field name="state" />
+                <field name="payment_type" />
+                <field name="service_charge" />
+                <field name="to_be_paid" />
+                <field name="account_number" />
+            </list>
+        </field>
+    </record>
+    <record id="optics_sale_form_view" model="ir.ui.view">
+        <field name="name">optics_sale.form</field>
+        <field name="model">optics.sale</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <field name="state" widget="statusbar" />
+                </header>
+                <sheet>
+                    <group string="Information">
+                        <group>
+                            <field name="name" />
+                            <field name="patient_id" />
+                            <field name="address" />
+                            <field name="sex" />
+                            <field name="right_eye_cyl" />
+                            <field name="right_eye_sph_n" />
+                            <field name="right_eye_axis_n" />
+                            <field name="left_eye_cyl" />
+                            <field name="left_eye_sph_n" />
+                            <field name="left_eye_axis_n" />
+                            <field name="hard_cover" />
+                            <field name="frame_id" />
+                            <field name="qty_available" />
+                            <field name="price" />
+                            <field name="doctors_discounts" />
+                            <field name="other_discount" />
+                            <field name="paid" />
+                            <field name="card_no" />
+                            <field name="due" />
+                            <field name="payment_type" />
+                            <field name="to_be_paid" />
+                        </group>
+                        <group>
+                            <field name="mobile" />
+                            <field name="patient_name" />
+                            <field name="age" />
+                            <field name="right_eye_sph" />
+                            <field name="right_eye_axis" />
+                            <field name="right_eye_cyl_n" />
+                            <field name="left_eye_sph" />
+                            <field name="left_eye_axis" />
+                            <field name="left_eye_cyl_n" />
+                            <field name="delivery_date" />
+                            <field name="cell_pad" />
+                            <field name="quantity" />
+                            <field name="delivery_id" />
+                            <field name="total" />
+                            <field name="after_discount" />
+                            <field name="grand_total" />
+                            <field name="type" />
+                            <field name="bank_name" />
+                            <field name="date" />
+                            <field name="service_charge" />
+                            <field name="account_number" />
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Optics Lens Sale Line">
+                            <field name="optics_lens_sale_line_id" />
+                        </page>
+                        <page string="Optics Sale Payment Line">
+                            <field name="optics_sale_payment_line_id" />
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="optics_sale_action" model="ir.actions.act_window">
+        <field name="name">optics_sale</field>
+        <field name="res_model">optics.sale</field>
+        <field name="view_mode">list,form</field>
+    </record>
+</odoo>

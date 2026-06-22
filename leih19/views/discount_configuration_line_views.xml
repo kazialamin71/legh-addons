@@ -1,0 +1,48 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <record id="discount_configuration_line_tree_view" model="ir.ui.view">
+        <field name="name">discount_configuration_line.tree</field>
+        <field name="model">discount.configuration.line</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="discount_donfiguration_line_ids" />
+                <field name="department_id" />
+                <field name="test_id" />
+                <field name="test_price" />
+                <field name="applicable" />
+                <field name="fixed_amount" />
+                <field name="variance_amount" />
+                <field name="after_discount" />
+            </list>
+        </field>
+    </record>
+    <record id="discount_configuration_line_form_view" model="ir.ui.view">
+        <field name="name">discount_configuration_line.form</field>
+        <field name="model">discount.configuration.line</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group string="Information">
+                        <group>
+                            <field name="discount_donfiguration_line_ids" />
+                            <field name="test_id" />
+                            <field name="applicable" />
+                            <field name="variance_amount" />
+                        </group>
+                        <group>
+                            <field name="department_id" />
+                            <field name="test_price" />
+                            <field name="fixed_amount" />
+                            <field name="after_discount" />
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="discount_configuration_line_action" model="ir.actions.act_window">
+        <field name="name">discount_configuration_line</field>
+        <field name="res_model">discount.configuration.line</field>
+        <field name="view_mode">list,form</field>
+    </record>
+</odoo>

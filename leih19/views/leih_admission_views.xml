@@ -1,0 +1,141 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <record id="leih_admission_tree_view" model="ir.ui.view">
+        <field name="name">leih_admission.tree</field>
+        <field name="model">leih.admission</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name" />
+                <field name="mobile" />
+                <field name="patient_id" />
+                <field name="patient_name" />
+                <field name="address" />
+                <field name="age" />
+                <field name="sex" />
+                <field name="ref_doctors" />
+                <field name="operation_date" />
+                <field name="release_note" />
+                <field name="package_name" />
+                <field name="emergency" />
+                <field name="total_without_discount" />
+                <field name="total" />
+                <field name="doctors_discounts" />
+                <field name="after_discount" />
+                <field name="other_discount" />
+                <field name="grand_total" />
+                <field name="advance" />
+                <field name="paid" />
+                <field name="due" />
+                <field name="type" />
+                <field name="card_no" />
+                <field name="bank_name" />
+                <field name="date" />
+                <field name="user_id" />
+                <field name="state" />
+                <field name="emergency_covert_time" />
+                <field name="old_journal" />
+                <field name="payment_type" />
+                <field name="service_charge" />
+                <field name="to_be_paid" />
+                <field name="account_number" />
+                <field name="father_name" />
+                <field name="mother_name" />
+                <field name="religion" />
+                <field name="blood_group" />
+                <field name="reffered_to_hospital" />
+                <field name="occupation" />
+                <field name="business_address" />
+                <field name="admitting_doctor" />
+                <field name="bed" />
+                <field name="received_by" />
+                <field name="clinic_diagnosis" />
+                <field name="discount_remarks" />
+            </list>
+        </field>
+    </record>
+    <record id="leih_admission_form_view" model="ir.ui.view">
+        <field name="name">leih_admission.form</field>
+        <field name="model">leih.admission</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <field name="state" widget="statusbar" />
+                </header>
+                <sheet>
+                    <group string="Information">
+                        <group>
+                            <field name="name" />
+                            <field name="patient_id" />
+                            <field name="address" />
+                            <field name="sex" />
+                            <field name="operation_date" />
+                            <field name="package_name" />
+                            <field name="total_without_discount" />
+                            <field name="doctors_discounts" />
+                            <field name="other_discount" />
+                            <field name="advance" />
+                            <field name="due" />
+                            <field name="card_no" />
+                            <field name="date" />
+                            <field name="emergency_covert_time" />
+                            <field name="payment_type" />
+                            <field name="to_be_paid" />
+                            <field name="father_name" />
+                            <field name="religion" />
+                            <field name="reffered_to_hospital" />
+                            <field name="business_address" />
+                            <field name="bed" />
+                            <field name="clinic_diagnosis" />
+                        </group>
+                        <group>
+                            <field name="mobile" />
+                            <field name="patient_name" />
+                            <field name="age" />
+                            <field name="ref_doctors" />
+                            <field name="release_note" />
+                            <field name="emergency" />
+                            <field name="total" />
+                            <field name="after_discount" />
+                            <field name="grand_total" />
+                            <field name="paid" />
+                            <field name="type" />
+                            <field name="bank_name" />
+                            <field name="user_id" />
+                            <field name="old_journal" />
+                            <field name="service_charge" />
+                            <field name="account_number" />
+                            <field name="mother_name" />
+                            <field name="blood_group" />
+                            <field name="occupation" />
+                            <field name="admitting_doctor" />
+                            <field name="received_by" />
+                            <field name="discount_remarks" />
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Leih Admission Line">
+                            <field name="leih_admission_line_id" />
+                        </page>
+                        <page string="Guarantor Line">
+                            <field name="guarantor_line_id" />
+                        </page>
+                        <page string="Bill Register Admission Line">
+                            <field name="bill_register_admission_line_id" />
+                        </page>
+                        <page string="Admission Payment Line">
+                            <field name="admission_payment_line_id" />
+                        </page>
+                        <page string="Admission Journal Relation">
+                            <field name="admission_journal_relation_id" />
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="leih_admission_action" model="ir.actions.act_window">
+        <field name="name">leih_admission</field>
+        <field name="res_model">leih.admission</field>
+        <field name="view_mode">list,form</field>
+    </record>
+</odoo>

@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <record id="lab_specimen_tree_view" model="ir.ui.view">
+        <field name="name">lab.specimen.tree</field>
+        <field name="model">lab.specimen</field>
+        <field name="arch" type="xml">
+            <list decoration-info="state == 'draft'"
+                  decoration-warning="state == 'collected'"
+                  decoration-success="state == 'processed'"
+                  decoration-muted="state == 'cancelled'">
+                <field name="name"/>
+                <field name="bill_register_id"/>
+                <field name="collected_at"/>
+                <field name="patient_id"/>
+                <field name="tube_color_id"/>
+                <field name="department_id"/>
+                <field name="test_names" string="Tests"/>
+                <field name="result_count" string="# Tests"/>
+                <field name="state"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="lab_specimen_search_view" model="ir.ui.view">
+        <field name="name">lab.specimen.search</field>
+        <field name="model">lab.specimen</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="patient_id"/>
+                <field name="tube_color_id"/>
+                <field name="department_id"/>
+                <field name="bill_register_id"/>
+                <filter name="state_draft" string="Draft" domain="[('state','=','draft')]"/>
+                <filter name="state_collected" string="Collected" domain="[('state','=','collected')]"/>
+                <filter name="state_received" string="Received" domain="[('state','=','received')]"/>
+                <filter name="state_processed" string="Processed" domain="[('state','=','processed')]"/>
+                <separator/>
+                <filter name="group_state" string="State" context="{'group_by': 'state'}"/>
+                <filter name="group_dept" string="Department" context="{'group_by': 'department_id'}"/>
+                <filter name="group_tube" string="Tube Color" context="{'group_by': 'tube_color_id'}"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="lab_specimen_form_view" model="ir.ui.view">
+        <field name="name">lab.specimen.form</field>
+        <field name="model">lab.specimen</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_collect" type="object" string="Mark Collected"
+                            class="oe_highlight" invisible="state != 'draft'"/>
+                    <button name="action_receive" type="object" string="Receive in Lab"
+                            class="oe_highlight" invisible="state != 'collected'"/>
+                    <button name="action_process" type="object" string="Mark Processed"
+                            invisible="state != 'received'"/>
+                    <button name="action_cancel" type="object" string="Cancel"
+                            invisible="state in ('cancelled', 'processed')"/>
+                    <button name="action_reset_to_draft" type="object" string="Reset to Draft"
+                            invisible="state != 'cancelled'"/>
+                    <button name="action_print_sticker" type="object" string="Print Sticker"
+                            class="btn-secondary"/>
+                    <field name="state" widget="statusbar"
+                           statusbar_visible="draft,collected,received,processed"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_view_results" type="object"
+                                class="oe_stat_button" icon="fa-flask">
+                            <field name="result_count" widget="statinfo" string="Tests"/>
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <h1><field name="name" readonly="1"/></h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="patient_id" options="{'no_create': True}"/>
+                            <field name="bill_register_id" readonly="1"/>
+                            <field name="tube_color_id"/>
+                            <field name="department_id"/>
+                        </group>
+                        <group>
+                            <field name="collected_at"/>
+                            <field name="collected_by_id" readonly="1"/>
+                            <field name="received_at" readonly="1"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Tests on This Tube">
+                            <field name="result_ids" readonly="1">
+                                <list>
+                                    <field name="name"/>
+                                    <field name="entry_id"/>
+                                    <field name="reported_by_id"/>
+                                    <field name="state"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Note">
+                            <field name="note" nolabel="1"/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="lab_specimen_action" model="ir.actions.act_window">
+        <field name="name">Lab Specimens</field>
+        <field name="res_model">lab.specimen</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="lab_specimen_search_view"/>
+    </record>
+
+    <!-- Bulk "Mark Collected" from the Action menu on selected specimens -->
+    <record id="action_lab_specimen_mark_collected" model="ir.actions.server">
+        <field name="name">Mark Collected</field>
+        <field name="model_id" ref="model_lab_specimen"/>
+        <field name="binding_model_id" ref="model_lab_specimen"/>
+        <field name="binding_view_types">list</field>
+        <field name="state">code</field>
+        <field name="code">records.filtered(lambda s: s.state == 'draft').action_collect()</field>
+    </record>
+
+    <!-- Sample Collection worklist: tubes awaiting collection -->
+    <record id="action_lab_sample_collection" model="ir.actions.act_window">
+        <field name="name">Sample Collection</field>
+        <field name="res_model">lab.specimen</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="lab_specimen_search_view"/>
+        <field name="domain">[('state', '=', 'draft')]</field>
+        <field name="context">{'search_default_group_dept': 1}</field>
+    </record>
+
+</odoo>

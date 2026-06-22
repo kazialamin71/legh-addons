@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+  <record id="leih_admission_pending_action" model="ir.actions.act_window">
+    <field name="name">Pending Admission</field>
+    <field name="res_model">leih.admission</field>
+    <field name="domain">[('state', '=', 'pending')]</field>
+    <field name="view_mode">list,form</field>
+  </record>
+  <record id="leih_admission_activated_action" model="ir.actions.act_window">
+    <field name="name">Activated Admission</field>
+    <field name="res_model">leih.admission</field>
+    <field name="domain">[('state', '=', 'activated')]</field>
+    <field name="view_mode">list,form</field>
+  </record>
+  <record id="leih_admission_released_action" model="ir.actions.act_window">
+    <field name="name">Released Admission</field>
+    <field name="res_model">leih.admission</field>
+    <field name="domain">[('state', '=', 'released')]</field>
+    <field name="view_mode">list,form</field>
+  </record>
+  <record id="leih_admission_cancelled_action" model="ir.actions.act_window">
+    <field name="name">Cancelled Admission</field>
+    <field name="res_model">leih.admission</field>
+    <field name="domain">[('state', '=', 'cancelled')]</field>
+    <field name="view_mode">list,form</field>
+  </record>
+
+  <record id="hospital_admission_pending_action" model="ir.actions.act_window">
+    <field name="name">Hospital Pending Admission</field>
+    <field name="res_model">hospital.admission</field>
+    <field name="domain">[('state', '=', 'pending')]</field>
+    <field name="view_mode">list,form</field>
+  </record>
+  <record id="hospital_admission_activated_action" model="ir.actions.act_window">
+    <field name="name">Hospital Activated Admission</field>
+    <field name="res_model">hospital.admission</field>
+    <field name="domain">[('state', '=', 'activated')]</field>
+    <field name="view_mode">list,form</field>
+  </record>
+  <record id="hospital_admission_released_action" model="ir.actions.act_window">
+    <field name="name">Hospital Released Admission</field>
+    <field name="res_model">hospital.admission</field>
+    <field name="domain">[('state', '=', 'released')]</field>
+    <field name="view_mode">list,form</field>
+  </record>
+  <record id="hospital_admission_cancelled_action" model="ir.actions.act_window">
+    <field name="name">Hospital Cancelled Admission</field>
+    <field name="res_model">hospital.admission</field>
+    <field name="domain">[('state', '=', 'cancelled')]</field>
+    <field name="view_mode">list,form</field>
+  </record>
+
+  <record id="diagnosis_sticker_sample_action" model="ir.actions.act_window">
+    <field name="name">Sample Collection</field>
+    <field name="res_model">diagnosis.sticker</field>
+    <field name="domain">[('state', '=', 'sample')]</field>
+    <field name="view_mode">list,form</field>
+  </record>
+  <record id="diagnosis_sticker_lab_action" model="ir.actions.act_window">
+    <field name="name">Pending in Lab</field>
+    <field name="res_model">diagnosis.sticker</field>
+    <field name="domain">[('state', '=', 'lab')]</field>
+    <field name="view_mode">list,form</field>
+  </record>
+
+  <record id="discount_pending_action" model="ir.actions.act_window">
+    <field name="name">Pending Discount</field>
+    <field name="res_model">discount</field>
+    <field name="domain">[('state', '=', 'pending')]</field>
+    <field name="view_mode">list,form</field>
+  </record>
+  <record id="discount_approved_action" model="ir.actions.act_window">
+    <field name="name">Approved Discount</field>
+    <field name="res_model">discount</field>
+    <field name="domain">[('state', '=', 'approve')]</field>
+    <field name="view_mode">list,form</field>
+  </record>
+  <record id="discount_cancelled_action" model="ir.actions.act_window">
+    <field name="name">Cancelled Discount</field>
+    <field name="res_model">discount</field>
+    <field name="domain">[('state', '=', 'cancel')]</field>
+    <field name="view_mode">list,form</field>
+  </record>
+
+  <record id="leih_emergency_pending_action" model="ir.actions.act_window">
+    <field name="name">Pending Emergency</field>
+    <field name="res_model">leih.admission</field>
+    <field name="domain">[('emergency', '=', True), ('state', '=', 'pending')]</field>
+    <field name="view_mode">list,form</field>
+  </record>
+  <record id="leih_emergency_activated_action" model="ir.actions.act_window">
+    <field name="name">Activated Emergency</field>
+    <field name="res_model">leih.admission</field>
+    <field name="domain">[('emergency', '=', True), ('state', '=', 'activated')]</field>
+    <field name="view_mode">list,form</field>
+  </record>
+  <record id="leih_emergency_released_action" model="ir.actions.act_window">
+    <field name="name">Released Emergency</field>
+    <field name="res_model">leih.admission</field>
+    <field name="domain">[('emergency', '=', True), ('state', '=', 'released')]</field>
+    <field name="view_mode">list,form</field>
+  </record>
+
+  <record id="leih_expense_pending_action" model="ir.actions.act_window">
+    <field name="name">Pending Expense</field>
+    <field name="res_model">leih.expense</field>
+    <field name="domain">[('state', '=', 'pending')]</field>
+    <field name="view_mode">list,form</field>
+  </record>
+  <record id="leih_expense_approved_action" model="ir.actions.act_window">
+    <field name="name">Approved Expense</field>
+    <field name="res_model">leih.expense</field>
+    <field name="domain">[('state', '=', 'approved')]</field>
+    <field name="view_mode">list,form</field>
+  </record>
+  <record id="leih_expense_cancelled_action" model="ir.actions.act_window">
+    <field name="name">Expense Cancel</field>
+    <field name="res_model">leih.expense</field>
+    <field name="domain">[('state', '=', 'canceled')]</field>
+    <field name="view_mode">list,form</field>
+  </record>
+
+  <record id="inventory_product_entry_pending_action" model="ir.actions.act_window">
+    <field name="name">Pending Inventory Product Entry</field>
+    <field name="res_model">inventory.product.entry</field>
+    <field name="domain">[('state', '=', 'pending')]</field>
+    <field name="view_mode">list,form</field>
+  </record>
+  <record id="inventory_product_entry_confirmed_action" model="ir.actions.act_window">
+    <field name="name">Confirmed Inventory Product Entry</field>
+    <field name="res_model">inventory.product.entry</field>
+    <field name="domain">[('state', '=', 'confirmed')]</field>
+    <field name="view_mode">list,form</field>
+  </record>
+  <record id="inventory_product_entry_verified_action" model="ir.actions.act_window">
+    <field name="name">Verified Inventory Product Entry</field>
+    <field name="res_model">inventory.product.entry</field>
+    <field name="domain">[('state', '=', 'verify')]</field>
+    <field name="view_mode">list,form</field>
+  </record>
+</odoo>

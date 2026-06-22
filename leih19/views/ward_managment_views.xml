@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <record id="ward_managment_tree_view" model="ir.ui.view">
+        <field name="name">ward_managment.tree</field>
+        <field name="model">ward.managment</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="wname" />
+                <field name="bed" />
+                <field name="name" />
+                <field name="pid" />
+                <field name="Date" />
+                <field name="precived" />
+            </list>
+        </field>
+    </record>
+    <record id="ward_managment_form_view" model="ir.ui.view">
+        <field name="name">ward_managment.form</field>
+        <field name="model">ward.managment</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group string="Information">
+                        <group>
+                            <field name="wname" />
+                            <field name="name" />
+                            <field name="Date" />
+                        </group>
+                        <group>
+                            <field name="bed" />
+                            <field name="pid" />
+                            <field name="precived" />
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="ward_managment_action" model="ir.actions.act_window">
+        <field name="name">ward_managment</field>
+        <field name="res_model">ward.managment</field>
+        <field name="view_mode">list,form</field>
+    </record>
+</odoo>

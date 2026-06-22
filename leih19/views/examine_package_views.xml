@@ -1,0 +1,49 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <record id="examine_package_tree_view" model="ir.ui.view">
+        <field name="name">examine_package.tree</field>
+        <field name="model">examine.package</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name" />
+                <field name="price" />
+                <field name="start_date" />
+                <field name="end_date" />
+                <field name="active" />
+                <field name="total" />
+            </list>
+        </field>
+    </record>
+    <record id="examine_package_form_view" model="ir.ui.view">
+        <field name="name">examine_package.form</field>
+        <field name="model">examine.package</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group string="Information">
+                        <group>
+                            <field name="name" />
+                            <field name="start_date" />
+                            <field name="active" />
+                        </group>
+                        <group>
+                            <field name="price" />
+                            <field name="end_date" />
+                            <field name="total" />
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Examine Package Line">
+                            <field name="examine_package_line_id" />
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="examine_package_action" model="ir.actions.act_window">
+        <field name="name">Examination Package</field>
+        <field name="res_model">examine.package</field>
+        <field name="view_mode">list,form</field>
+    </record>
+</odoo>

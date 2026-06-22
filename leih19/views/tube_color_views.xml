@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <record id="tube_color_tree_view" model="ir.ui.view">
+        <field name="name">tube_color.tree</field>
+        <field name="model">tube.color</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="sequence" widget="handle"/>
+                <field name="name"/>
+                <field name="code"/>
+                <field name="description"/>
+                <field name="active"/>
+            </list>
+        </field>
+    </record>
+    <record id="tube_color_form_view" model="ir.ui.view">
+        <field name="name">tube_color.form</field>
+        <field name="model">tube.color</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="code" placeholder="#FFFF00"/>
+                            <field name="sequence"/>
+                        </group>
+                        <group>
+                            <field name="description"/>
+                            <field name="active"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="tube_color_action" model="ir.actions.act_window">
+        <field name="name">Tube Color</field>
+        <field name="res_model">tube.color</field>
+        <field name="view_mode">list,form</field>
+    </record>
+</odoo>

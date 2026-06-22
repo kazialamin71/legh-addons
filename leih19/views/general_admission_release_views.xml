@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <record id="general_admission_release_tree_view" model="ir.ui.view">
+        <field name="name">general_admission_release.tree</field>
+        <field name="model">general.admission.release</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="total" />
+                <field name="paid" />
+                <field name="unpaid" />
+                <field name="admission_id" />
+                <field name="pay" />
+                <field name="release_note" />
+            </list>
+        </field>
+    </record>
+    <record id="general_admission_release_form_view" model="ir.ui.view">
+        <field name="name">general_admission_release.form</field>
+        <field name="model">general.admission.release</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group string="Information">
+                        <group>
+                            <field name="total" />
+                            <field name="unpaid" />
+                            <field name="pay" />
+                        </group>
+                        <group>
+                            <field name="paid" />
+                            <field name="admission_id" />
+                            <field name="release_note" />
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="general_admission_release_action" model="ir.actions.act_window">
+        <field name="name">general_admission_release</field>
+        <field name="res_model">general.admission.release</field>
+        <field name="view_mode">list,form</field>
+    </record>
+</odoo>

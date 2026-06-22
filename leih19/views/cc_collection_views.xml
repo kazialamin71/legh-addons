@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <record id="cc_collection_tree_view" model="ir.ui.view">
+        <field name="name">cc_collection.tree</field>
+        <field name="model">cc.collection</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="date_start" />
+                <field name="date_end" />
+            </list>
+        </field>
+    </record>
+    <record id="cc_collection_form_view" model="ir.ui.view">
+        <field name="name">cc_collection.form</field>
+        <field name="model">cc.collection</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group string="Information">
+                        <group>
+                            <field name="date_start" />
+                        </group>
+                        <group>
+                            <field name="date_end" />
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="cc_collection_action" model="ir.actions.act_window">
+        <field name="name">cc_collection</field>
+        <field name="res_model">cc.collection</field>
+        <field name="view_mode">list,form</field>
+    </record>
+</odoo>

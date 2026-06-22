@@ -1,0 +1,57 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <record id="diagnosis_sticker_tree_view" model="ir.ui.view">
+        <field name="name">diagnosis_sticker.tree</field>
+        <field name="model">diagnosis.sticker</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name" />
+                <field name="full_name" />
+                <field name="bill_register_id" />
+                <field name="admission_id" />
+                <field name="general_admission_id" />
+                <field name="department_id" />
+                <field name="doctor_id" />
+                <field name="test_id" />
+                <field name="state" />
+            </list>
+        </field>
+    </record>
+    <record id="diagnosis_sticker_form_view" model="ir.ui.view">
+        <field name="name">diagnosis_sticker.form</field>
+        <field name="model">diagnosis.sticker</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <field name="state" widget="statusbar" />
+                </header>
+                <sheet>
+                    <group string="Information">
+                        <group>
+                            <field name="name" />
+                            <field name="bill_register_id" />
+                            <field name="general_admission_id" />
+                            <field name="doctor_id" />
+                        </group>
+                        <group>
+                            <field name="full_name" />
+                            <field name="admission_id" />
+                            <field name="department_id" />
+                            <field name="test_id" />
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Sticker Line">
+                            <field name="sticker_line_id" />
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="diagnosis_sticker_action" model="ir.actions.act_window">
+        <field name="name">diagnosis_sticker</field>
+        <field name="res_model">diagnosis.sticker</field>
+        <field name="view_mode">list,form</field>
+    </record>
+</odoo>

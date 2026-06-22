@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="lab_antibiotic_tree_view" model="ir.ui.view">
+        <field name="name">lab.antibiotic.tree</field>
+        <field name="model">lab.antibiotic</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="sequence" widget="handle"/>
+                <field name="name"/>
+                <field name="code"/>
+                <field name="drug_class"/>
+                <field name="active"/>
+            </list>
+        </field>
+    </record>
+    <record id="lab_antibiotic_form_view" model="ir.ui.view">
+        <field name="name">lab.antibiotic.form</field>
+        <field name="model">lab.antibiotic</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="code"/>
+                            <field name="drug_class"/>
+                        </group>
+                        <group>
+                            <field name="sequence"/>
+                            <field name="active"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="lab_antibiotic_action" model="ir.actions.act_window">
+        <field name="name">Antibiotics</field>
+        <field name="res_model">lab.antibiotic</field>
+        <field name="view_mode">list,form</field>
+    </record>
+</odoo>

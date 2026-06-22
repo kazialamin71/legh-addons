@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo noupdate="1">
+
+    <!-- CLSI-aligned starter antibiotic panel for a general hospital lab -->
+
+    <record id="antibiotic_amoxicillin" model="lab.antibiotic">
+        <field name="name">Amoxicillin</field>
+        <field name="code">AMX</field>
+        <field name="drug_class">Penicillin</field>
+        <field name="sequence">10</field>
+    </record>
+    <record id="antibiotic_ampicillin" model="lab.antibiotic">
+        <field name="name">Ampicillin</field>
+        <field name="code">AMP</field>
+        <field name="drug_class">Penicillin</field>
+        <field name="sequence">20</field>
+    </record>
+    <record id="antibiotic_amoxiclav" model="lab.antibiotic">
+        <field name="name">Amoxicillin-Clavulanate</field>
+        <field name="code">AMC</field>
+        <field name="drug_class">Beta-lactam + inhibitor</field>
+        <field name="sequence">30</field>
+    </record>
+    <record id="antibiotic_piptaz" model="lab.antibiotic">
+        <field name="name">Piperacillin-Tazobactam</field>
+        <field name="code">TZP</field>
+        <field name="drug_class">Beta-lactam + inhibitor</field>
+        <field name="sequence">40</field>
+    </record>
+    <record id="antibiotic_cefuroxime" model="lab.antibiotic">
+        <field name="name">Cefuroxime</field>
+        <field name="code">CXM</field>
+        <field name="drug_class">Cephalosporin</field>
+        <field name="sequence">50</field>
+    </record>
+    <record id="antibiotic_ceftriaxone" model="lab.antibiotic">
+        <field name="name">Ceftriaxone</field>
+        <field name="code">CRO</field>
+        <field name="drug_class">Cephalosporin</field>
+        <field name="sequence">60</field>
+    </record>
+    <record id="antibiotic_cefepime" model="lab.antibiotic">
+        <field name="name">Cefepime</field>
+        <field name="code">FEP</field>
+        <field name="drug_class">Cephalosporin</field>
+        <field name="sequence">70</field>
+    </record>
+    <record id="antibiotic_meropenem" model="lab.antibiotic">
+        <field name="name">Meropenem</field>
+        <field name="code">MEM</field>
+        <field name="drug_class">Carbapenem</field>
+        <field name="sequence">80</field>
+    </record>
+    <record id="antibiotic_imipenem" model="lab.antibiotic">
+        <field name="name">Imipenem</field>
+        <field name="code">IPM</field>
+        <field name="drug_class">Carbapenem</field>
+        <field name="sequence">90</field>
+    </record>
+    <record id="antibiotic_ciprofloxacin" model="lab.antibiotic">
+        <field name="name">Ciprofloxacin</field>
+        <field name="code">CIP</field>
+        <field name="drug_class">Fluoroquinolone</field>
+        <field name="sequence">100</field>
+    </record>
+    <record id="antibiotic_levofloxacin" model="lab.antibiotic">
+        <field name="name">Levofloxacin</field>
+        <field name="code">LVX</field>
+        <field name="drug_class">Fluoroquinolone</field>
+        <field name="sequence">110</field>
+    </record>
+    <record id="antibiotic_gentamicin" model="lab.antibiotic">
+        <field name="name">Gentamicin</field>
+        <field name="code">GEN</field>
+        <field name="drug_class">Aminoglycoside</field>
+        <field name="sequence">120</field>
+    </record>
+    <record id="antibiotic_amikacin" model="lab.antibiotic">
+        <field name="name">Amikacin</field>
+        <field name="code">AMK</field>
+        <field name="drug_class">Aminoglycoside</field>
+        <field name="sequence">130</field>
+    </record>
+    <record id="antibiotic_azithromycin" model="lab.antibiotic">
+        <field name="name">Azithromycin</field>
+        <field name="code">AZM</field>
+        <field name="drug_class">Macrolide</field>
+        <field name="sequence">140</field>
+    </record>
+    <record id="antibiotic_doxycycline" model="lab.antibiotic">
+        <field name="name">Doxycycline</field>
+        <field name="code">DOX</field>
+        <field name="drug_class">Tetracycline</field>
+        <field name="sequence">150</field>
+    </record>
+    <record id="antibiotic_cotrimoxazole" model="lab.antibiotic">
+        <field name="name">Cotrimoxazole</field>
+        <field name="code">SXT</field>
+        <field name="drug_class">Sulfonamide</field>
+        <field name="sequence">160</field>
+    </record>
+    <record id="antibiotic_nitrofurantoin" model="lab.antibiotic">
+        <field name="name">Nitrofurantoin</field>
+        <field name="code">NIT</field>
+        <field name="drug_class">Nitrofuran</field>
+        <field name="sequence">170</field>
+    </record>
+    <record id="antibiotic_vancomycin" model="lab.antibiotic">
+        <field name="name">Vancomycin</field>
+        <field name="code">VAN</field>
+        <field name="drug_class">Glycopeptide</field>
+        <field name="sequence">180</field>
+    </record>
+    <record id="antibiotic_linezolid" model="lab.antibiotic">
+        <field name="name">Linezolid</field>
+        <field name="code">LZD</field>
+        <field name="drug_class">Oxazolidinone</field>
+        <field name="sequence">190</field>
+    </record>
+
+</odoo>

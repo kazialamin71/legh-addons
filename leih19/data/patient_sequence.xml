@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="seq_patient_info" model="ir.sequence">
+        <field name="name">Patient ID</field>
+        <field name="code">patient.info</field>
+        <field name="prefix">PAT/</field>
+        <field name="padding">5</field>
+    </record>
+    <record id="seq_bill_register" model="ir.sequence">
+        <field name="name">Bill Register</field>
+        <field name="code">bill.register</field>
+        <field name="prefix">BILL-</field>
+        <field name="padding">5</field>
+        <field name="company_id" eval="False"/>
+    </record>
+    <record id="seq_commission" model="ir.sequence">
+        <field name="name">Commission Settlement</field>
+        <field name="code">commission</field>
+        <field name="prefix">COMM-</field>
+        <field name="padding">5</field>
+        <field name="company_id" eval="False"/>
+    </record>
+    <record id="seq_brokers_info" model="ir.sequence">
+        <field name="name">Broker ID</field>
+        <field name="code">brokers.info</field>
+        <field name="prefix">BRK-</field>
+        <field name="padding">4</field>
+        <field name="company_id" eval="False"/>
+    </record>
+</odoo>

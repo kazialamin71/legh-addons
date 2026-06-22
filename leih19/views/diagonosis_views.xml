@@ -1,0 +1,62 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <record id="diagonosis_tree_view" model="ir.ui.view">
+        <field name="name">diagonosis.tree</field>
+        <field name="model">diagonosis</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name" />
+                <field name="patient_id" />
+                <field name="present_date" />
+                <field name="payment" />
+                <field name="first_name" />
+                <field name="last_name" />
+                <field name="father__name" />
+                <field name="mother_name" />
+                <field name="age" />
+                <field name="phone" />
+                <field name="email" />
+                <field name="nid" />
+                <field name="p_address" />
+                <field name="per_address" />
+                <field name="gender" />
+            </list>
+        </field>
+    </record>
+    <record id="diagonosis_form_view" model="ir.ui.view">
+        <field name="name">diagonosis.form</field>
+        <field name="model">diagonosis</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group string="Information">
+                        <group>
+                            <field name="name" />
+                            <field name="present_date" />
+                            <field name="first_name" />
+                            <field name="father__name" />
+                            <field name="age" />
+                            <field name="email" />
+                            <field name="p_address" />
+                            <field name="gender" />
+                        </group>
+                        <group>
+                            <field name="patient_id" />
+                            <field name="payment" />
+                            <field name="last_name" />
+                            <field name="mother_name" />
+                            <field name="phone" />
+                            <field name="nid" />
+                            <field name="per_address" />
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="diagonosis_action" model="ir.actions.act_window">
+        <field name="name">diagonosis</field>
+        <field name="res_model">diagonosis</field>
+        <field name="view_mode">list,form</field>
+    </record>
+</odoo>

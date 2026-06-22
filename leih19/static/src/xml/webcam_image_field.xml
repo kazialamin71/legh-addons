@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+
+    <t t-name="leih19.WebcamImageField">
+        <div class="o_field_webcam">
+            <div t-if="!state.active">
+                <img t-if="imageSrc" t-att-src="imageSrc" class="img img-thumbnail"
+                     style="max-height:160px; max-width:160px;"/>
+                <div t-else=""
+                     class="border rounded text-muted d-inline-flex align-items-center justify-content-center"
+                     style="width:130px; height:160px;">No Photo</div>
+                <div class="mt-2 d-flex gap-1">
+                    <button type="button" class="btn btn-sm btn-primary" t-on-click="start">
+                        <i class="fa fa-camera me-1"/>Webcam
+                    </button>
+                    <button type="button" class="btn btn-sm btn-secondary" t-on-click="triggerUpload">
+                        <i class="fa fa-upload me-1"/>Upload
+                    </button>
+                    <button t-if="imageSrc" type="button" class="btn btn-sm btn-link text-danger"
+                            t-on-click="clear">Remove</button>
+                    <input type="file" accept="image/*" class="d-none"
+                           t-ref="fileInput" t-on-change="onFileChange"/>
+                </div>
+            </div>
+            <div t-else="">
+                <video t-ref="video" autoplay="autoplay" playsinline="playsinline" muted="muted"
+                       style="max-width:240px; border:1px solid #ccc; border-radius:4px;"/>
+                <div class="mt-2 d-flex gap-1">
+                    <button type="button" class="btn btn-sm btn-success" t-on-click="snap">
+                        <i class="fa fa-camera me-1"/>Capture
+                    </button>
+                    <button type="button" class="btn btn-sm btn-secondary" t-on-click="stop">Cancel</button>
+                </div>
+            </div>
+            <canvas t-ref="canvas" class="d-none"/>
+        </div>
+    </t>
+
+</templates>

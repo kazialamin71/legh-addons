@@ -1,0 +1,163 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <record id="examination_entry_tree_view" model="ir.ui.view">
+        <field name="name">examination_entry.tree</field>
+        <field name="model">examination.entry</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name" />
+                <field name="department" />
+                <field name="report_type" />
+                <field name="tube_color_id" />
+                <field name="rate" />
+                <field name="base_rate" />
+                <field name="required_time" />
+                <field name="sample_req" />
+                <field name="individual" />
+                <field name="sample_type" />
+                <field name="reported_by_id" />
+            </list>
+        </field>
+    </record>
+    <record id="examination_entry_form_view" model="ir.ui.view">
+        <field name="name">Examinatio Entry</field>
+        <field name="model">examination.entry</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group string="Information">
+                        <group>
+                            <field name="name" />
+                            <field name="service_group"/>
+                            <field name="category" invisible="service_group != 'diagnostic'"/>
+                            <field name="rate" />
+                            <field name="required_time" />
+                            <field name="individual" />
+                            <field name="merge" />
+                            <field name="lab_not_required" />
+                            <field name="sample_type" />
+                            <field name="merge_ids" />
+                        </group>
+                        <group>
+                            <field name="department" />
+                            <field name="base_rate" />
+                            <field name="sample_req" />
+                            <field name="manual" />
+                            <field name="dependency" />
+                            <field name="indoor" />
+                            <field name="accounts_id" />
+                        </group>
+                    </group>
+                    <group string="Reporting">
+                        <group>
+                            <field name="report_type" />
+                            <field name="report_layout" />
+                            <field name="tube_color_id" />
+                            <field name="needs_separate_tube"/>
+                            <field name="default_method_id"/>
+                        </group>
+                        <group>
+                            <field name="reported_by_id" />
+                            <field name="default_instrument_id"/>
+                        </group>
+                    </group>
+                    <group string="Microbiology Defaults" invisible="category != 'microbiology'">
+                        <group>
+                            <field name="default_incubation_hours"/>
+                            <field name="default_incubation_temp_c"/>
+                        </group>
+                        <group>
+                            <field name="default_culture_medium"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Components">
+                            <field name="examination_entry_line">
+                                <list>
+                                    <field name="sequence" widget="handle"/>
+                                    <field name="name"/>
+                                    <field name="result_type"/>
+                                    <field name="uom"/>
+                                    <field name="reference_value"/>
+                                    <field name="reference_value_male"/>
+                                    <field name="reference_value_female"/>
+                                    <field name="reference_value_child"/>
+                                    <field name="bold"/>
+                                    <field name="is_group_header"/>
+                                    <field name="group_by"/>
+                                </list>
+                                <form>
+                                    <sheet>
+                                        <group>
+                                            <group>
+                                                <field name="name"/>
+                                                <field name="sequence"/>
+                                                <field name="result_type"/>
+                                                <field name="uom"/>
+                                                <field name="reference_value"/>
+                                                <field name="default_value"/>
+                                            </group>
+                                            <group>
+                                                <field name="reference_value_male"/>
+                                                <field name="reference_value_female"/>
+                                                <field name="reference_value_child"/>
+                                                <field name="ref_low" invisible="result_type != 'numeric'"/>
+                                                <field name="ref_high" invisible="result_type != 'numeric'"/>
+                                                <field name="critical_low" invisible="result_type != 'numeric'"/>
+                                                <field name="critical_high" invisible="result_type != 'numeric'"/>
+                                                <field name="bold"/>
+                                                <field name="is_group_header"/>
+                                                <field name="group_by"/>
+                                                <field name="others"/>
+                                            </group>
+                                        </group>
+                                        <group string="Conditional Display">
+                                            <field name="parent_line_id"/>
+                                            <field name="show_when_value_id" invisible="not parent_line_id"/>
+                                        </group>
+                                        <notebook>
+                                            <page string="Possible Values"
+                                                  invisible="result_type != 'selection'">
+                                                <field name="possible_value_ids">
+                                                    <list editable="bottom">
+                                                        <field name="sequence" widget="handle"/>
+                                                        <field name="name"/>
+                                                        <field name="is_default"/>
+                                                    </list>
+                                                </field>
+                                            </page>
+                                        </notebook>
+                                    </sheet>
+                                </form>
+                            </field>
+                        </page>
+                        <page string="Report Templates">
+                            <field name="report_template_ids">
+                                <list>
+                                    <field name="name"/>
+                                    <field name="report_type"/>
+                                    <field name="department"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Antibiotic Panel" invisible="category != 'microbiology'">
+                            <field name="antibiotic_ids">
+                                <list>
+                                    <field name="sequence" widget="handle"/>
+                                    <field name="name"/>
+                                    <field name="code"/>
+                                    <field name="drug_class"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="examination_entry_action" model="ir.actions.act_window">
+        <field name="name">Examination Entry</field>
+        <field name="res_model">examination.entry</field>
+        <field name="view_mode">list,form</field>
+    </record>
+</odoo>

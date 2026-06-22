@@ -1,0 +1,85 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+
+  <data noupdate="1">
+
+    <record id="module_category_lab_modality" model="ir.module.category">
+        <field name="name">Lab Modality</field>
+        <field name="sequence">22</field>
+    </record>
+
+    <record id="privilege_lab_modality" model="res.groups.privilege">
+        <field name="name">Lab Modality Access</field>
+        <field name="category_id" ref="module_category_lab_modality"/>
+        <field name="sequence">22</field>
+    </record>
+
+    <record id="group_lab_pathology" model="res.groups">
+        <field name="name">Pathology</field>
+        <field name="privilege_id" ref="privilege_lab_modality"/>
+    </record>
+    <record id="group_lab_radiology" model="res.groups">
+        <field name="name">Radiology (X-ray / CT / MRI)</field>
+        <field name="privilege_id" ref="privilege_lab_modality"/>
+    </record>
+    <record id="group_lab_usg" model="res.groups">
+        <field name="name">USG / Imaging</field>
+        <field name="privilege_id" ref="privilege_lab_modality"/>
+    </record>
+    <record id="group_lab_other" model="res.groups">
+        <field name="name">Other</field>
+        <field name="privilege_id" ref="privilege_lab_modality"/>
+    </record>
+    <!-- All modalities (manager): implies every modality group -->
+    <record id="group_lab_all" model="res.groups">
+        <field name="name">All Modalities</field>
+        <field name="privilege_id" ref="privilege_lab_modality"/>
+        <field name="implied_ids" eval="[(4, ref('group_lab_pathology')),
+                                         (4, ref('group_lab_radiology')),
+                                         (4, ref('group_lab_usg')),
+                                         (4, ref('group_lab_other'))]"/>
+    </record>
+
+  </data>
+
+  <!-- Updatable on every upgrade: keep the admin's All-Modalities membership and
+       the record rules in sync (and self-heal if a prior install missed them). -->
+  <data noupdate="0">
+
+    <record id="base.user_admin" model="res.users">
+        <field name="group_ids" eval="[(4, ref('group_lab_all'))]"/>
+    </record>
+
+    <!-- A user sees results/specimens only of the modalities their lab groups
+         allow. Records with no department, or a department whose modality is
+         unset (False), stay visible to all - an empty department_id would
+         otherwise be dropped by the join and lock everyone out. System
+         Administrators (Settings access) bypass the filter entirely so a fresh
+         admin is never locked out of any modality. -->
+    <record id="rule_examination_result_modality" model="ir.rule">
+        <field name="name">Lab Result: visible by modality</field>
+        <field name="model_id" ref="model_examination_result"/>
+        <field name="domain_force">['|', ('department_id', '=', False),
+            ('department_id.modality', 'in', [False]
+            + (['pathology', 'radiology', 'usg', 'other'] if user.has_group('base.group_system') else (
+                  (['pathology'] if user.has_group('leih19.group_lab_pathology') else [])
+                + (['radiology'] if user.has_group('leih19.group_lab_radiology') else [])
+                + (['usg'] if user.has_group('leih19.group_lab_usg') else [])
+                + (['other'] if user.has_group('leih19.group_lab_other') else []))))]</field>
+    </record>
+
+    <record id="rule_lab_specimen_modality" model="ir.rule">
+        <field name="name">Lab Specimen: visible by modality</field>
+        <field name="model_id" ref="model_lab_specimen"/>
+        <field name="domain_force">['|', ('department_id', '=', False),
+            ('department_id.modality', 'in', [False]
+            + (['pathology', 'radiology', 'usg', 'other'] if user.has_group('base.group_system') else (
+                  (['pathology'] if user.has_group('leih19.group_lab_pathology') else [])
+                + (['radiology'] if user.has_group('leih19.group_lab_radiology') else [])
+                + (['usg'] if user.has_group('leih19.group_lab_usg') else [])
+                + (['other'] if user.has_group('leih19.group_lab_other') else []))))]</field>
+    </record>
+
+  </data>
+
+</odoo>

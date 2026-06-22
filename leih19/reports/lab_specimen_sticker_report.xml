@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Thermal roll label ~50 x 25 mm -->
+    <record id="paperformat_lab_sticker" model="report.paperformat">
+        <field name="name">Lab Tube Sticker 50x25</field>
+        <field name="format">custom</field>
+        <field name="page_width">50</field>
+        <field name="page_height">25</field>
+        <field name="orientation">Portrait</field>
+        <field name="margin_top">1</field>
+        <field name="margin_bottom">1</field>
+        <field name="margin_left">2</field>
+        <field name="margin_right">2</field>
+        <field name="header_spacing">0</field>
+        <field name="header_line" eval="False"/>
+        <field name="dpi">203</field>
+    </record>
+
+    <record id="action_report_lab_specimen_sticker" model="ir.actions.report">
+        <field name="name">Tube Sticker</field>
+        <field name="model">lab.specimen</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">leih19.report_lab_specimen_sticker</field>
+        <field name="report_file">leih19.report_lab_specimen_sticker</field>
+        <field name="print_report_name">'Sticker - %s' % (object.name or '')</field>
+        <field name="paperformat_id" ref="paperformat_lab_sticker"/>
+        <field name="binding_model_id" ref="model_lab_specimen"/>
+        <field name="binding_type">report</field>
+    </record>
+
+    <template id="report_lab_specimen_sticker">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <div class="page"
+                     t-att-style="(not o_first and 'page-break-before: always; ' or '') + 'width:46mm; font-family:Arial, sans-serif; color:#000;'">
+                    <div style="text-align:center; margin-top:0.5mm;">
+                        <img t-att-src="'/report/barcode/Code128/%s' % (o.name or '-')"
+                             style="width:44mm; height:8mm;"/>
+                    </div>
+                    <div style="text-align:center; font-size:7px; letter-spacing:0.3px; margin-top:0.3mm;">
+                        <t t-out="o.name"/>
+                    </div>
+                    <div style="font-size:10px; font-weight:bold; line-height:1.1; margin-top:0.5mm;">
+                        <t t-out="(o.patient_id.name or '')[:15]"/>
+                    </div>
+                    <div style="font-size:8px; line-height:1.1;">
+                        <t t-out="o.test_names or ''"/>
+                    </div>
+                </div>
+            </t>
+        </t>
+    </template>
+
+</odoo>

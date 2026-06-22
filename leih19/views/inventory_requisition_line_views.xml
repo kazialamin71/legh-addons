@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <record id="inventory_requisition_line_tree_view" model="ir.ui.view">
+        <field name="name">inventory_requisition_line.tree</field>
+        <field name="model">inventory.requisition.line</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name" />
+                <field name="inventory_requsition_id" />
+                <field name="product_name" />
+                <field name="available_qty" />
+                <field name="quantity" />
+            </list>
+        </field>
+    </record>
+    <record id="inventory_requisition_line_form_view" model="ir.ui.view">
+        <field name="name">inventory_requisition_line.form</field>
+        <field name="model">inventory.requisition.line</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group string="Information">
+                        <group>
+                            <field name="name" />
+                            <field name="product_name" />
+                            <field name="quantity" />
+                        </group>
+                        <group>
+                            <field name="inventory_requsition_id" />
+                            <field name="available_qty" />
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="inventory_requisition_line_action" model="ir.actions.act_window">
+        <field name="name">inventory_requisition_line</field>
+        <field name="res_model">inventory.requisition.line</field>
+        <field name="view_mode">list,form</field>
+    </record>
+</odoo>

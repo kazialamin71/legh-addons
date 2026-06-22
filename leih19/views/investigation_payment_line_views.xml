@@ -1,0 +1,52 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <record id="investigation_payment_line_tree_view" model="ir.ui.view">
+        <field name="name">investigation_payment_line.tree</field>
+        <field name="model">investigation.payment.line</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="investigation_payment_line_ids" />
+                <field name="department_id" />
+                <field name="name" />
+                <field name="discount_amount" />
+                <field name="test_amount" />
+                <field name="mou_payable_comm_var" />
+                <field name="mou_payable_comm_fixed" />
+                <field name="mou_payable_comm_max_cap" />
+                <field name="after_discount" />
+                <field name="payable_amount" />
+            </list>
+        </field>
+    </record>
+    <record id="investigation_payment_line_form_view" model="ir.ui.view">
+        <field name="name">investigation_payment_line.form</field>
+        <field name="model">investigation.payment.line</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group string="Information">
+                        <group>
+                            <field name="investigation_payment_line_ids" />
+                            <field name="name" />
+                            <field name="test_amount" />
+                            <field name="mou_payable_comm_fixed" />
+                            <field name="after_discount" />
+                        </group>
+                        <group>
+                            <field name="department_id" />
+                            <field name="discount_amount" />
+                            <field name="mou_payable_comm_var" />
+                            <field name="mou_payable_comm_max_cap" />
+                            <field name="payable_amount" />
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="investigation_payment_line_action" model="ir.actions.act_window">
+        <field name="name">investigation_payment_line</field>
+        <field name="res_model">investigation.payment.line</field>
+        <field name="view_mode">list,form</field>
+    </record>
+</odoo>

@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <record id="bill_register_general_admission_line_tree_view" model="ir.ui.view">
+        <field name="name">bill_register_general_admission_line.tree</field>
+        <field name="model">bill.register.general.admission.line</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="general_admission_line_id" />
+                <field name="bill_id" />
+                <field name="total" />
+            </list>
+        </field>
+    </record>
+    <record id="bill_register_general_admission_line_form_view" model="ir.ui.view">
+        <field name="name">bill_register_general_admission_line.form</field>
+        <field name="model">bill.register.general.admission.line</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group string="Information">
+                        <group>
+                            <field name="general_admission_line_id" />
+                            <field name="total" />
+                        </group>
+                        <group>
+                            <field name="bill_id" />
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="bill_register_general_admission_line_action" model="ir.actions.act_window">
+        <field name="name">bill_register_general_admission_line</field>
+        <field name="res_model">bill.register.general.admission.line</field>
+        <field name="view_mode">list,form</field>
+    </record>
+</odoo>

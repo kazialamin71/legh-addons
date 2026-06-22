@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <record id="optics_lens_sale_line_tree_view" model="ir.ui.view">
+        <field name="name">optics_lens_sale_line.tree</field>
+        <field name="model">optics.lens.sale.line</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name" />
+                <field name="product_id" />
+                <field name="optics_sale_id" />
+                <field name="price" />
+                <field name="qty" />
+                <field name="total_amount" />
+            </list>
+        </field>
+    </record>
+    <record id="optics_lens_sale_line_form_view" model="ir.ui.view">
+        <field name="name">optics_lens_sale_line.form</field>
+        <field name="model">optics.lens.sale.line</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group string="Information">
+                        <group>
+                            <field name="name" />
+                            <field name="optics_sale_id" />
+                            <field name="qty" />
+                        </group>
+                        <group>
+                            <field name="product_id" />
+                            <field name="price" />
+                            <field name="total_amount" />
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="optics_lens_sale_line_action" model="ir.actions.act_window">
+        <field name="name">optics_lens_sale_line</field>
+        <field name="res_model">optics.lens.sale.line</field>
+        <field name="view_mode">list,form</field>
+    </record>
+</odoo>

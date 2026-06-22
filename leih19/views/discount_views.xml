@@ -1,0 +1,57 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <record id="discount_tree_view" model="ir.ui.view">
+        <field name="name">discount.tree</field>
+        <field name="model">discount</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name" />
+                <field name="date" />
+                <field name="admission_id" />
+                <field name="bill_no" />
+                <field name="patient_name" />
+                <field name="mobile" />
+                <field name="total_discount" />
+                <field name="amount" />
+                <field name="state" />
+            </list>
+        </field>
+    </record>
+    <record id="discount_form_view" model="ir.ui.view">
+        <field name="name">discount.form</field>
+        <field name="model">discount</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <field name="state" widget="statusbar" />
+                </header>
+                <sheet>
+                    <group string="Information">
+                        <group>
+                            <field name="name" />
+                            <field name="admission_id" />
+                            <field name="patient_name" />
+                            <field name="total_discount" />
+                        </group>
+                        <group>
+                            <field name="date" />
+                            <field name="bill_no" />
+                            <field name="mobile" />
+                            <field name="amount" />
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Discount Line">
+                            <field name="discount_line_id" />
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="discount_action" model="ir.actions.act_window">
+        <field name="name">discount</field>
+        <field name="res_model">discount</field>
+        <field name="view_mode">list,form</field>
+    </record>
+</odoo>

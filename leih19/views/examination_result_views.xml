@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <record id="examination_result_tree_view" model="ir.ui.view">
+        <field name="name">examination.result.tree</field>
+        <field name="model">examination.result</field>
+        <field name="arch" type="xml">
+            <list decoration-info="state == 'draft'"
+                  decoration-warning="state == 'in_progress'"
+                  decoration-success="state == 'released'"
+                  decoration-muted="state == 'cancelled'">
+                <field name="name"/>
+                <field name="reported_at"/>
+                <field name="patient_id"/>
+                <field name="entry_id"/>
+                <field name="category"/>
+                <field name="doctor_id"/>
+                <field name="reported_by_id"/>
+                <field name="state"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="examination_result_search_view" model="ir.ui.view">
+        <field name="name">examination.result.search</field>
+        <field name="model">examination.result</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="patient_id"/>
+                <field name="entry_id"/>
+                <field name="doctor_id"/>
+                <filter name="state_draft" string="Draft" domain="[('state','=','draft')]"/>
+                <filter name="state_in_progress" string="In Progress" domain="[('state','=','in_progress')]"/>
+                <filter name="state_verified" string="Verified" domain="[('state','=','verified')]"/>
+                <filter name="state_released" string="Released" domain="[('state','=','released')]"/>
+                <separator/>
+                <filter name="cat_micro" string="Microbiology" domain="[('category','=','microbiology')]"/>
+                <filter name="cat_pathology" string="Pathology" domain="[('category','=','pathology')]"/>
+                <separator/>
+                <filter name="group_state" string="State" context="{'group_by': 'state'}"/>
+                <filter name="group_category" string="Category" context="{'group_by': 'category'}"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="examination_result_form_view" model="ir.ui.view">
+        <field name="name">examination.result.form</field>
+        <field name="model">examination.result</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_start" type="object" string="Start Entry"
+                            class="oe_highlight" invisible="state != 'draft'"/>
+                    <button name="action_verify" type="object" string="Verify"
+                            class="oe_highlight" invisible="state != 'in_progress'"/>
+                    <button name="action_release" type="object" string="Release"
+                            class="oe_highlight" invisible="state != 'verified'"/>
+                    <button name="action_print_report" type="object" string="Print Report"
+                            invisible="state not in ('verified', 'released')"
+                            help="Print just this result. Sign the printed copy, then click Release."/>
+                    <button name="action_print_bill_reports" type="object" string="Print All (Bill)"
+                            invisible="state not in ('verified', 'released') or not bill_register_id"
+                            help="Print all verified/released results from the same bill as one consolidated PDF."/>
+                    <button name="action_cancel" type="object" string="Cancel"
+                            invisible="state in ('cancelled', 'released')"/>
+                    <button name="action_reset_to_draft" type="object" string="Reset to Draft"
+                            invisible="state != 'cancelled'"/>
+                    <field name="state" widget="statusbar"
+                           statusbar_visible="draft,in_progress,verified,released"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1><field name="name" readonly="1"/></h1>
+                    </div>
+                    <group>
+                        <group string="Patient &amp; Test">
+                            <field name="patient_id" options="{'no_create': True}"/>
+                            <field name="patient_sex"/>
+                            <field name="patient_age"/>
+                            <field name="entry_id" options="{'no_create': True}"/>
+                            <field name="category" readonly="1"/>
+                            <field name="report_layout" readonly="1"/>
+                            <field name="department_id"/>
+                        </group>
+                        <group string="Workflow">
+                            <field name="doctor_id"/>
+                            <field name="reported_by_id"/>
+                            <field name="specimen_id" options="{'no_create': True}"/>
+                            <field name="bill_register_id" readonly="1"/>
+                            <field name="sample_collected_at"/>
+                            <field name="reported_at"/>
+                            <field name="verified_at" readonly="1"/>
+                            <field name="verified_by_id" readonly="1"/>
+                        </group>
+                    </group>
+                    <group string="Method / Instrument">
+                        <group>
+                            <field name="method_id"/>
+                        </group>
+                        <group>
+                            <field name="instrument_id"/>
+                        </group>
+                    </group>
+                    <group string="Microbiology Actuals" invisible="category != 'microbiology'">
+                        <group>
+                            <field name="incubation_hours"/>
+                            <field name="incubation_temp_c"/>
+                        </group>
+                        <group>
+                            <field name="culture_medium"/>
+                            <field name="organism_identified"/>
+                            <field name="show_antibiogram"/>
+                        </group>
+                    </group>
+                    <group string="Transfusion / Cross Matching" invisible="report_layout != 'transfusion'">
+                        <group string="Donor">
+                            <field name="donor_name"/>
+                            <field name="donor_age"/>
+                            <field name="donor_sex"/>
+                            <field name="bag_no"/>
+                        </group>
+                        <group string="Cross Match">
+                            <field name="patient_blood_group"/>
+                            <field name="donor_blood_group"/>
+                            <field name="donation_type"/>
+                            <field name="blood_component"/>
+                            <field name="cross_match_status"/>
+                        </group>
+                        <field name="transfusion_note" colspan="2"/>
+                    </group>
+                    <notebook>
+                        <page string="Narrative / Findings"
+                              invisible="category not in ('descriptive', 'radiology')">
+                            <field name="available_template_ids" invisible="1"/>
+                            <group>
+                                <field name="template_id"
+                                       options="{'no_create': True}"
+                                       domain="[('id', 'in', available_template_ids)]"
+                                       help="Pick a template to load its body into the editor below. Edit freely after."/>
+                            </group>
+                            <field name="narrative_html" widget="html" nolabel="1"/>
+                        </page>
+                        <page string="Components"
+                              invisible="category in ('descriptive', 'radiology')">
+                            <field name="result_line_ids">
+                                <list editable="bottom"
+                                      decoration-bf="is_group_header"
+                                      decoration-danger="flag in ('HH','LL')"
+                                      decoration-warning="flag in ('H','L','A')">
+                                    <field name="sequence" widget="handle"/>
+                                    <field name="entry_line_id" column_invisible="1"/>
+                                    <field name="is_group_header" column_invisible="1"/>
+                                    <field name="result_type" column_invisible="1"/>
+                                    <field name="parent_line_id" column_invisible="1"/>
+                                    <field name="name" readonly="1"/>
+                                    <field name="value_numeric"
+                                           invisible="result_type != 'numeric' or is_group_header"/>
+                                    <field name="value_text"
+                                           invisible="result_type != 'text' or is_group_header"/>
+                                    <field name="value_selection_id"
+                                           invisible="result_type != 'selection' or is_group_header"
+                                           options="{'no_create': True}"/>
+                                    <field name="uom" readonly="1"/>
+                                    <field name="reference_value" readonly="1"/>
+                                    <field name="flag" readonly="1" optional="show"/>
+                                    <field name="show_when_value_id" string="Show When"
+                                           readonly="1" optional="hide"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Antibiogram" invisible="category != 'microbiology'">
+                            <field name="antibiogram_line_ids">
+                                <list editable="bottom">
+                                    <field name="sequence" widget="handle"/>
+                                    <field name="antibiotic_id" readonly="1" options="{'no_create': True}"/>
+                                    <field name="code" readonly="1"/>
+                                    <field name="drug_class" readonly="1"/>
+                                    <field name="sensitivity"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Clinical Note">
+                            <field name="clinical_note" nolabel="1"/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="examination_result_action" model="ir.actions.act_window">
+        <field name="name">Lab Results</field>
+        <field name="res_model">examination.result</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="examination_result_search_view"/>
+        <field name="context">{'search_default_state_in_progress': 1, 'search_default_state_draft': 1}</field>
+    </record>
+
+</odoo>

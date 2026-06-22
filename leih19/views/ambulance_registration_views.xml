@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <record id="ambulance_registration_tree_view" model="ir.ui.view">
+        <field name="name">ambulance_registration.tree</field>
+        <field name="model">ambulance.registration</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="vehicle_type" />
+                <field name="name" />
+                <field name="vehicle_name" />
+                <field name="active" />
+            </list>
+        </field>
+    </record>
+    <record id="ambulance_registration_form_view" model="ir.ui.view">
+        <field name="name">ambulance_registration.form</field>
+        <field name="model">ambulance.registration</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group string="Information">
+                        <group>
+                            <field name="vehicle_type" />
+                            <field name="vehicle_name" />
+                        </group>
+                        <group>
+                            <field name="name" />
+                            <field name="active" />
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="ambulance_registration_action" model="ir.actions.act_window">
+        <field name="name">ambulance_registration</field>
+        <field name="res_model">ambulance.registration</field>
+        <field name="view_mode">list,form</field>
+    </record>
+</odoo>

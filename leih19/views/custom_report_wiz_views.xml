@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <record id="custom_report_wiz_tree_view" model="ir.ui.view">
+        <field name="name">custom_report_wiz.tree</field>
+        <field name="model">custom.report.wiz</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="date_from" />
+                <field name="date_to" />
+            </list>
+        </field>
+    </record>
+    <record id="custom_report_wiz_form_view" model="ir.ui.view">
+        <field name="name">custom_report_wiz.form</field>
+        <field name="model">custom.report.wiz</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group string="Information">
+                        <group>
+                            <field name="date_from" />
+                        </group>
+                        <group>
+                            <field name="date_to" />
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="custom_report_wiz_action" model="ir.actions.act_window">
+        <field name="name">custom_report_wiz</field>
+        <field name="res_model">custom.report.wiz</field>
+        <field name="view_mode">list,form</field>
+    </record>
+</odoo>

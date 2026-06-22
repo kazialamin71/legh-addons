@@ -1,0 +1,290 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <record id="view_bill_register_list" model="ir.ui.view">
+        <field name="name">bill.register.list</field>
+        <field name="model">bill.register</field>
+        <field name="arch" type="xml">
+            <list string="Bill Register">
+                <field name="name" />
+                <field name="mobile" />
+                <field name="patient_name" />
+                <field name="patient_id" />
+                <field name="address" />
+                <field name="age" />
+                <field name="sex" />
+                <field name="diagonostic_bill" />
+                <field name="ref_doctors" />
+                <field name="referral" />
+                <field name="doctors_discounts" />
+                <field name="other_discount" />
+                <field name="after_discount" />
+                <field name="total_without_discount" />
+                <field name="total" />
+                <field name="grand_total" />
+                <field name="paid" />
+                <field name="due" />
+                <field name="type" />
+                <field name="card_no" />
+                <field name="bank_name" />
+                <field name="payment_type" />
+                <field name="service_charge" />
+                <field name="to_be_paid" />
+                <field name="account_number" />
+                <field name="discount_remarks" />
+                <field name="date" />
+                <field name="user_id" />
+                <field name="state" />
+                <field name="old_journal" />
+                <field name="general_admission_id" />
+                <field name="is_applied_to_admission" />
+            </list>
+        </field>
+    </record>
+    <record id="view_bill_register_form" model="ir.ui.view">
+        <field name="name">bill.register.form</field>
+        <field name="model">bill.register</field>
+        <field name="arch" type="xml">
+            <form string="Bill Register">
+                <header>
+                    <button name="bill_confirm" type="object" string="Confirm"
+                            class="oe_highlight" invisible="state != 'pending'"/>
+                    <button name="action_generate_lab_items" type="object" string="Generate Lab Items"
+                            invisible="state != 'confirmed'"
+                            help="Create specimens and lab results from this bill's lab tests. Safe to re-run."/>
+                    <button name="action_print_lab_reports" type="object" string="Print Lab Reports"
+                            class="oe_highlight" invisible="lab_result_count == 0"/>
+                    <button name="action_print_tube_stickers" type="object" string="Print Stickers"
+                            invisible="specimen_count == 0"/>
+                    <button name="btn_pay_bill" type="object" string="Pay"
+                            class="oe_highlight" invisible="state != 'confirmed' or due &lt;= 0"/>
+                    <button name="bill_cancel" type="object" string="Cancel"
+                            invisible="state in ('cancelled', 'released')"/>
+                    <field name="state" widget="statusbar"
+                           statusbar_visible="pending,confirmed,released"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_view_lab_specimens" type="object"
+                                class="oe_stat_button" icon="fa-flask"
+                                invisible="specimen_count == 0">
+                            <field name="specimen_count" widget="statinfo" string="Specimens"/>
+                        </button>
+                        <button name="action_view_lab_results" type="object"
+                                class="oe_stat_button" icon="fa-file-text-o"
+                                invisible="lab_result_count == 0">
+                            <field name="lab_result_count" widget="statinfo" string="Lab Results"/>
+                        </button>
+                    </div>
+                    <group string="Information">
+                        <group>
+                            <field name="name" readonly="1" />
+                            <field name="patient_name" />
+                            <field name="address" />
+                            <field name="sex" />
+                            <field name="ref_doctors" />
+                            <field name="corporate_client_id" />
+                            <field name="scheme_discount_total" readonly="1" />
+                            <field name="doctors_discounts" />
+                            <field name="doctor_discount_amt" readonly="1" />
+                            <field name="after_discount" readonly="1" />
+                            <field name="total" readonly="1" />
+                            <field name="down_payment" readonly="state != 'pending'" />
+                            <field name="paid" readonly="1" />
+                            <field name="type" />
+                            <field name="bank_name" />
+                            <field name="service_charge" readonly="1" />
+                            <field name="account_number" />
+                            <field name="date" readonly="1" />
+                            <field name="old_journal" />
+                            <field name="is_applied_to_admission" />
+                        </group>
+                        <group>
+                            <field name="mobile" />
+                            <field name="patient_id" readonly="1" />
+                            <field name="age" />
+                            <field name="diagonostic_bill" />
+                            <field name="referral" />
+                            <field name="other_discount" />
+                            <field name="total_without_discount" readonly="1" />
+                            <field name="grand_total" readonly="1" />
+                            <field name="due" readonly="1" />
+                            <field name="card_no" />
+                            <field name="payment_type" />
+                            <field name="to_be_paid" readonly="1" />
+                            <field name="discount_remarks" />
+                            <field name="user_id" />
+                            <field name="general_admission_id" />
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Bill Register Line">
+                            <field name="bill_register_line_id">
+                                <list editable="bottom">
+                                    <field name="name" />
+                                    <field name="department" readonly="1" />
+                                    <field name="product_qty" />
+                                    <field name="delivery_date" readonly="1" />
+                                    <field name="price" />
+                                    <field name="discount" />
+                                    <field name="flat_discount" />
+                                    <field name="scheme_discount" />
+                                    <field name="scheme_discount_amt" readonly="1" optional="show" />
+                                    <field name="total_discount" readonly="1" />
+                                    <field name="total_amount" readonly="1" />
+                                    <field name="paid_allocated" readonly="1" optional="show" />
+                                </list>
+                                <form string="Bill Line">
+                                    <group>
+                                        <field name="name" />
+                                        <field name="department" readonly="1" />
+                                        <field name="product_qty" />
+                                        <field name="delivery_date" readonly="1" />
+                                        <field name="price" />
+                                        <field name="discount" />
+                                        <field name="flat_discount" />
+                                        <field name="scheme_discount" />
+                                        <field name="scheme_discount_amt" readonly="1" />
+                                        <field name="total_discount" readonly="1" />
+                                        <field name="total_amount" readonly="1" />
+                                    </group>
+                                </form>
+                            </field>
+                        </page>
+                        <page string="Bill Register Payment Line">
+                            <field name="bill_register_payment_line_id" readonly="1">
+                                <list>
+                                    <field name="date" />
+                                    <field name="amount" />
+                                    <field name="type" />
+                                    <field name="money_receipt_id" />
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Bill Journal Relation">
+                            <field name="bill_journal_relation_id" readonly="1">
+                                <list>
+                                    <field name="journal_id" />
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="view_bill_register_search" model="ir.ui.view">
+        <field name="name">bill.register.search</field>
+        <field name="model">bill.register</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name" />
+                <field name="patient_name" />
+                <field name="ref_doctors" />
+                <field name="state" />
+                <filter string="Pending" name="pending" domain="[('state','=','pending')]" />
+                <filter string="Confirmed" name="confirmed" domain="[('state','=','confirmed')]" />
+                <filter string="Cancelled" name="cancelled" domain="[('state','=','cancelled')]" />
+                <separator />
+                <filter string="Group by Patient" name="group_patient" context="{'group_by':'patient_name'}" />
+                <filter string="Group by Doctor" name="group_doctor" context="{'group_by':'ref_doctors'}" />
+                <filter string="Group by Status" name="group_state" context="{'group_by':'state'}" />
+            </search>
+        </field>
+    </record>
+    <record id="action_bill_register" model="ir.actions.act_window">
+        <field name="name">Bill Register</field>
+        <field name="res_model">bill.register</field>
+        <field name="view_mode">list,form</field>
+        <field name="view_id" ref="view_bill_register_list" />
+        <field name="search_view_id" ref="view_bill_register_search" />
+        <field name="context">{}</field>
+    </record>
+    <!-- ============================================================= -->
+    <!-- Diagnostic item analytics (cross-bill: counts, revenue, paid)  -->
+    <!-- ============================================================= -->
+    <record id="view_bill_register_line_report_list" model="ir.ui.view">
+        <field name="name">bill.register.line.report.list</field>
+        <field name="model">bill.register.line</field>
+        <field name="arch" type="xml">
+            <list string="Service Income" create="false">
+                <field name="bill_date" optional="show"/>
+                <field name="bill_register_id" optional="show"/>
+                <field name="service_group" optional="show"/>
+                <field name="department_id" optional="show"/>
+                <field name="name"/>
+                <field name="assign_doctors" string="Provider" optional="show"/>
+                <field name="product_qty" sum="Qty"/>
+                <field name="gross_amount" sum="Gross"/>
+                <field name="total_discount" sum="Discount"/>
+                <field name="total_amount" sum="Net"/>
+                <field name="paid_allocated" sum="Paid"/>
+                <field name="bill_state" optional="show"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_bill_register_line_pivot" model="ir.ui.view">
+        <field name="name">bill.register.line.pivot</field>
+        <field name="model">bill.register.line</field>
+        <field name="arch" type="xml">
+            <pivot string="Service Income">
+                <field name="service_group" type="row"/>
+                <field name="assign_doctors" type="row"/>
+                <field name="product_qty" type="measure"/>
+                <field name="total_amount" type="measure"/>
+                <field name="paid_allocated" type="measure"/>
+            </pivot>
+        </field>
+    </record>
+
+    <record id="view_bill_register_line_graph" model="ir.ui.view">
+        <field name="name">bill.register.line.graph</field>
+        <field name="model">bill.register.line</field>
+        <field name="arch" type="xml">
+            <graph string="Diagnostic Items" type="bar">
+                <field name="department_id"/>
+                <field name="total_amount" type="measure"/>
+            </graph>
+        </field>
+    </record>
+
+    <record id="view_bill_register_line_report_search" model="ir.ui.view">
+        <field name="name">bill.register.line.report.search</field>
+        <field name="model">bill.register.line</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="service_group"/>
+                <field name="department_id"/>
+                <field name="assign_doctors" string="Provider"/>
+                <field name="bill_register_id"/>
+                <filter name="confirmed" string="Confirmed/Released"
+                        domain="[('bill_state','in',('confirmed','released'))]"/>
+                <separator/>
+                <filter name="physiotherapy" string="Physiotherapy" domain="[('service_group','=','physiotherapy')]"/>
+                <filter name="dental" string="Dental" domain="[('service_group','=','dental')]"/>
+                <filter name="diagnostic" string="Diagnostic" domain="[('service_group','=','diagnostic')]"/>
+                <separator/>
+                <filter name="this_month" string="This Month"
+                        domain="[('bill_date','&gt;=',(context_today().replace(day=1)).strftime('%Y-%m-%d'))]"/>
+                <separator/>
+                <filter name="group_service_group" string="Service Group" context="{'group_by':'service_group'}"/>
+                <filter name="group_provider" string="Provider" context="{'group_by':'assign_doctors'}"/>
+                <filter name="group_department" string="Department" context="{'group_by':'department_id'}"/>
+                <filter name="group_item" string="Item" context="{'group_by':'name'}"/>
+                <filter name="group_bill_date" string="Bill Date" context="{'group_by':'bill_date:month'}"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_bill_register_line_report" model="ir.actions.act_window">
+        <field name="name">Service Income Report</field>
+        <field name="res_model">bill.register.line</field>
+        <field name="view_mode">list,pivot,graph</field>
+        <field name="search_view_id" ref="view_bill_register_line_report_search"/>
+        <field name="context">{'search_default_confirmed': 1, 'search_default_group_service_group': 1, 'search_default_group_provider': 1}</field>
+    </record>
+
+    <menuitem id="menu_leis_root" name="LEIS" sequence="10" />
+    <menuitem id="menu_leis_others" name="Others" parent="menu_leis_root" sequence="50" />
+</odoo>

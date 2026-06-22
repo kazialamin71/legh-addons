@@ -1,0 +1,60 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <record id="bill_register_line_tree_view" model="ir.ui.view">
+        <field name="name">bill_register_line.tree</field>
+        <field name="model">bill.register.line</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name" />
+                <field name="bill_register_id" />
+                <field name="department" />
+                <field name="product_qty" />
+                <field name="delivery_date" />
+                <field name="date" />
+                <field name="price" />
+                <field name="discount" />
+                <field name="flat_discount" />
+                <field name="total_discount" />
+                <field name="discount_percent" />
+                <field name="total_amount" />
+                <field name="assign_doctors" />
+                <field name="commission_paid" />
+            </list>
+        </field>
+    </record>
+    <record id="bill_register_line_form_view" model="ir.ui.view">
+        <field name="name">bill_register_line.form</field>
+        <field name="model">bill.register.line</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group string="Information">
+                        <group>
+                            <field name="name" />
+                            <field name="department" />
+                            <field name="delivery_date" />
+                            <field name="price" />
+                            <field name="flat_discount" />
+                            <field name="discount_percent" />
+                            <field name="assign_doctors" />
+                        </group>
+                        <group>
+                            <field name="bill_register_id" />
+                            <field name="product_qty" />
+                            <field name="date" />
+                            <field name="discount" />
+                            <field name="total_discount" />
+                            <field name="total_amount" />
+                            <field name="commission_paid" />
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="bill_register_line_action" model="ir.actions.act_window">
+        <field name="name">bill_register_line</field>
+        <field name="res_model">bill.register.line</field>
+        <field name="view_mode">list,form</field>
+    </record>
+</odoo>

@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <record id="bill_journal_relation_tree_view" model="ir.ui.view">
+        <field name="name">bill_journal_relation.tree</field>
+        <field name="model">bill.journal.relation</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="bill_journal_relation_id" />
+                <field name="admission_journal_relation_id" />
+                <field name="general_admission_journal_relation_id" />
+                <field name="journal_id" />
+            </list>
+        </field>
+    </record>
+    <record id="bill_journal_relation_form_view" model="ir.ui.view">
+        <field name="name">bill_journal_relation.form</field>
+        <field name="model">bill.journal.relation</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group string="Information">
+                        <group>
+                            <field name="bill_journal_relation_id" />
+                            <field name="general_admission_journal_relation_id" />
+                        </group>
+                        <group>
+                            <field name="admission_journal_relation_id" />
+                            <field name="journal_id" />
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="bill_journal_relation_action" model="ir.actions.act_window">
+        <field name="name">bill_journal_relation</field>
+        <field name="res_model">bill.journal.relation</field>
+        <field name="view_mode">list,form</field>
+    </record>
+</odoo>

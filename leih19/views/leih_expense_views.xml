@@ -1,0 +1,48 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <record id="leih_expense_tree_view" model="ir.ui.view">
+        <field name="name">leih_expense.tree</field>
+        <field name="model">leih.expense</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="expense_type" />
+                <field name="ex_name" />
+                <field name="amount" />
+                <field name="responsible_person" />
+                <field name="date" />
+                <field name="description" />
+                <field name="state" />
+            </list>
+        </field>
+    </record>
+    <record id="leih_expense_form_view" model="ir.ui.view">
+        <field name="name">leih_expense.form</field>
+        <field name="model">leih.expense</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <field name="state" widget="statusbar" />
+                </header>
+                <sheet>
+                    <group string="Information">
+                        <group>
+                            <field name="expense_type" />
+                            <field name="amount" />
+                            <field name="date" />
+                        </group>
+                        <group>
+                            <field name="ex_name" />
+                            <field name="responsible_person" />
+                            <field name="description" />
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="leih_expense_action" model="ir.actions.act_window">
+        <field name="name">leih_expense</field>
+        <field name="res_model">leih.expense</field>
+        <field name="view_mode">list,form</field>
+    </record>
+</odoo>

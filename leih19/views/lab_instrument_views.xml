@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="lab_instrument_tree_view" model="ir.ui.view">
+        <field name="name">lab.instrument.tree</field>
+        <field name="model">lab.instrument</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="sequence" widget="handle"/>
+                <field name="name"/>
+                <field name="code"/>
+                <field name="location"/>
+                <field name="active"/>
+            </list>
+        </field>
+    </record>
+    <record id="lab_instrument_form_view" model="ir.ui.view">
+        <field name="name">lab.instrument.form</field>
+        <field name="model">lab.instrument</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="code"/>
+                            <field name="location"/>
+                            <field name="sequence"/>
+                        </group>
+                        <group>
+                            <field name="description"/>
+                            <field name="active"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="lab_instrument_action" model="ir.actions.act_window">
+        <field name="name">Lab Instruments</field>
+        <field name="res_model">lab.instrument</field>
+        <field name="view_mode">list,form</field>
+    </record>
+</odoo>

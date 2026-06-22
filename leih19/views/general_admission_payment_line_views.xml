@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <record id="general_admission_payment_line_tree_view" model="ir.ui.view">
+        <field name="name">general_admission_payment_line.tree</field>
+        <field name="model">general.admission.payment.line</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="admission_payment_line_id" />
+                <field name="date" />
+                <field name="amount" />
+                <field name="type" />
+                <field name="card_no" />
+                <field name="bank_name" />
+                <field name="money_receipt_id" />
+            </list>
+        </field>
+    </record>
+    <record id="general_admission_payment_line_form_view" model="ir.ui.view">
+        <field name="name">general_admission_payment_line.form</field>
+        <field name="model">general.admission.payment.line</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group string="Information">
+                        <group>
+                            <field name="admission_payment_line_id" />
+                            <field name="amount" />
+                            <field name="card_no" />
+                            <field name="money_receipt_id" />
+                        </group>
+                        <group>
+                            <field name="date" />
+                            <field name="type" />
+                            <field name="bank_name" />
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="general_admission_payment_line_action" model="ir.actions.act_window">
+        <field name="name">general_admission_payment_line</field>
+        <field name="res_model">general.admission.payment.line</field>
+        <field name="view_mode">list,form</field>
+    </record>
+</odoo>

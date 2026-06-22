@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <record id="diagnosis_group_tree_view" model="ir.ui.view">
+        <field name="name">diagnosis_group.tree</field>
+        <field name="model">diagnosis.group</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name" />
+                <field name="department" />
+                <field name="year" />
+            </list>
+        </field>
+    </record>
+    <record id="diagnosis_group_form_view" model="ir.ui.view">
+        <field name="name">diagnosis_group.form</field>
+        <field name="model">diagnosis.group</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group string="Information">
+                        <group>
+                            <field name="name" />
+                            <field name="year" />
+                        </group>
+                        <group>
+                            <field name="department" />
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="diagnosis_group_action" model="ir.actions.act_window">
+        <field name="name">Diagnosis Group</field>
+        <field name="res_model">diagnosis.group</field>
+        <field name="view_mode">list,form</field>
+    </record>
+</odoo>

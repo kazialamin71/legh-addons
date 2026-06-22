@@ -1,0 +1,49 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <record id="discount_configuration_tree_view" model="ir.ui.view">
+        <field name="name">discount_configuration.tree</field>
+        <field name="model">discount.configuration</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name" />
+                <field name="type" />
+                <field name="overall_discount" />
+                <field name="department" />
+                <field name="from_date" />
+                <field name="to_date" />
+            </list>
+        </field>
+    </record>
+    <record id="discount_configuration_form_view" model="ir.ui.view">
+        <field name="name">discount_configuration.form</field>
+        <field name="model">discount.configuration</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group string="Information">
+                        <group>
+                            <field name="name" />
+                            <field name="overall_discount" />
+                            <field name="from_date" />
+                        </group>
+                        <group>
+                            <field name="type" />
+                            <field name="department" />
+                            <field name="to_date" />
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Discount Donfiguration Line">
+                            <field name="discount_donfiguration_line_ids" />
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="discount_configuration_action" model="ir.actions.act_window">
+        <field name="name">discount_configuration</field>
+        <field name="res_model">discount.configuration</field>
+        <field name="view_mode">list,form</field>
+    </record>
+</odoo>

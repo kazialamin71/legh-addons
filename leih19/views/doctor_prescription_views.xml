@@ -1,0 +1,108 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <record id="view_doctor_prescription_tree" model="ir.ui.view">
+        <field name="name">doctor.prescription.tree</field>
+        <field name="model">doctor.prescription</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name" />
+                <field name="date" />
+                <field name="patient_id" />
+                <field name="patient_code" />
+                <field name="age" />
+                <field name="sex" />
+                <field name="mobile" />
+                <field name="address" />
+                <field name="doctor_id" />
+                <field name="department" />
+                <field name="source_model" />
+                <field name="opd_ticket_id" />
+                <field name="admission_id" />
+                <field name="chief_complaint" />
+                <field name="diagnosis" />
+                <field name="note" />
+                <field name="followup_date" />
+                <field name="followup_note" />
+                <field name="state" />
+            </list>
+        </field>
+    </record>
+    <record id="view_doctor_prescription_form" model="ir.ui.view">
+        <field name="name">doctor.prescription.form</field>
+        <field name="model">doctor.prescription</field>
+        <field name="arch" type="xml">
+            <form string="Prescription">
+                <header>
+                    <button name="action_confirm" type="object" string="Confirm" class="btn-primary" invisible="state != 'draft'" />
+                    <button name="action_reset_to_draft" type="object" string="Reset to Draft" invisible="state != 'done'" />
+                    <button name="action_cancel" type="object" string="Cancel" invisible="state == 'cancel'" />
+                    <button name="action_print_prescription" type="object" string="Print" class="btn-secondary" />
+                    <field name="state" widget="statusbar" />
+                </header>
+                <sheet>
+                    <group string="Information">
+                        <group>
+                            <field name="name" />
+                            <field name="patient_id" />
+                            <field name="age" />
+                            <field name="mobile" />
+                            <field name="doctor_id" />
+                            <field name="source_model" />
+                            <field name="admission_id" invisible="source_model != 'hospital.admission'" />
+                            <field name="diagnosis" />
+                            <field name="followup_date" />
+                        </group>
+                        <group>
+                            <field name="date" />
+                            <field name="patient_code" />
+                            <field name="sex" />
+                            <field name="address" />
+                            <field name="department" />
+                            <field name="opd_ticket_id" invisible="source_model != 'opd.ticket'" />
+                            <field name="chief_complaint" />
+                            <field name="note" />
+                            <field name="followup_note" />
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Medicine Line">
+                            <field name="medicine_line_ids">
+                                <list editable="bottom">
+                                    <field name="sequence" widget="handle" />
+                                    <field name="medicine_name" />
+                                    <field name="dosage" />
+                                    <field name="frequency" />
+                                    <field name="duration" />
+                                    <field name="instruction" />
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Advice Line">
+                            <field name="advice_line_ids">
+                                <list editable="bottom">
+                                    <field name="sequence" widget="handle" />
+                                    <field name="advice" />
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Test Line">
+                            <field name="test_line_ids">
+                                <list editable="bottom">
+                                    <field name="sequence" widget="handle" />
+                                    <field name="test_name" />
+                                    <field name="note" />
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="doctor_prescription_action" model="ir.actions.act_window">
+        <field name="name">Prescriptions</field>
+        <field name="res_model">doctor.prescription</field>
+        <field name="view_mode">list,form</field>
+    </record>
+    <menuitem id="menu_doctor_prescription" name="Prescription" parent="menu_leis_opd" action="doctor_prescription_action" sequence="30" />
+</odoo>
