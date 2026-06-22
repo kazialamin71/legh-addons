@@ -1,0 +1,34 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo noupdate="1">
+
+    <record id="module_category_pharmacy" model="ir.module.category">
+        <field name="name">Pharmacy</field>
+        <field name="sequence">21</field>
+    </record>
+
+    <record id="privilege_pharmacy" model="res.groups.privilege">
+        <field name="name">Pharmacy</field>
+        <field name="category_id" ref="module_category_pharmacy"/>
+        <field name="sequence">21</field>
+    </record>
+
+    <!-- Requester (nurse / ward): creates requisitions, cannot issue -->
+    <record id="group_pharmacy_user" model="res.groups">
+        <field name="name">User (Requisition)</field>
+        <field name="privilege_id" ref="privilege_pharmacy"/>
+        <field name="comment">Create pharmacy requisitions for admissions; cannot issue or return.</field>
+    </record>
+
+    <!-- Dispenser (pharmacist): issues / returns; implies stock access -->
+    <record id="group_pharmacy_dispenser" model="res.groups">
+        <field name="name">Dispenser</field>
+        <field name="privilege_id" ref="privilege_pharmacy"/>
+        <field name="implied_ids" eval="[(4, ref('group_pharmacy_user')), (4, ref('stock.group_stock_user'))]"/>
+        <field name="comment">Issue medicines (stock out + charge), and process returns.</field>
+    </record>
+
+    <record id="base.user_admin" model="res.users">
+        <field name="group_ids" eval="[(4, ref('group_pharmacy_dispenser'))]"/>
+    </record>
+
+</odoo>

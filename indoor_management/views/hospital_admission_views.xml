@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="hospital_admission_form_view_indoor" model="ir.ui.view">
+        <field name="name">hospital.admission.form.indoor</field>
+        <field name="model">hospital.admission</field>
+        <field name="inherit_id" ref="leih19.hospital_admission_form_view"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//header/button[@name='action_view_prescriptions']" position="after">
+                <button string="Shift Bed" type="object" name="action_shift_bed"
+                        class="btn-secondary"
+                        invisible="state != 'activated'"/>
+            </xpath>
+
+            <xpath expr="//sheet" position="inside">
+                <div class="oe_button_box" name="indoor_button_box">
+                    <button name="action_view_accommodation" type="object"
+                            class="oe_stat_button" icon="fa-bed">
+                        <field name="bed_line_count" widget="statinfo" string="Accommodations"/>
+                    </button>
+                </div>
+            </xpath>
+
+            <xpath expr="//field[@name='hospital_bed_line_id']" position="replace">
+                <field name="hospital_bed_line_id">
+                    <list editable="bottom" decoration-info="is_current==True">
+                        <field name="category_id" readonly="1"/>
+                        <field name="ward_id" readonly="1"/>
+                        <field name="bed_no" options="{'no_create': True}"/>
+                        <field name="start_date"/>
+                        <field name="end_date"/>
+                        <field name="bed_qty"/>
+                        <field name="perday_charge"/>
+                        <field name="days_count" readonly="1"/>
+                        <field name="manual_override"/>
+                        <field name="total_amount"/>
+                        <field name="shift_reason"/>
+                        <field name="is_current" column_invisible="True"/>
+                    </list>
+                </field>
+            </xpath>
+
+            <xpath expr="//field[@name='admitting_doctor']" position="after">
+                <field name="current_category_id" readonly="1"/>
+                <field name="current_ward_id" readonly="1"/>
+                <field name="current_bed_id" readonly="1"/>
+            </xpath>
+
+        </field>
+    </record>
+</odoo>

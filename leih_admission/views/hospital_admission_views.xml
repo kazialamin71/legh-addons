@@ -1,0 +1,52 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <!-- Phase A: paid is derived; add the advance (down payment) input. -->
+    <record id="hospital_admission_form_payments" model="ir.ui.view">
+        <field name="name">hospital.admission.form.payments</field>
+        <field name="model">hospital.admission</field>
+        <field name="inherit_id" ref="leih19.hospital_admission_form_view"/>
+        <field name="arch" type="xml">
+            <field name="paid" position="attributes">
+                <attribute name="readonly">1</attribute>
+            </field>
+            <field name="paid" position="after">
+                <field name="down_payment" readonly="state != 'pending'"/>
+            </field>
+
+            <button name="calculate_bill" position="after">
+                <button string="Calculate Payable" type="object"
+                        name="action_calculate_payable" class="btn-primary"
+                        groups="base.group_user"/>
+            </button>
+
+            <button name="btn_bill" position="after">
+                <button string="New Investigation Bill" type="object"
+                        name="action_new_investigation_bill" class="btn-secondary"
+                        groups="base.group_user"/>
+                <button string="Print Statement" type="object"
+                        name="action_print_statement" class="btn-secondary"
+                        groups="base.group_user"/>
+            </button>
+
+            <xpath expr="//notebook/page[1]" position="before">
+                <page string="Charges">
+                    <field name="charge_ids">
+                        <list editable="bottom">
+                            <field name="date"/>
+                            <field name="service_type"/>
+                            <field name="description"/>
+                            <field name="unit_id"/>
+                            <field name="provider_id" optional="show"/>
+                            <field name="qty"/>
+                            <field name="unit_price"/>
+                            <field name="discount"/>
+                            <field name="total_amount" sum="Total"/>
+                            <field name="is_auto" optional="hide"/>
+                            <field name="source_model" optional="hide"/>
+                        </list>
+                    </field>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

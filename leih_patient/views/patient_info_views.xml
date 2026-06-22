@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <record id="patient_info_form_partner" model="ir.ui.view">
+        <field name="name">patient.info.form.partner</field>
+        <field name="model">patient.info</field>
+        <field name="inherit_id" ref="leih19.patient_info_form_view"/>
+        <field name="arch" type="xml">
+            <div name="button_box" position="inside">
+                <button name="action_open_partner" type="object"
+                        class="oe_stat_button" icon="fa-address-card"
+                        invisible="not partner_id">
+                    <div class="o_stat_info">
+                        <span class="o_stat_text">Partner</span>
+                    </div>
+                </button>
+            </div>
+            <field name="name" position="after">
+                <field name="partner_id" readonly="1"/>
+            </field>
+            <field name="age" position="before">
+                <field name="date_of_birth"/>
+            </field>
+            <field name="age" position="after">
+                <field name="age_estimated" readonly="1"
+                       invisible="not age_estimated"
+                       string="(age is estimated)"/>
+            </field>
+        </field>
+    </record>
+</odoo>

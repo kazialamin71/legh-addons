@@ -1,0 +1,19 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <record id="view_bill_register_form_opd" model="ir.ui.view">
+        <field name="name">bill.register.form.opd</field>
+        <field name="model">bill.register</field>
+        <field name="inherit_id" ref="leih19.view_bill_register_form"/>
+        <field name="arch" type="xml">
+            <button name="bill_confirm" position="before">
+                <button name="action_load_from_prescription" type="object"
+                        string="Load Investigations"
+                        invisible="not patient_name or state != 'pending'"
+                        help="Load the investigations prescribed for this patient."/>
+            </button>
+            <field name="ref_doctors" position="after">
+                <field name="prescription_id"/>
+            </field>
+        </field>
+    </record>
+</odoo>

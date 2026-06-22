@@ -1,0 +1,61 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <record id="doctor_schedule_list_view" model="ir.ui.view">
+        <field name="name">doctor.schedule.list</field>
+        <field name="model">doctor.schedule</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="doctor_id"/>
+                <field name="name"/>
+                <field name="start_time" widget="float_time"/>
+                <field name="end_time" widget="float_time"/>
+                <field name="capacity"/>
+                <field name="consultation_fee"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="doctor_schedule_form_view" model="ir.ui.view">
+        <field name="name">doctor.schedule.form</field>
+        <field name="model">doctor.schedule</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group string="Session">
+                            <field name="doctor_id"/>
+                            <field name="name"/>
+                            <field name="start_time" widget="float_time"/>
+                            <field name="end_time" widget="float_time"/>
+                            <field name="active"/>
+                        </group>
+                        <group string="Booking">
+                            <field name="capacity"/>
+                            <field name="consultation_fee"/>
+                            <field name="consultation_entry_id"/>
+                        </group>
+                    </group>
+                    <group string="Days of Week">
+                        <group>
+                            <field name="sun"/>
+                            <field name="mon"/>
+                            <field name="tue"/>
+                            <field name="wed"/>
+                        </group>
+                        <group>
+                            <field name="thu"/>
+                            <field name="fri"/>
+                            <field name="sat"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="doctor_schedule_action" model="ir.actions.act_window">
+        <field name="name">Doctor Sessions</field>
+        <field name="res_model">doctor.schedule</field>
+        <field name="view_mode">list,form</field>
+    </record>
+</odoo>

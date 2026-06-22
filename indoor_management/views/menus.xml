@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="menu_indoor_root"
+              name="Indoor Management"
+              sequence="35"
+              web_icon="indoor_management,static/description/icon.png"/>
+
+    <menuitem id="menu_indoor_operations"
+              name="Operations"
+              parent="menu_indoor_root"
+              sequence="10"/>
+
+    <menuitem id="menu_indoor_beds"
+              name="Beds"
+              parent="menu_indoor_operations"
+              action="action_hospital_bed_indoor"
+              sequence="10"/>
+
+    <menuitem id="menu_indoor_accommodation"
+              name="Accommodation History"
+              parent="menu_indoor_operations"
+              action="action_hospital_bed_line_indoor"
+              sequence="20"/>
+
+    <menuitem id="menu_indoor_config"
+              name="Configuration"
+              parent="menu_indoor_root"
+              sequence="90"/>
+
+    <menuitem id="menu_indoor_categories"
+              name="Bed Categories"
+              parent="menu_indoor_config"
+              action="action_bed_category"
+              sequence="10"/>
+
+    <menuitem id="menu_indoor_wards"
+              name="Wards / Rooms"
+              parent="menu_indoor_config"
+              action="action_hospital_ward"
+              sequence="20"/>
+</odoo>

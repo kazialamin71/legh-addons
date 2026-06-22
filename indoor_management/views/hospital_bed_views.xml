@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_hospital_bed_list_indoor" model="ir.ui.view">
+        <field name="name">hospital.bed.list.indoor</field>
+        <field name="model">hospital.bed</field>
+        <field name="arch" type="xml">
+            <list string="Beds" decoration-success="state=='available'" decoration-warning="state=='reserved'" decoration-danger="state=='occupied'" decoration-muted="state=='maintenance'">
+                <field name="name"/>
+                <field name="code"/>
+                <field name="ward_id"/>
+                <field name="category_id"/>
+                <field name="perday_charge"/>
+                <field name="state"/>
+                <field name="current_admission_id"/>
+                <field name="active"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_hospital_bed_form_indoor" model="ir.ui.view">
+        <field name="name">hospital.bed.form.indoor</field>
+        <field name="model">hospital.bed</field>
+        <field name="arch" type="xml">
+            <form string="Bed">
+                <sheet>
+                    <div class="oe_title">
+                        <label for="name"/>
+                        <h1><field name="name"/></h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="code"/>
+                            <field name="ward_id"/>
+                            <field name="category_id" readonly="1"/>
+                            <field name="bed_qty"/>
+                        </group>
+                        <group>
+                            <field name="perday_charge"/>
+                            <field name="state"/>
+                            <field name="current_admission_id"/>
+                            <field name="active"/>
+                        </group>
+                    </group>
+                    <group string="Notes">
+                        <field name="notes" nolabel="1"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_hospital_bed_kanban_indoor" model="ir.ui.view">
+        <field name="name">hospital.bed.kanban.indoor</field>
+        <field name="model">hospital.bed</field>
+        <field name="arch" type="xml">
+            <kanban default_group_by="category_id" class="o_kanban_dashboard">
+                <field name="name"/>
+                <field name="ward_id"/>
+                <field name="category_id"/>
+                <field name="state"/>
+                <field name="perday_charge"/>
+                <field name="current_admission_id"/>
+                <templates>
+                    <t t-name="card">
+                        <div class="oe_kanban_global_click o_kanban_record_top">
+                            <div class="o_kanban_record_headings">
+                                <strong><field name="name"/></strong>
+                                <div class="text-muted"><field name="ward_id"/></div>
+                            </div>
+                            <div>
+                                <span class="badge" t-attf-class="badge text-bg-#{record.state.raw_value === 'available' ? 'success' : record.state.raw_value === 'occupied' ? 'danger' : record.state.raw_value === 'reserved' ? 'warning' : 'secondary'}">
+                                    <field name="state"/>
+                                </span>
+                            </div>
+                            <div class="mt-1">
+                                <span>Rate: </span><field name="perday_charge"/>
+                            </div>
+                            <div t-if="record.current_admission_id.raw_value">
+                                <small class="text-muted">Patient: <field name="current_admission_id"/></small>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record id="action_hospital_bed_indoor" model="ir.actions.act_window">
+        <field name="name">Beds</field>
+        <field name="res_model">hospital.bed</field>
+        <field name="view_mode">kanban,list,form</field>
+    </record>
+</odoo>

@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <!-- Convenience category for dispensable medicines (POS pharmacy). -->
+    <record id="product_category_medicine" model="product.category">
+        <field name="name">Medicine</field>
+    </record>
+</odoo>

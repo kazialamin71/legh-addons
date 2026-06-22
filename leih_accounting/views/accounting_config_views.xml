@@ -1,0 +1,61 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <record id="leih_accounting_config_form" model="ir.ui.view">
+        <field name="name">leih.accounting.config.form</field>
+        <field name="model">leih.accounting.config</field>
+        <field name="arch" type="xml">
+            <form string="Hospital Accounting Settings">
+                <sheet>
+                    <div class="oe_title">
+                        <h1><field name="name"/></h1>
+                    </div>
+                    <group>
+                        <group string="Status">
+                            <field name="company_id" groups="base.group_multi_company"/>
+                            <field name="posting_enabled"/>
+                        </group>
+                        <group string="Journals">
+                            <field name="sales_journal_id"/>
+                            <field name="payment_journal_id"/>
+                        </group>
+                        <group string="Accounts">
+                            <field name="default_income_account_id"/>
+                            <field name="receivable_account_id"/>
+                            <field name="advance_account_id"/>
+                        </group>
+                    </group>
+                    <div class="text-muted">
+                        Posting is off until <b>Post to General Ledger</b> is enabled and the
+                        journals/accounts above are set. Income account per item comes from the
+                        item's account first, then the default income account here.
+                    </div>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="leih_accounting_config_list" model="ir.ui.view">
+        <field name="name">leih.accounting.config.list</field>
+        <field name="model">leih.accounting.config</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="company_id" groups="base.group_multi_company"/>
+                <field name="posting_enabled"/>
+                <field name="sales_journal_id"/>
+                <field name="payment_journal_id"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="action_leih_accounting_config" model="ir.actions.act_window">
+        <field name="name">Hospital Accounting Settings</field>
+        <field name="res_model">leih.accounting.config</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <menuitem id="menu_leih_accounting_config" name="Hospital Accounting"
+              parent="account.menu_finance_configuration"
+              action="action_leih_accounting_config" sequence="100"
+              groups="account.group_account_manager"/>
+</odoo>

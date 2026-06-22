@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_doctor_schedule,doctor.schedule,model_doctor_schedule,base.group_user,1,1,1,1
+access_prescription_template,prescription.template,model_prescription_template,base.group_user,1,1,1,1
+access_prescription_template_medicine,prescription.template.medicine,model_prescription_template_medicine,base.group_user,1,1,1,1
+access_prescription_template_advice,prescription.template.advice,model_prescription_template_advice,base.group_user,1,1,1,1
+access_prescription_template_test,prescription.template.test,model_prescription_template_test,base.group_user,1,1,1,1

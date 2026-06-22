@@ -1,0 +1,56 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <record id="commission_configuration_line_tree_view" model="ir.ui.view">
+        <field name="name">commission_configuration_line.tree</field>
+        <field name="model">commission.configuration.line</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="commission_configuration_line_ids" />
+                <field name="department_id" />
+                <field name="test_id" />
+                <field name="applicable" />
+                <field name="line_method" />
+                <field name="base_price" />
+                <field name="variance_amount" />
+                <field name="fixed_amount" />
+                <field name="max_commission_amount" />
+                <field name="base_price_applicable" optional="hide" />
+                <field name="test_price" optional="hide" />
+                <field name="est_commission_amount" optional="hide" />
+            </list>
+        </field>
+    </record>
+    <record id="commission_configuration_line_form_view" model="ir.ui.view">
+        <field name="name">commission_configuration_line.form</field>
+        <field name="model">commission.configuration.line</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group string="Information">
+                        <group>
+                            <field name="commission_configuration_line_ids" />
+                            <field name="test_id" />
+                            <field name="department_id" />
+                            <field name="applicable" />
+                            <field name="line_method" />
+                        </group>
+                        <group string="Margin over Base Price" invisible="line_method != 'margin'">
+                            <field name="base_price" />
+                            <field name="max_commission_amount" />
+                        </group>
+                        <group string="Percentage / Fixed" invisible="line_method != 'percentage'">
+                            <field name="variance_amount" />
+                            <field name="fixed_amount" />
+                            <field name="max_commission_amount" />
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="commission_configuration_line_action" model="ir.actions.act_window">
+        <field name="name">commission_configuration_line</field>
+        <field name="res_model">commission.configuration.line</field>
+        <field name="view_mode">list,form</field>
+    </record>
+</odoo>

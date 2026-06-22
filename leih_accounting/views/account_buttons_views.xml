@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <!-- Bill: smart button -->
+    <record id="view_bill_register_form_acc" model="ir.ui.view">
+        <field name="name">bill.register.form.acc</field>
+        <field name="model">bill.register</field>
+        <field name="inherit_id" ref="leih19.view_bill_register_form"/>
+        <field name="arch" type="xml">
+            <div name="button_box" position="inside">
+                <button name="action_view_acc_moves" type="object"
+                        class="oe_stat_button" icon="fa-book"
+                        invisible="acc_move_count == 0">
+                    <field name="acc_move_count" widget="statinfo" string="Journal Entries"/>
+                </button>
+            </div>
+        </field>
+    </record>
+
+    <!-- Admission: header button (no button box on this form) -->
+    <record id="view_hospital_admission_form_acc" model="ir.ui.view">
+        <field name="name">hospital.admission.form.acc</field>
+        <field name="model">hospital.admission</field>
+        <field name="inherit_id" ref="leih19.hospital_admission_form_view"/>
+        <field name="arch" type="xml">
+            <button name="btn_bill" position="after">
+                <field name="acc_move_count" invisible="1"/>
+                <button string="Journal Entries" type="object"
+                        name="action_view_acc_moves" class="btn-secondary"
+                        invisible="acc_move_count == 0"/>
+            </button>
+        </field>
+    </record>
+</odoo>

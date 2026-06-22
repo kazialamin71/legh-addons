@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Repoint the existing (broken) report action at our working template.
+         The leih19 record had report_name="leis_migrated_models.*", which does
+         not resolve because the module's technical name is "leih19". -->
+    <record id="leih19.action_report_doctor_prescription" model="ir.actions.report">
+        <field name="report_name">leih_opd.report_prescription_document</field>
+        <field name="report_file">leih_opd.report_prescription_document</field>
+        <field name="print_report_name">'Prescription - %s' % (object.name)</field>
+    </record>
+
+    <template id="report_prescription_document">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.external_layout">
+                    <div class="page o_rx">
+                        <style>
+                            .o_rx { font-size: 12px; color: #1a1a1a; }
+                            .o_rx h1.o_rx_title { text-align:center; letter-spacing:3px;
+                                font-size:18px; margin:0 0 8px 0; font-weight:600; }
+                            .o_rx .o_rx_meta { width:100%; border:1px solid #bbb;
+                                border-collapse:collapse; margin-bottom:10px; }
+                            .o_rx .o_rx_meta td { padding:4px 8px; border:1px solid #ddd;
+                                vertical-align:top; }
+                            .o_rx .o_rx_meta .lbl { color:#666; font-size:10px;
+                                text-transform:uppercase; display:block; }
+                            .o_rx .o_rx_body { width:100%; border-collapse:collapse; }
+                            .o_rx .o_rx_left { width:34%; vertical-align:top;
+                                border-right:1px solid #ccc; padding:6px 12px 6px 0; }
+                            .o_rx .o_rx_right { width:66%; vertical-align:top; padding:6px 0 6px 14px; }
+                            .o_rx .o_rx_sec { margin-bottom:12px; }
+                            .o_rx .o_rx_sec h3 { font-size:12px; text-transform:uppercase;
+                                letter-spacing:1px; color:#2b6ca3; border-bottom:1px solid #e0e0e0;
+                                padding-bottom:2px; margin:0 0 5px 0; }
+                            .o_rx .o_rx_symbol { font-size:30px; font-weight:700;
+                                font-style:italic; color:#2b6ca3; line-height:1; margin-bottom:6px; }
+                            .o_rx ol.o_rx_meds { padding-left:20px; margin:0; }
+                            .o_rx ol.o_rx_meds li { margin-bottom:10px; }
+                            .o_rx .o_rx_med_name { font-weight:600; font-size:13px; }
+                            .o_rx .o_rx_med_sig { color:#333; }
+                            .o_rx .o_rx_med_note { font-style:italic; color:#777; font-size:11px; }
+                            .o_rx ul.o_rx_list { padding-left:18px; margin:0; }
+                            .o_rx ul.o_rx_list li { margin-bottom:4px; }
+                            .o_rx .o_rx_sign { margin-top:40px; text-align:right; }
+                            .o_rx .o_rx_sign .line { display:inline-block; border-top:1px solid #333;
+                                padding-top:3px; min-width:200px; text-align:center; }
+                        </style>
+
+                        <h1 class="o_rx_title">PRESCRIPTION</h1>
+
+                        <table class="o_rx_meta">
+                            <tr>
+                                <td style="width:40%"><span class="lbl">Patient</span>
+                                    <span t-field="o.patient_id"/></td>
+                                <td style="width:30%"><span class="lbl">Patient ID</span>
+                                    <span t-field="o.patient_code"/></td>
+                                <td style="width:30%"><span class="lbl">Rx No</span>
+                                    <span t-field="o.name"/></td>
+                            </tr>
+                            <tr>
+                                <td><span class="lbl">Age / Sex</span>
+                                    <span t-field="o.age"/> / <span t-field="o.sex"/></td>
+                                <td><span class="lbl">Mobile</span>
+                                    <span t-field="o.mobile"/></td>
+                                <td><span class="lbl">Date</span>
+                                    <span t-field="o.date" t-options="{'widget': 'date'}"/></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2"><span class="lbl">Address</span>
+                                    <span t-field="o.address"/></td>
+                                <td><span class="lbl">Department</span>
+                                    <span t-field="o.department"/></td>
+                            </tr>
+                        </table>
+
+                        <table class="o_rx_body">
+                            <tr>
+                                <td class="o_rx_left">
+                                    <div class="o_rx_sec" t-if="o.chief_complaint">
+                                        <h3>Chief Complaint</h3>
+                                        <div t-field="o.chief_complaint"/>
+                                    </div>
+                                    <div class="o_rx_sec" t-if="o.diagnosis">
+                                        <h3>Diagnosis</h3>
+                                        <div t-field="o.diagnosis"/>
+                                    </div>
+                                    <div class="o_rx_sec" t-if="o.test_line_ids">
+                                        <h3>Investigations</h3>
+                                        <ul class="o_rx_list">
+                                            <li t-foreach="o.test_line_ids" t-as="t">
+                                                <span t-field="t.test_name"/>
+                                                <t t-if="t.note"> — <span t-field="t.note"/></t>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="o_rx_sec" t-if="o.advice_line_ids">
+                                        <h3>Advice</h3>
+                                        <ul class="o_rx_list">
+                                            <li t-foreach="o.advice_line_ids" t-as="a">
+                                                <span t-field="a.advice"/>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </td>
+                                <td class="o_rx_right">
+                                    <div class="o_rx_symbol">R<span style="font-size:20px;">x</span></div>
+                                    <ol class="o_rx_meds">
+                                        <li t-foreach="o.medicine_line_ids" t-as="m">
+                                            <div class="o_rx_med_name"><span t-field="m.medicine_name"/></div>
+                                            <div class="o_rx_med_sig">
+                                                <span t-field="m.dosage"/>
+                                                <t t-if="m.frequency"> — <span t-field="m.frequency"/></t>
+                                                <t t-if="m.duration"> — <span t-field="m.duration"/></t>
+                                            </div>
+                                            <div class="o_rx_med_note" t-if="m.instruction">
+                                                <span t-field="m.instruction"/>
+                                            </div>
+                                        </li>
+                                    </ol>
+                                    <p t-if="not o.medicine_line_ids" class="text-muted">
+                                        No medicine prescribed.</p>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <div class="o_rx_sec" style="margin-top:14px;" t-if="o.followup_date or o.followup_note">
+                            <strong>Follow Up: </strong>
+                            <span t-field="o.followup_date" t-options="{'widget': 'date'}"/>
+                            <t t-if="o.followup_note"> — <span t-field="o.followup_note"/></t>
+                        </div>
+
+                        <div class="o_rx_sign">
+                            <div class="line">
+                                <strong><span t-field="o.doctor_id"/></strong><br/>
+                                <span t-field="o.department"/>
+                            </div>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

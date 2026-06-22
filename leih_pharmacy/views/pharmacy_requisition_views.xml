@@ -1,0 +1,107 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <record id="pharmacy_requisition_list_view" model="ir.ui.view">
+        <field name="name">pharmacy.requisition.list</field>
+        <field name="model">pharmacy.requisition</field>
+        <field name="arch" type="xml">
+            <list decoration-info="state == 'draft'"
+                  decoration-success="state == 'issued'"
+                  decoration-muted="state in ('returned','cancelled')">
+                <field name="name"/>
+                <field name="date"/>
+                <field name="admission_id"/>
+                <field name="patient_id"/>
+                <field name="net_amount" sum="Net"/>
+                <field name="state"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="pharmacy_requisition_form_view" model="ir.ui.view">
+        <field name="name">pharmacy.requisition.form</field>
+        <field name="model">pharmacy.requisition</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_issue" type="object" string="Issue"
+                            class="oe_highlight" invisible="state != 'draft'"
+                            groups="leih_pharmacy.group_pharmacy_dispenser"/>
+                    <button name="action_return" type="object" string="Return"
+                            invisible="state not in ('issued','returned')"
+                            groups="leih_pharmacy.group_pharmacy_dispenser"/>
+                    <button name="action_cancel" type="object" string="Cancel"
+                            invisible="state in ('issued','cancelled')"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,issued"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_view_pickings" type="object"
+                                class="oe_stat_button" icon="fa-truck"
+                                invisible="picking_count == 0">
+                            <field name="picking_count" widget="statinfo" string="Transfers"/>
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <h1><field name="name" readonly="1"/></h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="admission_id" options="{'no_create': True}"
+                                   readonly="state != 'draft'"/>
+                            <field name="patient_id"/>
+                            <field name="requested_by"/>
+                        </group>
+                        <group>
+                            <field name="date"/>
+                            <field name="location_id" readonly="state != 'draft'"/>
+                            <field name="net_amount"/>
+                            <field name="charge_id" readonly="1"/>
+                        </group>
+                    </group>
+                    <field name="line_ids">
+                        <list editable="bottom">
+                            <field name="product_id"/>
+                            <field name="requested_qty"/>
+                            <field name="issued_qty" readonly="parent.state != 'draft'"/>
+                            <field name="returned_qty" readonly="parent.state == 'draft'"/>
+                            <field name="unit_price"/>
+                            <field name="subtotal" readonly="1"/>
+                        </list>
+                    </field>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="pharmacy_requisition_search_view" model="ir.ui.view">
+        <field name="name">pharmacy.requisition.search</field>
+        <field name="model">pharmacy.requisition</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="admission_id"/>
+                <field name="patient_id"/>
+                <filter name="draft" string="Pending (to issue)" domain="[('state','=','draft')]"/>
+                <filter name="issued" string="Issued" domain="[('state','=','issued')]"/>
+                <separator/>
+                <filter name="group_admission" string="Admission" context="{'group_by':'admission_id'}"/>
+                <filter name="group_state" string="Status" context="{'group_by':'state'}"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="pharmacy_requisition_action" model="ir.actions.act_window">
+        <field name="name">Pharmacy Requisitions</field>
+        <field name="res_model">pharmacy.requisition</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="pharmacy_requisition_search_view"/>
+    </record>
+
+    <record id="pharmacy_requisition_pending_action" model="ir.actions.act_window">
+        <field name="name">Pending Requisitions</field>
+        <field name="res_model">pharmacy.requisition</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="pharmacy_requisition_search_view"/>
+        <field name="domain">[('state','=','draft')]</field>
+    </record>
+</odoo>

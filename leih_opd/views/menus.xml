@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <!-- Configuration -->
+    <menuitem id="menu_doctor_schedule" name="Doctor Sessions"
+              parent="leih19.menu_leis_configuration"
+              action="doctor_schedule_action" sequence="20"/>
+    <menuitem id="menu_prescription_template" name="Prescription Templates"
+              parent="leih19.menu_leis_configuration"
+              action="prescription_template_action" sequence="21"/>
+
+    <!-- Appointment: surface the (now enhanced) booking screen -->
+    <menuitem id="menu_opd_appointment_booking" name="Appointments"
+              parent="leih19.menu_leis_appointment"
+              action="leih19.appointment_booking_action" sequence="10"/>
+</odoo>

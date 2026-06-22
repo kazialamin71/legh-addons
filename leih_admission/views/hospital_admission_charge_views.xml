@@ -1,0 +1,76 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <record id="view_admission_charge_report_list" model="ir.ui.view">
+        <field name="name">hospital.admission.charge.report.list</field>
+        <field name="model">hospital.admission.charge</field>
+        <field name="arch" type="xml">
+            <list string="Admission Charges" create="false">
+                <field name="date" optional="show"/>
+                <field name="admission_id" optional="show"/>
+                <field name="service_type"/>
+                <field name="unit_id" optional="show"/>
+                <field name="provider_id" optional="show"/>
+                <field name="description"/>
+                <field name="qty" sum="Qty"/>
+                <field name="unit_price"/>
+                <field name="total_amount" sum="Total"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_admission_charge_pivot" model="ir.ui.view">
+        <field name="name">hospital.admission.charge.pivot</field>
+        <field name="model">hospital.admission.charge</field>
+        <field name="arch" type="xml">
+            <pivot string="Admission Income">
+                <field name="service_type" type="row"/>
+                <field name="unit_id" type="row"/>
+                <field name="qty" type="measure"/>
+                <field name="total_amount" type="measure"/>
+            </pivot>
+        </field>
+    </record>
+
+    <record id="view_admission_charge_graph" model="ir.ui.view">
+        <field name="name">hospital.admission.charge.graph</field>
+        <field name="model">hospital.admission.charge</field>
+        <field name="arch" type="xml">
+            <graph string="Admission Income" type="bar">
+                <field name="service_type"/>
+                <field name="total_amount" type="measure"/>
+            </graph>
+        </field>
+    </record>
+
+    <record id="view_admission_charge_search" model="ir.ui.view">
+        <field name="name">hospital.admission.charge.search</field>
+        <field name="model">hospital.admission.charge</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="admission_id"/>
+                <field name="service_type"/>
+                <field name="unit_id"/>
+                <field name="provider_id"/>
+                <filter name="this_month" string="This Month"
+                        domain="[('date','&gt;=',(context_today().replace(day=1)).strftime('%Y-%m-%d'))]"/>
+                <separator/>
+                <filter name="group_service_type" string="Service Type" context="{'group_by':'service_type'}"/>
+                <filter name="group_unit" string="Income Unit" context="{'group_by':'unit_id'}"/>
+                <filter name="group_provider" string="Provider" context="{'group_by':'provider_id'}"/>
+                <filter name="group_date" string="Date" context="{'group_by':'date:month'}"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_admission_charge_report" model="ir.actions.act_window">
+        <field name="name">Admission Income</field>
+        <field name="res_model">hospital.admission.charge</field>
+        <field name="view_mode">pivot,graph,list</field>
+        <field name="search_view_id" ref="view_admission_charge_search"/>
+        <field name="context">{'search_default_group_service_type': 1}</field>
+    </record>
+
+    <menuitem id="menu_admission_income_report" name="Admission Income"
+              parent="leih19.menu_leis_hospital_admission"
+              action="action_admission_charge_report" sequence="20"/>
+</odoo>

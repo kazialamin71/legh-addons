@@ -1,0 +1,11 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <menuitem id="menu_pharmacy_root" name="Pharmacy"
+              parent="leih19.menu_leis_root" sequence="75"
+              groups="group_pharmacy_user"/>
+
+    <menuitem id="menu_pharmacy_pending" name="Pending Requisitions"
+              parent="menu_pharmacy_root" action="pharmacy_requisition_pending_action" sequence="10"/>
+    <menuitem id="menu_pharmacy_all" name="All Requisitions"
+              parent="menu_pharmacy_root" action="pharmacy_requisition_action" sequence="20"/>
+</odoo>

@@ -1,0 +1,19 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <record id="hospital_admission_form_pharmacy" model="ir.ui.view">
+        <field name="name">hospital.admission.form.pharmacy</field>
+        <field name="model">hospital.admission</field>
+        <field name="inherit_id" ref="leih19.hospital_admission_form_view"/>
+        <field name="arch" type="xml">
+            <button name="btn_bill" position="after">
+                <field name="pharmacy_requisition_count" invisible="1"/>
+                <button string="New Pharmacy Requisition" type="object"
+                        name="action_new_pharmacy_requisition" class="btn-secondary"
+                        groups="base.group_user"/>
+                <button string="Pharmacy Requisitions" type="object"
+                        name="action_view_pharmacy_requisitions" class="btn-secondary"
+                        invisible="pharmacy_requisition_count == 0"/>
+            </button>
+        </field>
+    </record>
+</odoo>

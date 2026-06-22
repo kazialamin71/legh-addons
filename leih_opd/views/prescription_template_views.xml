@@ -1,0 +1,79 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <record id="prescription_template_list_view" model="ir.ui.view">
+        <field name="name">prescription.template.list</field>
+        <field name="model">prescription.template</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="doctor_id"/>
+                <field name="department"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="prescription_template_form_view" model="ir.ui.view">
+        <field name="name">prescription.template.form</field>
+        <field name="model">prescription.template</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="doctor_id"/>
+                        </group>
+                        <group>
+                            <field name="department"/>
+                            <field name="active"/>
+                        </group>
+                    </group>
+                    <group>
+                        <field name="chief_complaint"/>
+                        <field name="diagnosis"/>
+                        <field name="note"/>
+                    </group>
+                    <notebook>
+                        <page string="Medicines">
+                            <field name="medicine_line_ids">
+                                <list editable="bottom">
+                                    <field name="sequence" widget="handle"/>
+                                    <field name="product_id"/>
+                                    <field name="medicine_name"/>
+                                    <field name="dosage"/>
+                                    <field name="frequency"/>
+                                    <field name="duration"/>
+                                    <field name="instruction"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Advices">
+                            <field name="advice_line_ids">
+                                <list editable="bottom">
+                                    <field name="sequence" widget="handle"/>
+                                    <field name="advice"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Investigations">
+                            <field name="test_line_ids">
+                                <list editable="bottom">
+                                    <field name="sequence" widget="handle"/>
+                                    <field name="examination_id"/>
+                                    <field name="test_name"/>
+                                    <field name="note"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="prescription_template_action" model="ir.actions.act_window">
+        <field name="name">Prescription Templates</field>
+        <field name="res_model">prescription.template</field>
+        <field name="view_mode">list,form</field>
+    </record>
+</odoo>

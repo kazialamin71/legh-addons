@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <record id="commission_payment_tree_view" model="ir.ui.view">
+        <field name="name">commission_payment.tree</field>
+        <field name="model">commission.payment</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name" />
+                <field name="doctor_id" />
+                <field name="date" />
+                <field name="cc_id" />
+                <field name="debit_id" />
+                <field name="credit_id" />
+                <field name="paid_amount" />
+                <field name="due_amount" />
+                <field name="period_id" />
+                <field name="journal_id" />
+                <field name="note" />
+                <field name="state" />
+            </list>
+        </field>
+    </record>
+    <record id="commission_payment_form_view" model="ir.ui.view">
+        <field name="name">commission_payment.form</field>
+        <field name="model">commission.payment</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <field name="state" widget="statusbar" />
+                </header>
+                <sheet>
+                    <group string="Information">
+                        <group>
+                            <field name="name" />
+                            <field name="date" />
+                            <field name="debit_id" />
+                            <field name="paid_amount" />
+                            <field name="period_id" />
+                            <field name="note" />
+                        </group>
+                        <group>
+                            <field name="doctor_id" />
+                            <field name="cc_id" />
+                            <field name="credit_id" />
+                            <field name="due_amount" />
+                            <field name="journal_id" />
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="commission_payment_action" model="ir.actions.act_window">
+        <field name="name">commission_payment</field>
+        <field name="res_model">commission.payment</field>
+        <field name="view_mode">list,form</field>
+    </record>
+</odoo>

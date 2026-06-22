@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <record id="appointment_booking_form_opd" model="ir.ui.view">
+        <field name="name">appointment.booking.form.opd</field>
+        <field name="model">appointment.booking</field>
+        <field name="inherit_id" ref="leih19.appointment_booking_form_view"/>
+        <field name="arch" type="xml">
+            <header position="inside">
+                <button name="action_confirm_serial" type="object"
+                        string="Confirm Serial" class="btn-primary"
+                        invisible="serial_no != 0"/>
+                <button name="action_register_arrival" type="object"
+                        string="Register Arrival" class="btn-primary"
+                        invisible="status in ('arrived', 'converted')"/>
+                <button name="action_open_opd_ticket" type="object"
+                        string="Open OPD Ticket"
+                        invisible="not opd_ticket_id"/>
+            </header>
+            <field name="doctor_name" position="after">
+                <field name="schedule_id"/>
+                <field name="appointment_date"/>
+                <field name="serial_no"/>
+            </field>
+            <field name="patient_status" position="after">
+                <field name="patient_id"/>
+                <field name="opd_ticket_id"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="appointment_booking_list_opd" model="ir.ui.view">
+        <field name="name">appointment.booking.list.opd</field>
+        <field name="model">appointment.booking</field>
+        <field name="inherit_id" ref="leih19.appointment_booking_tree_view"/>
+        <field name="arch" type="xml">
+            <field name="doctor_name" position="after">
+                <field name="schedule_id"/>
+                <field name="appointment_date"/>
+                <field name="serial_no"/>
+            </field>
+        </field>
+    </record>
+</odoo>

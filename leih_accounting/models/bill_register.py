@@ -1,0 +1,104 @@
+from odoo import api, fields, models
+
+
+class BillRegister(models.Model):
+    """Post revenue at confirm and a payment entry per receipt (off by default).
+
+      Confirm:  Dr Accounts Receivable (patient)   grand_total
+                Cr Income (per item account)        grand_total (net, scaled)
+      Payment:  Dr Cash/Bank                        amount
+                Cr Accounts Receivable (patient)    amount
+    """
+    _inherit = 'bill.register'
+
+    acc_move_ids = fields.Many2many(
+        'account.move', 'bill_register_acc_move_rel', 'bill_id', 'move_id',
+        string='Journal Entries', copy=False)
+    acc_revenue_posted = fields.Boolean(copy=False)
+    acc_move_count = fields.Integer(compute='_compute_acc_move_count')
+
+    @api.depends('acc_move_ids')
+    def _compute_acc_move_count(self):
+        for rec in self:
+            rec.acc_move_count = len(rec.acc_move_ids)
+
+    def action_view_acc_moves(self):
+        self.ensure_one()
+        return {
+            'type': 'ir.actions.act_window',
+            'name': 'Journal Entries',
+            'res_model': 'account.move',
+            'view_mode': 'list,form',
+            'domain': [('id', 'in', self.acc_move_ids.ids)],
+        }
+
+    # ---------------------------------------------------------------- hooks
+    def bill_confirm(self):
+        res = super().bill_confirm()
+        self._acc_post_revenue()
+        return res
+
+    def bill_cancel(self):
+        res = super().bill_cancel()
+        cfg = self.env['leih.accounting.config']._get()
+        cfg._reverse(self.acc_move_ids)
+        return res
+
+    def _register_payment(self, amount, payment_type=None, date=None, card_no=None, bank_name=None):
+        mr = super()._register_payment(amount, payment_type=payment_type, date=date,
+                                       card_no=card_no, bank_name=bank_name)
+        if mr:
+            self._acc_post_payment(amount, payment_type or self.payment_type, date)
+        return mr
+
+    # ---------------------------------------------------------------- posting
+    def _acc_post_revenue(self):
+        self.ensure_one()
+        cfg = self.env['leih.accounting.config']._get()
+        if not cfg._enabled() or self.acc_revenue_posted:
+            return
+        partner = self.patient_name.partner_id
+        receivable = cfg._receivable_account(partner) if partner else False
+        if not partner or not receivable:
+            return
+        line_total = sum(self.bill_register_line_id.mapped('total_amount'))
+        grand = self.grand_total or 0.0
+        if line_total <= 0 or grand <= 0:
+            return
+        scale = grand / line_total  # spread bill-level discount into net income
+        income = {}
+        for line in self.bill_register_line_id:
+            acct = cfg._income_account(line.name)
+            if not acct:
+                continue
+            income.setdefault(acct, 0.0)
+            income[acct] += (line.total_amount or 0.0) * scale
+        if not income:
+            return
+        lines = [(receivable, grand, 0.0, partner)]
+        for acct, amt in income.items():
+            lines.append((acct, 0.0, amt, partner))
+        move = cfg._create_move(cfg.sales_journal_id, self.name, self.date, lines, partner=partner)
+        if move:
+            self.acc_move_ids = [(4, move.id)]
+            self.acc_revenue_posted = True
+
+    def _acc_post_payment(self, amount, payment_type, date):
+        self.ensure_one()
+        cfg = self.env['leih.accounting.config']._get()
+        if not cfg._enabled() or amount <= 0:
+            return
+        partner = self.patient_name.partner_id
+        receivable = cfg._receivable_account(partner) if partner else False
+        if not partner or not receivable:
+            return
+        journal, cash_account = cfg._payment_accounts(payment_type)
+        if not journal or not cash_account:
+            return
+        lines = [
+            (cash_account, amount, 0.0, False),
+            (receivable, 0.0, amount, partner),
+        ]
+        move = cfg._create_move(journal, self.name, date, lines, partner=partner)
+        if move:
+            self.acc_move_ids = [(4, move.id)]

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="action_report_admission_statement" model="ir.actions.report">
+        <field name="name">Admission Statement</field>
+        <field name="model">hospital.admission</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">leih_admission.report_admission_statement</field>
+        <field name="report_file">leih_admission.report_admission_statement</field>
+        <field name="print_report_name">'Statement - %s' % (object.name or object.patient_name.name)</field>
+        <field name="binding_model_id" ref="leih19.model_hospital_admission"/>
+        <field name="binding_type">report</field>
+    </record>
+
+    <template id="report_admission_statement">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <div class="page" style="width:190mm; margin:0 auto; font-family:Arial, sans-serif; font-size:13px; color:#000;">
+
+                    <div style="text-align:center; font-size:20px; font-weight:bold; margin-bottom:10px;">Account Statement</div>
+
+                    <!-- Patient / admission header -->
+                    <table style="width:100%; border-collapse:collapse; border:1.5px solid #000; font-size:13px;">
+                        <tr>
+                            <td style="border:1px solid #ccc; padding:6px 9px;"><b>Patient:</b> <t t-out="o.patient_name.name or '-'"/></td>
+                            <td style="border:1px solid #ccc; padding:6px 9px;"><b>Admission No:</b> <t t-out="o.name or '-'"/></td>
+                        </tr>
+                        <tr>
+                            <td style="border:1px solid #ccc; padding:6px 9px;"><b>Age / Sex:</b> <t t-out="o.age or '-'"/> / <t t-out="o.sex or '-'"/></td>
+                            <td style="border:1px solid #ccc; padding:6px 9px;"><b>Mobile:</b> <t t-out="o.mobile or '-'"/></td>
+                        </tr>
+                        <tr>
+                            <td style="border:1px solid #ccc; padding:6px 9px;"><b>Admitting Dr.:</b> <t t-out="o.admitting_doctor.name or o.ref_doctors.name or '-'"/></td>
+                            <td style="border:1px solid #ccc; padding:6px 9px;"><b>Print Date:</b> <t t-out="datetime.datetime.now().strftime('%Y-%m-%d %H:%M')"/></td>
+                        </tr>
+                    </table>
+
+                    <!-- Charges summarized per service -->
+                    <table style="width:100%; border-collapse:collapse; font-size:13px; margin-top:14px;">
+                        <thead>
+                            <tr>
+                                <th style="background:#ececec; border:1px solid #c8c8c8; padding:8px 10px; text-align:left;">Service</th>
+                                <th style="background:#ececec; border:1px solid #c8c8c8; padding:8px 10px; text-align:right; width:30%;">Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-foreach="o._statement_summary()" t-as="row">
+                                <tr>
+                                    <td style="border:1px solid #ddd; padding:8px 10px;"><t t-out="row['label']"/></td>
+                                    <td style="border:1px solid #ddd; padding:8px 10px; text-align:right;"><t t-out="'%.2f' % row['amount']"/></td>
+                                </tr>
+                            </t>
+                        </tbody>
+                    </table>
+
+                    <!-- Totals -->
+                    <table style="width:55%; border-collapse:collapse; font-size:13px; margin-top:12px; margin-left:auto;">
+                        <tr><td style="padding:4px 9px;">Total Charges</td><td style="padding:4px 9px; text-align:right;"><t t-out="'%.2f' % o.total"/></td></tr>
+                        <tr><td style="padding:4px 9px;">Discount</td><td style="padding:4px 9px; text-align:right;"><t t-out="'%.2f' % o.after_discount"/></td></tr>
+                        <tr style="font-weight:bold; border-top:1px solid #999;"><td style="padding:6px 9px;">Grand Total</td><td style="padding:6px 9px; text-align:right;"><t t-out="'%.2f' % o.grand_total"/></td></tr>
+                        <tr><td style="padding:4px 9px;">Paid (Admission)</td><td style="padding:4px 9px; text-align:right;"><t t-out="'%.2f' % o.paid"/></td></tr>
+                        <tr><td style="padding:4px 9px;">Investigation Paid</td><td style="padding:4px 9px; text-align:right;"><t t-out="'%.2f' % o.investigation_paid"/></td></tr>
+                        <tr style="font-weight:bold; border-top:1px solid #999;"><td style="padding:6px 9px;">Due</td><td style="padding:6px 9px; text-align:right;"><t t-out="'%.2f' % o.due"/></td></tr>
+                    </table>
+
+                    <!-- Receipts -->
+                    <t t-set="receipts" t-value="o.money_receipt_ids.filtered(lambda m: m.state == 'confirm')"/>
+                    <div t-if="receipts">
+                        <div style="font-weight:bold; margin-top:16px; margin-bottom:4px;">Money Receipts</div>
+                        <table style="width:100%; border-collapse:collapse; font-size:12px;">
+                            <thead>
+                                <tr>
+                                    <th style="background:#f2f2f2; border:1px solid #ddd; padding:6px 9px; text-align:left;">Receipt</th>
+                                    <th style="background:#f2f2f2; border:1px solid #ddd; padding:6px 9px; text-align:left;">Date</th>
+                                    <th style="background:#f2f2f2; border:1px solid #ddd; padding:6px 9px; text-align:right;">Amount</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-foreach="receipts" t-as="mr">
+                                    <tr>
+                                        <td style="border:1px solid #eee; padding:6px 9px;"><t t-out="mr.name"/></td>
+                                        <td style="border:1px solid #eee; padding:6px 9px;"><t t-out="mr.date"/></td>
+                                        <td style="border:1px solid #eee; padding:6px 9px; text-align:right;"><t t-out="'%.2f' % mr.amount"/></td>
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <p style="text-align:center; color:#666; font-size:11px; margin-top:24px;">*** Computer-generated statement ***</p>
+                </div>
+            </t>
+        </t>
+    </template>
+
+</odoo>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+  <!-- Single parent menu holding all commission features -->
+  <menuitem id="menu_commission_root" name="Commission"
+            parent="leih19.menu_leis_root" sequence="85"
+            groups="group_commission_user"/>
+
+  <menuitem id="menu_commission_accruals" name="Commission Accruals"
+            parent="menu_commission_root" action="commission_accrual_action" sequence="10"/>
+  <menuitem id="menu_commission_settlement" name="Commission Settlement"
+            parent="menu_commission_root" action="commission_action" sequence="20"/>
+  <menuitem id="menu_commission_configuration" name="Commission Configuration"
+            parent="menu_commission_root" action="commission_configuration_action" sequence="30"/>
+  <menuitem id="menu_commission_calculation" name="Commission Calculation"
+            parent="menu_commission_root" action="commission_calculation_action" sequence="40"/>
+  <menuitem id="menu_commission_payment" name="Commission Payment"
+            parent="menu_commission_root" action="commission_payment_action" sequence="50"/>
+</odoo>

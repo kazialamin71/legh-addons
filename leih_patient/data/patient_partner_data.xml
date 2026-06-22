@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <record id="partner_category_patient" model="res.partner.category">
+        <field name="name">Patient</field>
+        <field name="color">4</field>
+    </record>
+</odoo>

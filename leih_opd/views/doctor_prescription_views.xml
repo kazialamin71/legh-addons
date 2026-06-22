@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <record id="view_doctor_prescription_form_opd" model="ir.ui.view">
+        <field name="name">doctor.prescription.form.opd</field>
+        <field name="model">doctor.prescription</field>
+        <field name="inherit_id" ref="leih19.view_doctor_prescription_form"/>
+        <field name="arch" type="xml">
+            <button name="action_print_prescription" position="before">
+                <button name="action_apply_template" type="object"
+                        string="Apply Template" class="btn-secondary"
+                        invisible="not template_id or state != 'draft'"/>
+            </button>
+            <field name="department" position="after">
+                <field name="template_id"/>
+            </field>
+            <!-- link medicine lines to a dispensable product -->
+            <xpath expr="//field[@name='medicine_line_ids']/list/field[@name='medicine_name']"
+                   position="before">
+                <field name="product_id"/>
+            </xpath>
+            <!-- link investigation lines to a billing item -->
+            <xpath expr="//field[@name='test_line_ids']/list/field[@name='test_name']"
+                   position="before">
+                <field name="examination_id"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>
