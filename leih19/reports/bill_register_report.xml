@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="action_report_bill_register" model="ir.actions.report">
+        <field name="name">Patient Bill</field>
+        <field name="model">bill.register</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">leih19.report_bill_register_document</field>
+        <field name="report_file">leih19.report_bill_register_document</field>
+        <field name="print_report_name">'Bill - %s' % (object.name or object.patient_name.name)</field>
+        <field name="binding_model_id" ref="leih19.model_bill_register"/>
+        <field name="binding_type">report</field>
+    </record>
+
+    <template id="report_bill_register_document">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.external_layout">
+                    <div class="page leih">
+                        <t t-call="leih19.leih_report_styles"/>
+
+                        <h2 class="doc_title">MONEY RECEIPT / BILL</h2>
+                        <div class="doc_sub">
+                            <t t-if="o.diagonostic_bill">Diagnostic Bill</t>
+                            <t t-else="">Service Bill</t>
+                        </div>
+
+                        <table class="meta">
+                            <tr>
+                                <td style="width:40%"><span class="lbl">Patient</span>
+                                    <span t-field="o.patient_name"/></td>
+                                <td style="width:30%"><span class="lbl">Patient ID</span>
+                                    <span t-out="o.patient_id or '-'"/></td>
+                                <td style="width:30%"><span class="lbl">Bill No</span>
+                                    <span t-field="o.name"/></td>
+                            </tr>
+                            <tr>
+                                <td><span class="lbl">Age / Sex</span>
+                                    <span t-out="o.age or '-'"/> / <span t-out="o.sex or '-'"/></td>
+                                <td><span class="lbl">Mobile</span>
+                                    <span t-out="o.mobile or '-'"/></td>
+                                <td><span class="lbl">Date</span>
+                                    <span t-field="o.date" t-options="{'widget': 'datetime'}"/></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2"><span class="lbl">Address</span>
+                                    <span t-out="o.address or '-'"/></td>
+                                <td><span class="lbl">Referred by</span>
+                                    <span t-out="o.ref_doctors.name or '-'"/></td>
+                            </tr>
+                        </table>
+
+                        <table class="items">
+                            <thead>
+                                <tr>
+                                    <th style="width:5%">#</th>
+                                    <th style="width:38%">Item / Investigation</th>
+                                    <th style="width:17%">Department</th>
+                                    <th style="width:8%" class="num">Qty</th>
+                                    <th style="width:12%" class="num">Price</th>
+                                    <th style="width:10%" class="num">Disc.</th>
+                                    <th style="width:15%" class="num">Amount</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-set="idx" t-value="0"/>
+                                <t t-foreach="o.bill_register_line_id" t-as="line">
+                                    <t t-set="idx" t-value="idx + 1"/>
+                                    <tr>
+                                        <td class="ctr"><span t-out="idx"/></td>
+                                        <td><span t-out="line.name.name or '-'"/></td>
+                                        <td><span t-out="line.department or '-'"/></td>
+                                        <td class="num"><span t-out="'%g' % (line.product_qty or 0)"/></td>
+                                        <td class="num"><span t-out="'%.2f' % (line.price or 0)"/></td>
+                                        <td class="num"><span t-out="'%.2f' % (line.total_discount or 0)"/></td>
+                                        <td class="num"><span t-out="'%.2f' % (line.total_amount or 0)"/></td>
+                                    </tr>
+                                </t>
+                                <tr t-if="not o.bill_register_line_id">
+                                    <td colspan="7" class="ctr text-muted">No items on this bill.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <table class="totals">
+                            <tr><td>Gross Total</td>
+                                <td class="num"><span t-out="'%.2f' % o.total_without_discount"/></td></tr>
+                            <tr t-if="o.doctor_discount_amt"><td>Doctor Discount
+                                (<span t-out="'%g' % o.doctors_discounts"/>%)</td>
+                                <td class="num"><span t-out="'-%.2f' % o.doctor_discount_amt"/></td></tr>
+                            <tr t-if="o.scheme_discount_total"><td>Scheme Discount</td>
+                                <td class="num"><span t-out="'-%.2f' % o.scheme_discount_total"/></td></tr>
+                            <tr t-if="o.other_discount"><td>Other Discount</td>
+                                <td class="num"><span t-out="'-%.2f' % o.other_discount"/></td></tr>
+                            <tr t-if="o.service_charge"><td>Service Charge</td>
+                                <td class="num"><span t-out="'%.2f' % o.service_charge"/></td></tr>
+                            <tr class="grand"><td>Grand Total</td>
+                                <td class="num"><span t-out="'%.2f' % o.grand_total"/></td></tr>
+                            <tr><td>Paid</td>
+                                <td class="num"><span t-out="'%.2f' % o.paid"/></td></tr>
+                            <tr class="due"><td>Due</td>
+                                <td class="num"><span t-out="'%.2f' % o.due"/></td></tr>
+                        </table>
+
+                        <div t-if="o.discount_remarks" style="margin-top:8px;">
+                            <strong>Discount Remarks: </strong><span t-out="o.discount_remarks"/>
+                        </div>
+
+                        <t t-set="payments" t-value="o.bill_register_payment_line_id"/>
+                        <div t-if="payments">
+                            <div class="sec_title">Payment History</div>
+                            <table class="items">
+                                <thead>
+                                    <tr>
+                                        <th>Date</th>
+                                        <th>Mode</th>
+                                        <th>Card / Bank</th>
+                                        <th class="num">Amount</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-foreach="payments" t-as="p">
+                                        <tr>
+                                            <td><span t-field="p.date"/></td>
+                                            <td><span t-out="p.type or '-'"/></td>
+                                            <td><span t-out="p.card_no or p.bank_name or '-'"/></td>
+                                            <td class="num"><span t-out="'%.2f' % (p.amount or 0)"/></td>
+                                        </tr>
+                                    </t>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="sign_row" style="display:flex; justify-content:space-between;">
+                            <span class="sign_box">Received By
+                                <br/><span t-out="o.user_id.name or ''"/></span>
+                            <span class="sign_box">Patient / Attendant</span>
+                        </div>
+
+                        <p class="foot_note">*** This is a computer-generated bill. ***</p>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

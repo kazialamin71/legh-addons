@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="action_report_money_receipt" model="ir.actions.report">
+        <field name="name">Money Receipt</field>
+        <field name="model">leih.money.receipt</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">leih19.report_money_receipt_document</field>
+        <field name="report_file">leih19.report_money_receipt_document</field>
+        <field name="print_report_name">'Money Receipt - %s' % (object.name)</field>
+        <field name="binding_model_id" ref="leih19.model_leih_money_receipt"/>
+        <field name="binding_type">report</field>
+    </record>
+
+    <template id="report_money_receipt_document">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.external_layout">
+                    <div class="page leih">
+                        <t t-call="leih19.leih_report_styles"/>
+
+                        <!-- Resolve the source document and patient -->
+                        <t t-set="src" t-value="o.bill_id or o.admission_id or o.general_admission_id or o.optics_sale_id"/>
+                        <t t-set="patient" t-value="src.patient_name if src else False"/>
+
+                        <h2 class="doc_title">MONEY RECEIPT</h2>
+                        <div class="doc_sub">
+                            <t t-if="o.p_type == 'advance'">Advance Payment</t>
+                            <t t-elif="o.p_type == 'due_payment'">Due Payment</t>
+                        </div>
+
+                        <table class="meta">
+                            <tr>
+                                <td style="width:34%"><span class="lbl">Receipt No</span>
+                                    <span t-field="o.name"/></td>
+                                <td style="width:33%"><span class="lbl">Date</span>
+                                    <span t-field="o.date" t-options="{'widget': 'date'}"/></td>
+                                <td style="width:33%"><span class="lbl">Payment Type</span>
+                                    <span t-out="o.type.name if o.type else '-'"/></td>
+                            </tr>
+                            <tr>
+                                <td><span class="lbl">Patient</span>
+                                    <span t-out="patient.name if patient else '-'"/></td>
+                                <td><span class="lbl">Patient ID</span>
+                                    <span t-out="(patient.patient_id if patient else '') or '-'"/></td>
+                                <td><span class="lbl">Reference</span>
+                                    <span t-out="src.name if src else '-'"/></td>
+                            </tr>
+                        </table>
+
+                        <table class="totals" style="width:60%; margin:18px auto 0 auto;
+                                border:1px solid #ddd;">
+                            <tr><td>Bill / Total Amount</td>
+                                <td class="num"><span t-out="'%.2f' % o.bill_total_amount"/></td></tr>
+                            <tr class="grand"><td>Received Amount</td>
+                                <td class="num"><span t-out="'%.2f' % o.amount"/></td></tr>
+                            <tr class="due"><td>Due Amount</td>
+                                <td class="num"><span t-out="'%.2f' % o.due_amount"/></td></tr>
+                        </table>
+
+                        <div class="sign_row" style="display:flex; justify-content:space-between;">
+                            <span class="sign_box">Received By
+                                <br/><span t-out="o.user_id.name or ''"/></span>
+                            <span class="sign_box">Authorized Signature</span>
+                        </div>
+
+                        <p class="foot_note">*** Please preserve this receipt for future reference. ***</p>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

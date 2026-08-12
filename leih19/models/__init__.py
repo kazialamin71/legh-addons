@@ -50,6 +50,7 @@ from . import examination_report_template
 from . import examination_possible_value
 from . import examination_entry
 from . import examination_entry_line
+from . import examination_support_item
 from . import examination_result
 from . import examination_result_line
 from . import examination_result_antibiogram_line
@@ -98,4 +99,3 @@ from . import cc_collection
 from . import detail_component
 from . import optics_daily_collection
 
-from . import doctor_prescription

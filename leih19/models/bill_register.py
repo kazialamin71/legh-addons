@@ -129,6 +129,51 @@ class BillRegister(models.Model):
             rec.age = patient.age or False
             rec.sex = patient.sex or False
 
+    def _desired_support_qty(self, main_lines):
+        """Return {support_entry_id: total_qty} required by the given main lines.
+
+        Every main line that carries an active supporting item contributes that
+        item's configured quantity; items shared by several main tests (e.g. one
+        Test Tube for both CBC and RBS) are summed into a single quantity."""
+        desired = {}
+        for line in main_lines:
+            if line.is_support_line or not line.name:
+                continue
+            for sup in line.name.support_item_ids:
+                if not sup.is_active or not sup.support_entry_id:
+                    continue
+                sid = sup.support_entry_id.id
+                desired[sid] = desired.get(sid, 0.0) + (sup.quantity or 1.0)
+        return desired
+
+    @api.onchange('bill_register_line_id')
+    def _onchange_add_support_items(self):
+        """Live UX: keep exactly one supporting line per supporting item, with its
+        quantity summed across every main test that needs it. Adding a main item
+        bumps the quantity (or adds the line); removing one lowers it (or removes
+        the line). The server-side reconcile guarantees the same on save."""
+        Line = self.env['bill.register.line']
+        for rec in self:
+            lines = rec.bill_register_line_id
+            desired = rec._desired_support_qty(lines.filtered(lambda l: not l.is_support_line))
+            seen = set()
+            for sl in lines.filtered(lambda l: l.is_support_line):
+                sid = sl.name.id
+                if sid in desired and sid not in seen:
+                    if sl.product_qty != desired[sid]:
+                        sl.product_qty = desired[sid]
+                    seen.add(sid)
+                else:
+                    # no longer needed, or a duplicate of one already kept
+                    rec.bill_register_line_id -= sl
+            for sid, qty in desired.items():
+                if sid in seen:
+                    continue
+                sup_entry = self.env['examination.entry'].browse(sid)
+                vals = Line._prepare_exam_values(sup_entry)
+                vals.update({'name': sid, 'product_qty': qty, 'is_support_line': True})
+                rec.bill_register_line_id |= Line.new(vals)
+
     # -------------------------------------------------------------------------
     # COMPUTES
     # -------------------------------------------------------------------------
@@ -250,6 +295,10 @@ class BillRegister(models.Model):
 
             depts = []
             for cmd in vals.get('bill_register_line_id', []):
+                # Supporting items (consumables) are not part of the diagnostic /
+                # non-diagnostic department consistency rule.
+                if cmd[0] == 0 and cmd[2] and cmd[2].get('is_support_line'):
+                    continue
                 if cmd[0] == 0 and cmd[2] and cmd[2].get('department'):
                     d = cmd[2]['department']
                     if d not in depts:
@@ -269,6 +318,7 @@ class BillRegister(models.Model):
                 vals["name"] = seq.next_by_code("bill.register") or "New"
 
         records = super().create(vals_list)
+        records._reconcile_support_lines()
 
         # Initial counter payment -> first money receipt
         for rec in records:
@@ -276,6 +326,40 @@ class BillRegister(models.Model):
                 rec._register_payment(rec.down_payment)
 
         return records
+
+    def _reconcile_support_lines(self):
+        """Keep supporting lines in sync with the main items on the bill: one line
+        per supporting item, quantity summed across the main tests that need it.
+        Runs on save so removals/additions of main items also update or drop the
+        supporting line. Idempotent and safe to re-run."""
+        Line = self.env['bill.register.line'].with_context(skip_support_reconcile=True)
+        for bill in self:
+            lines = bill.bill_register_line_id
+            desired = bill._desired_support_qty(lines.filtered(lambda l: not l.is_support_line))
+            seen = set()
+            to_unlink = Line.browse()
+            for sl in lines.filtered(lambda l: l.is_support_line):
+                sid = sl.name.id
+                if sid in desired and sid not in seen:
+                    if sl.product_qty != desired[sid]:
+                        sl.product_qty = desired[sid]
+                    seen.add(sid)
+                else:
+                    to_unlink |= sl
+            for sid, qty in desired.items():
+                if sid in seen:
+                    continue
+                sup_entry = self.env['examination.entry'].browse(sid)
+                vals = Line._prepare_exam_values(sup_entry)
+                vals.update({
+                    'name': sid,
+                    'bill_register_id': bill.id,
+                    'product_qty': qty,
+                    'is_support_line': True,
+                })
+                Line.create(vals)
+            if to_unlink:
+                to_unlink.unlink()
 
     # -------------------------------------------------------------------------
     # PAYMENTS
@@ -322,7 +406,12 @@ class BillRegister(models.Model):
     def write(self, vals):
         if vals.get("due") is not None and vals.get("due") < 0:
             raise UserError(_("Check paid and grand total!"))
-        return super().write(vals)
+        res = super().write(vals)
+        # When the item lines change (a main item added/removed/edited), keep the
+        # supporting lines and their quantities in sync.
+        if 'bill_register_line_id' in vals and not self.env.context.get('skip_support_reconcile'):
+            self._reconcile_support_lines()
+        return res
 
     # -------------------------------------------------------------------------
     # Your existing actions (kept minimal; you can paste your old ones below)
@@ -582,6 +671,14 @@ class BillRegisterLine(models.Model):
     assign_doctors = fields.Many2one('doctors.profile', string='Doctor')
     commission_paid = fields.Boolean('Commission Paid')
 
+    # --- Supporting-item traceability ---
+    is_support_line = fields.Boolean(
+        'Supporting Item', default=False,
+        help='Auto-generated line for a supporting item of another billed item.')
+    source_entry_id = fields.Many2one(
+        'examination.entry', string='Added For',
+        help='The main item that pulled this supporting item into the bill.')
+
     @api.depends('name')
     def _compute_department_id(self):
         for rec in self:
@@ -701,7 +798,15 @@ class BillRegisterLine(models.Model):
                 auto_vals = self._prepare_exam_values(exam)
                 for key, value in auto_vals.items():
                     vals.setdefault(key, value)
-        return super().create(vals_list)
+        records = super().create(vals_list)
+        # Reconcile at the bill level so supporting items are consolidated into a
+        # single line with a summed quantity. Skipped when we are ourselves
+        # creating supporting lines (avoids recursion).
+        if not self.env.context.get('skip_support_reconcile'):
+            bills = records.filtered(lambda l: not l.is_support_line).bill_register_id
+            if bills:
+                bills._reconcile_support_lines()
+        return records
 
     def write(self, vals):
         if vals.get('name'):

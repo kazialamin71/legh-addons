@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="action_report_ambulance_booking" model="ir.actions.report">
+        <field name="name">Ambulance Booking Slip</field>
+        <field name="model">ambulance.booking</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">leih19.report_ambulance_booking_document</field>
+        <field name="report_file">leih19.report_ambulance_booking_document</field>
+        <field name="print_report_name">'Ambulance - %s' % (object.name)</field>
+        <field name="binding_model_id" ref="leih19.model_ambulance_booking"/>
+        <field name="binding_type">report</field>
+    </record>
+
+    <template id="report_ambulance_booking_document">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.external_layout">
+                    <div class="page leih">
+                        <t t-call="leih19.leih_report_styles"/>
+
+                        <h2 class="doc_title">AMBULANCE BOOKING SLIP</h2>
+                        <div class="doc_sub"><span t-out="o.booking_type or ''"/></div>
+
+                        <table class="meta">
+                            <tr>
+                                <td style="width:50%"><span class="lbl">Customer</span>
+                                    <span t-out="o.name or '-'"/></td>
+                                <td style="width:50%"><span class="lbl">Patient</span>
+                                    <span t-field="o.patient_id"/></td>
+                            </tr>
+                            <tr>
+                                <td><span class="lbl">Mobile</span>
+                                    <span t-out="o.mobile_no or '-'"/></td>
+                                <td><span class="lbl">Booking Date / Time</span>
+                                    <span t-field="o.date" t-options="{'widget': 'datetime'}"/></td>
+                            </tr>
+                            <tr>
+                                <td><span class="lbl">Pick From</span>
+                                    <span t-out="o.start_from or '-'"/></td>
+                                <td><span class="lbl">Destination</span>
+                                    <span t-out="o.destination or '-'"/></td>
+                            </tr>
+                            <tr>
+                                <td><span class="lbl">Vehicle</span>
+                                    <span t-out="o.ambulance_id.display_name or '-'"/></td>
+                                <td><span class="lbl">Expected Completion (hrs)</span>
+                                    <span t-out="'%g' % (o.grace_time or 0)"/></td>
+                            </tr>
+                        </table>
+
+                        <table class="totals" style="width:55%;">
+                            <tr><td>Total Charge</td>
+                                <td class="num"><span t-out="'%.2f' % o.amount"/></td></tr>
+                            <tr><td>Advance</td>
+                                <td class="num"><span t-out="'%.2f' % o.advance_amount"/></td></tr>
+                            <tr><td>Paid</td>
+                                <td class="num"><span t-out="'%.2f' % o.paid_amount"/></td></tr>
+                            <tr class="due"><td>Due</td>
+                                <td class="num"><span t-out="'%.2f' % o.unpaid_amount"/></td></tr>
+                        </table>
+
+                        <div class="sign_row" style="display:flex; justify-content:space-between;">
+                            <span class="sign_box">Driver</span>
+                            <span class="sign_box">Authorized Signature</span>
+                        </div>
+
+                        <p class="foot_note">*** Wishing the patient a safe journey. ***</p>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

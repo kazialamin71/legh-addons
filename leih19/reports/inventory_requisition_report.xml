@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="action_report_inventory_requisition" model="ir.actions.report">
+        <field name="name">Store Requisition</field>
+        <field name="model">inventory.requisition</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">leih19.report_inventory_requisition_document</field>
+        <field name="report_file">leih19.report_inventory_requisition_document</field>
+        <field name="print_report_name">'Requisition - %s' % (object.name or '')</field>
+        <field name="binding_model_id" ref="leih19.model_inventory_requisition"/>
+        <field name="binding_type">report</field>
+    </record>
+
+    <template id="report_inventory_requisition_document">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.external_layout">
+                    <div class="page leih">
+                        <t t-call="leih19.leih_report_styles"/>
+
+                        <h2 class="doc_title">STORE REQUISITION</h2>
+
+                        <table class="meta">
+                            <tr>
+                                <td style="width:34%"><span class="lbl">Requisition No</span>
+                                    <span t-out="o.name or '-'"/></td>
+                                <td style="width:33%"><span class="lbl">Reference No</span>
+                                    <span t-out="o.reference_no or '-'"/></td>
+                                <td style="width:33%"><span class="lbl">Date</span>
+                                    <span t-field="o.date" t-options="{'widget': 'date'}"/></td>
+                            </tr>
+                            <tr>
+                                <td><span class="lbl">Department</span>
+                                    <span t-out="o.department.name or '-'"/></td>
+                                <td><span class="lbl">Warehouse</span>
+                                    <span t-out="o.warehouse_id.name or '-'"/></td>
+                                <td><span class="lbl">Receiver</span>
+                                    <span t-out="o.partner_id.name or '-'"/></td>
+                            </tr>
+                        </table>
+
+                        <table class="items">
+                            <thead>
+                                <tr>
+                                    <th style="width:8%">#</th>
+                                    <th style="width:62%">Product</th>
+                                    <th style="width:15%" class="num">Available</th>
+                                    <th style="width:15%" class="num">Requested</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-set="idx" t-value="0"/>
+                                <t t-foreach="o.inventory_requisition_line_ids" t-as="line">
+                                    <t t-set="idx" t-value="idx + 1"/>
+                                    <tr>
+                                        <td class="ctr"><span t-out="idx"/></td>
+                                        <td><span t-out="line.product_name.display_name or '-'"/></td>
+                                        <td class="num"><span t-out="'%g' % (line.available_qty or 0)"/></td>
+                                        <td class="num"><span t-out="'%g' % (line.quantity or 0)"/></td>
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
+
+                        <div class="sign_row" style="display:flex; justify-content:space-between;">
+                            <span class="sign_box">Requested By</span>
+                            <span class="sign_box">Store In-charge</span>
+                            <span class="sign_box">Approved By</span>
+                        </div>
+
+                        <p class="foot_note">*** Computer-generated requisition. ***</p>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

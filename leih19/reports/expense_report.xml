@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- General Expense Voucher -->
+    <record id="action_report_leih_expense" model="ir.actions.report">
+        <field name="name">Expense Voucher</field>
+        <field name="model">leih.expense</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">leih19.report_leih_expense_document</field>
+        <field name="report_file">leih19.report_leih_expense_document</field>
+        <field name="print_report_name">'Expense - %s' % (object.ex_name or object.id)</field>
+        <field name="binding_model_id" ref="leih19.model_leih_expense"/>
+        <field name="binding_type">report</field>
+    </record>
+
+    <template id="report_leih_expense_document">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.external_layout">
+                    <div class="page leih">
+                        <t t-call="leih19.leih_report_styles"/>
+                        <h2 class="doc_title">EXPENSE VOUCHER</h2>
+                        <div class="doc_sub">
+                            <span t-out="dict(o._fields['expense_type'].selection).get(o.expense_type, '') if o.expense_type else ''"/>
+                        </div>
+
+                        <table class="meta">
+                            <tr>
+                                <td style="width:50%"><span class="lbl">Expense Name</span>
+                                    <span t-out="o.ex_name or '-'"/></td>
+                                <td style="width:25%"><span class="lbl">Date</span>
+                                    <span t-field="o.date" t-options="{'widget': 'date'}"/></td>
+                                <td style="width:25%"><span class="lbl">Status</span>
+                                    <span class="badge" t-out="dict(o._fields['state'].selection).get(o.state, o.state)"/></td>
+                            </tr>
+                            <tr>
+                                <td colspan="3"><span class="lbl">Responsible Person</span>
+                                    <span t-out="o.responsible_person or '-'"/></td>
+                            </tr>
+                            <tr t-if="o.description">
+                                <td colspan="3"><span class="lbl">Description</span>
+                                    <span t-out="o.description"/></td>
+                            </tr>
+                        </table>
+
+                        <table class="totals" style="width:55%;">
+                            <tr class="grand"><td>Amount</td>
+                                <td class="num"><span t-out="'%.2f' % o.amount"/></td></tr>
+                        </table>
+
+                        <div class="sign_row" style="display:flex; justify-content:space-between;">
+                            <span class="sign_box">Prepared By</span>
+                            <span class="sign_box">Approved By</span>
+                        </div>
+                        <p class="foot_note">*** Computer-generated voucher. ***</p>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+
+    <!-- Ambulance Expense Voucher -->
+    <record id="action_report_ambulance_expense" model="ir.actions.report">
+        <field name="name">Ambulance Expense Voucher</field>
+        <field name="model">ambulance.expense</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">leih19.report_ambulance_expense_document</field>
+        <field name="report_file">leih19.report_ambulance_expense_document</field>
+        <field name="print_report_name">'Ambulance Expense - %s' % (object.ambulance_id.name or object.id)</field>
+        <field name="binding_model_id" ref="leih19.model_ambulance_expense"/>
+        <field name="binding_type">report</field>
+    </record>
+
+    <template id="report_ambulance_expense_document">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.external_layout">
+                    <div class="page leih">
+                        <t t-call="leih19.leih_report_styles"/>
+                        <h2 class="doc_title">AMBULANCE EXPENSE VOUCHER</h2>
+
+                        <table class="meta">
+                            <tr>
+                                <td style="width:60%"><span class="lbl">Vehicle</span>
+                                    <span t-out="o.ambulance_id.display_name or '-'"/></td>
+                                <td style="width:40%"><span class="lbl">Status</span>
+                                    <span class="badge" t-out="dict(o._fields['state'].selection).get(o.state, o.state or '-')"/></td>
+                            </tr>
+                            <tr t-if="o.description">
+                                <td colspan="2"><span class="lbl">Reason</span>
+                                    <span t-out="o.description"/></td>
+                            </tr>
+                        </table>
+
+                        <table class="totals" style="width:55%;">
+                            <tr><td>Fuel Cost</td>
+                                <td class="num"><span t-out="'%.2f' % o.fuel_cost"/></td></tr>
+                            <tr><td>Other Cost</td>
+                                <td class="num"><span t-out="'%.2f' % o.other_cost"/></td></tr>
+                            <tr class="grand"><td>Total</td>
+                                <td class="num"><span t-out="'%.2f' % (o.fuel_cost + o.other_cost)"/></td></tr>
+                        </table>
+
+                        <div class="sign_row" style="display:flex; justify-content:space-between;">
+                            <span class="sign_box">Driver</span>
+                            <span class="sign_box">Approved By</span>
+                        </div>
+                        <p class="foot_note">*** Computer-generated voucher. ***</p>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

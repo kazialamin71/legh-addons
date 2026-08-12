@@ -4,3 +4,7 @@ access_prescription_template,prescription.template,model_prescription_template,b
 access_prescription_template_medicine,prescription.template.medicine,model_prescription_template_medicine,base.group_user,1,1,1,1
 access_prescription_template_advice,prescription.template.advice,model_prescription_template_advice,base.group_user,1,1,1,1
 access_prescription_template_test,prescription.template.test,model_prescription_template_test,base.group_user,1,1,1,1
+access_doctor_prescription,doctor.prescription,model_doctor_prescription,base.group_user,1,1,1,1
+access_doctor_prescription_medicine,doctor.prescription.medicine,model_doctor_prescription_medicine,base.group_user,1,1,1,1
+access_doctor_prescription_advice,doctor.prescription.advice,model_doctor_prescription_advice,base.group_user,1,1,1,1
+access_doctor_prescription_test,doctor.prescription.test,model_doctor_prescription_test,base.group_user,1,1,1,1

@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Laundry Receive Slip -->
+    <record id="action_report_laundry_receive" model="ir.actions.report">
+        <field name="name">Laundry Receive Slip</field>
+        <field name="model">laundry.receive</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">leih19.report_laundry_receive_document</field>
+        <field name="report_file">leih19.report_laundry_receive_document</field>
+        <field name="print_report_name">'Laundry Receive - %s' % (object.name or object.id)</field>
+        <field name="binding_model_id" ref="leih19.model_laundry_receive"/>
+        <field name="binding_type">report</field>
+    </record>
+
+    <template id="report_laundry_receive_document">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.external_layout">
+                    <div class="page leih">
+                        <t t-call="leih19.leih_report_styles"/>
+                        <h2 class="doc_title">LAUNDRY RECEIVE SLIP</h2>
+                        <table class="meta">
+                            <tr>
+                                <td style="width:50%"><span class="lbl">Laundry</span>
+                                    <span t-out="o.laundry_name.display_name or '-'"/></td>
+                                <td style="width:50%"><span class="lbl">Receive Date</span>
+                                    <span t-field="o.receive_date" t-options="{'widget': 'date'}"/></td>
+                            </tr>
+                            <tr>
+                                <td><span class="lbl">Cloth Type</span>
+                                    <span t-out="o.name or '-'"/></td>
+                                <td><span class="lbl">Color</span>
+                                    <span t-out="o.color or '-'"/></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2"><span class="lbl">Quantity</span>
+                                    <span style="font-size:15px; font-weight:700;" t-out="o.quantity or 0"/></td>
+                            </tr>
+                        </table>
+                        <div class="sign_row" style="display:flex; justify-content:space-between;">
+                            <span class="sign_box">Received By</span>
+                            <span class="sign_box">Laundry In-charge</span>
+                        </div>
+                        <p class="foot_note">*** Computer-generated slip. ***</p>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+
+    <!-- Laundry Cleaning Challan -->
+    <record id="action_report_laundry_clean" model="ir.actions.report">
+        <field name="name">Laundry Cleaning Challan</field>
+        <field name="model">laundry.clean</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">leih19.report_laundry_clean_document</field>
+        <field name="report_file">leih19.report_laundry_clean_document</field>
+        <field name="print_report_name">'Laundry Clean - %s' % (object.name or object.id)</field>
+        <field name="binding_model_id" ref="leih19.model_laundry_clean"/>
+        <field name="binding_type">report</field>
+    </record>
+
+    <template id="report_laundry_clean_document">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.external_layout">
+                    <div class="page leih">
+                        <t t-call="leih19.leih_report_styles"/>
+                        <h2 class="doc_title">LAUNDRY CLEANING CHALLAN</h2>
+                        <table class="meta">
+                            <tr>
+                                <td style="width:34%"><span class="lbl">Challan</span>
+                                    <span t-out="o.name or '-'"/></td>
+                                <td style="width:33%"><span class="lbl">Laundry</span>
+                                    <span t-out="o.laundry_name.display_name or '-'"/></td>
+                                <td style="width:33%"><span class="lbl">Status</span>
+                                    <span class="badge" t-out="dict(o._fields['state'].selection).get(o.state, o.state or '-')"/></td>
+                            </tr>
+                            <tr>
+                                <td><span class="lbl">Send Date</span>
+                                    <span t-field="o.send_date" t-options="{'widget': 'date'}"/></td>
+                                <td colspan="2"><span class="lbl">Delivered Date</span>
+                                    <span t-field="o.back_date" t-options="{'widget': 'date'}"/></td>
+                            </tr>
+                        </table>
+
+                        <table class="items">
+                            <thead>
+                                <tr>
+                                    <th style="width:8%">#</th>
+                                    <th style="width:57%">Linen Item</th>
+                                    <th style="width:20%">Color</th>
+                                    <th style="width:15%" class="num">Quantity</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-set="idx" t-value="0"/>
+                                <t t-foreach="o.product_line" t-as="line">
+                                    <t t-set="idx" t-value="idx + 1"/>
+                                    <tr>
+                                        <td class="ctr"><span t-out="idx"/></td>
+                                        <td><span t-out="line.linen_item.display_name or '-'"/></td>
+                                        <td><span t-out="line.color or '-'"/></td>
+                                        <td class="num"><span t-out="line.quantity or 0"/></td>
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
+
+                        <div class="sign_row" style="display:flex; justify-content:space-between;">
+                            <span class="sign_box">Sent By</span>
+                            <span class="sign_box">Laundry In-charge</span>
+                        </div>
+                        <p class="foot_note">*** Computer-generated challan. ***</p>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

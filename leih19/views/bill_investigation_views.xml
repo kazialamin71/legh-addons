@@ -23,6 +23,7 @@
                 <field name="grand_total" />
                 <field name="paid" />
                 <field name="due" />
+
                 <field name="type" />
                 <field name="card_no" />
                 <field name="bank_name" />
@@ -51,7 +52,6 @@
                 <sheet>
                     <group string="Information">
                         <group>
-                            <field name="name" readonly="1" />
                             <field name="patient_name" />
                             <field name="address" />
                             <field name="sex" />
@@ -132,6 +132,7 @@
                 <field name="name" />
                 <field name="patient_name" />
                 <field name="ref_doctors" />
+
                 <field name="state" />
                 <filter string="Pending" name="pending" domain="[('state','=','pending')]" />
                 <filter string="Confirmed" name="confirmed" domain="[('state','=','confirmed')]" />
@@ -151,6 +152,7 @@
         <field name="view_id" ref="view_bill_register_list" />
         <field name="search_view_id" ref="view_bill_register_search" />
         <field name="context">{}</field>
+
     </record>
     <menuitem id="menu_leis_root" name="LEIS" sequence="10" />
     <menuitem id="menu_bill_register" name="Bill Register" parent="menu_leis_root" action="action_bill_register" sequence="20" />

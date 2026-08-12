@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Blood Donor Card -->
+    <record id="action_report_blood_donar" model="ir.actions.report">
+        <field name="name">Blood Donor Card</field>
+        <field name="model">blood.donar</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">leih19.report_blood_donar_document</field>
+        <field name="report_file">leih19.report_blood_donar_document</field>
+        <field name="print_report_name">'Donor - %s' % (object.doner_name or '')</field>
+        <field name="binding_model_id" ref="leih19.model_blood_donar"/>
+        <field name="binding_type">report</field>
+    </record>
+
+    <template id="report_blood_donar_document">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.external_layout">
+                    <div class="page leih">
+                        <t t-call="leih19.leih_report_styles"/>
+
+                        <h2 class="doc_title">BLOOD DONATION CARD</h2>
+
+                        <table class="meta">
+                            <tr>
+                                <td style="width:50%"><span class="lbl">Donor Name</span>
+                                    <span t-out="o.doner_name or '-'"/></td>
+                                <td style="width:25%"><span class="lbl">Blood Group</span>
+                                    <span style="font-size:16px; font-weight:700; color:#b00;"
+                                        t-out="o.group or '-'"/></td>
+                                <td style="width:25%"><span class="lbl">Card No</span>
+                                    <span t-out="o.name or '-'"/></td>
+                            </tr>
+                            <tr>
+                                <td><span class="lbl">Mobile</span>
+                                    <span t-out="o.mobile_no or '-'"/></td>
+                                <td colspan="2"><span class="lbl">Donation Date</span>
+                                    <span t-field="o.date" t-options="{'widget': 'date'}"/></td>
+                            </tr>
+                            <tr t-if="o.description">
+                                <td colspan="3"><span class="lbl">Remarks</span>
+                                    <span t-out="o.description"/></td>
+                            </tr>
+                        </table>
+
+                        <div class="sign_row" style="text-align:right;">
+                            <span class="sign_box">Blood Bank In-charge</span>
+                        </div>
+
+                        <p class="foot_note">*** Thank you for your life-saving donation. ***</p>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+
+    <!-- Blood Issue Slip -->
+    <record id="action_report_blood_receiver" model="ir.actions.report">
+        <field name="name">Blood Issue Slip</field>
+        <field name="model">blood.receiver</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">leih19.report_blood_receiver_document</field>
+        <field name="report_file">leih19.report_blood_receiver_document</field>
+        <field name="print_report_name">'Blood Issue - %s' % (object.buyer_name or '')</field>
+        <field name="binding_model_id" ref="leih19.model_blood_receiver"/>
+        <field name="binding_type">report</field>
+    </record>
+
+    <template id="report_blood_receiver_document">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.external_layout">
+                    <div class="page leih">
+                        <t t-call="leih19.leih_report_styles"/>
+
+                        <h2 class="doc_title">BLOOD ISSUE SLIP</h2>
+
+                        <table class="meta">
+                            <tr>
+                                <td style="width:50%"><span class="lbl">Issued To</span>
+                                    <span t-out="o.buyer_name or '-'"/></td>
+                                <td style="width:25%"><span class="lbl">Blood Group</span>
+                                    <span style="font-size:16px; font-weight:700; color:#b00;"
+                                        t-out="o.blood_group or '-'"/></td>
+                                <td style="width:25%"><span class="lbl">Slip No</span>
+                                    <span t-out="o.name or '-'"/></td>
+                            </tr>
+                            <tr>
+                                <td><span class="lbl">Patient</span>
+                                    <span t-field="o.patient_id"/></td>
+                                <td><span class="lbl">Mobile</span>
+                                    <span t-out="o.mobile_no or '-'"/></td>
+                                <td><span class="lbl">Date</span>
+                                    <span t-field="o.receive_date" t-options="{'widget': 'date'}"/></td>
+                            </tr>
+                            <tr t-if="o.description">
+                                <td colspan="3"><span class="lbl">Remarks</span>
+                                    <span t-out="o.description"/></td>
+                            </tr>
+                        </table>
+
+                        <table class="totals" style="width:52%;">
+                            <tr class="grand"><td>Price</td>
+                                <td class="num"><span t-out="'%.2f' % o.price"/></td></tr>
+                            <tr><td>Paid</td>
+                                <td class="num"><span t-out="'%.2f' % o.paid_amount"/></td></tr>
+                            <tr class="due"><td>Due</td>
+                                <td class="num"><span t-out="'%.2f' % o.unpaid_amount"/></td></tr>
+                        </table>
+
+                        <div class="sign_row" style="display:flex; justify-content:space-between;">
+                            <span class="sign_box">Received By</span>
+                            <span class="sign_box">Blood Bank In-charge</span>
+                        </div>
+
+                        <p class="foot_note">*** Cross-matching report must accompany this slip. ***</p>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <!-- Repoint the existing (broken) report action at our working template.
-         The leih19 record had report_name="leis_migrated_models.*", which does
-         not resolve because the module's technical name is "leih19". -->
-    <record id="leih19.action_report_doctor_prescription" model="ir.actions.report">
+    <record id="action_report_doctor_prescription" model="ir.actions.report">
+        <field name="name">Doctor Prescription</field>
+        <field name="model">doctor.prescription</field>
+        <field name="report_type">qweb-pdf</field>
         <field name="report_name">leih_opd.report_prescription_document</field>
         <field name="report_file">leih_opd.report_prescription_document</field>
         <field name="print_report_name">'Prescription - %s' % (object.name)</field>
+        <field name="binding_model_id" ref="model_doctor_prescription"/>
+        <field name="binding_type">report</field>
     </record>
 
     <template id="report_prescription_document">

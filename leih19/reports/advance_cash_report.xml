@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="action_report_advance_cash" model="ir.actions.report">
+        <field name="name">Advance Cash Voucher</field>
+        <field name="model">advance.cash</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">leih19.report_advance_cash_document</field>
+        <field name="report_file">leih19.report_advance_cash_document</field>
+        <field name="print_report_name">'Advance Cash - %s' % (object.name or '')</field>
+        <field name="binding_model_id" ref="leih19.model_advance_cash"/>
+        <field name="binding_type">report</field>
+    </record>
+
+    <template id="report_advance_cash_document">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.external_layout">
+                    <div class="page leih">
+                        <t t-call="leih19.leih_report_styles"/>
+
+                        <h2 class="doc_title">ADVANCE CASH VOUCHER</h2>
+
+                        <table class="meta">
+                            <tr>
+                                <td style="width:50%"><span class="lbl">Voucher No</span>
+                                    <span t-out="o.name or '-'"/></td>
+                                <td style="width:50%"><span class="lbl">Date</span>
+                                    <span t-field="o.date" t-options="{'widget': 'date'}"/></td>
+                            </tr>
+                            <tr>
+                                <td><span class="lbl">Paid To</span>
+                                    <span t-field="o.partner_id"/></td>
+                                <td><span class="lbl">Status</span>
+                                    <span class="badge" t-out="dict(o._fields['state'].selection).get(o.state, o.state)"/></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2"><span class="lbl">Purpose</span>
+                                    <span t-out="o.purpose or '-'"/></td>
+                            </tr>
+                        </table>
+
+                        <table class="totals" style="width:55%;">
+                            <tr class="grand"><td>Amount</td>
+                                <td class="num"><span t-out="'%.2f' % o.amount"/></td></tr>
+                        </table>
+
+                        <div class="sign_row" style="display:flex; justify-content:space-between;">
+                            <span class="sign_box">Received By</span>
+                            <span class="sign_box">Approved By</span>
+                        </div>
+
+                        <p class="foot_note">*** Computer-generated voucher. ***</p>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

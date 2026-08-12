@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="action_report_doctors_profile" model="ir.actions.report">
+        <field name="name">Doctor Profile Card</field>
+        <field name="model">doctors.profile</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">leih19.report_doctors_profile_document</field>
+        <field name="report_file">leih19.report_doctors_profile_document</field>
+        <field name="print_report_name">'Doctor - %s' % (object.name or object.id)</field>
+        <field name="binding_model_id" ref="leih19.model_doctors_profile"/>
+        <field name="binding_type">report</field>
+    </record>
+
+    <template id="report_doctors_profile_document">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.external_layout">
+                    <div class="page leih">
+                        <t t-call="leih19.leih_report_styles"/>
+                        <h2 class="doc_title">DOCTOR PROFILE</h2>
+                        <div class="doc_sub"><span t-out="o.name or ''"/></div>
+
+                        <table class="meta">
+                            <tr>
+                                <td style="width:34%"><span class="lbl">Doctor ID</span>
+                                    <span t-out="o.doctor_id or '-'"/></td>
+                                <td style="width:33%"><span class="lbl">Department</span>
+                                    <span t-out="o.department or '-'"/></td>
+                                <td style="width:33%"><span class="lbl">Designation</span>
+                                    <span t-out="o.designation or '-'"/></td>
+                            </tr>
+                            <tr>
+                                <td><span class="lbl">Degree</span>
+                                    <span t-out="o.degree or '-'"/></td>
+                                <td><span class="lbl">Type</span>
+                                    <span t-out="dict(o._fields['type'].selection).get(o.type, o.type or '-')"/></td>
+                                <td><span class="lbl">Status</span>
+                                    <span class="badge" t-out="dict(o._fields['status'].selection).get(o.status, o.status or '-')"/></td>
+                            </tr>
+                            <tr>
+                                <td><span class="lbl">IPD Visit Fee</span>
+                                    <span t-out="'%.2f' % (o.ipd_visit or 0)"/></td>
+                                <td><span class="lbl">Commission Rate</span>
+                                    <span t-out="'%g' % (o.commission_rate or 0)"/>%</td>
+                                <td><span class="lbl">Is Referral</span>
+                                    <span t-out="'Yes' if o.is_referral else 'No'"/></td>
+                            </tr>
+                            <tr t-if="o.others">
+                                <td colspan="3"><span class="lbl">Others</span>
+                                    <span t-out="o.others"/></td>
+                            </tr>
+                        </table>
+
+                        <p class="foot_note">*** Internal reference card. ***</p>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

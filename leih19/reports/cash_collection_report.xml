@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="action_report_cash_collection" model="ir.actions.report">
+        <field name="name">Cash Collection Report</field>
+        <field name="model">cash.collection</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">leih19.report_cash_collection_document</field>
+        <field name="report_file">leih19.report_cash_collection_document</field>
+        <field name="print_report_name">'Cash Collection - %s' % (object.name or '')</field>
+        <field name="binding_model_id" ref="leih19.model_cash_collection"/>
+        <field name="binding_type">report</field>
+    </record>
+
+    <template id="report_cash_collection_document">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.external_layout">
+                    <div class="page leih">
+                        <t t-call="leih19.leih_report_styles"/>
+
+                        <h2 class="doc_title">CASH COLLECTION REPORT</h2>
+                        <div class="doc_sub">
+                            <span t-out="dict(o._fields['type'].selection).get(o.type, '') if o.type else ''"/>
+                        </div>
+
+                        <table class="meta">
+                            <tr>
+                                <td style="width:50%"><span class="lbl">Collection No</span>
+                                    <span t-out="o.name or '-'"/></td>
+                                <td style="width:50%"><span class="lbl">Date</span>
+                                    <span t-field="o.date" t-options="{'widget': 'datetime'}"/></td>
+                            </tr>
+                        </table>
+
+                        <table class="items">
+                            <thead>
+                                <tr>
+                                    <th style="width:8%">#</th>
+                                    <th style="width:32%">MR No.</th>
+                                    <th style="width:40%">Bill / Admission / OPD</th>
+                                    <th style="width:20%" class="num">Amount</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-set="idx" t-value="0"/>
+                                <t t-foreach="o.cash_collection_lines" t-as="line">
+                                    <t t-set="idx" t-value="idx + 1"/>
+                                    <tr>
+                                        <td class="ctr"><span t-out="idx"/></td>
+                                        <td><span t-out="line.mr_no.name or '-'"/></td>
+                                        <td><span t-out="line.bill_admission_opd_id or (line.opd_id.name if line.opd_id else '') or '-'"/></td>
+                                        <td class="num"><span t-out="'%.2f' % (line.amount or 0)"/></td>
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
+
+                        <table class="totals">
+                            <tr class="grand"><td>Total Collection</td>
+                                <td class="num"><span t-out="'%.2f' % o.total"/></td></tr>
+                        </table>
+
+                        <div class="sign_row" style="display:flex; justify-content:space-between;">
+                            <span class="sign_box">Collected By</span>
+                            <span class="sign_box">Accounts</span>
+                        </div>
+
+                        <p class="foot_note">*** Computer-generated collection report. ***</p>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

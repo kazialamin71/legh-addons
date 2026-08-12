@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Shared print styling for every LEIS document report.
+         Include inside a report page with:  <t t-call="leih19.leih_report_styles"/> -->
+    <template id="leih_report_styles">
+        <style>
+            .leih { font-size:12px; color:#1a1a1a; }
+            .leih .doc_title { text-align:center; letter-spacing:2px; font-size:18px;
+                margin:0 0 3px 0; font-weight:600; }
+            .leih .doc_sub { text-align:center; color:#666; font-size:11px;
+                margin:0 0 12px 0; text-transform:uppercase; letter-spacing:1px; }
+            .leih table.meta { width:100%; border-collapse:collapse; margin-bottom:12px;
+                border:1px solid #bbb; }
+            .leih table.meta td { padding:4px 8px; border:1px solid #ddd; vertical-align:top; }
+            .leih table.meta .lbl { color:#666; font-size:10px; text-transform:uppercase;
+                display:block; margin-bottom:1px; }
+            .leih .sec_title { font-size:12px; text-transform:uppercase; letter-spacing:1px;
+                color:#2b6ca3; border-bottom:1px solid #e0e0e0; padding-bottom:2px;
+                margin:14px 0 6px 0; }
+            .leih table.items { width:100%; border-collapse:collapse; margin-bottom:12px; }
+            .leih table.items th { background:#f0f0f0; border:1px solid #c8c8c8;
+                padding:6px 8px; text-align:left; font-size:11px; text-transform:uppercase; }
+            .leih table.items td { border:1px solid #e0e0e0; padding:6px 8px; }
+            .leih .num { text-align:right; }
+            .leih .ctr { text-align:center; }
+            .leih table.totals { width:52%; margin-left:auto; border-collapse:collapse; }
+            .leih table.totals td { padding:3px 8px; }
+            .leih table.totals tr.grand td { font-weight:700; border-top:1px solid #999;
+                font-size:13px; }
+            .leih table.totals tr.due td { font-weight:700; border-top:1px solid #999; }
+            .leih .amt_words { font-style:italic; color:#444; margin-top:8px; }
+            .leih .sign_row { margin-top:48px; width:100%; }
+            .leih .sign_box { display:inline-block; border-top:1px solid #333;
+                padding-top:3px; min-width:180px; text-align:center; font-size:11px; }
+            .leih .foot_note { text-align:center; color:#888; font-size:10px; margin-top:22px; }
+            .leih .badge { display:inline-block; padding:1px 8px; border:1px solid #999;
+                border-radius:10px; font-size:10px; text-transform:uppercase; }
+        </style>
+    </template>
+</odoo>

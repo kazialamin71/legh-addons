@@ -7,6 +7,7 @@
     'data': [
         'security/commission_security.xml',
         'security/ir.model.access.csv',
+        'reports/commission_report.xml',
         'views/commission_configuration_line_views.xml',
         'views/commission_configuration_views.xml',
         'views/commission_calculation_line_views.xml',

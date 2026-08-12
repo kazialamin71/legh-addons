@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="action_report_inventory_product_entry" model="ir.actions.report">
+        <field name="name">Goods Received Note</field>
+        <field name="model">inventory.product.entry</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">leih19.report_inventory_product_entry_document</field>
+        <field name="report_file">leih19.report_inventory_product_entry_document</field>
+        <field name="print_report_name">'GRN - %s' % (object.name or object.id)</field>
+        <field name="binding_model_id" ref="leih19.model_inventory_product_entry"/>
+        <field name="binding_type">report</field>
+    </record>
+
+    <template id="report_inventory_product_entry_document">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.external_layout">
+                    <div class="page leih">
+                        <t t-call="leih19.leih_report_styles"/>
+                        <h2 class="doc_title">GOODS RECEIVED NOTE</h2>
+
+                        <table class="meta">
+                            <tr>
+                                <td style="width:34%"><span class="lbl">GRN Entry No</span>
+                                    <span t-out="o.name or '-'"/></td>
+                                <td style="width:33%"><span class="lbl">Invoice / Bill No</span>
+                                    <span t-out="o.invoice_no or '-'"/></td>
+                                <td style="width:33%"><span class="lbl">Invoice Date</span>
+                                    <span t-field="o.invoice_date" t-options="{'widget': 'date'}"/></td>
+                            </tr>
+                            <tr>
+                                <td><span class="lbl">Challan No</span>
+                                    <span t-out="o.chalan_no or '-'"/></td>
+                                <td><span class="lbl">Challan Date</span>
+                                    <span t-field="o.chalan_date" t-options="{'widget': 'date'}"/></td>
+                                <td><span class="lbl">Reference</span>
+                                    <span t-out="o.reference_no or '-'"/></td>
+                            </tr>
+                            <tr>
+                                <td><span class="lbl">Supplier / Employee</span>
+                                    <span t-out="o.partner_id.name or '-'"/></td>
+                                <td><span class="lbl">Warehouse</span>
+                                    <span t-out="o.warehouse_id.name or '-'"/></td>
+                                <td><span class="lbl">Department</span>
+                                    <span t-out="o.department.name or '-'"/></td>
+                            </tr>
+                        </table>
+
+                        <table class="items">
+                            <thead>
+                                <tr>
+                                    <th style="width:6%">#</th>
+                                    <th style="width:48%">Product</th>
+                                    <th style="width:14%" class="num">Qty</th>
+                                    <th style="width:16%" class="num">Unit Price</th>
+                                    <th style="width:16%" class="num">Total</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-set="idx" t-value="0"/>
+                                <t t-foreach="o.inventory_product_entry_line_ids" t-as="line">
+                                    <t t-set="idx" t-value="idx + 1"/>
+                                    <tr>
+                                        <td class="ctr"><span t-out="idx"/></td>
+                                        <td><span t-out="line.product_name.display_name or '-'"/></td>
+                                        <td class="num"><span t-out="'%g' % (line.quantity or 0)"/></td>
+                                        <td class="num"><span t-out="'%.2f' % (line.unit_price or 0)"/></td>
+                                        <td class="num"><span t-out="'%.2f' % (line.total_price or 0)"/></td>
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
+
+                        <table class="totals">
+                            <tr class="grand"><td>Total Amount</td>
+                                <td class="num"><span t-out="'%.2f' % o.total"/></td></tr>
+                        </table>
+
+                        <div class="sign_row" style="display:flex; justify-content:space-between;">
+                            <span class="sign_box">Received By</span>
+                            <span class="sign_box">Store In-charge</span>
+                            <span class="sign_box">Verified By</span>
+                        </div>
+                        <p class="foot_note">*** Computer-generated GRN. ***</p>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

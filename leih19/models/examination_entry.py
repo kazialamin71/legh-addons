@@ -21,6 +21,10 @@ class ExaminationEntry(models.Model):
     accounts_id = fields.Many2one('account.account', string='Account ID')
     examination_entry_line = fields.One2many('examination.entry.line', 'examinationentry_id')
     merge_ids = fields.Many2many('examination.merge.line', 'merge_item_rel', string='Merge')
+    support_item_ids = fields.One2many(
+        'examination.support.item', 'entry_id', string='Supporting Items',
+        help='Items automatically added to the bill whenever this item is billed '
+             '(e.g. disposable bed sheet, test tube).')
 
     # --- Reporting / workflow configuration (Phase 1) ---
     service_group = fields.Selection(

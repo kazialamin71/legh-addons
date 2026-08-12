@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="action_report_appointment_booking" model="ir.actions.report">
+        <field name="name">Appointment Slip</field>
+        <field name="model">appointment.booking</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">leih19.report_appointment_booking_document</field>
+        <field name="report_file">leih19.report_appointment_booking_document</field>
+        <field name="print_report_name">'Appointment - %s' % (object.name or object.patient_name)</field>
+        <field name="binding_model_id" ref="leih19.model_appointment_booking"/>
+        <field name="binding_type">report</field>
+    </record>
+
+    <template id="report_appointment_booking_document">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.external_layout">
+                    <div class="page leih">
+                        <t t-call="leih19.leih_report_styles"/>
+
+                        <h2 class="doc_title">APPOINTMENT SLIP</h2>
+                        <div class="doc_sub">
+                            <t t-if="o.patient_status == 'new'">New Patient</t>
+                            <t t-elif="o.patient_status == 'review'">Review</t>
+                        </div>
+
+                        <table class="meta">
+                            <tr>
+                                <td style="width:50%"><span class="lbl">Serial No</span>
+                                    <span style="font-size:16px; font-weight:700;" t-out="o.name or '-'"/></td>
+                                <td style="width:50%"><span class="lbl">Doctor</span>
+                                    <span t-out="o.doctor_name.name or '-'"/></td>
+                            </tr>
+                            <tr>
+                                <td><span class="lbl">Patient</span>
+                                    <span t-out="o.patient_name or '-'"/></td>
+                                <td><span class="lbl">Age / Sex</span>
+                                    <span t-out="o.age or '-'"/> / <span t-out="o.sex or '-'"/></td>
+                            </tr>
+                            <tr>
+                                <td><span class="lbl">Mobile</span>
+                                    <span t-out="o.phone or '-'"/></td>
+                                <td><span class="lbl">Date / Time</span>
+                                    <span t-field="o.date" t-options="{'widget': 'date'}"/>
+                                    <t t-if="o.time"> — <span t-out="o.time"/></t></td>
+                            </tr>
+                            <tr>
+                                <td><span class="lbl">Address</span>
+                                    <span t-out="o.address or '-'"/></td>
+                                <td><span class="lbl">Fee</span>
+                                    <span t-out="'%.2f' % (o.amount or 0)"/>
+                                    <span class="badge" style="margin-left:6px;"
+                                        t-out="'Paid' if o.payment_done else 'Unpaid'"/></td>
+                            </tr>
+                        </table>
+
+                        <div class="sign_row" style="text-align:right;">
+                            <span class="sign_box">Reception</span>
+                        </div>
+
+                        <p class="foot_note">*** Please arrive 15 minutes before your serial. ***</p>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

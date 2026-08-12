@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Commission Payment Voucher -->
+    <record id="action_report_commission_payment" model="ir.actions.report">
+        <field name="name">Commission Payment Voucher</field>
+        <field name="model">commission.payment</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">leih_commission.report_commission_payment_document</field>
+        <field name="report_file">leih_commission.report_commission_payment_document</field>
+        <field name="print_report_name">'Commission Payment - %s' % (object.name or object.id)</field>
+        <field name="binding_model_id" ref="model_commission_payment"/>
+        <field name="binding_type">report</field>
+    </record>
+
+    <template id="report_commission_payment_document">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.external_layout">
+                    <div class="page leih">
+                        <t t-call="leih19.leih_report_styles"/>
+                        <h2 class="doc_title">COMMISSION PAYMENT VOUCHER</h2>
+                        <div class="doc_sub">
+                            <span class="badge" t-out="dict(o._fields['state'].selection).get(o.state, o.state or '-')"/>
+                        </div>
+
+                        <table class="meta">
+                            <tr>
+                                <td style="width:34%"><span class="lbl">Voucher No</span>
+                                    <span t-out="o.name or '-'"/></td>
+                                <td style="width:33%"><span class="lbl">Doctor / Broker</span>
+                                    <span t-out="o.doctor_id.name or '-'"/></td>
+                                <td style="width:33%"><span class="lbl">Payment Date</span>
+                                    <span t-field="o.date" t-options="{'widget': 'date'}"/></td>
+                            </tr>
+                            <tr>
+                                <td><span class="lbl">Period</span>
+                                    <span t-out="o.period_id or '-'"/></td>
+                                <td colspan="2"><span class="lbl">Commission Ref</span>
+                                    <span t-out="o.cc_id.display_name or '-'"/></td>
+                            </tr>
+                            <tr t-if="o.note">
+                                <td colspan="3"><span class="lbl">Note</span>
+                                    <span t-out="o.note"/></td>
+                            </tr>
+                        </table>
+
+                        <table class="totals" style="width:55%;">
+                            <tr class="grand"><td>Paid Amount</td>
+                                <td class="num"><span t-out="'%.2f' % o.paid_amount"/></td></tr>
+                            <tr class="due"><td>Due Amount</td>
+                                <td class="num"><span t-out="'%.2f' % o.due_amount"/></td></tr>
+                        </table>
+
+                        <div class="sign_row" style="display:flex; justify-content:space-between;">
+                            <span class="sign_box">Received By</span>
+                            <span class="sign_box">Approved By</span>
+                        </div>
+                        <p class="foot_note">*** Computer-generated voucher. ***</p>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+
+    <!-- Commission Statement -->
+    <record id="action_report_commission_calculation" model="ir.actions.report">
+        <field name="name">Commission Statement</field>
+        <field name="model">commission.calculation</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">leih_commission.report_commission_calculation_document</field>
+        <field name="report_file">leih_commission.report_commission_calculation_document</field>
+        <field name="print_report_name">'Commission Statement - %s' % (object.name or object.id)</field>
+        <field name="binding_model_id" ref="model_commission_calculation"/>
+        <field name="binding_type">report</field>
+    </record>
+
+    <template id="report_commission_calculation_document">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.external_layout">
+                    <div class="page leih">
+                        <t t-call="leih19.leih_report_styles"/>
+                        <h2 class="doc_title">COMMISSION STATEMENT</h2>
+
+                        <table class="meta">
+                            <tr>
+                                <td style="width:40%"><span class="lbl">Doctor / Broker</span>
+                                    <span t-out="o.doctor_id.name or '-'"/></td>
+                                <td style="width:30%"><span class="lbl">From</span>
+                                    <span t-field="o.start_date" t-options="{'widget': 'date'}"/></td>
+                                <td style="width:30%"><span class="lbl">To</span>
+                                    <span t-field="o.end_date" t-options="{'widget': 'date'}"/></td>
+                            </tr>
+                            <tr>
+                                <td><span class="lbl">Total Patients</span>
+                                    <span t-out="'%g' % (o.no_of_total_patient or 0)"/></td>
+                                <td><span class="lbl">Total Bills</span>
+                                    <span t-out="'%g' % (o.no_of_total_bill or 0)"/></td>
+                                <td><span class="lbl">Total Tests</span>
+                                    <span t-out="'%g' % (o.no_of_total_test or 0)"/></td>
+                            </tr>
+                        </table>
+
+                        <table class="items">
+                            <thead>
+                                <tr>
+                                    <th style="width:6%">#</th>
+                                    <th style="width:34%">Test</th>
+                                    <th style="width:20%">Department</th>
+                                    <th style="width:13%" class="num">Amount</th>
+                                    <th style="width:13%" class="num">Discount</th>
+                                    <th style="width:14%" class="num">Payable</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-set="idx" t-value="0"/>
+                                <t t-foreach="o.commission_calculation_line_ids" t-as="line">
+                                    <t t-set="idx" t-value="idx + 1"/>
+                                    <tr>
+                                        <td class="ctr"><span t-out="idx"/></td>
+                                        <td><span t-out="line.test_id.name or '-'"/></td>
+                                        <td><span t-out="line.department_id.name or '-'"/></td>
+                                        <td class="num"><span t-out="'%.2f' % (line.test_amount or 0)"/></td>
+                                        <td class="num"><span t-out="'%.2f' % (line.discount_amount or 0)"/></td>
+                                        <td class="num"><span t-out="'%.2f' % (line.payble_amount or 0)"/></td>
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
+
+                        <table class="totals">
+                            <tr><td>Total Bill Amount</td>
+                                <td class="num"><span t-out="'%.2f' % o.no_of_total_bill_amount"/></td></tr>
+                            <tr><td>Total Discount</td>
+                                <td class="num"><span t-out="'%.2f' % o.given_discount_amount"/></td></tr>
+                            <tr><td>Total Commission</td>
+                                <td class="num"><span t-out="'%.2f' % o.total_commission_amount"/></td></tr>
+                            <tr class="grand"><td>Total Payable</td>
+                                <td class="num"><span t-out="'%.2f' % o.total_paybale_amount"/></td></tr>
+                        </table>
+
+                        <div class="sign_row" style="display:flex; justify-content:space-between;">
+                            <span class="sign_box">Prepared By</span>
+                            <span class="sign_box">Doctor / Broker</span>
+                            <span class="sign_box">Accounts</span>
+                        </div>
+                        <p class="foot_note">*** Computer-generated statement. ***</p>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

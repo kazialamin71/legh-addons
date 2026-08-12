@@ -8,6 +8,7 @@
     'data': [
         'security/ir.model.access.csv',
         'data/appointment_sequence.xml',
+        'data/doctor_prescription_sequence.xml',
         'data/medicine_data.xml',
         'views/doctor_schedule_views.xml',
         'views/appointment_booking_views.xml',

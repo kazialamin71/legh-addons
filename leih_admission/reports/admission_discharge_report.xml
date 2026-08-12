@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="action_report_admission_discharge" model="ir.actions.report">
+        <field name="name">Discharge Summary</field>
+        <field name="model">hospital.admission</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">leih_admission.report_admission_discharge</field>
+        <field name="report_file">leih_admission.report_admission_discharge</field>
+        <field name="print_report_name">'Discharge - %s' % (object.name or object.patient_name.name)</field>
+        <field name="binding_model_id" ref="leih19.model_hospital_admission"/>
+        <field name="binding_type">report</field>
+    </record>
+
+    <template id="report_admission_discharge">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.external_layout">
+                    <div class="page leih">
+                        <t t-call="leih19.leih_report_styles"/>
+
+                        <h2 class="doc_title">DISCHARGE SUMMARY</h2>
+
+                        <table class="meta">
+                            <tr>
+                                <td style="width:40%"><span class="lbl">Patient</span>
+                                    <span t-field="o.patient_name"/></td>
+                                <td style="width:30%"><span class="lbl">Patient ID</span>
+                                    <span t-out="o.patient_id or '-'"/></td>
+                                <td style="width:30%"><span class="lbl">Admission No</span>
+                                    <span t-field="o.name"/></td>
+                            </tr>
+                            <tr>
+                                <td><span class="lbl">Age / Sex</span>
+                                    <span t-out="o.age or '-'"/> / <span t-out="o.sex or '-'"/></td>
+                                <td><span class="lbl">Mobile</span>
+                                    <span t-out="o.mobile or '-'"/></td>
+                                <td><span class="lbl">Blood Group</span>
+                                    <span t-out="o.blood_group or '-'"/></td>
+                            </tr>
+                            <tr>
+                                <td><span class="lbl">Admitting Doctor</span>
+                                    <span t-out="o.admitting_doctor.name or o.ref_doctors.name or '-'"/></td>
+                                <td><span class="lbl">Admission Date</span>
+                                    <span t-field="o.date" t-options="{'widget': 'date'}"/></td>
+                                <td><span class="lbl">Release Date</span>
+                                    <span t-field="o.release_note_date" t-options="{'widget': 'date'}"/></td>
+                            </tr>
+                            <tr>
+                                <td><span class="lbl">Bed</span>
+                                    <span t-out="o.bed or '-'"/></td>
+                                <td><span class="lbl">Operation Date</span>
+                                    <span t-field="o.operation_date" t-options="{'widget': 'date'}"/></td>
+                                <td><span class="lbl">Package</span>
+                                    <span t-out="o.package_name.name or '-'"/></td>
+                            </tr>
+                        </table>
+
+                        <div class="sec_title">Clinical Diagnosis</div>
+                        <div t-out="o.clinic_diagnosis or 'Not recorded.'"/>
+
+                        <div class="sec_title">Release Note</div>
+                        <div style="white-space:pre-line;" t-out="o.release_note or 'Not recorded.'"/>
+
+                        <div class="sec_title">Account Summary</div>
+                        <table class="totals" style="width:55%; margin-left:0;">
+                            <tr><td>Grand Total</td>
+                                <td class="num"><span t-out="'%.2f' % o.grand_total"/></td></tr>
+                            <tr><td>Paid</td>
+                                <td class="num"><span t-out="'%.2f' % o.paid"/></td></tr>
+                            <tr class="due"><td>Due</td>
+                                <td class="num"><span t-out="'%.2f' % o.due"/></td></tr>
+                        </table>
+
+                        <div class="sign_row" style="display:flex; justify-content:space-between;">
+                            <span class="sign_box">Consultant</span>
+                            <span class="sign_box">Ward In-charge</span>
+                        </div>
+
+                        <p class="foot_note">*** Please follow the advice and follow-up schedule above. ***</p>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

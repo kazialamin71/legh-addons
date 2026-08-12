@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="action_report_discount" model="ir.actions.report">
+        <field name="name">Discount Approval</field>
+        <field name="model">discount</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">leih19.report_discount_document</field>
+        <field name="report_file">leih19.report_discount_document</field>
+        <field name="print_report_name">'Discount - %s' % (object.name or object.id)</field>
+        <field name="binding_model_id" ref="leih19.model_discount"/>
+        <field name="binding_type">report</field>
+    </record>
+
+    <template id="report_discount_document">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.external_layout">
+                    <div class="page leih">
+                        <t t-call="leih19.leih_report_styles"/>
+                        <h2 class="doc_title">DISCOUNT APPROVAL</h2>
+                        <div class="doc_sub">
+                            <span class="badge" t-out="dict(o._fields['state'].selection).get(o.state, o.state or '-')"/>
+                        </div>
+
+                        <table class="meta">
+                            <tr>
+                                <td style="width:34%"><span class="lbl">Discount No</span>
+                                    <span t-out="o.name or '-'"/></td>
+                                <td style="width:33%"><span class="lbl">Date</span>
+                                    <span t-field="o.date" t-options="{'widget': 'datetime'}"/></td>
+                                <td style="width:33%"><span class="lbl">Reference</span>
+                                    <span t-out="o.bill_no.name or o.admission_id.name or '-'"/></td>
+                            </tr>
+                            <tr>
+                                <td><span class="lbl">Patient</span>
+                                    <span t-out="o.patient_name or '-'"/></td>
+                                <td colspan="2"><span class="lbl">Mobile</span>
+                                    <span t-out="o.mobile or '-'"/></td>
+                            </tr>
+                        </table>
+
+                        <table class="items" t-if="o.discount_line_id">
+                            <thead>
+                                <tr>
+                                    <th style="width:34%">Category</th>
+                                    <th style="width:30%">Reference</th>
+                                    <th style="width:18%" class="num">Fixed</th>
+                                    <th style="width:18%" class="num">Percent</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-foreach="o.discount_line_id" t-as="line">
+                                    <tr>
+                                        <td><span t-out="line.category.display_name or '-'"/></td>
+                                        <td><span t-out="line.ref or '-'"/></td>
+                                        <td class="num"><span t-out="'%.2f' % (line.fixed_amount or 0)"/></td>
+                                        <td class="num"><span t-out="'%g' % (line.percent_amount or 0)"/>%</td>
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
+
+                        <table class="totals">
+                            <tr class="grand"><td>Total Discount</td>
+                                <td class="num"><span t-out="'%.2f' % o.total_discount"/></td></tr>
+                        </table>
+
+                        <div class="sign_row" style="display:flex; justify-content:space-between;">
+                            <span class="sign_box">Requested By</span>
+                            <span class="sign_box">Approved By</span>
+                        </div>
+                        <p class="foot_note">*** Computer-generated approval. ***</p>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

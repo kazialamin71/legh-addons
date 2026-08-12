@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="action_report_examine_package" model="ir.actions.report">
+        <field name="name">Package Details</field>
+        <field name="model">examine.package</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">leih19.report_examine_package_document</field>
+        <field name="report_file">leih19.report_examine_package_document</field>
+        <field name="print_report_name">'Package - %s' % (object.name or object.id)</field>
+        <field name="binding_model_id" ref="leih19.model_examine_package"/>
+        <field name="binding_type">report</field>
+    </record>
+
+    <template id="report_examine_package_document">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.external_layout">
+                    <div class="page leih">
+                        <t t-call="leih19.leih_report_styles"/>
+                        <h2 class="doc_title">HEALTH PACKAGE</h2>
+                        <div class="doc_sub"><span t-out="o.name or ''"/></div>
+
+                        <table class="meta">
+                            <tr>
+                                <td style="width:50%"><span class="lbl">Valid From</span>
+                                    <span t-field="o.start_date" t-options="{'widget': 'date'}"/></td>
+                                <td style="width:50%"><span class="lbl">Valid To</span>
+                                    <span t-field="o.end_date" t-options="{'widget': 'date'}"/></td>
+                            </tr>
+                        </table>
+
+                        <table class="items">
+                            <thead>
+                                <tr>
+                                    <th style="width:8%">#</th>
+                                    <th style="width:52%">Test / Service</th>
+                                    <th style="width:20%" class="num">Price</th>
+                                    <th style="width:20%" class="num">Amount</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-set="idx" t-value="0"/>
+                                <t t-foreach="o.examine_package_line_id" t-as="line">
+                                    <t t-set="idx" t-value="idx + 1"/>
+                                    <tr>
+                                        <td class="ctr"><span t-out="idx"/></td>
+                                        <td><span t-out="line.name.name or '-'"/></td>
+                                        <td class="num"><span t-out="'%.2f' % (line.price or 0)"/></td>
+                                        <td class="num"><span t-out="'%.2f' % (line.total_amount or 0)"/></td>
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
+
+                        <table class="totals">
+                            <tr><td>Total (individual)</td>
+                                <td class="num"><span t-out="'%.2f' % o.total"/></td></tr>
+                            <tr class="grand"><td>Package Price</td>
+                                <td class="num"><span t-out="'%.2f' % o.price"/></td></tr>
+                        </table>
+
+                        <p class="foot_note">*** Prices are subject to change. Please confirm at reception. ***</p>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

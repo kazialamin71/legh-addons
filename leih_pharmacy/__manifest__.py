@@ -8,6 +8,7 @@
         'security/pharmacy_security.xml',
         'security/ir.model.access.csv',
         'data/pharmacy_sequence.xml',
+        'reports/pharmacy_requisition_report.xml',
         'views/pharmacy_requisition_views.xml',
         'views/hospital_admission_views.xml',
         'views/menus.xml',

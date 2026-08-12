@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="action_report_optics_sale" model="ir.actions.report">
+        <field name="name">Optics Sale Invoice</field>
+        <field name="model">optics.sale</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">leih19.report_optics_sale_document</field>
+        <field name="report_file">leih19.report_optics_sale_document</field>
+        <field name="print_report_name">'Optics - %s' % (object.name or object.patient_name.name)</field>
+        <field name="binding_model_id" ref="leih19.model_optics_sale"/>
+        <field name="binding_type">report</field>
+    </record>
+
+    <template id="report_optics_sale_document">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.external_layout">
+                    <div class="page leih">
+                        <t t-call="leih19.leih_report_styles"/>
+
+                        <h2 class="doc_title">OPTICS SALE INVOICE</h2>
+
+                        <table class="meta">
+                            <tr>
+                                <td style="width:40%"><span class="lbl">Patient</span>
+                                    <span t-field="o.patient_name"/></td>
+                                <td style="width:30%"><span class="lbl">Patient ID</span>
+                                    <span t-out="o.patient_id or '-'"/></td>
+                                <td style="width:30%"><span class="lbl">Invoice No</span>
+                                    <span t-out="o.name or '-'"/></td>
+                            </tr>
+                            <tr>
+                                <td><span class="lbl">Age / Sex</span>
+                                    <span t-out="o.age or '-'"/> / <span t-out="o.sex or '-'"/></td>
+                                <td><span class="lbl">Mobile</span>
+                                    <span t-out="o.mobile or '-'"/></td>
+                                <td><span class="lbl">Date</span>
+                                    <span t-field="o.date" t-options="{'widget': 'datetime'}"/></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2"><span class="lbl">Address</span>
+                                    <span t-out="o.address or '-'"/></td>
+                                <td><span class="lbl">Delivery Date</span>
+                                    <span t-field="o.delivery_date" t-options="{'widget': 'date'}"/></td>
+                            </tr>
+                        </table>
+
+                        <!-- Eye prescription grid -->
+                        <div class="sec_title">Refraction</div>
+                        <table class="items">
+                            <thead>
+                                <tr>
+                                    <th style="width:16%">Eye</th>
+                                    <th class="ctr">SPH</th>
+                                    <th class="ctr">CYL</th>
+                                    <th class="ctr">AXIS</th>
+                                    <th class="ctr">SPH (N)</th>
+                                    <th class="ctr">CYL (N)</th>
+                                    <th class="ctr">AXIS (N)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Right (OD)</strong></td>
+                                    <td class="ctr"><span t-out="o.right_eye_sph or '-'"/></td>
+                                    <td class="ctr"><span t-out="o.right_eye_cyl or '-'"/></td>
+                                    <td class="ctr"><span t-out="o.right_eye_axis or '-'"/></td>
+                                    <td class="ctr"><span t-out="o.right_eye_sph_n or '-'"/></td>
+                                    <td class="ctr"><span t-out="o.right_eye_cyl_n or '-'"/></td>
+                                    <td class="ctr"><span t-out="o.right_eye_axis_n or '-'"/></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Left (OS)</strong></td>
+                                    <td class="ctr"><span t-out="o.left_eye_sph or '-'"/></td>
+                                    <td class="ctr"><span t-out="o.left_eye_cyl or '-'"/></td>
+                                    <td class="ctr"><span t-out="o.left_eye_axis or '-'"/></td>
+                                    <td class="ctr"><span t-out="o.left_eye_sph_n or '-'"/></td>
+                                    <td class="ctr"><span t-out="o.left_eye_cyl_n or '-'"/></td>
+                                    <td class="ctr"><span t-out="o.left_eye_axis_n or '-'"/></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <!-- Items -->
+                        <div class="sec_title">Items</div>
+                        <table class="items">
+                            <thead>
+                                <tr>
+                                    <th style="width:55%">Description</th>
+                                    <th style="width:12%" class="num">Qty</th>
+                                    <th style="width:16%" class="num">Unit Price</th>
+                                    <th style="width:17%" class="num">Amount</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr t-if="o.frame_id">
+                                    <td>Frame: <span t-out="o.frame_id.display_name"/></td>
+                                    <td class="num"><span t-out="o.quantity or 0"/></td>
+                                    <td class="num"><span t-out="'%.2f' % (o.price or 0)"/></td>
+                                    <td class="num"><span t-out="'%.2f' % ((o.price or 0) * (o.quantity or 0))"/></td>
+                                </tr>
+                                <t t-foreach="o.optics_lens_sale_line_id" t-as="line">
+                                    <tr>
+                                        <td>Lens: <span t-out="(line.name.name if line.name else line.product_id.display_name) or '-'"/></td>
+                                        <td class="num"><span t-out="line.qty or 0"/></td>
+                                        <td class="num"><span t-out="'%.2f' % (line.price or 0)"/></td>
+                                        <td class="num"><span t-out="'%.2f' % (line.total_amount or 0)"/></td>
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
+
+                        <table class="totals">
+                            <tr><td>Total</td>
+                                <td class="num"><span t-out="'%.2f' % o.total"/></td></tr>
+                            <tr t-if="o.after_discount"><td>Discount
+                                (<span t-out="'%g' % o.doctors_discounts"/>%)</td>
+                                <td class="num"><span t-out="'-%.2f' % o.after_discount"/></td></tr>
+                            <tr t-if="o.other_discount"><td>Other Discount</td>
+                                <td class="num"><span t-out="'-%.2f' % o.other_discount"/></td></tr>
+                            <tr class="grand"><td>Grand Total</td>
+                                <td class="num"><span t-out="'%.2f' % o.grand_total"/></td></tr>
+                            <tr><td>Paid</td>
+                                <td class="num"><span t-out="'%.2f' % o.paid"/></td></tr>
+                            <tr class="due"><td>Due</td>
+                                <td class="num"><span t-out="'%.2f' % o.due"/></td></tr>
+                        </table>
+
+                        <div class="sign_row" style="display:flex; justify-content:space-between;">
+                            <span class="sign_box">Received By</span>
+                            <span class="sign_box">Customer Signature</span>
+                        </div>
+
+                        <p class="foot_note">*** Thank you for your purchase. ***</p>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

@@ -120,6 +120,7 @@
                         <page string="Bill Register Line">
                             <field name="bill_register_line_id">
                                 <list editable="bottom">
+                                    <field name="is_support_line" column_invisible="1"/>
                                     <field name="name" />
                                     <field name="department" readonly="1" />
                                     <field name="product_qty" />
