@@ -102,6 +102,7 @@
         'views/patient_guarantor_views.xml',
         'data/patient_sequence.xml',
         'data/lab_sequence.xml',
+        'data/inventory_sequence.xml',
         'data/lab_antibiotic_data.xml',
         'data/sample_test_data.xml',
         'data/mantoux_test_data.xml',

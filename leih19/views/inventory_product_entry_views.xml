@@ -11,15 +11,16 @@
                 <field name="chalan_date" />
                 <field name="chalan_no" />
                 <field name="reference_no" />
-                <field name="total" />
                 <field name="partner_id" />
+                <field name="warehouse_id" />
+                <field name="payment_journal_id" />
                 <field name="grn_id" />
                 <field name="grn_journal_id" />
-                <field name="advance_journal_id" />
                 <field name="department" />
-                <field name="warehouse_id" />
                 <field name="date" />
-                <field name="state" />
+                <field name="total" sum="Total" />
+                <field name="state" widget="badge" decoration-success="state == 'verify'"
+                       decoration-info="state == 'confirmed'" decoration-muted="state == 'cancelled'" />
             </list>
         </field>
     </record>
@@ -29,32 +30,67 @@
         <field name="arch" type="xml">
             <form>
                 <header>
-                    <field name="state" widget="statusbar" />
+                    <button name="action_receive_product" type="object" string="Receive Product"
+                            class="btn-primary" invisible="state != 'pending'" />
+                    <button name="action_verify" type="object" string="Verify &amp; Pay Cash"
+                            class="btn-primary" invisible="state != 'confirmed'" />
+                    <button name="action_cancel" type="object" string="Cancel"
+                            invisible="state not in ('pending', 'confirmed')" />
+                    <button name="action_draft" type="object" string="Set to Pending"
+                            invisible="state != 'cancelled'" />
+                    <field name="state" widget="statusbar"
+                           statusbar_visible="pending,confirmed,verify" />
                 </header>
                 <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_view_grn" type="object" class="oe_stat_button"
+                                icon="fa-truck" invisible="not grn_id">
+                            <span class="o_stat_text">Receipt</span>
+                        </button>
+                        <button name="action_view_journal" type="object" class="oe_stat_button"
+                                icon="fa-money" invisible="not grn_journal_id">
+                            <span class="o_stat_text">Cash Entry</span>
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <h1><field name="name" readonly="1" /></h1>
+                    </div>
                     <group string="Information">
                         <group>
-                            <field name="name" />
-                            <field name="invoice_date" />
-                            <field name="chalan_no" />
-                            <field name="total" />
-                            <field name="grn_id" />
-                            <field name="advance_journal_id" />
-                            <field name="warehouse_id" />
+                            <field name="invoice_no" readonly="state != 'pending'" />
+                            <field name="invoice_date" readonly="state != 'pending'" />
+                            <field name="chalan_no" readonly="state != 'pending'" />
+                            <field name="chalan_date" readonly="state != 'pending'" />
+                            <field name="reference_no" readonly="state != 'pending'" />
+                            <field name="date" readonly="state != 'pending'" />
                         </group>
                         <group>
-                            <field name="invoice_no" />
-                            <field name="chalan_date" />
-                            <field name="reference_no" />
-                            <field name="partner_id" />
-                            <field name="grn_journal_id" />
-                            <field name="department" />
-                            <field name="date" />
+                            <field name="partner_id" readonly="state != 'pending'" />
+                            <field name="department" readonly="state != 'pending'" />
+                            <field name="warehouse_id" readonly="state != 'pending'" />
+                            <field name="payment_journal_id" readonly="state == 'verify'" />
+                            <field name="company_id" groups="base.group_multi_company"
+                                   readonly="state != 'pending'" />
+                            <field name="grn_id" invisible="not grn_id" />
+                            <field name="grn_journal_id" invisible="not grn_journal_id" />
+                            <field name="advance_journal_id" invisible="not advance_journal_id" />
                         </group>
                     </group>
                     <notebook>
                         <page string="Inventory Product Entry Line">
-                            <field name="inventory_product_entry_line_ids" />
+                            <field name="inventory_product_entry_line_ids"
+                                   readonly="state != 'pending'">
+                                <list editable="bottom">
+                                    <field name="product_name" />
+                                    <field name="account_id" optional="show" />
+                                    <field name="quantity" />
+                                    <field name="unit_price" />
+                                    <field name="total_price" sum="Total" readonly="1" />
+                                </list>
+                            </field>
+                            <group class="oe_subtotal_footer oe_right">
+                                <field name="total" />
+                            </group>
                         </page>
                     </notebook>
                 </sheet>
