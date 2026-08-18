@@ -14,7 +14,7 @@
         <field name="margin_right">2</field>
         <field name="header_spacing">0</field>
         <field name="header_line" eval="False"/>
-        <field name="dpi">203</field>
+        <field name="dpi">96</field>
     </record>
 
     <record id="action_report_lab_specimen_sticker" model="ir.actions.report">
@@ -30,7 +30,7 @@
     </record>
 
     <template id="report_lab_specimen_sticker">
-        <t t-call="web.html_container">
+        <t t-call="web.basic_layout">
             <t t-foreach="docs" t-as="o">
                 <div class="page"
                      t-att-style="(not o_first and 'page-break-before: always; ' or '') + 'width:46mm; font-family:Arial, sans-serif; color:#000;'">

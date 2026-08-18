@@ -26,6 +26,29 @@ class PatientInfo(models.Model):
 
     bill_count = fields.Integer(string="Bills", compute="_compute_bill_count")
 
+    # Front desk looks patients up by phone number at least as often as by name,
+    # and a name alone is rarely unique, so make both (plus the patient id)
+    # searchable from any Many2one to patient.info.
+    _rec_names_search = ['name', 'mobile', 'patient_id']
+
+    @api.depends('name', 'mobile', 'patient_id')
+    @api.depends_context('patient_display_contact')
+    def _compute_display_name(self):
+        """Show ``Name [ID] - Mobile`` where the extra context flag is set.
+
+        Only the registration/billing forms opt in via ``patient_display_contact``;
+        reports and everything else keep the plain patient name.
+        """
+        if not self.env.context.get('patient_display_contact'):
+            return super()._compute_display_name()
+        for rec in self:
+            label = rec.name or ''
+            if rec.patient_id:
+                label = '%s [%s]' % (label, rec.patient_id)
+            if rec.mobile:
+                label = '%s - %s' % (label, rec.mobile)
+            rec.display_name = label
+
     @api.model_create_multi
     def create(self, vals_list):
         for vals in vals_list:

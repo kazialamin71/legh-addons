@@ -111,6 +111,7 @@
         'reports/examination_result_report.xml',
         'reports/lab_specimen_sticker_report.xml',
         'reports/bill_register_report.xml',
+        'reports/bill_register_slip_report.xml',
         'reports/money_receipt_report.xml',
         'reports/opd_ticket_report.xml',
         'reports/leih_admission_report.xml',

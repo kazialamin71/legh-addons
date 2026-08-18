@@ -5,14 +5,24 @@
         <field name="name">examination.result.tree</field>
         <field name="model">examination.result</field>
         <field name="arch" type="xml">
-            <list decoration-info="state == 'draft'"
-                  decoration-warning="state == 'in_progress'"
-                  decoration-success="state == 'released'"
-                  decoration-muted="state == 'cancelled'">
+            <!-- grey = sample not in the lab yet, blue = ready to enter,
+                 orange = being entered, green = reported. -->
+            <list decoration-muted="state == 'cancelled' or (state in ('draft', 'in_progress') and sample_state in ('awaiting', 'collected'))"
+                  decoration-info="state == 'draft' and sample_state in ('received', 'no_sample')"
+                  decoration-warning="state == 'in_progress' and sample_state in ('received', 'no_sample')"
+                  decoration-success="state in ('verified', 'released')">
                 <field name="name"/>
+                <field name="bill_register_id"/>
                 <field name="reported_at"/>
                 <field name="patient_id"/>
                 <field name="entry_id"/>
+                <field name="sample_collected" optional="hide"/>
+                <field name="sample_received" string="In Lab" widget="boolean_toggle"/>
+                <field name="sample_state" widget="badge"
+                       decoration-success="sample_state in ('received', 'processed')"
+                       decoration-warning="sample_state == 'collected'"
+                       decoration-danger="sample_state == 'cancelled'"
+                       decoration-info="sample_state == 'no_sample'"/>
                 <field name="category"/>
                 <field name="doctor_id"/>
                 <field name="reported_by_id"/>
@@ -26,10 +36,22 @@
         <field name="model">examination.result</field>
         <field name="arch" type="xml">
             <search>
+                <field name="bill_register_id" string="Bill No"
+                       filter_domain="[('bill_register_id', 'ilike', self)]"/>
                 <field name="name"/>
                 <field name="patient_id"/>
                 <field name="entry_id"/>
                 <field name="doctor_id"/>
+                <filter name="ready_entry" string="Ready for Entry"
+                        domain="[('sample_state', 'in', ('received', 'no_sample')),
+                                 ('state', 'in', ('draft', 'in_progress'))]"
+                        help="Tests whose tube is in the lab (or that need no tube) and are not reported yet."/>
+                <filter name="sample_in_lab" string="Sample in Lab" domain="[('sample_received', '=', True)]"/>
+                <filter name="waiting_sample" string="Waiting for Sample"
+                        domain="[('sample_state', 'in', ('awaiting', 'collected')),
+                                 ('state', 'in', ('draft', 'in_progress'))]"
+                        help="Tube not received in the lab yet - results cannot be entered."/>
+                <separator/>
                 <filter name="state_draft" string="Draft" domain="[('state','=','draft')]"/>
                 <filter name="state_in_progress" string="In Progress" domain="[('state','=','in_progress')]"/>
                 <filter name="state_verified" string="Verified" domain="[('state','=','verified')]"/>
@@ -39,6 +61,7 @@
                 <filter name="cat_pathology" string="Pathology" domain="[('category','=','pathology')]"/>
                 <separator/>
                 <filter name="group_state" string="State" context="{'group_by': 'state'}"/>
+                <filter name="group_sample_state" string="Sample Status" context="{'group_by': 'sample_state'}"/>
                 <filter name="group_category" string="Category" context="{'group_by': 'category'}"/>
             </search>
         </field>
@@ -87,6 +110,8 @@
                             <field name="doctor_id"/>
                             <field name="reported_by_id"/>
                             <field name="specimen_id" options="{'no_create': True}"/>
+                            <field name="sample_state" readonly="1"/>
+                            <field name="sample_received" readonly="1"/>
                             <field name="bill_register_id" readonly="1"/>
                             <field name="sample_collected_at"/>
                             <field name="reported_at"/>
@@ -194,7 +219,7 @@
         <field name="res_model">examination.result</field>
         <field name="view_mode">list,form</field>
         <field name="search_view_id" ref="examination_result_search_view"/>
-        <field name="context">{'search_default_state_in_progress': 1, 'search_default_state_draft': 1}</field>
+        <field name="context">{'search_default_ready_entry': 1}</field>
     </record>
 
 </odoo>

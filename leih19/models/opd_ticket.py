@@ -6,12 +6,16 @@ class OpdTicket(models.Model):
     _description = 'OpdTicket'
 
     name = fields.Char('Name')
-    mobile = fields.Char(string='Mobile', store=False)
-    patient_id = fields.Char(related='patient_name.patient_id', string='Patient Id', readonly=True)
     patient_name = fields.Many2one('patient.info', string='Patient Name')
-    address = fields.Char('Address', store=False)
-    age = fields.Char('Age', store=False)
-    sex = fields.Char('Sex', store=False)
+    patient_id = fields.Char(related='patient_name.patient_id', string='Patient Id', readonly=True)
+
+    # Patient details mirrored from the selected patient. They used to be plain
+    # non-stored Char fields that nothing ever filled in, so the form, the list
+    # and the OPD ticket printout all showed them empty.
+    mobile = fields.Char(string='Mobile', compute='_compute_patient_details')
+    address = fields.Char('Address', compute='_compute_patient_details')
+    age = fields.Char('Age', compute='_compute_patient_details')
+    sex = fields.Char('Sex', compute='_compute_patient_details')
     already_collected = fields.Boolean('Money Collected', default=False)
     date = fields.Date('Date', readonly=True, default=None)
     ref_doctors = fields.Many2one('doctors.profile', string='Reffered by')
@@ -19,10 +23,20 @@ class OpdTicket(models.Model):
     user_id = fields.Many2one('res.users', string='Assigned to', select=True, track_visibility='onchange')
     state = fields.Selection([('confirmed', 'Confirmed'), ('cancelled', 'Cancelled')], 'Status', default='confirmed', readonly=True)
     total = fields.Float(string='Total')
-    with_doctor_total = fields.Float(string='with_doctor_total')
+    with_doctor_total = fields.Float(string='Total with Doctor Fee')
 
 
     prescription_count = fields.Integer(string='Prescription Count', compute='_compute_prescription_count')
+
+    @api.depends('patient_name')
+    def _compute_patient_details(self):
+        sex_labels = dict(self.env['patient.info']._fields['sex'].selection)
+        for rec in self:
+            patient = rec.patient_name
+            rec.mobile = patient.mobile or False
+            rec.address = patient.address or False
+            rec.age = patient.age or False
+            rec.sex = sex_labels.get(patient.sex, patient.sex) or False
 
     def _compute_prescription_count(self):
         Prescription = self.env['doctor.prescription']

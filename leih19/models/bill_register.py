@@ -445,6 +445,11 @@ class BillRegister(models.Model):
         Result = self.env['examination.result']
 
         existing_entry_ids = set(self.lab_result_ids.mapped('entry_id').ids)
+        # Consumables (test tube, bed sheet, ...) are billed but never reported on:
+        # anything configured as somebody's supporting item is excluded, whether it
+        # was pulled in automatically or typed on the bill by hand.
+        support_entry_ids = set(self.env['examination.support.item'].search(
+            []).mapped('support_entry_id').ids)
 
         # Group test lines that share a tube
         groups = {}            # key -> list of (entry, doctor)
@@ -456,6 +461,8 @@ class BillRegister(models.Model):
                 continue
             # Only diagnostic/lab items produce lab results & specimens.
             if (entry.service_group or 'diagnostic') != 'diagnostic':
+                continue
+            if line.is_support_line or entry.lab_not_required or entry.id in support_entry_ids:
                 continue
             if entry.category in ('radiology', 'descriptive') or not entry.tube_color_id:
                 direct_lines.append((entry, line.assign_doctors))
@@ -503,6 +510,21 @@ class BillRegister(models.Model):
             'domain': [('bill_register_id', '=', self.id)],
             'context': {'default_bill_register_id': self.id, 'default_patient_id': self.patient_name.id},
         }
+
+    def amount_in_words(self, amount=None):
+        """Spell out an amount in the company currency, e.g. 'Three Thousand Taka'.
+
+        Defaults to the paid amount, which is what the counter slip prints."""
+        self.ensure_one()
+        currency = self.env.company.currency_id
+        if not currency:
+            return ''
+        return currency.amount_to_text(self.paid if amount is None else amount)
+
+    def action_print_bill_slip(self):
+        """Counter slip / patient copy of this bill."""
+        self.ensure_one()
+        return self.env.ref('leih19.action_report_bill_register_slip').report_action(self)
 
     def action_print_tube_stickers(self):
         """Print tube stickers for all specimens of this bill."""

@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Counter slip: same layout as the legacy LEIH bill print
+         (~190 x 230 mm, no company header, Code128 of the bill no). -->
+    <record id="paperformat_bill_slip" model="report.paperformat">
+        <field name="name">Bill Slip 190x230</field>
+        <field name="format">custom</field>
+        <field name="page_width">190</field>
+        <field name="page_height">230</field>
+        <field name="orientation">Portrait</field>
+        <field name="margin_top">8</field>
+        <field name="margin_bottom">8</field>
+        <field name="margin_left">10</field>
+        <field name="margin_right">10</field>
+        <field name="header_spacing">0</field>
+        <field name="header_line" eval="False"/>
+        <field name="dpi">90</field>
+    </record>
+
+    <record id="action_report_bill_register_slip" model="ir.actions.report">
+        <field name="name">Bill Slip</field>
+        <field name="model">bill.register</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">leih19.report_bill_register_slip</field>
+        <field name="report_file">leih19.report_bill_register_slip</field>
+        <field name="print_report_name">'Bill - %s' % (object.name or object.patient_name.name)</field>
+        <field name="paperformat_id" ref="paperformat_bill_slip"/>
+        <field name="binding_model_id" ref="leih19.model_bill_register"/>
+        <field name="binding_type">report</field>
+    </record>
+
+    <template id="report_bill_register_slip_style">
+        <style>
+            /* Bootstrap leaves table cells with border-style:solid + width:0, which
+               wkhtmltopdf still paints as a 1px grid - kill it before styling. */
+            .bs table, .bs thead, .bs tbody, .bs tr, .bs td, .bs th { border:0 none; }
+            .bs { font-family:Arial, Helvetica, sans-serif; font-size:12px; color:#000; }
+            .bs .date_line { text-align:right; font-size:11px; margin:0 0 6px 0; }
+            .bs .bill_no { font-size:13px; margin:0; }
+            .bs .bill_no b { letter-spacing:.3px; }
+            .bs .barcode_box { text-align:right; margin:6px 0 8px 0; }
+            .bs table.info { width:100%; border-collapse:collapse; margin-bottom:10px; }
+            .bs table.info td { padding:1px 0; vertical-align:top; font-size:12px; }
+            .bs table.items { width:100%; border-collapse:collapse; margin:0 0 10px 0; }
+            .bs table.items th { border-top:1px solid #000; border-bottom:1px solid #000;
+                padding:4px 3px; text-align:left; font-size:12px; }
+            .bs table.items td { padding:3px; font-size:12px; vertical-align:top; }
+            .bs table.items tr.last td { border-bottom:1px solid #000; }
+            .bs .num { text-align:right; }
+            .bs .ctr { text-align:center; }
+            .bs table.foot { width:100%; border-collapse:collapse; }
+            .bs table.foot td.pay { width:50%; vertical-align:top; font-size:12px; }
+            .bs table.foot td.tot { width:50%; vertical-align:top; }
+            .bs table.tot_tbl { width:100%; border-collapse:collapse; }
+            .bs table.tot_tbl td { padding:1px 0; font-size:12px; }
+            .bs table.tot_tbl td.lbl { text-align:right; font-weight:bold; padding-right:6px; }
+            .bs .words { margin-top:10px; font-size:12px; }
+            .bs .made_by { font-size:12px; }
+            .bs .deg { font-size:8px; }
+        </style>
+    </template>
+
+    <template id="report_bill_register_slip">
+        <t t-call="web.basic_layout">
+            <t t-foreach="docs" t-as="o">
+                <div class="page bs"
+                     t-att-style="not o_first and 'page-break-before: always;' or ''">
+                    <t t-call="leih19.report_bill_register_slip_style"/>
+
+                    <div class="date_line">Date:
+                        <span t-field="o.date" t-options="{'widget': 'datetime', 'format': 'dd/MM/yyyy HH:mm:ss'}"/>
+                    </div>
+
+                    <p class="bill_no"><b>Bill No: </b><span t-out="o.name or '-'"/></p>
+
+                    <div class="barcode_box">
+                        <img t-if="o.name and o.name != 'New'"
+                             t-att-src="'/report/barcode/Code128/%s' % o.name"
+                             style="width:60mm; height:14mm;"/>
+                    </div>
+
+                    <table class="info">
+                        <tr>
+                            <td style="width:34%"><b>Patient ID: </b><span t-out="o.patient_id or '-'"/></td>
+                            <td style="width:38%"><b>Name: </b><span t-out="o.patient_name.name or '-'"/></td>
+                            <td style="width:28%" class="num"><b>Age: </b><span t-out="o.age or '-'"/></td>
+                        </tr>
+                        <tr>
+                            <td><b>Address: </b><span t-out="o.address or '-'"/></td>
+                            <td><b>Sex: </b><span t-out="o.sex or '-'"/></td>
+                            <td class="num"><b>Mobile: </b><span t-out="o.mobile or '-'"/></td>
+                        </tr>
+                        <tr>
+                            <td colspan="3"><b>Referred By: </b>
+                                <span t-out="o.ref_doctors.designation or ''"/>
+                                <span t-out="o.ref_doctors.name or '-'"/>
+                                <span class="deg" t-out="o.ref_doctors.degree or ''"/>
+                            </td>
+                        </tr>
+                    </table>
+
+                    <table class="items">
+                        <thead>
+                            <tr>
+                                <th style="width:8%">S.N.</th>
+                                <th style="width:46%">Item Name</th>
+                                <th style="width:12%" class="num">Price</th>
+                                <th style="width:14%" class="num">Amount</th>
+                                <th style="width:20%" class="num">Delivery</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-foreach="o.bill_register_line_id" t-as="line">
+                                <tr t-att-class="line_last and 'last' or ''">
+                                    <td><span t-out="line_index + 1"/></td>
+                                    <td><span t-out="line.name.name or '-'"/></td>
+                                    <td class="num"><span t-out="'%g' % (line.price or 0)"/></td>
+                                    <td class="num"><span t-out="'%g' % (line.total_amount or 0)"/></td>
+                                    <td class="num">
+                                        <span t-if="line.delivery_date" t-field="line.delivery_date"
+                                              t-options="{'format': 'dd/MM/yyyy'}"/>
+                                    </td>
+                                </tr>
+                            </t>
+                            <tr t-if="not o.bill_register_line_id" class="last">
+                                <td colspan="5" class="ctr">No items on this bill.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <table class="foot">
+                        <tr>
+                            <td class="pay">
+                                <p style="margin:0 0 4px 0;"><b>Payment Details</b></p>
+                                <t t-foreach="o.bill_register_payment_line_id" t-as="p">
+                                    <div><span t-out="p.type or 'Payment'"/>:
+                                        <span t-out="'%.1f' % (p.amount or 0)"/></div>
+                                </t>
+                                <div t-if="not o.bill_register_payment_line_id">No payment yet.</div>
+                            </td>
+                            <td class="tot">
+                                <table class="tot_tbl">
+                                    <tr>
+                                        <td class="lbl">Sub Total:</td>
+                                        <td><span t-out="'%.1f' % (o.total_without_discount or 0)"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="lbl">Referral Discount(%):</td>
+                                        <td><span t-out="'%.1f' % (o.doctors_discounts or 0)"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="lbl">Others Discount:</td>
+                                        <td><span t-out="'%.1f' % (o.other_discount or 0)"/></td>
+                                    </tr>
+                                    <tr t-if="o.service_charge">
+                                        <td class="lbl">Service Charge:</td>
+                                        <td><span t-out="'%.1f' % o.service_charge"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="lbl">Grand Total:</td>
+                                        <td><span t-out="'%.1f' % (o.grand_total or 0)"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="lbl">Paid:</td>
+                                        <td><span t-out="'%.1f' % (o.paid or 0)"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="lbl">Due Amount:</td>
+                                        <td><span t-out="'%.1f' % (o.due or 0)"/></td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+
+                    <p class="words"><b>Paid(In Words): </b><span t-out="o.amount_in_words()"/></p>
+                    <p class="made_by">Created By: <span t-out="o.user_id.name or ''"/></p>
+                </div>
+            </t>
+        </t>
+    </template>
+
+</odoo>

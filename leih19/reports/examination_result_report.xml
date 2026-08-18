@@ -30,6 +30,10 @@
          bundles are not loaded in this report, so all styling lives here). -->
     <template id="report_examination_result_style">
         <style>
+            /* wkhtmltopdf paints bootstrap's zero-width solid cell borders, so
+               reset them here and let the rules below draw the real ones. */
+            .lp-page table, .lp-page thead, .lp-page tbody, .lp-page tr,
+            .lp-page td, .lp-page th { border:0 none; }
             .lp-page { width:190mm; margin:0 auto; font-family:Arial, sans-serif; font-size:13px; color:#000; }
             .lp-head { width:100%; border-collapse:collapse; border:2px solid #000; }
             .lp-head td { border:1px solid #cfcfcf; padding:7px 10px; font-size:13.5px; line-height:1.4; }
@@ -154,7 +158,7 @@
     <!-- Main report                                                    -->
     <!-- ============================================================= -->
     <template id="report_examination_result">
-        <t t-call="web.html_container">
+        <t t-call="web.basic_layout">
             <t t-call="leih19.report_examination_result_style"/>
             <!-- Group results into pages: same department + tube color share a
                  page; 'Individual' tests get their own page. -->

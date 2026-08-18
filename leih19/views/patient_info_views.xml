@@ -57,9 +57,28 @@
             </form>
         </field>
     </record>
+    <record id="patient_info_search_view" model="ir.ui.view">
+        <field name="name">patient_info.search</field>
+        <field name="model">patient.info</field>
+        <field name="arch" type="xml">
+            <search string="Patients">
+                <field name="name" string="Patient"
+                       filter_domain="['|', '|', ('name', 'ilike', self), ('mobile', 'ilike', self), ('patient_id', 'ilike', self)]" />
+                <field name="mobile" string="Mobile / Phone" />
+                <field name="patient_id" />
+                <field name="address" />
+                <separator />
+                <filter string="Male" name="male" domain="[('sex', '=', 'male')]" />
+                <filter string="Female" name="female" domain="[('sex', '=', 'female')]" />
+                <separator />
+                <filter string="Group by Sex" name="group_sex" context="{'group_by': 'sex'}" />
+            </search>
+        </field>
+    </record>
     <record id="patient_info_action" model="ir.actions.act_window">
         <field name="name">Patient Information</field>
         <field name="res_model">patient.info</field>
         <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="patient_info_search_view" />
     </record>
 </odoo>

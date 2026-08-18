@@ -11,32 +11,43 @@
     </record>
 
     <template id="report_patient_id_card">
-        <t t-call="web.html_container">
+        <t t-call="web.basic_layout">
+            <style>
+                /* Report assets pull in bootstrap; keep its paragraph spacing from
+                   pushing the details out of the fixed-size card. */
+                .pidcard table, .pidcard thead, .pidcard tbody, .pidcard tr, .pidcard td
+                    { border:0 none !important; }
+                .pidcard p { margin:0 0 3px 0; line-height:1.25; }
+                .pidcard h3 { font-size:16px; }
+            </style>
             <t t-foreach="docs" t-as="o">
-                <div style="width:340px; height:210px; border:2px solid #000; padding:10px; font-family:Arial;">
+                <div class="pidcard" style="width:340px; height:210px; border:2px solid #000; padding:10px; font-family:Arial;">
                     <h3 style="text-align:center; margin:0 0 8px 0;">Patient ID Card</h3>
 
-                    <div style="display:flex;">
-                        <div style="width:90px;">
-                            <t t-if="o.photo">
-                                <img t-att-src="image_data_uri(o.photo)"
-                                     style="width:80px; height:90px; object-fit:cover; border:1px solid #000;"/>
-                            </t>
-                            <t t-else="">
-                                <div style="width:80px; height:90px; border:1px solid #000; text-align:center; line-height:90px;">
-                                    No Photo
-                                </div>
-                            </t>
-                        </div>
-
-                        <div style="font-size:13px;">
-                            <p><strong>ID:</strong> <span t-field="o.patient_id"/></p>
-                            <p><strong>Name:</strong> <span t-field="o.name"/></p>
-                            <p><strong>Age:</strong> <span t-field="o.age"/></p>
-                            <p><strong>Sex:</strong> <span t-field="o.sex"/></p>
-                            <p><strong>Print Date:</strong> <span t-esc="datetime.datetime.now().strftime('%d-%m-%Y')"/></p>
-                        </div>
-                    </div>
+                    <!-- wkhtmltopdf's Qt WebKit has no flexbox: a table keeps the
+                         photo and the details side by side. -->
+                    <table style="width:100%; border-collapse:collapse;">
+                        <tr>
+                            <td style="width:95px; vertical-align:top; border:0 none;">
+                                <t t-if="o.photo">
+                                    <img t-att-src="image_data_uri(o.photo)"
+                                         style="width:80px; height:90px; object-fit:cover; border:1px solid #000;"/>
+                                </t>
+                                <t t-else="">
+                                    <div style="width:80px; height:90px; border:1px solid #000; text-align:center; line-height:90px;">
+                                        No Photo
+                                    </div>
+                                </t>
+                            </td>
+                            <td style="vertical-align:top; font-size:12px; border:0 none;">
+                                <p><strong>ID:</strong> <span t-field="o.patient_id"/></p>
+                                <p><strong>Name:</strong> <span t-field="o.name"/></p>
+                                <p><strong>Age:</strong> <span t-field="o.age"/></p>
+                                <p><strong>Sex:</strong> <span t-field="o.sex"/></p>
+                                <p><strong>Print Date:</strong> <span t-esc="datetime.datetime.now().strftime('%d-%m-%Y')"/></p>
+                            </td>
+                        </tr>
+                    </table>
 
                     <div style="text-align:center; margin-top:8px;">
                         <img t-att-src="'/report/barcode/Code128/%s' % o.patient_id"

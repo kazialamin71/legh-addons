@@ -9,9 +9,11 @@
             <field name="paid" position="attributes">
                 <attribute name="readonly">1</attribute>
             </field>
-            <field name="paid" position="after">
+            <!-- The advance input belongs with the payment method, not in the
+                 read-only totals column where ``paid`` now lives. -->
+            <xpath expr="//group[@name='payment_details']" position="inside">
                 <field name="down_payment" readonly="state != 'pending'"/>
-            </field>
+            </xpath>
 
             <button name="calculate_bill" position="after">
                 <button string="Calculate Payable" type="object"

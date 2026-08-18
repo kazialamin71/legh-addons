@@ -48,6 +48,8 @@
                 <header>
                     <button name="bill_confirm" type="object" string="Confirm"
                             class="oe_highlight" invisible="state != 'pending'"/>
+                    <button name="action_print_bill_slip" type="object" string="Print Bill"
+                            invisible="state == 'pending'"/>
                     <button name="action_generate_lab_items" type="object" string="Generate Lab Items"
                             invisible="state != 'confirmed'"
                             help="Create specimens and lab results from this bill's lab tests. Safe to re-run."/>
@@ -75,45 +77,33 @@
                             <field name="lab_result_count" widget="statinfo" string="Lab Results"/>
                         </button>
                     </div>
-                    <group string="Information">
-                        <group>
-                            <field name="name" readonly="1" />
-                            <field name="patient_name" />
-                            <field name="address" />
-                            <field name="sex" />
-                            <field name="ref_doctors" />
-                            <field name="corporate_client_id" />
-                            <field name="scheme_discount_total" readonly="1" />
-                            <field name="doctors_discounts" />
-                            <field name="doctor_discount_amt" readonly="1" />
-                            <field name="after_discount" readonly="1" />
-                            <field name="total" readonly="1" />
-                            <field name="down_payment" readonly="state != 'pending'" />
-                            <field name="paid" readonly="1" />
-                            <field name="type" />
-                            <field name="bank_name" />
-                            <field name="service_charge" readonly="1" />
-                            <field name="account_number" />
-                            <field name="date" readonly="1" />
-                            <field name="old_journal" />
-                            <field name="is_applied_to_admission" />
+                    <div class="oe_title">
+                        <label for="name" string="Bill No"/>
+                        <h1><field name="name" readonly="1" class="oe_inline"/></h1>
+                    </div>
+                    <group>
+                        <group string="Patient" name="patient_info">
+                            <field name="patient_name"
+                                   context="{'patient_display_contact': 1}"
+                                   options="{'no_quick_create': True}"
+                                   placeholder="Search by name, mobile or patient id..."/>
+                            <field name="patient_id" readonly="1"/>
+                            <field name="mobile" readonly="1"/>
+                            <field name="age" readonly="1"/>
+                            <field name="sex" readonly="1"/>
+                            <field name="address" readonly="1"/>
                         </group>
-                        <group>
-                            <field name="mobile" />
-                            <field name="patient_id" readonly="1" />
-                            <field name="age" />
-                            <field name="diagonostic_bill" />
-                            <field name="referral" />
-                            <field name="other_discount" />
-                            <field name="total_without_discount" readonly="1" />
-                            <field name="grand_total" readonly="1" />
-                            <field name="due" readonly="1" />
-                            <field name="card_no" />
-                            <field name="payment_type" />
-                            <field name="to_be_paid" readonly="1" />
-                            <field name="discount_remarks" />
-                            <field name="user_id" />
-                            <field name="general_admission_id" />
+                        <group string="Bill Details" name="bill_info">
+                            <field name="date" readonly="1"/>
+                            <field name="ref_doctors"
+                                   options="{'no_quick_create': True, 'no_create_edit': True}"/>
+                            <field name="referral"/>
+                            <field name="corporate_client_id"/>
+                            <field name="user_id"/>
+                            <field name="diagonostic_bill"/>
+                            <field name="general_admission_id"/>
+                            <field name="is_applied_to_admission"/>
+                            <field name="old_journal"/>
                         </group>
                     </group>
                     <notebook>
@@ -169,6 +159,39 @@
                             </field>
                         </page>
                     </notebook>
+                    <group name="bill_bottom" col="6" class="mt-3">
+                        <group colspan="4" name="discount_and_payment">
+                            <group string="Discounts" name="discounts">
+                                <label for="doctors_discounts"/>
+                                <div class="o_row">
+                                    <field name="doctors_discounts" class="oe_inline"/>
+                                    <span class="oe_inline">%</span>
+                                </div>
+                                <field name="doctor_discount_amt" readonly="1"/>
+                                <field name="scheme_discount_total" readonly="1"/>
+                                <field name="other_discount"/>
+                                <field name="discount_remarks" placeholder="Reason for the discount..."/>
+                            </group>
+                            <group string="Payment Details" name="payment_details">
+                                <field name="payment_type"/>
+                                <field name="type"/>
+                                <field name="bank_name" invisible="type != 'bank'"/>
+                                <field name="card_no" invisible="type != 'bank'"/>
+                                <field name="account_number" invisible="type != 'bank'"/>
+                                <field name="down_payment" readonly="state != 'pending'"/>
+                            </group>
+                        </group>
+                        <group class="oe_subtotal_footer" colspan="2" name="bill_totals">
+                            <field name="total_without_discount" readonly="1"/>
+                            <field name="after_discount" readonly="1"/>
+                            <field name="total" readonly="1"/>
+                            <field name="service_charge" readonly="1" invisible="service_charge == 0"/>
+                            <field name="grand_total" readonly="1" class="oe_subtotal_footer_separator"/>
+                            <field name="to_be_paid" readonly="1" invisible="service_charge == 0"/>
+                            <field name="paid" readonly="1"/>
+                            <field name="due" readonly="1" class="oe_subtotal_footer_separator"/>
+                        </group>
+                    </group>
                 </sheet>
             </form>
         </field>
@@ -177,14 +200,21 @@
         <field name="name">bill.register.search</field>
         <field name="model">bill.register</field>
         <field name="arch" type="xml">
-            <search>
-                <field name="name" />
-                <field name="patient_name" />
+            <search string="Bill Register">
+                <!-- One box that matches a patient by name, mobile number or patient id. -->
+                <field name="patient_name" string="Patient / Mobile"
+                       filter_domain="['|', '|', ('patient_name', 'ilike', self), ('mobile', 'ilike', self), ('patient_id', 'ilike', self)]" />
+                <field name="mobile" string="Mobile / Phone" />
+                <field name="patient_id" string="Patient Id" />
+                <field name="name" string="Bill No" />
                 <field name="ref_doctors" />
                 <field name="state" />
                 <filter string="Pending" name="pending" domain="[('state','=','pending')]" />
                 <filter string="Confirmed" name="confirmed" domain="[('state','=','confirmed')]" />
                 <filter string="Cancelled" name="cancelled" domain="[('state','=','cancelled')]" />
+                <separator />
+                <filter string="With Due" name="with_due" domain="[('due','&gt;',0)]" />
+                <filter string="Today" name="today" domain="[('date','&gt;=','today'),('date','&lt;','today +1d')]" />
                 <separator />
                 <filter string="Group by Patient" name="group_patient" context="{'group_by':'patient_name'}" />
                 <filter string="Group by Doctor" name="group_doctor" context="{'group_by':'ref_doctors'}" />

@@ -1,4 +1,5 @@
-from odoo import api, fields, models
+from odoo import _, api, fields, models
+from odoo.exceptions import UserError
 
 
 class ExaminationResult(models.Model):
@@ -44,6 +45,23 @@ class ExaminationResult(models.Model):
         'bill.register', string='Bill', ondelete='set null',
         help='Bill this lab result belongs to (set when auto-generated from bill confirmation).',
     )
+
+    sample_state = fields.Selection(
+        [('no_sample', 'No Sample Needed'),
+         ('awaiting', 'Awaiting Collection'),
+         ('collected', 'Collected'),
+         ('received', 'Received in Lab'),
+         ('processed', 'Sample Processed'),
+         ('cancelled', 'Sample Cancelled')],
+        string='Sample Status', compute='_compute_sample_state', store=True,
+        help='Where the physical sample is. Tests that need no tube (radiology, '
+             'descriptive) are always "No Sample Needed".')
+    sample_collected = fields.Boolean(
+        'Sample Collected', compute='_compute_sample_state', store=True,
+        help='The tube for this test has been collected from the patient.')
+    sample_received = fields.Boolean(
+        'Sample in Lab', compute='_compute_sample_state', store=True,
+        help='The tube for this test has been received in the lab - results can be entered.')
 
     sample_collected_at = fields.Datetime('Sample Collected At')
     reported_at = fields.Datetime('Reported At', default=fields.Datetime.now)
@@ -105,6 +123,19 @@ class ExaminationResult(models.Model):
         for rec in self:
             rec.has_antibiogram = rec.category == 'microbiology' and bool(rec.antibiogram_line_ids)
 
+    @api.depends('specimen_id', 'specimen_id.state')
+    def _compute_sample_state(self):
+        mapping = {'draft': 'awaiting', 'collected': 'collected',
+                   'received': 'received', 'processed': 'processed',
+                   'cancelled': 'cancelled'}
+        for rec in self:
+            if not rec.specimen_id:
+                rec.sample_state = 'no_sample'
+            else:
+                rec.sample_state = mapping.get(rec.specimen_id.state, 'awaiting')
+            rec.sample_collected = rec.sample_state in ('collected', 'received', 'processed')
+            rec.sample_received = rec.sample_state in ('received', 'processed')
+
     @api.onchange('entry_id')
     def _onchange_entry_id(self):
         for rec in self:
@@ -158,6 +189,14 @@ class ExaminationResult(models.Model):
                     vals['narrative_html'] = first_template.body_html or ''
         return super().create(vals_list)
 
+    def write(self, vals):
+        res = super().write(vals)
+        # A tube is done when every test on it is done - and re-opens if one of
+        # them is sent back for re-entry.
+        if 'state' in vals or 'specimen_id' in vals:
+            self.specimen_id._sync_state_from_results()
+        return res
+
     def _report_page_groups(self):
         """Group results into printed pages. Results that share the same
         department and tube color print on ONE page; a test flagged
@@ -198,7 +237,20 @@ class ExaminationResult(models.Model):
         return default[:1].id if default else False
 
     # --- workflow buttons ---
+    # Sample states that mean the tube is not in the lab yet, so no result may
+    # be typed against it. Tube-less tests ('no_sample') are never blocked.
+    _BLOCKING_SAMPLE_STATES = ('awaiting', 'collected', 'cancelled')
+
     def action_start(self):
+        for rec in self:
+            if rec.sample_state in rec._BLOCKING_SAMPLE_STATES:
+                label = dict(rec._fields['sample_state'].selection)[rec.sample_state]
+                raise UserError(_(
+                    'Specimen %(specimen)s for %(test)s is "%(status)s". Receive the '
+                    'tube in the lab before entering results.',
+                    specimen=rec.specimen_id.name or '-',
+                    test=rec.entry_id.name or rec.name,
+                    status=label))
         self.write({'state': 'in_progress'})
 
     def action_verify(self):

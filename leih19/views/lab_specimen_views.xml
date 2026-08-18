@@ -108,22 +108,50 @@
         </field>
     </record>
 
+    <!-- Sample Collection screen: draft tubes, so the only bulk step is collection. -->
+    <record id="lab_specimen_tree_view_collection" model="ir.ui.view">
+        <field name="name">lab.specimen.list.collection</field>
+        <field name="model">lab.specimen</field>
+        <field name="inherit_id" ref="lab_specimen_tree_view"/>
+        <field name="mode">primary</field>
+        <field name="priority">20</field>
+        <field name="arch" type="xml">
+            <list position="inside">
+                <header>
+                    <button name="action_collect" type="object" string="Mark Collected"
+                            class="btn-primary"/>
+                </header>
+            </list>
+        </field>
+    </record>
+
+    <!-- Lab Specimens screen: tubes are already collected, so the bulk step is reception. -->
+    <record id="lab_specimen_tree_view_reception" model="ir.ui.view">
+        <field name="name">lab.specimen.list.reception</field>
+        <field name="model">lab.specimen</field>
+        <field name="inherit_id" ref="lab_specimen_tree_view"/>
+        <field name="mode">primary</field>
+        <field name="priority">20</field>
+        <field name="arch" type="xml">
+            <list position="inside">
+                <header>
+                    <button name="action_receive" type="object" string="Receive in Lab"
+                            class="btn-primary"/>
+                </header>
+            </list>
+        </field>
+    </record>
+
     <record id="lab_specimen_action" model="ir.actions.act_window">
         <field name="name">Lab Specimens</field>
         <field name="res_model">lab.specimen</field>
         <field name="view_mode">list,form</field>
         <field name="search_view_id" ref="lab_specimen_search_view"/>
+        <field name="view_ids" eval="[(5, 0, 0),
+            (0, 0, {'sequence': 1, 'view_mode': 'list', 'view_id': ref('lab_specimen_tree_view_reception')}),
+            (0, 0, {'sequence': 2, 'view_mode': 'form', 'view_id': ref('lab_specimen_form_view')})]"/>
     </record>
 
-    <!-- Bulk "Mark Collected" from the Action menu on selected specimens -->
-    <record id="action_lab_specimen_mark_collected" model="ir.actions.server">
-        <field name="name">Mark Collected</field>
-        <field name="model_id" ref="model_lab_specimen"/>
-        <field name="binding_model_id" ref="model_lab_specimen"/>
-        <field name="binding_view_types">list</field>
-        <field name="state">code</field>
-        <field name="code">records.filtered(lambda s: s.state == 'draft').action_collect()</field>
-    </record>
 
     <!-- Sample Collection worklist: tubes awaiting collection -->
     <record id="action_lab_sample_collection" model="ir.actions.act_window">
@@ -133,6 +161,9 @@
         <field name="search_view_id" ref="lab_specimen_search_view"/>
         <field name="domain">[('state', '=', 'draft')]</field>
         <field name="context">{'search_default_group_dept': 1}</field>
+        <field name="view_ids" eval="[(5, 0, 0),
+            (0, 0, {'sequence': 1, 'view_mode': 'list', 'view_id': ref('lab_specimen_tree_view_collection')}),
+            (0, 0, {'sequence': 2, 'view_mode': 'form', 'view_id': ref('lab_specimen_form_view')})]"/>
     </record>
 
 </odoo>
