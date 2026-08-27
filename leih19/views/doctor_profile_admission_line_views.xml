@@ -5,12 +5,12 @@
         <field name="model">doctor.profile.admission.line</field>
         <field name="arch" type="xml">
             <list>
-                <field name="name" />
                 <field name="doctor_profile_id" />
                 <field name="hospital_doctor_line_item" />
-                <field name="doctor_visit_qty" />
+                <field name="visit_datetime" />
                 <field name="visit_fee" />
-                <field name="total_amount" />
+                <field name="doctor_visit_qty" optional="hide" />
+                <field name="total_amount" sum="Total" />
             </list>
         </field>
     </record>
@@ -22,14 +22,15 @@
                 <sheet>
                     <group string="Information">
                         <group>
-                            <field name="name" />
-                            <field name="hospital_doctor_line_item" />
+                            <field name="doctor_profile_id" />
+                            <field name="visit_datetime" />
                             <field name="visit_fee" />
                         </group>
                         <group>
-                            <field name="doctor_profile_id" />
+                            <field name="hospital_doctor_line_item" />
                             <field name="doctor_visit_qty" />
                             <field name="total_amount" />
+                            <field name="name" />
                         </group>
                     </group>
                 </sheet>

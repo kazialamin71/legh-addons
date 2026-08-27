@@ -11,6 +11,7 @@
                 <field name="end_time" widget="float_time"/>
                 <field name="capacity"/>
                 <field name="consultation_fee"/>
+                <field name="room_location" optional="show"/>
             </list>
         </field>
     </record>
@@ -33,6 +34,8 @@
                             <field name="capacity"/>
                             <field name="consultation_fee"/>
                             <field name="consultation_entry_id"/>
+                            <field name="room_location"
+                                   placeholder="e.g. Extension Wing-2, 10th Floor-EW2, 1018"/>
                         </group>
                     </group>
                     <group string="Days of Week">

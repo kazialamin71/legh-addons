@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Narrative report templates for imaging and descriptive studies.
+
+    A test with `report_layout = 'narrative'` prints `narrative_html` from the
+    result. Free-typing that body for every scan is how reports drift: one
+    sonologist reports liver span, the next does not. These templates give each
+    study a fixed skeleton with the measurements spelled out, so the operator
+    fills blanks instead of recalling the structure.
+
+    Templates are attached to tests via `report_template_ids`; the technician
+    picks one on the result and edits the loaded copy.
+-->
+<odoo noupdate="1">
+
+    <record id="tpl_usg_whole_abdomen" model="examination.report.template">
+        <field name="name">USG of Whole Abdomen</field>
+        <field name="report_type">descriptive</field>
+        <field name="department" ref="dept_usg"/>
+        <field name="body_html" type="html">
+            <div>
+                <p><b>LIVER:</b> Normal in size (span ____ cm), shape and echotexture. No focal lesion. Intrahepatic biliary channels are not dilated. Portal vein measures ____ mm.</p>
+                <p><b>GALL BLADDER:</b> Well distended, wall thickness ____ mm. No calculus or sludge seen.</p>
+                <p><b>COMMON BILE DUCT:</b> Not dilated, measures ____ mm.</p>
+                <p><b>PANCREAS:</b> Normal in size and echotexture. Pancreatic duct is not dilated.</p>
+                <p><b>SPLEEN:</b> Normal in size (____ cm) and echotexture. No focal lesion.</p>
+                <p><b>RIGHT KIDNEY:</b> Measures ____ x ____ cm. Normal cortical echogenicity, corticomedullary differentiation maintained. No calculus or hydronephrosis.</p>
+                <p><b>LEFT KIDNEY:</b> Measures ____ x ____ cm. Normal cortical echogenicity, corticomedullary differentiation maintained. No calculus or hydronephrosis.</p>
+                <p><b>URINARY BLADDER:</b> Well distended, wall thickness normal. No calculus or mass. Pre-void volume ____ mL, post-void residue ____ mL.</p>
+                <p><b>PROSTATE / UTERUS &amp; ADNEXA:</b> ____</p>
+                <p><b>OTHERS:</b> No free fluid in the peritoneal cavity. No significant lymphadenopathy.</p>
+                <p><b>IMPRESSION:</b> ____</p>
+            </div>
+        </field>
+    </record>
+
+    <record id="tpl_usg_upper_abdomen" model="examination.report.template">
+        <field name="name">USG of Upper Abdomen / HBS</field>
+        <field name="report_type">descriptive</field>
+        <field name="department" ref="dept_usg"/>
+        <field name="body_html" type="html">
+            <div>
+                <p><b>LIVER:</b> Size ____ cm. Echotexture ____. No focal lesion. Intrahepatic biliary channels not dilated.</p>
+                <p><b>GALL BLADDER:</b> Well distended. Wall thickness ____ mm. No calculus / sludge.</p>
+                <p><b>COMMON BILE DUCT:</b> ____ mm, not dilated.</p>
+                <p><b>PANCREAS:</b> Normal in size and echotexture.</p>
+                <p><b>SPLEEN:</b> ____ cm, normal echotexture.</p>
+                <p><b>OTHERS:</b> No free fluid. No para-aortic lymphadenopathy.</p>
+                <p><b>IMPRESSION:</b> ____</p>
+            </div>
+        </field>
+    </record>
+
+    <record id="tpl_usg_kub_prostate" model="examination.report.template">
+        <field name="name">USG of KUB, Prostate &amp; PVR</field>
+        <field name="report_type">descriptive</field>
+        <field name="department" ref="dept_usg"/>
+        <field name="body_html" type="html">
+            <div>
+                <p><b>RIGHT KIDNEY:</b> Measures ____ x ____ cm. Cortical thickness ____ mm. No calculus or hydronephrosis.</p>
+                <p><b>LEFT KIDNEY:</b> Measures ____ x ____ cm. Cortical thickness ____ mm. No calculus or hydronephrosis.</p>
+                <p><b>URETERS:</b> Not dilated on either side.</p>
+                <p><b>URINARY BLADDER:</b> Well distended, wall thickness ____ mm. No calculus, mass or diverticulum.</p>
+                <p><b>PROSTATE:</b> Measures ____ x ____ x ____ cm, volume ____ mL. Outline regular, echotexture ____. No median lobe enlargement.</p>
+                <p><b>BLADDER VOLUMES:</b> Pre-void ____ mL, Post-void residue (PVR) ____ mL.</p>
+                <p><b>IMPRESSION:</b> ____</p>
+            </div>
+        </field>
+    </record>
+
+    <record id="tpl_usg_pelvis" model="examination.report.template">
+        <field name="name">USG of Pelvis</field>
+        <field name="report_type">descriptive</field>
+        <field name="department" ref="dept_usg"/>
+        <field name="body_html" type="html">
+            <div>
+                <p><b>UTERUS:</b> ____ position, measures ____ x ____ x ____ cm. Myometrial echotexture ____. No fibroid seen.</p>
+                <p><b>ENDOMETRIUM:</b> Thickness ____ mm, central and regular.</p>
+                <p><b>RIGHT OVARY:</b> Measures ____ x ____ cm, volume ____ mL. ____</p>
+                <p><b>LEFT OVARY:</b> Measures ____ x ____ cm, volume ____ mL. ____</p>
+                <p><b>POUCH OF DOUGLAS:</b> No free fluid / collection.</p>
+                <p><b>URINARY BLADDER:</b> Well distended, normal wall.</p>
+                <p><b>IMPRESSION:</b> ____</p>
+            </div>
+        </field>
+    </record>
+
+    <record id="tpl_usg_pregnancy_profile" model="examination.report.template">
+        <field name="name">USG of Pregnancy Profile</field>
+        <field name="report_type">descriptive</field>
+        <field name="department" ref="dept_usg"/>
+        <field name="body_html" type="html">
+            <div>
+                <p><b>NUMBER OF FOETUS:</b> Single, intrauterine.</p>
+                <p><b>CARDIAC ACTIVITY:</b> Present, foetal heart rate ____ bpm.</p>
+                <p><b>PRESENTATION:</b> ____</p>
+                <p><b>BIOMETRY:</b> BPD ____ mm | HC ____ mm | AC ____ mm | FL ____ mm</p>
+                <p><b>ESTIMATED GESTATIONAL AGE:</b> ____ weeks ____ days</p>
+                <p><b>ESTIMATED FOETAL WEIGHT:</b> ____ g</p>
+                <p><b>EXPECTED DATE OF DELIVERY:</b> ____</p>
+                <p><b>PLACENTA:</b> ____ , grade ____ , clear of the internal os.</p>
+                <p><b>LIQUOR:</b> Adequate. AFI ____ cm / Deepest vertical pocket ____ cm.</p>
+                <p><b>UMBILICAL CORD:</b> Three vessels seen.</p>
+                <p><b>IMPRESSION:</b> ____</p>
+            </div>
+        </field>
+    </record>
+
+    <record id="tpl_usg_anomaly_scan" model="examination.report.template">
+        <field name="name">USG Anomaly Scan (18-22 Weeks)</field>
+        <field name="report_type">descriptive</field>
+        <field name="department" ref="dept_usg"/>
+        <field name="body_html" type="html">
+            <div>
+                <p><b>FOETAL BIOMETRY:</b> BPD ____ mm | HC ____ mm | AC ____ mm | FL ____ mm | EFW ____ g | GA ____ weeks</p>
+                <p><b>HEAD &amp; BRAIN:</b> Skull, ventricles, choroid plexus, cavum septi pellucidi, cerebellum and cisterna magna appear normal.</p>
+                <p><b>FACE &amp; NECK:</b> Orbits, lips and profile appear normal. Nuchal fold ____ mm.</p>
+                <p><b>SPINE:</b> Normal alignment, intact overlying skin throughout.</p>
+                <p><b>THORAX:</b> Lungs homogeneous. Diaphragm intact.</p>
+                <p><b>HEART:</b> Four-chamber view normal. Outflow tracts normal. Situs solitus, levocardia. Rate ____ bpm.</p>
+                <p><b>ABDOMEN:</b> Stomach on the left. Kidneys, bladder and cord insertion appear normal.</p>
+                <p><b>LIMBS:</b> All four limbs with three segments each visualised.</p>
+                <p><b>PLACENTA &amp; LIQUOR:</b> ____ , grade ____ . AFI ____ cm.</p>
+                <p><b>IMPRESSION:</b> ____</p>
+                <p><i>No sonographically detectable anomaly is seen in the structures visualised. Ultrasound cannot exclude all foetal anomalies.</i></p>
+            </div>
+        </field>
+    </record>
+
+    <record id="tpl_usg_biophysical_profile" model="examination.report.template">
+        <field name="name">Biophysical Profile</field>
+        <field name="report_type">descriptive</field>
+        <field name="department" ref="dept_usg"/>
+        <field name="body_html" type="html">
+            <div>
+                <p><b>FOETAL BREATHING MOVEMENT:</b> ____ / 2</p>
+                <p><b>GROSS BODY MOVEMENT:</b> ____ / 2</p>
+                <p><b>FOETAL TONE:</b> ____ / 2</p>
+                <p><b>AMNIOTIC FLUID VOLUME:</b> ____ / 2 (AFI ____ cm)</p>
+                <p><b>NON-STRESS TEST:</b> ____ / 2</p>
+                <p><b>TOTAL SCORE:</b> ____ / 10</p>
+                <p><b>FOETAL HEART RATE:</b> ____ bpm</p>
+                <p><b>IMPRESSION:</b> ____</p>
+            </div>
+        </field>
+    </record>
+
+    <record id="tpl_usg_thyroid_neck" model="examination.report.template">
+        <field name="name">USG of Thyroid / Neck</field>
+        <field name="report_type">descriptive</field>
+        <field name="department" ref="dept_usg"/>
+        <field name="body_html" type="html">
+            <div>
+                <p><b>RIGHT LOBE:</b> Measures ____ x ____ x ____ cm. Echotexture ____.</p>
+                <p><b>LEFT LOBE:</b> Measures ____ x ____ x ____ cm. Echotexture ____.</p>
+                <p><b>ISTHMUS:</b> Thickness ____ mm.</p>
+                <p><b>FOCAL LESION:</b> ____ (size, site, composition, echogenicity, margin, calcification, TI-RADS category)</p>
+                <p><b>CERVICAL LYMPH NODES:</b> ____</p>
+                <p><b>IMPRESSION:</b> ____</p>
+            </div>
+        </field>
+    </record>
+
+    <record id="tpl_usg_breast" model="examination.report.template">
+        <field name="name">USG of Breast</field>
+        <field name="report_type">descriptive</field>
+        <field name="department" ref="dept_usg"/>
+        <field name="body_html" type="html">
+            <div>
+                <p><b>RIGHT BREAST:</b> Skin, subcutaneous tissue and fibroglandular parenchyma appear ____. Focal lesion: ____</p>
+                <p><b>LEFT BREAST:</b> Skin, subcutaneous tissue and fibroglandular parenchyma appear ____. Focal lesion: ____</p>
+                <p><b>AXILLA:</b> Right ____ | Left ____</p>
+                <p><b>BI-RADS CATEGORY:</b> ____</p>
+                <p><b>IMPRESSION:</b> ____</p>
+            </div>
+        </field>
+    </record>
+
+    <record id="tpl_usg_brain" model="examination.report.template">
+        <field name="name">USG of Brain (Neonatal, Trans-fontanelle)</field>
+        <field name="report_type">descriptive</field>
+        <field name="department" ref="dept_usg"/>
+        <field name="body_html" type="html">
+            <div>
+                <p><b>LATERAL VENTRICLES:</b> Normal in size and configuration. No dilatation.</p>
+                <p><b>GERMINAL MATRIX:</b> No haemorrhage seen.</p>
+                <p><b>PERIVENTRICULAR WHITE MATTER:</b> Normal echogenicity.</p>
+                <p><b>MIDLINE STRUCTURES:</b> Central, no shift.</p>
+                <p><b>POSTERIOR FOSSA:</b> Cerebellum and cisterna magna appear normal.</p>
+                <p><b>EXTRA-AXIAL SPACES:</b> Not widened.</p>
+                <p><b>IMPRESSION:</b> ____</p>
+            </div>
+        </field>
+    </record>
+
+    <record id="tpl_echo_2d" model="examination.report.template">
+        <field name="name">Echocardiogram (2D, M-Mode &amp; Doppler)</field>
+        <field name="report_type">descriptive</field>
+        <field name="department" ref="dept_echo"/>
+        <field name="body_html" type="html">
+            <div>
+                <p><b>CHAMBER DIMENSIONS:</b> LVIDd ____ mm | LVIDs ____ mm | IVSd ____ mm | LVPWd ____ mm | LA ____ mm | Aortic root ____ mm</p>
+                <p><b>LEFT VENTRICLE:</b> Normal in size. Global systolic function ____ . No regional wall motion abnormality at rest.</p>
+                <p><b>EJECTION FRACTION:</b> ____ % (Simpson / Teichholz)</p>
+                <p><b>DIASTOLIC FUNCTION:</b> E/A ____ , E/e' ____ . Grade ____ .</p>
+                <p><b>VALVES:</b> Mitral ____ | Aortic ____ | Tricuspid ____ | Pulmonary ____</p>
+                <p><b>DOPPLER:</b> No significant stenosis or regurgitation. TR jet velocity ____ m/s, RVSP ____ mmHg.</p>
+                <p><b>PERICARDIUM:</b> No effusion.</p>
+                <p><b>IAS / IVS:</b> Intact. No shunt on colour Doppler.</p>
+                <p><b>IMPRESSION:</b> ____</p>
+            </div>
+        </field>
+    </record>
+
+    <record id="tpl_ecg" model="examination.report.template">
+        <field name="name">ECG (12 Lead)</field>
+        <field name="report_type">descriptive</field>
+        <field name="department" ref="dept_ecg"/>
+        <field name="body_html" type="html">
+            <div>
+                <p><b>RATE:</b> ____ bpm &#160;&#160; <b>RHYTHM:</b> ____ &#160;&#160; <b>AXIS:</b> ____</p>
+                <p><b>INTERVALS:</b> PR ____ ms | QRS ____ ms | QTc ____ ms</p>
+                <p><b>P WAVE:</b> ____</p>
+                <p><b>QRS COMPLEX:</b> ____</p>
+                <p><b>ST SEGMENT / T WAVE:</b> ____</p>
+                <p><b>IMPRESSION:</b> ____</p>
+            </div>
+        </field>
+    </record>
+
+    <record id="tpl_bmd" model="examination.report.template">
+        <field name="name">Bone Mineral Density (DEXA)</field>
+        <field name="report_type">radiology</field>
+        <field name="department" ref="dept_xray"/>
+        <field name="body_html" type="html">
+            <div>
+                <p><b>LUMBAR SPINE (L1-L4):</b> BMD ____ g/cm2 | T-score ____ | Z-score ____</p>
+                <p><b>FEMORAL NECK:</b> BMD ____ g/cm2 | T-score ____ | Z-score ____</p>
+                <p><b>TOTAL HIP:</b> BMD ____ g/cm2 | T-score ____ | Z-score ____</p>
+                <p><b>WHO CLASSIFICATION:</b> Normal (T &gt;= -1.0) / Osteopenia (-1.0 to -2.5) / Osteoporosis (T &lt;= -2.5) - ____</p>
+                <p><b>IMPRESSION:</b> ____</p>
+                <p><i>T-score is used for post-menopausal women and men aged 50 and over; Z-score is used below that age.</i></p>
+            </div>
+        </field>
+    </record>
+
+    <record id="tpl_mra_neck" model="examination.report.template">
+        <field name="name">MRA of Neck Vessels</field>
+        <field name="report_type">radiology</field>
+        <field name="department" ref="dept_mri"/>
+        <field name="body_html" type="html">
+            <div>
+                <p><b>TECHNIQUE:</b> Time-of-flight / contrast enhanced MR angiography of the neck vessels.</p>
+                <p><b>COMMON CAROTID ARTERIES:</b> Right ____ | Left ____</p>
+                <p><b>INTERNAL CAROTID ARTERIES:</b> Right ____ | Left ____</p>
+                <p><b>EXTERNAL CAROTID ARTERIES:</b> Right ____ | Left ____</p>
+                <p><b>VERTEBRAL ARTERIES:</b> Right ____ | Left ____ . Dominance: ____</p>
+                <p><b>STENOSIS (NASCET):</b> ____</p>
+                <p><b>IMPRESSION:</b> ____</p>
+            </div>
+        </field>
+    </record>
+
+    <record id="tpl_usg_generic" model="examination.report.template">
+        <field name="name">USG - Generic Study</field>
+        <field name="report_type">descriptive</field>
+        <field name="department" ref="dept_usg"/>
+        <field name="body_html" type="html">
+            <div>
+                <p><b>TECHNIQUE:</b> ____</p>
+                <p><b>FINDINGS:</b> ____</p>
+                <p><b>IMPRESSION:</b> ____</p>
+            </div>
+        </field>
+    </record>
+
+</odoo>

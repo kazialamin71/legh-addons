@@ -139,7 +139,10 @@ class HospitalBedLine(models.Model):
     def _calc_admission_days(self, lines, tz, now_utc):
         """Per-line days_count for all bed lines under one admission, applying shift rule."""
         intervals = []  # (line, start_local, end_local)
-        result = {l.id: 0.0 for l in lines if l.id}
+        # Key every line, saved or not: a record being edited in the form carries
+        # a NewId, and NewId is always falsy, so filtering on ``l.id`` dropped
+        # exactly those lines and the accumulation below raised KeyError.
+        result = {line.id: 0.0 for line in lines}
         for line in lines:
             if not line.start_date or not line.bed_no:
                 continue

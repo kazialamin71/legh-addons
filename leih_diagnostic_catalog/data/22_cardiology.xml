@@ -1,0 +1,938 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Cardiac Investigations - 4 catalogue items.
+
+    GENERATED FILE - do not edit by hand.
+    Source: tools/items/cardiology.py    Rebuild: python3 tools/build_catalogue.py
+
+    Rates carried over from the legacy export are PROVISIONAL and are expected
+    to be revised before go-live.
+-->
+<odoo noupdate="1">
+    <!-- ECG (12 Lead) -->
+    <record id="ecg" model="examination.entry">
+        <field name="name">ECG (12 Lead)</field>
+        <field name="department" ref="dept_ecg"/>
+        <field name="accounts_id" ref="account_income_ecg"/>
+        <field name="rate">400</field>
+        <field name="base_rate">400</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">descriptive</field>
+        <field name="report_layout">narrative</field>
+        <field name="report_type">descriptive</field>
+        <field name="sample_req" eval="False"/>
+        <field name="report_template_ids" eval="[(6, 0, [
+            ref('tpl_ecg'),
+        ])]"/>
+    </record>
+
+    <record id="ecg_c01" model="examination.entry.line">
+        <field name="name">ECG MEASUREMENTS</field>
+        <field name="examinationentry_id" ref="ecg"/>
+        <field name="sequence">10</field>
+        <field name="is_group_header" eval="True"/>
+        <field name="bold" eval="True"/>
+        <field name="result_type">text</field>
+    </record>
+
+    <record id="ecg_c02" model="examination.entry.line">
+        <field name="name">Heart Rate</field>
+        <field name="examinationentry_id" ref="ecg"/>
+        <field name="sequence">20</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">bpm</field>
+        <field name="reference_value">60 - 100</field>
+        <field name="ref_low">60</field>
+        <field name="ref_high">100</field>
+        <field name="critical_low">40</field>
+        <field name="critical_high">150</field>
+    </record>
+
+    <record id="ecg_c03" model="examination.entry.line">
+        <field name="name">PR Interval</field>
+        <field name="examinationentry_id" ref="ecg"/>
+        <field name="sequence">30</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">ms</field>
+        <field name="reference_value">120 - 200</field>
+        <field name="ref_low">120</field>
+        <field name="ref_high">200</field>
+    </record>
+
+    <record id="ecg_c04" model="examination.entry.line">
+        <field name="name">QRS Duration</field>
+        <field name="examinationentry_id" ref="ecg"/>
+        <field name="sequence">40</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">ms</field>
+        <field name="reference_value">&lt; 120</field>
+        <field name="ref_high">120</field>
+    </record>
+
+    <record id="ecg_c05" model="examination.entry.line">
+        <field name="name">QTc Interval</field>
+        <field name="examinationentry_id" ref="ecg"/>
+        <field name="sequence">50</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">ms</field>
+        <field name="reference_value">M: &lt; 450  F: &lt; 460</field>
+        <field name="ref_high">460</field>
+        <field name="critical_high">500</field>
+    </record>
+
+    <record id="ecg_c06" model="examination.entry.line">
+        <field name="name">Rhythm</field>
+        <field name="examinationentry_id" ref="ecg"/>
+        <field name="sequence">60</field>
+        <field name="result_type">selection</field>
+        <field name="reference_value">Sinus Rhythm</field>
+    </record>
+
+    <record id="ecg_c06_v01" model="examination.possible.value">
+        <field name="name">Sinus Rhythm</field>
+        <field name="examination_line_id" ref="ecg_c06"/>
+        <field name="sequence">10</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="ecg_c06_v02" model="examination.possible.value">
+        <field name="name">Sinus Bradycardia</field>
+        <field name="examination_line_id" ref="ecg_c06"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="ecg_c06_v03" model="examination.possible.value">
+        <field name="name">Sinus Tachycardia</field>
+        <field name="examination_line_id" ref="ecg_c06"/>
+        <field name="sequence">30</field>
+    </record>
+
+    <record id="ecg_c06_v04" model="examination.possible.value">
+        <field name="name">Atrial Fibrillation</field>
+        <field name="examination_line_id" ref="ecg_c06"/>
+        <field name="sequence">40</field>
+    </record>
+
+    <record id="ecg_c06_v05" model="examination.possible.value">
+        <field name="name">Atrial Flutter</field>
+        <field name="examination_line_id" ref="ecg_c06"/>
+        <field name="sequence">50</field>
+    </record>
+
+    <record id="ecg_c06_v06" model="examination.possible.value">
+        <field name="name">Paced</field>
+        <field name="examination_line_id" ref="ecg_c06"/>
+        <field name="sequence">60</field>
+    </record>
+
+    <record id="ecg_c06_v07" model="examination.possible.value">
+        <field name="name">Other - see impression</field>
+        <field name="examination_line_id" ref="ecg_c06"/>
+        <field name="sequence">70</field>
+    </record>
+
+    <record id="ecg_c07" model="examination.entry.line">
+        <field name="name">Impression</field>
+        <field name="examinationentry_id" ref="ecg"/>
+        <field name="sequence">70</field>
+        <field name="result_type">text</field>
+    </record>
+
+    <!-- Echocardiogram (2D) -->
+    <record id="echo_2d" model="examination.entry">
+        <field name="name">Echocardiogram (2D)</field>
+        <field name="department" ref="dept_echo"/>
+        <field name="accounts_id" ref="account_income_echo"/>
+        <field name="rate">1500</field>
+        <field name="base_rate">1500</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">descriptive</field>
+        <field name="report_layout">narrative</field>
+        <field name="report_type">descriptive</field>
+        <field name="sample_req" eval="False"/>
+        <field name="report_template_ids" eval="[(6, 0, [
+            ref('tpl_echo_2d'),
+        ])]"/>
+    </record>
+
+    <record id="echo_2d_c01" model="examination.entry.line">
+        <field name="name">MEASUREMENTS</field>
+        <field name="examinationentry_id" ref="echo_2d"/>
+        <field name="sequence">10</field>
+        <field name="is_group_header" eval="True"/>
+        <field name="bold" eval="True"/>
+        <field name="result_type">text</field>
+    </record>
+
+    <record id="echo_2d_c02" model="examination.entry.line">
+        <field name="name">LVIDd</field>
+        <field name="examinationentry_id" ref="echo_2d"/>
+        <field name="sequence">20</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">mm</field>
+        <field name="reference_value">37 - 56</field>
+        <field name="ref_low">37</field>
+        <field name="ref_high">56</field>
+    </record>
+
+    <record id="echo_2d_c03" model="examination.entry.line">
+        <field name="name">LVIDs</field>
+        <field name="examinationentry_id" ref="echo_2d"/>
+        <field name="sequence">30</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">mm</field>
+        <field name="reference_value">20 - 40</field>
+        <field name="ref_low">20</field>
+        <field name="ref_high">40</field>
+    </record>
+
+    <record id="echo_2d_c04" model="examination.entry.line">
+        <field name="name">IVSd</field>
+        <field name="examinationentry_id" ref="echo_2d"/>
+        <field name="sequence">40</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">mm</field>
+        <field name="reference_value">6 - 11</field>
+        <field name="ref_low">6</field>
+        <field name="ref_high">11</field>
+    </record>
+
+    <record id="echo_2d_c05" model="examination.entry.line">
+        <field name="name">LVPWd</field>
+        <field name="examinationentry_id" ref="echo_2d"/>
+        <field name="sequence">50</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">mm</field>
+        <field name="reference_value">6 - 11</field>
+        <field name="ref_low">6</field>
+        <field name="ref_high">11</field>
+    </record>
+
+    <record id="echo_2d_c06" model="examination.entry.line">
+        <field name="name">Left Atrium</field>
+        <field name="examinationentry_id" ref="echo_2d"/>
+        <field name="sequence">60</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">mm</field>
+        <field name="reference_value">19 - 40</field>
+        <field name="ref_low">19</field>
+        <field name="ref_high">40</field>
+    </record>
+
+    <record id="echo_2d_c07" model="examination.entry.line">
+        <field name="name">Aortic Root</field>
+        <field name="examinationentry_id" ref="echo_2d"/>
+        <field name="sequence">70</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">mm</field>
+        <field name="reference_value">20 - 37</field>
+        <field name="ref_low">20</field>
+        <field name="ref_high">37</field>
+    </record>
+
+    <record id="echo_2d_c08" model="examination.entry.line">
+        <field name="name">FUNCTION</field>
+        <field name="examinationentry_id" ref="echo_2d"/>
+        <field name="sequence">80</field>
+        <field name="is_group_header" eval="True"/>
+        <field name="bold" eval="True"/>
+        <field name="result_type">text</field>
+    </record>
+
+    <record id="echo_2d_c09" model="examination.entry.line">
+        <field name="name">Ejection Fraction (EF)</field>
+        <field name="examinationentry_id" ref="echo_2d"/>
+        <field name="sequence">90</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">%</field>
+        <field name="reference_value">&gt; 55</field>
+        <field name="ref_low">55</field>
+        <field name="critical_low">30</field>
+    </record>
+
+    <record id="echo_2d_c10" model="examination.entry.line">
+        <field name="name">Fractional Shortening (FS)</field>
+        <field name="examinationentry_id" ref="echo_2d"/>
+        <field name="sequence">100</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">%</field>
+        <field name="reference_value">25 - 45</field>
+        <field name="ref_low">25</field>
+        <field name="ref_high">45</field>
+    </record>
+
+    <record id="echo_2d_c11" model="examination.entry.line">
+        <field name="name">Diastolic Function</field>
+        <field name="examinationentry_id" ref="echo_2d"/>
+        <field name="sequence">110</field>
+        <field name="result_type">selection</field>
+        <field name="reference_value">Normal</field>
+    </record>
+
+    <record id="echo_2d_c11_v01" model="examination.possible.value">
+        <field name="name">Normal</field>
+        <field name="examination_line_id" ref="echo_2d_c11"/>
+        <field name="sequence">10</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="echo_2d_c11_v02" model="examination.possible.value">
+        <field name="name">Grade I (Impaired Relaxation)</field>
+        <field name="examination_line_id" ref="echo_2d_c11"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="echo_2d_c11_v03" model="examination.possible.value">
+        <field name="name">Grade II (Pseudonormal)</field>
+        <field name="examination_line_id" ref="echo_2d_c11"/>
+        <field name="sequence">30</field>
+    </record>
+
+    <record id="echo_2d_c11_v04" model="examination.possible.value">
+        <field name="name">Grade III (Restrictive)</field>
+        <field name="examination_line_id" ref="echo_2d_c11"/>
+        <field name="sequence">40</field>
+    </record>
+
+    <record id="echo_2d_c12" model="examination.entry.line">
+        <field name="name">RVSP (estimated)</field>
+        <field name="examinationentry_id" ref="echo_2d"/>
+        <field name="sequence">120</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">mmHg</field>
+        <field name="reference_value">&lt; 35</field>
+        <field name="ref_high">35</field>
+    </record>
+
+    <record id="echo_2d_c13" model="examination.entry.line">
+        <field name="name">Pericardial Effusion</field>
+        <field name="examinationentry_id" ref="echo_2d"/>
+        <field name="sequence">130</field>
+        <field name="result_type">selection</field>
+        <field name="reference_value">Absent</field>
+    </record>
+
+    <record id="echo_2d_c13_v01" model="examination.possible.value">
+        <field name="name">Absent</field>
+        <field name="examination_line_id" ref="echo_2d_c13"/>
+        <field name="sequence">10</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="echo_2d_c13_v02" model="examination.possible.value">
+        <field name="name">Trivial</field>
+        <field name="examination_line_id" ref="echo_2d_c13"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="echo_2d_c13_v03" model="examination.possible.value">
+        <field name="name">Mild</field>
+        <field name="examination_line_id" ref="echo_2d_c13"/>
+        <field name="sequence">30</field>
+    </record>
+
+    <record id="echo_2d_c13_v04" model="examination.possible.value">
+        <field name="name">Moderate</field>
+        <field name="examination_line_id" ref="echo_2d_c13"/>
+        <field name="sequence">40</field>
+    </record>
+
+    <record id="echo_2d_c13_v05" model="examination.possible.value">
+        <field name="name">Large</field>
+        <field name="examination_line_id" ref="echo_2d_c13"/>
+        <field name="sequence">50</field>
+    </record>
+
+    <record id="echo_2d_c14" model="examination.entry.line">
+        <field name="name">Impression</field>
+        <field name="examinationentry_id" ref="echo_2d"/>
+        <field name="sequence">140</field>
+        <field name="result_type">text</field>
+    </record>
+
+    <!-- Echocardiogram with Colour Doppler -->
+    <record id="echo_colour_doppler" model="examination.entry">
+        <field name="name">Echocardiogram with Colour Doppler</field>
+        <field name="department" ref="dept_echo"/>
+        <field name="accounts_id" ref="account_income_echo"/>
+        <field name="rate">2600</field>
+        <field name="base_rate">2600</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">descriptive</field>
+        <field name="report_layout">narrative</field>
+        <field name="report_type">descriptive</field>
+        <field name="sample_req" eval="False"/>
+        <field name="lab_not_required" eval="True"/>
+        <field name="report_template_ids" eval="[(6, 0, [
+            ref('tpl_echo_2d'),
+        ])]"/>
+    </record>
+
+    <record id="echo_colour_doppler_c01" model="examination.entry.line">
+        <field name="name">MEASUREMENTS</field>
+        <field name="examinationentry_id" ref="echo_colour_doppler"/>
+        <field name="sequence">10</field>
+        <field name="is_group_header" eval="True"/>
+        <field name="bold" eval="True"/>
+        <field name="result_type">text</field>
+    </record>
+
+    <record id="echo_colour_doppler_c02" model="examination.entry.line">
+        <field name="name">LVIDd</field>
+        <field name="examinationentry_id" ref="echo_colour_doppler"/>
+        <field name="sequence">20</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">mm</field>
+        <field name="reference_value">37 - 56</field>
+        <field name="ref_low">37</field>
+        <field name="ref_high">56</field>
+    </record>
+
+    <record id="echo_colour_doppler_c03" model="examination.entry.line">
+        <field name="name">LVIDs</field>
+        <field name="examinationentry_id" ref="echo_colour_doppler"/>
+        <field name="sequence">30</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">mm</field>
+        <field name="reference_value">20 - 40</field>
+        <field name="ref_low">20</field>
+        <field name="ref_high">40</field>
+    </record>
+
+    <record id="echo_colour_doppler_c04" model="examination.entry.line">
+        <field name="name">IVSd</field>
+        <field name="examinationentry_id" ref="echo_colour_doppler"/>
+        <field name="sequence">40</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">mm</field>
+        <field name="reference_value">6 - 11</field>
+        <field name="ref_low">6</field>
+        <field name="ref_high">11</field>
+    </record>
+
+    <record id="echo_colour_doppler_c05" model="examination.entry.line">
+        <field name="name">LVPWd</field>
+        <field name="examinationentry_id" ref="echo_colour_doppler"/>
+        <field name="sequence">50</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">mm</field>
+        <field name="reference_value">6 - 11</field>
+        <field name="ref_low">6</field>
+        <field name="ref_high">11</field>
+    </record>
+
+    <record id="echo_colour_doppler_c06" model="examination.entry.line">
+        <field name="name">Left Atrium</field>
+        <field name="examinationentry_id" ref="echo_colour_doppler"/>
+        <field name="sequence">60</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">mm</field>
+        <field name="reference_value">19 - 40</field>
+        <field name="ref_low">19</field>
+        <field name="ref_high">40</field>
+    </record>
+
+    <record id="echo_colour_doppler_c07" model="examination.entry.line">
+        <field name="name">Aortic Root</field>
+        <field name="examinationentry_id" ref="echo_colour_doppler"/>
+        <field name="sequence">70</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">mm</field>
+        <field name="reference_value">20 - 37</field>
+        <field name="ref_low">20</field>
+        <field name="ref_high">37</field>
+    </record>
+
+    <record id="echo_colour_doppler_c08" model="examination.entry.line">
+        <field name="name">FUNCTION</field>
+        <field name="examinationentry_id" ref="echo_colour_doppler"/>
+        <field name="sequence">80</field>
+        <field name="is_group_header" eval="True"/>
+        <field name="bold" eval="True"/>
+        <field name="result_type">text</field>
+    </record>
+
+    <record id="echo_colour_doppler_c09" model="examination.entry.line">
+        <field name="name">Ejection Fraction (EF)</field>
+        <field name="examinationentry_id" ref="echo_colour_doppler"/>
+        <field name="sequence">90</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">%</field>
+        <field name="reference_value">&gt; 55</field>
+        <field name="ref_low">55</field>
+        <field name="critical_low">30</field>
+    </record>
+
+    <record id="echo_colour_doppler_c10" model="examination.entry.line">
+        <field name="name">Fractional Shortening (FS)</field>
+        <field name="examinationentry_id" ref="echo_colour_doppler"/>
+        <field name="sequence">100</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">%</field>
+        <field name="reference_value">25 - 45</field>
+        <field name="ref_low">25</field>
+        <field name="ref_high">45</field>
+    </record>
+
+    <record id="echo_colour_doppler_c11" model="examination.entry.line">
+        <field name="name">Diastolic Function</field>
+        <field name="examinationentry_id" ref="echo_colour_doppler"/>
+        <field name="sequence">110</field>
+        <field name="result_type">selection</field>
+        <field name="reference_value">Normal</field>
+    </record>
+
+    <record id="echo_colour_doppler_c11_v01" model="examination.possible.value">
+        <field name="name">Normal</field>
+        <field name="examination_line_id" ref="echo_colour_doppler_c11"/>
+        <field name="sequence">10</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="echo_colour_doppler_c11_v02" model="examination.possible.value">
+        <field name="name">Grade I (Impaired Relaxation)</field>
+        <field name="examination_line_id" ref="echo_colour_doppler_c11"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="echo_colour_doppler_c11_v03" model="examination.possible.value">
+        <field name="name">Grade II (Pseudonormal)</field>
+        <field name="examination_line_id" ref="echo_colour_doppler_c11"/>
+        <field name="sequence">30</field>
+    </record>
+
+    <record id="echo_colour_doppler_c11_v04" model="examination.possible.value">
+        <field name="name">Grade III (Restrictive)</field>
+        <field name="examination_line_id" ref="echo_colour_doppler_c11"/>
+        <field name="sequence">40</field>
+    </record>
+
+    <record id="echo_colour_doppler_c12" model="examination.entry.line">
+        <field name="name">RVSP (estimated)</field>
+        <field name="examinationentry_id" ref="echo_colour_doppler"/>
+        <field name="sequence">120</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">mmHg</field>
+        <field name="reference_value">&lt; 35</field>
+        <field name="ref_high">35</field>
+    </record>
+
+    <record id="echo_colour_doppler_c13" model="examination.entry.line">
+        <field name="name">Pericardial Effusion</field>
+        <field name="examinationentry_id" ref="echo_colour_doppler"/>
+        <field name="sequence">130</field>
+        <field name="result_type">selection</field>
+        <field name="reference_value">Absent</field>
+    </record>
+
+    <record id="echo_colour_doppler_c13_v01" model="examination.possible.value">
+        <field name="name">Absent</field>
+        <field name="examination_line_id" ref="echo_colour_doppler_c13"/>
+        <field name="sequence">10</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="echo_colour_doppler_c13_v02" model="examination.possible.value">
+        <field name="name">Trivial</field>
+        <field name="examination_line_id" ref="echo_colour_doppler_c13"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="echo_colour_doppler_c13_v03" model="examination.possible.value">
+        <field name="name">Mild</field>
+        <field name="examination_line_id" ref="echo_colour_doppler_c13"/>
+        <field name="sequence">30</field>
+    </record>
+
+    <record id="echo_colour_doppler_c13_v04" model="examination.possible.value">
+        <field name="name">Moderate</field>
+        <field name="examination_line_id" ref="echo_colour_doppler_c13"/>
+        <field name="sequence">40</field>
+    </record>
+
+    <record id="echo_colour_doppler_c13_v05" model="examination.possible.value">
+        <field name="name">Large</field>
+        <field name="examination_line_id" ref="echo_colour_doppler_c13"/>
+        <field name="sequence">50</field>
+    </record>
+
+    <record id="echo_colour_doppler_c14" model="examination.entry.line">
+        <field name="name">Impression</field>
+        <field name="examinationentry_id" ref="echo_colour_doppler"/>
+        <field name="sequence">140</field>
+        <field name="result_type">text</field>
+    </record>
+
+    <record id="echo_colour_doppler_c15" model="examination.entry.line">
+        <field name="name">COLOUR DOPPLER</field>
+        <field name="examinationentry_id" ref="echo_colour_doppler"/>
+        <field name="sequence">150</field>
+        <field name="is_group_header" eval="True"/>
+        <field name="bold" eval="True"/>
+        <field name="result_type">text</field>
+    </record>
+
+    <record id="echo_colour_doppler_c16" model="examination.entry.line">
+        <field name="name">Mitral Regurgitation</field>
+        <field name="examinationentry_id" ref="echo_colour_doppler"/>
+        <field name="sequence">160</field>
+        <field name="result_type">selection</field>
+        <field name="reference_value">None</field>
+    </record>
+
+    <record id="echo_colour_doppler_c16_v01" model="examination.possible.value">
+        <field name="name">None</field>
+        <field name="examination_line_id" ref="echo_colour_doppler_c16"/>
+        <field name="sequence">10</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="echo_colour_doppler_c16_v02" model="examination.possible.value">
+        <field name="name">Trivial</field>
+        <field name="examination_line_id" ref="echo_colour_doppler_c16"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="echo_colour_doppler_c16_v03" model="examination.possible.value">
+        <field name="name">Mild</field>
+        <field name="examination_line_id" ref="echo_colour_doppler_c16"/>
+        <field name="sequence">30</field>
+    </record>
+
+    <record id="echo_colour_doppler_c16_v04" model="examination.possible.value">
+        <field name="name">Moderate</field>
+        <field name="examination_line_id" ref="echo_colour_doppler_c16"/>
+        <field name="sequence">40</field>
+    </record>
+
+    <record id="echo_colour_doppler_c16_v05" model="examination.possible.value">
+        <field name="name">Severe</field>
+        <field name="examination_line_id" ref="echo_colour_doppler_c16"/>
+        <field name="sequence">50</field>
+    </record>
+
+    <record id="echo_colour_doppler_c17" model="examination.entry.line">
+        <field name="name">Aortic Regurgitation</field>
+        <field name="examinationentry_id" ref="echo_colour_doppler"/>
+        <field name="sequence">170</field>
+        <field name="result_type">selection</field>
+        <field name="reference_value">None</field>
+    </record>
+
+    <record id="echo_colour_doppler_c17_v01" model="examination.possible.value">
+        <field name="name">None</field>
+        <field name="examination_line_id" ref="echo_colour_doppler_c17"/>
+        <field name="sequence">10</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="echo_colour_doppler_c17_v02" model="examination.possible.value">
+        <field name="name">Trivial</field>
+        <field name="examination_line_id" ref="echo_colour_doppler_c17"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="echo_colour_doppler_c17_v03" model="examination.possible.value">
+        <field name="name">Mild</field>
+        <field name="examination_line_id" ref="echo_colour_doppler_c17"/>
+        <field name="sequence">30</field>
+    </record>
+
+    <record id="echo_colour_doppler_c17_v04" model="examination.possible.value">
+        <field name="name">Moderate</field>
+        <field name="examination_line_id" ref="echo_colour_doppler_c17"/>
+        <field name="sequence">40</field>
+    </record>
+
+    <record id="echo_colour_doppler_c17_v05" model="examination.possible.value">
+        <field name="name">Severe</field>
+        <field name="examination_line_id" ref="echo_colour_doppler_c17"/>
+        <field name="sequence">50</field>
+    </record>
+
+    <record id="echo_colour_doppler_c18" model="examination.entry.line">
+        <field name="name">Tricuspid Regurgitation</field>
+        <field name="examinationentry_id" ref="echo_colour_doppler"/>
+        <field name="sequence">180</field>
+        <field name="result_type">selection</field>
+        <field name="reference_value">None</field>
+    </record>
+
+    <record id="echo_colour_doppler_c18_v01" model="examination.possible.value">
+        <field name="name">None</field>
+        <field name="examination_line_id" ref="echo_colour_doppler_c18"/>
+        <field name="sequence">10</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="echo_colour_doppler_c18_v02" model="examination.possible.value">
+        <field name="name">Trivial</field>
+        <field name="examination_line_id" ref="echo_colour_doppler_c18"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="echo_colour_doppler_c18_v03" model="examination.possible.value">
+        <field name="name">Mild</field>
+        <field name="examination_line_id" ref="echo_colour_doppler_c18"/>
+        <field name="sequence">30</field>
+    </record>
+
+    <record id="echo_colour_doppler_c18_v04" model="examination.possible.value">
+        <field name="name">Moderate</field>
+        <field name="examination_line_id" ref="echo_colour_doppler_c18"/>
+        <field name="sequence">40</field>
+    </record>
+
+    <record id="echo_colour_doppler_c18_v05" model="examination.possible.value">
+        <field name="name">Severe</field>
+        <field name="examination_line_id" ref="echo_colour_doppler_c18"/>
+        <field name="sequence">50</field>
+    </record>
+
+    <record id="echo_colour_doppler_c19" model="examination.entry.line">
+        <field name="name">Intracardiac Shunt</field>
+        <field name="examinationentry_id" ref="echo_colour_doppler"/>
+        <field name="sequence">190</field>
+        <field name="result_type">selection</field>
+        <field name="reference_value">Not Detected</field>
+    </record>
+
+    <record id="echo_colour_doppler_c19_v01" model="examination.possible.value">
+        <field name="name">Not Detected</field>
+        <field name="examination_line_id" ref="echo_colour_doppler_c19"/>
+        <field name="sequence">10</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="echo_colour_doppler_c19_v02" model="examination.possible.value">
+        <field name="name">ASD</field>
+        <field name="examination_line_id" ref="echo_colour_doppler_c19"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="echo_colour_doppler_c19_v03" model="examination.possible.value">
+        <field name="name">VSD</field>
+        <field name="examination_line_id" ref="echo_colour_doppler_c19"/>
+        <field name="sequence">30</field>
+    </record>
+
+    <record id="echo_colour_doppler_c19_v04" model="examination.possible.value">
+        <field name="name">PDA</field>
+        <field name="examination_line_id" ref="echo_colour_doppler_c19"/>
+        <field name="sequence">40</field>
+    </record>
+
+    <!-- Portable Echocardiography (Bedside) -->
+    <record id="echo_portable" model="examination.entry">
+        <field name="name">Portable Echocardiography (Bedside)</field>
+        <field name="department" ref="dept_echo"/>
+        <field name="accounts_id" ref="account_income_echo"/>
+        <field name="rate">4000</field>
+        <field name="base_rate">4000</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">descriptive</field>
+        <field name="report_layout">narrative</field>
+        <field name="report_type">descriptive</field>
+        <field name="sample_req" eval="False"/>
+        <field name="indoor" eval="True"/>
+        <field name="report_template_ids" eval="[(6, 0, [
+            ref('tpl_echo_2d'),
+        ])]"/>
+    </record>
+
+    <record id="echo_portable_c01" model="examination.entry.line">
+        <field name="name">MEASUREMENTS</field>
+        <field name="examinationentry_id" ref="echo_portable"/>
+        <field name="sequence">10</field>
+        <field name="is_group_header" eval="True"/>
+        <field name="bold" eval="True"/>
+        <field name="result_type">text</field>
+    </record>
+
+    <record id="echo_portable_c02" model="examination.entry.line">
+        <field name="name">LVIDd</field>
+        <field name="examinationentry_id" ref="echo_portable"/>
+        <field name="sequence">20</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">mm</field>
+        <field name="reference_value">37 - 56</field>
+        <field name="ref_low">37</field>
+        <field name="ref_high">56</field>
+    </record>
+
+    <record id="echo_portable_c03" model="examination.entry.line">
+        <field name="name">LVIDs</field>
+        <field name="examinationentry_id" ref="echo_portable"/>
+        <field name="sequence">30</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">mm</field>
+        <field name="reference_value">20 - 40</field>
+        <field name="ref_low">20</field>
+        <field name="ref_high">40</field>
+    </record>
+
+    <record id="echo_portable_c04" model="examination.entry.line">
+        <field name="name">IVSd</field>
+        <field name="examinationentry_id" ref="echo_portable"/>
+        <field name="sequence">40</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">mm</field>
+        <field name="reference_value">6 - 11</field>
+        <field name="ref_low">6</field>
+        <field name="ref_high">11</field>
+    </record>
+
+    <record id="echo_portable_c05" model="examination.entry.line">
+        <field name="name">LVPWd</field>
+        <field name="examinationentry_id" ref="echo_portable"/>
+        <field name="sequence">50</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">mm</field>
+        <field name="reference_value">6 - 11</field>
+        <field name="ref_low">6</field>
+        <field name="ref_high">11</field>
+    </record>
+
+    <record id="echo_portable_c06" model="examination.entry.line">
+        <field name="name">Left Atrium</field>
+        <field name="examinationentry_id" ref="echo_portable"/>
+        <field name="sequence">60</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">mm</field>
+        <field name="reference_value">19 - 40</field>
+        <field name="ref_low">19</field>
+        <field name="ref_high">40</field>
+    </record>
+
+    <record id="echo_portable_c07" model="examination.entry.line">
+        <field name="name">Aortic Root</field>
+        <field name="examinationentry_id" ref="echo_portable"/>
+        <field name="sequence">70</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">mm</field>
+        <field name="reference_value">20 - 37</field>
+        <field name="ref_low">20</field>
+        <field name="ref_high">37</field>
+    </record>
+
+    <record id="echo_portable_c08" model="examination.entry.line">
+        <field name="name">FUNCTION</field>
+        <field name="examinationentry_id" ref="echo_portable"/>
+        <field name="sequence">80</field>
+        <field name="is_group_header" eval="True"/>
+        <field name="bold" eval="True"/>
+        <field name="result_type">text</field>
+    </record>
+
+    <record id="echo_portable_c09" model="examination.entry.line">
+        <field name="name">Ejection Fraction (EF)</field>
+        <field name="examinationentry_id" ref="echo_portable"/>
+        <field name="sequence">90</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">%</field>
+        <field name="reference_value">&gt; 55</field>
+        <field name="ref_low">55</field>
+        <field name="critical_low">30</field>
+    </record>
+
+    <record id="echo_portable_c10" model="examination.entry.line">
+        <field name="name">Fractional Shortening (FS)</field>
+        <field name="examinationentry_id" ref="echo_portable"/>
+        <field name="sequence">100</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">%</field>
+        <field name="reference_value">25 - 45</field>
+        <field name="ref_low">25</field>
+        <field name="ref_high">45</field>
+    </record>
+
+    <record id="echo_portable_c11" model="examination.entry.line">
+        <field name="name">Diastolic Function</field>
+        <field name="examinationentry_id" ref="echo_portable"/>
+        <field name="sequence">110</field>
+        <field name="result_type">selection</field>
+        <field name="reference_value">Normal</field>
+    </record>
+
+    <record id="echo_portable_c11_v01" model="examination.possible.value">
+        <field name="name">Normal</field>
+        <field name="examination_line_id" ref="echo_portable_c11"/>
+        <field name="sequence">10</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="echo_portable_c11_v02" model="examination.possible.value">
+        <field name="name">Grade I (Impaired Relaxation)</field>
+        <field name="examination_line_id" ref="echo_portable_c11"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="echo_portable_c11_v03" model="examination.possible.value">
+        <field name="name">Grade II (Pseudonormal)</field>
+        <field name="examination_line_id" ref="echo_portable_c11"/>
+        <field name="sequence">30</field>
+    </record>
+
+    <record id="echo_portable_c11_v04" model="examination.possible.value">
+        <field name="name">Grade III (Restrictive)</field>
+        <field name="examination_line_id" ref="echo_portable_c11"/>
+        <field name="sequence">40</field>
+    </record>
+
+    <record id="echo_portable_c12" model="examination.entry.line">
+        <field name="name">RVSP (estimated)</field>
+        <field name="examinationentry_id" ref="echo_portable"/>
+        <field name="sequence">120</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">mmHg</field>
+        <field name="reference_value">&lt; 35</field>
+        <field name="ref_high">35</field>
+    </record>
+
+    <record id="echo_portable_c13" model="examination.entry.line">
+        <field name="name">Pericardial Effusion</field>
+        <field name="examinationentry_id" ref="echo_portable"/>
+        <field name="sequence">130</field>
+        <field name="result_type">selection</field>
+        <field name="reference_value">Absent</field>
+    </record>
+
+    <record id="echo_portable_c13_v01" model="examination.possible.value">
+        <field name="name">Absent</field>
+        <field name="examination_line_id" ref="echo_portable_c13"/>
+        <field name="sequence">10</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="echo_portable_c13_v02" model="examination.possible.value">
+        <field name="name">Trivial</field>
+        <field name="examination_line_id" ref="echo_portable_c13"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="echo_portable_c13_v03" model="examination.possible.value">
+        <field name="name">Mild</field>
+        <field name="examination_line_id" ref="echo_portable_c13"/>
+        <field name="sequence">30</field>
+    </record>
+
+    <record id="echo_portable_c13_v04" model="examination.possible.value">
+        <field name="name">Moderate</field>
+        <field name="examination_line_id" ref="echo_portable_c13"/>
+        <field name="sequence">40</field>
+    </record>
+
+    <record id="echo_portable_c13_v05" model="examination.possible.value">
+        <field name="name">Large</field>
+        <field name="examination_line_id" ref="echo_portable_c13"/>
+        <field name="sequence">50</field>
+    </record>
+
+    <record id="echo_portable_c14" model="examination.entry.line">
+        <field name="name">Impression</field>
+        <field name="examinationentry_id" ref="echo_portable"/>
+        <field name="sequence">140</field>
+        <field name="result_type">text</field>
+    </record>
+
+</odoo>

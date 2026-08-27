@@ -1,0 +1,1761 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Clinical Pathology - 8 catalogue items.
+
+    GENERATED FILE - do not edit by hand.
+    Source: tools/items/clinical_pathology.py    Rebuild: python3 tools/build_catalogue.py
+
+    Rates carried over from the legacy export are PROVISIONAL and are expected
+    to be revised before go-live.
+-->
+<odoo noupdate="1">
+    <!-- Urine R/M/E (Routine & Microscopic Examination) -->
+    <record id="urine_rme" model="examination.entry">
+        <field name="name">Urine R/M/E (Routine &amp; Microscopic Examination)</field>
+        <field name="department" ref="dept_clinical_pathology"/>
+        <field name="accounts_id" ref="account_income_clinical_pathology"/>
+        <field name="rate">250</field>
+        <field name="base_rate">250</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">pathology</field>
+        <field name="report_layout">two_column</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_urine_container"/>
+        <field name="sample_type" ref="sample_urine"/>
+        <field name="default_method_id" ref="method_microscopy"/>
+        <field name="default_instrument_id" ref="instrument_urine_analyzer"/>
+        <field name="sample_req" eval="True"/>
+    </record>
+
+    <record id="urine_rme_c01" model="examination.entry.line">
+        <field name="name">PHYSICAL EXAMINATION</field>
+        <field name="examinationentry_id" ref="urine_rme"/>
+        <field name="sequence">10</field>
+        <field name="is_group_header" eval="True"/>
+        <field name="bold" eval="True"/>
+        <field name="result_type">text</field>
+    </record>
+
+    <record id="urine_rme_c02" model="examination.entry.line">
+        <field name="name">Quantity</field>
+        <field name="examinationentry_id" ref="urine_rme"/>
+        <field name="sequence">20</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">mL</field>
+    </record>
+
+    <record id="urine_rme_c03" model="examination.entry.line">
+        <field name="name">Colour</field>
+        <field name="examinationentry_id" ref="urine_rme"/>
+        <field name="sequence">30</field>
+        <field name="result_type">selection</field>
+        <field name="reference_value">Pale Yellow</field>
+    </record>
+
+    <record id="urine_rme_c03_v01" model="examination.possible.value">
+        <field name="name">Pale Yellow</field>
+        <field name="examination_line_id" ref="urine_rme_c03"/>
+        <field name="sequence">10</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="urine_rme_c03_v02" model="examination.possible.value">
+        <field name="name">Straw</field>
+        <field name="examination_line_id" ref="urine_rme_c03"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="urine_rme_c03_v03" model="examination.possible.value">
+        <field name="name">Yellow</field>
+        <field name="examination_line_id" ref="urine_rme_c03"/>
+        <field name="sequence">30</field>
+    </record>
+
+    <record id="urine_rme_c03_v04" model="examination.possible.value">
+        <field name="name">Deep Yellow</field>
+        <field name="examination_line_id" ref="urine_rme_c03"/>
+        <field name="sequence">40</field>
+    </record>
+
+    <record id="urine_rme_c03_v05" model="examination.possible.value">
+        <field name="name">Amber</field>
+        <field name="examination_line_id" ref="urine_rme_c03"/>
+        <field name="sequence">50</field>
+    </record>
+
+    <record id="urine_rme_c03_v06" model="examination.possible.value">
+        <field name="name">Reddish</field>
+        <field name="examination_line_id" ref="urine_rme_c03"/>
+        <field name="sequence">60</field>
+    </record>
+
+    <record id="urine_rme_c03_v07" model="examination.possible.value">
+        <field name="name">High Coloured</field>
+        <field name="examination_line_id" ref="urine_rme_c03"/>
+        <field name="sequence">70</field>
+    </record>
+
+    <record id="urine_rme_c04" model="examination.entry.line">
+        <field name="name">Appearance</field>
+        <field name="examinationentry_id" ref="urine_rme"/>
+        <field name="sequence">40</field>
+        <field name="result_type">selection</field>
+        <field name="reference_value">Clear</field>
+    </record>
+
+    <record id="urine_rme_c04_v01" model="examination.possible.value">
+        <field name="name">Clear</field>
+        <field name="examination_line_id" ref="urine_rme_c04"/>
+        <field name="sequence">10</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="urine_rme_c04_v02" model="examination.possible.value">
+        <field name="name">Slightly Hazy</field>
+        <field name="examination_line_id" ref="urine_rme_c04"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="urine_rme_c04_v03" model="examination.possible.value">
+        <field name="name">Hazy</field>
+        <field name="examination_line_id" ref="urine_rme_c04"/>
+        <field name="sequence">30</field>
+    </record>
+
+    <record id="urine_rme_c04_v04" model="examination.possible.value">
+        <field name="name">Turbid</field>
+        <field name="examination_line_id" ref="urine_rme_c04"/>
+        <field name="sequence">40</field>
+    </record>
+
+    <record id="urine_rme_c05" model="examination.entry.line">
+        <field name="name">Specific Gravity</field>
+        <field name="examinationentry_id" ref="urine_rme"/>
+        <field name="sequence">50</field>
+        <field name="result_type">numeric</field>
+        <field name="reference_value">1.005 - 1.030</field>
+        <field name="ref_low">1.005</field>
+        <field name="ref_high">1.03</field>
+    </record>
+
+    <record id="urine_rme_c06" model="examination.entry.line">
+        <field name="name">Deposit / Sediment</field>
+        <field name="examinationentry_id" ref="urine_rme"/>
+        <field name="sequence">60</field>
+        <field name="result_type">selection</field>
+        <field name="reference_value">Nil</field>
+    </record>
+
+    <record id="urine_rme_c06_v01" model="examination.possible.value">
+        <field name="name">Nil</field>
+        <field name="examination_line_id" ref="urine_rme_c06"/>
+        <field name="sequence">10</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="urine_rme_c06_v02" model="examination.possible.value">
+        <field name="name">Scanty</field>
+        <field name="examination_line_id" ref="urine_rme_c06"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="urine_rme_c06_v03" model="examination.possible.value">
+        <field name="name">Moderate</field>
+        <field name="examination_line_id" ref="urine_rme_c06"/>
+        <field name="sequence">30</field>
+    </record>
+
+    <record id="urine_rme_c06_v04" model="examination.possible.value">
+        <field name="name">Plenty</field>
+        <field name="examination_line_id" ref="urine_rme_c06"/>
+        <field name="sequence">40</field>
+    </record>
+
+    <record id="urine_rme_c07" model="examination.entry.line">
+        <field name="name">CHEMICAL EXAMINATION</field>
+        <field name="examinationentry_id" ref="urine_rme"/>
+        <field name="sequence">70</field>
+        <field name="is_group_header" eval="True"/>
+        <field name="bold" eval="True"/>
+        <field name="result_type">text</field>
+    </record>
+
+    <record id="urine_rme_c08" model="examination.entry.line">
+        <field name="name">Reaction (pH)</field>
+        <field name="examinationentry_id" ref="urine_rme"/>
+        <field name="sequence">80</field>
+        <field name="result_type">numeric</field>
+        <field name="reference_value">5.0 - 8.0</field>
+        <field name="ref_low">5.0</field>
+        <field name="ref_high">8.0</field>
+    </record>
+
+    <record id="urine_rme_c09" model="examination.entry.line">
+        <field name="name">Albumin</field>
+        <field name="examinationentry_id" ref="urine_rme"/>
+        <field name="sequence">90</field>
+        <field name="result_type">selection</field>
+        <field name="reference_value">Nil</field>
+    </record>
+
+    <record id="urine_rme_c09_v01" model="examination.possible.value">
+        <field name="name">Nil</field>
+        <field name="examination_line_id" ref="urine_rme_c09"/>
+        <field name="sequence">10</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="urine_rme_c09_v02" model="examination.possible.value">
+        <field name="name">Trace</field>
+        <field name="examination_line_id" ref="urine_rme_c09"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="urine_rme_c09_v03" model="examination.possible.value">
+        <field name="name">+</field>
+        <field name="examination_line_id" ref="urine_rme_c09"/>
+        <field name="sequence">30</field>
+    </record>
+
+    <record id="urine_rme_c09_v04" model="examination.possible.value">
+        <field name="name">++</field>
+        <field name="examination_line_id" ref="urine_rme_c09"/>
+        <field name="sequence">40</field>
+    </record>
+
+    <record id="urine_rme_c09_v05" model="examination.possible.value">
+        <field name="name">+++</field>
+        <field name="examination_line_id" ref="urine_rme_c09"/>
+        <field name="sequence">50</field>
+    </record>
+
+    <record id="urine_rme_c09_v06" model="examination.possible.value">
+        <field name="name">++++</field>
+        <field name="examination_line_id" ref="urine_rme_c09"/>
+        <field name="sequence">60</field>
+    </record>
+
+    <record id="urine_rme_c10" model="examination.entry.line">
+        <field name="name">Sugar</field>
+        <field name="examinationentry_id" ref="urine_rme"/>
+        <field name="sequence">100</field>
+        <field name="result_type">selection</field>
+        <field name="reference_value">Nil</field>
+    </record>
+
+    <record id="urine_rme_c10_v01" model="examination.possible.value">
+        <field name="name">Nil</field>
+        <field name="examination_line_id" ref="urine_rme_c10"/>
+        <field name="sequence">10</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="urine_rme_c10_v02" model="examination.possible.value">
+        <field name="name">Trace</field>
+        <field name="examination_line_id" ref="urine_rme_c10"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="urine_rme_c10_v03" model="examination.possible.value">
+        <field name="name">+</field>
+        <field name="examination_line_id" ref="urine_rme_c10"/>
+        <field name="sequence">30</field>
+    </record>
+
+    <record id="urine_rme_c10_v04" model="examination.possible.value">
+        <field name="name">++</field>
+        <field name="examination_line_id" ref="urine_rme_c10"/>
+        <field name="sequence">40</field>
+    </record>
+
+    <record id="urine_rme_c10_v05" model="examination.possible.value">
+        <field name="name">+++</field>
+        <field name="examination_line_id" ref="urine_rme_c10"/>
+        <field name="sequence">50</field>
+    </record>
+
+    <record id="urine_rme_c10_v06" model="examination.possible.value">
+        <field name="name">++++</field>
+        <field name="examination_line_id" ref="urine_rme_c10"/>
+        <field name="sequence">60</field>
+    </record>
+
+    <record id="urine_rme_c11" model="examination.entry.line">
+        <field name="name">Ketone Bodies</field>
+        <field name="examinationentry_id" ref="urine_rme"/>
+        <field name="sequence">110</field>
+        <field name="result_type">selection</field>
+        <field name="reference_value">Nil</field>
+    </record>
+
+    <record id="urine_rme_c11_v01" model="examination.possible.value">
+        <field name="name">Nil</field>
+        <field name="examination_line_id" ref="urine_rme_c11"/>
+        <field name="sequence">10</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="urine_rme_c11_v02" model="examination.possible.value">
+        <field name="name">Trace</field>
+        <field name="examination_line_id" ref="urine_rme_c11"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="urine_rme_c11_v03" model="examination.possible.value">
+        <field name="name">+</field>
+        <field name="examination_line_id" ref="urine_rme_c11"/>
+        <field name="sequence">30</field>
+    </record>
+
+    <record id="urine_rme_c11_v04" model="examination.possible.value">
+        <field name="name">++</field>
+        <field name="examination_line_id" ref="urine_rme_c11"/>
+        <field name="sequence">40</field>
+    </record>
+
+    <record id="urine_rme_c11_v05" model="examination.possible.value">
+        <field name="name">+++</field>
+        <field name="examination_line_id" ref="urine_rme_c11"/>
+        <field name="sequence">50</field>
+    </record>
+
+    <record id="urine_rme_c12" model="examination.entry.line">
+        <field name="name">Bile Salt</field>
+        <field name="examinationentry_id" ref="urine_rme"/>
+        <field name="sequence">120</field>
+        <field name="result_type">selection</field>
+        <field name="reference_value">Absent</field>
+    </record>
+
+    <record id="urine_rme_c12_v01" model="examination.possible.value">
+        <field name="name">Absent</field>
+        <field name="examination_line_id" ref="urine_rme_c12"/>
+        <field name="sequence">10</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="urine_rme_c12_v02" model="examination.possible.value">
+        <field name="name">Present</field>
+        <field name="examination_line_id" ref="urine_rme_c12"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="urine_rme_c13" model="examination.entry.line">
+        <field name="name">Bile Pigment</field>
+        <field name="examinationentry_id" ref="urine_rme"/>
+        <field name="sequence">130</field>
+        <field name="result_type">selection</field>
+        <field name="reference_value">Absent</field>
+    </record>
+
+    <record id="urine_rme_c13_v01" model="examination.possible.value">
+        <field name="name">Absent</field>
+        <field name="examination_line_id" ref="urine_rme_c13"/>
+        <field name="sequence">10</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="urine_rme_c13_v02" model="examination.possible.value">
+        <field name="name">Present</field>
+        <field name="examination_line_id" ref="urine_rme_c13"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="urine_rme_c14" model="examination.entry.line">
+        <field name="name">Urobilinogen</field>
+        <field name="examinationentry_id" ref="urine_rme"/>
+        <field name="sequence">140</field>
+        <field name="result_type">selection</field>
+        <field name="reference_value">Normal</field>
+    </record>
+
+    <record id="urine_rme_c14_v01" model="examination.possible.value">
+        <field name="name">Normal</field>
+        <field name="examination_line_id" ref="urine_rme_c14"/>
+        <field name="sequence">10</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="urine_rme_c14_v02" model="examination.possible.value">
+        <field name="name">Increased</field>
+        <field name="examination_line_id" ref="urine_rme_c14"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="urine_rme_c14_v03" model="examination.possible.value">
+        <field name="name">Absent</field>
+        <field name="examination_line_id" ref="urine_rme_c14"/>
+        <field name="sequence">30</field>
+    </record>
+
+    <record id="urine_rme_c15" model="examination.entry.line">
+        <field name="name">Nitrite</field>
+        <field name="examinationentry_id" ref="urine_rme"/>
+        <field name="sequence">150</field>
+        <field name="result_type">selection</field>
+        <field name="reference_value">Negative</field>
+    </record>
+
+    <record id="urine_rme_c15_v01" model="examination.possible.value">
+        <field name="name">Negative</field>
+        <field name="examination_line_id" ref="urine_rme_c15"/>
+        <field name="sequence">10</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="urine_rme_c15_v02" model="examination.possible.value">
+        <field name="name">Positive</field>
+        <field name="examination_line_id" ref="urine_rme_c15"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="urine_rme_c16" model="examination.entry.line">
+        <field name="name">MICROSCOPIC EXAMINATION</field>
+        <field name="examinationentry_id" ref="urine_rme"/>
+        <field name="sequence">160</field>
+        <field name="is_group_header" eval="True"/>
+        <field name="bold" eval="True"/>
+        <field name="result_type">text</field>
+    </record>
+
+    <record id="urine_rme_c17" model="examination.entry.line">
+        <field name="name">Pus Cells</field>
+        <field name="examinationentry_id" ref="urine_rme"/>
+        <field name="sequence">170</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">/HPF</field>
+        <field name="reference_value">0 - 5</field>
+        <field name="ref_high">5</field>
+    </record>
+
+    <record id="urine_rme_c18" model="examination.entry.line">
+        <field name="name">Red Blood Cells</field>
+        <field name="examinationentry_id" ref="urine_rme"/>
+        <field name="sequence">180</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">/HPF</field>
+        <field name="reference_value">0 - 2</field>
+        <field name="ref_high">2</field>
+    </record>
+
+    <record id="urine_rme_c19" model="examination.entry.line">
+        <field name="name">Epithelial Cells</field>
+        <field name="examinationentry_id" ref="urine_rme"/>
+        <field name="sequence">190</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">/HPF</field>
+        <field name="reference_value">0 - 5</field>
+        <field name="ref_high">5</field>
+    </record>
+
+    <record id="urine_rme_c20" model="examination.entry.line">
+        <field name="name">CASTS (/LPF)</field>
+        <field name="examinationentry_id" ref="urine_rme"/>
+        <field name="sequence">200</field>
+        <field name="is_group_header" eval="True"/>
+        <field name="bold" eval="True"/>
+        <field name="result_type">text</field>
+    </record>
+
+    <record id="urine_rme_c21" model="examination.entry.line">
+        <field name="name">Hyaline Cast</field>
+        <field name="examinationentry_id" ref="urine_rme"/>
+        <field name="sequence">210</field>
+        <field name="result_type">selection</field>
+        <field name="reference_value">Absent</field>
+    </record>
+
+    <record id="urine_rme_c21_v01" model="examination.possible.value">
+        <field name="name">Absent</field>
+        <field name="examination_line_id" ref="urine_rme_c21"/>
+        <field name="sequence">10</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="urine_rme_c21_v02" model="examination.possible.value">
+        <field name="name">Present</field>
+        <field name="examination_line_id" ref="urine_rme_c21"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="urine_rme_c22" model="examination.entry.line">
+        <field name="name">Granular Cast</field>
+        <field name="examinationentry_id" ref="urine_rme"/>
+        <field name="sequence">220</field>
+        <field name="result_type">selection</field>
+        <field name="reference_value">Absent</field>
+    </record>
+
+    <record id="urine_rme_c22_v01" model="examination.possible.value">
+        <field name="name">Absent</field>
+        <field name="examination_line_id" ref="urine_rme_c22"/>
+        <field name="sequence">10</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="urine_rme_c22_v02" model="examination.possible.value">
+        <field name="name">Present</field>
+        <field name="examination_line_id" ref="urine_rme_c22"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="urine_rme_c23" model="examination.entry.line">
+        <field name="name">Epithelial Cast</field>
+        <field name="examinationentry_id" ref="urine_rme"/>
+        <field name="sequence">230</field>
+        <field name="result_type">selection</field>
+        <field name="reference_value">Absent</field>
+    </record>
+
+    <record id="urine_rme_c23_v01" model="examination.possible.value">
+        <field name="name">Absent</field>
+        <field name="examination_line_id" ref="urine_rme_c23"/>
+        <field name="sequence">10</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="urine_rme_c23_v02" model="examination.possible.value">
+        <field name="name">Present</field>
+        <field name="examination_line_id" ref="urine_rme_c23"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="urine_rme_c24" model="examination.entry.line">
+        <field name="name">RBC Cast</field>
+        <field name="examinationentry_id" ref="urine_rme"/>
+        <field name="sequence">240</field>
+        <field name="result_type">selection</field>
+        <field name="reference_value">Absent</field>
+    </record>
+
+    <record id="urine_rme_c24_v01" model="examination.possible.value">
+        <field name="name">Absent</field>
+        <field name="examination_line_id" ref="urine_rme_c24"/>
+        <field name="sequence">10</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="urine_rme_c24_v02" model="examination.possible.value">
+        <field name="name">Present</field>
+        <field name="examination_line_id" ref="urine_rme_c24"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="urine_rme_c25" model="examination.entry.line">
+        <field name="name">WBC Cast</field>
+        <field name="examinationentry_id" ref="urine_rme"/>
+        <field name="sequence">250</field>
+        <field name="result_type">selection</field>
+        <field name="reference_value">Absent</field>
+    </record>
+
+    <record id="urine_rme_c25_v01" model="examination.possible.value">
+        <field name="name">Absent</field>
+        <field name="examination_line_id" ref="urine_rme_c25"/>
+        <field name="sequence">10</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="urine_rme_c25_v02" model="examination.possible.value">
+        <field name="name">Present</field>
+        <field name="examination_line_id" ref="urine_rme_c25"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="urine_rme_c26" model="examination.entry.line">
+        <field name="name">CRYSTALS</field>
+        <field name="examinationentry_id" ref="urine_rme"/>
+        <field name="sequence">260</field>
+        <field name="is_group_header" eval="True"/>
+        <field name="bold" eval="True"/>
+        <field name="result_type">text</field>
+    </record>
+
+    <record id="urine_rme_c27" model="examination.entry.line">
+        <field name="name">Calcium Oxalate</field>
+        <field name="examinationentry_id" ref="urine_rme"/>
+        <field name="sequence">270</field>
+        <field name="result_type">selection</field>
+        <field name="reference_value">Absent</field>
+    </record>
+
+    <record id="urine_rme_c27_v01" model="examination.possible.value">
+        <field name="name">Absent</field>
+        <field name="examination_line_id" ref="urine_rme_c27"/>
+        <field name="sequence">10</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="urine_rme_c27_v02" model="examination.possible.value">
+        <field name="name">Few</field>
+        <field name="examination_line_id" ref="urine_rme_c27"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="urine_rme_c27_v03" model="examination.possible.value">
+        <field name="name">Moderate</field>
+        <field name="examination_line_id" ref="urine_rme_c27"/>
+        <field name="sequence">30</field>
+    </record>
+
+    <record id="urine_rme_c27_v04" model="examination.possible.value">
+        <field name="name">Plenty</field>
+        <field name="examination_line_id" ref="urine_rme_c27"/>
+        <field name="sequence">40</field>
+    </record>
+
+    <record id="urine_rme_c28" model="examination.entry.line">
+        <field name="name">Uric Acid</field>
+        <field name="examinationentry_id" ref="urine_rme"/>
+        <field name="sequence">280</field>
+        <field name="result_type">selection</field>
+        <field name="reference_value">Absent</field>
+    </record>
+
+    <record id="urine_rme_c28_v01" model="examination.possible.value">
+        <field name="name">Absent</field>
+        <field name="examination_line_id" ref="urine_rme_c28"/>
+        <field name="sequence">10</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="urine_rme_c28_v02" model="examination.possible.value">
+        <field name="name">Few</field>
+        <field name="examination_line_id" ref="urine_rme_c28"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="urine_rme_c28_v03" model="examination.possible.value">
+        <field name="name">Moderate</field>
+        <field name="examination_line_id" ref="urine_rme_c28"/>
+        <field name="sequence">30</field>
+    </record>
+
+    <record id="urine_rme_c28_v04" model="examination.possible.value">
+        <field name="name">Plenty</field>
+        <field name="examination_line_id" ref="urine_rme_c28"/>
+        <field name="sequence">40</field>
+    </record>
+
+    <record id="urine_rme_c29" model="examination.entry.line">
+        <field name="name">Amorphous Phosphate</field>
+        <field name="examinationentry_id" ref="urine_rme"/>
+        <field name="sequence">290</field>
+        <field name="result_type">selection</field>
+        <field name="reference_value">Absent</field>
+    </record>
+
+    <record id="urine_rme_c29_v01" model="examination.possible.value">
+        <field name="name">Absent</field>
+        <field name="examination_line_id" ref="urine_rme_c29"/>
+        <field name="sequence">10</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="urine_rme_c29_v02" model="examination.possible.value">
+        <field name="name">Few</field>
+        <field name="examination_line_id" ref="urine_rme_c29"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="urine_rme_c29_v03" model="examination.possible.value">
+        <field name="name">Moderate</field>
+        <field name="examination_line_id" ref="urine_rme_c29"/>
+        <field name="sequence">30</field>
+    </record>
+
+    <record id="urine_rme_c29_v04" model="examination.possible.value">
+        <field name="name">Plenty</field>
+        <field name="examination_line_id" ref="urine_rme_c29"/>
+        <field name="sequence">40</field>
+    </record>
+
+    <record id="urine_rme_c30" model="examination.entry.line">
+        <field name="name">Amorphous Urates</field>
+        <field name="examinationentry_id" ref="urine_rme"/>
+        <field name="sequence">300</field>
+        <field name="result_type">selection</field>
+        <field name="reference_value">Absent</field>
+    </record>
+
+    <record id="urine_rme_c30_v01" model="examination.possible.value">
+        <field name="name">Absent</field>
+        <field name="examination_line_id" ref="urine_rme_c30"/>
+        <field name="sequence">10</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="urine_rme_c30_v02" model="examination.possible.value">
+        <field name="name">Few</field>
+        <field name="examination_line_id" ref="urine_rme_c30"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="urine_rme_c30_v03" model="examination.possible.value">
+        <field name="name">Moderate</field>
+        <field name="examination_line_id" ref="urine_rme_c30"/>
+        <field name="sequence">30</field>
+    </record>
+
+    <record id="urine_rme_c30_v04" model="examination.possible.value">
+        <field name="name">Plenty</field>
+        <field name="examination_line_id" ref="urine_rme_c30"/>
+        <field name="sequence">40</field>
+    </record>
+
+    <record id="urine_rme_c31" model="examination.entry.line">
+        <field name="name">Triple Phosphate</field>
+        <field name="examinationentry_id" ref="urine_rme"/>
+        <field name="sequence">310</field>
+        <field name="result_type">selection</field>
+        <field name="reference_value">Absent</field>
+    </record>
+
+    <record id="urine_rme_c31_v01" model="examination.possible.value">
+        <field name="name">Absent</field>
+        <field name="examination_line_id" ref="urine_rme_c31"/>
+        <field name="sequence">10</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="urine_rme_c31_v02" model="examination.possible.value">
+        <field name="name">Few</field>
+        <field name="examination_line_id" ref="urine_rme_c31"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="urine_rme_c31_v03" model="examination.possible.value">
+        <field name="name">Moderate</field>
+        <field name="examination_line_id" ref="urine_rme_c31"/>
+        <field name="sequence">30</field>
+    </record>
+
+    <record id="urine_rme_c31_v04" model="examination.possible.value">
+        <field name="name">Plenty</field>
+        <field name="examination_line_id" ref="urine_rme_c31"/>
+        <field name="sequence">40</field>
+    </record>
+
+    <record id="urine_rme_c32" model="examination.entry.line">
+        <field name="name">Calcium Carbonate</field>
+        <field name="examinationentry_id" ref="urine_rme"/>
+        <field name="sequence">320</field>
+        <field name="result_type">selection</field>
+        <field name="reference_value">Absent</field>
+    </record>
+
+    <record id="urine_rme_c32_v01" model="examination.possible.value">
+        <field name="name">Absent</field>
+        <field name="examination_line_id" ref="urine_rme_c32"/>
+        <field name="sequence">10</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="urine_rme_c32_v02" model="examination.possible.value">
+        <field name="name">Few</field>
+        <field name="examination_line_id" ref="urine_rme_c32"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="urine_rme_c32_v03" model="examination.possible.value">
+        <field name="name">Moderate</field>
+        <field name="examination_line_id" ref="urine_rme_c32"/>
+        <field name="sequence">30</field>
+    </record>
+
+    <record id="urine_rme_c32_v04" model="examination.possible.value">
+        <field name="name">Plenty</field>
+        <field name="examination_line_id" ref="urine_rme_c32"/>
+        <field name="sequence">40</field>
+    </record>
+
+    <record id="urine_rme_c33" model="examination.entry.line">
+        <field name="name">OTHERS</field>
+        <field name="examinationentry_id" ref="urine_rme"/>
+        <field name="sequence">330</field>
+        <field name="is_group_header" eval="True"/>
+        <field name="bold" eval="True"/>
+        <field name="result_type">text</field>
+    </record>
+
+    <record id="urine_rme_c34" model="examination.entry.line">
+        <field name="name">Candida / Yeast</field>
+        <field name="examinationentry_id" ref="urine_rme"/>
+        <field name="sequence">340</field>
+        <field name="result_type">selection</field>
+        <field name="reference_value">Absent</field>
+    </record>
+
+    <record id="urine_rme_c34_v01" model="examination.possible.value">
+        <field name="name">Absent</field>
+        <field name="examination_line_id" ref="urine_rme_c34"/>
+        <field name="sequence">10</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="urine_rme_c34_v02" model="examination.possible.value">
+        <field name="name">Present</field>
+        <field name="examination_line_id" ref="urine_rme_c34"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="urine_rme_c35" model="examination.entry.line">
+        <field name="name">Bacteria</field>
+        <field name="examinationentry_id" ref="urine_rme"/>
+        <field name="sequence">350</field>
+        <field name="result_type">selection</field>
+        <field name="reference_value">Absent</field>
+    </record>
+
+    <record id="urine_rme_c35_v01" model="examination.possible.value">
+        <field name="name">Absent</field>
+        <field name="examination_line_id" ref="urine_rme_c35"/>
+        <field name="sequence">10</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="urine_rme_c35_v02" model="examination.possible.value">
+        <field name="name">Few</field>
+        <field name="examination_line_id" ref="urine_rme_c35"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="urine_rme_c35_v03" model="examination.possible.value">
+        <field name="name">Moderate</field>
+        <field name="examination_line_id" ref="urine_rme_c35"/>
+        <field name="sequence">30</field>
+    </record>
+
+    <record id="urine_rme_c35_v04" model="examination.possible.value">
+        <field name="name">Plenty</field>
+        <field name="examination_line_id" ref="urine_rme_c35"/>
+        <field name="sequence">40</field>
+    </record>
+
+    <record id="urine_rme_c36" model="examination.entry.line">
+        <field name="name">Trichomonas</field>
+        <field name="examinationentry_id" ref="urine_rme"/>
+        <field name="sequence">360</field>
+        <field name="result_type">selection</field>
+        <field name="reference_value">Absent</field>
+    </record>
+
+    <record id="urine_rme_c36_v01" model="examination.possible.value">
+        <field name="name">Absent</field>
+        <field name="examination_line_id" ref="urine_rme_c36"/>
+        <field name="sequence">10</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="urine_rme_c36_v02" model="examination.possible.value">
+        <field name="name">Present</field>
+        <field name="examination_line_id" ref="urine_rme_c36"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="urine_rme_c37" model="examination.entry.line">
+        <field name="name">Comment</field>
+        <field name="examinationentry_id" ref="urine_rme"/>
+        <field name="sequence">370</field>
+        <field name="result_type">text</field>
+    </record>
+
+    <!-- Stool R/M/E (Routine & Microscopic Examination) -->
+    <record id="stool_rme" model="examination.entry">
+        <field name="name">Stool R/M/E (Routine &amp; Microscopic Examination)</field>
+        <field name="department" ref="dept_clinical_pathology"/>
+        <field name="accounts_id" ref="account_income_clinical_pathology"/>
+        <field name="rate">200</field>
+        <field name="base_rate">200</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">pathology</field>
+        <field name="report_layout">two_column</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_stool_container"/>
+        <field name="sample_type" ref="sample_stool"/>
+        <field name="default_method_id" ref="method_microscopy"/>
+        <field name="default_instrument_id" ref="instrument_microscope"/>
+        <field name="sample_req" eval="True"/>
+    </record>
+
+    <record id="stool_rme_c01" model="examination.entry.line">
+        <field name="name">PHYSICAL EXAMINATION</field>
+        <field name="examinationentry_id" ref="stool_rme"/>
+        <field name="sequence">10</field>
+        <field name="is_group_header" eval="True"/>
+        <field name="bold" eval="True"/>
+        <field name="result_type">text</field>
+    </record>
+
+    <record id="stool_rme_c02" model="examination.entry.line">
+        <field name="name">Colour</field>
+        <field name="examinationentry_id" ref="stool_rme"/>
+        <field name="sequence">20</field>
+        <field name="result_type">selection</field>
+        <field name="reference_value">Brown</field>
+    </record>
+
+    <record id="stool_rme_c02_v01" model="examination.possible.value">
+        <field name="name">Brown</field>
+        <field name="examination_line_id" ref="stool_rme_c02"/>
+        <field name="sequence">10</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="stool_rme_c02_v02" model="examination.possible.value">
+        <field name="name">Yellowish</field>
+        <field name="examination_line_id" ref="stool_rme_c02"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="stool_rme_c02_v03" model="examination.possible.value">
+        <field name="name">Greenish</field>
+        <field name="examination_line_id" ref="stool_rme_c02"/>
+        <field name="sequence">30</field>
+    </record>
+
+    <record id="stool_rme_c02_v04" model="examination.possible.value">
+        <field name="name">Blackish</field>
+        <field name="examination_line_id" ref="stool_rme_c02"/>
+        <field name="sequence">40</field>
+    </record>
+
+    <record id="stool_rme_c02_v05" model="examination.possible.value">
+        <field name="name">Clay Coloured</field>
+        <field name="examination_line_id" ref="stool_rme_c02"/>
+        <field name="sequence">50</field>
+    </record>
+
+    <record id="stool_rme_c03" model="examination.entry.line">
+        <field name="name">Consistency</field>
+        <field name="examinationentry_id" ref="stool_rme"/>
+        <field name="sequence">30</field>
+        <field name="result_type">selection</field>
+        <field name="reference_value">Formed</field>
+    </record>
+
+    <record id="stool_rme_c03_v01" model="examination.possible.value">
+        <field name="name">Formed</field>
+        <field name="examination_line_id" ref="stool_rme_c03"/>
+        <field name="sequence">10</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="stool_rme_c03_v02" model="examination.possible.value">
+        <field name="name">Semi-formed</field>
+        <field name="examination_line_id" ref="stool_rme_c03"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="stool_rme_c03_v03" model="examination.possible.value">
+        <field name="name">Loose</field>
+        <field name="examination_line_id" ref="stool_rme_c03"/>
+        <field name="sequence">30</field>
+    </record>
+
+    <record id="stool_rme_c03_v04" model="examination.possible.value">
+        <field name="name">Watery</field>
+        <field name="examination_line_id" ref="stool_rme_c03"/>
+        <field name="sequence">40</field>
+    </record>
+
+    <record id="stool_rme_c03_v05" model="examination.possible.value">
+        <field name="name">Hard</field>
+        <field name="examination_line_id" ref="stool_rme_c03"/>
+        <field name="sequence">50</field>
+    </record>
+
+    <record id="stool_rme_c04" model="examination.entry.line">
+        <field name="name">Mucus</field>
+        <field name="examinationentry_id" ref="stool_rme"/>
+        <field name="sequence">40</field>
+        <field name="result_type">selection</field>
+        <field name="reference_value">Absent</field>
+    </record>
+
+    <record id="stool_rme_c04_v01" model="examination.possible.value">
+        <field name="name">Absent</field>
+        <field name="examination_line_id" ref="stool_rme_c04"/>
+        <field name="sequence">10</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="stool_rme_c04_v02" model="examination.possible.value">
+        <field name="name">Present</field>
+        <field name="examination_line_id" ref="stool_rme_c04"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="stool_rme_c05" model="examination.entry.line">
+        <field name="name">Blood (Macroscopic)</field>
+        <field name="examinationentry_id" ref="stool_rme"/>
+        <field name="sequence">50</field>
+        <field name="result_type">selection</field>
+        <field name="reference_value">Absent</field>
+    </record>
+
+    <record id="stool_rme_c05_v01" model="examination.possible.value">
+        <field name="name">Absent</field>
+        <field name="examination_line_id" ref="stool_rme_c05"/>
+        <field name="sequence">10</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="stool_rme_c05_v02" model="examination.possible.value">
+        <field name="name">Present</field>
+        <field name="examination_line_id" ref="stool_rme_c05"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="stool_rme_c06" model="examination.entry.line">
+        <field name="name">MICROSCOPIC EXAMINATION</field>
+        <field name="examinationentry_id" ref="stool_rme"/>
+        <field name="sequence">60</field>
+        <field name="is_group_header" eval="True"/>
+        <field name="bold" eval="True"/>
+        <field name="result_type">text</field>
+    </record>
+
+    <record id="stool_rme_c07" model="examination.entry.line">
+        <field name="name">Pus Cells</field>
+        <field name="examinationentry_id" ref="stool_rme"/>
+        <field name="sequence">70</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">/HPF</field>
+        <field name="reference_value">0 - 2</field>
+        <field name="ref_high">2</field>
+    </record>
+
+    <record id="stool_rme_c08" model="examination.entry.line">
+        <field name="name">Red Blood Cells</field>
+        <field name="examinationentry_id" ref="stool_rme"/>
+        <field name="sequence">80</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">/HPF</field>
+        <field name="reference_value">Nil</field>
+        <field name="ref_high">0</field>
+    </record>
+
+    <record id="stool_rme_c09" model="examination.entry.line">
+        <field name="name">Macrophages</field>
+        <field name="examinationentry_id" ref="stool_rme"/>
+        <field name="sequence">90</field>
+        <field name="result_type">selection</field>
+        <field name="reference_value">Absent</field>
+    </record>
+
+    <record id="stool_rme_c09_v01" model="examination.possible.value">
+        <field name="name">Absent</field>
+        <field name="examination_line_id" ref="stool_rme_c09"/>
+        <field name="sequence">10</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="stool_rme_c09_v02" model="examination.possible.value">
+        <field name="name">Present</field>
+        <field name="examination_line_id" ref="stool_rme_c09"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="stool_rme_c10" model="examination.entry.line">
+        <field name="name">Vegetable Cells</field>
+        <field name="examinationentry_id" ref="stool_rme"/>
+        <field name="sequence">100</field>
+        <field name="result_type">selection</field>
+        <field name="reference_value">Absent</field>
+    </record>
+
+    <record id="stool_rme_c10_v01" model="examination.possible.value">
+        <field name="name">Absent</field>
+        <field name="examination_line_id" ref="stool_rme_c10"/>
+        <field name="sequence">10</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="stool_rme_c10_v02" model="examination.possible.value">
+        <field name="name">Few</field>
+        <field name="examination_line_id" ref="stool_rme_c10"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="stool_rme_c10_v03" model="examination.possible.value">
+        <field name="name">Moderate</field>
+        <field name="examination_line_id" ref="stool_rme_c10"/>
+        <field name="sequence">30</field>
+    </record>
+
+    <record id="stool_rme_c10_v04" model="examination.possible.value">
+        <field name="name">Plenty</field>
+        <field name="examination_line_id" ref="stool_rme_c10"/>
+        <field name="sequence">40</field>
+    </record>
+
+    <record id="stool_rme_c11" model="examination.entry.line">
+        <field name="name">Fat Globules</field>
+        <field name="examinationentry_id" ref="stool_rme"/>
+        <field name="sequence">110</field>
+        <field name="result_type">selection</field>
+        <field name="reference_value">Absent</field>
+    </record>
+
+    <record id="stool_rme_c11_v01" model="examination.possible.value">
+        <field name="name">Absent</field>
+        <field name="examination_line_id" ref="stool_rme_c11"/>
+        <field name="sequence">10</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="stool_rme_c11_v02" model="examination.possible.value">
+        <field name="name">Few</field>
+        <field name="examination_line_id" ref="stool_rme_c11"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="stool_rme_c11_v03" model="examination.possible.value">
+        <field name="name">Moderate</field>
+        <field name="examination_line_id" ref="stool_rme_c11"/>
+        <field name="sequence">30</field>
+    </record>
+
+    <record id="stool_rme_c11_v04" model="examination.possible.value">
+        <field name="name">Plenty</field>
+        <field name="examination_line_id" ref="stool_rme_c11"/>
+        <field name="sequence">40</field>
+    </record>
+
+    <record id="stool_rme_c12" model="examination.entry.line">
+        <field name="name">Starch Granules</field>
+        <field name="examinationentry_id" ref="stool_rme"/>
+        <field name="sequence">120</field>
+        <field name="result_type">selection</field>
+        <field name="reference_value">Absent</field>
+    </record>
+
+    <record id="stool_rme_c12_v01" model="examination.possible.value">
+        <field name="name">Absent</field>
+        <field name="examination_line_id" ref="stool_rme_c12"/>
+        <field name="sequence">10</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="stool_rme_c12_v02" model="examination.possible.value">
+        <field name="name">Present</field>
+        <field name="examination_line_id" ref="stool_rme_c12"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="stool_rme_c13" model="examination.entry.line">
+        <field name="name">PARASITOLOGY</field>
+        <field name="examinationentry_id" ref="stool_rme"/>
+        <field name="sequence">130</field>
+        <field name="is_group_header" eval="True"/>
+        <field name="bold" eval="True"/>
+        <field name="result_type">text</field>
+    </record>
+
+    <record id="stool_rme_c14" model="examination.entry.line">
+        <field name="name">Ova</field>
+        <field name="examinationentry_id" ref="stool_rme"/>
+        <field name="sequence">140</field>
+        <field name="result_type">selection</field>
+        <field name="reference_value">Not Found</field>
+    </record>
+
+    <record id="stool_rme_c14_v01" model="examination.possible.value">
+        <field name="name">Not Found</field>
+        <field name="examination_line_id" ref="stool_rme_c14"/>
+        <field name="sequence">10</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="stool_rme_c14_v02" model="examination.possible.value">
+        <field name="name">Ascaris lumbricoides</field>
+        <field name="examination_line_id" ref="stool_rme_c14"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="stool_rme_c14_v03" model="examination.possible.value">
+        <field name="name">Hookworm</field>
+        <field name="examination_line_id" ref="stool_rme_c14"/>
+        <field name="sequence">30</field>
+    </record>
+
+    <record id="stool_rme_c14_v04" model="examination.possible.value">
+        <field name="name">Trichuris trichiura</field>
+        <field name="examination_line_id" ref="stool_rme_c14"/>
+        <field name="sequence">40</field>
+    </record>
+
+    <record id="stool_rme_c14_v05" model="examination.possible.value">
+        <field name="name">Enterobius vermicularis</field>
+        <field name="examination_line_id" ref="stool_rme_c14"/>
+        <field name="sequence">50</field>
+    </record>
+
+    <record id="stool_rme_c14_v06" model="examination.possible.value">
+        <field name="name">Hymenolepis nana</field>
+        <field name="examination_line_id" ref="stool_rme_c14"/>
+        <field name="sequence">60</field>
+    </record>
+
+    <record id="stool_rme_c14_v07" model="examination.possible.value">
+        <field name="name">Other - see comment</field>
+        <field name="examination_line_id" ref="stool_rme_c14"/>
+        <field name="sequence">70</field>
+    </record>
+
+    <record id="stool_rme_c15" model="examination.entry.line">
+        <field name="name">Cyst</field>
+        <field name="examinationentry_id" ref="stool_rme"/>
+        <field name="sequence">150</field>
+        <field name="result_type">selection</field>
+        <field name="reference_value">Not Found</field>
+    </record>
+
+    <record id="stool_rme_c15_v01" model="examination.possible.value">
+        <field name="name">Not Found</field>
+        <field name="examination_line_id" ref="stool_rme_c15"/>
+        <field name="sequence">10</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="stool_rme_c15_v02" model="examination.possible.value">
+        <field name="name">Entamoeba histolytica</field>
+        <field name="examination_line_id" ref="stool_rme_c15"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="stool_rme_c15_v03" model="examination.possible.value">
+        <field name="name">Entamoeba coli</field>
+        <field name="examination_line_id" ref="stool_rme_c15"/>
+        <field name="sequence">30</field>
+    </record>
+
+    <record id="stool_rme_c15_v04" model="examination.possible.value">
+        <field name="name">Giardia lamblia</field>
+        <field name="examination_line_id" ref="stool_rme_c15"/>
+        <field name="sequence">40</field>
+    </record>
+
+    <record id="stool_rme_c15_v05" model="examination.possible.value">
+        <field name="name">Other - see comment</field>
+        <field name="examination_line_id" ref="stool_rme_c15"/>
+        <field name="sequence">50</field>
+    </record>
+
+    <record id="stool_rme_c16" model="examination.entry.line">
+        <field name="name">Trophozoite</field>
+        <field name="examinationentry_id" ref="stool_rme"/>
+        <field name="sequence">160</field>
+        <field name="result_type">selection</field>
+        <field name="reference_value">Not Found</field>
+    </record>
+
+    <record id="stool_rme_c16_v01" model="examination.possible.value">
+        <field name="name">Not Found</field>
+        <field name="examination_line_id" ref="stool_rme_c16"/>
+        <field name="sequence">10</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="stool_rme_c16_v02" model="examination.possible.value">
+        <field name="name">Entamoeba histolytica</field>
+        <field name="examination_line_id" ref="stool_rme_c16"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="stool_rme_c16_v03" model="examination.possible.value">
+        <field name="name">Giardia lamblia</field>
+        <field name="examination_line_id" ref="stool_rme_c16"/>
+        <field name="sequence">30</field>
+    </record>
+
+    <record id="stool_rme_c17" model="examination.entry.line">
+        <field name="name">Comment</field>
+        <field name="examinationentry_id" ref="stool_rme"/>
+        <field name="sequence">170</field>
+        <field name="result_type">text</field>
+    </record>
+
+    <!-- Stool for Occult Blood (OBT) -->
+    <record id="stool_obt" model="examination.entry">
+        <field name="name">Stool for Occult Blood (OBT)</field>
+        <field name="department" ref="dept_clinical_pathology"/>
+        <field name="accounts_id" ref="account_income_clinical_pathology"/>
+        <field name="rate">300</field>
+        <field name="base_rate">300</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">pathology</field>
+        <field name="report_layout">tabular</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_stool_container"/>
+        <field name="sample_type" ref="sample_stool"/>
+        <field name="default_method_id" ref="method_microscopy"/>
+        <field name="default_instrument_id" ref="instrument_microscope"/>
+        <field name="sample_req" eval="True"/>
+    </record>
+
+    <record id="stool_obt_c01" model="examination.entry.line">
+        <field name="name">Occult Blood</field>
+        <field name="examinationentry_id" ref="stool_obt"/>
+        <field name="sequence">10</field>
+        <field name="result_type">selection</field>
+        <field name="reference_value">Negative</field>
+    </record>
+
+    <record id="stool_obt_c01_v01" model="examination.possible.value">
+        <field name="name">Negative</field>
+        <field name="examination_line_id" ref="stool_obt_c01"/>
+        <field name="sequence">10</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="stool_obt_c01_v02" model="examination.possible.value">
+        <field name="name">Positive</field>
+        <field name="examination_line_id" ref="stool_obt_c01"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <!-- Stool for Reducing Substance -->
+    <record id="stool_reducing_substance" model="examination.entry">
+        <field name="name">Stool for Reducing Substance</field>
+        <field name="department" ref="dept_clinical_pathology"/>
+        <field name="accounts_id" ref="account_income_clinical_pathology"/>
+        <field name="rate">350</field>
+        <field name="base_rate">350</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">pathology</field>
+        <field name="report_layout">tabular</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_stool_container"/>
+        <field name="sample_type" ref="sample_stool"/>
+        <field name="default_method_id" ref="method_microscopy"/>
+        <field name="default_instrument_id" ref="instrument_microscope"/>
+        <field name="sample_req" eval="True"/>
+    </record>
+
+    <record id="stool_reducing_substance_c01" model="examination.entry.line">
+        <field name="name">Reducing Substance</field>
+        <field name="examinationentry_id" ref="stool_reducing_substance"/>
+        <field name="sequence">10</field>
+        <field name="result_type">selection</field>
+        <field name="reference_value">Absent</field>
+    </record>
+
+    <record id="stool_reducing_substance_c01_v01" model="examination.possible.value">
+        <field name="name">Absent</field>
+        <field name="examination_line_id" ref="stool_reducing_substance_c01"/>
+        <field name="sequence">10</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="stool_reducing_substance_c01_v02" model="examination.possible.value">
+        <field name="name">Trace</field>
+        <field name="examination_line_id" ref="stool_reducing_substance_c01"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="stool_reducing_substance_c01_v03" model="examination.possible.value">
+        <field name="name">+</field>
+        <field name="examination_line_id" ref="stool_reducing_substance_c01"/>
+        <field name="sequence">30</field>
+    </record>
+
+    <record id="stool_reducing_substance_c01_v04" model="examination.possible.value">
+        <field name="name">++</field>
+        <field name="examination_line_id" ref="stool_reducing_substance_c01"/>
+        <field name="sequence">40</field>
+    </record>
+
+    <record id="stool_reducing_substance_c01_v05" model="examination.possible.value">
+        <field name="name">+++</field>
+        <field name="examination_line_id" ref="stool_reducing_substance_c01"/>
+        <field name="sequence">50</field>
+    </record>
+
+    <record id="stool_reducing_substance_c02" model="examination.entry.line">
+        <field name="name">Stool pH</field>
+        <field name="examinationentry_id" ref="stool_reducing_substance"/>
+        <field name="sequence">20</field>
+        <field name="result_type">numeric</field>
+        <field name="reference_value">6.0 - 7.5</field>
+        <field name="ref_low">6.0</field>
+        <field name="ref_high">7.5</field>
+    </record>
+
+    <!-- Semen Analysis -->
+    <record id="semen_analysis" model="examination.entry">
+        <field name="name">Semen Analysis</field>
+        <field name="department" ref="dept_clinical_pathology"/>
+        <field name="accounts_id" ref="account_income_clinical_pathology"/>
+        <field name="rate">1000</field>
+        <field name="base_rate">1000</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">pathology</field>
+        <field name="report_layout">tabular</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_sterile_pot"/>
+        <field name="sample_type" ref="sample_semen"/>
+        <field name="default_method_id" ref="method_microscopy"/>
+        <field name="default_instrument_id" ref="instrument_microscope"/>
+        <field name="sample_req" eval="True"/>
+        <field name="needs_separate_tube" eval="True"/>
+    </record>
+
+    <record id="semen_analysis_c01" model="examination.entry.line">
+        <field name="name">PHYSICAL EXAMINATION</field>
+        <field name="examinationentry_id" ref="semen_analysis"/>
+        <field name="sequence">10</field>
+        <field name="is_group_header" eval="True"/>
+        <field name="bold" eval="True"/>
+        <field name="result_type">text</field>
+    </record>
+
+    <record id="semen_analysis_c02" model="examination.entry.line">
+        <field name="name">Abstinence Period</field>
+        <field name="examinationentry_id" ref="semen_analysis"/>
+        <field name="sequence">20</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">days</field>
+        <field name="reference_value">2 - 7 days recommended</field>
+    </record>
+
+    <record id="semen_analysis_c03" model="examination.entry.line">
+        <field name="name">Volume</field>
+        <field name="examinationentry_id" ref="semen_analysis"/>
+        <field name="sequence">30</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">mL</field>
+        <field name="reference_value">&gt;= 1.4</field>
+        <field name="ref_low">1.4</field>
+    </record>
+
+    <record id="semen_analysis_c04" model="examination.entry.line">
+        <field name="name">Colour</field>
+        <field name="examinationentry_id" ref="semen_analysis"/>
+        <field name="sequence">40</field>
+        <field name="result_type">selection</field>
+        <field name="reference_value">Greyish White</field>
+    </record>
+
+    <record id="semen_analysis_c04_v01" model="examination.possible.value">
+        <field name="name">Greyish White</field>
+        <field name="examination_line_id" ref="semen_analysis_c04"/>
+        <field name="sequence">10</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="semen_analysis_c04_v02" model="examination.possible.value">
+        <field name="name">Yellowish</field>
+        <field name="examination_line_id" ref="semen_analysis_c04"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="semen_analysis_c04_v03" model="examination.possible.value">
+        <field name="name">Reddish</field>
+        <field name="examination_line_id" ref="semen_analysis_c04"/>
+        <field name="sequence">30</field>
+    </record>
+
+    <record id="semen_analysis_c05" model="examination.entry.line">
+        <field name="name">Liquefaction Time</field>
+        <field name="examinationentry_id" ref="semen_analysis"/>
+        <field name="sequence">50</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">minutes</field>
+        <field name="reference_value">&lt; 60</field>
+        <field name="ref_high">60</field>
+    </record>
+
+    <record id="semen_analysis_c06" model="examination.entry.line">
+        <field name="name">Viscosity</field>
+        <field name="examinationentry_id" ref="semen_analysis"/>
+        <field name="sequence">60</field>
+        <field name="result_type">selection</field>
+        <field name="reference_value">Normal</field>
+    </record>
+
+    <record id="semen_analysis_c06_v01" model="examination.possible.value">
+        <field name="name">Normal</field>
+        <field name="examination_line_id" ref="semen_analysis_c06"/>
+        <field name="sequence">10</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="semen_analysis_c06_v02" model="examination.possible.value">
+        <field name="name">Increased</field>
+        <field name="examination_line_id" ref="semen_analysis_c06"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="semen_analysis_c07" model="examination.entry.line">
+        <field name="name">pH</field>
+        <field name="examinationentry_id" ref="semen_analysis"/>
+        <field name="sequence">70</field>
+        <field name="result_type">numeric</field>
+        <field name="reference_value">&gt;= 7.2</field>
+        <field name="ref_low">7.2</field>
+    </record>
+
+    <record id="semen_analysis_c08" model="examination.entry.line">
+        <field name="name">MICROSCOPIC EXAMINATION</field>
+        <field name="examinationentry_id" ref="semen_analysis"/>
+        <field name="sequence">80</field>
+        <field name="is_group_header" eval="True"/>
+        <field name="bold" eval="True"/>
+        <field name="result_type">text</field>
+    </record>
+
+    <record id="semen_analysis_c09" model="examination.entry.line">
+        <field name="name">Sperm Concentration</field>
+        <field name="examinationentry_id" ref="semen_analysis"/>
+        <field name="sequence">90</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">million/mL</field>
+        <field name="reference_value">&gt;= 16</field>
+        <field name="ref_low">16</field>
+    </record>
+
+    <record id="semen_analysis_c10" model="examination.entry.line">
+        <field name="name">Total Sperm Count</field>
+        <field name="examinationentry_id" ref="semen_analysis"/>
+        <field name="sequence">100</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">million/ejaculate</field>
+        <field name="reference_value">&gt;= 39</field>
+        <field name="ref_low">39</field>
+    </record>
+
+    <record id="semen_analysis_c11" model="examination.entry.line">
+        <field name="name">Progressive Motility</field>
+        <field name="examinationentry_id" ref="semen_analysis"/>
+        <field name="sequence">110</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">%</field>
+        <field name="reference_value">&gt;= 30</field>
+        <field name="ref_low">30</field>
+    </record>
+
+    <record id="semen_analysis_c12" model="examination.entry.line">
+        <field name="name">Total Motility</field>
+        <field name="examinationentry_id" ref="semen_analysis"/>
+        <field name="sequence">120</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">%</field>
+        <field name="reference_value">&gt;= 42</field>
+        <field name="ref_low">42</field>
+    </record>
+
+    <record id="semen_analysis_c13" model="examination.entry.line">
+        <field name="name">Non-motile</field>
+        <field name="examinationentry_id" ref="semen_analysis"/>
+        <field name="sequence">130</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">%</field>
+    </record>
+
+    <record id="semen_analysis_c14" model="examination.entry.line">
+        <field name="name">Normal Morphology</field>
+        <field name="examinationentry_id" ref="semen_analysis"/>
+        <field name="sequence">140</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">%</field>
+        <field name="reference_value">&gt;= 4</field>
+        <field name="ref_low">4</field>
+    </record>
+
+    <record id="semen_analysis_c15" model="examination.entry.line">
+        <field name="name">Vitality (Live Sperm)</field>
+        <field name="examinationentry_id" ref="semen_analysis"/>
+        <field name="sequence">150</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">%</field>
+        <field name="reference_value">&gt;= 54</field>
+        <field name="ref_low">54</field>
+    </record>
+
+    <record id="semen_analysis_c16" model="examination.entry.line">
+        <field name="name">Pus Cells</field>
+        <field name="examinationentry_id" ref="semen_analysis"/>
+        <field name="sequence">160</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">/HPF</field>
+        <field name="reference_value">&lt; 5</field>
+        <field name="ref_high">5</field>
+    </record>
+
+    <record id="semen_analysis_c17" model="examination.entry.line">
+        <field name="name">Red Blood Cells</field>
+        <field name="examinationentry_id" ref="semen_analysis"/>
+        <field name="sequence">170</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">/HPF</field>
+        <field name="reference_value">Nil</field>
+        <field name="ref_high">0</field>
+    </record>
+
+    <record id="semen_analysis_c18" model="examination.entry.line">
+        <field name="name">Impression</field>
+        <field name="examinationentry_id" ref="semen_analysis"/>
+        <field name="sequence">180</field>
+        <field name="result_type">selection</field>
+        <field name="reference_value">Normozoospermia</field>
+    </record>
+
+    <record id="semen_analysis_c18_v01" model="examination.possible.value">
+        <field name="name">Normozoospermia</field>
+        <field name="examination_line_id" ref="semen_analysis_c18"/>
+        <field name="sequence">10</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="semen_analysis_c18_v02" model="examination.possible.value">
+        <field name="name">Oligozoospermia</field>
+        <field name="examination_line_id" ref="semen_analysis_c18"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="semen_analysis_c18_v03" model="examination.possible.value">
+        <field name="name">Asthenozoospermia</field>
+        <field name="examination_line_id" ref="semen_analysis_c18"/>
+        <field name="sequence">30</field>
+    </record>
+
+    <record id="semen_analysis_c18_v04" model="examination.possible.value">
+        <field name="name">Teratozoospermia</field>
+        <field name="examination_line_id" ref="semen_analysis_c18"/>
+        <field name="sequence">40</field>
+    </record>
+
+    <record id="semen_analysis_c18_v05" model="examination.possible.value">
+        <field name="name">Oligoasthenoteratozoospermia</field>
+        <field name="examination_line_id" ref="semen_analysis_c18"/>
+        <field name="sequence">50</field>
+    </record>
+
+    <record id="semen_analysis_c18_v06" model="examination.possible.value">
+        <field name="name">Azoospermia</field>
+        <field name="examination_line_id" ref="semen_analysis_c18"/>
+        <field name="sequence">60</field>
+    </record>
+
+    <record id="semen_analysis_c18_v07" model="examination.possible.value">
+        <field name="name">Other - see comment</field>
+        <field name="examination_line_id" ref="semen_analysis_c18"/>
+        <field name="sequence">70</field>
+    </record>
+
+    <record id="semen_analysis_c19" model="examination.entry.line">
+        <field name="name">Comment</field>
+        <field name="examinationentry_id" ref="semen_analysis"/>
+        <field name="sequence">190</field>
+        <field name="result_type">text</field>
+        <field name="default_value">Reference values as per WHO Laboratory Manual, 6th Edition (2021).</field>
+    </record>
+
+    <!-- HsCRP (High Sensitivity CRP) -->
+    <record id="hscrp" model="examination.entry">
+        <field name="name">HsCRP (High Sensitivity CRP)</field>
+        <field name="department" ref="dept_clinical_pathology"/>
+        <field name="accounts_id" ref="account_income_clinical_pathology"/>
+        <field name="rate">600</field>
+        <field name="base_rate">600</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">pathology</field>
+        <field name="report_layout">tabular</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_gold_sst"/>
+        <field name="sample_type" ref="sample_serum"/>
+        <field name="default_method_id" ref="method_clia"/>
+        <field name="default_instrument_id" ref="instrument_immunoassay"/>
+        <field name="sample_req" eval="True"/>
+    </record>
+
+    <record id="hscrp_c01" model="examination.entry.line">
+        <field name="name">hs-CRP</field>
+        <field name="examinationentry_id" ref="hscrp"/>
+        <field name="sequence">10</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">mg/L</field>
+        <field name="reference_value">Low risk: &lt; 1.0 | Average risk: 1.0 - 3.0 | High risk: &gt; 3.0</field>
+        <field name="ref_high">3.0</field>
+    </record>
+
+    <!-- Intraocular Pressure (IOP) -->
+    <record id="intraocular_pressure" model="examination.entry">
+        <field name="name">Intraocular Pressure (IOP)</field>
+        <field name="department" ref="dept_clinical_pathology"/>
+        <field name="accounts_id" ref="account_income_clinical_pathology"/>
+        <field name="rate">100</field>
+        <field name="base_rate">100</field>
+        <field name="service_group">procedure</field>
+        <field name="report_type">other</field>
+        <field name="default_method_id" ref="method_manual"/>
+        <field name="sample_req" eval="False"/>
+        <field name="manual" eval="True"/>
+    </record>
+
+    <record id="intraocular_pressure_c01" model="examination.entry.line">
+        <field name="name">Right Eye (OD)</field>
+        <field name="examinationentry_id" ref="intraocular_pressure"/>
+        <field name="sequence">10</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">mmHg</field>
+        <field name="reference_value">10 - 21</field>
+        <field name="ref_low">10</field>
+        <field name="ref_high">21</field>
+        <field name="critical_high">30</field>
+    </record>
+
+    <record id="intraocular_pressure_c02" model="examination.entry.line">
+        <field name="name">Left Eye (OS)</field>
+        <field name="examinationentry_id" ref="intraocular_pressure"/>
+        <field name="sequence">20</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">mmHg</field>
+        <field name="reference_value">10 - 21</field>
+        <field name="ref_low">10</field>
+        <field name="ref_high">21</field>
+        <field name="critical_high">30</field>
+    </record>
+
+    <!-- Blood Pressure (BP) -->
+    <record id="blood_pressure" model="examination.entry">
+        <field name="name">Blood Pressure (BP)</field>
+        <field name="department" ref="dept_clinical_pathology"/>
+        <field name="accounts_id" ref="account_income_clinical_pathology"/>
+        <field name="rate">50</field>
+        <field name="base_rate">50</field>
+        <field name="service_group">procedure</field>
+        <field name="report_type">other</field>
+        <field name="default_method_id" ref="method_manual"/>
+        <field name="sample_req" eval="False"/>
+        <field name="lab_not_required" eval="True"/>
+        <field name="manual" eval="True"/>
+    </record>
+
+    <record id="blood_pressure_c01" model="examination.entry.line">
+        <field name="name">Systolic</field>
+        <field name="examinationentry_id" ref="blood_pressure"/>
+        <field name="sequence">10</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">mmHg</field>
+        <field name="reference_value">90 - 120</field>
+        <field name="ref_low">90</field>
+        <field name="ref_high">120</field>
+        <field name="critical_high">180</field>
+    </record>
+
+    <record id="blood_pressure_c02" model="examination.entry.line">
+        <field name="name">Diastolic</field>
+        <field name="examinationentry_id" ref="blood_pressure"/>
+        <field name="sequence">20</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">mmHg</field>
+        <field name="reference_value">60 - 80</field>
+        <field name="ref_low">60</field>
+        <field name="ref_high">80</field>
+        <field name="critical_high">120</field>
+    </record>
+
+</odoo>

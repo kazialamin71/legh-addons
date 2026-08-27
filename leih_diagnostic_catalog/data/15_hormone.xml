@@ -1,0 +1,805 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Hormone & Endocrinology - 21 catalogue items.
+
+    GENERATED FILE - do not edit by hand.
+    Source: tools/items/hormone.py    Rebuild: python3 tools/build_catalogue.py
+
+    Rates carried over from the legacy export are PROVISIONAL and are expected
+    to be revised before go-live.
+-->
+<odoo noupdate="1">
+    <!-- TSH -->
+    <record id="tsh" model="examination.entry">
+        <field name="name">TSH</field>
+        <field name="department" ref="dept_hormone"/>
+        <field name="accounts_id" ref="account_income_hormone"/>
+        <field name="rate">800</field>
+        <field name="base_rate">800</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">pathology</field>
+        <field name="report_layout">tabular</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_gold_sst"/>
+        <field name="sample_type" ref="sample_serum"/>
+        <field name="default_method_id" ref="method_clia"/>
+        <field name="default_instrument_id" ref="instrument_immunoassay"/>
+        <field name="sample_req" eval="True"/>
+    </record>
+
+    <record id="tsh_c01" model="examination.entry.line">
+        <field name="name">TSH</field>
+        <field name="examinationentry_id" ref="tsh"/>
+        <field name="sequence">10</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">uIU/mL</field>
+        <field name="reference_value">0.35 - 4.94</field>
+        <field name="ref_low">0.35</field>
+        <field name="ref_high">4.94</field>
+    </record>
+
+    <!-- T3 (Total Triiodothyronine) -->
+    <record id="t3" model="examination.entry">
+        <field name="name">T3 (Total Triiodothyronine)</field>
+        <field name="department" ref="dept_hormone"/>
+        <field name="accounts_id" ref="account_income_hormone"/>
+        <field name="rate">800</field>
+        <field name="base_rate">800</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">pathology</field>
+        <field name="report_layout">tabular</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_gold_sst"/>
+        <field name="sample_type" ref="sample_serum"/>
+        <field name="default_method_id" ref="method_clia"/>
+        <field name="default_instrument_id" ref="instrument_immunoassay"/>
+        <field name="sample_req" eval="True"/>
+    </record>
+
+    <record id="t3_c01" model="examination.entry.line">
+        <field name="name">T3</field>
+        <field name="examinationentry_id" ref="t3"/>
+        <field name="sequence">10</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">ng/mL</field>
+        <field name="reference_value">0.58 - 1.59</field>
+        <field name="ref_low">0.58</field>
+        <field name="ref_high">1.59</field>
+    </record>
+
+    <!-- T4 (Total Thyroxine) -->
+    <record id="t4" model="examination.entry">
+        <field name="name">T4 (Total Thyroxine)</field>
+        <field name="department" ref="dept_hormone"/>
+        <field name="accounts_id" ref="account_income_hormone"/>
+        <field name="rate">800</field>
+        <field name="base_rate">800</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">pathology</field>
+        <field name="report_layout">tabular</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_gold_sst"/>
+        <field name="sample_type" ref="sample_serum"/>
+        <field name="default_method_id" ref="method_clia"/>
+        <field name="default_instrument_id" ref="instrument_immunoassay"/>
+        <field name="sample_req" eval="True"/>
+    </record>
+
+    <record id="t4_c01" model="examination.entry.line">
+        <field name="name">T4</field>
+        <field name="examinationentry_id" ref="t4"/>
+        <field name="sequence">10</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">ug/dL</field>
+        <field name="reference_value">4.87 - 11.72</field>
+        <field name="ref_low">4.87</field>
+        <field name="ref_high">11.72</field>
+    </record>
+
+    <!-- FT3 (Free T3) -->
+    <record id="ft3" model="examination.entry">
+        <field name="name">FT3 (Free T3)</field>
+        <field name="department" ref="dept_hormone"/>
+        <field name="accounts_id" ref="account_income_hormone"/>
+        <field name="rate">1000</field>
+        <field name="base_rate">1000</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">pathology</field>
+        <field name="report_layout">tabular</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_gold_sst"/>
+        <field name="sample_type" ref="sample_serum"/>
+        <field name="default_method_id" ref="method_clia"/>
+        <field name="default_instrument_id" ref="instrument_immunoassay"/>
+        <field name="sample_req" eval="True"/>
+    </record>
+
+    <record id="ft3_c01" model="examination.entry.line">
+        <field name="name">FT3</field>
+        <field name="examinationentry_id" ref="ft3"/>
+        <field name="sequence">10</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">pg/mL</field>
+        <field name="reference_value">1.71 - 3.71</field>
+        <field name="ref_low">1.71</field>
+        <field name="ref_high">3.71</field>
+    </record>
+
+    <!-- FT4 (Free T4) -->
+    <record id="ft4" model="examination.entry">
+        <field name="name">FT4 (Free T4)</field>
+        <field name="department" ref="dept_hormone"/>
+        <field name="accounts_id" ref="account_income_hormone"/>
+        <field name="rate">1000</field>
+        <field name="base_rate">1000</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">pathology</field>
+        <field name="report_layout">tabular</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_gold_sst"/>
+        <field name="sample_type" ref="sample_serum"/>
+        <field name="default_method_id" ref="method_clia"/>
+        <field name="default_instrument_id" ref="instrument_immunoassay"/>
+        <field name="sample_req" eval="True"/>
+    </record>
+
+    <record id="ft4_c01" model="examination.entry.line">
+        <field name="name">FT4</field>
+        <field name="examinationentry_id" ref="ft4"/>
+        <field name="sequence">10</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">ng/dL</field>
+        <field name="reference_value">0.70 - 1.48</field>
+        <field name="ref_low">0.7</field>
+        <field name="ref_high">1.48</field>
+    </record>
+
+    <!-- LH (Luteinizing Hormone) -->
+    <record id="lh" model="examination.entry">
+        <field name="name">LH (Luteinizing Hormone)</field>
+        <field name="department" ref="dept_hormone"/>
+        <field name="accounts_id" ref="account_income_hormone"/>
+        <field name="rate">1200</field>
+        <field name="base_rate">1200</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">pathology</field>
+        <field name="report_layout">tabular</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_gold_sst"/>
+        <field name="sample_type" ref="sample_serum"/>
+        <field name="default_method_id" ref="method_clia"/>
+        <field name="default_instrument_id" ref="instrument_immunoassay"/>
+        <field name="sample_req" eval="True"/>
+    </record>
+
+    <record id="lh_c01" model="examination.entry.line">
+        <field name="name">LH</field>
+        <field name="examinationentry_id" ref="lh"/>
+        <field name="sequence">10</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">mIU/mL</field>
+        <field name="reference_value">Follicular: 2.4 - 12.6 | Mid-cycle: 14.0 - 95.6 | Luteal: 1.0 - 11.4 | Post-menopausal: 7.7 - 58.5 | Male: 1.7 - 8.6</field>
+        <field name="reference_value_male">1.7 - 8.6</field>
+    </record>
+
+    <record id="lh_c02" model="examination.entry.line">
+        <field name="name">Menstrual Phase</field>
+        <field name="examinationentry_id" ref="lh"/>
+        <field name="sequence">20</field>
+        <field name="result_type">selection</field>
+        <field name="reference_value">Not Applicable</field>
+    </record>
+
+    <record id="lh_c02_v01" model="examination.possible.value">
+        <field name="name">Not Applicable</field>
+        <field name="examination_line_id" ref="lh_c02"/>
+        <field name="sequence">10</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="lh_c02_v02" model="examination.possible.value">
+        <field name="name">Follicular</field>
+        <field name="examination_line_id" ref="lh_c02"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="lh_c02_v03" model="examination.possible.value">
+        <field name="name">Mid-cycle (Ovulatory)</field>
+        <field name="examination_line_id" ref="lh_c02"/>
+        <field name="sequence">30</field>
+    </record>
+
+    <record id="lh_c02_v04" model="examination.possible.value">
+        <field name="name">Luteal</field>
+        <field name="examination_line_id" ref="lh_c02"/>
+        <field name="sequence">40</field>
+    </record>
+
+    <record id="lh_c02_v05" model="examination.possible.value">
+        <field name="name">Post-menopausal</field>
+        <field name="examination_line_id" ref="lh_c02"/>
+        <field name="sequence">50</field>
+    </record>
+
+    <!-- FSH (Follicle Stimulating Hormone) -->
+    <record id="fsh" model="examination.entry">
+        <field name="name">FSH (Follicle Stimulating Hormone)</field>
+        <field name="department" ref="dept_hormone"/>
+        <field name="accounts_id" ref="account_income_hormone"/>
+        <field name="rate">1200</field>
+        <field name="base_rate">1200</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">pathology</field>
+        <field name="report_layout">tabular</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_gold_sst"/>
+        <field name="sample_type" ref="sample_serum"/>
+        <field name="default_method_id" ref="method_clia"/>
+        <field name="default_instrument_id" ref="instrument_immunoassay"/>
+        <field name="sample_req" eval="True"/>
+    </record>
+
+    <record id="fsh_c01" model="examination.entry.line">
+        <field name="name">FSH</field>
+        <field name="examinationentry_id" ref="fsh"/>
+        <field name="sequence">10</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">mIU/mL</field>
+        <field name="reference_value">Follicular: 3.5 - 12.5 | Mid-cycle: 4.7 - 21.5 | Luteal: 1.7 - 7.7 | Post-menopausal: 25.8 - 134.8 | Male: 1.5 - 12.4</field>
+        <field name="reference_value_male">1.5 - 12.4</field>
+    </record>
+
+    <record id="fsh_c02" model="examination.entry.line">
+        <field name="name">Menstrual Phase</field>
+        <field name="examinationentry_id" ref="fsh"/>
+        <field name="sequence">20</field>
+        <field name="result_type">selection</field>
+        <field name="reference_value">Not Applicable</field>
+    </record>
+
+    <record id="fsh_c02_v01" model="examination.possible.value">
+        <field name="name">Not Applicable</field>
+        <field name="examination_line_id" ref="fsh_c02"/>
+        <field name="sequence">10</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="fsh_c02_v02" model="examination.possible.value">
+        <field name="name">Follicular</field>
+        <field name="examination_line_id" ref="fsh_c02"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="fsh_c02_v03" model="examination.possible.value">
+        <field name="name">Mid-cycle (Ovulatory)</field>
+        <field name="examination_line_id" ref="fsh_c02"/>
+        <field name="sequence">30</field>
+    </record>
+
+    <record id="fsh_c02_v04" model="examination.possible.value">
+        <field name="name">Luteal</field>
+        <field name="examination_line_id" ref="fsh_c02"/>
+        <field name="sequence">40</field>
+    </record>
+
+    <record id="fsh_c02_v05" model="examination.possible.value">
+        <field name="name">Post-menopausal</field>
+        <field name="examination_line_id" ref="fsh_c02"/>
+        <field name="sequence">50</field>
+    </record>
+
+    <!-- Prolactin -->
+    <record id="prolactin" model="examination.entry">
+        <field name="name">Prolactin</field>
+        <field name="department" ref="dept_hormone"/>
+        <field name="accounts_id" ref="account_income_hormone"/>
+        <field name="rate">1200</field>
+        <field name="base_rate">1200</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">pathology</field>
+        <field name="report_layout">tabular</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_gold_sst"/>
+        <field name="sample_type" ref="sample_serum"/>
+        <field name="default_method_id" ref="method_clia"/>
+        <field name="default_instrument_id" ref="instrument_immunoassay"/>
+        <field name="sample_req" eval="True"/>
+    </record>
+
+    <record id="prolactin_c01" model="examination.entry.line">
+        <field name="name">Prolactin</field>
+        <field name="examinationentry_id" ref="prolactin"/>
+        <field name="sequence">10</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">ng/mL</field>
+        <field name="reference_value">M: 4.0 - 15.2  F: 4.8 - 23.3</field>
+        <field name="ref_low">4.0</field>
+        <field name="ref_high">23.3</field>
+    </record>
+
+    <!-- Growth Hormone (GH) -->
+    <record id="growth_hormone" model="examination.entry">
+        <field name="name">Growth Hormone (GH)</field>
+        <field name="department" ref="dept_hormone"/>
+        <field name="accounts_id" ref="account_income_hormone"/>
+        <field name="rate">1500</field>
+        <field name="base_rate">1500</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">pathology</field>
+        <field name="report_layout">tabular</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_gold_sst"/>
+        <field name="sample_type" ref="sample_serum"/>
+        <field name="default_method_id" ref="method_clia"/>
+        <field name="default_instrument_id" ref="instrument_immunoassay"/>
+        <field name="sample_req" eval="True"/>
+    </record>
+
+    <record id="growth_hormone_c01" model="examination.entry.line">
+        <field name="name">Growth Hormone</field>
+        <field name="examinationentry_id" ref="growth_hormone"/>
+        <field name="sequence">10</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">ng/mL</field>
+        <field name="reference_value">M: &lt; 3.0  F: &lt; 8.0</field>
+        <field name="reference_value_male">&lt; 3.0</field>
+        <field name="reference_value_female">&lt; 8.0</field>
+        <field name="ref_high">8.0</field>
+    </record>
+
+    <record id="growth_hormone_c02" model="examination.entry.line">
+        <field name="name">Comment</field>
+        <field name="examinationentry_id" ref="growth_hormone"/>
+        <field name="sequence">20</field>
+        <field name="result_type">text</field>
+        <field name="default_value">Random GH has limited diagnostic value; interpret with a suppression or stimulation test.</field>
+    </record>
+
+    <!-- ACTH -->
+    <record id="acth" model="examination.entry">
+        <field name="name">ACTH</field>
+        <field name="department" ref="dept_hormone"/>
+        <field name="accounts_id" ref="account_income_hormone"/>
+        <field name="rate">2200</field>
+        <field name="base_rate">2200</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">pathology</field>
+        <field name="report_layout">tabular</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_gold_sst"/>
+        <field name="sample_type" ref="sample_serum"/>
+        <field name="default_method_id" ref="method_clia"/>
+        <field name="default_instrument_id" ref="instrument_immunoassay"/>
+        <field name="sample_req" eval="True"/>
+    </record>
+
+    <record id="acth_c01" model="examination.entry.line">
+        <field name="name">ACTH</field>
+        <field name="examinationentry_id" ref="acth"/>
+        <field name="sequence">10</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">pg/mL</field>
+        <field name="reference_value">7.2 - 63.3 (morning sample)</field>
+        <field name="ref_low">7.2</field>
+        <field name="ref_high">63.3</field>
+    </record>
+
+    <!-- PTH (Parathyroid Hormone) -->
+    <record id="pth" model="examination.entry">
+        <field name="name">PTH (Parathyroid Hormone)</field>
+        <field name="department" ref="dept_hormone"/>
+        <field name="accounts_id" ref="account_income_hormone"/>
+        <field name="rate">1200</field>
+        <field name="base_rate">1200</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">pathology</field>
+        <field name="report_layout">tabular</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_gold_sst"/>
+        <field name="sample_type" ref="sample_serum"/>
+        <field name="default_method_id" ref="method_clia"/>
+        <field name="default_instrument_id" ref="instrument_immunoassay"/>
+        <field name="sample_req" eval="True"/>
+    </record>
+
+    <record id="pth_c01" model="examination.entry.line">
+        <field name="name">Intact PTH</field>
+        <field name="examinationentry_id" ref="pth"/>
+        <field name="sequence">10</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">pg/mL</field>
+        <field name="reference_value">15 - 65</field>
+        <field name="ref_low">15</field>
+        <field name="ref_high">65</field>
+    </record>
+
+    <!-- Cortisol (Basal - 9:00 AM) -->
+    <record id="cortisol_am" model="examination.entry">
+        <field name="name">Cortisol (Basal - 9:00 AM)</field>
+        <field name="department" ref="dept_hormone"/>
+        <field name="accounts_id" ref="account_income_hormone"/>
+        <field name="rate">1200</field>
+        <field name="base_rate">1200</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">pathology</field>
+        <field name="report_layout">tabular</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_gold_sst"/>
+        <field name="sample_type" ref="sample_serum"/>
+        <field name="default_method_id" ref="method_clia"/>
+        <field name="default_instrument_id" ref="instrument_immunoassay"/>
+        <field name="sample_req" eval="True"/>
+    </record>
+
+    <record id="cortisol_am_c01" model="examination.entry.line">
+        <field name="name">Cortisol (AM)</field>
+        <field name="examinationentry_id" ref="cortisol_am"/>
+        <field name="sequence">10</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">ug/dL</field>
+        <field name="reference_value">6.2 - 19.4</field>
+        <field name="ref_low">6.2</field>
+        <field name="ref_high">19.4</field>
+    </record>
+
+    <!-- Cortisol (Evening - 5:00 PM) -->
+    <record id="cortisol_pm" model="examination.entry">
+        <field name="name">Cortisol (Evening - 5:00 PM)</field>
+        <field name="department" ref="dept_hormone"/>
+        <field name="accounts_id" ref="account_income_hormone"/>
+        <field name="rate">1200</field>
+        <field name="base_rate">1200</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">pathology</field>
+        <field name="report_layout">tabular</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_gold_sst"/>
+        <field name="sample_type" ref="sample_serum"/>
+        <field name="default_method_id" ref="method_clia"/>
+        <field name="default_instrument_id" ref="instrument_immunoassay"/>
+        <field name="sample_req" eval="True"/>
+    </record>
+
+    <record id="cortisol_pm_c01" model="examination.entry.line">
+        <field name="name">Cortisol (PM)</field>
+        <field name="examinationentry_id" ref="cortisol_pm"/>
+        <field name="sequence">10</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">ug/dL</field>
+        <field name="reference_value">2.3 - 11.9</field>
+        <field name="ref_low">2.3</field>
+        <field name="ref_high">11.9</field>
+    </record>
+
+    <!-- Testosterone (Total) -->
+    <record id="testosterone_total" model="examination.entry">
+        <field name="name">Testosterone (Total)</field>
+        <field name="department" ref="dept_hormone"/>
+        <field name="accounts_id" ref="account_income_hormone"/>
+        <field name="rate">1500</field>
+        <field name="base_rate">1500</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">pathology</field>
+        <field name="report_layout">tabular</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_gold_sst"/>
+        <field name="sample_type" ref="sample_serum"/>
+        <field name="default_method_id" ref="method_clia"/>
+        <field name="default_instrument_id" ref="instrument_immunoassay"/>
+        <field name="sample_req" eval="True"/>
+    </record>
+
+    <record id="testosterone_total_c01" model="examination.entry.line">
+        <field name="name">Total Testosterone</field>
+        <field name="examinationentry_id" ref="testosterone_total"/>
+        <field name="sequence">10</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">ng/mL</field>
+        <field name="reference_value">M: 2.49 - 8.36  F: 0.084 - 0.481</field>
+        <field name="reference_value_male">2.49 - 8.36</field>
+        <field name="reference_value_female">0.084 - 0.481</field>
+    </record>
+
+    <!-- Free Testosterone -->
+    <record id="free_testosterone" model="examination.entry">
+        <field name="name">Free Testosterone</field>
+        <field name="department" ref="dept_hormone"/>
+        <field name="accounts_id" ref="account_income_hormone"/>
+        <field name="rate">2800</field>
+        <field name="base_rate">2800</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">pathology</field>
+        <field name="report_layout">tabular</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_gold_sst"/>
+        <field name="sample_type" ref="sample_serum"/>
+        <field name="default_method_id" ref="method_clia"/>
+        <field name="default_instrument_id" ref="instrument_immunoassay"/>
+        <field name="sample_req" eval="True"/>
+    </record>
+
+    <record id="free_testosterone_c01" model="examination.entry.line">
+        <field name="name">Free Testosterone</field>
+        <field name="examinationentry_id" ref="free_testosterone"/>
+        <field name="sequence">10</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">pg/mL</field>
+        <field name="reference_value">M: 8.7 - 54.7  F: 0.3 - 3.2</field>
+        <field name="reference_value_male">8.7 - 54.7</field>
+        <field name="reference_value_female">0.3 - 3.2</field>
+    </record>
+
+    <!-- DHT (Dihydrotestosterone) -->
+    <record id="dht" model="examination.entry">
+        <field name="name">DHT (Dihydrotestosterone)</field>
+        <field name="department" ref="dept_hormone"/>
+        <field name="accounts_id" ref="account_income_hormone"/>
+        <field name="rate">3500</field>
+        <field name="base_rate">3500</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">pathology</field>
+        <field name="report_layout">tabular</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_gold_sst"/>
+        <field name="sample_type" ref="sample_serum"/>
+        <field name="default_method_id" ref="method_clia"/>
+        <field name="default_instrument_id" ref="instrument_immunoassay"/>
+        <field name="sample_req" eval="True"/>
+    </record>
+
+    <record id="dht_c01" model="examination.entry.line">
+        <field name="name">DHT</field>
+        <field name="examinationentry_id" ref="dht"/>
+        <field name="sequence">10</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">ng/dL</field>
+        <field name="reference_value">M: 30 - 85  F: 4 - 22</field>
+    </record>
+
+    <!-- Oestrogen (Estradiol / E2) -->
+    <record id="oestrogen_estradiol" model="examination.entry">
+        <field name="name">Oestrogen (Estradiol / E2)</field>
+        <field name="department" ref="dept_hormone"/>
+        <field name="accounts_id" ref="account_income_hormone"/>
+        <field name="rate">1000</field>
+        <field name="base_rate">1000</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">pathology</field>
+        <field name="report_layout">tabular</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_gold_sst"/>
+        <field name="sample_type" ref="sample_serum"/>
+        <field name="default_method_id" ref="method_clia"/>
+        <field name="default_instrument_id" ref="instrument_immunoassay"/>
+        <field name="sample_req" eval="True"/>
+    </record>
+
+    <record id="oestrogen_estradiol_c01" model="examination.entry.line">
+        <field name="name">Estradiol (E2)</field>
+        <field name="examinationentry_id" ref="oestrogen_estradiol"/>
+        <field name="sequence">10</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">pg/mL</field>
+        <field name="reference_value">Follicular: 12.5 - 166 | Mid-cycle: 85.8 - 498 | Luteal: 43.8 - 211 | Post-menopausal: &lt; 54.7 | Male: 7.6 - 42.6</field>
+        <field name="reference_value_male">7.6 - 42.6</field>
+    </record>
+
+    <record id="oestrogen_estradiol_c02" model="examination.entry.line">
+        <field name="name">Menstrual Phase</field>
+        <field name="examinationentry_id" ref="oestrogen_estradiol"/>
+        <field name="sequence">20</field>
+        <field name="result_type">selection</field>
+        <field name="reference_value">Not Applicable</field>
+    </record>
+
+    <record id="oestrogen_estradiol_c02_v01" model="examination.possible.value">
+        <field name="name">Not Applicable</field>
+        <field name="examination_line_id" ref="oestrogen_estradiol_c02"/>
+        <field name="sequence">10</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="oestrogen_estradiol_c02_v02" model="examination.possible.value">
+        <field name="name">Follicular</field>
+        <field name="examination_line_id" ref="oestrogen_estradiol_c02"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="oestrogen_estradiol_c02_v03" model="examination.possible.value">
+        <field name="name">Mid-cycle (Ovulatory)</field>
+        <field name="examination_line_id" ref="oestrogen_estradiol_c02"/>
+        <field name="sequence">30</field>
+    </record>
+
+    <record id="oestrogen_estradiol_c02_v04" model="examination.possible.value">
+        <field name="name">Luteal</field>
+        <field name="examination_line_id" ref="oestrogen_estradiol_c02"/>
+        <field name="sequence">40</field>
+    </record>
+
+    <record id="oestrogen_estradiol_c02_v05" model="examination.possible.value">
+        <field name="name">Post-menopausal</field>
+        <field name="examination_line_id" ref="oestrogen_estradiol_c02"/>
+        <field name="sequence">50</field>
+    </record>
+
+    <!-- Progesterone -->
+    <record id="progesterone" model="examination.entry">
+        <field name="name">Progesterone</field>
+        <field name="department" ref="dept_hormone"/>
+        <field name="accounts_id" ref="account_income_hormone"/>
+        <field name="rate">1000</field>
+        <field name="base_rate">1000</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">pathology</field>
+        <field name="report_layout">tabular</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_gold_sst"/>
+        <field name="sample_type" ref="sample_serum"/>
+        <field name="default_method_id" ref="method_clia"/>
+        <field name="default_instrument_id" ref="instrument_immunoassay"/>
+        <field name="sample_req" eval="True"/>
+    </record>
+
+    <record id="progesterone_c01" model="examination.entry.line">
+        <field name="name">Progesterone</field>
+        <field name="examinationentry_id" ref="progesterone"/>
+        <field name="sequence">10</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">ng/mL</field>
+        <field name="reference_value">Follicular: 0.181 - 2.84 | Luteal: 5.82 - 75.9 | Post-menopausal: &lt; 0.401 | Male: &lt; 0.149</field>
+    </record>
+
+    <record id="progesterone_c02" model="examination.entry.line">
+        <field name="name">Menstrual Phase</field>
+        <field name="examinationentry_id" ref="progesterone"/>
+        <field name="sequence">20</field>
+        <field name="result_type">selection</field>
+        <field name="reference_value">Not Applicable</field>
+    </record>
+
+    <record id="progesterone_c02_v01" model="examination.possible.value">
+        <field name="name">Not Applicable</field>
+        <field name="examination_line_id" ref="progesterone_c02"/>
+        <field name="sequence">10</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="progesterone_c02_v02" model="examination.possible.value">
+        <field name="name">Follicular</field>
+        <field name="examination_line_id" ref="progesterone_c02"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="progesterone_c02_v03" model="examination.possible.value">
+        <field name="name">Luteal</field>
+        <field name="examination_line_id" ref="progesterone_c02"/>
+        <field name="sequence">30</field>
+    </record>
+
+    <record id="progesterone_c02_v04" model="examination.possible.value">
+        <field name="name">Post-menopausal</field>
+        <field name="examination_line_id" ref="progesterone_c02"/>
+        <field name="sequence">40</field>
+    </record>
+
+    <!-- AMH (Anti-Mullerian Hormone) -->
+    <record id="amh" model="examination.entry">
+        <field name="name">AMH (Anti-Mullerian Hormone)</field>
+        <field name="department" ref="dept_hormone"/>
+        <field name="accounts_id" ref="account_income_hormone"/>
+        <field name="rate">3000</field>
+        <field name="base_rate">3000</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">pathology</field>
+        <field name="report_layout">tabular</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_gold_sst"/>
+        <field name="sample_type" ref="sample_serum"/>
+        <field name="default_method_id" ref="method_clia"/>
+        <field name="default_instrument_id" ref="instrument_immunoassay"/>
+        <field name="sample_req" eval="True"/>
+    </record>
+
+    <record id="amh_c01" model="examination.entry.line">
+        <field name="name">AMH</field>
+        <field name="examinationentry_id" ref="amh"/>
+        <field name="sequence">10</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">ng/mL</field>
+        <field name="reference_value">Adequate ovarian reserve: 1.0 - 4.0 | Low: &lt; 1.0 | PCOS pattern: &gt; 4.0</field>
+        <field name="ref_low">1.0</field>
+        <field name="ref_high">4.0</field>
+    </record>
+
+    <record id="amh_c02" model="examination.entry.line">
+        <field name="name">Comment</field>
+        <field name="examinationentry_id" ref="amh"/>
+        <field name="sequence">20</field>
+        <field name="result_type">text</field>
+    </record>
+
+    <!-- PSA (Total) -->
+    <record id="psa_total" model="examination.entry">
+        <field name="name">PSA (Total)</field>
+        <field name="department" ref="dept_hormone"/>
+        <field name="accounts_id" ref="account_income_hormone"/>
+        <field name="rate">1200</field>
+        <field name="base_rate">1200</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">pathology</field>
+        <field name="report_layout">tabular</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_gold_sst"/>
+        <field name="sample_type" ref="sample_serum"/>
+        <field name="default_method_id" ref="method_clia"/>
+        <field name="default_instrument_id" ref="instrument_immunoassay"/>
+        <field name="sample_req" eval="True"/>
+    </record>
+
+    <record id="psa_total_c01" model="examination.entry.line">
+        <field name="name">Total PSA</field>
+        <field name="examinationentry_id" ref="psa_total"/>
+        <field name="sequence">10</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">ng/mL</field>
+        <field name="reference_value">&lt; 4.0</field>
+        <field name="ref_high">4.0</field>
+    </record>
+
+    <!-- tPSA & fPSA (with Ratio) -->
+    <record id="tpsa_fpsa" model="examination.entry">
+        <field name="name">tPSA &amp; fPSA (with Ratio)</field>
+        <field name="department" ref="dept_hormone"/>
+        <field name="accounts_id" ref="account_income_hormone"/>
+        <field name="rate">800</field>
+        <field name="base_rate">800</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">pathology</field>
+        <field name="report_layout">tabular</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_gold_sst"/>
+        <field name="sample_type" ref="sample_serum"/>
+        <field name="default_method_id" ref="method_clia"/>
+        <field name="default_instrument_id" ref="instrument_immunoassay"/>
+        <field name="sample_req" eval="True"/>
+    </record>
+
+    <record id="tpsa_fpsa_c01" model="examination.entry.line">
+        <field name="name">PROSTATE SPECIFIC ANTIGEN</field>
+        <field name="examinationentry_id" ref="tpsa_fpsa"/>
+        <field name="sequence">10</field>
+        <field name="is_group_header" eval="True"/>
+        <field name="bold" eval="True"/>
+        <field name="result_type">text</field>
+    </record>
+
+    <record id="tpsa_fpsa_c02" model="examination.entry.line">
+        <field name="name">Total PSA (tPSA)</field>
+        <field name="examinationentry_id" ref="tpsa_fpsa"/>
+        <field name="sequence">20</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">ng/mL</field>
+        <field name="reference_value">&lt; 4.0</field>
+        <field name="ref_high">4.0</field>
+    </record>
+
+    <record id="tpsa_fpsa_c03" model="examination.entry.line">
+        <field name="name">Free PSA (fPSA)</field>
+        <field name="examinationentry_id" ref="tpsa_fpsa"/>
+        <field name="sequence">30</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">ng/mL</field>
+    </record>
+
+    <record id="tpsa_fpsa_c04" model="examination.entry.line">
+        <field name="name">Free / Total PSA Ratio</field>
+        <field name="examinationentry_id" ref="tpsa_fpsa"/>
+        <field name="sequence">40</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">%</field>
+        <field name="reference_value">&gt; 25 (favours benign disease)</field>
+        <field name="ref_low">25</field>
+    </record>
+
+</odoo>

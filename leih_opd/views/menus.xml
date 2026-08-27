@@ -8,8 +8,15 @@
               parent="leih19.menu_leis_configuration"
               action="prescription_template_action" sequence="21"/>
 
-    <!-- Appointment: surface the (now enhanced) booking screen -->
-    <menuitem id="menu_opd_appointment_booking" name="Appointments"
+    <!-- Appointment management.
+         "Appointment Booking" (leih19.menu_appointment_booking) already opens
+         the booking list, so no second entry for it here - only the pieces the
+         desk needs alongside it: the doctor sessions serials are issued
+         against, and the prescriptions written for those patients. -->
+    <menuitem id="menu_appointment_doctor_schedule" name="Doctor Sessions"
               parent="leih19.menu_leis_appointment"
-              action="leih19.appointment_booking_action" sequence="10"/>
+              action="doctor_schedule_action" sequence="20"/>
+    <menuitem id="menu_appointment_prescription" name="Prescriptions"
+              parent="leih19.menu_leis_appointment"
+              action="doctor_prescription_action" sequence="30"/>
 </odoo>

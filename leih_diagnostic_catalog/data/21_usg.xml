@@ -1,0 +1,425 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Ultrasonography - 22 catalogue items.
+
+    GENERATED FILE - do not edit by hand.
+    Source: tools/items/usg.py    Rebuild: python3 tools/build_catalogue.py
+
+    Rates carried over from the legacy export are PROVISIONAL and are expected
+    to be revised before go-live.
+-->
+<odoo noupdate="1">
+    <!-- USG of Whole Abdomen (2D) -->
+    <record id="usg_whole_abdomen" model="examination.entry">
+        <field name="name">USG of Whole Abdomen (2D)</field>
+        <field name="department" ref="dept_usg"/>
+        <field name="accounts_id" ref="account_income_usg"/>
+        <field name="rate">1500</field>
+        <field name="base_rate">1500</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">descriptive</field>
+        <field name="report_layout">narrative</field>
+        <field name="report_type">descriptive</field>
+        <field name="sample_req" eval="False"/>
+        <field name="lab_not_required" eval="True"/>
+        <field name="report_template_ids" eval="[(6, 0, [
+            ref('tpl_usg_whole_abdomen'),
+            ref('tpl_usg_generic'),
+        ])]"/>
+    </record>
+
+    <!-- USG of Whole Abdomen with MCC & PVR -->
+    <record id="usg_whole_abdomen_mcc_pvr" model="examination.entry">
+        <field name="name">USG of Whole Abdomen with MCC &amp; PVR</field>
+        <field name="department" ref="dept_usg"/>
+        <field name="accounts_id" ref="account_income_usg"/>
+        <field name="rate">1800</field>
+        <field name="base_rate">1800</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">descriptive</field>
+        <field name="report_layout">narrative</field>
+        <field name="report_type">descriptive</field>
+        <field name="sample_req" eval="False"/>
+        <field name="lab_not_required" eval="True"/>
+        <field name="report_template_ids" eval="[(6, 0, [
+            ref('tpl_usg_whole_abdomen'),
+            ref('tpl_usg_kub_prostate'),
+            ref('tpl_usg_generic'),
+        ])]"/>
+    </record>
+
+    <!-- USG of Upper Abdomen / HBS -->
+    <record id="usg_upper_abdomen" model="examination.entry">
+        <field name="name">USG of Upper Abdomen / HBS</field>
+        <field name="department" ref="dept_usg"/>
+        <field name="accounts_id" ref="account_income_usg"/>
+        <field name="rate">1200</field>
+        <field name="base_rate">1200</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">descriptive</field>
+        <field name="report_layout">narrative</field>
+        <field name="report_type">descriptive</field>
+        <field name="sample_req" eval="False"/>
+        <field name="report_template_ids" eval="[(6, 0, [
+            ref('tpl_usg_upper_abdomen'),
+            ref('tpl_usg_generic'),
+        ])]"/>
+    </record>
+
+    <!-- USG of HBS -->
+    <record id="usg_hbs" model="examination.entry">
+        <field name="name">USG of HBS</field>
+        <field name="department" ref="dept_usg"/>
+        <field name="accounts_id" ref="account_income_usg"/>
+        <field name="rate">250</field>
+        <field name="base_rate">250</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">descriptive</field>
+        <field name="report_layout">narrative</field>
+        <field name="report_type">descriptive</field>
+        <field name="sample_req" eval="False"/>
+        <field name="report_template_ids" eval="[(6, 0, [
+            ref('tpl_usg_upper_abdomen'),
+            ref('tpl_usg_generic'),
+        ])]"/>
+    </record>
+
+    <!-- USG of Lower Abdomen -->
+    <record id="usg_lower_abdomen" model="examination.entry">
+        <field name="name">USG of Lower Abdomen</field>
+        <field name="department" ref="dept_usg"/>
+        <field name="accounts_id" ref="account_income_usg"/>
+        <field name="rate">1200</field>
+        <field name="base_rate">1200</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">descriptive</field>
+        <field name="report_layout">narrative</field>
+        <field name="report_type">descriptive</field>
+        <field name="sample_req" eval="False"/>
+        <field name="report_template_ids" eval="[(6, 0, [
+            ref('tpl_usg_pelvis'),
+            ref('tpl_usg_kub_prostate'),
+            ref('tpl_usg_generic'),
+        ])]"/>
+    </record>
+
+    <!-- USG of Pelvis -->
+    <record id="usg_pelvis" model="examination.entry">
+        <field name="name">USG of Pelvis</field>
+        <field name="department" ref="dept_usg"/>
+        <field name="accounts_id" ref="account_income_usg"/>
+        <field name="rate">1200</field>
+        <field name="base_rate">1200</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">descriptive</field>
+        <field name="report_layout">narrative</field>
+        <field name="report_type">descriptive</field>
+        <field name="sample_req" eval="False"/>
+        <field name="lab_not_required" eval="True"/>
+        <field name="report_template_ids" eval="[(6, 0, [
+            ref('tpl_usg_pelvis'),
+            ref('tpl_usg_generic'),
+        ])]"/>
+    </record>
+
+    <!-- USG - Trans Vaginal (TVS) -->
+    <record id="usg_tvs" model="examination.entry">
+        <field name="name">USG - Trans Vaginal (TVS)</field>
+        <field name="department" ref="dept_usg"/>
+        <field name="accounts_id" ref="account_income_usg"/>
+        <field name="rate">1500</field>
+        <field name="base_rate">1500</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">descriptive</field>
+        <field name="report_layout">narrative</field>
+        <field name="report_type">descriptive</field>
+        <field name="sample_req" eval="False"/>
+        <field name="report_template_ids" eval="[(6, 0, [
+            ref('tpl_usg_pelvis'),
+            ref('tpl_usg_generic'),
+        ])]"/>
+    </record>
+
+    <!-- USG of KUB Region -->
+    <record id="usg_kub_region" model="examination.entry">
+        <field name="name">USG of KUB Region</field>
+        <field name="department" ref="dept_usg"/>
+        <field name="accounts_id" ref="account_income_usg"/>
+        <field name="rate">1500</field>
+        <field name="base_rate">1500</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">descriptive</field>
+        <field name="report_layout">narrative</field>
+        <field name="report_type">descriptive</field>
+        <field name="sample_req" eval="False"/>
+        <field name="lab_not_required" eval="True"/>
+        <field name="report_template_ids" eval="[(6, 0, [
+            ref('tpl_usg_kub_prostate'),
+            ref('tpl_usg_generic'),
+        ])]"/>
+    </record>
+
+    <!-- USG of KUB, Prostate & PVR -->
+    <record id="usg_kub_prostate_pvr" model="examination.entry">
+        <field name="name">USG of KUB, Prostate &amp; PVR</field>
+        <field name="department" ref="dept_usg"/>
+        <field name="accounts_id" ref="account_income_usg"/>
+        <field name="rate">1500</field>
+        <field name="base_rate">1500</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">descriptive</field>
+        <field name="report_layout">narrative</field>
+        <field name="report_type">descriptive</field>
+        <field name="sample_req" eval="False"/>
+        <field name="report_template_ids" eval="[(6, 0, [
+            ref('tpl_usg_kub_prostate'),
+            ref('tpl_usg_generic'),
+        ])]"/>
+    </record>
+
+    <!-- USG of KUB, Prostate, PVR & MCC -->
+    <record id="usg_kub_prostate_pvr_mcc" model="examination.entry">
+        <field name="name">USG of KUB, Prostate, PVR &amp; MCC</field>
+        <field name="department" ref="dept_usg"/>
+        <field name="accounts_id" ref="account_income_usg"/>
+        <field name="rate">1800</field>
+        <field name="base_rate">1800</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">descriptive</field>
+        <field name="report_layout">narrative</field>
+        <field name="report_type">descriptive</field>
+        <field name="sample_req" eval="False"/>
+        <field name="report_template_ids" eval="[(6, 0, [
+            ref('tpl_usg_kub_prostate'),
+            ref('tpl_usg_generic'),
+        ])]"/>
+    </record>
+
+    <!-- USG of Pregnancy Profile -->
+    <record id="usg_pregnancy_profile" model="examination.entry">
+        <field name="name">USG of Pregnancy Profile</field>
+        <field name="department" ref="dept_usg"/>
+        <field name="accounts_id" ref="account_income_usg"/>
+        <field name="rate">1200</field>
+        <field name="base_rate">1200</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">descriptive</field>
+        <field name="report_layout">narrative</field>
+        <field name="report_type">descriptive</field>
+        <field name="sample_req" eval="False"/>
+        <field name="lab_not_required" eval="True"/>
+        <field name="report_template_ids" eval="[(6, 0, [
+            ref('tpl_usg_pregnancy_profile'),
+            ref('tpl_usg_generic'),
+        ])]"/>
+    </record>
+
+    <!-- USG Anomaly Scan -->
+    <record id="usg_anomaly_scan" model="examination.entry">
+        <field name="name">USG Anomaly Scan</field>
+        <field name="department" ref="dept_usg"/>
+        <field name="accounts_id" ref="account_income_usg"/>
+        <field name="rate">2500</field>
+        <field name="base_rate">2500</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">descriptive</field>
+        <field name="report_layout">narrative</field>
+        <field name="report_type">descriptive</field>
+        <field name="sample_req" eval="False"/>
+        <field name="lab_not_required" eval="True"/>
+        <field name="report_template_ids" eval="[(6, 0, [
+            ref('tpl_usg_anomaly_scan'),
+            ref('tpl_usg_pregnancy_profile'),
+            ref('tpl_usg_generic'),
+        ])]"/>
+    </record>
+
+    <!-- Biophysical Profile -->
+    <record id="usg_biophysical_profile" model="examination.entry">
+        <field name="name">Biophysical Profile</field>
+        <field name="department" ref="dept_usg"/>
+        <field name="accounts_id" ref="account_income_usg"/>
+        <field name="rate">1500</field>
+        <field name="base_rate">1500</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">descriptive</field>
+        <field name="report_layout">narrative</field>
+        <field name="report_type">descriptive</field>
+        <field name="sample_req" eval="False"/>
+        <field name="lab_not_required" eval="True"/>
+        <field name="report_template_ids" eval="[(6, 0, [
+            ref('tpl_usg_biophysical_profile'),
+            ref('tpl_usg_pregnancy_profile'),
+            ref('tpl_usg_generic'),
+        ])]"/>
+    </record>
+
+    <!-- USG of Pregnancy Biophysical Profile -->
+    <record id="usg_pregnancy_biophysical_profile" model="examination.entry">
+        <field name="name">USG of Pregnancy Biophysical Profile</field>
+        <field name="department" ref="dept_usg"/>
+        <field name="accounts_id" ref="account_income_usg"/>
+        <field name="rate">1800</field>
+        <field name="base_rate">1800</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">descriptive</field>
+        <field name="report_layout">narrative</field>
+        <field name="report_type">descriptive</field>
+        <field name="sample_req" eval="False"/>
+        <field name="report_template_ids" eval="[(6, 0, [
+            ref('tpl_usg_biophysical_profile'),
+            ref('tpl_usg_pregnancy_profile'),
+            ref('tpl_usg_generic'),
+        ])]"/>
+    </record>
+
+    <!-- USG of Thyroid (2D) -->
+    <record id="usg_thyroid" model="examination.entry">
+        <field name="name">USG of Thyroid (2D)</field>
+        <field name="department" ref="dept_usg"/>
+        <field name="accounts_id" ref="account_income_usg"/>
+        <field name="rate">1500</field>
+        <field name="base_rate">1500</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">descriptive</field>
+        <field name="report_layout">narrative</field>
+        <field name="report_type">descriptive</field>
+        <field name="sample_req" eval="False"/>
+        <field name="lab_not_required" eval="True"/>
+        <field name="report_template_ids" eval="[(6, 0, [
+            ref('tpl_usg_thyroid_neck'),
+            ref('tpl_usg_generic'),
+        ])]"/>
+    </record>
+
+    <!-- USG of Neck -->
+    <record id="usg_neck" model="examination.entry">
+        <field name="name">USG of Neck</field>
+        <field name="department" ref="dept_usg"/>
+        <field name="accounts_id" ref="account_income_usg"/>
+        <field name="rate">1500</field>
+        <field name="base_rate">1500</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">descriptive</field>
+        <field name="report_layout">narrative</field>
+        <field name="report_type">descriptive</field>
+        <field name="sample_req" eval="False"/>
+        <field name="report_template_ids" eval="[(6, 0, [
+            ref('tpl_usg_thyroid_neck'),
+            ref('tpl_usg_generic'),
+        ])]"/>
+    </record>
+
+    <!-- USG of Single Breast -->
+    <record id="usg_single_breast" model="examination.entry">
+        <field name="name">USG of Single Breast</field>
+        <field name="department" ref="dept_usg"/>
+        <field name="accounts_id" ref="account_income_usg"/>
+        <field name="rate">1500</field>
+        <field name="base_rate">1500</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">descriptive</field>
+        <field name="report_layout">narrative</field>
+        <field name="report_type">descriptive</field>
+        <field name="sample_req" eval="False"/>
+        <field name="report_template_ids" eval="[(6, 0, [
+            ref('tpl_usg_breast'),
+            ref('tpl_usg_generic'),
+        ])]"/>
+    </record>
+
+    <!-- USG of Both Breasts -->
+    <record id="usg_both_breasts" model="examination.entry">
+        <field name="name">USG of Both Breasts</field>
+        <field name="department" ref="dept_usg"/>
+        <field name="accounts_id" ref="account_income_usg"/>
+        <field name="rate">2000</field>
+        <field name="base_rate">2000</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">descriptive</field>
+        <field name="report_layout">narrative</field>
+        <field name="report_type">descriptive</field>
+        <field name="sample_req" eval="False"/>
+        <field name="report_template_ids" eval="[(6, 0, [
+            ref('tpl_usg_breast'),
+            ref('tpl_usg_generic'),
+        ])]"/>
+    </record>
+
+    <!-- USG of Both Axillary Regions -->
+    <record id="usg_both_axillary_regions" model="examination.entry">
+        <field name="name">USG of Both Axillary Regions</field>
+        <field name="department" ref="dept_usg"/>
+        <field name="accounts_id" ref="account_income_usg"/>
+        <field name="rate">1500</field>
+        <field name="base_rate">1500</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">descriptive</field>
+        <field name="report_layout">narrative</field>
+        <field name="report_type">descriptive</field>
+        <field name="sample_req" eval="False"/>
+        <field name="lab_not_required" eval="True"/>
+        <field name="report_template_ids" eval="[(6, 0, [
+            ref('tpl_usg_breast'),
+            ref('tpl_usg_generic'),
+        ])]"/>
+    </record>
+
+    <!-- USG of Brain -->
+    <record id="usg_brain" model="examination.entry">
+        <field name="name">USG of Brain</field>
+        <field name="department" ref="dept_usg"/>
+        <field name="accounts_id" ref="account_income_usg"/>
+        <field name="rate">2500</field>
+        <field name="base_rate">2500</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">descriptive</field>
+        <field name="report_layout">narrative</field>
+        <field name="report_type">descriptive</field>
+        <field name="sample_req" eval="False"/>
+        <field name="lab_not_required" eval="True"/>
+        <field name="report_template_ids" eval="[(6, 0, [
+            ref('tpl_usg_brain'),
+            ref('tpl_usg_generic'),
+        ])]"/>
+    </record>
+
+    <!-- Ultrasonogram (4D USG) -->
+    <record id="usg_4d" model="examination.entry">
+        <field name="name">Ultrasonogram (4D USG)</field>
+        <field name="department" ref="dept_usg"/>
+        <field name="accounts_id" ref="account_income_usg"/>
+        <field name="rate">2000</field>
+        <field name="base_rate">2000</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">descriptive</field>
+        <field name="report_layout">narrative</field>
+        <field name="report_type">descriptive</field>
+        <field name="sample_req" eval="False"/>
+        <field name="report_template_ids" eval="[(6, 0, [
+            ref('tpl_usg_pregnancy_profile'),
+            ref('tpl_usg_anomaly_scan'),
+            ref('tpl_usg_generic'),
+        ])]"/>
+    </record>
+
+    <!-- Portable USG (Bedside) -->
+    <record id="usg_portable" model="examination.entry">
+        <field name="name">Portable USG (Bedside)</field>
+        <field name="department" ref="dept_usg"/>
+        <field name="accounts_id" ref="account_income_usg"/>
+        <field name="rate">2500</field>
+        <field name="base_rate">2500</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">descriptive</field>
+        <field name="report_layout">narrative</field>
+        <field name="report_type">descriptive</field>
+        <field name="sample_req" eval="False"/>
+        <field name="lab_not_required" eval="True"/>
+        <field name="indoor" eval="True"/>
+        <field name="report_template_ids" eval="[(6, 0, [
+            ref('tpl_usg_generic'),
+        ])]"/>
+    </record>
+
+</odoo>

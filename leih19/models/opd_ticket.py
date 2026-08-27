@@ -18,15 +18,20 @@ class OpdTicket(models.Model):
     sex = fields.Char('Sex', compute='_compute_patient_details')
     already_collected = fields.Boolean('Money Collected', default=False)
     date = fields.Date('Date', readonly=True, default=None)
-    ref_doctors = fields.Many2one('doctors.profile', string='Reffered by')
+    ref_doctors = fields.Many2one('doctors.profile', string='Doctor name')
     opd_ticket_line_id = fields.One2many('opd.ticket.line', 'opd_ticket_id', required=True)
     user_id = fields.Many2one('res.users', string='Assigned to', select=True, track_visibility='onchange')
     state = fields.Selection([('confirmed', 'Confirmed'), ('cancelled', 'Cancelled')], 'Status', default='confirmed', readonly=True)
-    total = fields.Float(string='Total')
+    total = fields.Float(string='Total', compute='_compute_total', store=True)
     with_doctor_total = fields.Float(string='Total with Doctor Fee')
 
 
     prescription_count = fields.Integer(string='Prescription Count', compute='_compute_prescription_count')
+
+    @api.depends('opd_ticket_line_id.total_amount')
+    def _compute_total(self):
+        for rec in self:
+            rec.total = sum(rec.opd_ticket_line_id.mapped('total_amount'))
 
     @api.depends('patient_name')
     def _compute_patient_details(self):

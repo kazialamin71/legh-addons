@@ -15,15 +15,60 @@
                 <button name="action_open_opd_ticket" type="object"
                         string="Open OPD Ticket"
                         invisible="not opd_ticket_id"/>
+                <button name="action_print_token" type="object"
+                        string="Print Token" class="btn-primary" icon="fa-print"
+                        invisible="not doctor_name"/>
             </header>
             <field name="doctor_name" position="after">
                 <field name="schedule_id"/>
                 <field name="appointment_date"/>
                 <field name="serial_no"/>
             </field>
+            <!-- Same patient lookup as the Bill Register: search by name,
+                 mobile or patient id; "Create and edit..." opens the full
+                 patient form for someone genuinely new. -->
+            <field name="patient_name" position="before">
+                <field name="patient_id" required="1"
+                       context="{'patient_display_contact': 1}"
+                       options="{'no_quick_create': True}"
+                       placeholder="Search by name, mobile or patient id..."/>
+            </field>
+            <field name="patient_name" position="attributes">
+                <attribute name="readonly">1</attribute>
+            </field>
+            <field name="age" position="attributes">
+                <attribute name="readonly">1</attribute>
+            </field>
+            <field name="phone" position="attributes">
+                <attribute name="readonly">1</attribute>
+            </field>
+            <field name="sex" position="attributes">
+                <attribute name="readonly">1</attribute>
+            </field>
+            <field name="address" position="attributes">
+                <attribute name="readonly">1</attribute>
+            </field>
             <field name="patient_status" position="after">
-                <field name="patient_id"/>
-                <field name="opd_ticket_id"/>
+                <field name="opd_ticket_id" invisible="not opd_ticket_id"/>
+                <field name="date_of_birth"/>
+                <field name="age_display"/>
+            </field>
+            <!-- The printed identifiers, grouped together so reception can read
+                 back what is on the slip in the patient's hand. -->
+            <field name="opd_ticket_id" position="after">
+                <label for="token_no" string="Consultation Token"/>
+                <div>
+                    <field name="token_no" class="oe_inline" readonly="1"/>
+                    <span class="text-muted" invisible="not token_date">
+                        &#160;(for <field name="token_date" class="oe_inline" readonly="1"/>)
+                    </span>
+                </div>
+                <field name="cn_number" readonly="1"/>
+                <field name="cn_date" readonly="1"/>
+                <field name="vn_date"/>
+                <field name="hn_number"/>
+                <field name="location"/>
+                <field name="token_printed_on" readonly="1" invisible="not token_printed_on"/>
             </field>
         </field>
     </record>
@@ -33,11 +78,68 @@
         <field name="model">appointment.booking</field>
         <field name="inherit_id" ref="leih19.appointment_booking_tree_view"/>
         <field name="arch" type="xml">
+            <list position="attributes">
+                <attribute name="decoration-success">status == 'arrived'</attribute>
+                <attribute name="decoration-muted">status == 'converted'</attribute>
+            </list>
             <field name="doctor_name" position="after">
-                <field name="schedule_id"/>
-                <field name="appointment_date"/>
-                <field name="serial_no"/>
+                <field name="schedule_id" optional="show"/>
+                <field name="appointment_date" optional="show"/>
+                <field name="token_no" optional="show"/>
+                <field name="serial_no" optional="show"/>
+                <field name="cn_number" optional="hide"/>
+                <field name="hn_number" optional="hide"/>
+            </field>
+            <field name="status" position="attributes">
+                <attribute name="widget">badge</attribute>
+            </field>
+            <field name="patient_status" position="after">
+                <field name="patient_id" optional="show"/>
+                <field name="opd_ticket_id" optional="hide"/>
             </field>
         </field>
+    </record>
+
+    <!-- The booking list had no search view at all: no way to pull up today's
+         serials, one doctor's session, or the people still waiting to arrive. -->
+    <record id="appointment_booking_search_opd" model="ir.ui.view">
+        <field name="name">appointment.booking.search.opd</field>
+        <field name="model">appointment.booking</field>
+        <field name="arch" type="xml">
+            <search string="Appointments">
+                <field name="patient_name" string="Patient / Mobile / Ref"
+                       filter_domain="['|', '|', ('patient_name', 'ilike', self), ('phone', 'ilike', self), ('name', 'ilike', self)]"/>
+                <field name="patient_id"/>
+                <field name="doctor_name"/>
+                <field name="schedule_id"/>
+                <field name="serial_no"/>
+                <field name="opd_ticket_id"/>
+                <separator/>
+                <filter string="Today" name="today"
+                        domain="[('appointment_date', '=', context_today().strftime('%Y-%m-%d'))]"/>
+                <filter string="Upcoming" name="upcoming"
+                        domain="[('appointment_date', '&gt;', context_today().strftime('%Y-%m-%d'))]"/>
+                <separator/>
+                <filter string="Waiting" name="waiting"
+                        domain="[('status', 'not in', ('arrived', 'converted'))]"/>
+                <filter string="Arrived" name="arrived" domain="[('status', '=', 'arrived')]"/>
+                <filter string="Converted" name="converted" domain="[('status', '=', 'converted')]"/>
+                <separator/>
+                <filter string="Serial Not Issued" name="no_serial" domain="[('serial_no', '=', 0)]"/>
+                <filter string="Payment Done" name="paid" domain="[('payment_done', '=', True)]"/>
+                <separator/>
+                <filter string="Group by Doctor" name="group_doctor" context="{'group_by': 'doctor_name'}"/>
+                <filter string="Group by Session" name="group_session" context="{'group_by': 'schedule_id'}"/>
+                <filter string="Group by Appointment Date" name="group_date" context="{'group_by': 'appointment_date'}"/>
+                <filter string="Group by Status" name="group_status" context="{'group_by': 'status'}"/>
+            </search>
+        </field>
+    </record>
+
+    <!-- leih19 already publishes this action under LEIS > Appointment; give it a
+         readable name and the search view instead of adding a second menu. -->
+    <record id="leih19.appointment_booking_action" model="ir.actions.act_window">
+        <field name="name">Appointments</field>
+        <field name="search_view_id" ref="appointment_booking_search_opd"/>
     </record>
 </odoo>

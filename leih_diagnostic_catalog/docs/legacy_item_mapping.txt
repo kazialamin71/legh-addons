@@ -1,0 +1,401 @@
+Legacy item -> new catalogue item
+======================================================================================================================
+
+LEGACY NAME                                                RATE    NEW ITEM                               ACTION
+----------------------------------------------------------------------------------------------------------------------
+2 Hours ABF                                                0       Blood Sugar 2 Hours ABF                duplicate
+24 hrs urinary total protein                               750     24 Hours Urinary Total Protein         renamed
+2Hrs ABF(Strip)                                            100     2 Hours ABF (Glucometer Strip)         renamed
+75 gm Glucose                                              300     75g Glucose (Oral Load)                moved to Consumables
+ACH Receptor Antibody                                      10090   ACh Receptor Antibody                  renamed
+ACTH                                                       2200    ACTH                                   moved to Hormone
+ADA                                                        2000    ADA (Adenosine Deaminase)              kept
+Admission Charge                                           1000    Admission Charge                       kept
+Admission Fee (Outside)                                    1500    Admission Fee (Outside Referral)       renamed
+AFB                                                        600     AFB (Acid Fast Bacilli) Staining       renamed
+AFP                                                        1200    AFP (Alpha Feto Protein)               kept
+ALP Phosphatase                                            500     Alkaline Phosphatase (ALP)             renamed
+ALT (SGPT)                                                 300     ALT (SGPT)                             kept
+Ambulance Service Fee                                      0       Ambulance Service Fee                  kept
+AMH                                                        3000    AMH (Anti-Mullerian Hormone)           renamed
+Ammonia                                                    1400    Serum Ammonia                          renamed
+Amphetamine                                                1400    Amphetamine (Urine Screen)             renamed
+ANA                                                        1200    ANA (Anti Nuclear Antibody)            kept
+Anesthesia Doctor Free                                     0       Anaesthesia Doctor Fee                 misspelling of Fee
+Anesthesiologist Fee                                       0       Anaesthesiologist Fee                  renamed
+Anti - Thyroid Ab Test                                     2600    Anti-Thyroid Antibody Panel            renamed
+Anti HAV                                                   1200    Anti-HAV (Total)                       renamed
+Anti Hbs                                                   1500    Anti-HBs (Antibody to HBsAg)           renamed
+Anti HCV                                                   1200    Anti-HCV                               renamed
+Anti HEV                                                   1200    Anti-HEV (Total)                       renamed
+Anti HIV                                                   2000    Anti-HIV (ELISA)                       renamed
+Anti HSV-1 IgG & IgM                                       2800    Anti HSV-1 IgG & IgM                   kept
+Anti SS-A Antibody                                         4000    Anti SS-A (Ro) Antibody                moved to Immunology
+Anti SS-B Antibody                                         4000    Anti SS-B (La) Antibody                moved to Immunology
+Anti- HBV                                                  1300    Anti-HBs (Antibody to HBsAg)           duplicate of Anti-HBs
+Anti-Cardiolipin AB                                        4000    Anti-Cardiolipin Antibody              moved to Immunology
+ANTI-CCP                                                   2200    Anti-CCP                               renamed
+ANTI-DS DNA                                                1600    Anti-dsDNA                             renamed
+ANTI-HAV IGM                                               1200    Anti-HAV IgM                           renamed
+ANTI-HBC TOTAL                                             1200    Anti-HBc Total                         renamed
+ANTI-HBE TOTAL                                             1200    Anti-HBe Total                         renamed
+ANTI-HEV IGM                                               1200    Anti-HEV IgM                           renamed
+ANTI-HPYLORI IGG                                           1200    Anti H. pylori IgG                     renamed
+Anti-Thyroid Antibodies (TPO)                              2500    Anti-Thyroid Antibody (Anti-TPO)       renamed
+Apisectomy 2 Teeth                                         3500    Apicectomy - 2 Teeth                   misspelling
+Apisectomy 4 Teeth                                         7000    Apicectomy - 4 Teeth                   misspelling
+APTT                                                       1000    APTT (Activated Partial Thromboplastin renamed
+Ascitic/CSF/Pleural Fluid for Biochemistry                 2000    Ascitic / CSF / Pleural Fluid for Bioc kept
+ASO Titre                                                  600     ASO Titre                              kept
+Assistant Doctor Free                                      0       Assistant Doctor Fee                   misspelling of Fee
+AST (SGOT)                                                 500     AST (SGOT)                             kept
+ATP-ALPHA-FETO-PROTEIN                                     1200    AFP (Alpha Feto Protein)               duplicate of AFP
+B-HCG                                                      1200    Beta-hCG (Quantitative)                renamed
+Baby Cot Bed                                               1000    Baby Cot Bed                           kept
+Basic Health Checkup Package (RBS, Creatinine, Lipid Profi 3000    Basic Health Checkup Package           renamed - contents moved out of the name
+BCL                                                        1000    Bandage Contact Lens (BCL)             renamed
+Benzodiazepines                                            1400    Benzodiazepines (Urine Screen)         renamed
+BILIRUBIN (TOTAL)                                          600     Serum Bilirubin (Total)                renamed
+BILIRUBIN DIRECT/INDIRECT                                  600     Serum Bilirubin (Direct & Indirect)    renamed
+Bio-physical Profile                                       1500    Biophysical Profile                    renamed
+Birth Certificate Fee                                      1000    Birth Certificate Fee                  kept
+Blood Bag Set                                              400     Blood Bag Set                          moved to Consumables
+Blood Film (PBF)                                           400     Blood Film (PBF)                       kept
+Blood For C/S                                              1200    Blood for C/S                          renamed
+Blood Group                                                200     Blood Group & Rh Typing                renamed
+Blood Sugar 2hrs ABF                                       180     Blood Sugar 2 Hours ABF                renamed
+Blood Sugar 2hrs ABF & 2hrs AL (After Lunch)               300     Blood Sugar 2 Hours ABF & 2 Hours Afte renamed
+Blood Sugar 2hrs After Lunch                               180     Blood Sugar 2 Hours After Lunch        renamed
+Blood Sugar Fasting & 2hrs ABF                             300     Blood Sugar Fasting & 2 Hours ABF      renamed
+BMD                                                        3000    Bone Mineral Density (BMD / DEXA)      renamed, moved to X-Ray
+BP                                                         50      Blood Pressure (BP)                    renamed
+BT, CT                                                     100     BT, CT (Bleeding & Clotting Time)      renamed
+BUN                                                        500     Blood Urea Nitrogen (BUN)              renamed
+C-Peptide                                                  1600    C-Peptide                              moved to Biochemistry
+CA-125                                                     1200    CA-125                                 kept
+CA-15.3                                                    1200    CA-15.3                                kept
+CA-19.9                                                    1200    CA-19.9                                kept
+Cabin Charge                                               5000    Cabin Charge                           kept
+Canalicular Reconstructions A                              8000    Canalicular Reconstruction - A         renamed
+Canalicular Reconstructions B                              12000   Canalicular Reconstruction - B         renamed
+CANCA                                                      1300    c-ANCA                                 renamed
+Cannabinoids                                               1400    Cannabinoids (Urine Screen)            renamed
+Cap Visit                                                  1000    Cap Visit                              kept
+Cast Post (Each Unit) Crown                                7000    Cast Post & Crown (Each Unit)          renamed
+Catheter Tip CS                                            1650    Catheter Tip for C/S                   renamed
+CBC                                                        400     CBC (Complete Blood Count)             renamed
+CCR                                                        1000    Creatinine Clearance (CCR)             renamed
+CEA                                                        1200    CEA (Carcinoembryonic Antigen)         kept
+Chickungunya igG, igM                                      1500    Chikungunya IgG & IgM                  misspelling
+Circular Stapler                                           0       Circular Stapler                       kept
+Circulating Eosinophils (T C E)                            300     Circulating Eosinophil Count (TCE)     renamed
+CK-MB                                                      1200    CK-MB                                  unchanged name
+Commb's                                                    300     Coombs Test (Direct & Indirect)        misspelling
+Complete Denture                                           24000   Complete Denture (Upper & Lower)       renamed
+complete denture ( Lower)                                  12000   Complete Denture (Lower)               renamed
+complete denture ( Upper)                                  12000   Complete Denture (Upper)               renamed
+Conjunctival Swab For C/S (Right Eye)                      400     Conjunctival Swab for C/S (Right Eye)  renamed
+Conjunctival Swab For C/S(Left Eye)                        400     Conjunctival Swab for C/S (Left Eye)   renamed
+Consultant's Fee                                           1000    Consultant's Fee (Indoor Round)        renamed
+Copper-T Charge                                            4000    Copper-T Insertion                     renamed
+Corneal Scrapping for C/S                                  250     Corneal Scraping for C/S               misspelling
+Corneal Scrapping for KOH (Right Eye)                      500     Corneal Scraping for KOH (Right Eye)   misspelling
+Corneal Scrapping for KOH-Left Eye                         500     Corneal Scraping for KOH (Left Eye)    misspelling
+CORTISOL (BASAL-9:00 AM)                                   1200    Cortisol (Basal - 9:00 AM)             moved to Hormone
+CORTISOL (Evening-5:00 PM)                                 1200    Cortisol (Evening - 5:00 PM)           moved to Hormone
+CPK                                                        1200    CPK (Creatine Phosphokinase)           moved to Biochemistry
+Cross Matching + Screening + Drawing                       1500    Cross Matching + Screening + Drawing   kept
+CRP                                                        600     CRP (C-Reactive Protein)               kept
+CSF for protein, Glucose, TC, DC, ADA                      3500    CSF for Protein, Glucose, TC, DC & ADA kept
+Cutting Stapler                                            0       Cutting Stapler                        kept
+D-Dimer                                                    1200    D-Dimer                                moved to Haematology
+Dengue IgG/IgM                                             300     Dengue IgG & IgM                       renamed
+Dengue lgM                                                 300     Dengue IgM                             misspelling
+Dengue NS1 Ag (ICT)                                        300     Dengue NS1 Antigen (ICT)               renamed
+Dental Dressing                                            300     Dental Dressing                        kept
+Dental X-Ray                                               200     Dental X-Ray (IOPA)                    renamed
+Deprecated by IT (Electrolyte).                            1200    (none)                                 explicitly deprecated in the legacy data
+DHT                                                        3500    DHT (Dihydrotestosterone)              moved to Hormone
+Disposable for Vacuette                                    10      Disposable for Vacuette                kept
+Disposable for Vacuette-01 Unit                            20      Disposable for Vacuette (1 Unit)       renamed
+Disposable for Vacuette-02 Unit                            40      Disposable for Vacuette (2 Units)      renamed
+Disposable for Vacuette-03 Unit                            60      Disposable for Vacuette (3 Units)      renamed
+Dressing (Intermediate)                                    200     Dressing (Intermediate)                kept
+Dressing (Major)                                           1000    Dressing (Major)                       kept
+Dressing (Minor)                                           300     Dressing (Minor)                       kept
+ECG                                                        400     ECG (12 Lead)                          renamed
+Echo Color Doppler                                         2600    Echocardiogram with Colour Doppler     renamed
+Echo-2D                                                    1500    Echocardiogram (2D)                    renamed
+Emergency Observation                                      200     Emergency Observation                  kept
+EMO Charge                                                 300     EMO Charge (Emergency Medical Officer) renamed
+ESTEOGEN                                                   1000    Oestrogen (Estradiol / E2)             misspelling
+Executive Health Checkup Package (RBS, HbA1c, S. Creatinin 4500    Executive Health Checkup Package       renamed - contents moved out of the name
+Fasting Blood Sugar and 2 Hours After 75gm Glucose (FBS-2h 300     Fasting Blood Sugar & 2 Hours After 75 renamed
+FBS (Fasting Blood Sugar)                                  180     Fasting Blood Sugar (FBS)              renamed
+FBS(Strip)                                                 100     FBS (Glucometer Strip)                 renamed
+Febrile Antigen                                            1200    Febrile Antigen Test                   renamed
+Ferritin                                                   1400    Serum Ferritin                         duplicate of Serum Ferritin
+Fibrin Degradation Products (FDP)                          1400    Fibrin Degradation Products (FDP)      renamed
+Fibrionogen Level                                          1500    Fibrinogen Level                       misspelling, moved to Haematology
+Folic Acid                                                 1200    Serum Folic Acid                       renamed
+Food Cost                                                  800     Food Cost                              kept
+Free Testosteron                                           2800    Free Testosterone                      misspelling, moved to Hormone
+FSH                                                        1200    FSH (Follicle Stimulating Hormone)     kept
+FT3                                                        1000    FT3 (Free T3)                          renamed
+FT4                                                        1000    FT4 (Free T4)                          renamed
+Gamma GT                                                   500     Gamma GT (GGT)                         renamed
+Gene-X-Pert                                                6500    GeneXpert MTB/RIF                      renamed, moved to Microbiology
+Gingi Vectomy (per teeth)                                  1500    Gingivectomy (Per Tooth)               misspelling
+Gram Staining                                              500     Gram Staining                          kept
+Growth Hormone                                             1500    Growth Hormone (GH)                    moved to Hormone
+H.pylori Test                                              1200    H. pylori Stool Antigen                renamed
+Haemoglobin                                                200     Haemoglobin (Hb%)                      duplicate
+Hb%                                                        200     Haemoglobin (Hb%)                      renamed
+HB% Electro Phoresis                                       1500    Haemoglobin Electrophoresis            renamed
+HB-ELECTROPHORESIS                                         1500    Haemoglobin Electrophoresis            duplicate
+HBA1C                                                      1200    HbA1c (Glycated Haemoglobin)           renamed
+HBeAg                                                      1000    HBeAg                                  kept
+HBS                                                        200     HBsAg (Screening - ICT)                duplicate of the HBsAg screening test
+HBs Ag                                                     600     HBsAg (ELISA)                          renamed
+HBsAg (Quantitative)                                       1200    HBsAg (Quantitative)                   kept
+HBsAg (Screening Test)                                     300     HBsAg (Screening - ICT)                renamed
+HCT                                                        250     Haematocrit (HCT)                      renamed
+HCV(Screening Test)                                        300     Anti-HCV (Screening - ICT)             renamed
+HDU (Bed Charge)                                           7000    HDU Bed Charge                         renamed
+Hemo Dialysis Charge                                       3000    Haemodialysis Charge                   renamed
+Hemo Dialysis Charge (Reuse)                               2500    Haemodialysis Charge (Reuse Dialyser)  renamed
+Hemoglobin                                                 250     Haemoglobin (Hb%)                      misspelling, duplicate
+HIV 1,2 ( Screening Test )                                 300     HIV 1 & 2 (Screening - ICT)            renamed
+HLA-B27                                                    4000    HLA-B27                                kept
+Homa IR                                                    2000    Homa IR (Insulin Resistance Index)     renamed
+Homocysteine                                               3500    Homocysteine                           moved to Biochemistry
+HsCRP                                                      600     HsCRP (High Sensitivity CRP)           renamed
+ICT for Malarial                                           1200    ICT for Malaria                        misspelling
+IgG ,IgM for Toxo                                          2800    Toxoplasma IgG & IgM                   renamed
+IGG for Herpes Simplex                                     1400    Herpes Simplex IgG                     moved to Immunology
+IGM for Herpes Simplex                                     1400    Herpes Simplex IgM                     moved to Immunology
+IGRA (Quantiferon TB Gold Test)                            8000    QuantiFERON-TB Gold (IGRA)             duplicate
+Implant Charge                                             0       Implant Charge                         kept
+Infusion Pump Charge (Per Day)                             0       Infusion Pump Charge (Per Day)         kept
+Injection Pushing                                          300     Injection Pushing                      kept
+Inorganic Phoshate                                         640     Serum Inorganic Phosphate              misspelling
+Interleukin-6 ( IL-6)                                      2540    Interleukin-6 (IL-6)                   renamed
+Investigation Charge                                       0       Investigation Charge (Miscellaneous)   renamed
+IOP                                                        100     Intraocular Pressure (IOP)             renamed
+Isoflurance Charge                                         1000    Isoflurane Charge                      misspelling
+iv canula                                                  0       IV Cannula Insertion                   renamed
+Labour Room Charge                                         2000    Labour Room Charge                     kept
+Lactate                                                    1400    Serum Lactate                          renamed
+Laparoscopy Machine Charge                                 0       Laparoscopy Machine Charge             kept
+LDH                                                        1400    LDH (Lactate Dehydrogenase)            moved to Biochemistry
+LFT                                                        1500    Liver Function Test (LFT)              renamed
+LH                                                         1200    LH (Luteinizing Hormone)               kept
+Ligasure  machine charge                                   0       Ligasure Machine Charge                renamed
+Light Cure Filling Type -2(LCF)                            1500    Light Cure Filling Type-2 (LCF)        renamed
+Light Cure Filling Type-1 (LCF)                            1200    Light Cure Filling Type-1 (LCF)        renamed
+Light Cure Filling Type-3(LCF)                             2000    Light Cure Filling Type-3 (LCF)        renamed
+Lipase                                                     1200    Serum Lipase                           renamed
+Lipid Profile                                              1200    Lipid Profile                          unchanged name
+LPH                                                        800     (none)                                 unidentifiable legacy code - no test could be established from the name
+Lumbar Puncher                                             4000    Lumbar Puncture                        misspelling
+Magnesium                                                  1200    Serum Magnesium                        renamed
+Malaria Parasite(MP)                                       300     Malaria Parasite (MP)                  renamed
+Mantoux Test (MT)                                          200     leih19.examination_entry_mantoux       adopted leih19 build
+Medicine Charge                                            0       Medicine Charge                        kept
+Medicine total                                             0       Medicine Total                         renamed
+Milk Teeth Extraction                                      500     Milk Teeth Extraction                  kept
+Monitor Charge for Post Operative (1 Day)                  500     Monitor Charge for Post Operative (Per renamed
+MRA of Neck Vessel                                         7000    MRA of Neck Vessels                    renamed, moved to MRI
+Needle for Vacuette- 01 Unit                               20      Needle for Vacuette (1 Unit)           renamed
+Normal Scaling                                             1200    Normal Scaling                         kept
+NT-Pro BNP                                                 3000    NT-proBNP                              renamed
+OESTROGEN                                                  1000    Oestrogen (Estradiol / E2)             renamed
+OGTT                                                       450     OGTT (Full - Fasting, 1 Hour & 2 Hours renamed
+OGTT (Fasting)                                             300     OGTT (Fasting)                         kept
+OGTT 2Hrs                                                  100     OGTT (2 Hours)                         renamed
+Opiates                                                    1400    Opiates (Urine Screen)                 renamed
+Ot Assistant                                               0       OT Assistant Charge                    renamed
+OT Charge (First Hour)                                     3000    OT Charge (First Hour)                 kept
+OT Charge - Second Hour                                    1000    OT Charge (Second Hour)                renamed
+OT Charge with Sedation                                    2000    OT Charge with Sedation                kept
+OT Team Charge -2                                          5000    OT Team Charge - 2                     renamed
+Other Charges                                              0       Other Charges                          kept
+Out Medicine Fee                                           0       Out Medicine Fee                       kept
+Outdoor Surgeon OT Charge (Package)                        8000    Outdoor Surgeon OT Charge (Package)    renamed
+Oxygen Above 5 Litre                                       250     Oxygen (Above 5 Litre)                 renamed
+Oxygen Charge for Post Operative                           500     Oxygen Charge for Post Operative       kept
+PANCA                                                      1300    p-ANCA                                 renamed
+Pap's Smear for Cytology                                   800     Pap's Smear for Cytology               kept
+Partial Denture (Per Unit) (PD)                            1000    Partial Denture (Per Unit)             renamed
+PBF                                                        300     Blood Film (PBF)                       duplicate of Blood Film (PBF)
+PCR For zika, dengue & Chikungunya Virus                   6500    PCR for Zika, Dengue & Chikungunya Vir renamed
+PCT                                                        200     Plateletcrit (PCT)                     renamed
+Permanent Teeth ( Glass lonomer Filling )                  1500    Permanent Teeth - Glass Ionomer Fillin misspelling
+Permanent teeth extraction (ant.) Simple                   2000    Permanent Teeth Extraction (Anterior)  renamed
+Permanent teeth extraction (Post.) Simple                  3000    Permanent Teeth Extraction (Posterior) renamed
+Photo Therapy(/hour)                                       200     Photo Therapy (Per Hour)               renamed
+Plasma Glucose                                             300     Plasma Glucose                         unchanged name
+Platelet  Count                                            300     Platelet Count                         renamed
+Porcelain Cap (1 Unit) A                                   4500    Porcelain Cap (1 Unit)                 renamed
+Portable Echocardiography                                  4000    Portable Echocardiography (Bedside)    renamed, moved to Echocardiography
+Portable USG                                               2500    Portable USG (Bedside)                 renamed
+Post Operative Charge (First Four Hours)                   1000    Post Operative Charge (First Four Hour renamed
+Post Operative Charge (More Than Four Hours)               1500    Post Operative Charge (More Than Four  renamed
+Potassium                                                  400     Serum Potassium                        renamed
+Pregnancy Test                                             300     Pregnancy Test (Urine hCG)             renamed
+Procalcitonin                                              2000    Procalcitonin                          kept
+Procedure Charge - Local Anaesthesia Only                  1500    Procedure Charge - Local Anaesthesia O duplicate
+Procedure Charge - Local Anesthesia Only                   1500    Procedure Charge - Local Anaesthesia O renamed
+PROGESTERONE                                               1000    Progesterone                           renamed
+Prolactin                                                  1200    Prolactin                              kept
+Protein (Albumin) Creatinine Ratio                         800     Protein (Albumin) Creatinine Ratio     unchanged name
+Protein electrophoresis                                    1600    Protein Electrophoresis                duplicate
+Protein-Electrophoresis                                    2000    Protein Electrophoresis                renamed
+Prothombintime                                             500     Prothrombin Time (PT / INR)            misspelling
+PSA                                                        1200    PSA (Total)                            renamed
+PTH( Parathyroid)                                          1200    PTH (Parathyroid Hormone)              renamed
+Pulpectomy                                                 3000    Pulpectomy                             kept
+Pulpotomy                                                  2500    Pulpotomy                              kept
+Punctoplasty A                                             4000    Punctoplasty - A                       renamed
+Punctoplasty B                                             6000    Punctoplasty - B                       renamed
+Pus for C/S                                                2200    Pus for C/S                            renamed
+QuantiFERON-TB Gold                                        8000    QuantiFERON-TB Gold (IGRA)             renamed
+R A Test( Rheumatoid Arthritis)                            200     RA Test (Qualitative)                  duplicate
+RA                                                         400     RA Test (Qualitative)                  duplicate
+RA Factor                                                  500     RA Test (Qualitative)                  duplicate
+RA Test                                                    500     RA Test (Qualitative)                  renamed
+RA Test (quantitative)                                     800     RA Test (Quantitative)                 renamed
+Random Insulin                                             1400    Random Insulin                         moved to Biochemistry
+Raticulocyte Count                                         400     Reticulocyte Count                     misspelling, duplicate
+RBS (Random Blood Sugar)                                   180     Random Blood Sugar (RBS)               renamed
+RBS (Strip)                                                100     RBS (Glucometer Strip)                 renamed
+RBS With Corosponding Urine                                200     RBS With Corresponding Urine           misspelling
+RCT (Anterior)                                             2500    RCT (Anterior)                         kept
+RCT (posterior)                                            3000    RCT (Posterior)                        renamed
+Re-RCT                                                     7000    Re-RCT                                 kept
+Renal Function Test (RFT)                                  4200    Renal Function Test (RFT)              kept
+Reposition of IOL for OPD Patients                         5000    Reposition of IOL (OPD Patient)        renamed
+Reposition of IOL for OPD Patients(Lions Case)             1000    Reposition of IOL (OPD Patient - Lions renamed
+Reticulocyte Count                                         400     Reticulocyte Count                     kept
+RH-antibody Titre                                          1200    Rh Antibody Titre                      renamed
+Root Canal Treatement Endo. (RCT)                          4000    RCT (Endo Motor) - Complete Treatment  misspelling
+Root Canal Treatment (Endo Motor) Each Visit-1 (RCT)       1000    RCT (Endo Motor) - Visit 1             renamed
+Root Canal Treatment (Endo Motor) Each Visit-2 (RCT)       2000    RCT (Endo Motor) - Visit 2             renamed
+Root Canal Treatment (Endo Motor) Each Visit-4 (RCT)       4000    RCT (Endo Motor) - Visit 4             renamed
+Root Canal Treatment Ant. (2nd) (RCT)                      1000    RCT Anterior - 2nd Visit               renamed
+Root Canal Treatment Ant. (4th) (RCT)                      2000    RCT Anterior - 4th Visit               renamed
+Root Canal Treatment Ant. (Each Visit) (RCT)               500     RCT Anterior - Each Visit              renamed
+Root Canel Treatment (Endo Motor) Each Visit (RCT)         500     RCT (Endo Motor) - Each Visit          misspelling
+Root canel treatment (infection) (RCT)                     6500    RCT with Infection                     misspelling
+RTR PCR (Covid-19)                                         3500    RT-PCR for COVID-19 (SARS-CoV-2)       renamed
+Rubella IgG                                                1200    Rubella IgG                            kept
+Rubella IgM                                                1200    Rubella IgM                            kept
+RVG Dental X-Ray                                           300     RVG Dental X-Ray                       renamed
+S. ACE LEVEL                                               5080    Serum ACE (Angiotensin Converting Enzy duplicate
+S. AMYLASE                                                 1200    Serum Amylase                          renamed
+S. Calcium                                                 500     Serum Calcium                          renamed
+S. eGFR                                                    1280    Serum eGFR                             renamed
+S. Feritin                                                 1400    Serum Ferritin                         misspelling, duplicate of Serum Ferritin
+S. GH                                                      1500    Growth Hormone (GH)                    duplicate, moved to Hormone
+S. Phosphate                                               1200    Serum Inorganic Phosphate              duplicate of Inorganic Phosphate
+S. Urea                                                    300     Serum Urea                             renamed
+S.Cholesterol                                              350     Serum Cholesterol                      renamed
+S.Electrolytes                                             1200    Serum Electrolytes                     renamed
+S.FREEITIN LEVEL                                           1000    Serum Ferritin                         misspelling, duplicate of Serum Ferritin
+S.GOT                                                      350     AST (SGOT)                             duplicate of AST (SGOT)
+S.IRON                                                     1200    Serum Iron                             duplicate of Serum Iron
+S.Iron Profile                                             4200    Serum Iron Profile                     renamed
+S.TIBC                                                     900     TIBC (Total Iron Binding Capacity)     duplicate of TIBC
+S.Trygleceride                                             300     Serum Triglyceride                     misspelling, duplicate of Serum Triglyceride
+SBNP                                                       3000    NT-proBNP                              duplicate of NT-proBNP
+Scaling & Polishing + currettage + Deep currettage         2500    Scaling & Polishing with Curettage and misspelling
+Scaling with Polishing (SP)                                1500    Scaling with Polishing (SP)            renamed
+Semen Analysis                                             1000    Semen Analysis                         kept
+SERUM A/G RATIO                                            800     Serum A / G Ratio                      renamed
+Serum ACE (Angiotensin Converting Enzime)                  5000    Serum ACE (Angiotensin Converting Enzy misspelling
+Serum Bilirubin (Direct)                                   300     Serum Bilirubin (Direct)               unchanged name
+Serum Bilirubin (Indirect)                                 300     Serum Bilirubin (Indirect)             unchanged name
+Serum Bilirubin(total-direct-indirect)                     1200    Serum Bilirubin (Total, Direct & Indir renamed
+Serum C3                                                   1500    Serum C3                               moved to Immunology
+Serum C4                                                   1500    Serum C4                               moved to Immunology
+Serum Creatinine                                           500     Serum Creatinine                       unchanged name
+SERUM GLOBULIN                                             800     Serum Globulin                         renamed
+Serum Osmolality                                           1200    Serum Osmolality                       moved to Biochemistry
+Serum: Albumin                                             500     Serum Albumin                          renamed
+Service Charge                                             0       Service Charge                         kept
+Share Cabin Charge                                         3500    Share Cabin Charge                     kept
+Socket Reconstructions A                                   16000   Socket Reconstruction - A              renamed
+Socket Reconstructions B                                   20000   Socket Reconstruction - B              renamed
+Socket Reconstructions C                                   25000   Socket Reconstruction - C              renamed
+Sputum For C/S                                             1000    Sputum for C/S                         renamed
+Sputum For Gram Staining                                   750     Sputum for Gram Staining               renamed
+Stool  R/M/E                                               200     Stool R/M/E (Routine & Microscopic Exa renamed
+Stool For C/S                                              800     Stool for C/S                          renamed
+Stool OBT                                                  300     Stool for Occult Blood (OBT)           renamed
+Stool R/s                                                  350     Stool for Reducing Substance           reinterpreted - the legacy record held an antibiotic list, not a routine
+Surgeon Team Charge                                        0       Surgeon Team Charge                    kept
+Surgeon team charge                                        0       Surgeon Team Charge                    duplicate
+Surgical Ext lower/mesic angular                           7000    Surgical Extraction - Lower Mesio-Angu misspelling
+Surgical Extraction Horizontal/Angular/Vertical            7000    Surgical Extraction - Horizontal / Ang renamed
+Surgical teeth ext lower                                   6000    Surgical Extraction - Lower            renamed
+Surgical teeth ext upper                                   3500    Surgical Extraction - Upper            renamed
+T3                                                         800     T3 (Total Triiodothyronine)            renamed
+T4                                                         800     T4 (Total Thyroxine)                   renamed
+TC,DC                                                      400     TC, DC (Total & Differential Count)    renamed
+Team Charge (OT)                                           10000   OT Team Charge                         renamed
+Testosterone                                               1500    Testosterone (Total)                   renamed
+TIBC                                                       900     TIBC (Total Iron Binding Capacity)     kept
+Tooth Color(GI)                                            800     Tooth Colour Filling (Glass Ionomer)   renamed
+Torch Anti-Body                                            9680    TORCH Antibody Panel                   renamed
+Total IgE                                                  1200    Total IgE                              kept
+TOTAL PROTEIN                                              600     Total Protein                          renamed
+TPHA (Screening Test)                                      700     TPHA (Screening Test)                  renamed
+tPSA                                                       800     tPSA & fPSA (with Ratio)               renamed
+TRAB                                                       6000    TRAB (TSH Receptor Antibody)           kept
+Tracheal Aspirate / Swab for C/S                           1200    Tracheal Aspirate / Swab for C/S       kept
+Tracheal aspirate for c/s                                  1200    Tracheal Aspirate / Swab for C/S       duplicate
+Transferrin saturation (TSAT)                              1800    Transferrin Saturation (TSAT)          kept
+Treatment Filling (TF)                                     300     Treatment Filling (TF)                 renamed
+Triglycerides                                              500     Serum Triglyceride                     duplicate of Serum Triglyceride
+Triple  Antigen                                            1000    Triple Antigen Test                    renamed
+Troponin-I                                                 1000    Troponin-I                             unchanged name
+TSH                                                        800     TSH                                    kept
+Ultrasonogram (4D USG)                                     2000    Ultrasonogram (4D USG)                 renamed
+Uric Acid                                                  500     Serum Uric Acid                        renamed
+Urinary electrolytes                                       1200    Urinary Electrolytes                   renamed
+Urinary Osmolality                                         1200    Urinary Osmolality                     moved to Biochemistry
+Urine ACR                                                  1200    Urine ACR (Albumin Creatinine Ratio)   renamed
+Urine For C/S                                              800     Urine for C/S                          renamed
+Urine For Ketone Bodies                                    450     Urine for Ketone Bodies                renamed
+Urine for Toxicology                                       5000    Urine for Toxicology Screen            renamed
+Urine PCR                                                  500     Urine PCR (Protein Creatinine Ratio)   renamed
+Urine R/M/E                                                250     Urine R/M/E (Routine & Microscopic Exa renamed
+Urine: Albumin                                             400     Urine Albumin                          renamed
+Urine: Micro-Albumin                                       1200    Urine Micro-Albumin                    renamed
+USG OF ANOMALY SCAN                                        2500    USG Anomaly Scan                       renamed
+USG OF BOTH AXILLARY REGION                                1500    USG of Both Axillary Regions           renamed
+Usg Of Both Breast                                         2000    USG of Both Breasts                    renamed
+Usg of brain                                               2500    USG of Brain                           renamed
+Usg Of HBS Panonex                                         250     USG of HBS                             renamed
+USG of KUB region                                          1500    USG of KUB Region                      renamed
+USG of KUB, Prostate and PVR                               1500    USG of KUB, Prostate & PVR             renamed
+USG of KUB, Prostate PVR, MCC                              1800    USG of KUB, Prostate, PVR & MCC        renamed
+USG of Lower Abdomenm                                      1200    USG of Lower Abdomen                   misspelling
+USG Of Neck                                                1500    USG of Neck                            renamed
+USG of Pelvis                                              1200    USG of Pelvis                          kept
+USG OF Pregnancy Biophysical Profile                       1800    USG of Pregnancy Biophysical Profile   renamed
+USG of Pregnancy Profile                                   1200    USG of Pregnancy Profile               kept
+Usg Of Single Breast                                       1500    USG of Single Breast                   renamed
+USG OF THYROID-2D                                          1500    USG of Thyroid (2D)                    renamed
+Usg Of TVS                                                 1500    USG - Trans Vaginal (TVS)              renamed
+USG Of Upper Abdomen /HBS                                  1200    USG of Upper Abdomen / HBS             renamed
+USG OF W/A, WITH MCC + PVR                                 1800    USG of Whole Abdomen with MCC & PVR    renamed
+USG W/A 2D                                                 1500    USG of Whole Abdomen (2D)              renamed
+VDRL                                                       600     VDRL                                   kept
+VIT B-12                                                   2200    Vitamin B12                            duplicate
+Vitamin B12                                                2500    Vitamin B12                            kept
+Vitamin D                                                  3000    Vitamin D (25-OH)                      renamed
+Ward Bed Charge                                            2000    Ward Bed Charge                        kept
+Widal Test                                                 600     Widal Test                             kept
+Wound Swab C/s                                             800     Wound Swab for C/S                     renamed
+Zirconia Crown                                             20000   Zirconia Crown                         kept

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Radiology (X-Ray / CT / MRI) - 2 catalogue items.
+
+    GENERATED FILE - do not edit by hand.
+    Source: tools/items/radiology.py    Rebuild: python3 tools/build_catalogue.py
+
+    Rates carried over from the legacy export are PROVISIONAL and are expected
+    to be revised before go-live.
+-->
+<odoo noupdate="1">
+    <!-- Bone Mineral Density (BMD / DEXA) -->
+    <record id="bmd" model="examination.entry">
+        <field name="name">Bone Mineral Density (BMD / DEXA)</field>
+        <field name="department" ref="dept_xray"/>
+        <field name="accounts_id" ref="account_income_xray"/>
+        <field name="rate">3000</field>
+        <field name="base_rate">3000</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">radiology</field>
+        <field name="report_layout">narrative</field>
+        <field name="report_type">radiology</field>
+        <field name="sample_req" eval="False"/>
+        <field name="lab_not_required" eval="True"/>
+        <field name="report_template_ids" eval="[(6, 0, [
+            ref('tpl_bmd'),
+        ])]"/>
+    </record>
+
+    <record id="bmd_c01" model="examination.entry.line">
+        <field name="name">DEXA SUMMARY</field>
+        <field name="examinationentry_id" ref="bmd"/>
+        <field name="sequence">10</field>
+        <field name="is_group_header" eval="True"/>
+        <field name="bold" eval="True"/>
+        <field name="result_type">text</field>
+    </record>
+
+    <record id="bmd_c02" model="examination.entry.line">
+        <field name="name">Lumbar Spine T-Score</field>
+        <field name="examinationentry_id" ref="bmd"/>
+        <field name="sequence">20</field>
+        <field name="result_type">numeric</field>
+    </record>
+
+    <record id="bmd_c03" model="examination.entry.line">
+        <field name="name">Femoral Neck T-Score</field>
+        <field name="examinationentry_id" ref="bmd"/>
+        <field name="sequence">30</field>
+        <field name="result_type">numeric</field>
+    </record>
+
+    <record id="bmd_c04" model="examination.entry.line">
+        <field name="name">Total Hip T-Score</field>
+        <field name="examinationentry_id" ref="bmd"/>
+        <field name="sequence">40</field>
+        <field name="result_type">numeric</field>
+    </record>
+
+    <record id="bmd_c05" model="examination.entry.line">
+        <field name="name">WHO Classification</field>
+        <field name="examinationentry_id" ref="bmd"/>
+        <field name="sequence">50</field>
+        <field name="result_type">text</field>
+    </record>
+
+    <!-- MRA of Neck Vessels -->
+    <record id="mra_neck_vessels" model="examination.entry">
+        <field name="name">MRA of Neck Vessels</field>
+        <field name="department" ref="dept_mri"/>
+        <field name="accounts_id" ref="account_income_mri"/>
+        <field name="rate">7000</field>
+        <field name="base_rate">7000</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">radiology</field>
+        <field name="report_layout">narrative</field>
+        <field name="report_type">radiology</field>
+        <field name="sample_req" eval="False"/>
+        <field name="lab_not_required" eval="True"/>
+        <field name="required_time">1</field>
+        <field name="report_template_ids" eval="[(6, 0, [
+            ref('tpl_mra_neck'),
+        ])]"/>
+    </record>
+
+</odoo>

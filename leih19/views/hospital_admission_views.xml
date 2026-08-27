@@ -91,6 +91,8 @@
                             <field name="sex" readonly="1"/>
                             <field name="blood_group"/>
                             <field name="address" readonly="1"/>
+                            <field name="release_note_date"/>
+                            <field name="release_note" placeholder="Release / discharge note..."/>
                         </group>
                         <group string="Admission Details" name="admission_info">
                             <field name="date" readonly="1"/>
@@ -109,31 +111,18 @@
                             <field name="prescription_count" readonly="1"/>
                         </group>
                     </group>
+                    <!-- Order follows the ward workflow: charges (added by
+                         leih_admission) - services - bed - medicine - visits.
+                         The form still opens on the admission lines: that page
+                         carries autofocus, so the Charges page inserted ahead of
+                         it does not steal the default tab. -->
                     <notebook>
-                        <page string="Patient Details" name="patient_details">
-                            <group>
-                                <group string="Family" name="family">
-                                    <field name="father_name"/>
-                                    <field name="mother_name"/>
-                                    <field name="spouse_name"/>
-                                    <field name="religion"/>
-                                </group>
-                                <group string="Other" name="other_details">
-                                    <field name="occupation"/>
-                                    <field name="business_address"/>
-                                    <field name="reffered_to_hospital"/>
-                                    <field name="old_journal"/>
-                                </group>
-                            </group>
-                            <group string="Release" name="release">
-                                <field name="release_note_date"/>
-                                <field name="release_note" placeholder="Release / discharge note..."/>
-                            </group>
-                        </page>
-                        <page string="Leih Admission Line">
+                        <page string="Leih Admission Line" name="page_admission_line" autofocus="autofocus">
                             <field name="leih_admission_line_id">
                                 <list editable="bottom">
-                                    <field name="name" />
+                                    <field name="name"
+                                           options="{'no_quick_create': True, 'no_create_edit': True}" />
+                                    <field name="charge_type" optional="show" widget="badge" />
                                     <field name="department" />
                                     <field name="product_qty" />
                                     <field name="price" />
@@ -145,50 +134,20 @@
                                 </list>
                             </field>
                         </page>
-                        <page string="Guarantor Line">
-                            <field name="guarantor_line_id">
-                                <list editable="top">
-                                    <field name="name" />
-                                    <field name="address" />
-                                    <field name="relationship" />
-                                    <field name="contact" />
+                        <page string="Investigation Entry" name="page_investigation">
+                            <field name="investigation_bill_ids" readonly="1">
+                                <list>
+                                    <field name="name"/>
+                                    <field name="date"/>
+                                    <field name="grand_total" sum="Total"/>
+                                    <field name="paid" sum="Paid"/>
+                                    <field name="due" sum="Due"/>
+                                    <field name="is_applied_to_admission" string="On Admission Bill"/>
+                                    <field name="state"/>
                                 </list>
                             </field>
                         </page>
-                        <page string="Bill Register Admission Line">
-                            <field name="bill_register_admission_line_id" />
-                        </page>
-                        <page string="Admission Payment Line">
-                            <field name="admission_payment_line_id" />
-                        </page>
-                        <page string="Admission Journal Relation">
-                            <field name="admission_journal_relation_id">
-                                <list editable="top">
-                                    <field name="journal_id" />
-                                </list>
-                            </field>
-                        </page>
-                        <page string="Hospital Doctor Line">
-                            <field name="hospital_doctor_line_id">
-                                <list editable="bottom">
-                                    <field name="doctor_profile_id" />
-                                    <field name="doctor_visit_qty" />
-                                    <field name="visit_fee" />
-                                    <field name="total_amount" />
-                                </list>
-                            </field>
-                        </page>
-                        <page string="Hospital Medicine Line">
-                            <field name="hospital_medicine_line_id">
-                                <list editable="bottom">
-                                    <field name="product_name" />
-                                    <field name="product_qty" />
-                                    <field name="unit_price" />
-                                    <field name="total_price" />
-                                </list>
-                            </field>
-                        </page>
-                        <page string="Hospital Bed Line">
+                        <page string="Hospital Bed Line" name="page_bed">
                             <field name="hospital_bed_line_id">
                                 <list editable="bottom">
                                     <field name="bed_no" />
@@ -200,7 +159,64 @@
                                 </list>
                             </field>
                         </page>
-                        <page string="Hospital Bill Line">
+                        <page string="Medicine Line" name="page_medicine">
+                            <!-- leih_pharmacy injects the requisition list before this field. -->
+                            <separator string="Manual Medicine Charges" name="manual_medicine"/>
+                            <field name="hospital_medicine_line_id">
+                                <list editable="bottom">
+                                    <field name="product_name" />
+                                    <field name="product_qty" />
+                                    <field name="unit_price" />
+                                    <field name="total_price" />
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Consultant Visit Charge" name="page_visits">
+                            <field name="hospital_doctor_line_id">
+                                <list editable="bottom">
+                                    <field name="doctor_profile_id"
+                                           options="{'no_quick_create': True, 'no_create_edit': True}" />
+                                    <field name="visit_datetime" />
+                                    <field name="visit_fee" />
+                                    <field name="doctor_visit_qty" optional="hide" />
+                                    <field name="total_amount" sum="Total" />
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Patient Details" name="patient_details">
+                            <group>
+                                <group string="Guardian / Attendant" name="guardian">
+                                    <field name="guardian_name"/>
+                                    <field name="guardian_relation"/>
+                                    <field name="guardian_occupation"/>
+                                    <field name="guardian_contact"/>
+                                </group>
+                            </group>
+                        </page>
+                        <page string="Guarantor Line" name="page_guarantor">
+                            <field name="guarantor_line_id">
+                                <list editable="top">
+                                    <field name="name" />
+                                    <field name="address" />
+                                    <field name="relationship" />
+                                    <field name="contact" />
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Bill Register Admission Line" name="page_bill_register_line">
+                            <field name="bill_register_admission_line_id" />
+                        </page>
+                        <page string="Admission Payment Line" name="page_payment_line">
+                            <field name="admission_payment_line_id" />
+                        </page>
+                        <page string="Admission Journal Relation" name="page_journal">
+                            <field name="admission_journal_relation_id">
+                                <list editable="top">
+                                    <field name="journal_id" />
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Hospital Bill Line" name="page_bill_line">
                             <field name="hospital_bill_line_id">
                                 <list editable="bottom">
                                     <field name="item_name" />
@@ -215,7 +231,7 @@
                                 </list>
                             </field>
                         </page>
-                        <page string="Money Receipt">
+                        <page string="Money Receipt" name="page_money_receipt">
                             <field name="money_receipt_ids" readonly="1">
                                 <list>
                                     <field name="name" />

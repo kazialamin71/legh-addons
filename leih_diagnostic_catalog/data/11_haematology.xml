@@ -1,0 +1,1031 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Haematology - 16 catalogue items.
+
+    GENERATED FILE - do not edit by hand.
+    Source: tools/items/haematology.py    Rebuild: python3 tools/build_catalogue.py
+
+    Rates carried over from the legacy export are PROVISIONAL and are expected
+    to be revised before go-live.
+-->
+<odoo noupdate="1">
+    <!-- CBC (Complete Blood Count) -->
+    <record id="cbc" model="examination.entry">
+        <field name="name">CBC (Complete Blood Count)</field>
+        <field name="department" ref="dept_haematology"/>
+        <field name="accounts_id" ref="account_income_haematology"/>
+        <field name="rate">400</field>
+        <field name="base_rate">400</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">pathology</field>
+        <field name="report_layout">tabular</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_lavender"/>
+        <field name="sample_type" ref="sample_whole_blood"/>
+        <field name="default_method_id" ref="method_impedance"/>
+        <field name="default_instrument_id" ref="instrument_haematology"/>
+        <field name="sample_req" eval="True"/>
+    </record>
+
+    <record id="cbc_c01" model="examination.entry.line">
+        <field name="name">COMPLETE BLOOD COUNT</field>
+        <field name="examinationentry_id" ref="cbc"/>
+        <field name="sequence">10</field>
+        <field name="is_group_header" eval="True"/>
+        <field name="bold" eval="True"/>
+        <field name="result_type">text</field>
+    </record>
+
+    <record id="cbc_c02" model="examination.entry.line">
+        <field name="name">Haemoglobin (Hb)</field>
+        <field name="examinationentry_id" ref="cbc"/>
+        <field name="sequence">20</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">g/dL</field>
+        <field name="reference_value">M: 13.0 - 17.0  F: 12.0 - 15.0</field>
+        <field name="reference_value_male">13.0 - 17.0</field>
+        <field name="reference_value_female">12.0 - 15.0</field>
+        <field name="reference_value_child">11.0 - 14.0</field>
+        <field name="ref_low">12.0</field>
+        <field name="ref_high">17.0</field>
+        <field name="critical_low">7.0</field>
+        <field name="critical_high">20.0</field>
+    </record>
+
+    <record id="cbc_c03" model="examination.entry.line">
+        <field name="name">Haematocrit (HCT / PCV)</field>
+        <field name="examinationentry_id" ref="cbc"/>
+        <field name="sequence">30</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">%</field>
+        <field name="reference_value">M: 40 - 50  F: 36 - 46</field>
+        <field name="reference_value_male">40 - 50</field>
+        <field name="reference_value_female">36 - 46</field>
+        <field name="ref_low">36</field>
+        <field name="ref_high">50</field>
+    </record>
+
+    <record id="cbc_c04" model="examination.entry.line">
+        <field name="name">RBC Count</field>
+        <field name="examinationentry_id" ref="cbc"/>
+        <field name="sequence">40</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">million/cmm</field>
+        <field name="reference_value">M: 4.5 - 5.9  F: 4.1 - 5.1</field>
+        <field name="reference_value_male">4.5 - 5.9</field>
+        <field name="reference_value_female">4.1 - 5.1</field>
+        <field name="ref_low">4.1</field>
+        <field name="ref_high">5.9</field>
+    </record>
+
+    <record id="cbc_c05" model="examination.entry.line">
+        <field name="name">MCV</field>
+        <field name="examinationentry_id" ref="cbc"/>
+        <field name="sequence">50</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">fL</field>
+        <field name="reference_value">80 - 100</field>
+        <field name="ref_low">80</field>
+        <field name="ref_high">100</field>
+    </record>
+
+    <record id="cbc_c06" model="examination.entry.line">
+        <field name="name">MCH</field>
+        <field name="examinationentry_id" ref="cbc"/>
+        <field name="sequence">60</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">pg</field>
+        <field name="reference_value">27 - 33</field>
+        <field name="ref_low">27</field>
+        <field name="ref_high">33</field>
+    </record>
+
+    <record id="cbc_c07" model="examination.entry.line">
+        <field name="name">MCHC</field>
+        <field name="examinationentry_id" ref="cbc"/>
+        <field name="sequence">70</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">g/dL</field>
+        <field name="reference_value">32 - 36</field>
+        <field name="ref_low">32</field>
+        <field name="ref_high">36</field>
+    </record>
+
+    <record id="cbc_c08" model="examination.entry.line">
+        <field name="name">RDW-CV</field>
+        <field name="examinationentry_id" ref="cbc"/>
+        <field name="sequence">80</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">%</field>
+        <field name="reference_value">11.5 - 14.5</field>
+        <field name="ref_low">11.5</field>
+        <field name="ref_high">14.5</field>
+    </record>
+
+    <record id="cbc_c09" model="examination.entry.line">
+        <field name="name">Total WBC Count</field>
+        <field name="examinationentry_id" ref="cbc"/>
+        <field name="sequence">90</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">/cmm</field>
+        <field name="reference_value">4,000 - 11,000</field>
+        <field name="ref_low">4000</field>
+        <field name="ref_high">11000</field>
+        <field name="critical_low">2000</field>
+        <field name="critical_high">30000</field>
+    </record>
+
+    <record id="cbc_c10" model="examination.entry.line">
+        <field name="name">DIFFERENTIAL COUNT</field>
+        <field name="examinationentry_id" ref="cbc"/>
+        <field name="sequence">100</field>
+        <field name="is_group_header" eval="True"/>
+        <field name="bold" eval="True"/>
+        <field name="result_type">text</field>
+    </record>
+
+    <record id="cbc_c11" model="examination.entry.line">
+        <field name="name">Neutrophils</field>
+        <field name="examinationentry_id" ref="cbc"/>
+        <field name="sequence">110</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">%</field>
+        <field name="reference_value">40 - 75</field>
+        <field name="ref_low">40</field>
+        <field name="ref_high">75</field>
+    </record>
+
+    <record id="cbc_c12" model="examination.entry.line">
+        <field name="name">Lymphocytes</field>
+        <field name="examinationentry_id" ref="cbc"/>
+        <field name="sequence">120</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">%</field>
+        <field name="reference_value">20 - 45</field>
+        <field name="ref_low">20</field>
+        <field name="ref_high">45</field>
+    </record>
+
+    <record id="cbc_c13" model="examination.entry.line">
+        <field name="name">Monocytes</field>
+        <field name="examinationentry_id" ref="cbc"/>
+        <field name="sequence">130</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">%</field>
+        <field name="reference_value">2 - 10</field>
+        <field name="ref_low">2</field>
+        <field name="ref_high">10</field>
+    </record>
+
+    <record id="cbc_c14" model="examination.entry.line">
+        <field name="name">Eosinophils</field>
+        <field name="examinationentry_id" ref="cbc"/>
+        <field name="sequence">140</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">%</field>
+        <field name="reference_value">1 - 6</field>
+        <field name="ref_low">1</field>
+        <field name="ref_high">6</field>
+    </record>
+
+    <record id="cbc_c15" model="examination.entry.line">
+        <field name="name">Basophils</field>
+        <field name="examinationentry_id" ref="cbc"/>
+        <field name="sequence">150</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">%</field>
+        <field name="reference_value">0 - 1</field>
+        <field name="ref_high">1</field>
+    </record>
+
+    <record id="cbc_c16" model="examination.entry.line">
+        <field name="name">PLATELETS</field>
+        <field name="examinationentry_id" ref="cbc"/>
+        <field name="sequence">160</field>
+        <field name="is_group_header" eval="True"/>
+        <field name="bold" eval="True"/>
+        <field name="result_type">text</field>
+    </record>
+
+    <record id="cbc_c17" model="examination.entry.line">
+        <field name="name">Platelet Count</field>
+        <field name="examinationentry_id" ref="cbc"/>
+        <field name="sequence">170</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">/cmm</field>
+        <field name="reference_value">150,000 - 450,000</field>
+        <field name="ref_low">150000</field>
+        <field name="ref_high">450000</field>
+        <field name="critical_low">50000</field>
+        <field name="critical_high">1000000</field>
+    </record>
+
+    <record id="cbc_c18" model="examination.entry.line">
+        <field name="name">MPV</field>
+        <field name="examinationentry_id" ref="cbc"/>
+        <field name="sequence">180</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">fL</field>
+        <field name="reference_value">7.5 - 11.5</field>
+        <field name="ref_low">7.5</field>
+        <field name="ref_high">11.5</field>
+    </record>
+
+    <record id="cbc_c19" model="examination.entry.line">
+        <field name="name">ESR</field>
+        <field name="examinationentry_id" ref="cbc"/>
+        <field name="sequence">190</field>
+        <field name="is_group_header" eval="True"/>
+        <field name="bold" eval="True"/>
+        <field name="result_type">text</field>
+    </record>
+
+    <record id="cbc_c20" model="examination.entry.line">
+        <field name="name">ESR (1st Hour)</field>
+        <field name="examinationentry_id" ref="cbc"/>
+        <field name="sequence">200</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">mm</field>
+        <field name="reference_value">M: 0 - 15  F: 0 - 20</field>
+        <field name="reference_value_male">0 - 15</field>
+        <field name="reference_value_female">0 - 20</field>
+        <field name="ref_high">20</field>
+    </record>
+
+    <record id="cbc_c21" model="examination.entry.line">
+        <field name="name">Comment</field>
+        <field name="examinationentry_id" ref="cbc"/>
+        <field name="sequence">210</field>
+        <field name="result_type">text</field>
+    </record>
+
+    <!-- Haemoglobin (Hb%) -->
+    <record id="haemoglobin" model="examination.entry">
+        <field name="name">Haemoglobin (Hb%)</field>
+        <field name="department" ref="dept_haematology"/>
+        <field name="accounts_id" ref="account_income_haematology"/>
+        <field name="rate">250</field>
+        <field name="base_rate">250</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">pathology</field>
+        <field name="report_layout">tabular</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_lavender"/>
+        <field name="sample_type" ref="sample_whole_blood"/>
+        <field name="default_method_id" ref="method_impedance"/>
+        <field name="default_instrument_id" ref="instrument_haematology"/>
+        <field name="sample_req" eval="True"/>
+    </record>
+
+    <record id="haemoglobin_c01" model="examination.entry.line">
+        <field name="name">Haemoglobin (Hb)</field>
+        <field name="examinationentry_id" ref="haemoglobin"/>
+        <field name="sequence">10</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">g/dL</field>
+        <field name="reference_value">M: 13.0 - 17.0  F: 12.0 - 15.0</field>
+        <field name="reference_value_male">13.0 - 17.0</field>
+        <field name="reference_value_female">12.0 - 15.0</field>
+        <field name="reference_value_child">11.0 - 14.0</field>
+        <field name="ref_low">12.0</field>
+        <field name="ref_high">17.0</field>
+        <field name="critical_low">7.0</field>
+        <field name="critical_high">20.0</field>
+    </record>
+
+    <!-- Haematocrit (HCT) -->
+    <record id="haematocrit" model="examination.entry">
+        <field name="name">Haematocrit (HCT)</field>
+        <field name="department" ref="dept_haematology"/>
+        <field name="accounts_id" ref="account_income_haematology"/>
+        <field name="rate">250</field>
+        <field name="base_rate">250</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">pathology</field>
+        <field name="report_layout">tabular</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_lavender"/>
+        <field name="sample_type" ref="sample_whole_blood"/>
+        <field name="default_method_id" ref="method_impedance"/>
+        <field name="default_instrument_id" ref="instrument_haematology"/>
+        <field name="sample_req" eval="True"/>
+    </record>
+
+    <record id="haematocrit_c01" model="examination.entry.line">
+        <field name="name">Haematocrit (HCT / PCV)</field>
+        <field name="examinationentry_id" ref="haematocrit"/>
+        <field name="sequence">10</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">%</field>
+        <field name="reference_value">M: 40 - 50  F: 36 - 46</field>
+        <field name="reference_value_male">40 - 50</field>
+        <field name="reference_value_female">36 - 46</field>
+        <field name="ref_low">36</field>
+        <field name="ref_high">50</field>
+    </record>
+
+    <!-- Platelet Count -->
+    <record id="platelet_count" model="examination.entry">
+        <field name="name">Platelet Count</field>
+        <field name="department" ref="dept_haematology"/>
+        <field name="accounts_id" ref="account_income_haematology"/>
+        <field name="rate">300</field>
+        <field name="base_rate">300</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">pathology</field>
+        <field name="report_layout">tabular</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_lavender"/>
+        <field name="sample_type" ref="sample_whole_blood"/>
+        <field name="default_method_id" ref="method_impedance"/>
+        <field name="default_instrument_id" ref="instrument_haematology"/>
+        <field name="sample_req" eval="True"/>
+    </record>
+
+    <record id="platelet_count_c01" model="examination.entry.line">
+        <field name="name">Platelet Count</field>
+        <field name="examinationentry_id" ref="platelet_count"/>
+        <field name="sequence">10</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">/cmm</field>
+        <field name="reference_value">150,000 - 450,000</field>
+        <field name="ref_low">150000</field>
+        <field name="ref_high">450000</field>
+        <field name="critical_low">50000</field>
+        <field name="critical_high">1000000</field>
+    </record>
+
+    <!-- Plateletcrit (PCT) -->
+    <record id="plateletcrit" model="examination.entry">
+        <field name="name">Plateletcrit (PCT)</field>
+        <field name="department" ref="dept_haematology"/>
+        <field name="accounts_id" ref="account_income_haematology"/>
+        <field name="rate">200</field>
+        <field name="base_rate">200</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">pathology</field>
+        <field name="report_layout">tabular</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_lavender"/>
+        <field name="sample_type" ref="sample_whole_blood"/>
+        <field name="default_method_id" ref="method_impedance"/>
+        <field name="default_instrument_id" ref="instrument_haematology"/>
+        <field name="sample_req" eval="True"/>
+    </record>
+
+    <record id="plateletcrit_c01" model="examination.entry.line">
+        <field name="name">Plateletcrit (PCT)</field>
+        <field name="examinationentry_id" ref="plateletcrit"/>
+        <field name="sequence">10</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">%</field>
+        <field name="reference_value">0.19 - 0.39</field>
+        <field name="ref_low">0.19</field>
+        <field name="ref_high">0.39</field>
+    </record>
+
+    <record id="plateletcrit_c02" model="examination.entry.line">
+        <field name="name">Platelet Count</field>
+        <field name="examinationentry_id" ref="plateletcrit"/>
+        <field name="sequence">20</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">/cmm</field>
+        <field name="reference_value">150,000 - 450,000</field>
+        <field name="ref_low">150000</field>
+        <field name="ref_high">450000</field>
+        <field name="critical_low">50000</field>
+        <field name="critical_high">1000000</field>
+    </record>
+
+    <!-- TC, DC (Total & Differential Count) -->
+    <record id="tc_dc" model="examination.entry">
+        <field name="name">TC, DC (Total &amp; Differential Count)</field>
+        <field name="department" ref="dept_haematology"/>
+        <field name="accounts_id" ref="account_income_haematology"/>
+        <field name="rate">400</field>
+        <field name="base_rate">400</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">pathology</field>
+        <field name="report_layout">tabular</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_lavender"/>
+        <field name="sample_type" ref="sample_whole_blood"/>
+        <field name="default_method_id" ref="method_impedance"/>
+        <field name="default_instrument_id" ref="instrument_haematology"/>
+        <field name="sample_req" eval="True"/>
+    </record>
+
+    <record id="tc_dc_c01" model="examination.entry.line">
+        <field name="name">TOTAL COUNT</field>
+        <field name="examinationentry_id" ref="tc_dc"/>
+        <field name="sequence">10</field>
+        <field name="is_group_header" eval="True"/>
+        <field name="bold" eval="True"/>
+        <field name="result_type">text</field>
+    </record>
+
+    <record id="tc_dc_c02" model="examination.entry.line">
+        <field name="name">Total WBC Count</field>
+        <field name="examinationentry_id" ref="tc_dc"/>
+        <field name="sequence">20</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">/cmm</field>
+        <field name="reference_value">4,000 - 11,000</field>
+        <field name="ref_low">4000</field>
+        <field name="ref_high">11000</field>
+        <field name="critical_low">2000</field>
+        <field name="critical_high">30000</field>
+    </record>
+
+    <record id="tc_dc_c03" model="examination.entry.line">
+        <field name="name">DIFFERENTIAL COUNT</field>
+        <field name="examinationentry_id" ref="tc_dc"/>
+        <field name="sequence">30</field>
+        <field name="is_group_header" eval="True"/>
+        <field name="bold" eval="True"/>
+        <field name="result_type">text</field>
+    </record>
+
+    <record id="tc_dc_c04" model="examination.entry.line">
+        <field name="name">Neutrophils</field>
+        <field name="examinationentry_id" ref="tc_dc"/>
+        <field name="sequence">40</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">%</field>
+        <field name="reference_value">40 - 75</field>
+        <field name="ref_low">40</field>
+        <field name="ref_high">75</field>
+    </record>
+
+    <record id="tc_dc_c05" model="examination.entry.line">
+        <field name="name">Lymphocytes</field>
+        <field name="examinationentry_id" ref="tc_dc"/>
+        <field name="sequence">50</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">%</field>
+        <field name="reference_value">20 - 45</field>
+        <field name="ref_low">20</field>
+        <field name="ref_high">45</field>
+    </record>
+
+    <record id="tc_dc_c06" model="examination.entry.line">
+        <field name="name">Monocytes</field>
+        <field name="examinationentry_id" ref="tc_dc"/>
+        <field name="sequence">60</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">%</field>
+        <field name="reference_value">2 - 10</field>
+        <field name="ref_low">2</field>
+        <field name="ref_high">10</field>
+    </record>
+
+    <record id="tc_dc_c07" model="examination.entry.line">
+        <field name="name">Eosinophils</field>
+        <field name="examinationentry_id" ref="tc_dc"/>
+        <field name="sequence">70</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">%</field>
+        <field name="reference_value">1 - 6</field>
+        <field name="ref_low">1</field>
+        <field name="ref_high">6</field>
+    </record>
+
+    <record id="tc_dc_c08" model="examination.entry.line">
+        <field name="name">Basophils</field>
+        <field name="examinationentry_id" ref="tc_dc"/>
+        <field name="sequence">80</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">%</field>
+        <field name="reference_value">0 - 1</field>
+        <field name="ref_high">1</field>
+    </record>
+
+    <!-- Circulating Eosinophil Count (TCE) -->
+    <record id="circulating_eosinophil_count" model="examination.entry">
+        <field name="name">Circulating Eosinophil Count (TCE)</field>
+        <field name="department" ref="dept_haematology"/>
+        <field name="accounts_id" ref="account_income_haematology"/>
+        <field name="rate">300</field>
+        <field name="base_rate">300</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">pathology</field>
+        <field name="report_layout">tabular</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_lavender"/>
+        <field name="sample_type" ref="sample_whole_blood"/>
+        <field name="default_method_id" ref="method_impedance"/>
+        <field name="default_instrument_id" ref="instrument_haematology"/>
+        <field name="sample_req" eval="True"/>
+    </record>
+
+    <record id="circulating_eosinophil_count_c01" model="examination.entry.line">
+        <field name="name">Absolute Eosinophil Count</field>
+        <field name="examinationentry_id" ref="circulating_eosinophil_count"/>
+        <field name="sequence">10</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">/cmm</field>
+        <field name="reference_value">40 - 440</field>
+        <field name="ref_low">40</field>
+        <field name="ref_high">440</field>
+    </record>
+
+    <!-- Reticulocyte Count -->
+    <record id="reticulocyte_count" model="examination.entry">
+        <field name="name">Reticulocyte Count</field>
+        <field name="department" ref="dept_haematology"/>
+        <field name="accounts_id" ref="account_income_haematology"/>
+        <field name="rate">400</field>
+        <field name="base_rate">400</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">pathology</field>
+        <field name="report_layout">tabular</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_lavender"/>
+        <field name="sample_type" ref="sample_whole_blood"/>
+        <field name="default_method_id" ref="method_microscopy"/>
+        <field name="default_instrument_id" ref="instrument_microscope"/>
+        <field name="sample_req" eval="True"/>
+    </record>
+
+    <record id="reticulocyte_count_c01" model="examination.entry.line">
+        <field name="name">Reticulocyte Count</field>
+        <field name="examinationentry_id" ref="reticulocyte_count"/>
+        <field name="sequence">10</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">%</field>
+        <field name="reference_value">0.5 - 2.5</field>
+        <field name="ref_low">0.5</field>
+        <field name="ref_high">2.5</field>
+    </record>
+
+    <record id="reticulocyte_count_c02" model="examination.entry.line">
+        <field name="name">Absolute Reticulocyte Count</field>
+        <field name="examinationentry_id" ref="reticulocyte_count"/>
+        <field name="sequence">20</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">/cmm</field>
+        <field name="reference_value">25,000 - 75,000</field>
+        <field name="ref_low">25000</field>
+        <field name="ref_high">75000</field>
+    </record>
+
+    <!-- Blood Film (PBF) -->
+    <record id="blood_film_pbf" model="examination.entry">
+        <field name="name">Blood Film (PBF)</field>
+        <field name="department" ref="dept_haematology"/>
+        <field name="accounts_id" ref="account_income_haematology"/>
+        <field name="rate">400</field>
+        <field name="base_rate">400</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">pathology</field>
+        <field name="report_layout">narrative</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_lavender"/>
+        <field name="sample_type" ref="sample_whole_blood"/>
+        <field name="default_method_id" ref="method_microscopy"/>
+        <field name="default_instrument_id" ref="instrument_microscope"/>
+        <field name="sample_req" eval="True"/>
+    </record>
+
+    <record id="blood_film_pbf_c01" model="examination.entry.line">
+        <field name="name">PERIPHERAL BLOOD FILM</field>
+        <field name="examinationentry_id" ref="blood_film_pbf"/>
+        <field name="sequence">10</field>
+        <field name="is_group_header" eval="True"/>
+        <field name="bold" eval="True"/>
+        <field name="result_type">text</field>
+    </record>
+
+    <record id="blood_film_pbf_c02" model="examination.entry.line">
+        <field name="name">RBC Morphology</field>
+        <field name="examinationentry_id" ref="blood_film_pbf"/>
+        <field name="sequence">20</field>
+        <field name="result_type">text</field>
+        <field name="default_value">Normocytic normochromic</field>
+    </record>
+
+    <record id="blood_film_pbf_c03" model="examination.entry.line">
+        <field name="name">WBC Morphology</field>
+        <field name="examinationentry_id" ref="blood_film_pbf"/>
+        <field name="sequence">30</field>
+        <field name="result_type">text</field>
+        <field name="default_value">Mature, no immature form seen</field>
+    </record>
+
+    <record id="blood_film_pbf_c04" model="examination.entry.line">
+        <field name="name">Platelet Morphology</field>
+        <field name="examinationentry_id" ref="blood_film_pbf"/>
+        <field name="sequence">40</field>
+        <field name="result_type">text</field>
+        <field name="default_value">Adequate on smear</field>
+    </record>
+
+    <record id="blood_film_pbf_c05" model="examination.entry.line">
+        <field name="name">Haemoparasite</field>
+        <field name="examinationentry_id" ref="blood_film_pbf"/>
+        <field name="sequence">50</field>
+        <field name="result_type">selection</field>
+        <field name="reference_value">Not Found</field>
+    </record>
+
+    <record id="blood_film_pbf_c05_v01" model="examination.possible.value">
+        <field name="name">Not Found</field>
+        <field name="examination_line_id" ref="blood_film_pbf_c05"/>
+        <field name="sequence">10</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="blood_film_pbf_c05_v02" model="examination.possible.value">
+        <field name="name">Malarial Parasite Seen</field>
+        <field name="examination_line_id" ref="blood_film_pbf_c05"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="blood_film_pbf_c05_v03" model="examination.possible.value">
+        <field name="name">Microfilaria Seen</field>
+        <field name="examination_line_id" ref="blood_film_pbf_c05"/>
+        <field name="sequence">30</field>
+    </record>
+
+    <record id="blood_film_pbf_c06" model="examination.entry.line">
+        <field name="name">Impression</field>
+        <field name="examinationentry_id" ref="blood_film_pbf"/>
+        <field name="sequence">60</field>
+        <field name="result_type">text</field>
+    </record>
+
+    <!-- Haemoglobin Electrophoresis -->
+    <record id="haemoglobin_electrophoresis" model="examination.entry">
+        <field name="name">Haemoglobin Electrophoresis</field>
+        <field name="department" ref="dept_haematology"/>
+        <field name="accounts_id" ref="account_income_haematology"/>
+        <field name="rate">1500</field>
+        <field name="base_rate">1500</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">pathology</field>
+        <field name="report_layout">tabular</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_lavender"/>
+        <field name="sample_type" ref="sample_whole_blood"/>
+        <field name="default_method_id" ref="method_hplc"/>
+        <field name="default_instrument_id" ref="instrument_hba1c"/>
+        <field name="sample_req" eval="True"/>
+        <field name="required_time">3</field>
+    </record>
+
+    <record id="haemoglobin_electrophoresis_c01" model="examination.entry.line">
+        <field name="name">HAEMOGLOBIN ELECTROPHORESIS</field>
+        <field name="examinationentry_id" ref="haemoglobin_electrophoresis"/>
+        <field name="sequence">10</field>
+        <field name="is_group_header" eval="True"/>
+        <field name="bold" eval="True"/>
+        <field name="result_type">text</field>
+    </record>
+
+    <record id="haemoglobin_electrophoresis_c02" model="examination.entry.line">
+        <field name="name">HbA</field>
+        <field name="examinationentry_id" ref="haemoglobin_electrophoresis"/>
+        <field name="sequence">20</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">%</field>
+        <field name="reference_value">96.5 - 98.5</field>
+        <field name="ref_low">96.5</field>
+        <field name="ref_high">98.5</field>
+    </record>
+
+    <record id="haemoglobin_electrophoresis_c03" model="examination.entry.line">
+        <field name="name">HbA2</field>
+        <field name="examinationentry_id" ref="haemoglobin_electrophoresis"/>
+        <field name="sequence">30</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">%</field>
+        <field name="reference_value">1.5 - 3.5</field>
+        <field name="ref_low">1.5</field>
+        <field name="ref_high">3.5</field>
+    </record>
+
+    <record id="haemoglobin_electrophoresis_c04" model="examination.entry.line">
+        <field name="name">HbF</field>
+        <field name="examinationentry_id" ref="haemoglobin_electrophoresis"/>
+        <field name="sequence">40</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">%</field>
+        <field name="reference_value">&lt; 1.0</field>
+        <field name="ref_high">1.0</field>
+    </record>
+
+    <record id="haemoglobin_electrophoresis_c05" model="examination.entry.line">
+        <field name="name">HbS</field>
+        <field name="examinationentry_id" ref="haemoglobin_electrophoresis"/>
+        <field name="sequence">50</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">%</field>
+        <field name="reference_value">Absent</field>
+    </record>
+
+    <record id="haemoglobin_electrophoresis_c06" model="examination.entry.line">
+        <field name="name">HbE</field>
+        <field name="examinationentry_id" ref="haemoglobin_electrophoresis"/>
+        <field name="sequence">60</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">%</field>
+        <field name="reference_value">Absent</field>
+    </record>
+
+    <record id="haemoglobin_electrophoresis_c07" model="examination.entry.line">
+        <field name="name">Interpretation</field>
+        <field name="examinationentry_id" ref="haemoglobin_electrophoresis"/>
+        <field name="sequence">70</field>
+        <field name="result_type">selection</field>
+        <field name="reference_value">Normal Haemoglobin Pattern (AA)</field>
+    </record>
+
+    <record id="haemoglobin_electrophoresis_c07_v01" model="examination.possible.value">
+        <field name="name">Normal Haemoglobin Pattern (AA)</field>
+        <field name="examination_line_id" ref="haemoglobin_electrophoresis_c07"/>
+        <field name="sequence">10</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="haemoglobin_electrophoresis_c07_v02" model="examination.possible.value">
+        <field name="name">Beta Thalassaemia Trait</field>
+        <field name="examination_line_id" ref="haemoglobin_electrophoresis_c07"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="haemoglobin_electrophoresis_c07_v03" model="examination.possible.value">
+        <field name="name">HbE Trait</field>
+        <field name="examination_line_id" ref="haemoglobin_electrophoresis_c07"/>
+        <field name="sequence">30</field>
+    </record>
+
+    <record id="haemoglobin_electrophoresis_c07_v04" model="examination.possible.value">
+        <field name="name">HbE Beta Thalassaemia</field>
+        <field name="examination_line_id" ref="haemoglobin_electrophoresis_c07"/>
+        <field name="sequence">40</field>
+    </record>
+
+    <record id="haemoglobin_electrophoresis_c07_v05" model="examination.possible.value">
+        <field name="name">Sickle Cell Trait</field>
+        <field name="examination_line_id" ref="haemoglobin_electrophoresis_c07"/>
+        <field name="sequence">50</field>
+    </record>
+
+    <record id="haemoglobin_electrophoresis_c07_v06" model="examination.possible.value">
+        <field name="name">Sickle Cell Disease</field>
+        <field name="examination_line_id" ref="haemoglobin_electrophoresis_c07"/>
+        <field name="sequence">60</field>
+    </record>
+
+    <record id="haemoglobin_electrophoresis_c07_v07" model="examination.possible.value">
+        <field name="name">Other - see comment</field>
+        <field name="examination_line_id" ref="haemoglobin_electrophoresis_c07"/>
+        <field name="sequence">70</field>
+    </record>
+
+    <record id="haemoglobin_electrophoresis_c08" model="examination.entry.line">
+        <field name="name">Comment</field>
+        <field name="examinationentry_id" ref="haemoglobin_electrophoresis"/>
+        <field name="sequence">80</field>
+        <field name="result_type">text</field>
+    </record>
+
+    <!-- Prothrombin Time (PT / INR) -->
+    <record id="prothrombin_time" model="examination.entry">
+        <field name="name">Prothrombin Time (PT / INR)</field>
+        <field name="department" ref="dept_haematology"/>
+        <field name="accounts_id" ref="account_income_haematology"/>
+        <field name="rate">500</field>
+        <field name="base_rate">500</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">pathology</field>
+        <field name="report_layout">tabular</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_light_blue"/>
+        <field name="sample_type" ref="sample_plasma"/>
+        <field name="default_method_id" ref="method_coagulometry"/>
+        <field name="default_instrument_id" ref="instrument_coagulometer"/>
+        <field name="sample_req" eval="True"/>
+        <field name="needs_separate_tube" eval="True"/>
+    </record>
+
+    <record id="prothrombin_time_c01" model="examination.entry.line">
+        <field name="name">PROTHROMBIN TIME</field>
+        <field name="examinationentry_id" ref="prothrombin_time"/>
+        <field name="sequence">10</field>
+        <field name="is_group_header" eval="True"/>
+        <field name="bold" eval="True"/>
+        <field name="result_type">text</field>
+    </record>
+
+    <record id="prothrombin_time_c02" model="examination.entry.line">
+        <field name="name">Patient PT</field>
+        <field name="examinationentry_id" ref="prothrombin_time"/>
+        <field name="sequence">20</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">seconds</field>
+        <field name="reference_value">11 - 14</field>
+        <field name="ref_low">11</field>
+        <field name="ref_high">14</field>
+        <field name="critical_high">30</field>
+    </record>
+
+    <record id="prothrombin_time_c03" model="examination.entry.line">
+        <field name="name">Control PT</field>
+        <field name="examinationentry_id" ref="prothrombin_time"/>
+        <field name="sequence">30</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">seconds</field>
+        <field name="reference_value">11 - 14</field>
+    </record>
+
+    <record id="prothrombin_time_c04" model="examination.entry.line">
+        <field name="name">INR</field>
+        <field name="examinationentry_id" ref="prothrombin_time"/>
+        <field name="sequence">40</field>
+        <field name="result_type">numeric</field>
+        <field name="reference_value">Normal: 0.8 - 1.2 | On warfarin: 2.0 - 3.0</field>
+        <field name="ref_low">0.8</field>
+        <field name="ref_high">1.2</field>
+        <field name="critical_high">5.0</field>
+    </record>
+
+    <record id="prothrombin_time_c05" model="examination.entry.line">
+        <field name="name">Prothrombin Index</field>
+        <field name="examinationentry_id" ref="prothrombin_time"/>
+        <field name="sequence">50</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">%</field>
+        <field name="reference_value">70 - 100</field>
+        <field name="ref_low">70</field>
+        <field name="ref_high">100</field>
+    </record>
+
+    <!-- APTT (Activated Partial Thromboplastin Time) -->
+    <record id="aptt" model="examination.entry">
+        <field name="name">APTT (Activated Partial Thromboplastin Time)</field>
+        <field name="department" ref="dept_haematology"/>
+        <field name="accounts_id" ref="account_income_haematology"/>
+        <field name="rate">1000</field>
+        <field name="base_rate">1000</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">pathology</field>
+        <field name="report_layout">tabular</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_light_blue"/>
+        <field name="sample_type" ref="sample_plasma"/>
+        <field name="default_method_id" ref="method_coagulometry"/>
+        <field name="default_instrument_id" ref="instrument_coagulometer"/>
+        <field name="sample_req" eval="True"/>
+        <field name="needs_separate_tube" eval="True"/>
+    </record>
+
+    <record id="aptt_c01" model="examination.entry.line">
+        <field name="name">Patient APTT</field>
+        <field name="examinationentry_id" ref="aptt"/>
+        <field name="sequence">10</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">seconds</field>
+        <field name="reference_value">25 - 35</field>
+        <field name="ref_low">25</field>
+        <field name="ref_high">35</field>
+        <field name="critical_high">70</field>
+    </record>
+
+    <record id="aptt_c02" model="examination.entry.line">
+        <field name="name">Control APTT</field>
+        <field name="examinationentry_id" ref="aptt"/>
+        <field name="sequence">20</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">seconds</field>
+        <field name="reference_value">25 - 35</field>
+    </record>
+
+    <!-- BT, CT (Bleeding & Clotting Time) -->
+    <record id="bt_ct" model="examination.entry">
+        <field name="name">BT, CT (Bleeding &amp; Clotting Time)</field>
+        <field name="department" ref="dept_haematology"/>
+        <field name="accounts_id" ref="account_income_haematology"/>
+        <field name="rate">100</field>
+        <field name="base_rate">100</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">pathology</field>
+        <field name="report_layout">tabular</field>
+        <field name="report_type">pathology</field>
+        <field name="default_method_id" ref="method_manual"/>
+        <field name="sample_req" eval="False"/>
+        <field name="manual" eval="True"/>
+    </record>
+
+    <record id="bt_ct_c01" model="examination.entry.line">
+        <field name="name">Bleeding Time (BT)</field>
+        <field name="examinationentry_id" ref="bt_ct"/>
+        <field name="sequence">10</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">minutes</field>
+        <field name="reference_value">2 - 7</field>
+        <field name="ref_low">2</field>
+        <field name="ref_high">7</field>
+    </record>
+
+    <record id="bt_ct_c02" model="examination.entry.line">
+        <field name="name">Clotting Time (CT)</field>
+        <field name="examinationentry_id" ref="bt_ct"/>
+        <field name="sequence">20</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">minutes</field>
+        <field name="reference_value">4 - 9</field>
+        <field name="ref_low">4</field>
+        <field name="ref_high">9</field>
+    </record>
+
+    <!-- Fibrinogen Level -->
+    <record id="fibrinogen_level" model="examination.entry">
+        <field name="name">Fibrinogen Level</field>
+        <field name="department" ref="dept_haematology"/>
+        <field name="accounts_id" ref="account_income_haematology"/>
+        <field name="rate">1500</field>
+        <field name="base_rate">1500</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">pathology</field>
+        <field name="report_layout">tabular</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_light_blue"/>
+        <field name="sample_type" ref="sample_plasma"/>
+        <field name="default_method_id" ref="method_coagulometry"/>
+        <field name="default_instrument_id" ref="instrument_coagulometer"/>
+        <field name="sample_req" eval="True"/>
+        <field name="needs_separate_tube" eval="True"/>
+    </record>
+
+    <record id="fibrinogen_level_c01" model="examination.entry.line">
+        <field name="name">Fibrinogen</field>
+        <field name="examinationentry_id" ref="fibrinogen_level"/>
+        <field name="sequence">10</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">mg/dL</field>
+        <field name="reference_value">200 - 400</field>
+        <field name="ref_low">200</field>
+        <field name="ref_high">400</field>
+        <field name="critical_low">100</field>
+    </record>
+
+    <!-- D-Dimer -->
+    <record id="d_dimer" model="examination.entry">
+        <field name="name">D-Dimer</field>
+        <field name="department" ref="dept_haematology"/>
+        <field name="accounts_id" ref="account_income_haematology"/>
+        <field name="rate">1200</field>
+        <field name="base_rate">1200</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">pathology</field>
+        <field name="report_layout">tabular</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_light_blue"/>
+        <field name="sample_type" ref="sample_plasma"/>
+        <field name="default_method_id" ref="method_clia"/>
+        <field name="default_instrument_id" ref="instrument_immunoassay"/>
+        <field name="sample_req" eval="True"/>
+        <field name="needs_separate_tube" eval="True"/>
+    </record>
+
+    <record id="d_dimer_c01" model="examination.entry.line">
+        <field name="name">D-Dimer</field>
+        <field name="examinationentry_id" ref="d_dimer"/>
+        <field name="sequence">10</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">ng/mL FEU</field>
+        <field name="reference_value">&lt; 500</field>
+        <field name="ref_high">500</field>
+    </record>
+
+    <!-- Fibrin Degradation Products (FDP) -->
+    <record id="fdp" model="examination.entry">
+        <field name="name">Fibrin Degradation Products (FDP)</field>
+        <field name="department" ref="dept_haematology"/>
+        <field name="accounts_id" ref="account_income_haematology"/>
+        <field name="rate">1400</field>
+        <field name="base_rate">1400</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">pathology</field>
+        <field name="report_layout">tabular</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_light_blue"/>
+        <field name="sample_type" ref="sample_plasma"/>
+        <field name="default_method_id" ref="method_coagulometry"/>
+        <field name="default_instrument_id" ref="instrument_coagulometer"/>
+        <field name="sample_req" eval="True"/>
+        <field name="needs_separate_tube" eval="True"/>
+    </record>
+
+    <record id="fdp_c01" model="examination.entry.line">
+        <field name="name">FDP</field>
+        <field name="examinationentry_id" ref="fdp"/>
+        <field name="sequence">10</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">ug/mL</field>
+        <field name="reference_value">&lt; 5</field>
+        <field name="ref_high">5</field>
+    </record>
+
+</odoo>

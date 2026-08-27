@@ -1,0 +1,366 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Histopathology & Cytopathology - 3 catalogue items.
+
+    GENERATED FILE - do not edit by hand.
+    Source: tools/items/histocytopathology.py    Rebuild: python3 tools/build_catalogue.py
+
+    Rates carried over from the legacy export are PROVISIONAL and are expected
+    to be revised before go-live.
+-->
+<odoo noupdate="1">
+    <!-- Pap's Smear for Cytology -->
+    <record id="paps_smear_cytology" model="examination.entry">
+        <field name="name">Pap's Smear for Cytology</field>
+        <field name="department" ref="dept_histocytopathology"/>
+        <field name="accounts_id" ref="account_income_histocytopathology"/>
+        <field name="rate">800</field>
+        <field name="base_rate">800</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">descriptive</field>
+        <field name="report_layout">narrative</field>
+        <field name="report_type">descriptive</field>
+        <field name="tube_color_id" ref="tube_histo_formalin"/>
+        <field name="sample_type" ref="sample_smear"/>
+        <field name="default_method_id" ref="method_papanicolaou"/>
+        <field name="default_instrument_id" ref="instrument_microscope"/>
+        <field name="sample_req" eval="True"/>
+        <field name="required_time">5</field>
+    </record>
+
+    <record id="paps_smear_cytology_c01" model="examination.entry.line">
+        <field name="name">SPECIMEN</field>
+        <field name="examinationentry_id" ref="paps_smear_cytology"/>
+        <field name="sequence">10</field>
+        <field name="is_group_header" eval="True"/>
+        <field name="bold" eval="True"/>
+        <field name="result_type">text</field>
+    </record>
+
+    <record id="paps_smear_cytology_c02" model="examination.entry.line">
+        <field name="name">Specimen Type</field>
+        <field name="examinationentry_id" ref="paps_smear_cytology"/>
+        <field name="sequence">20</field>
+        <field name="result_type">text</field>
+        <field name="default_value">Cervical smear (conventional)</field>
+    </record>
+
+    <record id="paps_smear_cytology_c03" model="examination.entry.line">
+        <field name="name">Clinical History / LMP</field>
+        <field name="examinationentry_id" ref="paps_smear_cytology"/>
+        <field name="sequence">30</field>
+        <field name="result_type">text</field>
+    </record>
+
+    <record id="paps_smear_cytology_c04" model="examination.entry.line">
+        <field name="name">ADEQUACY</field>
+        <field name="examinationentry_id" ref="paps_smear_cytology"/>
+        <field name="sequence">40</field>
+        <field name="is_group_header" eval="True"/>
+        <field name="bold" eval="True"/>
+        <field name="result_type">text</field>
+    </record>
+
+    <record id="paps_smear_cytology_c05" model="examination.entry.line">
+        <field name="name">Specimen Adequacy</field>
+        <field name="examinationentry_id" ref="paps_smear_cytology"/>
+        <field name="sequence">50</field>
+        <field name="result_type">selection</field>
+        <field name="reference_value">Satisfactory for Evaluation</field>
+    </record>
+
+    <record id="paps_smear_cytology_c05_v01" model="examination.possible.value">
+        <field name="name">Satisfactory for Evaluation</field>
+        <field name="examination_line_id" ref="paps_smear_cytology_c05"/>
+        <field name="sequence">10</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="paps_smear_cytology_c05_v02" model="examination.possible.value">
+        <field name="name">Satisfactory - obscured by blood / inflammation</field>
+        <field name="examination_line_id" ref="paps_smear_cytology_c05"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="paps_smear_cytology_c05_v03" model="examination.possible.value">
+        <field name="name">Unsatisfactory - repeat advised</field>
+        <field name="examination_line_id" ref="paps_smear_cytology_c05"/>
+        <field name="sequence">30</field>
+    </record>
+
+    <record id="paps_smear_cytology_c06" model="examination.entry.line">
+        <field name="name">Endocervical / Transformation Zone Component</field>
+        <field name="examinationentry_id" ref="paps_smear_cytology"/>
+        <field name="sequence">60</field>
+        <field name="result_type">selection</field>
+        <field name="reference_value">Present</field>
+    </record>
+
+    <record id="paps_smear_cytology_c06_v01" model="examination.possible.value">
+        <field name="name">Present</field>
+        <field name="examination_line_id" ref="paps_smear_cytology_c06"/>
+        <field name="sequence">10</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="paps_smear_cytology_c06_v02" model="examination.possible.value">
+        <field name="name">Absent</field>
+        <field name="examination_line_id" ref="paps_smear_cytology_c06"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="paps_smear_cytology_c07" model="examination.entry.line">
+        <field name="name">INTERPRETATION (BETHESDA 2014)</field>
+        <field name="examinationentry_id" ref="paps_smear_cytology"/>
+        <field name="sequence">70</field>
+        <field name="is_group_header" eval="True"/>
+        <field name="bold" eval="True"/>
+        <field name="result_type">text</field>
+    </record>
+
+    <record id="paps_smear_cytology_c08" model="examination.entry.line">
+        <field name="name">Category</field>
+        <field name="examinationentry_id" ref="paps_smear_cytology"/>
+        <field name="sequence">80</field>
+        <field name="result_type">selection</field>
+        <field name="reference_value">Negative for Intraepithelial Lesion or Malignancy (NILM)</field>
+    </record>
+
+    <record id="paps_smear_cytology_c08_v01" model="examination.possible.value">
+        <field name="name">Negative for Intraepithelial Lesion or Malignancy (NILM)</field>
+        <field name="examination_line_id" ref="paps_smear_cytology_c08"/>
+        <field name="sequence">10</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="paps_smear_cytology_c08_v02" model="examination.possible.value">
+        <field name="name">ASC-US</field>
+        <field name="examination_line_id" ref="paps_smear_cytology_c08"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="paps_smear_cytology_c08_v03" model="examination.possible.value">
+        <field name="name">ASC-H</field>
+        <field name="examination_line_id" ref="paps_smear_cytology_c08"/>
+        <field name="sequence">30</field>
+    </record>
+
+    <record id="paps_smear_cytology_c08_v04" model="examination.possible.value">
+        <field name="name">LSIL</field>
+        <field name="examination_line_id" ref="paps_smear_cytology_c08"/>
+        <field name="sequence">40</field>
+    </record>
+
+    <record id="paps_smear_cytology_c08_v05" model="examination.possible.value">
+        <field name="name">HSIL</field>
+        <field name="examination_line_id" ref="paps_smear_cytology_c08"/>
+        <field name="sequence">50</field>
+    </record>
+
+    <record id="paps_smear_cytology_c08_v06" model="examination.possible.value">
+        <field name="name">Atypical Glandular Cells (AGC)</field>
+        <field name="examination_line_id" ref="paps_smear_cytology_c08"/>
+        <field name="sequence">60</field>
+    </record>
+
+    <record id="paps_smear_cytology_c08_v07" model="examination.possible.value">
+        <field name="name">Squamous Cell Carcinoma</field>
+        <field name="examination_line_id" ref="paps_smear_cytology_c08"/>
+        <field name="sequence">70</field>
+    </record>
+
+    <record id="paps_smear_cytology_c08_v08" model="examination.possible.value">
+        <field name="name">Adenocarcinoma</field>
+        <field name="examination_line_id" ref="paps_smear_cytology_c08"/>
+        <field name="sequence">80</field>
+    </record>
+
+    <record id="paps_smear_cytology_c08_v09" model="examination.possible.value">
+        <field name="name">Other - see comment</field>
+        <field name="examination_line_id" ref="paps_smear_cytology_c08"/>
+        <field name="sequence">90</field>
+    </record>
+
+    <record id="paps_smear_cytology_c09" model="examination.entry.line">
+        <field name="name">Organisms</field>
+        <field name="examinationentry_id" ref="paps_smear_cytology"/>
+        <field name="sequence">90</field>
+        <field name="result_type">selection</field>
+        <field name="reference_value">None Identified</field>
+    </record>
+
+    <record id="paps_smear_cytology_c09_v01" model="examination.possible.value">
+        <field name="name">None Identified</field>
+        <field name="examination_line_id" ref="paps_smear_cytology_c09"/>
+        <field name="sequence">10</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="paps_smear_cytology_c09_v02" model="examination.possible.value">
+        <field name="name">Bacterial Vaginosis</field>
+        <field name="examination_line_id" ref="paps_smear_cytology_c09"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="paps_smear_cytology_c09_v03" model="examination.possible.value">
+        <field name="name">Candida species</field>
+        <field name="examination_line_id" ref="paps_smear_cytology_c09"/>
+        <field name="sequence">30</field>
+    </record>
+
+    <record id="paps_smear_cytology_c09_v04" model="examination.possible.value">
+        <field name="name">Trichomonas vaginalis</field>
+        <field name="examination_line_id" ref="paps_smear_cytology_c09"/>
+        <field name="sequence">40</field>
+    </record>
+
+    <record id="paps_smear_cytology_c09_v05" model="examination.possible.value">
+        <field name="name">Actinomyces</field>
+        <field name="examination_line_id" ref="paps_smear_cytology_c09"/>
+        <field name="sequence">50</field>
+    </record>
+
+    <record id="paps_smear_cytology_c09_v06" model="examination.possible.value">
+        <field name="name">Herpes Simplex Virus</field>
+        <field name="examination_line_id" ref="paps_smear_cytology_c09"/>
+        <field name="sequence">60</field>
+    </record>
+
+    <record id="paps_smear_cytology_c10" model="examination.entry.line">
+        <field name="name">Recommendation</field>
+        <field name="examinationentry_id" ref="paps_smear_cytology"/>
+        <field name="sequence">100</field>
+        <field name="result_type">text</field>
+        <field name="default_value">Routine screening at the interval appropriate for the patient age and history.</field>
+    </record>
+
+    <!-- Histopathology (Tissue Biopsy) -->
+    <record id="histopathology_biopsy" model="examination.entry">
+        <field name="name">Histopathology (Tissue Biopsy)</field>
+        <field name="department" ref="dept_histocytopathology"/>
+        <field name="accounts_id" ref="account_income_histocytopathology"/>
+        <field name="rate">2500</field>
+        <field name="base_rate">2500</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">descriptive</field>
+        <field name="report_layout">narrative</field>
+        <field name="report_type">descriptive</field>
+        <field name="tube_color_id" ref="tube_histo_formalin"/>
+        <field name="sample_type" ref="sample_tissue"/>
+        <field name="default_method_id" ref="method_microscopy"/>
+        <field name="default_instrument_id" ref="instrument_microscope"/>
+        <field name="sample_req" eval="True"/>
+        <field name="needs_separate_tube" eval="True"/>
+        <field name="required_time">7</field>
+    </record>
+
+    <record id="histopathology_biopsy_c01" model="examination.entry.line">
+        <field name="name">SPECIMEN</field>
+        <field name="examinationentry_id" ref="histopathology_biopsy"/>
+        <field name="sequence">10</field>
+        <field name="is_group_header" eval="True"/>
+        <field name="bold" eval="True"/>
+        <field name="result_type">text</field>
+    </record>
+
+    <record id="histopathology_biopsy_c02" model="examination.entry.line">
+        <field name="name">Specimen / Site</field>
+        <field name="examinationentry_id" ref="histopathology_biopsy"/>
+        <field name="sequence">20</field>
+        <field name="result_type">text</field>
+    </record>
+
+    <record id="histopathology_biopsy_c03" model="examination.entry.line">
+        <field name="name">Clinical History</field>
+        <field name="examinationentry_id" ref="histopathology_biopsy"/>
+        <field name="sequence">30</field>
+        <field name="result_type">text</field>
+    </record>
+
+    <record id="histopathology_biopsy_c04" model="examination.entry.line">
+        <field name="name">Number of Blocks</field>
+        <field name="examinationentry_id" ref="histopathology_biopsy"/>
+        <field name="sequence">40</field>
+        <field name="result_type">numeric</field>
+    </record>
+
+    <record id="histopathology_biopsy_c05" model="examination.entry.line">
+        <field name="name">MACROSCOPIC EXAMINATION</field>
+        <field name="examinationentry_id" ref="histopathology_biopsy"/>
+        <field name="sequence">50</field>
+        <field name="is_group_header" eval="True"/>
+        <field name="bold" eval="True"/>
+        <field name="result_type">text</field>
+    </record>
+
+    <record id="histopathology_biopsy_c06" model="examination.entry.line">
+        <field name="name">Gross Description</field>
+        <field name="examinationentry_id" ref="histopathology_biopsy"/>
+        <field name="sequence">60</field>
+        <field name="result_type">text</field>
+    </record>
+
+    <!-- FNAC (Fine Needle Aspiration Cytology) -->
+    <record id="fnac" model="examination.entry">
+        <field name="name">FNAC (Fine Needle Aspiration Cytology)</field>
+        <field name="department" ref="dept_histocytopathology"/>
+        <field name="accounts_id" ref="account_income_histocytopathology"/>
+        <field name="rate">1500</field>
+        <field name="base_rate">1500</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">descriptive</field>
+        <field name="report_layout">narrative</field>
+        <field name="report_type">descriptive</field>
+        <field name="tube_color_id" ref="tube_histo_formalin"/>
+        <field name="sample_type" ref="sample_smear"/>
+        <field name="default_method_id" ref="method_microscopy"/>
+        <field name="default_instrument_id" ref="instrument_microscope"/>
+        <field name="sample_req" eval="True"/>
+        <field name="required_time">3</field>
+    </record>
+
+    <record id="fnac_c01" model="examination.entry.line">
+        <field name="name">SPECIMEN</field>
+        <field name="examinationentry_id" ref="fnac"/>
+        <field name="sequence">10</field>
+        <field name="is_group_header" eval="True"/>
+        <field name="bold" eval="True"/>
+        <field name="result_type">text</field>
+    </record>
+
+    <record id="fnac_c02" model="examination.entry.line">
+        <field name="name">Site Aspirated</field>
+        <field name="examinationentry_id" ref="fnac"/>
+        <field name="sequence">20</field>
+        <field name="result_type">text</field>
+    </record>
+
+    <record id="fnac_c03" model="examination.entry.line">
+        <field name="name">Aspirate Adequacy</field>
+        <field name="examinationentry_id" ref="fnac"/>
+        <field name="sequence">30</field>
+        <field name="result_type">selection</field>
+        <field name="reference_value">Adequate</field>
+    </record>
+
+    <record id="fnac_c03_v01" model="examination.possible.value">
+        <field name="name">Adequate</field>
+        <field name="examination_line_id" ref="fnac_c03"/>
+        <field name="sequence">10</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="fnac_c03_v02" model="examination.possible.value">
+        <field name="name">Inadequate - repeat advised</field>
+        <field name="examination_line_id" ref="fnac_c03"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="fnac_c04" model="examination.entry.line">
+        <field name="name">Clinical History</field>
+        <field name="examinationentry_id" ref="fnac"/>
+        <field name="sequence">40</field>
+        <field name="result_type">text</field>
+    </record>
+
+</odoo>

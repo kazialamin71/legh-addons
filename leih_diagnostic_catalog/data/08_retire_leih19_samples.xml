@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Retire leih19's sample catalogue.
+
+    leih19/data/sample_test_data.xml seeds five demonstration tests (RBS, HBsAg,
+    Urine C/S, Lipid Profile, Blood C/S) plus four departments, to show what a
+    configured test looks like. Once this module is installed those are
+    duplicates of properly configured items, and a duplicate test in a billing
+    dropdown is worse than no example at all - the wrong one gets picked and the
+    result lands in the wrong department.
+
+    The Mantoux test is the exception: leih19 builds it out fully, with the
+    special-form layout and the interpretation criteria. That one is adopted
+    rather than replaced - re-pointed at this module's Clinical Pathology
+    department and given its revenue account and rate.
+-->
+<odoo noupdate="1">
+
+    <!-- ================== adopt leih19's Mantoux test ==================== -->
+    <record id="leih19.examination_entry_mantoux" model="examination.entry">
+        <field name="department" ref="dept_clinical_pathology"/>
+        <field name="accounts_id" ref="account_income_clinical_pathology"/>
+        <field name="rate">200</field>
+        <field name="base_rate">200</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">pathology</field>
+        <field name="report_layout">special</field>
+        <field name="report_type">pathology</field>
+        <field name="required_time">3</field>
+        <field name="sample_req" eval="False"/>
+        <field name="manual" eval="True"/>
+    </record>
+
+    <!-- ============ drop the demonstration tests and their lines ========== -->
+    <delete model="examination.entry.line" search="[
+        ('examinationentry_id', 'in', [
+            ref('leih19.examination_entry_rbs'),
+            ref('leih19.examination_entry_hbsag'),
+            ref('leih19.examination_entry_urine_culture'),
+            ref('leih19.examination_entry_lipid_profile'),
+            ref('leih19.examination_entry_blood_culture'),
+        ])]"/>
+
+    <delete model="examination.entry" id="leih19.examination_entry_rbs"/>
+    <delete model="examination.entry" id="leih19.examination_entry_hbsag"/>
+    <delete model="examination.entry" id="leih19.examination_entry_urine_culture"/>
+    <delete model="examination.entry" id="leih19.examination_entry_lipid_profile"/>
+    <delete model="examination.entry" id="leih19.examination_entry_blood_culture"/>
+
+    <!-- ================ drop the now-unreferenced departments ============= -->
+    <!-- Mantoux was re-pointed above, so nothing still uses these. -->
+    <delete model="diagnosis.department" id="leih19.diagnosis_department_biochemistry"/>
+    <delete model="diagnosis.department" id="leih19.diagnosis_department_serology"/>
+    <delete model="diagnosis.department" id="leih19.diagnosis_department_microbiology"/>
+    <delete model="diagnosis.department" id="leih19.diagnosis_department_clinical_pathology"/>
+
+    <!-- =================== drop the duplicate tube colours ================ -->
+    <!-- leih19 seeds Lavender and Yellow; 03_tube_colors.xml supersedes both. -->
+    <delete model="tube.color" id="leih19.tube_color_lavender"/>
+    <delete model="tube.color" id="leih19.tube_color_yellow"/>
+
+</odoo>

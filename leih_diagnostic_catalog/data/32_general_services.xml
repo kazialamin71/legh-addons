@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Nursing & General Services - 13 catalogue items.
+
+    GENERATED FILE - do not edit by hand.
+    Source: tools/items/general_services.py    Rebuild: python3 tools/build_catalogue.py
+
+    Rates carried over from the legacy export are PROVISIONAL and are expected
+    to be revised before go-live.
+-->
+<odoo noupdate="1">
+    <!-- Injection Pushing -->
+    <record id="svc_injection_pushing" model="examination.entry">
+        <field name="name">Injection Pushing</field>
+        <field name="department" ref="dept_nursing"/>
+        <field name="accounts_id" ref="account_income_nursing"/>
+        <field name="rate">300</field>
+        <field name="base_rate">300</field>
+        <field name="service_group">procedure</field>
+        <field name="report_type">other</field>
+        <field name="sample_req" eval="False"/>
+    </record>
+
+    <!-- Dressing (Minor) -->
+    <record id="svc_dressing_minor" model="examination.entry">
+        <field name="name">Dressing (Minor)</field>
+        <field name="department" ref="dept_nursing"/>
+        <field name="accounts_id" ref="account_income_nursing"/>
+        <field name="rate">300</field>
+        <field name="base_rate">300</field>
+        <field name="service_group">procedure</field>
+        <field name="report_type">other</field>
+        <field name="sample_req" eval="False"/>
+    </record>
+
+    <!-- Dressing (Intermediate) -->
+    <record id="svc_dressing_intermediate" model="examination.entry">
+        <field name="name">Dressing (Intermediate)</field>
+        <field name="department" ref="dept_nursing"/>
+        <field name="accounts_id" ref="account_income_nursing"/>
+        <field name="rate">200</field>
+        <field name="base_rate">200</field>
+        <field name="service_group">procedure</field>
+        <field name="report_type">other</field>
+        <field name="sample_req" eval="False"/>
+    </record>
+
+    <!-- Dressing (Major) -->
+    <record id="svc_dressing_major" model="examination.entry">
+        <field name="name">Dressing (Major)</field>
+        <field name="department" ref="dept_nursing"/>
+        <field name="accounts_id" ref="account_income_nursing"/>
+        <field name="rate">1000</field>
+        <field name="base_rate">1000</field>
+        <field name="service_group">procedure</field>
+        <field name="report_type">other</field>
+        <field name="sample_req" eval="False"/>
+    </record>
+
+    <!-- IV Cannula Insertion -->
+    <record id="svc_iv_cannula" model="examination.entry">
+        <field name="name">IV Cannula Insertion</field>
+        <field name="department" ref="dept_nursing"/>
+        <field name="accounts_id" ref="account_income_nursing"/>
+        <field name="rate">0</field>
+        <field name="base_rate">0</field>
+        <field name="service_group">consumable</field>
+        <field name="report_type">other</field>
+        <field name="sample_req" eval="False"/>
+        <field name="manual" eval="True"/>
+    </record>
+
+    <!-- Photo Therapy (Per Hour) -->
+    <record id="svc_photo_therapy" model="examination.entry">
+        <field name="name">Photo Therapy (Per Hour)</field>
+        <field name="department" ref="dept_nursing"/>
+        <field name="accounts_id" ref="account_income_nursing"/>
+        <field name="rate">200</field>
+        <field name="base_rate">200</field>
+        <field name="service_group">procedure</field>
+        <field name="report_type">other</field>
+        <field name="sample_req" eval="False"/>
+        <field name="indoor" eval="True"/>
+    </record>
+
+    <!-- Oxygen (Above 5 Litre) -->
+    <record id="svc_oxygen_above_5l" model="examination.entry">
+        <field name="name">Oxygen (Above 5 Litre)</field>
+        <field name="department" ref="dept_nursing"/>
+        <field name="accounts_id" ref="account_income_nursing"/>
+        <field name="rate">250</field>
+        <field name="base_rate">250</field>
+        <field name="service_group">oxygen</field>
+        <field name="report_type">other</field>
+        <field name="sample_req" eval="False"/>
+        <field name="lab_not_required" eval="True"/>
+        <field name="indoor" eval="True"/>
+    </record>
+
+    <!-- EMO Charge (Emergency Medical Officer) -->
+    <record id="svc_emo_charge" model="examination.entry">
+        <field name="name">EMO Charge (Emergency Medical Officer)</field>
+        <field name="department" ref="dept_emergency"/>
+        <field name="accounts_id" ref="account_income_emergency"/>
+        <field name="rate">300</field>
+        <field name="base_rate">300</field>
+        <field name="service_group">consultation</field>
+        <field name="report_type">other</field>
+        <field name="sample_req" eval="False"/>
+    </record>
+
+    <!-- Emergency Observation -->
+    <record id="svc_emergency_observation" model="examination.entry">
+        <field name="name">Emergency Observation</field>
+        <field name="department" ref="dept_emergency"/>
+        <field name="accounts_id" ref="account_income_emergency"/>
+        <field name="rate">200</field>
+        <field name="base_rate">200</field>
+        <field name="service_group">procedure</field>
+        <field name="report_type">other</field>
+        <field name="sample_req" eval="False"/>
+    </record>
+
+    <!-- Haemodialysis Charge -->
+    <record id="svc_haemodialysis" model="examination.entry">
+        <field name="name">Haemodialysis Charge</field>
+        <field name="department" ref="dept_dialysis"/>
+        <field name="accounts_id" ref="account_income_dialysis"/>
+        <field name="rate">3000</field>
+        <field name="base_rate">3000</field>
+        <field name="service_group">procedure</field>
+        <field name="report_type">other</field>
+        <field name="sample_req" eval="False"/>
+        <field name="lab_not_required" eval="True"/>
+        <field name="manual" eval="True"/>
+        <field name="indoor" eval="True"/>
+    </record>
+
+    <!-- Haemodialysis Charge (Reuse Dialyser) -->
+    <record id="svc_haemodialysis_reuse" model="examination.entry">
+        <field name="name">Haemodialysis Charge (Reuse Dialyser)</field>
+        <field name="department" ref="dept_dialysis"/>
+        <field name="accounts_id" ref="account_income_dialysis"/>
+        <field name="rate">2500</field>
+        <field name="base_rate">2500</field>
+        <field name="service_group">procedure</field>
+        <field name="report_type">other</field>
+        <field name="sample_req" eval="False"/>
+        <field name="lab_not_required" eval="True"/>
+        <field name="manual" eval="True"/>
+        <field name="indoor" eval="True"/>
+    </record>
+
+    <!-- Birth Certificate Fee -->
+    <record id="svc_birth_certificate_fee" model="examination.entry">
+        <field name="name">Birth Certificate Fee</field>
+        <field name="department" ref="dept_nursing"/>
+        <field name="accounts_id" ref="account_income_other"/>
+        <field name="rate">1000</field>
+        <field name="base_rate">1000</field>
+        <field name="service_group">other</field>
+        <field name="report_type">other</field>
+        <field name="sample_req" eval="False"/>
+    </record>
+
+    <!-- Investigation Charge (Miscellaneous) -->
+    <record id="svc_investigation_charge" model="examination.entry">
+        <field name="name">Investigation Charge (Miscellaneous)</field>
+        <field name="department" ref="dept_nursing"/>
+        <field name="accounts_id" ref="account_income_other"/>
+        <field name="rate">0</field>
+        <field name="base_rate">0</field>
+        <field name="service_group">other</field>
+        <field name="report_type">other</field>
+        <field name="sample_req" eval="False"/>
+        <field name="manual" eval="True"/>
+    </record>
+
+</odoo>

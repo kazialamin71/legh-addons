@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Health Checkup Packages - 2 catalogue items.
+
+    GENERATED FILE - do not edit by hand.
+    Source: tools/items/packages.py    Rebuild: python3 tools/build_catalogue.py
+
+    Rates carried over from the legacy export are PROVISIONAL and are expected
+    to be revised before go-live.
+-->
+<odoo noupdate="1">
+    <!-- Basic Health Checkup Package -->
+    <record id="pkg_basic_health_checkup" model="examination.entry">
+        <field name="name">Basic Health Checkup Package</field>
+        <field name="department" ref="dept_package"/>
+        <field name="accounts_id" ref="account_income_package"/>
+        <field name="rate">3000</field>
+        <field name="base_rate">3000</field>
+        <field name="service_group">other</field>
+        <field name="report_type">other</field>
+        <field name="tube_color_id" ref="tube_gold_sst"/>
+        <field name="sample_req" eval="True"/>
+    </record>
+
+    <!-- Executive Health Checkup Package -->
+    <record id="pkg_executive_health_checkup" model="examination.entry">
+        <field name="name">Executive Health Checkup Package</field>
+        <field name="department" ref="dept_package"/>
+        <field name="accounts_id" ref="account_income_package"/>
+        <field name="rate">4500</field>
+        <field name="base_rate">4500</field>
+        <field name="service_group">other</field>
+        <field name="report_type">other</field>
+        <field name="tube_color_id" ref="tube_gold_sst"/>
+        <field name="sample_req" eval="True"/>
+    </record>
+
+</odoo>

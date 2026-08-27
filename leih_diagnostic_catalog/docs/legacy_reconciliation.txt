@@ -1,0 +1,8 @@
+legacy unique items : 396
+new catalogue items : 368
+  matched by name   : 8
+  merged / renamed  : 386
+  intentionally dropped: 2
+  UNRESOLVED        : 0
+  DROPPED  Deprecated by IT (Electrolyte).                         explicitly deprecated in the legacy data
+  DROPPED  LPH                                                     unidentifiable legacy code - no test could be established from the name

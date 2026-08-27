@@ -1,0 +1,2824 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Microbiology - 24 catalogue items.
+
+    GENERATED FILE - do not edit by hand.
+    Source: tools/items/microbiology.py    Rebuild: python3 tools/build_catalogue.py
+
+    Rates carried over from the legacy export are PROVISIONAL and are expected
+    to be revised before go-live.
+-->
+<odoo noupdate="1">
+    <!-- Urine for C/S -->
+    <record id="urine_cs" model="examination.entry">
+        <field name="name">Urine for C/S</field>
+        <field name="department" ref="dept_microbiology"/>
+        <field name="accounts_id" ref="account_income_microbiology"/>
+        <field name="rate">800</field>
+        <field name="base_rate">800</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">microbiology</field>
+        <field name="report_layout">microbiology</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_urine_container"/>
+        <field name="sample_type" ref="sample_urine"/>
+        <field name="default_method_id" ref="method_culture"/>
+        <field name="default_instrument_id" ref="instrument_incubator"/>
+        <field name="sample_req" eval="True"/>
+        <field name="required_time">3</field>
+        <field name="default_incubation_hours">48</field>
+        <field name="default_incubation_temp_c">37.0</field>
+        <field name="default_culture_medium">CLED / MacConkey Agar</field>
+        <field name="antibiotic_ids" eval="[(6, 0, [
+            ref('leih19.antibiotic_ampicillin'),
+            ref('leih19.antibiotic_amoxiclav'),
+            ref('leih19.antibiotic_piptaz'),
+            ref('leih19.antibiotic_cefuroxime'),
+            ref('leih19.antibiotic_ceftriaxone'),
+            ref('antibiotic_cefotaxime'),
+            ref('antibiotic_ceftazidime'),
+            ref('leih19.antibiotic_cefepime'),
+            ref('leih19.antibiotic_imipenem'),
+            ref('leih19.antibiotic_meropenem'),
+            ref('leih19.antibiotic_amikacin'),
+            ref('leih19.antibiotic_gentamicin'),
+            ref('leih19.antibiotic_ciprofloxacin'),
+            ref('leih19.antibiotic_levofloxacin'),
+            ref('leih19.antibiotic_cotrimoxazole'),
+            ref('leih19.antibiotic_nitrofurantoin'),
+            ref('antibiotic_fosfomycin'),
+            ref('antibiotic_cefixime'),
+            ref('antibiotic_mecillinam'),
+            ref('antibiotic_nalidixic_acid'),
+        ])]"/>
+    </record>
+
+    <record id="urine_cs_c01" model="examination.entry.line">
+        <field name="name">CULTURE REPORT</field>
+        <field name="examinationentry_id" ref="urine_cs"/>
+        <field name="sequence">10</field>
+        <field name="is_group_header" eval="True"/>
+        <field name="bold" eval="True"/>
+        <field name="result_type">text</field>
+    </record>
+
+    <record id="urine_cs_c02" model="examination.entry.line">
+        <field name="name">Specimen Condition</field>
+        <field name="examinationentry_id" ref="urine_cs"/>
+        <field name="sequence">20</field>
+        <field name="result_type">selection</field>
+        <field name="reference_value">Satisfactory</field>
+    </record>
+
+    <record id="urine_cs_c02_v01" model="examination.possible.value">
+        <field name="name">Satisfactory</field>
+        <field name="examination_line_id" ref="urine_cs_c02"/>
+        <field name="sequence">10</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="urine_cs_c02_v02" model="examination.possible.value">
+        <field name="name">Sub-optimal</field>
+        <field name="examination_line_id" ref="urine_cs_c02"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="urine_cs_c02_v03" model="examination.possible.value">
+        <field name="name">Rejected</field>
+        <field name="examination_line_id" ref="urine_cs_c02"/>
+        <field name="sequence">30</field>
+    </record>
+
+    <record id="urine_cs_c03" model="examination.entry.line">
+        <field name="name">Pus Cells</field>
+        <field name="examinationentry_id" ref="urine_cs"/>
+        <field name="sequence">30</field>
+        <field name="result_type">selection</field>
+        <field name="reference_value">0 - 5 /HPF</field>
+    </record>
+
+    <record id="urine_cs_c03_v01" model="examination.possible.value">
+        <field name="name">0 - 5 /HPF</field>
+        <field name="examination_line_id" ref="urine_cs_c03"/>
+        <field name="sequence">10</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="urine_cs_c03_v02" model="examination.possible.value">
+        <field name="name">5 - 10 /HPF</field>
+        <field name="examination_line_id" ref="urine_cs_c03"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="urine_cs_c03_v03" model="examination.possible.value">
+        <field name="name">10 - 20 /HPF</field>
+        <field name="examination_line_id" ref="urine_cs_c03"/>
+        <field name="sequence">30</field>
+    </record>
+
+    <record id="urine_cs_c03_v04" model="examination.possible.value">
+        <field name="name">Numerous</field>
+        <field name="examination_line_id" ref="urine_cs_c03"/>
+        <field name="sequence">40</field>
+    </record>
+
+    <record id="urine_cs_c04" model="examination.entry.line">
+        <field name="name">Growth</field>
+        <field name="examinationentry_id" ref="urine_cs"/>
+        <field name="sequence">40</field>
+        <field name="result_type">selection</field>
+        <field name="reference_value">No Growth</field>
+    </record>
+
+    <record id="urine_cs_c04_v01" model="examination.possible.value">
+        <field name="name">No Growth</field>
+        <field name="examination_line_id" ref="urine_cs_c04"/>
+        <field name="sequence">10</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="urine_cs_c04_v02" model="examination.possible.value">
+        <field name="name">Growth</field>
+        <field name="examination_line_id" ref="urine_cs_c04"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="urine_cs_c05" model="examination.entry.line">
+        <field name="name">Organism Isolated</field>
+        <field name="examinationentry_id" ref="urine_cs"/>
+        <field name="sequence">50</field>
+        <field name="result_type">text</field>
+    </record>
+
+    <record id="urine_cs_c06" model="examination.entry.line">
+        <field name="name">Colony Count</field>
+        <field name="examinationentry_id" ref="urine_cs"/>
+        <field name="sequence">60</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">CFU/mL</field>
+    </record>
+
+    <record id="urine_cs_c07" model="examination.entry.line">
+        <field name="name">Comment</field>
+        <field name="examinationentry_id" ref="urine_cs"/>
+        <field name="sequence">70</field>
+        <field name="result_type">text</field>
+        <field name="default_value">No growth of aerobic organism after 48 hours of incubation at 37 C.</field>
+    </record>
+
+    <!-- conditional display -->
+    <record id="urine_cs_c05" model="examination.entry.line">
+        <field name="parent_line_id" ref="urine_cs_c04"/>
+        <field name="show_when_value_id" ref="urine_cs_c04_v02"/>
+    </record>
+
+    <record id="urine_cs_c06" model="examination.entry.line">
+        <field name="parent_line_id" ref="urine_cs_c04"/>
+        <field name="show_when_value_id" ref="urine_cs_c04_v02"/>
+    </record>
+
+    <!-- Blood for C/S -->
+    <record id="blood_cs" model="examination.entry">
+        <field name="name">Blood for C/S</field>
+        <field name="department" ref="dept_microbiology"/>
+        <field name="accounts_id" ref="account_income_microbiology"/>
+        <field name="rate">1200</field>
+        <field name="base_rate">1200</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">microbiology</field>
+        <field name="report_layout">microbiology</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_blood_culture"/>
+        <field name="sample_type" ref="sample_whole_blood"/>
+        <field name="default_method_id" ref="method_culture"/>
+        <field name="default_instrument_id" ref="instrument_incubator"/>
+        <field name="sample_req" eval="True"/>
+        <field name="needs_separate_tube" eval="True"/>
+        <field name="required_time">3</field>
+        <field name="default_incubation_hours">120</field>
+        <field name="default_incubation_temp_c">37.0</field>
+        <field name="default_culture_medium">Brain Heart Infusion Broth / Blood Agar</field>
+        <field name="antibiotic_ids" eval="[(6, 0, [
+            ref('leih19.antibiotic_ampicillin'),
+            ref('leih19.antibiotic_amoxiclav'),
+            ref('leih19.antibiotic_piptaz'),
+            ref('leih19.antibiotic_cefuroxime'),
+            ref('leih19.antibiotic_ceftriaxone'),
+            ref('antibiotic_cefotaxime'),
+            ref('antibiotic_ceftazidime'),
+            ref('leih19.antibiotic_cefepime'),
+            ref('leih19.antibiotic_imipenem'),
+            ref('leih19.antibiotic_meropenem'),
+            ref('leih19.antibiotic_amikacin'),
+            ref('leih19.antibiotic_gentamicin'),
+            ref('leih19.antibiotic_ciprofloxacin'),
+            ref('leih19.antibiotic_levofloxacin'),
+            ref('leih19.antibiotic_cotrimoxazole'),
+            ref('antibiotic_aztreonam'),
+            ref('antibiotic_tigecycline'),
+            ref('antibiotic_colistin'),
+            ref('leih19.antibiotic_vancomycin'),
+            ref('leih19.antibiotic_linezolid'),
+            ref('antibiotic_cefoxitin'),
+            ref('antibiotic_clindamycin'),
+        ])]"/>
+    </record>
+
+    <record id="blood_cs_c01" model="examination.entry.line">
+        <field name="name">CULTURE REPORT</field>
+        <field name="examinationentry_id" ref="blood_cs"/>
+        <field name="sequence">10</field>
+        <field name="is_group_header" eval="True"/>
+        <field name="bold" eval="True"/>
+        <field name="result_type">text</field>
+    </record>
+
+    <record id="blood_cs_c02" model="examination.entry.line">
+        <field name="name">Specimen Condition</field>
+        <field name="examinationentry_id" ref="blood_cs"/>
+        <field name="sequence">20</field>
+        <field name="result_type">selection</field>
+        <field name="reference_value">Satisfactory</field>
+    </record>
+
+    <record id="blood_cs_c02_v01" model="examination.possible.value">
+        <field name="name">Satisfactory</field>
+        <field name="examination_line_id" ref="blood_cs_c02"/>
+        <field name="sequence">10</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="blood_cs_c02_v02" model="examination.possible.value">
+        <field name="name">Sub-optimal</field>
+        <field name="examination_line_id" ref="blood_cs_c02"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="blood_cs_c02_v03" model="examination.possible.value">
+        <field name="name">Rejected</field>
+        <field name="examination_line_id" ref="blood_cs_c02"/>
+        <field name="sequence">30</field>
+    </record>
+
+    <record id="blood_cs_c03" model="examination.entry.line">
+        <field name="name">Growth</field>
+        <field name="examinationentry_id" ref="blood_cs"/>
+        <field name="sequence">30</field>
+        <field name="result_type">selection</field>
+        <field name="reference_value">No Growth</field>
+    </record>
+
+    <record id="blood_cs_c03_v01" model="examination.possible.value">
+        <field name="name">No Growth</field>
+        <field name="examination_line_id" ref="blood_cs_c03"/>
+        <field name="sequence">10</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="blood_cs_c03_v02" model="examination.possible.value">
+        <field name="name">Growth</field>
+        <field name="examination_line_id" ref="blood_cs_c03"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="blood_cs_c04" model="examination.entry.line">
+        <field name="name">Organism Isolated</field>
+        <field name="examinationentry_id" ref="blood_cs"/>
+        <field name="sequence">40</field>
+        <field name="result_type">text</field>
+    </record>
+
+    <record id="blood_cs_c05" model="examination.entry.line">
+        <field name="name">Colony Count</field>
+        <field name="examinationentry_id" ref="blood_cs"/>
+        <field name="sequence">50</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">CFU/mL</field>
+    </record>
+
+    <record id="blood_cs_c06" model="examination.entry.line">
+        <field name="name">Comment</field>
+        <field name="examinationentry_id" ref="blood_cs"/>
+        <field name="sequence">60</field>
+        <field name="result_type">text</field>
+        <field name="default_value">No growth of aerobic organism after 120 hours of incubation at 37 C.</field>
+    </record>
+
+    <!-- conditional display -->
+    <record id="blood_cs_c04" model="examination.entry.line">
+        <field name="parent_line_id" ref="blood_cs_c03"/>
+        <field name="show_when_value_id" ref="blood_cs_c03_v02"/>
+    </record>
+
+    <record id="blood_cs_c05" model="examination.entry.line">
+        <field name="parent_line_id" ref="blood_cs_c03"/>
+        <field name="show_when_value_id" ref="blood_cs_c03_v02"/>
+    </record>
+
+    <!-- Stool for C/S -->
+    <record id="stool_cs" model="examination.entry">
+        <field name="name">Stool for C/S</field>
+        <field name="department" ref="dept_microbiology"/>
+        <field name="accounts_id" ref="account_income_microbiology"/>
+        <field name="rate">800</field>
+        <field name="base_rate">800</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">microbiology</field>
+        <field name="report_layout">microbiology</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_stool_container"/>
+        <field name="sample_type" ref="sample_stool"/>
+        <field name="default_method_id" ref="method_culture"/>
+        <field name="default_instrument_id" ref="instrument_incubator"/>
+        <field name="sample_req" eval="True"/>
+        <field name="required_time">3</field>
+        <field name="default_incubation_hours">48</field>
+        <field name="default_incubation_temp_c">37.0</field>
+        <field name="default_culture_medium">MacConkey / SS Agar / Selenite F Broth</field>
+        <field name="antibiotic_ids" eval="[(6, 0, [
+            ref('leih19.antibiotic_ampicillin'),
+            ref('leih19.antibiotic_amoxiclav'),
+            ref('leih19.antibiotic_ceftriaxone'),
+            ref('antibiotic_cefixime'),
+            ref('leih19.antibiotic_ciprofloxacin'),
+            ref('leih19.antibiotic_levofloxacin'),
+            ref('antibiotic_pefloxacin'),
+            ref('antibiotic_nalidixic_acid'),
+            ref('leih19.antibiotic_azithromycin'),
+            ref('leih19.antibiotic_cotrimoxazole'),
+            ref('antibiotic_chloramphenicol'),
+            ref('antibiotic_tetracycline'),
+            ref('antibiotic_furazolidone'),
+        ])]"/>
+    </record>
+
+    <record id="stool_cs_c01" model="examination.entry.line">
+        <field name="name">CULTURE REPORT</field>
+        <field name="examinationentry_id" ref="stool_cs"/>
+        <field name="sequence">10</field>
+        <field name="is_group_header" eval="True"/>
+        <field name="bold" eval="True"/>
+        <field name="result_type">text</field>
+    </record>
+
+    <record id="stool_cs_c02" model="examination.entry.line">
+        <field name="name">Specimen Condition</field>
+        <field name="examinationentry_id" ref="stool_cs"/>
+        <field name="sequence">20</field>
+        <field name="result_type">selection</field>
+        <field name="reference_value">Satisfactory</field>
+    </record>
+
+    <record id="stool_cs_c02_v01" model="examination.possible.value">
+        <field name="name">Satisfactory</field>
+        <field name="examination_line_id" ref="stool_cs_c02"/>
+        <field name="sequence">10</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="stool_cs_c02_v02" model="examination.possible.value">
+        <field name="name">Sub-optimal</field>
+        <field name="examination_line_id" ref="stool_cs_c02"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="stool_cs_c02_v03" model="examination.possible.value">
+        <field name="name">Rejected</field>
+        <field name="examination_line_id" ref="stool_cs_c02"/>
+        <field name="sequence">30</field>
+    </record>
+
+    <record id="stool_cs_c03" model="examination.entry.line">
+        <field name="name">Growth</field>
+        <field name="examinationentry_id" ref="stool_cs"/>
+        <field name="sequence">30</field>
+        <field name="result_type">selection</field>
+        <field name="reference_value">No Growth</field>
+    </record>
+
+    <record id="stool_cs_c03_v01" model="examination.possible.value">
+        <field name="name">No Growth</field>
+        <field name="examination_line_id" ref="stool_cs_c03"/>
+        <field name="sequence">10</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="stool_cs_c03_v02" model="examination.possible.value">
+        <field name="name">Growth</field>
+        <field name="examination_line_id" ref="stool_cs_c03"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="stool_cs_c04" model="examination.entry.line">
+        <field name="name">Organism Isolated</field>
+        <field name="examinationentry_id" ref="stool_cs"/>
+        <field name="sequence">40</field>
+        <field name="result_type">text</field>
+    </record>
+
+    <record id="stool_cs_c05" model="examination.entry.line">
+        <field name="name">Colony Count</field>
+        <field name="examinationentry_id" ref="stool_cs"/>
+        <field name="sequence">50</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">CFU/mL</field>
+    </record>
+
+    <record id="stool_cs_c06" model="examination.entry.line">
+        <field name="name">Comment</field>
+        <field name="examinationentry_id" ref="stool_cs"/>
+        <field name="sequence">60</field>
+        <field name="result_type">text</field>
+        <field name="default_value">No growth of aerobic organism after 48 hours of incubation at 37 C.</field>
+    </record>
+
+    <!-- conditional display -->
+    <record id="stool_cs_c04" model="examination.entry.line">
+        <field name="parent_line_id" ref="stool_cs_c03"/>
+        <field name="show_when_value_id" ref="stool_cs_c03_v02"/>
+    </record>
+
+    <record id="stool_cs_c05" model="examination.entry.line">
+        <field name="parent_line_id" ref="stool_cs_c03"/>
+        <field name="show_when_value_id" ref="stool_cs_c03_v02"/>
+    </record>
+
+    <!-- Sputum for C/S -->
+    <record id="sputum_cs" model="examination.entry">
+        <field name="name">Sputum for C/S</field>
+        <field name="department" ref="dept_microbiology"/>
+        <field name="accounts_id" ref="account_income_microbiology"/>
+        <field name="rate">1000</field>
+        <field name="base_rate">1000</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">microbiology</field>
+        <field name="report_layout">microbiology</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_sterile_pot"/>
+        <field name="sample_type" ref="sample_sputum"/>
+        <field name="default_method_id" ref="method_culture"/>
+        <field name="default_instrument_id" ref="instrument_incubator"/>
+        <field name="sample_req" eval="True"/>
+        <field name="required_time">3</field>
+        <field name="default_incubation_hours">48</field>
+        <field name="default_incubation_temp_c">37.0</field>
+        <field name="default_culture_medium">Blood Agar / Chocolate Agar / MacConkey</field>
+        <field name="antibiotic_ids" eval="[(6, 0, [
+            ref('leih19.antibiotic_ampicillin'),
+            ref('leih19.antibiotic_amoxiclav'),
+            ref('leih19.antibiotic_piptaz'),
+            ref('leih19.antibiotic_cefuroxime'),
+            ref('leih19.antibiotic_ceftriaxone'),
+            ref('antibiotic_cefotaxime'),
+            ref('antibiotic_ceftazidime'),
+            ref('leih19.antibiotic_cefepime'),
+            ref('leih19.antibiotic_imipenem'),
+            ref('leih19.antibiotic_meropenem'),
+            ref('leih19.antibiotic_amikacin'),
+            ref('leih19.antibiotic_gentamicin'),
+            ref('leih19.antibiotic_ciprofloxacin'),
+            ref('leih19.antibiotic_levofloxacin'),
+            ref('leih19.antibiotic_cotrimoxazole'),
+            ref('leih19.antibiotic_amoxicillin'),
+            ref('leih19.antibiotic_azithromycin'),
+            ref('antibiotic_erythromycin'),
+            ref('leih19.antibiotic_doxycycline'),
+            ref('antibiotic_moxifloxacin'),
+            ref('leih19.antibiotic_linezolid'),
+            ref('antibiotic_colistin'),
+            ref('antibiotic_tigecycline'),
+        ])]"/>
+    </record>
+
+    <record id="sputum_cs_c01" model="examination.entry.line">
+        <field name="name">CULTURE REPORT</field>
+        <field name="examinationentry_id" ref="sputum_cs"/>
+        <field name="sequence">10</field>
+        <field name="is_group_header" eval="True"/>
+        <field name="bold" eval="True"/>
+        <field name="result_type">text</field>
+    </record>
+
+    <record id="sputum_cs_c02" model="examination.entry.line">
+        <field name="name">Specimen Condition</field>
+        <field name="examinationentry_id" ref="sputum_cs"/>
+        <field name="sequence">20</field>
+        <field name="result_type">selection</field>
+        <field name="reference_value">Satisfactory</field>
+    </record>
+
+    <record id="sputum_cs_c02_v01" model="examination.possible.value">
+        <field name="name">Satisfactory</field>
+        <field name="examination_line_id" ref="sputum_cs_c02"/>
+        <field name="sequence">10</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="sputum_cs_c02_v02" model="examination.possible.value">
+        <field name="name">Sub-optimal</field>
+        <field name="examination_line_id" ref="sputum_cs_c02"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="sputum_cs_c02_v03" model="examination.possible.value">
+        <field name="name">Rejected</field>
+        <field name="examination_line_id" ref="sputum_cs_c02"/>
+        <field name="sequence">30</field>
+    </record>
+
+    <record id="sputum_cs_c03" model="examination.entry.line">
+        <field name="name">Specimen Adequacy (Bartlett)</field>
+        <field name="examinationentry_id" ref="sputum_cs"/>
+        <field name="sequence">30</field>
+        <field name="result_type">selection</field>
+        <field name="reference_value">Acceptable</field>
+    </record>
+
+    <record id="sputum_cs_c03_v01" model="examination.possible.value">
+        <field name="name">Acceptable</field>
+        <field name="examination_line_id" ref="sputum_cs_c03"/>
+        <field name="sequence">10</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="sputum_cs_c03_v02" model="examination.possible.value">
+        <field name="name">Salivary - repeat advised</field>
+        <field name="examination_line_id" ref="sputum_cs_c03"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="sputum_cs_c04" model="examination.entry.line">
+        <field name="name">Growth</field>
+        <field name="examinationentry_id" ref="sputum_cs"/>
+        <field name="sequence">40</field>
+        <field name="result_type">selection</field>
+        <field name="reference_value">No Growth</field>
+    </record>
+
+    <record id="sputum_cs_c04_v01" model="examination.possible.value">
+        <field name="name">No Growth</field>
+        <field name="examination_line_id" ref="sputum_cs_c04"/>
+        <field name="sequence">10</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="sputum_cs_c04_v02" model="examination.possible.value">
+        <field name="name">Growth</field>
+        <field name="examination_line_id" ref="sputum_cs_c04"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="sputum_cs_c05" model="examination.entry.line">
+        <field name="name">Organism Isolated</field>
+        <field name="examinationentry_id" ref="sputum_cs"/>
+        <field name="sequence">50</field>
+        <field name="result_type">text</field>
+    </record>
+
+    <record id="sputum_cs_c06" model="examination.entry.line">
+        <field name="name">Colony Count</field>
+        <field name="examinationentry_id" ref="sputum_cs"/>
+        <field name="sequence">60</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">CFU/mL</field>
+    </record>
+
+    <record id="sputum_cs_c07" model="examination.entry.line">
+        <field name="name">Comment</field>
+        <field name="examinationentry_id" ref="sputum_cs"/>
+        <field name="sequence">70</field>
+        <field name="result_type">text</field>
+        <field name="default_value">No growth of aerobic organism after 48 hours of incubation at 37 C.</field>
+    </record>
+
+    <!-- conditional display -->
+    <record id="sputum_cs_c05" model="examination.entry.line">
+        <field name="parent_line_id" ref="sputum_cs_c04"/>
+        <field name="show_when_value_id" ref="sputum_cs_c04_v02"/>
+    </record>
+
+    <record id="sputum_cs_c06" model="examination.entry.line">
+        <field name="parent_line_id" ref="sputum_cs_c04"/>
+        <field name="show_when_value_id" ref="sputum_cs_c04_v02"/>
+    </record>
+
+    <!-- Wound Swab for C/S -->
+    <record id="wound_swab_cs" model="examination.entry">
+        <field name="name">Wound Swab for C/S</field>
+        <field name="department" ref="dept_microbiology"/>
+        <field name="accounts_id" ref="account_income_microbiology"/>
+        <field name="rate">800</field>
+        <field name="base_rate">800</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">microbiology</field>
+        <field name="report_layout">microbiology</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_swab"/>
+        <field name="sample_type" ref="sample_swab"/>
+        <field name="default_method_id" ref="method_culture"/>
+        <field name="default_instrument_id" ref="instrument_incubator"/>
+        <field name="sample_req" eval="True"/>
+        <field name="required_time">3</field>
+        <field name="default_incubation_hours">48</field>
+        <field name="default_incubation_temp_c">37.0</field>
+        <field name="default_culture_medium">Blood Agar / MacConkey</field>
+        <field name="antibiotic_ids" eval="[(6, 0, [
+            ref('leih19.antibiotic_ampicillin'),
+            ref('leih19.antibiotic_amoxiclav'),
+            ref('leih19.antibiotic_piptaz'),
+            ref('leih19.antibiotic_cefuroxime'),
+            ref('leih19.antibiotic_ceftriaxone'),
+            ref('antibiotic_cefotaxime'),
+            ref('antibiotic_ceftazidime'),
+            ref('leih19.antibiotic_cefepime'),
+            ref('leih19.antibiotic_imipenem'),
+            ref('leih19.antibiotic_meropenem'),
+            ref('leih19.antibiotic_amikacin'),
+            ref('leih19.antibiotic_gentamicin'),
+            ref('leih19.antibiotic_ciprofloxacin'),
+            ref('leih19.antibiotic_levofloxacin'),
+            ref('leih19.antibiotic_cotrimoxazole'),
+            ref('antibiotic_cloxacillin'),
+            ref('antibiotic_cefoxitin'),
+            ref('antibiotic_clindamycin'),
+            ref('antibiotic_erythromycin'),
+            ref('leih19.antibiotic_doxycycline'),
+            ref('leih19.antibiotic_vancomycin'),
+            ref('leih19.antibiotic_linezolid'),
+            ref('antibiotic_colistin'),
+        ])]"/>
+    </record>
+
+    <record id="wound_swab_cs_c01" model="examination.entry.line">
+        <field name="name">CULTURE REPORT</field>
+        <field name="examinationentry_id" ref="wound_swab_cs"/>
+        <field name="sequence">10</field>
+        <field name="is_group_header" eval="True"/>
+        <field name="bold" eval="True"/>
+        <field name="result_type">text</field>
+    </record>
+
+    <record id="wound_swab_cs_c02" model="examination.entry.line">
+        <field name="name">Specimen Condition</field>
+        <field name="examinationentry_id" ref="wound_swab_cs"/>
+        <field name="sequence">20</field>
+        <field name="result_type">selection</field>
+        <field name="reference_value">Satisfactory</field>
+    </record>
+
+    <record id="wound_swab_cs_c02_v01" model="examination.possible.value">
+        <field name="name">Satisfactory</field>
+        <field name="examination_line_id" ref="wound_swab_cs_c02"/>
+        <field name="sequence">10</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="wound_swab_cs_c02_v02" model="examination.possible.value">
+        <field name="name">Sub-optimal</field>
+        <field name="examination_line_id" ref="wound_swab_cs_c02"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="wound_swab_cs_c02_v03" model="examination.possible.value">
+        <field name="name">Rejected</field>
+        <field name="examination_line_id" ref="wound_swab_cs_c02"/>
+        <field name="sequence">30</field>
+    </record>
+
+    <record id="wound_swab_cs_c03" model="examination.entry.line">
+        <field name="name">Growth</field>
+        <field name="examinationentry_id" ref="wound_swab_cs"/>
+        <field name="sequence">30</field>
+        <field name="result_type">selection</field>
+        <field name="reference_value">No Growth</field>
+    </record>
+
+    <record id="wound_swab_cs_c03_v01" model="examination.possible.value">
+        <field name="name">No Growth</field>
+        <field name="examination_line_id" ref="wound_swab_cs_c03"/>
+        <field name="sequence">10</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="wound_swab_cs_c03_v02" model="examination.possible.value">
+        <field name="name">Growth</field>
+        <field name="examination_line_id" ref="wound_swab_cs_c03"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="wound_swab_cs_c04" model="examination.entry.line">
+        <field name="name">Organism Isolated</field>
+        <field name="examinationentry_id" ref="wound_swab_cs"/>
+        <field name="sequence">40</field>
+        <field name="result_type">text</field>
+    </record>
+
+    <record id="wound_swab_cs_c05" model="examination.entry.line">
+        <field name="name">Colony Count</field>
+        <field name="examinationentry_id" ref="wound_swab_cs"/>
+        <field name="sequence">50</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">CFU/mL</field>
+    </record>
+
+    <record id="wound_swab_cs_c06" model="examination.entry.line">
+        <field name="name">Comment</field>
+        <field name="examinationentry_id" ref="wound_swab_cs"/>
+        <field name="sequence">60</field>
+        <field name="result_type">text</field>
+        <field name="default_value">No growth of aerobic organism after 48 hours of incubation at 37 C.</field>
+    </record>
+
+    <!-- conditional display -->
+    <record id="wound_swab_cs_c04" model="examination.entry.line">
+        <field name="parent_line_id" ref="wound_swab_cs_c03"/>
+        <field name="show_when_value_id" ref="wound_swab_cs_c03_v02"/>
+    </record>
+
+    <record id="wound_swab_cs_c05" model="examination.entry.line">
+        <field name="parent_line_id" ref="wound_swab_cs_c03"/>
+        <field name="show_when_value_id" ref="wound_swab_cs_c03_v02"/>
+    </record>
+
+    <!-- Pus for C/S -->
+    <record id="pus_cs" model="examination.entry">
+        <field name="name">Pus for C/S</field>
+        <field name="department" ref="dept_microbiology"/>
+        <field name="accounts_id" ref="account_income_microbiology"/>
+        <field name="rate">2200</field>
+        <field name="base_rate">2200</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">microbiology</field>
+        <field name="report_layout">microbiology</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_sterile_pot"/>
+        <field name="sample_type" ref="sample_swab"/>
+        <field name="default_method_id" ref="method_culture"/>
+        <field name="default_instrument_id" ref="instrument_incubator"/>
+        <field name="sample_req" eval="True"/>
+        <field name="required_time">3</field>
+        <field name="default_incubation_hours">48</field>
+        <field name="default_incubation_temp_c">37.0</field>
+        <field name="default_culture_medium">Blood Agar / MacConkey / Thioglycollate Broth</field>
+        <field name="antibiotic_ids" eval="[(6, 0, [
+            ref('leih19.antibiotic_ampicillin'),
+            ref('leih19.antibiotic_amoxiclav'),
+            ref('leih19.antibiotic_piptaz'),
+            ref('leih19.antibiotic_cefuroxime'),
+            ref('leih19.antibiotic_ceftriaxone'),
+            ref('antibiotic_cefotaxime'),
+            ref('antibiotic_ceftazidime'),
+            ref('leih19.antibiotic_cefepime'),
+            ref('leih19.antibiotic_imipenem'),
+            ref('leih19.antibiotic_meropenem'),
+            ref('leih19.antibiotic_amikacin'),
+            ref('leih19.antibiotic_gentamicin'),
+            ref('leih19.antibiotic_ciprofloxacin'),
+            ref('leih19.antibiotic_levofloxacin'),
+            ref('leih19.antibiotic_cotrimoxazole'),
+            ref('antibiotic_cloxacillin'),
+            ref('antibiotic_cefoxitin'),
+            ref('antibiotic_clindamycin'),
+            ref('antibiotic_erythromycin'),
+            ref('leih19.antibiotic_doxycycline'),
+            ref('leih19.antibiotic_vancomycin'),
+            ref('leih19.antibiotic_linezolid'),
+            ref('antibiotic_colistin'),
+        ])]"/>
+    </record>
+
+    <record id="pus_cs_c01" model="examination.entry.line">
+        <field name="name">CULTURE REPORT</field>
+        <field name="examinationentry_id" ref="pus_cs"/>
+        <field name="sequence">10</field>
+        <field name="is_group_header" eval="True"/>
+        <field name="bold" eval="True"/>
+        <field name="result_type">text</field>
+    </record>
+
+    <record id="pus_cs_c02" model="examination.entry.line">
+        <field name="name">Specimen Condition</field>
+        <field name="examinationentry_id" ref="pus_cs"/>
+        <field name="sequence">20</field>
+        <field name="result_type">selection</field>
+        <field name="reference_value">Satisfactory</field>
+    </record>
+
+    <record id="pus_cs_c02_v01" model="examination.possible.value">
+        <field name="name">Satisfactory</field>
+        <field name="examination_line_id" ref="pus_cs_c02"/>
+        <field name="sequence">10</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="pus_cs_c02_v02" model="examination.possible.value">
+        <field name="name">Sub-optimal</field>
+        <field name="examination_line_id" ref="pus_cs_c02"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="pus_cs_c02_v03" model="examination.possible.value">
+        <field name="name">Rejected</field>
+        <field name="examination_line_id" ref="pus_cs_c02"/>
+        <field name="sequence">30</field>
+    </record>
+
+    <record id="pus_cs_c03" model="examination.entry.line">
+        <field name="name">Gram Stain Finding</field>
+        <field name="examinationentry_id" ref="pus_cs"/>
+        <field name="sequence">30</field>
+        <field name="result_type">text</field>
+    </record>
+
+    <record id="pus_cs_c04" model="examination.entry.line">
+        <field name="name">Growth</field>
+        <field name="examinationentry_id" ref="pus_cs"/>
+        <field name="sequence">40</field>
+        <field name="result_type">selection</field>
+        <field name="reference_value">No Growth</field>
+    </record>
+
+    <record id="pus_cs_c04_v01" model="examination.possible.value">
+        <field name="name">No Growth</field>
+        <field name="examination_line_id" ref="pus_cs_c04"/>
+        <field name="sequence">10</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="pus_cs_c04_v02" model="examination.possible.value">
+        <field name="name">Growth</field>
+        <field name="examination_line_id" ref="pus_cs_c04"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="pus_cs_c05" model="examination.entry.line">
+        <field name="name">Organism Isolated</field>
+        <field name="examinationentry_id" ref="pus_cs"/>
+        <field name="sequence">50</field>
+        <field name="result_type">text</field>
+    </record>
+
+    <record id="pus_cs_c06" model="examination.entry.line">
+        <field name="name">Colony Count</field>
+        <field name="examinationentry_id" ref="pus_cs"/>
+        <field name="sequence">60</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">CFU/mL</field>
+    </record>
+
+    <record id="pus_cs_c07" model="examination.entry.line">
+        <field name="name">Comment</field>
+        <field name="examinationentry_id" ref="pus_cs"/>
+        <field name="sequence">70</field>
+        <field name="result_type">text</field>
+        <field name="default_value">No growth of aerobic organism after 48 hours of incubation at 37 C.</field>
+    </record>
+
+    <!-- conditional display -->
+    <record id="pus_cs_c05" model="examination.entry.line">
+        <field name="parent_line_id" ref="pus_cs_c04"/>
+        <field name="show_when_value_id" ref="pus_cs_c04_v02"/>
+    </record>
+
+    <record id="pus_cs_c06" model="examination.entry.line">
+        <field name="parent_line_id" ref="pus_cs_c04"/>
+        <field name="show_when_value_id" ref="pus_cs_c04_v02"/>
+    </record>
+
+    <!-- Tracheal Aspirate / Swab for C/S -->
+    <record id="tracheal_aspirate_cs" model="examination.entry">
+        <field name="name">Tracheal Aspirate / Swab for C/S</field>
+        <field name="department" ref="dept_microbiology"/>
+        <field name="accounts_id" ref="account_income_microbiology"/>
+        <field name="rate">1200</field>
+        <field name="base_rate">1200</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">microbiology</field>
+        <field name="report_layout">microbiology</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_sterile_pot"/>
+        <field name="sample_type" ref="sample_sputum"/>
+        <field name="default_method_id" ref="method_culture"/>
+        <field name="default_instrument_id" ref="instrument_incubator"/>
+        <field name="sample_req" eval="True"/>
+        <field name="required_time">3</field>
+        <field name="default_incubation_hours">48</field>
+        <field name="default_incubation_temp_c">37.0</field>
+        <field name="default_culture_medium">Blood Agar / Chocolate Agar / MacConkey</field>
+        <field name="antibiotic_ids" eval="[(6, 0, [
+            ref('leih19.antibiotic_ampicillin'),
+            ref('leih19.antibiotic_amoxiclav'),
+            ref('leih19.antibiotic_piptaz'),
+            ref('leih19.antibiotic_cefuroxime'),
+            ref('leih19.antibiotic_ceftriaxone'),
+            ref('antibiotic_cefotaxime'),
+            ref('antibiotic_ceftazidime'),
+            ref('leih19.antibiotic_cefepime'),
+            ref('leih19.antibiotic_imipenem'),
+            ref('leih19.antibiotic_meropenem'),
+            ref('leih19.antibiotic_amikacin'),
+            ref('leih19.antibiotic_gentamicin'),
+            ref('leih19.antibiotic_ciprofloxacin'),
+            ref('leih19.antibiotic_levofloxacin'),
+            ref('leih19.antibiotic_cotrimoxazole'),
+            ref('leih19.antibiotic_amoxicillin'),
+            ref('leih19.antibiotic_azithromycin'),
+            ref('antibiotic_erythromycin'),
+            ref('leih19.antibiotic_doxycycline'),
+            ref('antibiotic_moxifloxacin'),
+            ref('leih19.antibiotic_linezolid'),
+            ref('antibiotic_colistin'),
+            ref('antibiotic_tigecycline'),
+        ])]"/>
+    </record>
+
+    <record id="tracheal_aspirate_cs_c01" model="examination.entry.line">
+        <field name="name">CULTURE REPORT</field>
+        <field name="examinationentry_id" ref="tracheal_aspirate_cs"/>
+        <field name="sequence">10</field>
+        <field name="is_group_header" eval="True"/>
+        <field name="bold" eval="True"/>
+        <field name="result_type">text</field>
+    </record>
+
+    <record id="tracheal_aspirate_cs_c02" model="examination.entry.line">
+        <field name="name">Specimen Condition</field>
+        <field name="examinationentry_id" ref="tracheal_aspirate_cs"/>
+        <field name="sequence">20</field>
+        <field name="result_type">selection</field>
+        <field name="reference_value">Satisfactory</field>
+    </record>
+
+    <record id="tracheal_aspirate_cs_c02_v01" model="examination.possible.value">
+        <field name="name">Satisfactory</field>
+        <field name="examination_line_id" ref="tracheal_aspirate_cs_c02"/>
+        <field name="sequence">10</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="tracheal_aspirate_cs_c02_v02" model="examination.possible.value">
+        <field name="name">Sub-optimal</field>
+        <field name="examination_line_id" ref="tracheal_aspirate_cs_c02"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="tracheal_aspirate_cs_c02_v03" model="examination.possible.value">
+        <field name="name">Rejected</field>
+        <field name="examination_line_id" ref="tracheal_aspirate_cs_c02"/>
+        <field name="sequence">30</field>
+    </record>
+
+    <record id="tracheal_aspirate_cs_c03" model="examination.entry.line">
+        <field name="name">Growth</field>
+        <field name="examinationentry_id" ref="tracheal_aspirate_cs"/>
+        <field name="sequence">30</field>
+        <field name="result_type">selection</field>
+        <field name="reference_value">No Growth</field>
+    </record>
+
+    <record id="tracheal_aspirate_cs_c03_v01" model="examination.possible.value">
+        <field name="name">No Growth</field>
+        <field name="examination_line_id" ref="tracheal_aspirate_cs_c03"/>
+        <field name="sequence">10</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="tracheal_aspirate_cs_c03_v02" model="examination.possible.value">
+        <field name="name">Growth</field>
+        <field name="examination_line_id" ref="tracheal_aspirate_cs_c03"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="tracheal_aspirate_cs_c04" model="examination.entry.line">
+        <field name="name">Organism Isolated</field>
+        <field name="examinationentry_id" ref="tracheal_aspirate_cs"/>
+        <field name="sequence">40</field>
+        <field name="result_type">text</field>
+    </record>
+
+    <record id="tracheal_aspirate_cs_c05" model="examination.entry.line">
+        <field name="name">Colony Count</field>
+        <field name="examinationentry_id" ref="tracheal_aspirate_cs"/>
+        <field name="sequence">50</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">CFU/mL</field>
+    </record>
+
+    <record id="tracheal_aspirate_cs_c06" model="examination.entry.line">
+        <field name="name">Comment</field>
+        <field name="examinationentry_id" ref="tracheal_aspirate_cs"/>
+        <field name="sequence">60</field>
+        <field name="result_type">text</field>
+        <field name="default_value">No growth of aerobic organism after 48 hours of incubation at 37 C.</field>
+    </record>
+
+    <!-- conditional display -->
+    <record id="tracheal_aspirate_cs_c04" model="examination.entry.line">
+        <field name="parent_line_id" ref="tracheal_aspirate_cs_c03"/>
+        <field name="show_when_value_id" ref="tracheal_aspirate_cs_c03_v02"/>
+    </record>
+
+    <record id="tracheal_aspirate_cs_c05" model="examination.entry.line">
+        <field name="parent_line_id" ref="tracheal_aspirate_cs_c03"/>
+        <field name="show_when_value_id" ref="tracheal_aspirate_cs_c03_v02"/>
+    </record>
+
+    <!-- Catheter Tip for C/S -->
+    <record id="catheter_tip_cs" model="examination.entry">
+        <field name="name">Catheter Tip for C/S</field>
+        <field name="department" ref="dept_microbiology"/>
+        <field name="accounts_id" ref="account_income_microbiology"/>
+        <field name="rate">1650</field>
+        <field name="base_rate">1650</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">microbiology</field>
+        <field name="report_layout">microbiology</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_sterile_pot"/>
+        <field name="sample_type" ref="sample_catheter_tip"/>
+        <field name="default_method_id" ref="method_culture"/>
+        <field name="default_instrument_id" ref="instrument_incubator"/>
+        <field name="sample_req" eval="True"/>
+        <field name="required_time">3</field>
+        <field name="default_incubation_hours">48</field>
+        <field name="default_incubation_temp_c">37.0</field>
+        <field name="default_culture_medium">Blood Agar (semi-quantitative roll plate)</field>
+        <field name="antibiotic_ids" eval="[(6, 0, [
+            ref('leih19.antibiotic_ampicillin'),
+            ref('leih19.antibiotic_amoxiclav'),
+            ref('leih19.antibiotic_piptaz'),
+            ref('leih19.antibiotic_cefuroxime'),
+            ref('leih19.antibiotic_ceftriaxone'),
+            ref('antibiotic_cefotaxime'),
+            ref('antibiotic_ceftazidime'),
+            ref('leih19.antibiotic_cefepime'),
+            ref('leih19.antibiotic_imipenem'),
+            ref('leih19.antibiotic_meropenem'),
+            ref('leih19.antibiotic_amikacin'),
+            ref('leih19.antibiotic_gentamicin'),
+            ref('leih19.antibiotic_ciprofloxacin'),
+            ref('leih19.antibiotic_levofloxacin'),
+            ref('leih19.antibiotic_cotrimoxazole'),
+            ref('antibiotic_aztreonam'),
+            ref('antibiotic_tigecycline'),
+            ref('antibiotic_colistin'),
+            ref('leih19.antibiotic_vancomycin'),
+            ref('leih19.antibiotic_linezolid'),
+            ref('antibiotic_cefoxitin'),
+            ref('antibiotic_clindamycin'),
+        ])]"/>
+    </record>
+
+    <record id="catheter_tip_cs_c01" model="examination.entry.line">
+        <field name="name">CULTURE REPORT</field>
+        <field name="examinationentry_id" ref="catheter_tip_cs"/>
+        <field name="sequence">10</field>
+        <field name="is_group_header" eval="True"/>
+        <field name="bold" eval="True"/>
+        <field name="result_type">text</field>
+    </record>
+
+    <record id="catheter_tip_cs_c02" model="examination.entry.line">
+        <field name="name">Specimen Condition</field>
+        <field name="examinationentry_id" ref="catheter_tip_cs"/>
+        <field name="sequence">20</field>
+        <field name="result_type">selection</field>
+        <field name="reference_value">Satisfactory</field>
+    </record>
+
+    <record id="catheter_tip_cs_c02_v01" model="examination.possible.value">
+        <field name="name">Satisfactory</field>
+        <field name="examination_line_id" ref="catheter_tip_cs_c02"/>
+        <field name="sequence">10</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="catheter_tip_cs_c02_v02" model="examination.possible.value">
+        <field name="name">Sub-optimal</field>
+        <field name="examination_line_id" ref="catheter_tip_cs_c02"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="catheter_tip_cs_c02_v03" model="examination.possible.value">
+        <field name="name">Rejected</field>
+        <field name="examination_line_id" ref="catheter_tip_cs_c02"/>
+        <field name="sequence">30</field>
+    </record>
+
+    <record id="catheter_tip_cs_c03" model="examination.entry.line">
+        <field name="name">Growth</field>
+        <field name="examinationentry_id" ref="catheter_tip_cs"/>
+        <field name="sequence">30</field>
+        <field name="result_type">selection</field>
+        <field name="reference_value">No Growth</field>
+    </record>
+
+    <record id="catheter_tip_cs_c03_v01" model="examination.possible.value">
+        <field name="name">No Growth</field>
+        <field name="examination_line_id" ref="catheter_tip_cs_c03"/>
+        <field name="sequence">10</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="catheter_tip_cs_c03_v02" model="examination.possible.value">
+        <field name="name">Growth</field>
+        <field name="examination_line_id" ref="catheter_tip_cs_c03"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="catheter_tip_cs_c04" model="examination.entry.line">
+        <field name="name">Organism Isolated</field>
+        <field name="examinationentry_id" ref="catheter_tip_cs"/>
+        <field name="sequence">40</field>
+        <field name="result_type">text</field>
+    </record>
+
+    <record id="catheter_tip_cs_c05" model="examination.entry.line">
+        <field name="name">Colony Count</field>
+        <field name="examinationentry_id" ref="catheter_tip_cs"/>
+        <field name="sequence">50</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">CFU/mL</field>
+    </record>
+
+    <record id="catheter_tip_cs_c06" model="examination.entry.line">
+        <field name="name">Comment</field>
+        <field name="examinationentry_id" ref="catheter_tip_cs"/>
+        <field name="sequence">60</field>
+        <field name="result_type">text</field>
+        <field name="default_value">No growth of aerobic organism after 48 hours of incubation at 37 C.</field>
+    </record>
+
+    <!-- conditional display -->
+    <record id="catheter_tip_cs_c04" model="examination.entry.line">
+        <field name="parent_line_id" ref="catheter_tip_cs_c03"/>
+        <field name="show_when_value_id" ref="catheter_tip_cs_c03_v02"/>
+    </record>
+
+    <record id="catheter_tip_cs_c05" model="examination.entry.line">
+        <field name="parent_line_id" ref="catheter_tip_cs_c03"/>
+        <field name="show_when_value_id" ref="catheter_tip_cs_c03_v02"/>
+    </record>
+
+    <!-- Conjunctival Swab for C/S (Right Eye) -->
+    <record id="conjunctival_swab_cs_right" model="examination.entry">
+        <field name="name">Conjunctival Swab for C/S (Right Eye)</field>
+        <field name="department" ref="dept_microbiology"/>
+        <field name="accounts_id" ref="account_income_microbiology"/>
+        <field name="rate">400</field>
+        <field name="base_rate">400</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">microbiology</field>
+        <field name="report_layout">microbiology</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_swab"/>
+        <field name="sample_type" ref="sample_swab"/>
+        <field name="default_method_id" ref="method_culture"/>
+        <field name="default_instrument_id" ref="instrument_incubator"/>
+        <field name="sample_req" eval="True"/>
+        <field name="required_time">3</field>
+        <field name="default_incubation_hours">48</field>
+        <field name="default_incubation_temp_c">37.0</field>
+        <field name="default_culture_medium">Blood Agar / Chocolate Agar</field>
+        <field name="antibiotic_ids" eval="[(6, 0, [
+            ref('leih19.antibiotic_ampicillin'),
+            ref('leih19.antibiotic_amoxiclav'),
+            ref('antibiotic_cloxacillin'),
+            ref('antibiotic_cephradine'),
+            ref('antibiotic_cephalexin'),
+            ref('leih19.antibiotic_ceftriaxone'),
+            ref('antibiotic_ceftazidime'),
+            ref('leih19.antibiotic_gentamicin'),
+            ref('antibiotic_tobramycin'),
+            ref('antibiotic_neomycin'),
+            ref('leih19.antibiotic_ciprofloxacin'),
+            ref('leih19.antibiotic_levofloxacin'),
+            ref('antibiotic_moxifloxacin'),
+            ref('antibiotic_chloramphenicol'),
+            ref('antibiotic_tetracycline'),
+            ref('leih19.antibiotic_azithromycin'),
+            ref('leih19.antibiotic_vancomycin'),
+        ])]"/>
+    </record>
+
+    <record id="conjunctival_swab_cs_right_c01" model="examination.entry.line">
+        <field name="name">CULTURE REPORT</field>
+        <field name="examinationentry_id" ref="conjunctival_swab_cs_right"/>
+        <field name="sequence">10</field>
+        <field name="is_group_header" eval="True"/>
+        <field name="bold" eval="True"/>
+        <field name="result_type">text</field>
+    </record>
+
+    <record id="conjunctival_swab_cs_right_c02" model="examination.entry.line">
+        <field name="name">Specimen Condition</field>
+        <field name="examinationentry_id" ref="conjunctival_swab_cs_right"/>
+        <field name="sequence">20</field>
+        <field name="result_type">selection</field>
+        <field name="reference_value">Satisfactory</field>
+    </record>
+
+    <record id="conjunctival_swab_cs_right_c02_v01" model="examination.possible.value">
+        <field name="name">Satisfactory</field>
+        <field name="examination_line_id" ref="conjunctival_swab_cs_right_c02"/>
+        <field name="sequence">10</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="conjunctival_swab_cs_right_c02_v02" model="examination.possible.value">
+        <field name="name">Sub-optimal</field>
+        <field name="examination_line_id" ref="conjunctival_swab_cs_right_c02"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="conjunctival_swab_cs_right_c02_v03" model="examination.possible.value">
+        <field name="name">Rejected</field>
+        <field name="examination_line_id" ref="conjunctival_swab_cs_right_c02"/>
+        <field name="sequence">30</field>
+    </record>
+
+    <record id="conjunctival_swab_cs_right_c03" model="examination.entry.line">
+        <field name="name">Growth</field>
+        <field name="examinationentry_id" ref="conjunctival_swab_cs_right"/>
+        <field name="sequence">30</field>
+        <field name="result_type">selection</field>
+        <field name="reference_value">No Growth</field>
+    </record>
+
+    <record id="conjunctival_swab_cs_right_c03_v01" model="examination.possible.value">
+        <field name="name">No Growth</field>
+        <field name="examination_line_id" ref="conjunctival_swab_cs_right_c03"/>
+        <field name="sequence">10</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="conjunctival_swab_cs_right_c03_v02" model="examination.possible.value">
+        <field name="name">Growth</field>
+        <field name="examination_line_id" ref="conjunctival_swab_cs_right_c03"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="conjunctival_swab_cs_right_c04" model="examination.entry.line">
+        <field name="name">Organism Isolated</field>
+        <field name="examinationentry_id" ref="conjunctival_swab_cs_right"/>
+        <field name="sequence">40</field>
+        <field name="result_type">text</field>
+    </record>
+
+    <record id="conjunctival_swab_cs_right_c05" model="examination.entry.line">
+        <field name="name">Colony Count</field>
+        <field name="examinationentry_id" ref="conjunctival_swab_cs_right"/>
+        <field name="sequence">50</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">CFU/mL</field>
+    </record>
+
+    <record id="conjunctival_swab_cs_right_c06" model="examination.entry.line">
+        <field name="name">Comment</field>
+        <field name="examinationentry_id" ref="conjunctival_swab_cs_right"/>
+        <field name="sequence">60</field>
+        <field name="result_type">text</field>
+        <field name="default_value">No growth of aerobic organism after 48 hours of incubation at 37 C.</field>
+    </record>
+
+    <!-- conditional display -->
+    <record id="conjunctival_swab_cs_right_c04" model="examination.entry.line">
+        <field name="parent_line_id" ref="conjunctival_swab_cs_right_c03"/>
+        <field name="show_when_value_id" ref="conjunctival_swab_cs_right_c03_v02"/>
+    </record>
+
+    <record id="conjunctival_swab_cs_right_c05" model="examination.entry.line">
+        <field name="parent_line_id" ref="conjunctival_swab_cs_right_c03"/>
+        <field name="show_when_value_id" ref="conjunctival_swab_cs_right_c03_v02"/>
+    </record>
+
+    <!-- Conjunctival Swab for C/S (Left Eye) -->
+    <record id="conjunctival_swab_cs_left" model="examination.entry">
+        <field name="name">Conjunctival Swab for C/S (Left Eye)</field>
+        <field name="department" ref="dept_microbiology"/>
+        <field name="accounts_id" ref="account_income_microbiology"/>
+        <field name="rate">400</field>
+        <field name="base_rate">400</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">microbiology</field>
+        <field name="report_layout">microbiology</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_swab"/>
+        <field name="sample_type" ref="sample_swab"/>
+        <field name="default_method_id" ref="method_culture"/>
+        <field name="default_instrument_id" ref="instrument_incubator"/>
+        <field name="sample_req" eval="True"/>
+        <field name="required_time">3</field>
+        <field name="default_incubation_hours">48</field>
+        <field name="default_incubation_temp_c">37.0</field>
+        <field name="default_culture_medium">Blood Agar / Chocolate Agar</field>
+        <field name="antibiotic_ids" eval="[(6, 0, [
+            ref('leih19.antibiotic_ampicillin'),
+            ref('leih19.antibiotic_amoxiclav'),
+            ref('antibiotic_cloxacillin'),
+            ref('antibiotic_cephradine'),
+            ref('antibiotic_cephalexin'),
+            ref('leih19.antibiotic_ceftriaxone'),
+            ref('antibiotic_ceftazidime'),
+            ref('leih19.antibiotic_gentamicin'),
+            ref('antibiotic_tobramycin'),
+            ref('antibiotic_neomycin'),
+            ref('leih19.antibiotic_ciprofloxacin'),
+            ref('leih19.antibiotic_levofloxacin'),
+            ref('antibiotic_moxifloxacin'),
+            ref('antibiotic_chloramphenicol'),
+            ref('antibiotic_tetracycline'),
+            ref('leih19.antibiotic_azithromycin'),
+            ref('leih19.antibiotic_vancomycin'),
+        ])]"/>
+    </record>
+
+    <record id="conjunctival_swab_cs_left_c01" model="examination.entry.line">
+        <field name="name">CULTURE REPORT</field>
+        <field name="examinationentry_id" ref="conjunctival_swab_cs_left"/>
+        <field name="sequence">10</field>
+        <field name="is_group_header" eval="True"/>
+        <field name="bold" eval="True"/>
+        <field name="result_type">text</field>
+    </record>
+
+    <record id="conjunctival_swab_cs_left_c02" model="examination.entry.line">
+        <field name="name">Specimen Condition</field>
+        <field name="examinationentry_id" ref="conjunctival_swab_cs_left"/>
+        <field name="sequence">20</field>
+        <field name="result_type">selection</field>
+        <field name="reference_value">Satisfactory</field>
+    </record>
+
+    <record id="conjunctival_swab_cs_left_c02_v01" model="examination.possible.value">
+        <field name="name">Satisfactory</field>
+        <field name="examination_line_id" ref="conjunctival_swab_cs_left_c02"/>
+        <field name="sequence">10</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="conjunctival_swab_cs_left_c02_v02" model="examination.possible.value">
+        <field name="name">Sub-optimal</field>
+        <field name="examination_line_id" ref="conjunctival_swab_cs_left_c02"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="conjunctival_swab_cs_left_c02_v03" model="examination.possible.value">
+        <field name="name">Rejected</field>
+        <field name="examination_line_id" ref="conjunctival_swab_cs_left_c02"/>
+        <field name="sequence">30</field>
+    </record>
+
+    <record id="conjunctival_swab_cs_left_c03" model="examination.entry.line">
+        <field name="name">Growth</field>
+        <field name="examinationentry_id" ref="conjunctival_swab_cs_left"/>
+        <field name="sequence">30</field>
+        <field name="result_type">selection</field>
+        <field name="reference_value">No Growth</field>
+    </record>
+
+    <record id="conjunctival_swab_cs_left_c03_v01" model="examination.possible.value">
+        <field name="name">No Growth</field>
+        <field name="examination_line_id" ref="conjunctival_swab_cs_left_c03"/>
+        <field name="sequence">10</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="conjunctival_swab_cs_left_c03_v02" model="examination.possible.value">
+        <field name="name">Growth</field>
+        <field name="examination_line_id" ref="conjunctival_swab_cs_left_c03"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="conjunctival_swab_cs_left_c04" model="examination.entry.line">
+        <field name="name">Organism Isolated</field>
+        <field name="examinationentry_id" ref="conjunctival_swab_cs_left"/>
+        <field name="sequence">40</field>
+        <field name="result_type">text</field>
+    </record>
+
+    <record id="conjunctival_swab_cs_left_c05" model="examination.entry.line">
+        <field name="name">Colony Count</field>
+        <field name="examinationentry_id" ref="conjunctival_swab_cs_left"/>
+        <field name="sequence">50</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">CFU/mL</field>
+    </record>
+
+    <record id="conjunctival_swab_cs_left_c06" model="examination.entry.line">
+        <field name="name">Comment</field>
+        <field name="examinationentry_id" ref="conjunctival_swab_cs_left"/>
+        <field name="sequence">60</field>
+        <field name="result_type">text</field>
+        <field name="default_value">No growth of aerobic organism after 48 hours of incubation at 37 C.</field>
+    </record>
+
+    <!-- conditional display -->
+    <record id="conjunctival_swab_cs_left_c04" model="examination.entry.line">
+        <field name="parent_line_id" ref="conjunctival_swab_cs_left_c03"/>
+        <field name="show_when_value_id" ref="conjunctival_swab_cs_left_c03_v02"/>
+    </record>
+
+    <record id="conjunctival_swab_cs_left_c05" model="examination.entry.line">
+        <field name="parent_line_id" ref="conjunctival_swab_cs_left_c03"/>
+        <field name="show_when_value_id" ref="conjunctival_swab_cs_left_c03_v02"/>
+    </record>
+
+    <!-- Corneal Scraping for C/S -->
+    <record id="corneal_scraping_cs" model="examination.entry">
+        <field name="name">Corneal Scraping for C/S</field>
+        <field name="department" ref="dept_microbiology"/>
+        <field name="accounts_id" ref="account_income_microbiology"/>
+        <field name="rate">250</field>
+        <field name="base_rate">250</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">microbiology</field>
+        <field name="report_layout">microbiology</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_swab"/>
+        <field name="sample_type" ref="sample_corneal_scraping"/>
+        <field name="default_method_id" ref="method_culture"/>
+        <field name="default_instrument_id" ref="instrument_incubator"/>
+        <field name="sample_req" eval="True"/>
+        <field name="lab_not_required" eval="True"/>
+        <field name="required_time">3</field>
+        <field name="default_incubation_hours">48</field>
+        <field name="default_incubation_temp_c">37.0</field>
+        <field name="default_culture_medium">Blood Agar / Chocolate Agar / Sabouraud Dextrose Agar</field>
+        <field name="antibiotic_ids" eval="[(6, 0, [
+            ref('leih19.antibiotic_ampicillin'),
+            ref('leih19.antibiotic_amoxiclav'),
+            ref('antibiotic_cloxacillin'),
+            ref('antibiotic_cephradine'),
+            ref('antibiotic_cephalexin'),
+            ref('leih19.antibiotic_ceftriaxone'),
+            ref('antibiotic_ceftazidime'),
+            ref('leih19.antibiotic_gentamicin'),
+            ref('antibiotic_tobramycin'),
+            ref('antibiotic_neomycin'),
+            ref('leih19.antibiotic_ciprofloxacin'),
+            ref('leih19.antibiotic_levofloxacin'),
+            ref('antibiotic_moxifloxacin'),
+            ref('antibiotic_chloramphenicol'),
+            ref('antibiotic_tetracycline'),
+            ref('leih19.antibiotic_azithromycin'),
+            ref('leih19.antibiotic_vancomycin'),
+        ])]"/>
+    </record>
+
+    <record id="corneal_scraping_cs_c01" model="examination.entry.line">
+        <field name="name">CULTURE REPORT</field>
+        <field name="examinationentry_id" ref="corneal_scraping_cs"/>
+        <field name="sequence">10</field>
+        <field name="is_group_header" eval="True"/>
+        <field name="bold" eval="True"/>
+        <field name="result_type">text</field>
+    </record>
+
+    <record id="corneal_scraping_cs_c02" model="examination.entry.line">
+        <field name="name">Specimen Condition</field>
+        <field name="examinationentry_id" ref="corneal_scraping_cs"/>
+        <field name="sequence">20</field>
+        <field name="result_type">selection</field>
+        <field name="reference_value">Satisfactory</field>
+    </record>
+
+    <record id="corneal_scraping_cs_c02_v01" model="examination.possible.value">
+        <field name="name">Satisfactory</field>
+        <field name="examination_line_id" ref="corneal_scraping_cs_c02"/>
+        <field name="sequence">10</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="corneal_scraping_cs_c02_v02" model="examination.possible.value">
+        <field name="name">Sub-optimal</field>
+        <field name="examination_line_id" ref="corneal_scraping_cs_c02"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="corneal_scraping_cs_c02_v03" model="examination.possible.value">
+        <field name="name">Rejected</field>
+        <field name="examination_line_id" ref="corneal_scraping_cs_c02"/>
+        <field name="sequence">30</field>
+    </record>
+
+    <record id="corneal_scraping_cs_c03" model="examination.entry.line">
+        <field name="name">Growth</field>
+        <field name="examinationentry_id" ref="corneal_scraping_cs"/>
+        <field name="sequence">30</field>
+        <field name="result_type">selection</field>
+        <field name="reference_value">No Growth</field>
+    </record>
+
+    <record id="corneal_scraping_cs_c03_v01" model="examination.possible.value">
+        <field name="name">No Growth</field>
+        <field name="examination_line_id" ref="corneal_scraping_cs_c03"/>
+        <field name="sequence">10</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="corneal_scraping_cs_c03_v02" model="examination.possible.value">
+        <field name="name">Growth</field>
+        <field name="examination_line_id" ref="corneal_scraping_cs_c03"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="corneal_scraping_cs_c04" model="examination.entry.line">
+        <field name="name">Organism Isolated</field>
+        <field name="examinationentry_id" ref="corneal_scraping_cs"/>
+        <field name="sequence">40</field>
+        <field name="result_type">text</field>
+    </record>
+
+    <record id="corneal_scraping_cs_c05" model="examination.entry.line">
+        <field name="name">Colony Count</field>
+        <field name="examinationentry_id" ref="corneal_scraping_cs"/>
+        <field name="sequence">50</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">CFU/mL</field>
+    </record>
+
+    <record id="corneal_scraping_cs_c06" model="examination.entry.line">
+        <field name="name">Comment</field>
+        <field name="examinationentry_id" ref="corneal_scraping_cs"/>
+        <field name="sequence">60</field>
+        <field name="result_type">text</field>
+        <field name="default_value">No growth of aerobic organism after 48 hours of incubation at 37 C.</field>
+    </record>
+
+    <!-- conditional display -->
+    <record id="corneal_scraping_cs_c04" model="examination.entry.line">
+        <field name="parent_line_id" ref="corneal_scraping_cs_c03"/>
+        <field name="show_when_value_id" ref="corneal_scraping_cs_c03_v02"/>
+    </record>
+
+    <record id="corneal_scraping_cs_c05" model="examination.entry.line">
+        <field name="parent_line_id" ref="corneal_scraping_cs_c03"/>
+        <field name="show_when_value_id" ref="corneal_scraping_cs_c03_v02"/>
+    </record>
+
+    <!-- Gram Staining -->
+    <record id="gram_staining" model="examination.entry">
+        <field name="name">Gram Staining</field>
+        <field name="department" ref="dept_microbiology"/>
+        <field name="accounts_id" ref="account_income_microbiology"/>
+        <field name="rate">500</field>
+        <field name="base_rate">500</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">microbiology</field>
+        <field name="report_layout">microbiology</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_sterile_pot"/>
+        <field name="sample_type" ref="sample_swab"/>
+        <field name="default_method_id" ref="method_gram_stain"/>
+        <field name="default_instrument_id" ref="instrument_microscope"/>
+        <field name="sample_req" eval="True"/>
+    </record>
+
+    <record id="gram_staining_c01" model="examination.entry.line">
+        <field name="name">GRAM STAIN</field>
+        <field name="examinationentry_id" ref="gram_staining"/>
+        <field name="sequence">10</field>
+        <field name="is_group_header" eval="True"/>
+        <field name="bold" eval="True"/>
+        <field name="result_type">text</field>
+    </record>
+
+    <record id="gram_staining_c02" model="examination.entry.line">
+        <field name="name">Pus Cells</field>
+        <field name="examinationentry_id" ref="gram_staining"/>
+        <field name="sequence">20</field>
+        <field name="result_type">selection</field>
+        <field name="reference_value">Nil</field>
+    </record>
+
+    <record id="gram_staining_c02_v01" model="examination.possible.value">
+        <field name="name">Nil</field>
+        <field name="examination_line_id" ref="gram_staining_c02"/>
+        <field name="sequence">10</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="gram_staining_c02_v02" model="examination.possible.value">
+        <field name="name">Few</field>
+        <field name="examination_line_id" ref="gram_staining_c02"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="gram_staining_c02_v03" model="examination.possible.value">
+        <field name="name">Moderate</field>
+        <field name="examination_line_id" ref="gram_staining_c02"/>
+        <field name="sequence">30</field>
+    </record>
+
+    <record id="gram_staining_c02_v04" model="examination.possible.value">
+        <field name="name">Plenty</field>
+        <field name="examination_line_id" ref="gram_staining_c02"/>
+        <field name="sequence">40</field>
+    </record>
+
+    <record id="gram_staining_c03" model="examination.entry.line">
+        <field name="name">Epithelial Cells</field>
+        <field name="examinationentry_id" ref="gram_staining"/>
+        <field name="sequence">30</field>
+        <field name="result_type">selection</field>
+        <field name="reference_value">Nil</field>
+    </record>
+
+    <record id="gram_staining_c03_v01" model="examination.possible.value">
+        <field name="name">Nil</field>
+        <field name="examination_line_id" ref="gram_staining_c03"/>
+        <field name="sequence">10</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="gram_staining_c03_v02" model="examination.possible.value">
+        <field name="name">Few</field>
+        <field name="examination_line_id" ref="gram_staining_c03"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="gram_staining_c03_v03" model="examination.possible.value">
+        <field name="name">Moderate</field>
+        <field name="examination_line_id" ref="gram_staining_c03"/>
+        <field name="sequence">30</field>
+    </record>
+
+    <record id="gram_staining_c03_v04" model="examination.possible.value">
+        <field name="name">Plenty</field>
+        <field name="examination_line_id" ref="gram_staining_c03"/>
+        <field name="sequence">40</field>
+    </record>
+
+    <record id="gram_staining_c04" model="examination.entry.line">
+        <field name="name">Gram Positive Cocci</field>
+        <field name="examinationentry_id" ref="gram_staining"/>
+        <field name="sequence">40</field>
+        <field name="result_type">selection</field>
+        <field name="reference_value">Not Seen</field>
+    </record>
+
+    <record id="gram_staining_c04_v01" model="examination.possible.value">
+        <field name="name">Not Seen</field>
+        <field name="examination_line_id" ref="gram_staining_c04"/>
+        <field name="sequence">10</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="gram_staining_c04_v02" model="examination.possible.value">
+        <field name="name">Few</field>
+        <field name="examination_line_id" ref="gram_staining_c04"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="gram_staining_c04_v03" model="examination.possible.value">
+        <field name="name">Moderate</field>
+        <field name="examination_line_id" ref="gram_staining_c04"/>
+        <field name="sequence">30</field>
+    </record>
+
+    <record id="gram_staining_c04_v04" model="examination.possible.value">
+        <field name="name">Plenty</field>
+        <field name="examination_line_id" ref="gram_staining_c04"/>
+        <field name="sequence">40</field>
+    </record>
+
+    <record id="gram_staining_c05" model="examination.entry.line">
+        <field name="name">Gram Positive Bacilli</field>
+        <field name="examinationentry_id" ref="gram_staining"/>
+        <field name="sequence">50</field>
+        <field name="result_type">selection</field>
+        <field name="reference_value">Not Seen</field>
+    </record>
+
+    <record id="gram_staining_c05_v01" model="examination.possible.value">
+        <field name="name">Not Seen</field>
+        <field name="examination_line_id" ref="gram_staining_c05"/>
+        <field name="sequence">10</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="gram_staining_c05_v02" model="examination.possible.value">
+        <field name="name">Few</field>
+        <field name="examination_line_id" ref="gram_staining_c05"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="gram_staining_c05_v03" model="examination.possible.value">
+        <field name="name">Moderate</field>
+        <field name="examination_line_id" ref="gram_staining_c05"/>
+        <field name="sequence">30</field>
+    </record>
+
+    <record id="gram_staining_c05_v04" model="examination.possible.value">
+        <field name="name">Plenty</field>
+        <field name="examination_line_id" ref="gram_staining_c05"/>
+        <field name="sequence">40</field>
+    </record>
+
+    <record id="gram_staining_c06" model="examination.entry.line">
+        <field name="name">Gram Negative Cocci</field>
+        <field name="examinationentry_id" ref="gram_staining"/>
+        <field name="sequence">60</field>
+        <field name="result_type">selection</field>
+        <field name="reference_value">Not Seen</field>
+    </record>
+
+    <record id="gram_staining_c06_v01" model="examination.possible.value">
+        <field name="name">Not Seen</field>
+        <field name="examination_line_id" ref="gram_staining_c06"/>
+        <field name="sequence">10</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="gram_staining_c06_v02" model="examination.possible.value">
+        <field name="name">Few</field>
+        <field name="examination_line_id" ref="gram_staining_c06"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="gram_staining_c06_v03" model="examination.possible.value">
+        <field name="name">Moderate</field>
+        <field name="examination_line_id" ref="gram_staining_c06"/>
+        <field name="sequence">30</field>
+    </record>
+
+    <record id="gram_staining_c06_v04" model="examination.possible.value">
+        <field name="name">Plenty</field>
+        <field name="examination_line_id" ref="gram_staining_c06"/>
+        <field name="sequence">40</field>
+    </record>
+
+    <record id="gram_staining_c07" model="examination.entry.line">
+        <field name="name">Gram Negative Bacilli</field>
+        <field name="examinationentry_id" ref="gram_staining"/>
+        <field name="sequence">70</field>
+        <field name="result_type">selection</field>
+        <field name="reference_value">Not Seen</field>
+    </record>
+
+    <record id="gram_staining_c07_v01" model="examination.possible.value">
+        <field name="name">Not Seen</field>
+        <field name="examination_line_id" ref="gram_staining_c07"/>
+        <field name="sequence">10</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="gram_staining_c07_v02" model="examination.possible.value">
+        <field name="name">Few</field>
+        <field name="examination_line_id" ref="gram_staining_c07"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="gram_staining_c07_v03" model="examination.possible.value">
+        <field name="name">Moderate</field>
+        <field name="examination_line_id" ref="gram_staining_c07"/>
+        <field name="sequence">30</field>
+    </record>
+
+    <record id="gram_staining_c07_v04" model="examination.possible.value">
+        <field name="name">Plenty</field>
+        <field name="examination_line_id" ref="gram_staining_c07"/>
+        <field name="sequence">40</field>
+    </record>
+
+    <record id="gram_staining_c08" model="examination.entry.line">
+        <field name="name">Yeast Cells</field>
+        <field name="examinationentry_id" ref="gram_staining"/>
+        <field name="sequence">80</field>
+        <field name="result_type">selection</field>
+        <field name="reference_value">Not Seen</field>
+    </record>
+
+    <record id="gram_staining_c08_v01" model="examination.possible.value">
+        <field name="name">Not Seen</field>
+        <field name="examination_line_id" ref="gram_staining_c08"/>
+        <field name="sequence">10</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="gram_staining_c08_v02" model="examination.possible.value">
+        <field name="name">Present</field>
+        <field name="examination_line_id" ref="gram_staining_c08"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="gram_staining_c09" model="examination.entry.line">
+        <field name="name">Comment</field>
+        <field name="examinationentry_id" ref="gram_staining"/>
+        <field name="sequence">90</field>
+        <field name="result_type">text</field>
+    </record>
+
+    <!-- Sputum for Gram Staining -->
+    <record id="sputum_gram_staining" model="examination.entry">
+        <field name="name">Sputum for Gram Staining</field>
+        <field name="department" ref="dept_microbiology"/>
+        <field name="accounts_id" ref="account_income_microbiology"/>
+        <field name="rate">750</field>
+        <field name="base_rate">750</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">microbiology</field>
+        <field name="report_layout">microbiology</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_sterile_pot"/>
+        <field name="sample_type" ref="sample_sputum"/>
+        <field name="default_method_id" ref="method_gram_stain"/>
+        <field name="default_instrument_id" ref="instrument_microscope"/>
+        <field name="sample_req" eval="True"/>
+    </record>
+
+    <record id="sputum_gram_staining_c01" model="examination.entry.line">
+        <field name="name">GRAM STAIN</field>
+        <field name="examinationentry_id" ref="sputum_gram_staining"/>
+        <field name="sequence">10</field>
+        <field name="is_group_header" eval="True"/>
+        <field name="bold" eval="True"/>
+        <field name="result_type">text</field>
+    </record>
+
+    <record id="sputum_gram_staining_c02" model="examination.entry.line">
+        <field name="name">Specimen Adequacy (Bartlett)</field>
+        <field name="examinationentry_id" ref="sputum_gram_staining"/>
+        <field name="sequence">20</field>
+        <field name="result_type">selection</field>
+        <field name="reference_value">Acceptable</field>
+    </record>
+
+    <record id="sputum_gram_staining_c02_v01" model="examination.possible.value">
+        <field name="name">Acceptable</field>
+        <field name="examination_line_id" ref="sputum_gram_staining_c02"/>
+        <field name="sequence">10</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="sputum_gram_staining_c02_v02" model="examination.possible.value">
+        <field name="name">Salivary - repeat advised</field>
+        <field name="examination_line_id" ref="sputum_gram_staining_c02"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="sputum_gram_staining_c03" model="examination.entry.line">
+        <field name="name">Pus Cells</field>
+        <field name="examinationentry_id" ref="sputum_gram_staining"/>
+        <field name="sequence">30</field>
+        <field name="result_type">selection</field>
+        <field name="reference_value">Nil</field>
+    </record>
+
+    <record id="sputum_gram_staining_c03_v01" model="examination.possible.value">
+        <field name="name">Nil</field>
+        <field name="examination_line_id" ref="sputum_gram_staining_c03"/>
+        <field name="sequence">10</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="sputum_gram_staining_c03_v02" model="examination.possible.value">
+        <field name="name">Few</field>
+        <field name="examination_line_id" ref="sputum_gram_staining_c03"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="sputum_gram_staining_c03_v03" model="examination.possible.value">
+        <field name="name">Moderate</field>
+        <field name="examination_line_id" ref="sputum_gram_staining_c03"/>
+        <field name="sequence">30</field>
+    </record>
+
+    <record id="sputum_gram_staining_c03_v04" model="examination.possible.value">
+        <field name="name">Plenty</field>
+        <field name="examination_line_id" ref="sputum_gram_staining_c03"/>
+        <field name="sequence">40</field>
+    </record>
+
+    <record id="sputum_gram_staining_c04" model="examination.entry.line">
+        <field name="name">Gram Positive Cocci</field>
+        <field name="examinationentry_id" ref="sputum_gram_staining"/>
+        <field name="sequence">40</field>
+        <field name="result_type">selection</field>
+        <field name="reference_value">Not Seen</field>
+    </record>
+
+    <record id="sputum_gram_staining_c04_v01" model="examination.possible.value">
+        <field name="name">Not Seen</field>
+        <field name="examination_line_id" ref="sputum_gram_staining_c04"/>
+        <field name="sequence">10</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="sputum_gram_staining_c04_v02" model="examination.possible.value">
+        <field name="name">Few</field>
+        <field name="examination_line_id" ref="sputum_gram_staining_c04"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="sputum_gram_staining_c04_v03" model="examination.possible.value">
+        <field name="name">Moderate</field>
+        <field name="examination_line_id" ref="sputum_gram_staining_c04"/>
+        <field name="sequence">30</field>
+    </record>
+
+    <record id="sputum_gram_staining_c04_v04" model="examination.possible.value">
+        <field name="name">Plenty</field>
+        <field name="examination_line_id" ref="sputum_gram_staining_c04"/>
+        <field name="sequence">40</field>
+    </record>
+
+    <record id="sputum_gram_staining_c05" model="examination.entry.line">
+        <field name="name">Gram Positive Bacilli</field>
+        <field name="examinationentry_id" ref="sputum_gram_staining"/>
+        <field name="sequence">50</field>
+        <field name="result_type">selection</field>
+        <field name="reference_value">Not Seen</field>
+    </record>
+
+    <record id="sputum_gram_staining_c05_v01" model="examination.possible.value">
+        <field name="name">Not Seen</field>
+        <field name="examination_line_id" ref="sputum_gram_staining_c05"/>
+        <field name="sequence">10</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="sputum_gram_staining_c05_v02" model="examination.possible.value">
+        <field name="name">Few</field>
+        <field name="examination_line_id" ref="sputum_gram_staining_c05"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="sputum_gram_staining_c05_v03" model="examination.possible.value">
+        <field name="name">Moderate</field>
+        <field name="examination_line_id" ref="sputum_gram_staining_c05"/>
+        <field name="sequence">30</field>
+    </record>
+
+    <record id="sputum_gram_staining_c05_v04" model="examination.possible.value">
+        <field name="name">Plenty</field>
+        <field name="examination_line_id" ref="sputum_gram_staining_c05"/>
+        <field name="sequence">40</field>
+    </record>
+
+    <record id="sputum_gram_staining_c06" model="examination.entry.line">
+        <field name="name">Gram Negative Cocci</field>
+        <field name="examinationentry_id" ref="sputum_gram_staining"/>
+        <field name="sequence">60</field>
+        <field name="result_type">selection</field>
+        <field name="reference_value">Not Seen</field>
+    </record>
+
+    <record id="sputum_gram_staining_c06_v01" model="examination.possible.value">
+        <field name="name">Not Seen</field>
+        <field name="examination_line_id" ref="sputum_gram_staining_c06"/>
+        <field name="sequence">10</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="sputum_gram_staining_c06_v02" model="examination.possible.value">
+        <field name="name">Few</field>
+        <field name="examination_line_id" ref="sputum_gram_staining_c06"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="sputum_gram_staining_c06_v03" model="examination.possible.value">
+        <field name="name">Moderate</field>
+        <field name="examination_line_id" ref="sputum_gram_staining_c06"/>
+        <field name="sequence">30</field>
+    </record>
+
+    <record id="sputum_gram_staining_c06_v04" model="examination.possible.value">
+        <field name="name">Plenty</field>
+        <field name="examination_line_id" ref="sputum_gram_staining_c06"/>
+        <field name="sequence">40</field>
+    </record>
+
+    <record id="sputum_gram_staining_c07" model="examination.entry.line">
+        <field name="name">Gram Negative Bacilli</field>
+        <field name="examinationentry_id" ref="sputum_gram_staining"/>
+        <field name="sequence">70</field>
+        <field name="result_type">selection</field>
+        <field name="reference_value">Not Seen</field>
+    </record>
+
+    <record id="sputum_gram_staining_c07_v01" model="examination.possible.value">
+        <field name="name">Not Seen</field>
+        <field name="examination_line_id" ref="sputum_gram_staining_c07"/>
+        <field name="sequence">10</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="sputum_gram_staining_c07_v02" model="examination.possible.value">
+        <field name="name">Few</field>
+        <field name="examination_line_id" ref="sputum_gram_staining_c07"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="sputum_gram_staining_c07_v03" model="examination.possible.value">
+        <field name="name">Moderate</field>
+        <field name="examination_line_id" ref="sputum_gram_staining_c07"/>
+        <field name="sequence">30</field>
+    </record>
+
+    <record id="sputum_gram_staining_c07_v04" model="examination.possible.value">
+        <field name="name">Plenty</field>
+        <field name="examination_line_id" ref="sputum_gram_staining_c07"/>
+        <field name="sequence">40</field>
+    </record>
+
+    <record id="sputum_gram_staining_c08" model="examination.entry.line">
+        <field name="name">Comment</field>
+        <field name="examinationentry_id" ref="sputum_gram_staining"/>
+        <field name="sequence">80</field>
+        <field name="result_type">text</field>
+    </record>
+
+    <!-- AFB (Acid Fast Bacilli) Staining -->
+    <record id="afb_staining" model="examination.entry">
+        <field name="name">AFB (Acid Fast Bacilli) Staining</field>
+        <field name="department" ref="dept_microbiology"/>
+        <field name="accounts_id" ref="account_income_microbiology"/>
+        <field name="rate">600</field>
+        <field name="base_rate">600</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">microbiology</field>
+        <field name="report_layout">microbiology</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_sterile_pot"/>
+        <field name="sample_type" ref="sample_sputum"/>
+        <field name="default_method_id" ref="method_zn_stain"/>
+        <field name="default_instrument_id" ref="instrument_microscope"/>
+        <field name="sample_req" eval="True"/>
+    </record>
+
+    <record id="afb_staining_c01" model="examination.entry.line">
+        <field name="name">ZIEHL-NEELSEN STAIN</field>
+        <field name="examinationentry_id" ref="afb_staining"/>
+        <field name="sequence">10</field>
+        <field name="is_group_header" eval="True"/>
+        <field name="bold" eval="True"/>
+        <field name="result_type">text</field>
+    </record>
+
+    <record id="afb_staining_c02" model="examination.entry.line">
+        <field name="name">AFB</field>
+        <field name="examinationentry_id" ref="afb_staining"/>
+        <field name="sequence">20</field>
+        <field name="result_type">selection</field>
+        <field name="reference_value">Not Found</field>
+    </record>
+
+    <record id="afb_staining_c02_v01" model="examination.possible.value">
+        <field name="name">Not Found</field>
+        <field name="examination_line_id" ref="afb_staining_c02"/>
+        <field name="sequence">10</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="afb_staining_c02_v02" model="examination.possible.value">
+        <field name="name">Scanty (1-9/100 fields)</field>
+        <field name="examination_line_id" ref="afb_staining_c02"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="afb_staining_c02_v03" model="examination.possible.value">
+        <field name="name">1+</field>
+        <field name="examination_line_id" ref="afb_staining_c02"/>
+        <field name="sequence">30</field>
+    </record>
+
+    <record id="afb_staining_c02_v04" model="examination.possible.value">
+        <field name="name">2+</field>
+        <field name="examination_line_id" ref="afb_staining_c02"/>
+        <field name="sequence">40</field>
+    </record>
+
+    <record id="afb_staining_c02_v05" model="examination.possible.value">
+        <field name="name">3+</field>
+        <field name="examination_line_id" ref="afb_staining_c02"/>
+        <field name="sequence">50</field>
+    </record>
+
+    <record id="afb_staining_c03" model="examination.entry.line">
+        <field name="name">Comment</field>
+        <field name="examinationentry_id" ref="afb_staining"/>
+        <field name="sequence">30</field>
+        <field name="result_type">text</field>
+        <field name="default_value">No acid fast bacilli seen in the smear examined. A single negative smear does not exclude tuberculosis.</field>
+    </record>
+
+    <!-- Corneal Scraping for KOH (Right Eye) -->
+    <record id="corneal_scraping_koh_right" model="examination.entry">
+        <field name="name">Corneal Scraping for KOH (Right Eye)</field>
+        <field name="department" ref="dept_microbiology"/>
+        <field name="accounts_id" ref="account_income_microbiology"/>
+        <field name="rate">500</field>
+        <field name="base_rate">500</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">microbiology</field>
+        <field name="report_layout">microbiology</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_swab"/>
+        <field name="sample_type" ref="sample_corneal_scraping"/>
+        <field name="default_method_id" ref="method_koh"/>
+        <field name="default_instrument_id" ref="instrument_microscope"/>
+        <field name="sample_req" eval="True"/>
+    </record>
+
+    <record id="corneal_scraping_koh_right_c01" model="examination.entry.line">
+        <field name="name">Fungal Filaments</field>
+        <field name="examinationentry_id" ref="corneal_scraping_koh_right"/>
+        <field name="sequence">10</field>
+        <field name="result_type">selection</field>
+        <field name="reference_value">Not Seen</field>
+    </record>
+
+    <record id="corneal_scraping_koh_right_c01_v01" model="examination.possible.value">
+        <field name="name">Not Seen</field>
+        <field name="examination_line_id" ref="corneal_scraping_koh_right_c01"/>
+        <field name="sequence">10</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="corneal_scraping_koh_right_c01_v02" model="examination.possible.value">
+        <field name="name">Seen</field>
+        <field name="examination_line_id" ref="corneal_scraping_koh_right_c01"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="corneal_scraping_koh_right_c02" model="examination.entry.line">
+        <field name="name">Yeast Cells</field>
+        <field name="examinationentry_id" ref="corneal_scraping_koh_right"/>
+        <field name="sequence">20</field>
+        <field name="result_type">selection</field>
+        <field name="reference_value">Not Seen</field>
+    </record>
+
+    <record id="corneal_scraping_koh_right_c02_v01" model="examination.possible.value">
+        <field name="name">Not Seen</field>
+        <field name="examination_line_id" ref="corneal_scraping_koh_right_c02"/>
+        <field name="sequence">10</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="corneal_scraping_koh_right_c02_v02" model="examination.possible.value">
+        <field name="name">Seen</field>
+        <field name="examination_line_id" ref="corneal_scraping_koh_right_c02"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="corneal_scraping_koh_right_c03" model="examination.entry.line">
+        <field name="name">Comment</field>
+        <field name="examinationentry_id" ref="corneal_scraping_koh_right"/>
+        <field name="sequence">30</field>
+        <field name="result_type">text</field>
+    </record>
+
+    <!-- Corneal Scraping for KOH (Left Eye) -->
+    <record id="corneal_scraping_koh_left" model="examination.entry">
+        <field name="name">Corneal Scraping for KOH (Left Eye)</field>
+        <field name="department" ref="dept_microbiology"/>
+        <field name="accounts_id" ref="account_income_microbiology"/>
+        <field name="rate">500</field>
+        <field name="base_rate">500</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">microbiology</field>
+        <field name="report_layout">microbiology</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_swab"/>
+        <field name="sample_type" ref="sample_corneal_scraping"/>
+        <field name="default_method_id" ref="method_koh"/>
+        <field name="default_instrument_id" ref="instrument_microscope"/>
+        <field name="sample_req" eval="True"/>
+    </record>
+
+    <record id="corneal_scraping_koh_left_c01" model="examination.entry.line">
+        <field name="name">Fungal Filaments</field>
+        <field name="examinationentry_id" ref="corneal_scraping_koh_left"/>
+        <field name="sequence">10</field>
+        <field name="result_type">selection</field>
+        <field name="reference_value">Not Seen</field>
+    </record>
+
+    <record id="corneal_scraping_koh_left_c01_v01" model="examination.possible.value">
+        <field name="name">Not Seen</field>
+        <field name="examination_line_id" ref="corneal_scraping_koh_left_c01"/>
+        <field name="sequence">10</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="corneal_scraping_koh_left_c01_v02" model="examination.possible.value">
+        <field name="name">Seen</field>
+        <field name="examination_line_id" ref="corneal_scraping_koh_left_c01"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="corneal_scraping_koh_left_c02" model="examination.entry.line">
+        <field name="name">Yeast Cells</field>
+        <field name="examinationentry_id" ref="corneal_scraping_koh_left"/>
+        <field name="sequence">20</field>
+        <field name="result_type">selection</field>
+        <field name="reference_value">Not Seen</field>
+    </record>
+
+    <record id="corneal_scraping_koh_left_c02_v01" model="examination.possible.value">
+        <field name="name">Not Seen</field>
+        <field name="examination_line_id" ref="corneal_scraping_koh_left_c02"/>
+        <field name="sequence">10</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="corneal_scraping_koh_left_c02_v02" model="examination.possible.value">
+        <field name="name">Seen</field>
+        <field name="examination_line_id" ref="corneal_scraping_koh_left_c02"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="corneal_scraping_koh_left_c03" model="examination.entry.line">
+        <field name="name">Comment</field>
+        <field name="examinationentry_id" ref="corneal_scraping_koh_left"/>
+        <field name="sequence">30</field>
+        <field name="result_type">text</field>
+    </record>
+
+    <!-- GeneXpert MTB/RIF -->
+    <record id="genexpert_mtb_rif" model="examination.entry">
+        <field name="name">GeneXpert MTB/RIF</field>
+        <field name="department" ref="dept_microbiology"/>
+        <field name="accounts_id" ref="account_income_microbiology"/>
+        <field name="rate">6500</field>
+        <field name="base_rate">6500</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">microbiology</field>
+        <field name="report_layout">special</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_sterile_pot"/>
+        <field name="sample_type" ref="sample_sputum"/>
+        <field name="default_method_id" ref="method_pcr"/>
+        <field name="default_instrument_id" ref="instrument_pcr"/>
+        <field name="sample_req" eval="True"/>
+        <field name="required_time">1</field>
+    </record>
+
+    <record id="genexpert_mtb_rif_c01" model="examination.entry.line">
+        <field name="name">GENEXPERT MTB/RIF ASSAY</field>
+        <field name="examinationentry_id" ref="genexpert_mtb_rif"/>
+        <field name="sequence">10</field>
+        <field name="is_group_header" eval="True"/>
+        <field name="bold" eval="True"/>
+        <field name="result_type">text</field>
+    </record>
+
+    <record id="genexpert_mtb_rif_c02" model="examination.entry.line">
+        <field name="name">M. tuberculosis complex</field>
+        <field name="examinationentry_id" ref="genexpert_mtb_rif"/>
+        <field name="sequence">20</field>
+        <field name="result_type">selection</field>
+        <field name="reference_value">Not Detected</field>
+    </record>
+
+    <record id="genexpert_mtb_rif_c02_v01" model="examination.possible.value">
+        <field name="name">Not Detected</field>
+        <field name="examination_line_id" ref="genexpert_mtb_rif_c02"/>
+        <field name="sequence">10</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="genexpert_mtb_rif_c02_v02" model="examination.possible.value">
+        <field name="name">Detected (Very Low)</field>
+        <field name="examination_line_id" ref="genexpert_mtb_rif_c02"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="genexpert_mtb_rif_c02_v03" model="examination.possible.value">
+        <field name="name">Detected (Low)</field>
+        <field name="examination_line_id" ref="genexpert_mtb_rif_c02"/>
+        <field name="sequence">30</field>
+    </record>
+
+    <record id="genexpert_mtb_rif_c02_v04" model="examination.possible.value">
+        <field name="name">Detected (Medium)</field>
+        <field name="examination_line_id" ref="genexpert_mtb_rif_c02"/>
+        <field name="sequence">40</field>
+    </record>
+
+    <record id="genexpert_mtb_rif_c02_v05" model="examination.possible.value">
+        <field name="name">Detected (High)</field>
+        <field name="examination_line_id" ref="genexpert_mtb_rif_c02"/>
+        <field name="sequence">50</field>
+    </record>
+
+    <record id="genexpert_mtb_rif_c03" model="examination.entry.line">
+        <field name="name">Rifampicin Resistance</field>
+        <field name="examinationentry_id" ref="genexpert_mtb_rif"/>
+        <field name="sequence">30</field>
+        <field name="result_type">selection</field>
+        <field name="reference_value">Not Applicable</field>
+    </record>
+
+    <record id="genexpert_mtb_rif_c03_v01" model="examination.possible.value">
+        <field name="name">Not Applicable</field>
+        <field name="examination_line_id" ref="genexpert_mtb_rif_c03"/>
+        <field name="sequence">10</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="genexpert_mtb_rif_c03_v02" model="examination.possible.value">
+        <field name="name">Not Detected</field>
+        <field name="examination_line_id" ref="genexpert_mtb_rif_c03"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="genexpert_mtb_rif_c03_v03" model="examination.possible.value">
+        <field name="name">Detected</field>
+        <field name="examination_line_id" ref="genexpert_mtb_rif_c03"/>
+        <field name="sequence">30</field>
+    </record>
+
+    <record id="genexpert_mtb_rif_c03_v04" model="examination.possible.value">
+        <field name="name">Indeterminate</field>
+        <field name="examination_line_id" ref="genexpert_mtb_rif_c03"/>
+        <field name="sequence">40</field>
+    </record>
+
+    <record id="genexpert_mtb_rif_c04" model="examination.entry.line">
+        <field name="name">Comment</field>
+        <field name="examinationentry_id" ref="genexpert_mtb_rif"/>
+        <field name="sequence">40</field>
+        <field name="result_type">text</field>
+    </record>
+
+    <!-- RT-PCR for COVID-19 (SARS-CoV-2) -->
+    <record id="rt_pcr_covid19" model="examination.entry">
+        <field name="name">RT-PCR for COVID-19 (SARS-CoV-2)</field>
+        <field name="department" ref="dept_microbiology"/>
+        <field name="accounts_id" ref="account_income_microbiology"/>
+        <field name="rate">3500</field>
+        <field name="base_rate">3500</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">microbiology</field>
+        <field name="report_layout">special</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_swab"/>
+        <field name="sample_type" ref="sample_swab"/>
+        <field name="default_method_id" ref="method_pcr"/>
+        <field name="default_instrument_id" ref="instrument_pcr"/>
+        <field name="sample_req" eval="True"/>
+        <field name="required_time">1</field>
+    </record>
+
+    <record id="rt_pcr_covid19_c01" model="examination.entry.line">
+        <field name="name">SARS-CoV-2 REAL-TIME RT-PCR</field>
+        <field name="examinationentry_id" ref="rt_pcr_covid19"/>
+        <field name="sequence">10</field>
+        <field name="is_group_header" eval="True"/>
+        <field name="bold" eval="True"/>
+        <field name="result_type">text</field>
+    </record>
+
+    <record id="rt_pcr_covid19_c02" model="examination.entry.line">
+        <field name="name">Result</field>
+        <field name="examinationentry_id" ref="rt_pcr_covid19"/>
+        <field name="sequence">20</field>
+        <field name="result_type">selection</field>
+        <field name="reference_value">Not Detected</field>
+    </record>
+
+    <record id="rt_pcr_covid19_c02_v01" model="examination.possible.value">
+        <field name="name">Not Detected</field>
+        <field name="examination_line_id" ref="rt_pcr_covid19_c02"/>
+        <field name="sequence">10</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="rt_pcr_covid19_c02_v02" model="examination.possible.value">
+        <field name="name">Detected</field>
+        <field name="examination_line_id" ref="rt_pcr_covid19_c02"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="rt_pcr_covid19_c02_v03" model="examination.possible.value">
+        <field name="name">Inconclusive</field>
+        <field name="examination_line_id" ref="rt_pcr_covid19_c02"/>
+        <field name="sequence">30</field>
+    </record>
+
+    <record id="rt_pcr_covid19_c03" model="examination.entry.line">
+        <field name="name">Ct Value (E gene)</field>
+        <field name="examinationentry_id" ref="rt_pcr_covid19"/>
+        <field name="sequence">30</field>
+        <field name="result_type">numeric</field>
+    </record>
+
+    <record id="rt_pcr_covid19_c04" model="examination.entry.line">
+        <field name="name">Ct Value (RdRp / ORF1ab)</field>
+        <field name="examinationentry_id" ref="rt_pcr_covid19"/>
+        <field name="sequence">40</field>
+        <field name="result_type">numeric</field>
+    </record>
+
+    <record id="rt_pcr_covid19_c05" model="examination.entry.line">
+        <field name="name">Comment</field>
+        <field name="examinationentry_id" ref="rt_pcr_covid19"/>
+        <field name="sequence">50</field>
+        <field name="result_type">text</field>
+    </record>
+
+    <!-- conditional display -->
+    <record id="rt_pcr_covid19_c03" model="examination.entry.line">
+        <field name="parent_line_id" ref="rt_pcr_covid19_c02"/>
+        <field name="show_when_value_id" ref="rt_pcr_covid19_c02_v02"/>
+    </record>
+
+    <record id="rt_pcr_covid19_c04" model="examination.entry.line">
+        <field name="parent_line_id" ref="rt_pcr_covid19_c02"/>
+        <field name="show_when_value_id" ref="rt_pcr_covid19_c02_v02"/>
+    </record>
+
+    <!-- PCR for Zika, Dengue & Chikungunya Virus -->
+    <record id="pcr_zika_dengue_chikungunya" model="examination.entry">
+        <field name="name">PCR for Zika, Dengue &amp; Chikungunya Virus</field>
+        <field name="department" ref="dept_microbiology"/>
+        <field name="accounts_id" ref="account_income_microbiology"/>
+        <field name="rate">6500</field>
+        <field name="base_rate">6500</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">microbiology</field>
+        <field name="report_layout">special</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_gold_sst"/>
+        <field name="sample_type" ref="sample_serum"/>
+        <field name="default_method_id" ref="method_pcr"/>
+        <field name="default_instrument_id" ref="instrument_pcr"/>
+        <field name="sample_req" eval="True"/>
+        <field name="required_time">3</field>
+    </record>
+
+    <record id="pcr_zika_dengue_chikungunya_c01" model="examination.entry.line">
+        <field name="name">ARBOVIRUS MULTIPLEX RT-PCR</field>
+        <field name="examinationentry_id" ref="pcr_zika_dengue_chikungunya"/>
+        <field name="sequence">10</field>
+        <field name="is_group_header" eval="True"/>
+        <field name="bold" eval="True"/>
+        <field name="result_type">text</field>
+    </record>
+
+    <record id="pcr_zika_dengue_chikungunya_c02" model="examination.entry.line">
+        <field name="name">Zika Virus RNA</field>
+        <field name="examinationentry_id" ref="pcr_zika_dengue_chikungunya"/>
+        <field name="sequence">20</field>
+        <field name="result_type">selection</field>
+        <field name="reference_value">Not Detected</field>
+    </record>
+
+    <record id="pcr_zika_dengue_chikungunya_c02_v01" model="examination.possible.value">
+        <field name="name">Not Detected</field>
+        <field name="examination_line_id" ref="pcr_zika_dengue_chikungunya_c02"/>
+        <field name="sequence">10</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="pcr_zika_dengue_chikungunya_c02_v02" model="examination.possible.value">
+        <field name="name">Detected</field>
+        <field name="examination_line_id" ref="pcr_zika_dengue_chikungunya_c02"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="pcr_zika_dengue_chikungunya_c03" model="examination.entry.line">
+        <field name="name">Dengue Virus RNA</field>
+        <field name="examinationentry_id" ref="pcr_zika_dengue_chikungunya"/>
+        <field name="sequence">30</field>
+        <field name="result_type">selection</field>
+        <field name="reference_value">Not Detected</field>
+    </record>
+
+    <record id="pcr_zika_dengue_chikungunya_c03_v01" model="examination.possible.value">
+        <field name="name">Not Detected</field>
+        <field name="examination_line_id" ref="pcr_zika_dengue_chikungunya_c03"/>
+        <field name="sequence">10</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="pcr_zika_dengue_chikungunya_c03_v02" model="examination.possible.value">
+        <field name="name">Detected</field>
+        <field name="examination_line_id" ref="pcr_zika_dengue_chikungunya_c03"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="pcr_zika_dengue_chikungunya_c04" model="examination.entry.line">
+        <field name="name">Chikungunya Virus RNA</field>
+        <field name="examinationentry_id" ref="pcr_zika_dengue_chikungunya"/>
+        <field name="sequence">40</field>
+        <field name="result_type">selection</field>
+        <field name="reference_value">Not Detected</field>
+    </record>
+
+    <record id="pcr_zika_dengue_chikungunya_c04_v01" model="examination.possible.value">
+        <field name="name">Not Detected</field>
+        <field name="examination_line_id" ref="pcr_zika_dengue_chikungunya_c04"/>
+        <field name="sequence">10</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="pcr_zika_dengue_chikungunya_c04_v02" model="examination.possible.value">
+        <field name="name">Detected</field>
+        <field name="examination_line_id" ref="pcr_zika_dengue_chikungunya_c04"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="pcr_zika_dengue_chikungunya_c05" model="examination.entry.line">
+        <field name="name">Comment</field>
+        <field name="examinationentry_id" ref="pcr_zika_dengue_chikungunya"/>
+        <field name="sequence">50</field>
+        <field name="result_type">text</field>
+    </record>
+
+    <!-- Urine for Toxicology Screen -->
+    <record id="urine_toxicology_screen" model="examination.entry">
+        <field name="name">Urine for Toxicology Screen</field>
+        <field name="department" ref="dept_microbiology"/>
+        <field name="accounts_id" ref="account_income_microbiology"/>
+        <field name="rate">5000</field>
+        <field name="base_rate">5000</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">microbiology</field>
+        <field name="report_layout">special</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_urine_container"/>
+        <field name="sample_type" ref="sample_urine"/>
+        <field name="default_method_id" ref="method_ict"/>
+        <field name="sample_req" eval="True"/>
+    </record>
+
+    <record id="urine_toxicology_screen_c01" model="examination.entry.line">
+        <field name="name">DRUGS OF ABUSE SCREEN</field>
+        <field name="examinationentry_id" ref="urine_toxicology_screen"/>
+        <field name="sequence">10</field>
+        <field name="is_group_header" eval="True"/>
+        <field name="bold" eval="True"/>
+        <field name="result_type">text</field>
+    </record>
+
+    <record id="urine_toxicology_screen_c02" model="examination.entry.line">
+        <field name="name">Amphetamine</field>
+        <field name="examinationentry_id" ref="urine_toxicology_screen"/>
+        <field name="sequence">20</field>
+        <field name="result_type">selection</field>
+        <field name="reference_value">Negative</field>
+    </record>
+
+    <record id="urine_toxicology_screen_c02_v01" model="examination.possible.value">
+        <field name="name">Negative</field>
+        <field name="examination_line_id" ref="urine_toxicology_screen_c02"/>
+        <field name="sequence">10</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="urine_toxicology_screen_c02_v02" model="examination.possible.value">
+        <field name="name">Positive</field>
+        <field name="examination_line_id" ref="urine_toxicology_screen_c02"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="urine_toxicology_screen_c03" model="examination.entry.line">
+        <field name="name">Benzodiazepines</field>
+        <field name="examinationentry_id" ref="urine_toxicology_screen"/>
+        <field name="sequence">30</field>
+        <field name="result_type">selection</field>
+        <field name="reference_value">Negative</field>
+    </record>
+
+    <record id="urine_toxicology_screen_c03_v01" model="examination.possible.value">
+        <field name="name">Negative</field>
+        <field name="examination_line_id" ref="urine_toxicology_screen_c03"/>
+        <field name="sequence">10</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="urine_toxicology_screen_c03_v02" model="examination.possible.value">
+        <field name="name">Positive</field>
+        <field name="examination_line_id" ref="urine_toxicology_screen_c03"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="urine_toxicology_screen_c04" model="examination.entry.line">
+        <field name="name">Cannabinoids (THC)</field>
+        <field name="examinationentry_id" ref="urine_toxicology_screen"/>
+        <field name="sequence">40</field>
+        <field name="result_type">selection</field>
+        <field name="reference_value">Negative</field>
+    </record>
+
+    <record id="urine_toxicology_screen_c04_v01" model="examination.possible.value">
+        <field name="name">Negative</field>
+        <field name="examination_line_id" ref="urine_toxicology_screen_c04"/>
+        <field name="sequence">10</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="urine_toxicology_screen_c04_v02" model="examination.possible.value">
+        <field name="name">Positive</field>
+        <field name="examination_line_id" ref="urine_toxicology_screen_c04"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="urine_toxicology_screen_c05" model="examination.entry.line">
+        <field name="name">Opiates</field>
+        <field name="examinationentry_id" ref="urine_toxicology_screen"/>
+        <field name="sequence">50</field>
+        <field name="result_type">selection</field>
+        <field name="reference_value">Negative</field>
+    </record>
+
+    <record id="urine_toxicology_screen_c05_v01" model="examination.possible.value">
+        <field name="name">Negative</field>
+        <field name="examination_line_id" ref="urine_toxicology_screen_c05"/>
+        <field name="sequence">10</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="urine_toxicology_screen_c05_v02" model="examination.possible.value">
+        <field name="name">Positive</field>
+        <field name="examination_line_id" ref="urine_toxicology_screen_c05"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="urine_toxicology_screen_c06" model="examination.entry.line">
+        <field name="name">Cocaine</field>
+        <field name="examinationentry_id" ref="urine_toxicology_screen"/>
+        <field name="sequence">60</field>
+        <field name="result_type">selection</field>
+        <field name="reference_value">Negative</field>
+    </record>
+
+    <record id="urine_toxicology_screen_c06_v01" model="examination.possible.value">
+        <field name="name">Negative</field>
+        <field name="examination_line_id" ref="urine_toxicology_screen_c06"/>
+        <field name="sequence">10</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="urine_toxicology_screen_c06_v02" model="examination.possible.value">
+        <field name="name">Positive</field>
+        <field name="examination_line_id" ref="urine_toxicology_screen_c06"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="urine_toxicology_screen_c07" model="examination.entry.line">
+        <field name="name">Comment</field>
+        <field name="examinationentry_id" ref="urine_toxicology_screen"/>
+        <field name="sequence">70</field>
+        <field name="result_type">text</field>
+        <field name="default_value">Screening result only. A positive screen must be confirmed by a quantitative method before it is used for any clinical or legal purpose.</field>
+    </record>
+
+    <!-- Amphetamine (Urine Screen) -->
+    <record id="amphetamine_urine" model="examination.entry">
+        <field name="name">Amphetamine (Urine Screen)</field>
+        <field name="department" ref="dept_microbiology"/>
+        <field name="accounts_id" ref="account_income_microbiology"/>
+        <field name="rate">1400</field>
+        <field name="base_rate">1400</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">microbiology</field>
+        <field name="report_layout">tabular</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_urine_container"/>
+        <field name="sample_type" ref="sample_urine"/>
+        <field name="default_method_id" ref="method_ict"/>
+        <field name="sample_req" eval="True"/>
+    </record>
+
+    <record id="amphetamine_urine_c01" model="examination.entry.line">
+        <field name="name">Amphetamine</field>
+        <field name="examinationentry_id" ref="amphetamine_urine"/>
+        <field name="sequence">10</field>
+        <field name="result_type">selection</field>
+        <field name="reference_value">Negative</field>
+    </record>
+
+    <record id="amphetamine_urine_c01_v01" model="examination.possible.value">
+        <field name="name">Negative</field>
+        <field name="examination_line_id" ref="amphetamine_urine_c01"/>
+        <field name="sequence">10</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="amphetamine_urine_c01_v02" model="examination.possible.value">
+        <field name="name">Positive</field>
+        <field name="examination_line_id" ref="amphetamine_urine_c01"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <!-- Benzodiazepines (Urine Screen) -->
+    <record id="benzodiazepines_urine" model="examination.entry">
+        <field name="name">Benzodiazepines (Urine Screen)</field>
+        <field name="department" ref="dept_microbiology"/>
+        <field name="accounts_id" ref="account_income_microbiology"/>
+        <field name="rate">1400</field>
+        <field name="base_rate">1400</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">microbiology</field>
+        <field name="report_layout">tabular</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_urine_container"/>
+        <field name="sample_type" ref="sample_urine"/>
+        <field name="default_method_id" ref="method_ict"/>
+        <field name="sample_req" eval="True"/>
+    </record>
+
+    <record id="benzodiazepines_urine_c01" model="examination.entry.line">
+        <field name="name">Benzodiazepines</field>
+        <field name="examinationentry_id" ref="benzodiazepines_urine"/>
+        <field name="sequence">10</field>
+        <field name="result_type">selection</field>
+        <field name="reference_value">Negative</field>
+    </record>
+
+    <record id="benzodiazepines_urine_c01_v01" model="examination.possible.value">
+        <field name="name">Negative</field>
+        <field name="examination_line_id" ref="benzodiazepines_urine_c01"/>
+        <field name="sequence">10</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="benzodiazepines_urine_c01_v02" model="examination.possible.value">
+        <field name="name">Positive</field>
+        <field name="examination_line_id" ref="benzodiazepines_urine_c01"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <!-- Cannabinoids (Urine Screen) -->
+    <record id="cannabinoids_urine" model="examination.entry">
+        <field name="name">Cannabinoids (Urine Screen)</field>
+        <field name="department" ref="dept_microbiology"/>
+        <field name="accounts_id" ref="account_income_microbiology"/>
+        <field name="rate">1400</field>
+        <field name="base_rate">1400</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">microbiology</field>
+        <field name="report_layout">tabular</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_urine_container"/>
+        <field name="sample_type" ref="sample_urine"/>
+        <field name="default_method_id" ref="method_ict"/>
+        <field name="sample_req" eval="True"/>
+    </record>
+
+    <record id="cannabinoids_urine_c01" model="examination.entry.line">
+        <field name="name">Cannabinoids (THC)</field>
+        <field name="examinationentry_id" ref="cannabinoids_urine"/>
+        <field name="sequence">10</field>
+        <field name="result_type">selection</field>
+        <field name="reference_value">Negative</field>
+    </record>
+
+    <record id="cannabinoids_urine_c01_v01" model="examination.possible.value">
+        <field name="name">Negative</field>
+        <field name="examination_line_id" ref="cannabinoids_urine_c01"/>
+        <field name="sequence">10</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="cannabinoids_urine_c01_v02" model="examination.possible.value">
+        <field name="name">Positive</field>
+        <field name="examination_line_id" ref="cannabinoids_urine_c01"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <!-- Opiates (Urine Screen) -->
+    <record id="opiates_urine" model="examination.entry">
+        <field name="name">Opiates (Urine Screen)</field>
+        <field name="department" ref="dept_microbiology"/>
+        <field name="accounts_id" ref="account_income_microbiology"/>
+        <field name="rate">1400</field>
+        <field name="base_rate">1400</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">microbiology</field>
+        <field name="report_layout">tabular</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_urine_container"/>
+        <field name="sample_type" ref="sample_urine"/>
+        <field name="default_method_id" ref="method_ict"/>
+        <field name="sample_req" eval="True"/>
+    </record>
+
+    <record id="opiates_urine_c01" model="examination.entry.line">
+        <field name="name">Opiates</field>
+        <field name="examinationentry_id" ref="opiates_urine"/>
+        <field name="sequence">10</field>
+        <field name="result_type">selection</field>
+        <field name="reference_value">Negative</field>
+    </record>
+
+    <record id="opiates_urine_c01_v01" model="examination.possible.value">
+        <field name="name">Negative</field>
+        <field name="examination_line_id" ref="opiates_urine_c01"/>
+        <field name="sequence">10</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="opiates_urine_c01_v02" model="examination.possible.value">
+        <field name="name">Positive</field>
+        <field name="examination_line_id" ref="opiates_urine_c01"/>
+        <field name="sequence">20</field>
+    </record>
+
+</odoo>

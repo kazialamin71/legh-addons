@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Consumables & Disposables - 7 catalogue items.
+
+    GENERATED FILE - do not edit by hand.
+    Source: tools/items/consumables.py    Rebuild: python3 tools/build_catalogue.py
+
+    Rates carried over from the legacy export are PROVISIONAL and are expected
+    to be revised before go-live.
+-->
+<odoo noupdate="1">
+    <!-- Needle for Vacuette (1 Unit) -->
+    <record id="cons_needle_vacuette" model="examination.entry">
+        <field name="name">Needle for Vacuette (1 Unit)</field>
+        <field name="department" ref="dept_consumable"/>
+        <field name="accounts_id" ref="account_income_consumable"/>
+        <field name="rate">20</field>
+        <field name="base_rate">20</field>
+        <field name="service_group">consumable</field>
+        <field name="report_type">other</field>
+        <field name="sample_req" eval="False"/>
+    </record>
+
+    <!-- Disposable for Vacuette -->
+    <record id="cons_disposable_vacuette" model="examination.entry">
+        <field name="name">Disposable for Vacuette</field>
+        <field name="department" ref="dept_consumable"/>
+        <field name="accounts_id" ref="account_income_consumable"/>
+        <field name="rate">10</field>
+        <field name="base_rate">10</field>
+        <field name="service_group">consumable</field>
+        <field name="report_type">other</field>
+        <field name="sample_req" eval="False"/>
+        <field name="lab_not_required" eval="True"/>
+        <field name="manual" eval="True"/>
+    </record>
+
+    <!-- Disposable for Vacuette (1 Unit) -->
+    <record id="cons_disposable_vacuette_1" model="examination.entry">
+        <field name="name">Disposable for Vacuette (1 Unit)</field>
+        <field name="department" ref="dept_consumable"/>
+        <field name="accounts_id" ref="account_income_consumable"/>
+        <field name="rate">20</field>
+        <field name="base_rate">20</field>
+        <field name="service_group">consumable</field>
+        <field name="report_type">other</field>
+        <field name="sample_req" eval="False"/>
+        <field name="lab_not_required" eval="True"/>
+        <field name="manual" eval="True"/>
+    </record>
+
+    <!-- Disposable for Vacuette (2 Units) -->
+    <record id="cons_disposable_vacuette_2" model="examination.entry">
+        <field name="name">Disposable for Vacuette (2 Units)</field>
+        <field name="department" ref="dept_consumable"/>
+        <field name="accounts_id" ref="account_income_consumable"/>
+        <field name="rate">40</field>
+        <field name="base_rate">40</field>
+        <field name="service_group">consumable</field>
+        <field name="report_type">other</field>
+        <field name="sample_req" eval="False"/>
+    </record>
+
+    <!-- Disposable for Vacuette (3 Units) -->
+    <record id="cons_disposable_vacuette_3" model="examination.entry">
+        <field name="name">Disposable for Vacuette (3 Units)</field>
+        <field name="department" ref="dept_consumable"/>
+        <field name="accounts_id" ref="account_income_consumable"/>
+        <field name="rate">60</field>
+        <field name="base_rate">60</field>
+        <field name="service_group">consumable</field>
+        <field name="report_type">other</field>
+        <field name="sample_req" eval="False"/>
+        <field name="lab_not_required" eval="True"/>
+        <field name="manual" eval="True"/>
+    </record>
+
+    <!-- Blood Bag Set -->
+    <record id="cons_blood_bag_set" model="examination.entry">
+        <field name="name">Blood Bag Set</field>
+        <field name="department" ref="dept_consumable"/>
+        <field name="accounts_id" ref="account_income_consumable"/>
+        <field name="rate">400</field>
+        <field name="base_rate">400</field>
+        <field name="service_group">consumable</field>
+        <field name="report_type">other</field>
+        <field name="sample_req" eval="False"/>
+    </record>
+
+    <!-- 75g Glucose (Oral Load) -->
+    <record id="cons_glucose_75g" model="examination.entry">
+        <field name="name">75g Glucose (Oral Load)</field>
+        <field name="department" ref="dept_consumable"/>
+        <field name="accounts_id" ref="account_income_consumable"/>
+        <field name="rate">300</field>
+        <field name="base_rate">300</field>
+        <field name="service_group">consumable</field>
+        <field name="report_type">other</field>
+        <field name="sample_req" eval="False"/>
+    </record>
+
+</odoo>

@@ -14,6 +14,19 @@
                         name="action_view_pharmacy_requisitions" class="btn-secondary"
                         invisible="pharmacy_requisition_count == 0"/>
             </button>
+
+            <!-- Requisitions raised for this admission, above the manual lines. -->
+            <xpath expr="//separator[@name='manual_medicine']" position="before">
+                <separator string="Pharmacy Requisitions"/>
+                <field name="pharmacy_requisition_ids" readonly="1" nolabel="1">
+                    <list>
+                        <field name="date"/>
+                        <field name="name" string="Requisition No"/>
+                        <field name="net_amount" string="Total Amount" sum="Total"/>
+                        <field name="state"/>
+                    </list>
+                </field>
+            </xpath>
         </field>
     </record>
 </odoo>

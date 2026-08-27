@@ -58,6 +58,7 @@ from . import lab_print_confirm
 from . import examination_merge_line
 from . import sample_type
 from . import leih_expense
+from . import admission_charge_item
 from . import hospital_admission
 from . import hospital_admission_line
 from . import bill_register_general_admission_line
@@ -98,4 +99,4 @@ from . import ward_managment
 from . import cc_collection
 from . import detail_component
 from . import optics_daily_collection
-
+from . import leih_collection_report

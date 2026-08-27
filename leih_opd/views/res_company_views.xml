@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <!--
+        The consultation token's boilerplate lives on the company, so the
+        policy notes and the SMS footer can be reworded by an administrator
+        without touching the report template.
+    -->
+    <record id="res_company_form_token" model="ir.ui.view">
+        <field name="name">res.company.form.appointment.token</field>
+        <field name="model">res.company</field>
+        <field name="inherit_id" ref="base.view_company_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//sheet" position="inside">
+                <group string="Consultation Token (POS Slip)" name="appointment_token">
+                    <field name="appointment_token_qr_label"
+                           placeholder="For Doctor Appointment&#10;Scan the QR Code"/>
+                    <field name="appointment_token_notes"
+                           placeholder="One numbered note per line. Leave empty to hide the box."/>
+                    <field name="appointment_token_footer"
+                           placeholder="Italic note printed at the bottom of the token."/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,670 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Operation Theatre & Indoor - 51 catalogue items.
+
+    GENERATED FILE - do not edit by hand.
+    Source: tools/items/ot_indoor.py    Rebuild: python3 tools/build_catalogue.py
+
+    Rates carried over from the legacy export are PROVISIONAL and are expected
+    to be revised before go-live.
+-->
+<odoo noupdate="1">
+    <!-- OT Charge (First Hour) -->
+    <record id="ot_charge_first_hour" model="examination.entry">
+        <field name="name">OT Charge (First Hour)</field>
+        <field name="department" ref="dept_ot"/>
+        <field name="accounts_id" ref="account_income_ot"/>
+        <field name="rate">3000</field>
+        <field name="base_rate">3000</field>
+        <field name="service_group">procedure</field>
+        <field name="report_type">other</field>
+        <field name="sample_req" eval="False"/>
+        <field name="indoor" eval="True"/>
+    </record>
+
+    <!-- OT Charge (Second Hour) -->
+    <record id="ot_charge_second_hour" model="examination.entry">
+        <field name="name">OT Charge (Second Hour)</field>
+        <field name="department" ref="dept_ot"/>
+        <field name="accounts_id" ref="account_income_ot"/>
+        <field name="rate">1000</field>
+        <field name="base_rate">1000</field>
+        <field name="service_group">procedure</field>
+        <field name="report_type">other</field>
+        <field name="sample_req" eval="False"/>
+        <field name="indoor" eval="True"/>
+    </record>
+
+    <!-- OT Charge with Sedation -->
+    <record id="ot_charge_with_sedation" model="examination.entry">
+        <field name="name">OT Charge with Sedation</field>
+        <field name="department" ref="dept_ot"/>
+        <field name="accounts_id" ref="account_income_ot"/>
+        <field name="rate">2000</field>
+        <field name="base_rate">2000</field>
+        <field name="service_group">procedure</field>
+        <field name="report_type">other</field>
+        <field name="sample_req" eval="False"/>
+    </record>
+
+    <!-- Outdoor Surgeon OT Charge (Package) -->
+    <record id="ot_outdoor_surgeon_package" model="examination.entry">
+        <field name="name">Outdoor Surgeon OT Charge (Package)</field>
+        <field name="department" ref="dept_ot"/>
+        <field name="accounts_id" ref="account_income_ot"/>
+        <field name="rate">8000</field>
+        <field name="base_rate">8000</field>
+        <field name="service_group">procedure</field>
+        <field name="report_type">other</field>
+        <field name="sample_req" eval="False"/>
+    </record>
+
+    <!-- OT Team Charge -->
+    <record id="ot_team_charge" model="examination.entry">
+        <field name="name">OT Team Charge</field>
+        <field name="department" ref="dept_ot"/>
+        <field name="accounts_id" ref="account_income_ot"/>
+        <field name="rate">10000</field>
+        <field name="base_rate">10000</field>
+        <field name="service_group">procedure</field>
+        <field name="report_type">other</field>
+        <field name="sample_req" eval="False"/>
+        <field name="indoor" eval="True"/>
+    </record>
+
+    <!-- OT Team Charge - 2 -->
+    <record id="ot_team_charge_2" model="examination.entry">
+        <field name="name">OT Team Charge - 2</field>
+        <field name="department" ref="dept_ot"/>
+        <field name="accounts_id" ref="account_income_ot"/>
+        <field name="rate">5000</field>
+        <field name="base_rate">5000</field>
+        <field name="service_group">procedure</field>
+        <field name="report_type">other</field>
+        <field name="sample_req" eval="False"/>
+        <field name="indoor" eval="True"/>
+    </record>
+
+    <!-- Surgeon Team Charge -->
+    <record id="ot_surgeon_team_charge" model="examination.entry">
+        <field name="name">Surgeon Team Charge</field>
+        <field name="department" ref="dept_ot"/>
+        <field name="accounts_id" ref="account_income_ot"/>
+        <field name="rate">0</field>
+        <field name="base_rate">0</field>
+        <field name="service_group">procedure</field>
+        <field name="report_type">other</field>
+        <field name="sample_req" eval="False"/>
+        <field name="manual" eval="True"/>
+        <field name="indoor" eval="True"/>
+    </record>
+
+    <!-- OT Assistant Charge -->
+    <record id="ot_assistant_charge" model="examination.entry">
+        <field name="name">OT Assistant Charge</field>
+        <field name="department" ref="dept_ot"/>
+        <field name="accounts_id" ref="account_income_ot"/>
+        <field name="rate">0</field>
+        <field name="base_rate">0</field>
+        <field name="service_group">procedure</field>
+        <field name="report_type">other</field>
+        <field name="sample_req" eval="False"/>
+        <field name="manual" eval="True"/>
+    </record>
+
+    <!-- Assistant Doctor Fee -->
+    <record id="ot_assistant_doctor_fee" model="examination.entry">
+        <field name="name">Assistant Doctor Fee</field>
+        <field name="department" ref="dept_ot"/>
+        <field name="accounts_id" ref="account_income_ot"/>
+        <field name="rate">0</field>
+        <field name="base_rate">0</field>
+        <field name="service_group">procedure</field>
+        <field name="report_type">other</field>
+        <field name="sample_req" eval="False"/>
+        <field name="manual" eval="True"/>
+    </record>
+
+    <!-- Anaesthesiologist Fee -->
+    <record id="ot_anaesthesiologist_fee" model="examination.entry">
+        <field name="name">Anaesthesiologist Fee</field>
+        <field name="department" ref="dept_ot"/>
+        <field name="accounts_id" ref="account_income_ot"/>
+        <field name="rate">0</field>
+        <field name="base_rate">0</field>
+        <field name="service_group">procedure</field>
+        <field name="report_type">other</field>
+        <field name="sample_req" eval="False"/>
+        <field name="manual" eval="True"/>
+    </record>
+
+    <!-- Anaesthesia Doctor Fee -->
+    <record id="ot_anaesthesia_doctor_fee" model="examination.entry">
+        <field name="name">Anaesthesia Doctor Fee</field>
+        <field name="department" ref="dept_ot"/>
+        <field name="accounts_id" ref="account_income_ot"/>
+        <field name="rate">0</field>
+        <field name="base_rate">0</field>
+        <field name="service_group">procedure</field>
+        <field name="report_type">other</field>
+        <field name="sample_req" eval="False"/>
+        <field name="manual" eval="True"/>
+    </record>
+
+    <!-- Isoflurane Charge -->
+    <record id="ot_isoflurane_charge" model="examination.entry">
+        <field name="name">Isoflurane Charge</field>
+        <field name="department" ref="dept_ot"/>
+        <field name="accounts_id" ref="account_income_ot"/>
+        <field name="rate">1000</field>
+        <field name="base_rate">1000</field>
+        <field name="service_group">procedure</field>
+        <field name="report_type">other</field>
+        <field name="sample_req" eval="False"/>
+    </record>
+
+    <!-- Labour Room Charge -->
+    <record id="ot_labour_room_charge" model="examination.entry">
+        <field name="name">Labour Room Charge</field>
+        <field name="department" ref="dept_ot"/>
+        <field name="accounts_id" ref="account_income_ot"/>
+        <field name="rate">2000</field>
+        <field name="base_rate">2000</field>
+        <field name="service_group">procedure</field>
+        <field name="report_type">other</field>
+        <field name="sample_req" eval="False"/>
+        <field name="lab_not_required" eval="True"/>
+        <field name="indoor" eval="True"/>
+    </record>
+
+    <!-- Ligasure Machine Charge -->
+    <record id="ot_ligasure_machine" model="examination.entry">
+        <field name="name">Ligasure Machine Charge</field>
+        <field name="department" ref="dept_ot"/>
+        <field name="accounts_id" ref="account_income_ot"/>
+        <field name="rate">0</field>
+        <field name="base_rate">0</field>
+        <field name="service_group">procedure</field>
+        <field name="report_type">other</field>
+        <field name="sample_req" eval="False"/>
+        <field name="manual" eval="True"/>
+    </record>
+
+    <!-- Laparoscopy Machine Charge -->
+    <record id="ot_laparoscopy_machine" model="examination.entry">
+        <field name="name">Laparoscopy Machine Charge</field>
+        <field name="department" ref="dept_ot"/>
+        <field name="accounts_id" ref="account_income_ot"/>
+        <field name="rate">0</field>
+        <field name="base_rate">0</field>
+        <field name="service_group">procedure</field>
+        <field name="report_type">other</field>
+        <field name="sample_req" eval="False"/>
+        <field name="manual" eval="True"/>
+    </record>
+
+    <!-- Circular Stapler -->
+    <record id="ot_circular_stapler" model="examination.entry">
+        <field name="name">Circular Stapler</field>
+        <field name="department" ref="dept_ot"/>
+        <field name="accounts_id" ref="account_income_ot"/>
+        <field name="rate">0</field>
+        <field name="base_rate">0</field>
+        <field name="service_group">consumable</field>
+        <field name="report_type">other</field>
+        <field name="sample_req" eval="False"/>
+        <field name="manual" eval="True"/>
+    </record>
+
+    <!-- Cutting Stapler -->
+    <record id="ot_cutting_stapler" model="examination.entry">
+        <field name="name">Cutting Stapler</field>
+        <field name="department" ref="dept_ot"/>
+        <field name="accounts_id" ref="account_income_ot"/>
+        <field name="rate">0</field>
+        <field name="base_rate">0</field>
+        <field name="service_group">consumable</field>
+        <field name="report_type">other</field>
+        <field name="sample_req" eval="False"/>
+        <field name="manual" eval="True"/>
+    </record>
+
+    <!-- Implant Charge -->
+    <record id="ot_implant_charge" model="examination.entry">
+        <field name="name">Implant Charge</field>
+        <field name="department" ref="dept_ot"/>
+        <field name="accounts_id" ref="account_income_ot"/>
+        <field name="rate">0</field>
+        <field name="base_rate">0</field>
+        <field name="service_group">consumable</field>
+        <field name="report_type">other</field>
+        <field name="sample_req" eval="False"/>
+        <field name="lab_not_required" eval="True"/>
+        <field name="manual" eval="True"/>
+    </record>
+
+    <!-- Post Operative Charge (First Four Hours) -->
+    <record id="ot_post_op_first_4h" model="examination.entry">
+        <field name="name">Post Operative Charge (First Four Hours)</field>
+        <field name="department" ref="dept_ot"/>
+        <field name="accounts_id" ref="account_income_ot"/>
+        <field name="rate">1000</field>
+        <field name="base_rate">1000</field>
+        <field name="service_group">procedure</field>
+        <field name="report_type">other</field>
+        <field name="sample_req" eval="False"/>
+        <field name="indoor" eval="True"/>
+    </record>
+
+    <!-- Post Operative Charge (More Than Four Hours) -->
+    <record id="ot_post_op_over_4h" model="examination.entry">
+        <field name="name">Post Operative Charge (More Than Four Hours)</field>
+        <field name="department" ref="dept_ot"/>
+        <field name="accounts_id" ref="account_income_ot"/>
+        <field name="rate">1500</field>
+        <field name="base_rate">1500</field>
+        <field name="service_group">procedure</field>
+        <field name="report_type">other</field>
+        <field name="sample_req" eval="False"/>
+        <field name="indoor" eval="True"/>
+    </record>
+
+    <!-- Monitor Charge for Post Operative (Per Day) -->
+    <record id="ot_post_op_monitor" model="examination.entry">
+        <field name="name">Monitor Charge for Post Operative (Per Day)</field>
+        <field name="department" ref="dept_ot"/>
+        <field name="accounts_id" ref="account_income_ot"/>
+        <field name="rate">500</field>
+        <field name="base_rate">500</field>
+        <field name="service_group">procedure</field>
+        <field name="report_type">other</field>
+        <field name="sample_req" eval="False"/>
+        <field name="indoor" eval="True"/>
+    </record>
+
+    <!-- Oxygen Charge for Post Operative -->
+    <record id="ot_post_op_oxygen" model="examination.entry">
+        <field name="name">Oxygen Charge for Post Operative</field>
+        <field name="department" ref="dept_ot"/>
+        <field name="accounts_id" ref="account_income_ot"/>
+        <field name="rate">500</field>
+        <field name="base_rate">500</field>
+        <field name="service_group">oxygen</field>
+        <field name="report_type">other</field>
+        <field name="sample_req" eval="False"/>
+        <field name="indoor" eval="True"/>
+    </record>
+
+    <!-- Socket Reconstruction - A -->
+    <record id="ot_socket_reconstruction_a" model="examination.entry">
+        <field name="name">Socket Reconstruction - A</field>
+        <field name="department" ref="dept_ot"/>
+        <field name="accounts_id" ref="account_income_ot"/>
+        <field name="rate">16000</field>
+        <field name="base_rate">16000</field>
+        <field name="service_group">procedure</field>
+        <field name="report_type">other</field>
+        <field name="sample_req" eval="False"/>
+    </record>
+
+    <!-- Socket Reconstruction - B -->
+    <record id="ot_socket_reconstruction_b" model="examination.entry">
+        <field name="name">Socket Reconstruction - B</field>
+        <field name="department" ref="dept_ot"/>
+        <field name="accounts_id" ref="account_income_ot"/>
+        <field name="rate">20000</field>
+        <field name="base_rate">20000</field>
+        <field name="service_group">procedure</field>
+        <field name="report_type">other</field>
+        <field name="sample_req" eval="False"/>
+    </record>
+
+    <!-- Socket Reconstruction - C -->
+    <record id="ot_socket_reconstruction_c" model="examination.entry">
+        <field name="name">Socket Reconstruction - C</field>
+        <field name="department" ref="dept_ot"/>
+        <field name="accounts_id" ref="account_income_ot"/>
+        <field name="rate">25000</field>
+        <field name="base_rate">25000</field>
+        <field name="service_group">procedure</field>
+        <field name="report_type">other</field>
+        <field name="sample_req" eval="False"/>
+    </record>
+
+    <!-- Canalicular Reconstruction - A -->
+    <record id="ot_canalicular_reconstruction_a" model="examination.entry">
+        <field name="name">Canalicular Reconstruction - A</field>
+        <field name="department" ref="dept_ot"/>
+        <field name="accounts_id" ref="account_income_ot"/>
+        <field name="rate">8000</field>
+        <field name="base_rate">8000</field>
+        <field name="service_group">procedure</field>
+        <field name="report_type">other</field>
+        <field name="sample_req" eval="False"/>
+    </record>
+
+    <!-- Canalicular Reconstruction - B -->
+    <record id="ot_canalicular_reconstruction_b" model="examination.entry">
+        <field name="name">Canalicular Reconstruction - B</field>
+        <field name="department" ref="dept_ot"/>
+        <field name="accounts_id" ref="account_income_ot"/>
+        <field name="rate">12000</field>
+        <field name="base_rate">12000</field>
+        <field name="service_group">procedure</field>
+        <field name="report_type">other</field>
+        <field name="sample_req" eval="False"/>
+    </record>
+
+    <!-- Punctoplasty - A -->
+    <record id="ot_punctoplasty_a" model="examination.entry">
+        <field name="name">Punctoplasty - A</field>
+        <field name="department" ref="dept_ot"/>
+        <field name="accounts_id" ref="account_income_ot"/>
+        <field name="rate">4000</field>
+        <field name="base_rate">4000</field>
+        <field name="service_group">procedure</field>
+        <field name="report_type">other</field>
+        <field name="sample_req" eval="False"/>
+    </record>
+
+    <!-- Punctoplasty - B -->
+    <record id="ot_punctoplasty_b" model="examination.entry">
+        <field name="name">Punctoplasty - B</field>
+        <field name="department" ref="dept_ot"/>
+        <field name="accounts_id" ref="account_income_ot"/>
+        <field name="rate">6000</field>
+        <field name="base_rate">6000</field>
+        <field name="service_group">procedure</field>
+        <field name="report_type">other</field>
+        <field name="sample_req" eval="False"/>
+    </record>
+
+    <!-- Bandage Contact Lens (BCL) -->
+    <record id="ot_bandage_contact_lens" model="examination.entry">
+        <field name="name">Bandage Contact Lens (BCL)</field>
+        <field name="department" ref="dept_ot"/>
+        <field name="accounts_id" ref="account_income_ot"/>
+        <field name="rate">1000</field>
+        <field name="base_rate">1000</field>
+        <field name="service_group">procedure</field>
+        <field name="report_type">other</field>
+        <field name="sample_req" eval="False"/>
+    </record>
+
+    <!-- Reposition of IOL (OPD Patient) -->
+    <record id="ot_reposition_iol" model="examination.entry">
+        <field name="name">Reposition of IOL (OPD Patient)</field>
+        <field name="department" ref="dept_ot"/>
+        <field name="accounts_id" ref="account_income_ot"/>
+        <field name="rate">5000</field>
+        <field name="base_rate">5000</field>
+        <field name="service_group">procedure</field>
+        <field name="report_type">other</field>
+        <field name="sample_req" eval="False"/>
+    </record>
+
+    <!-- Reposition of IOL (OPD Patient - Lions Case) -->
+    <record id="ot_reposition_iol_lions" model="examination.entry">
+        <field name="name">Reposition of IOL (OPD Patient - Lions Case)</field>
+        <field name="department" ref="dept_ot"/>
+        <field name="accounts_id" ref="account_income_ot"/>
+        <field name="rate">1000</field>
+        <field name="base_rate">1000</field>
+        <field name="service_group">procedure</field>
+        <field name="report_type">other</field>
+        <field name="sample_req" eval="False"/>
+    </record>
+
+    <!-- Procedure Charge - Local Anaesthesia Only -->
+    <record id="ot_procedure_local_anaesthesia" model="examination.entry">
+        <field name="name">Procedure Charge - Local Anaesthesia Only</field>
+        <field name="department" ref="dept_ot"/>
+        <field name="accounts_id" ref="account_income_ot"/>
+        <field name="rate">1500</field>
+        <field name="base_rate">1500</field>
+        <field name="service_group">procedure</field>
+        <field name="report_type">other</field>
+        <field name="sample_req" eval="False"/>
+    </record>
+
+    <!-- Lumbar Puncture -->
+    <record id="ot_lumbar_puncture" model="examination.entry">
+        <field name="name">Lumbar Puncture</field>
+        <field name="department" ref="dept_ot"/>
+        <field name="accounts_id" ref="account_income_ot"/>
+        <field name="rate">4000</field>
+        <field name="base_rate">4000</field>
+        <field name="service_group">procedure</field>
+        <field name="report_type">other</field>
+        <field name="sample_req" eval="False"/>
+    </record>
+
+    <!-- Copper-T Insertion -->
+    <record id="ot_copper_t" model="examination.entry">
+        <field name="name">Copper-T Insertion</field>
+        <field name="department" ref="dept_ot"/>
+        <field name="accounts_id" ref="account_income_ot"/>
+        <field name="rate">4000</field>
+        <field name="base_rate">4000</field>
+        <field name="service_group">procedure</field>
+        <field name="report_type">other</field>
+        <field name="sample_req" eval="False"/>
+        <field name="lab_not_required" eval="True"/>
+    </record>
+
+    <!-- Admission Charge -->
+    <record id="indoor_admission_charge" model="examination.entry">
+        <field name="name">Admission Charge</field>
+        <field name="department" ref="dept_indoor"/>
+        <field name="accounts_id" ref="account_income_indoor"/>
+        <field name="rate">1000</field>
+        <field name="base_rate">1000</field>
+        <field name="service_group">other</field>
+        <field name="report_type">other</field>
+        <field name="sample_req" eval="False"/>
+        <field name="indoor" eval="True"/>
+    </record>
+
+    <!-- Admission Fee (Outside Referral) -->
+    <record id="indoor_admission_fee_outside" model="examination.entry">
+        <field name="name">Admission Fee (Outside Referral)</field>
+        <field name="department" ref="dept_indoor"/>
+        <field name="accounts_id" ref="account_income_indoor"/>
+        <field name="rate">1500</field>
+        <field name="base_rate">1500</field>
+        <field name="service_group">other</field>
+        <field name="report_type">other</field>
+        <field name="sample_req" eval="False"/>
+        <field name="indoor" eval="True"/>
+    </record>
+
+    <!-- Ward Bed Charge -->
+    <record id="indoor_ward_bed_charge" model="examination.entry">
+        <field name="name">Ward Bed Charge</field>
+        <field name="department" ref="dept_indoor"/>
+        <field name="accounts_id" ref="account_income_indoor"/>
+        <field name="rate">2000</field>
+        <field name="base_rate">2000</field>
+        <field name="service_group">other</field>
+        <field name="report_type">other</field>
+        <field name="sample_req" eval="False"/>
+        <field name="indoor" eval="True"/>
+    </record>
+
+    <!-- Cabin Charge -->
+    <record id="indoor_cabin_charge" model="examination.entry">
+        <field name="name">Cabin Charge</field>
+        <field name="department" ref="dept_indoor"/>
+        <field name="accounts_id" ref="account_income_indoor"/>
+        <field name="rate">5000</field>
+        <field name="base_rate">5000</field>
+        <field name="service_group">other</field>
+        <field name="report_type">other</field>
+        <field name="sample_req" eval="False"/>
+        <field name="indoor" eval="True"/>
+    </record>
+
+    <!-- Share Cabin Charge -->
+    <record id="indoor_share_cabin_charge" model="examination.entry">
+        <field name="name">Share Cabin Charge</field>
+        <field name="department" ref="dept_indoor"/>
+        <field name="accounts_id" ref="account_income_indoor"/>
+        <field name="rate">3500</field>
+        <field name="base_rate">3500</field>
+        <field name="service_group">other</field>
+        <field name="report_type">other</field>
+        <field name="sample_req" eval="False"/>
+        <field name="indoor" eval="True"/>
+    </record>
+
+    <!-- HDU Bed Charge -->
+    <record id="indoor_hdu_bed_charge" model="examination.entry">
+        <field name="name">HDU Bed Charge</field>
+        <field name="department" ref="dept_indoor"/>
+        <field name="accounts_id" ref="account_income_indoor"/>
+        <field name="rate">7000</field>
+        <field name="base_rate">7000</field>
+        <field name="service_group">other</field>
+        <field name="report_type">other</field>
+        <field name="sample_req" eval="False"/>
+        <field name="indoor" eval="True"/>
+    </record>
+
+    <!-- Baby Cot Bed -->
+    <record id="indoor_baby_cot_bed" model="examination.entry">
+        <field name="name">Baby Cot Bed</field>
+        <field name="department" ref="dept_indoor"/>
+        <field name="accounts_id" ref="account_income_indoor"/>
+        <field name="rate">1000</field>
+        <field name="base_rate">1000</field>
+        <field name="service_group">other</field>
+        <field name="report_type">other</field>
+        <field name="sample_req" eval="False"/>
+        <field name="indoor" eval="True"/>
+    </record>
+
+    <!-- Food Cost -->
+    <record id="indoor_food_cost" model="examination.entry">
+        <field name="name">Food Cost</field>
+        <field name="department" ref="dept_indoor"/>
+        <field name="accounts_id" ref="account_income_indoor"/>
+        <field name="rate">800</field>
+        <field name="base_rate">800</field>
+        <field name="service_group">other</field>
+        <field name="report_type">other</field>
+        <field name="sample_req" eval="False"/>
+        <field name="indoor" eval="True"/>
+    </record>
+
+    <!-- Consultant's Fee (Indoor Round) -->
+    <record id="indoor_consultant_fee" model="examination.entry">
+        <field name="name">Consultant's Fee (Indoor Round)</field>
+        <field name="department" ref="dept_indoor"/>
+        <field name="accounts_id" ref="account_income_indoor"/>
+        <field name="rate">1000</field>
+        <field name="base_rate">1000</field>
+        <field name="service_group">consultation</field>
+        <field name="report_type">other</field>
+        <field name="sample_req" eval="False"/>
+        <field name="indoor" eval="True"/>
+    </record>
+
+    <!-- Service Charge -->
+    <record id="indoor_service_charge" model="examination.entry">
+        <field name="name">Service Charge</field>
+        <field name="department" ref="dept_indoor"/>
+        <field name="accounts_id" ref="account_income_indoor"/>
+        <field name="rate">0</field>
+        <field name="base_rate">0</field>
+        <field name="service_group">other</field>
+        <field name="report_type">other</field>
+        <field name="sample_req" eval="False"/>
+        <field name="manual" eval="True"/>
+        <field name="indoor" eval="True"/>
+    </record>
+
+    <!-- Medicine Charge -->
+    <record id="indoor_medicine_charge" model="examination.entry">
+        <field name="name">Medicine Charge</field>
+        <field name="department" ref="dept_indoor"/>
+        <field name="accounts_id" ref="account_income_indoor"/>
+        <field name="rate">0</field>
+        <field name="base_rate">0</field>
+        <field name="service_group">other</field>
+        <field name="report_type">other</field>
+        <field name="sample_req" eval="False"/>
+        <field name="manual" eval="True"/>
+        <field name="indoor" eval="True"/>
+    </record>
+
+    <!-- Medicine Total -->
+    <record id="indoor_medicine_total" model="examination.entry">
+        <field name="name">Medicine Total</field>
+        <field name="department" ref="dept_indoor"/>
+        <field name="accounts_id" ref="account_income_indoor"/>
+        <field name="rate">0</field>
+        <field name="base_rate">0</field>
+        <field name="service_group">other</field>
+        <field name="report_type">other</field>
+        <field name="sample_req" eval="False"/>
+        <field name="manual" eval="True"/>
+        <field name="indoor" eval="True"/>
+    </record>
+
+    <!-- Out Medicine Fee -->
+    <record id="indoor_out_medicine_fee" model="examination.entry">
+        <field name="name">Out Medicine Fee</field>
+        <field name="department" ref="dept_indoor"/>
+        <field name="accounts_id" ref="account_income_indoor"/>
+        <field name="rate">0</field>
+        <field name="base_rate">0</field>
+        <field name="service_group">other</field>
+        <field name="report_type">other</field>
+        <field name="sample_req" eval="False"/>
+        <field name="manual" eval="True"/>
+        <field name="indoor" eval="True"/>
+    </record>
+
+    <!-- Ambulance Service Fee -->
+    <record id="indoor_ambulance_service_fee" model="examination.entry">
+        <field name="name">Ambulance Service Fee</field>
+        <field name="department" ref="dept_indoor"/>
+        <field name="accounts_id" ref="account_income_indoor"/>
+        <field name="rate">0</field>
+        <field name="base_rate">0</field>
+        <field name="service_group">other</field>
+        <field name="report_type">other</field>
+        <field name="sample_req" eval="False"/>
+        <field name="manual" eval="True"/>
+        <field name="indoor" eval="True"/>
+    </record>
+
+    <!-- Infusion Pump Charge (Per Day) -->
+    <record id="indoor_infusion_pump_charge" model="examination.entry">
+        <field name="name">Infusion Pump Charge (Per Day)</field>
+        <field name="department" ref="dept_indoor"/>
+        <field name="accounts_id" ref="account_income_indoor"/>
+        <field name="rate">0</field>
+        <field name="base_rate">0</field>
+        <field name="service_group">other</field>
+        <field name="report_type">other</field>
+        <field name="sample_req" eval="False"/>
+        <field name="manual" eval="True"/>
+        <field name="indoor" eval="True"/>
+    </record>
+
+    <!-- Other Charges -->
+    <record id="indoor_other_charges" model="examination.entry">
+        <field name="name">Other Charges</field>
+        <field name="department" ref="dept_indoor"/>
+        <field name="accounts_id" ref="account_income_indoor"/>
+        <field name="rate">0</field>
+        <field name="base_rate">0</field>
+        <field name="service_group">other</field>
+        <field name="report_type">other</field>
+        <field name="sample_req" eval="False"/>
+        <field name="manual" eval="True"/>
+        <field name="indoor" eval="True"/>
+    </record>
+
+</odoo>

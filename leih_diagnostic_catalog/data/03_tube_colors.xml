@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Specimen containers, sequenced in the standard CLSI order of draw.
+
+    `sequence` matters: leih19 groups tests sharing the same tube colour and
+    department onto one lab.specimen (one physical tube), and the sticker report
+    prints them in this order, which is the order the phlebotomist should draw.
+-->
+<odoo noupdate="1">
+
+    <record id="tube_blood_culture" model="tube.color">
+        <field name="name">Blood Culture Bottle</field>
+        <field name="code">#F4D03F</field>
+        <field name="sequence">10</field>
+        <field name="description">Aerobic / anaerobic culture bottle - drawn first to keep the sample sterile</field>
+    </record>
+
+    <record id="tube_light_blue" model="tube.color">
+        <field name="name">Light Blue</field>
+        <field name="code">#5DADE2</field>
+        <field name="sequence">20</field>
+        <field name="description">3.2% sodium citrate - coagulation studies (PT/INR, APTT, Fibrinogen, D-Dimer). Must be filled to the mark.</field>
+    </record>
+
+    <record id="tube_red" model="tube.color">
+        <field name="name">Red (Plain)</field>
+        <field name="code">#C0392B</field>
+        <field name="sequence">30</field>
+        <field name="description">No additive - serum for serology and cross matching</field>
+    </record>
+
+    <record id="tube_gold_sst" model="tube.color">
+        <field name="name">Gold / SST</field>
+        <field name="code">#D4AC0D</field>
+        <field name="sequence">40</field>
+        <field name="description">Clot activator + separator gel - serum for biochemistry, hormones and immunoassays</field>
+    </record>
+
+    <record id="tube_green" model="tube.color">
+        <field name="name">Green</field>
+        <field name="code">#27AE60</field>
+        <field name="sequence">50</field>
+        <field name="description">Lithium/sodium heparin - plasma for ammonia, lactate and electrolytes; transport on ice where required</field>
+    </record>
+
+    <record id="tube_lavender" model="tube.color">
+        <field name="name">Lavender (EDTA)</field>
+        <field name="code">#B57EDC</field>
+        <field name="sequence">60</field>
+        <field name="description">K2/K3 EDTA - whole blood for CBC, ESR, HbA1c, Hb electrophoresis, blood grouping</field>
+    </record>
+
+    <record id="tube_grey" model="tube.color">
+        <field name="name">Grey</field>
+        <field name="code">#7F8C8D</field>
+        <field name="sequence">70</field>
+        <field name="description">Sodium fluoride / potassium oxalate - glucose and OGTT (stops glycolysis)</field>
+    </record>
+
+    <record id="tube_urine_container" model="tube.color">
+        <field name="name">Urine Container</field>
+        <field name="code">#F0E68C</field>
+        <field name="sequence">80</field>
+        <field name="description">Sterile wide-mouth container - urine R/M/E, culture, 24h collection</field>
+    </record>
+
+    <record id="tube_stool_container" model="tube.color">
+        <field name="name">Stool Container</field>
+        <field name="code">#A0522D</field>
+        <field name="sequence">90</field>
+        <field name="description">Sterile screw-cap container - stool R/M/E, OBT, culture</field>
+    </record>
+
+    <record id="tube_swab" model="tube.color">
+        <field name="name">Sterile Swab / Transport Medium</field>
+        <field name="code">#95A5A6</field>
+        <field name="sequence">100</field>
+        <field name="description">Amies / Stuart transport swab - wound, conjunctival, tracheal and corneal specimens</field>
+    </record>
+
+    <record id="tube_sterile_pot" model="tube.color">
+        <field name="name">Sterile Pot (Sputum / Fluid)</field>
+        <field name="code">#48C9B0</field>
+        <field name="sequence">110</field>
+        <field name="description">Wide-mouth sterile pot - sputum, aspirates, ascitic / pleural / CSF fluid</field>
+    </record>
+
+    <record id="tube_histo_formalin" model="tube.color">
+        <field name="name">Formalin Pot (Histology)</field>
+        <field name="code">#8E44AD</field>
+        <field name="sequence">120</field>
+        <field name="description">10% neutral buffered formalin - tissue and cytology specimens</field>
+    </record>
+
+</odoo>

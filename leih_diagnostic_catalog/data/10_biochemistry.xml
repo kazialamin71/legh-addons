@@ -1,0 +1,3555 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Biochemistry - 77 catalogue items.
+
+    GENERATED FILE - do not edit by hand.
+    Source: tools/items/biochemistry.py    Rebuild: python3 tools/build_catalogue.py
+
+    Rates carried over from the legacy export are PROVISIONAL and are expected
+    to be revised before go-live.
+-->
+<odoo noupdate="1">
+    <!-- Serum Creatinine -->
+    <record id="serum_creatinine" model="examination.entry">
+        <field name="name">Serum Creatinine</field>
+        <field name="department" ref="dept_biochemistry"/>
+        <field name="accounts_id" ref="account_income_biochemistry"/>
+        <field name="rate">500</field>
+        <field name="base_rate">500</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">pathology</field>
+        <field name="report_layout">tabular</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_gold_sst"/>
+        <field name="sample_type" ref="sample_serum"/>
+        <field name="default_method_id" ref="method_photometry"/>
+        <field name="default_instrument_id" ref="instrument_chem_analyzer"/>
+        <field name="sample_req" eval="True"/>
+    </record>
+
+    <record id="serum_creatinine_c01" model="examination.entry.line">
+        <field name="name">Serum Creatinine</field>
+        <field name="examinationentry_id" ref="serum_creatinine"/>
+        <field name="sequence">10</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">mg/dL</field>
+        <field name="reference_value">0.6 - 1.3</field>
+        <field name="reference_value_male">0.7 - 1.3</field>
+        <field name="reference_value_female">0.6 - 1.1</field>
+        <field name="reference_value_child">0.3 - 0.7</field>
+        <field name="ref_low">0.6</field>
+        <field name="ref_high">1.3</field>
+        <field name="critical_high">6.0</field>
+    </record>
+
+    <!-- Serum Urea -->
+    <record id="serum_urea" model="examination.entry">
+        <field name="name">Serum Urea</field>
+        <field name="department" ref="dept_biochemistry"/>
+        <field name="accounts_id" ref="account_income_biochemistry"/>
+        <field name="rate">300</field>
+        <field name="base_rate">300</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">pathology</field>
+        <field name="report_layout">tabular</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_gold_sst"/>
+        <field name="sample_type" ref="sample_serum"/>
+        <field name="default_method_id" ref="method_photometry"/>
+        <field name="default_instrument_id" ref="instrument_chem_analyzer"/>
+        <field name="sample_req" eval="True"/>
+    </record>
+
+    <record id="serum_urea_c01" model="examination.entry.line">
+        <field name="name">Serum Urea</field>
+        <field name="examinationentry_id" ref="serum_urea"/>
+        <field name="sequence">10</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">mg/dL</field>
+        <field name="reference_value">15 - 45</field>
+        <field name="ref_low">15</field>
+        <field name="ref_high">45</field>
+        <field name="critical_high">200</field>
+    </record>
+
+    <!-- Blood Urea Nitrogen (BUN) -->
+    <record id="blood_urea_nitrogen_bun" model="examination.entry">
+        <field name="name">Blood Urea Nitrogen (BUN)</field>
+        <field name="department" ref="dept_biochemistry"/>
+        <field name="accounts_id" ref="account_income_biochemistry"/>
+        <field name="rate">500</field>
+        <field name="base_rate">500</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">pathology</field>
+        <field name="report_layout">tabular</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_gold_sst"/>
+        <field name="sample_type" ref="sample_serum"/>
+        <field name="default_method_id" ref="method_photometry"/>
+        <field name="default_instrument_id" ref="instrument_chem_analyzer"/>
+        <field name="sample_req" eval="True"/>
+    </record>
+
+    <record id="blood_urea_nitrogen_bun_c01" model="examination.entry.line">
+        <field name="name">Blood Urea Nitrogen</field>
+        <field name="examinationentry_id" ref="blood_urea_nitrogen_bun"/>
+        <field name="sequence">10</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">mg/dL</field>
+        <field name="reference_value">7 - 20</field>
+        <field name="ref_low">7</field>
+        <field name="ref_high">20</field>
+        <field name="critical_high">100</field>
+    </record>
+
+    <!-- Serum Uric Acid -->
+    <record id="serum_uric_acid" model="examination.entry">
+        <field name="name">Serum Uric Acid</field>
+        <field name="department" ref="dept_biochemistry"/>
+        <field name="accounts_id" ref="account_income_biochemistry"/>
+        <field name="rate">500</field>
+        <field name="base_rate">500</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">pathology</field>
+        <field name="report_layout">tabular</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_gold_sst"/>
+        <field name="sample_type" ref="sample_serum"/>
+        <field name="default_method_id" ref="method_photometry"/>
+        <field name="default_instrument_id" ref="instrument_chem_analyzer"/>
+        <field name="sample_req" eval="True"/>
+    </record>
+
+    <record id="serum_uric_acid_c01" model="examination.entry.line">
+        <field name="name">Serum Uric Acid</field>
+        <field name="examinationentry_id" ref="serum_uric_acid"/>
+        <field name="sequence">10</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">mg/dL</field>
+        <field name="reference_value">3.5 - 7.2</field>
+        <field name="reference_value_male">3.5 - 7.2</field>
+        <field name="reference_value_female">2.6 - 6.0</field>
+        <field name="ref_low">3.5</field>
+        <field name="ref_high">7.2</field>
+    </record>
+
+    <!-- Serum eGFR -->
+    <record id="serum_egfr" model="examination.entry">
+        <field name="name">Serum eGFR</field>
+        <field name="department" ref="dept_biochemistry"/>
+        <field name="accounts_id" ref="account_income_biochemistry"/>
+        <field name="rate">1280</field>
+        <field name="base_rate">1280</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">pathology</field>
+        <field name="report_layout">tabular</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_gold_sst"/>
+        <field name="sample_type" ref="sample_serum"/>
+        <field name="default_method_id" ref="method_photometry"/>
+        <field name="default_instrument_id" ref="instrument_chem_analyzer"/>
+        <field name="sample_req" eval="True"/>
+    </record>
+
+    <record id="serum_egfr_c01" model="examination.entry.line">
+        <field name="name">Serum Creatinine</field>
+        <field name="examinationentry_id" ref="serum_egfr"/>
+        <field name="sequence">10</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">mg/dL</field>
+        <field name="reference_value">0.6 - 1.3</field>
+        <field name="reference_value_male">0.7 - 1.3</field>
+        <field name="reference_value_female">0.6 - 1.1</field>
+        <field name="reference_value_child">0.3 - 0.7</field>
+        <field name="ref_low">0.6</field>
+        <field name="ref_high">1.3</field>
+        <field name="critical_high">6.0</field>
+    </record>
+
+    <record id="serum_egfr_c02" model="examination.entry.line">
+        <field name="name">eGFR (CKD-EPI)</field>
+        <field name="examinationentry_id" ref="serum_egfr"/>
+        <field name="sequence">20</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">mL/min/1.73m2</field>
+        <field name="reference_value">&gt;= 90</field>
+        <field name="ref_low">90</field>
+    </record>
+
+    <!-- Creatinine Clearance (CCR) -->
+    <record id="creatinine_clearance_ccr" model="examination.entry">
+        <field name="name">Creatinine Clearance (CCR)</field>
+        <field name="department" ref="dept_biochemistry"/>
+        <field name="accounts_id" ref="account_income_biochemistry"/>
+        <field name="rate">1000</field>
+        <field name="base_rate">1000</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">pathology</field>
+        <field name="report_layout">tabular</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_urine_container"/>
+        <field name="sample_type" ref="sample_urine_24h"/>
+        <field name="default_method_id" ref="method_photometry"/>
+        <field name="default_instrument_id" ref="instrument_chem_analyzer"/>
+        <field name="sample_req" eval="True"/>
+        <field name="required_time">1</field>
+    </record>
+
+    <record id="creatinine_clearance_ccr_c01" model="examination.entry.line">
+        <field name="name">SPECIMEN</field>
+        <field name="examinationentry_id" ref="creatinine_clearance_ccr"/>
+        <field name="sequence">10</field>
+        <field name="is_group_header" eval="True"/>
+        <field name="bold" eval="True"/>
+        <field name="result_type">text</field>
+    </record>
+
+    <record id="creatinine_clearance_ccr_c02" model="examination.entry.line">
+        <field name="name">24 Hour Urine Volume</field>
+        <field name="examinationentry_id" ref="creatinine_clearance_ccr"/>
+        <field name="sequence">20</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">mL</field>
+    </record>
+
+    <record id="creatinine_clearance_ccr_c03" model="examination.entry.line">
+        <field name="name">RESULT</field>
+        <field name="examinationentry_id" ref="creatinine_clearance_ccr"/>
+        <field name="sequence">30</field>
+        <field name="is_group_header" eval="True"/>
+        <field name="bold" eval="True"/>
+        <field name="result_type">text</field>
+    </record>
+
+    <record id="creatinine_clearance_ccr_c04" model="examination.entry.line">
+        <field name="name">Serum Creatinine</field>
+        <field name="examinationentry_id" ref="creatinine_clearance_ccr"/>
+        <field name="sequence">40</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">mg/dL</field>
+        <field name="reference_value">0.6 - 1.3</field>
+        <field name="ref_low">0.6</field>
+        <field name="ref_high">1.3</field>
+    </record>
+
+    <record id="creatinine_clearance_ccr_c05" model="examination.entry.line">
+        <field name="name">Urine Creatinine</field>
+        <field name="examinationentry_id" ref="creatinine_clearance_ccr"/>
+        <field name="sequence">50</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">mg/dL</field>
+    </record>
+
+    <record id="creatinine_clearance_ccr_c06" model="examination.entry.line">
+        <field name="name">Creatinine Clearance</field>
+        <field name="examinationentry_id" ref="creatinine_clearance_ccr"/>
+        <field name="sequence">60</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">mL/min</field>
+        <field name="reference_value">90 - 140</field>
+        <field name="ref_low">90</field>
+        <field name="ref_high">140</field>
+    </record>
+
+    <!-- Renal Function Test (RFT) -->
+    <record id="renal_function_test_rft" model="examination.entry">
+        <field name="name">Renal Function Test (RFT)</field>
+        <field name="department" ref="dept_biochemistry"/>
+        <field name="accounts_id" ref="account_income_biochemistry"/>
+        <field name="rate">4200</field>
+        <field name="base_rate">4200</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">pathology</field>
+        <field name="report_layout">tabular</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_gold_sst"/>
+        <field name="sample_type" ref="sample_serum"/>
+        <field name="default_method_id" ref="method_photometry"/>
+        <field name="default_instrument_id" ref="instrument_chem_analyzer"/>
+        <field name="sample_req" eval="True"/>
+    </record>
+
+    <record id="renal_function_test_rft_c01" model="examination.entry.line">
+        <field name="name">RENAL FUNCTION TEST</field>
+        <field name="examinationentry_id" ref="renal_function_test_rft"/>
+        <field name="sequence">10</field>
+        <field name="is_group_header" eval="True"/>
+        <field name="bold" eval="True"/>
+        <field name="result_type">text</field>
+    </record>
+
+    <record id="renal_function_test_rft_c02" model="examination.entry.line">
+        <field name="name">Serum Urea</field>
+        <field name="examinationentry_id" ref="renal_function_test_rft"/>
+        <field name="sequence">20</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">mg/dL</field>
+        <field name="reference_value">15 - 45</field>
+        <field name="ref_low">15</field>
+        <field name="ref_high">45</field>
+        <field name="critical_high">200</field>
+    </record>
+
+    <record id="renal_function_test_rft_c03" model="examination.entry.line">
+        <field name="name">Serum Creatinine</field>
+        <field name="examinationentry_id" ref="renal_function_test_rft"/>
+        <field name="sequence">30</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">mg/dL</field>
+        <field name="reference_value">0.6 - 1.3</field>
+        <field name="reference_value_male">0.7 - 1.3</field>
+        <field name="reference_value_female">0.6 - 1.1</field>
+        <field name="reference_value_child">0.3 - 0.7</field>
+        <field name="ref_low">0.6</field>
+        <field name="ref_high">1.3</field>
+        <field name="critical_high">6.0</field>
+    </record>
+
+    <record id="renal_function_test_rft_c04" model="examination.entry.line">
+        <field name="name">Serum Uric Acid</field>
+        <field name="examinationentry_id" ref="renal_function_test_rft"/>
+        <field name="sequence">40</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">mg/dL</field>
+        <field name="reference_value">3.5 - 7.2</field>
+        <field name="ref_low">3.5</field>
+        <field name="ref_high">7.2</field>
+    </record>
+
+    <record id="renal_function_test_rft_c05" model="examination.entry.line">
+        <field name="name">Sodium (Na+)</field>
+        <field name="examinationentry_id" ref="renal_function_test_rft"/>
+        <field name="sequence">50</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">mmol/L</field>
+        <field name="reference_value">135 - 145</field>
+        <field name="ref_low">135</field>
+        <field name="ref_high">145</field>
+        <field name="critical_low">120</field>
+        <field name="critical_high">160</field>
+    </record>
+
+    <record id="renal_function_test_rft_c06" model="examination.entry.line">
+        <field name="name">Potassium (K+)</field>
+        <field name="examinationentry_id" ref="renal_function_test_rft"/>
+        <field name="sequence">60</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">mmol/L</field>
+        <field name="reference_value">3.5 - 5.1</field>
+        <field name="ref_low">3.5</field>
+        <field name="ref_high">5.1</field>
+        <field name="critical_low">2.8</field>
+        <field name="critical_high">6.2</field>
+    </record>
+
+    <record id="renal_function_test_rft_c07" model="examination.entry.line">
+        <field name="name">Chloride (Cl-)</field>
+        <field name="examinationentry_id" ref="renal_function_test_rft"/>
+        <field name="sequence">70</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">mmol/L</field>
+        <field name="reference_value">98 - 107</field>
+        <field name="ref_low">98</field>
+        <field name="ref_high">107</field>
+    </record>
+
+    <record id="renal_function_test_rft_c08" model="examination.entry.line">
+        <field name="name">Bicarbonate (HCO3-)</field>
+        <field name="examinationentry_id" ref="renal_function_test_rft"/>
+        <field name="sequence">80</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">mmol/L</field>
+        <field name="reference_value">22 - 29</field>
+        <field name="ref_low">22</field>
+        <field name="ref_high">29</field>
+    </record>
+
+    <record id="renal_function_test_rft_c09" model="examination.entry.line">
+        <field name="name">Serum Calcium</field>
+        <field name="examinationentry_id" ref="renal_function_test_rft"/>
+        <field name="sequence">90</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">mg/dL</field>
+        <field name="reference_value">8.6 - 10.2</field>
+        <field name="ref_low">8.6</field>
+        <field name="ref_high">10.2</field>
+    </record>
+
+    <record id="renal_function_test_rft_c10" model="examination.entry.line">
+        <field name="name">Inorganic Phosphate</field>
+        <field name="examinationentry_id" ref="renal_function_test_rft"/>
+        <field name="sequence">100</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">mg/dL</field>
+        <field name="reference_value">2.5 - 4.5</field>
+        <field name="ref_low">2.5</field>
+        <field name="ref_high">4.5</field>
+    </record>
+
+    <record id="renal_function_test_rft_c11" model="examination.entry.line">
+        <field name="name">Total Protein</field>
+        <field name="examinationentry_id" ref="renal_function_test_rft"/>
+        <field name="sequence">110</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">g/dL</field>
+        <field name="reference_value">6.4 - 8.3</field>
+        <field name="ref_low">6.4</field>
+        <field name="ref_high">8.3</field>
+    </record>
+
+    <record id="renal_function_test_rft_c12" model="examination.entry.line">
+        <field name="name">Serum Albumin</field>
+        <field name="examinationentry_id" ref="renal_function_test_rft"/>
+        <field name="sequence">120</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">g/dL</field>
+        <field name="reference_value">3.5 - 5.2</field>
+        <field name="ref_low">3.5</field>
+        <field name="ref_high">5.2</field>
+    </record>
+
+    <!-- Fasting Blood Sugar (FBS) -->
+    <record id="fasting_blood_sugar_fbs" model="examination.entry">
+        <field name="name">Fasting Blood Sugar (FBS)</field>
+        <field name="department" ref="dept_biochemistry"/>
+        <field name="accounts_id" ref="account_income_biochemistry"/>
+        <field name="rate">180</field>
+        <field name="base_rate">180</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">pathology</field>
+        <field name="report_layout">tabular</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_grey"/>
+        <field name="sample_type" ref="sample_plasma"/>
+        <field name="default_method_id" ref="method_photometry"/>
+        <field name="default_instrument_id" ref="instrument_chem_analyzer"/>
+        <field name="sample_req" eval="True"/>
+    </record>
+
+    <record id="fasting_blood_sugar_fbs_c01" model="examination.entry.line">
+        <field name="name">PLASMA GLUCOSE</field>
+        <field name="examinationentry_id" ref="fasting_blood_sugar_fbs"/>
+        <field name="sequence">10</field>
+        <field name="is_group_header" eval="True"/>
+        <field name="bold" eval="True"/>
+        <field name="result_type">text</field>
+    </record>
+
+    <record id="fasting_blood_sugar_fbs_c02" model="examination.entry.line">
+        <field name="name">Fasting Blood Sugar</field>
+        <field name="examinationentry_id" ref="fasting_blood_sugar_fbs"/>
+        <field name="sequence">20</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">mmol/L</field>
+        <field name="reference_value">3.9 - 6.1</field>
+        <field name="ref_low">3.9</field>
+        <field name="ref_high">6.1</field>
+        <field name="critical_low">2.8</field>
+        <field name="critical_high">25.0</field>
+    </record>
+
+    <!-- Random Blood Sugar (RBS) -->
+    <record id="random_blood_sugar_rbs" model="examination.entry">
+        <field name="name">Random Blood Sugar (RBS)</field>
+        <field name="department" ref="dept_biochemistry"/>
+        <field name="accounts_id" ref="account_income_biochemistry"/>
+        <field name="rate">180</field>
+        <field name="base_rate">180</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">pathology</field>
+        <field name="report_layout">tabular</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_grey"/>
+        <field name="sample_type" ref="sample_plasma"/>
+        <field name="default_method_id" ref="method_photometry"/>
+        <field name="default_instrument_id" ref="instrument_chem_analyzer"/>
+        <field name="sample_req" eval="True"/>
+    </record>
+
+    <record id="random_blood_sugar_rbs_c01" model="examination.entry.line">
+        <field name="name">PLASMA GLUCOSE</field>
+        <field name="examinationentry_id" ref="random_blood_sugar_rbs"/>
+        <field name="sequence">10</field>
+        <field name="is_group_header" eval="True"/>
+        <field name="bold" eval="True"/>
+        <field name="result_type">text</field>
+    </record>
+
+    <record id="random_blood_sugar_rbs_c02" model="examination.entry.line">
+        <field name="name">Random Blood Sugar</field>
+        <field name="examinationentry_id" ref="random_blood_sugar_rbs"/>
+        <field name="sequence">20</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">mmol/L</field>
+        <field name="reference_value">&lt; 11.1</field>
+        <field name="ref_high">11.1</field>
+        <field name="critical_low">2.8</field>
+        <field name="critical_high">25.0</field>
+    </record>
+
+    <!-- Blood Sugar 2 Hours ABF -->
+    <record id="blood_sugar_2_hours_abf" model="examination.entry">
+        <field name="name">Blood Sugar 2 Hours ABF</field>
+        <field name="department" ref="dept_biochemistry"/>
+        <field name="accounts_id" ref="account_income_biochemistry"/>
+        <field name="rate">180</field>
+        <field name="base_rate">180</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">pathology</field>
+        <field name="report_layout">tabular</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_grey"/>
+        <field name="sample_type" ref="sample_plasma"/>
+        <field name="default_method_id" ref="method_photometry"/>
+        <field name="default_instrument_id" ref="instrument_chem_analyzer"/>
+        <field name="sample_req" eval="True"/>
+    </record>
+
+    <record id="blood_sugar_2_hours_abf_c01" model="examination.entry.line">
+        <field name="name">PLASMA GLUCOSE</field>
+        <field name="examinationentry_id" ref="blood_sugar_2_hours_abf"/>
+        <field name="sequence">10</field>
+        <field name="is_group_header" eval="True"/>
+        <field name="bold" eval="True"/>
+        <field name="result_type">text</field>
+    </record>
+
+    <record id="blood_sugar_2_hours_abf_c02" model="examination.entry.line">
+        <field name="name">Blood Sugar 2 Hours ABF</field>
+        <field name="examinationentry_id" ref="blood_sugar_2_hours_abf"/>
+        <field name="sequence">20</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">mmol/L</field>
+        <field name="reference_value">&lt; 7.8</field>
+        <field name="ref_high">7.8</field>
+        <field name="critical_high">25.0</field>
+    </record>
+
+    <!-- Blood Sugar 2 Hours After Lunch -->
+    <record id="blood_sugar_2_hours_after_lunch" model="examination.entry">
+        <field name="name">Blood Sugar 2 Hours After Lunch</field>
+        <field name="department" ref="dept_biochemistry"/>
+        <field name="accounts_id" ref="account_income_biochemistry"/>
+        <field name="rate">180</field>
+        <field name="base_rate">180</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">pathology</field>
+        <field name="report_layout">tabular</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_grey"/>
+        <field name="sample_type" ref="sample_plasma"/>
+        <field name="default_method_id" ref="method_photometry"/>
+        <field name="default_instrument_id" ref="instrument_chem_analyzer"/>
+        <field name="sample_req" eval="True"/>
+    </record>
+
+    <record id="blood_sugar_2_hours_after_lunch_c01" model="examination.entry.line">
+        <field name="name">PLASMA GLUCOSE</field>
+        <field name="examinationentry_id" ref="blood_sugar_2_hours_after_lunch"/>
+        <field name="sequence">10</field>
+        <field name="is_group_header" eval="True"/>
+        <field name="bold" eval="True"/>
+        <field name="result_type">text</field>
+    </record>
+
+    <record id="blood_sugar_2_hours_after_lunch_c02" model="examination.entry.line">
+        <field name="name">Blood Sugar 2 Hours After Lunch</field>
+        <field name="examinationentry_id" ref="blood_sugar_2_hours_after_lunch"/>
+        <field name="sequence">20</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">mmol/L</field>
+        <field name="reference_value">&lt; 7.8</field>
+        <field name="ref_high">7.8</field>
+        <field name="critical_high">25.0</field>
+    </record>
+
+    <!-- Blood Sugar Fasting & 2 Hours ABF -->
+    <record id="blood_sugar_fasting_2_hours_abf" model="examination.entry">
+        <field name="name">Blood Sugar Fasting &amp; 2 Hours ABF</field>
+        <field name="department" ref="dept_biochemistry"/>
+        <field name="accounts_id" ref="account_income_biochemistry"/>
+        <field name="rate">300</field>
+        <field name="base_rate">300</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">pathology</field>
+        <field name="report_layout">tabular</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_grey"/>
+        <field name="sample_type" ref="sample_plasma"/>
+        <field name="default_method_id" ref="method_photometry"/>
+        <field name="default_instrument_id" ref="instrument_chem_analyzer"/>
+        <field name="sample_req" eval="True"/>
+    </record>
+
+    <record id="blood_sugar_fasting_2_hours_abf_c01" model="examination.entry.line">
+        <field name="name">PLASMA GLUCOSE</field>
+        <field name="examinationentry_id" ref="blood_sugar_fasting_2_hours_abf"/>
+        <field name="sequence">10</field>
+        <field name="is_group_header" eval="True"/>
+        <field name="bold" eval="True"/>
+        <field name="result_type">text</field>
+    </record>
+
+    <record id="blood_sugar_fasting_2_hours_abf_c02" model="examination.entry.line">
+        <field name="name">Fasting Blood Sugar</field>
+        <field name="examinationentry_id" ref="blood_sugar_fasting_2_hours_abf"/>
+        <field name="sequence">20</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">mmol/L</field>
+        <field name="reference_value">3.9 - 6.1</field>
+        <field name="ref_low">3.9</field>
+        <field name="ref_high">6.1</field>
+        <field name="critical_low">2.8</field>
+        <field name="critical_high">25.0</field>
+    </record>
+
+    <record id="blood_sugar_fasting_2_hours_abf_c03" model="examination.entry.line">
+        <field name="name">Blood Sugar 2 Hours ABF</field>
+        <field name="examinationentry_id" ref="blood_sugar_fasting_2_hours_abf"/>
+        <field name="sequence">30</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">mmol/L</field>
+        <field name="reference_value">&lt; 7.8</field>
+        <field name="ref_high">7.8</field>
+        <field name="critical_high">25.0</field>
+    </record>
+
+    <!-- Blood Sugar 2 Hours ABF & 2 Hours After Lunch -->
+    <record id="blood_sugar_2_hours_abf_2_hours_after_lunch" model="examination.entry">
+        <field name="name">Blood Sugar 2 Hours ABF &amp; 2 Hours After Lunch</field>
+        <field name="department" ref="dept_biochemistry"/>
+        <field name="accounts_id" ref="account_income_biochemistry"/>
+        <field name="rate">300</field>
+        <field name="base_rate">300</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">pathology</field>
+        <field name="report_layout">tabular</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_grey"/>
+        <field name="sample_type" ref="sample_plasma"/>
+        <field name="default_method_id" ref="method_photometry"/>
+        <field name="default_instrument_id" ref="instrument_chem_analyzer"/>
+        <field name="sample_req" eval="True"/>
+    </record>
+
+    <record id="blood_sugar_2_hours_abf_2_hours_after_lunch_c01" model="examination.entry.line">
+        <field name="name">PLASMA GLUCOSE</field>
+        <field name="examinationentry_id" ref="blood_sugar_2_hours_abf_2_hours_after_lunch"/>
+        <field name="sequence">10</field>
+        <field name="is_group_header" eval="True"/>
+        <field name="bold" eval="True"/>
+        <field name="result_type">text</field>
+    </record>
+
+    <record id="blood_sugar_2_hours_abf_2_hours_after_lunch_c02" model="examination.entry.line">
+        <field name="name">Blood Sugar 2 Hours ABF</field>
+        <field name="examinationentry_id" ref="blood_sugar_2_hours_abf_2_hours_after_lunch"/>
+        <field name="sequence">20</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">mmol/L</field>
+        <field name="reference_value">&lt; 7.8</field>
+        <field name="ref_high">7.8</field>
+        <field name="critical_high">25.0</field>
+    </record>
+
+    <record id="blood_sugar_2_hours_abf_2_hours_after_lunch_c03" model="examination.entry.line">
+        <field name="name">Blood Sugar 2 Hours After Lunch</field>
+        <field name="examinationentry_id" ref="blood_sugar_2_hours_abf_2_hours_after_lunch"/>
+        <field name="sequence">30</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">mmol/L</field>
+        <field name="reference_value">&lt; 7.8</field>
+        <field name="ref_high">7.8</field>
+    </record>
+
+    <!-- Plasma Glucose -->
+    <record id="plasma_glucose" model="examination.entry">
+        <field name="name">Plasma Glucose</field>
+        <field name="department" ref="dept_biochemistry"/>
+        <field name="accounts_id" ref="account_income_biochemistry"/>
+        <field name="rate">300</field>
+        <field name="base_rate">300</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">pathology</field>
+        <field name="report_layout">tabular</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_grey"/>
+        <field name="sample_type" ref="sample_plasma"/>
+        <field name="default_method_id" ref="method_photometry"/>
+        <field name="default_instrument_id" ref="instrument_chem_analyzer"/>
+        <field name="sample_req" eval="True"/>
+    </record>
+
+    <record id="plasma_glucose_c01" model="examination.entry.line">
+        <field name="name">PLASMA GLUCOSE</field>
+        <field name="examinationentry_id" ref="plasma_glucose"/>
+        <field name="sequence">10</field>
+        <field name="is_group_header" eval="True"/>
+        <field name="bold" eval="True"/>
+        <field name="result_type">text</field>
+    </record>
+
+    <record id="plasma_glucose_c02" model="examination.entry.line">
+        <field name="name">Random Blood Sugar</field>
+        <field name="examinationentry_id" ref="plasma_glucose"/>
+        <field name="sequence">20</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">mmol/L</field>
+        <field name="reference_value">&lt; 11.1</field>
+        <field name="ref_high">11.1</field>
+        <field name="critical_low">2.8</field>
+        <field name="critical_high">25.0</field>
+    </record>
+
+    <!-- RBS With Corresponding Urine -->
+    <record id="rbs_with_corresponding_urine" model="examination.entry">
+        <field name="name">RBS With Corresponding Urine</field>
+        <field name="department" ref="dept_biochemistry"/>
+        <field name="accounts_id" ref="account_income_biochemistry"/>
+        <field name="rate">200</field>
+        <field name="base_rate">200</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">pathology</field>
+        <field name="report_layout">tabular</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_grey"/>
+        <field name="sample_type" ref="sample_plasma"/>
+        <field name="default_method_id" ref="method_photometry"/>
+        <field name="default_instrument_id" ref="instrument_chem_analyzer"/>
+        <field name="sample_req" eval="True"/>
+    </record>
+
+    <record id="rbs_with_corresponding_urine_c01" model="examination.entry.line">
+        <field name="name">PLASMA GLUCOSE</field>
+        <field name="examinationentry_id" ref="rbs_with_corresponding_urine"/>
+        <field name="sequence">10</field>
+        <field name="is_group_header" eval="True"/>
+        <field name="bold" eval="True"/>
+        <field name="result_type">text</field>
+    </record>
+
+    <record id="rbs_with_corresponding_urine_c02" model="examination.entry.line">
+        <field name="name">Random Blood Sugar</field>
+        <field name="examinationentry_id" ref="rbs_with_corresponding_urine"/>
+        <field name="sequence">20</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">mmol/L</field>
+        <field name="reference_value">&lt; 11.1</field>
+        <field name="ref_high">11.1</field>
+        <field name="critical_low">2.8</field>
+        <field name="critical_high">25.0</field>
+    </record>
+
+    <record id="rbs_with_corresponding_urine_c03" model="examination.entry.line">
+        <field name="name">CORRESPONDING URINE</field>
+        <field name="examinationentry_id" ref="rbs_with_corresponding_urine"/>
+        <field name="sequence">30</field>
+        <field name="is_group_header" eval="True"/>
+        <field name="bold" eval="True"/>
+        <field name="result_type">text</field>
+    </record>
+
+    <record id="rbs_with_corresponding_urine_c04" model="examination.entry.line">
+        <field name="name">Urine Sugar</field>
+        <field name="examinationentry_id" ref="rbs_with_corresponding_urine"/>
+        <field name="sequence">40</field>
+        <field name="result_type">selection</field>
+        <field name="reference_value">Nil</field>
+    </record>
+
+    <record id="rbs_with_corresponding_urine_c04_v01" model="examination.possible.value">
+        <field name="name">Nil</field>
+        <field name="examination_line_id" ref="rbs_with_corresponding_urine_c04"/>
+        <field name="sequence">10</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="rbs_with_corresponding_urine_c04_v02" model="examination.possible.value">
+        <field name="name">Trace</field>
+        <field name="examination_line_id" ref="rbs_with_corresponding_urine_c04"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="rbs_with_corresponding_urine_c04_v03" model="examination.possible.value">
+        <field name="name">+</field>
+        <field name="examination_line_id" ref="rbs_with_corresponding_urine_c04"/>
+        <field name="sequence">30</field>
+    </record>
+
+    <record id="rbs_with_corresponding_urine_c04_v04" model="examination.possible.value">
+        <field name="name">++</field>
+        <field name="examination_line_id" ref="rbs_with_corresponding_urine_c04"/>
+        <field name="sequence">40</field>
+    </record>
+
+    <record id="rbs_with_corresponding_urine_c04_v05" model="examination.possible.value">
+        <field name="name">+++</field>
+        <field name="examination_line_id" ref="rbs_with_corresponding_urine_c04"/>
+        <field name="sequence">50</field>
+    </record>
+
+    <record id="rbs_with_corresponding_urine_c04_v06" model="examination.possible.value">
+        <field name="name">++++</field>
+        <field name="examination_line_id" ref="rbs_with_corresponding_urine_c04"/>
+        <field name="sequence">60</field>
+    </record>
+
+    <!-- OGTT (Fasting) -->
+    <record id="ogtt_fasting" model="examination.entry">
+        <field name="name">OGTT (Fasting)</field>
+        <field name="department" ref="dept_biochemistry"/>
+        <field name="accounts_id" ref="account_income_biochemistry"/>
+        <field name="rate">300</field>
+        <field name="base_rate">300</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">pathology</field>
+        <field name="report_layout">tabular</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_grey"/>
+        <field name="sample_type" ref="sample_plasma"/>
+        <field name="default_method_id" ref="method_photometry"/>
+        <field name="default_instrument_id" ref="instrument_chem_analyzer"/>
+        <field name="sample_req" eval="True"/>
+    </record>
+
+    <record id="ogtt_fasting_c01" model="examination.entry.line">
+        <field name="name">ORAL GLUCOSE TOLERANCE TEST</field>
+        <field name="examinationentry_id" ref="ogtt_fasting"/>
+        <field name="sequence">10</field>
+        <field name="is_group_header" eval="True"/>
+        <field name="bold" eval="True"/>
+        <field name="result_type">text</field>
+    </record>
+
+    <record id="ogtt_fasting_c02" model="examination.entry.line">
+        <field name="name">Fasting Blood Sugar</field>
+        <field name="examinationentry_id" ref="ogtt_fasting"/>
+        <field name="sequence">20</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">mmol/L</field>
+        <field name="reference_value">3.9 - 6.1</field>
+        <field name="ref_low">3.9</field>
+        <field name="ref_high">6.1</field>
+        <field name="critical_low">2.8</field>
+        <field name="critical_high">25.0</field>
+    </record>
+
+    <!-- OGTT (2 Hours) -->
+    <record id="ogtt_2_hours" model="examination.entry">
+        <field name="name">OGTT (2 Hours)</field>
+        <field name="department" ref="dept_biochemistry"/>
+        <field name="accounts_id" ref="account_income_biochemistry"/>
+        <field name="rate">100</field>
+        <field name="base_rate">100</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">pathology</field>
+        <field name="report_layout">tabular</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_grey"/>
+        <field name="sample_type" ref="sample_plasma"/>
+        <field name="default_method_id" ref="method_photometry"/>
+        <field name="default_instrument_id" ref="instrument_chem_analyzer"/>
+        <field name="sample_req" eval="True"/>
+    </record>
+
+    <record id="ogtt_2_hours_c01" model="examination.entry.line">
+        <field name="name">ORAL GLUCOSE TOLERANCE TEST</field>
+        <field name="examinationentry_id" ref="ogtt_2_hours"/>
+        <field name="sequence">10</field>
+        <field name="is_group_header" eval="True"/>
+        <field name="bold" eval="True"/>
+        <field name="result_type">text</field>
+    </record>
+
+    <record id="ogtt_2_hours_c02" model="examination.entry.line">
+        <field name="name">2 Hours After 75g Glucose</field>
+        <field name="examinationentry_id" ref="ogtt_2_hours"/>
+        <field name="sequence">20</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">mmol/L</field>
+        <field name="reference_value">&lt; 7.8</field>
+        <field name="ref_high">7.8</field>
+        <field name="critical_high">25.0</field>
+    </record>
+
+    <!-- OGTT (Full - Fasting, 1 Hour & 2 Hours) -->
+    <record id="ogtt_full_fasting_1_hour_2_hours" model="examination.entry">
+        <field name="name">OGTT (Full - Fasting, 1 Hour &amp; 2 Hours)</field>
+        <field name="department" ref="dept_biochemistry"/>
+        <field name="accounts_id" ref="account_income_biochemistry"/>
+        <field name="rate">450</field>
+        <field name="base_rate">450</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">pathology</field>
+        <field name="report_layout">tabular</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_grey"/>
+        <field name="sample_type" ref="sample_plasma"/>
+        <field name="default_method_id" ref="method_photometry"/>
+        <field name="default_instrument_id" ref="instrument_chem_analyzer"/>
+        <field name="sample_req" eval="True"/>
+    </record>
+
+    <record id="ogtt_full_fasting_1_hour_2_hours_c01" model="examination.entry.line">
+        <field name="name">ORAL GLUCOSE TOLERANCE TEST (75g)</field>
+        <field name="examinationentry_id" ref="ogtt_full_fasting_1_hour_2_hours"/>
+        <field name="sequence">10</field>
+        <field name="is_group_header" eval="True"/>
+        <field name="bold" eval="True"/>
+        <field name="result_type">text</field>
+    </record>
+
+    <record id="ogtt_full_fasting_1_hour_2_hours_c02" model="examination.entry.line">
+        <field name="name">Fasting Blood Sugar</field>
+        <field name="examinationentry_id" ref="ogtt_full_fasting_1_hour_2_hours"/>
+        <field name="sequence">20</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">mmol/L</field>
+        <field name="reference_value">3.9 - 6.1</field>
+        <field name="ref_low">3.9</field>
+        <field name="ref_high">6.1</field>
+        <field name="critical_low">2.8</field>
+        <field name="critical_high">25.0</field>
+    </record>
+
+    <record id="ogtt_full_fasting_1_hour_2_hours_c03" model="examination.entry.line">
+        <field name="name">1 Hour After 75g Glucose</field>
+        <field name="examinationentry_id" ref="ogtt_full_fasting_1_hour_2_hours"/>
+        <field name="sequence">30</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">mmol/L</field>
+        <field name="reference_value">&lt; 10.0</field>
+        <field name="ref_high">10.0</field>
+    </record>
+
+    <record id="ogtt_full_fasting_1_hour_2_hours_c04" model="examination.entry.line">
+        <field name="name">2 Hours After 75g Glucose</field>
+        <field name="examinationentry_id" ref="ogtt_full_fasting_1_hour_2_hours"/>
+        <field name="sequence">40</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">mmol/L</field>
+        <field name="reference_value">&lt; 7.8</field>
+        <field name="ref_high">7.8</field>
+        <field name="critical_high">25.0</field>
+    </record>
+
+    <!-- Fasting Blood Sugar & 2 Hours After 75g Glucose -->
+    <record id="fasting_blood_sugar_2_hours_after_75g_glucose" model="examination.entry">
+        <field name="name">Fasting Blood Sugar &amp; 2 Hours After 75g Glucose</field>
+        <field name="department" ref="dept_biochemistry"/>
+        <field name="accounts_id" ref="account_income_biochemistry"/>
+        <field name="rate">300</field>
+        <field name="base_rate">300</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">pathology</field>
+        <field name="report_layout">tabular</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_grey"/>
+        <field name="sample_type" ref="sample_plasma"/>
+        <field name="default_method_id" ref="method_photometry"/>
+        <field name="default_instrument_id" ref="instrument_chem_analyzer"/>
+        <field name="sample_req" eval="True"/>
+        <field name="lab_not_required" eval="True"/>
+    </record>
+
+    <record id="fasting_blood_sugar_2_hours_after_75g_glucose_c01" model="examination.entry.line">
+        <field name="name">ORAL GLUCOSE TOLERANCE TEST (75g)</field>
+        <field name="examinationentry_id" ref="fasting_blood_sugar_2_hours_after_75g_glucose"/>
+        <field name="sequence">10</field>
+        <field name="is_group_header" eval="True"/>
+        <field name="bold" eval="True"/>
+        <field name="result_type">text</field>
+    </record>
+
+    <record id="fasting_blood_sugar_2_hours_after_75g_glucose_c02" model="examination.entry.line">
+        <field name="name">Fasting Blood Sugar</field>
+        <field name="examinationentry_id" ref="fasting_blood_sugar_2_hours_after_75g_glucose"/>
+        <field name="sequence">20</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">mmol/L</field>
+        <field name="reference_value">3.9 - 6.1</field>
+        <field name="ref_low">3.9</field>
+        <field name="ref_high">6.1</field>
+        <field name="critical_low">2.8</field>
+        <field name="critical_high">25.0</field>
+    </record>
+
+    <record id="fasting_blood_sugar_2_hours_after_75g_glucose_c03" model="examination.entry.line">
+        <field name="name">2 Hours After 75g Glucose</field>
+        <field name="examinationentry_id" ref="fasting_blood_sugar_2_hours_after_75g_glucose"/>
+        <field name="sequence">30</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">mmol/L</field>
+        <field name="reference_value">&lt; 7.8</field>
+        <field name="ref_high">7.8</field>
+        <field name="critical_high">25.0</field>
+    </record>
+
+    <!-- FBS (Glucometer Strip) -->
+    <record id="fbs_glucometer_strip" model="examination.entry">
+        <field name="name">FBS (Glucometer Strip)</field>
+        <field name="department" ref="dept_biochemistry"/>
+        <field name="accounts_id" ref="account_income_biochemistry"/>
+        <field name="rate">100</field>
+        <field name="base_rate">100</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">pathology</field>
+        <field name="report_layout">tabular</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_grey"/>
+        <field name="sample_type" ref="sample_plasma"/>
+        <field name="default_method_id" ref="method_manual"/>
+        <field name="default_instrument_id" ref="instrument_glucometer"/>
+        <field name="sample_req" eval="True"/>
+        <field name="manual" eval="True"/>
+    </record>
+
+    <record id="fbs_glucometer_strip_c01" model="examination.entry.line">
+        <field name="name">Fasting Blood Sugar</field>
+        <field name="examinationentry_id" ref="fbs_glucometer_strip"/>
+        <field name="sequence">10</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">mmol/L</field>
+        <field name="reference_value">3.9 - 6.1</field>
+        <field name="ref_low">3.9</field>
+        <field name="ref_high">6.1</field>
+        <field name="critical_low">2.8</field>
+    </record>
+
+    <!-- RBS (Glucometer Strip) -->
+    <record id="rbs_glucometer_strip" model="examination.entry">
+        <field name="name">RBS (Glucometer Strip)</field>
+        <field name="department" ref="dept_biochemistry"/>
+        <field name="accounts_id" ref="account_income_biochemistry"/>
+        <field name="rate">100</field>
+        <field name="base_rate">100</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">pathology</field>
+        <field name="report_layout">tabular</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_grey"/>
+        <field name="sample_type" ref="sample_plasma"/>
+        <field name="default_method_id" ref="method_manual"/>
+        <field name="default_instrument_id" ref="instrument_glucometer"/>
+        <field name="sample_req" eval="True"/>
+        <field name="manual" eval="True"/>
+    </record>
+
+    <record id="rbs_glucometer_strip_c01" model="examination.entry.line">
+        <field name="name">Random Blood Sugar</field>
+        <field name="examinationentry_id" ref="rbs_glucometer_strip"/>
+        <field name="sequence">10</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">mmol/L</field>
+        <field name="reference_value">&lt; 11.1</field>
+        <field name="ref_high">11.1</field>
+        <field name="critical_low">2.8</field>
+        <field name="critical_high">25.0</field>
+    </record>
+
+    <!-- 2 Hours ABF (Glucometer Strip) -->
+    <record id="2_hours_abf_glucometer_strip" model="examination.entry">
+        <field name="name">2 Hours ABF (Glucometer Strip)</field>
+        <field name="department" ref="dept_biochemistry"/>
+        <field name="accounts_id" ref="account_income_biochemistry"/>
+        <field name="rate">100</field>
+        <field name="base_rate">100</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">pathology</field>
+        <field name="report_layout">tabular</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_grey"/>
+        <field name="sample_type" ref="sample_plasma"/>
+        <field name="default_method_id" ref="method_manual"/>
+        <field name="default_instrument_id" ref="instrument_glucometer"/>
+        <field name="sample_req" eval="True"/>
+        <field name="manual" eval="True"/>
+    </record>
+
+    <record id="2_hours_abf_glucometer_strip_c01" model="examination.entry.line">
+        <field name="name">Blood Sugar 2 Hours ABF</field>
+        <field name="examinationentry_id" ref="2_hours_abf_glucometer_strip"/>
+        <field name="sequence">10</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">mmol/L</field>
+        <field name="reference_value">&lt; 7.8</field>
+        <field name="ref_high">7.8</field>
+        <field name="critical_high">25.0</field>
+    </record>
+
+    <!-- HbA1c (Glycated Haemoglobin) -->
+    <record id="hba1c" model="examination.entry">
+        <field name="name">HbA1c (Glycated Haemoglobin)</field>
+        <field name="department" ref="dept_biochemistry"/>
+        <field name="accounts_id" ref="account_income_biochemistry"/>
+        <field name="rate">1200</field>
+        <field name="base_rate">1200</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">pathology</field>
+        <field name="report_layout">tabular</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_lavender"/>
+        <field name="sample_type" ref="sample_whole_blood"/>
+        <field name="default_method_id" ref="method_hplc"/>
+        <field name="default_instrument_id" ref="instrument_hba1c"/>
+        <field name="sample_req" eval="True"/>
+    </record>
+
+    <record id="hba1c_c01" model="examination.entry.line">
+        <field name="name">HbA1c</field>
+        <field name="examinationentry_id" ref="hba1c"/>
+        <field name="sequence">10</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">%</field>
+        <field name="reference_value">Non-diabetic: &lt; 5.7 | Pre-diabetic: 5.7 - 6.4 | Diabetic: &gt;= 6.5</field>
+        <field name="ref_low">4.0</field>
+        <field name="ref_high">5.7</field>
+    </record>
+
+    <record id="hba1c_c02" model="examination.entry.line">
+        <field name="name">Estimated Average Glucose (eAG)</field>
+        <field name="examinationentry_id" ref="hba1c"/>
+        <field name="sequence">20</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">mmol/L</field>
+        <field name="reference_value">Derived from HbA1c</field>
+    </record>
+
+    <!-- Lipid Profile -->
+    <record id="lipid_profile" model="examination.entry">
+        <field name="name">Lipid Profile</field>
+        <field name="department" ref="dept_biochemistry"/>
+        <field name="accounts_id" ref="account_income_biochemistry"/>
+        <field name="rate">1200</field>
+        <field name="base_rate">1200</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">pathology</field>
+        <field name="report_layout">tabular</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_gold_sst"/>
+        <field name="sample_type" ref="sample_serum"/>
+        <field name="default_method_id" ref="method_photometry"/>
+        <field name="default_instrument_id" ref="instrument_chem_analyzer"/>
+        <field name="sample_req" eval="True"/>
+        <field name="required_time">1</field>
+    </record>
+
+    <record id="lipid_profile_c01" model="examination.entry.line">
+        <field name="name">LIPID PROFILE (12 HOUR FASTING)</field>
+        <field name="examinationentry_id" ref="lipid_profile"/>
+        <field name="sequence">10</field>
+        <field name="is_group_header" eval="True"/>
+        <field name="bold" eval="True"/>
+        <field name="result_type">text</field>
+    </record>
+
+    <record id="lipid_profile_c02" model="examination.entry.line">
+        <field name="name">Serum Cholesterol (Total)</field>
+        <field name="examinationentry_id" ref="lipid_profile"/>
+        <field name="sequence">20</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">mg/dL</field>
+        <field name="reference_value">Desirable: &lt; 200</field>
+        <field name="ref_high">200</field>
+    </record>
+
+    <record id="lipid_profile_c03" model="examination.entry.line">
+        <field name="name">Serum Triglyceride</field>
+        <field name="examinationentry_id" ref="lipid_profile"/>
+        <field name="sequence">30</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">mg/dL</field>
+        <field name="reference_value">Normal: &lt; 150</field>
+        <field name="ref_high">150</field>
+    </record>
+
+    <record id="lipid_profile_c04" model="examination.entry.line">
+        <field name="name">HDL Cholesterol</field>
+        <field name="examinationentry_id" ref="lipid_profile"/>
+        <field name="sequence">40</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">mg/dL</field>
+        <field name="reference_value">M: &gt; 40  F: &gt; 50</field>
+        <field name="reference_value_male">&gt; 40</field>
+        <field name="reference_value_female">&gt; 50</field>
+        <field name="ref_low">40</field>
+    </record>
+
+    <record id="lipid_profile_c05" model="examination.entry.line">
+        <field name="name">LDL Cholesterol</field>
+        <field name="examinationentry_id" ref="lipid_profile"/>
+        <field name="sequence">50</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">mg/dL</field>
+        <field name="reference_value">Optimal: &lt; 100</field>
+        <field name="ref_high">100</field>
+    </record>
+
+    <record id="lipid_profile_c06" model="examination.entry.line">
+        <field name="name">VLDL Cholesterol</field>
+        <field name="examinationentry_id" ref="lipid_profile"/>
+        <field name="sequence">60</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">mg/dL</field>
+        <field name="reference_value">&lt; 30</field>
+        <field name="ref_high">30</field>
+    </record>
+
+    <record id="lipid_profile_c07" model="examination.entry.line">
+        <field name="name">Total Cholesterol / HDL Ratio</field>
+        <field name="examinationentry_id" ref="lipid_profile"/>
+        <field name="sequence">70</field>
+        <field name="result_type">numeric</field>
+        <field name="reference_value">&lt; 5.0</field>
+        <field name="ref_high">5.0</field>
+    </record>
+
+    <!-- Serum Cholesterol -->
+    <record id="serum_cholesterol" model="examination.entry">
+        <field name="name">Serum Cholesterol</field>
+        <field name="department" ref="dept_biochemistry"/>
+        <field name="accounts_id" ref="account_income_biochemistry"/>
+        <field name="rate">350</field>
+        <field name="base_rate">350</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">pathology</field>
+        <field name="report_layout">tabular</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_gold_sst"/>
+        <field name="sample_type" ref="sample_serum"/>
+        <field name="default_method_id" ref="method_photometry"/>
+        <field name="default_instrument_id" ref="instrument_chem_analyzer"/>
+        <field name="sample_req" eval="True"/>
+    </record>
+
+    <record id="serum_cholesterol_c01" model="examination.entry.line">
+        <field name="name">Serum Cholesterol (Total)</field>
+        <field name="examinationentry_id" ref="serum_cholesterol"/>
+        <field name="sequence">10</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">mg/dL</field>
+        <field name="reference_value">Desirable: &lt; 200</field>
+        <field name="ref_high">200</field>
+    </record>
+
+    <!-- Serum Triglyceride -->
+    <record id="serum_triglyceride" model="examination.entry">
+        <field name="name">Serum Triglyceride</field>
+        <field name="department" ref="dept_biochemistry"/>
+        <field name="accounts_id" ref="account_income_biochemistry"/>
+        <field name="rate">500</field>
+        <field name="base_rate">500</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">pathology</field>
+        <field name="report_layout">tabular</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_gold_sst"/>
+        <field name="sample_type" ref="sample_serum"/>
+        <field name="default_method_id" ref="method_photometry"/>
+        <field name="default_instrument_id" ref="instrument_chem_analyzer"/>
+        <field name="sample_req" eval="True"/>
+    </record>
+
+    <record id="serum_triglyceride_c01" model="examination.entry.line">
+        <field name="name">Serum Triglyceride</field>
+        <field name="examinationentry_id" ref="serum_triglyceride"/>
+        <field name="sequence">10</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">mg/dL</field>
+        <field name="reference_value">Normal: &lt; 150</field>
+        <field name="ref_high">150</field>
+    </record>
+
+    <!-- Liver Function Test (LFT) -->
+    <record id="liver_function_test_lft" model="examination.entry">
+        <field name="name">Liver Function Test (LFT)</field>
+        <field name="department" ref="dept_biochemistry"/>
+        <field name="accounts_id" ref="account_income_biochemistry"/>
+        <field name="rate">1500</field>
+        <field name="base_rate">1500</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">pathology</field>
+        <field name="report_layout">tabular</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_gold_sst"/>
+        <field name="sample_type" ref="sample_serum"/>
+        <field name="default_method_id" ref="method_photometry"/>
+        <field name="default_instrument_id" ref="instrument_chem_analyzer"/>
+        <field name="sample_req" eval="True"/>
+    </record>
+
+    <record id="liver_function_test_lft_c01" model="examination.entry.line">
+        <field name="name">LIVER FUNCTION TEST</field>
+        <field name="examinationentry_id" ref="liver_function_test_lft"/>
+        <field name="sequence">10</field>
+        <field name="is_group_header" eval="True"/>
+        <field name="bold" eval="True"/>
+        <field name="result_type">text</field>
+    </record>
+
+    <record id="liver_function_test_lft_c02" model="examination.entry.line">
+        <field name="name">Bilirubin (Total)</field>
+        <field name="examinationentry_id" ref="liver_function_test_lft"/>
+        <field name="sequence">20</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">mg/dL</field>
+        <field name="reference_value">0.2 - 1.2</field>
+        <field name="ref_low">0.2</field>
+        <field name="ref_high">1.2</field>
+        <field name="critical_high">15.0</field>
+    </record>
+
+    <record id="liver_function_test_lft_c03" model="examination.entry.line">
+        <field name="name">Bilirubin (Direct)</field>
+        <field name="examinationentry_id" ref="liver_function_test_lft"/>
+        <field name="sequence">30</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">mg/dL</field>
+        <field name="reference_value">0.0 - 0.3</field>
+        <field name="ref_high">0.3</field>
+    </record>
+
+    <record id="liver_function_test_lft_c04" model="examination.entry.line">
+        <field name="name">Bilirubin (Indirect)</field>
+        <field name="examinationentry_id" ref="liver_function_test_lft"/>
+        <field name="sequence">40</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">mg/dL</field>
+        <field name="reference_value">0.2 - 0.9</field>
+        <field name="ref_low">0.2</field>
+        <field name="ref_high">0.9</field>
+    </record>
+
+    <record id="liver_function_test_lft_c05" model="examination.entry.line">
+        <field name="name">ALT / SGPT</field>
+        <field name="examinationentry_id" ref="liver_function_test_lft"/>
+        <field name="sequence">50</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">U/L</field>
+        <field name="reference_value">&lt; 45</field>
+        <field name="reference_value_male">&lt; 45</field>
+        <field name="reference_value_female">&lt; 34</field>
+        <field name="ref_high">45</field>
+    </record>
+
+    <record id="liver_function_test_lft_c06" model="examination.entry.line">
+        <field name="name">AST / SGOT</field>
+        <field name="examinationentry_id" ref="liver_function_test_lft"/>
+        <field name="sequence">60</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">U/L</field>
+        <field name="reference_value">&lt; 40</field>
+        <field name="reference_value_male">&lt; 40</field>
+        <field name="reference_value_female">&lt; 32</field>
+        <field name="ref_high">40</field>
+    </record>
+
+    <record id="liver_function_test_lft_c07" model="examination.entry.line">
+        <field name="name">Alkaline Phosphatase</field>
+        <field name="examinationentry_id" ref="liver_function_test_lft"/>
+        <field name="sequence">70</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">U/L</field>
+        <field name="reference_value">44 - 147</field>
+        <field name="reference_value_child">Up to 400 (higher during growth spurts)</field>
+        <field name="ref_low">44</field>
+        <field name="ref_high">147</field>
+    </record>
+
+    <record id="liver_function_test_lft_c08" model="examination.entry.line">
+        <field name="name">Gamma GT</field>
+        <field name="examinationentry_id" ref="liver_function_test_lft"/>
+        <field name="sequence">80</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">U/L</field>
+        <field name="reference_value">8 - 61</field>
+        <field name="reference_value_male">8 - 61</field>
+        <field name="reference_value_female">5 - 36</field>
+        <field name="ref_low">8</field>
+        <field name="ref_high">61</field>
+    </record>
+
+    <record id="liver_function_test_lft_c09" model="examination.entry.line">
+        <field name="name">Total Protein</field>
+        <field name="examinationentry_id" ref="liver_function_test_lft"/>
+        <field name="sequence">90</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">g/dL</field>
+        <field name="reference_value">6.4 - 8.3</field>
+        <field name="ref_low">6.4</field>
+        <field name="ref_high">8.3</field>
+    </record>
+
+    <record id="liver_function_test_lft_c10" model="examination.entry.line">
+        <field name="name">Serum Albumin</field>
+        <field name="examinationentry_id" ref="liver_function_test_lft"/>
+        <field name="sequence">100</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">g/dL</field>
+        <field name="reference_value">3.5 - 5.2</field>
+        <field name="ref_low">3.5</field>
+        <field name="ref_high">5.2</field>
+    </record>
+
+    <record id="liver_function_test_lft_c11" model="examination.entry.line">
+        <field name="name">Serum Globulin</field>
+        <field name="examinationentry_id" ref="liver_function_test_lft"/>
+        <field name="sequence">110</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">g/dL</field>
+        <field name="reference_value">2.0 - 3.5</field>
+        <field name="ref_low">2.0</field>
+        <field name="ref_high">3.5</field>
+    </record>
+
+    <record id="liver_function_test_lft_c12" model="examination.entry.line">
+        <field name="name">A / G Ratio</field>
+        <field name="examinationentry_id" ref="liver_function_test_lft"/>
+        <field name="sequence">120</field>
+        <field name="result_type">numeric</field>
+        <field name="reference_value">1.1 - 2.5</field>
+        <field name="ref_low">1.1</field>
+        <field name="ref_high">2.5</field>
+    </record>
+
+    <!-- ALT (SGPT) -->
+    <record id="alt_sgpt" model="examination.entry">
+        <field name="name">ALT (SGPT)</field>
+        <field name="department" ref="dept_biochemistry"/>
+        <field name="accounts_id" ref="account_income_biochemistry"/>
+        <field name="rate">300</field>
+        <field name="base_rate">300</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">pathology</field>
+        <field name="report_layout">tabular</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_gold_sst"/>
+        <field name="sample_type" ref="sample_serum"/>
+        <field name="default_method_id" ref="method_photometry"/>
+        <field name="default_instrument_id" ref="instrument_chem_analyzer"/>
+        <field name="sample_req" eval="True"/>
+    </record>
+
+    <record id="alt_sgpt_c01" model="examination.entry.line">
+        <field name="name">ALT / SGPT</field>
+        <field name="examinationentry_id" ref="alt_sgpt"/>
+        <field name="sequence">10</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">U/L</field>
+        <field name="reference_value">&lt; 45</field>
+        <field name="reference_value_male">&lt; 45</field>
+        <field name="reference_value_female">&lt; 34</field>
+        <field name="ref_high">45</field>
+    </record>
+
+    <!-- AST (SGOT) -->
+    <record id="ast_sgot" model="examination.entry">
+        <field name="name">AST (SGOT)</field>
+        <field name="department" ref="dept_biochemistry"/>
+        <field name="accounts_id" ref="account_income_biochemistry"/>
+        <field name="rate">500</field>
+        <field name="base_rate">500</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">pathology</field>
+        <field name="report_layout">tabular</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_gold_sst"/>
+        <field name="sample_type" ref="sample_serum"/>
+        <field name="default_method_id" ref="method_photometry"/>
+        <field name="default_instrument_id" ref="instrument_chem_analyzer"/>
+        <field name="sample_req" eval="True"/>
+    </record>
+
+    <record id="ast_sgot_c01" model="examination.entry.line">
+        <field name="name">AST / SGOT</field>
+        <field name="examinationentry_id" ref="ast_sgot"/>
+        <field name="sequence">10</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">U/L</field>
+        <field name="reference_value">&lt; 40</field>
+        <field name="reference_value_male">&lt; 40</field>
+        <field name="reference_value_female">&lt; 32</field>
+        <field name="ref_high">40</field>
+    </record>
+
+    <!-- Alkaline Phosphatase (ALP) -->
+    <record id="alkaline_phosphatase_alp" model="examination.entry">
+        <field name="name">Alkaline Phosphatase (ALP)</field>
+        <field name="department" ref="dept_biochemistry"/>
+        <field name="accounts_id" ref="account_income_biochemistry"/>
+        <field name="rate">500</field>
+        <field name="base_rate">500</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">pathology</field>
+        <field name="report_layout">tabular</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_gold_sst"/>
+        <field name="sample_type" ref="sample_serum"/>
+        <field name="default_method_id" ref="method_photometry"/>
+        <field name="default_instrument_id" ref="instrument_chem_analyzer"/>
+        <field name="sample_req" eval="True"/>
+    </record>
+
+    <record id="alkaline_phosphatase_alp_c01" model="examination.entry.line">
+        <field name="name">Alkaline Phosphatase</field>
+        <field name="examinationentry_id" ref="alkaline_phosphatase_alp"/>
+        <field name="sequence">10</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">U/L</field>
+        <field name="reference_value">44 - 147</field>
+        <field name="reference_value_child">Up to 400 (higher during growth spurts)</field>
+        <field name="ref_low">44</field>
+        <field name="ref_high">147</field>
+    </record>
+
+    <!-- Gamma GT (GGT) -->
+    <record id="gamma_gt_ggt" model="examination.entry">
+        <field name="name">Gamma GT (GGT)</field>
+        <field name="department" ref="dept_biochemistry"/>
+        <field name="accounts_id" ref="account_income_biochemistry"/>
+        <field name="rate">500</field>
+        <field name="base_rate">500</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">pathology</field>
+        <field name="report_layout">tabular</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_gold_sst"/>
+        <field name="sample_type" ref="sample_serum"/>
+        <field name="default_method_id" ref="method_photometry"/>
+        <field name="default_instrument_id" ref="instrument_chem_analyzer"/>
+        <field name="sample_req" eval="True"/>
+    </record>
+
+    <record id="gamma_gt_ggt_c01" model="examination.entry.line">
+        <field name="name">Gamma GT</field>
+        <field name="examinationentry_id" ref="gamma_gt_ggt"/>
+        <field name="sequence">10</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">U/L</field>
+        <field name="reference_value">8 - 61</field>
+        <field name="reference_value_male">8 - 61</field>
+        <field name="reference_value_female">5 - 36</field>
+        <field name="ref_low">8</field>
+        <field name="ref_high">61</field>
+    </record>
+
+    <!-- Serum Bilirubin (Total, Direct & Indirect) -->
+    <record id="serum_bilirubin_total_direct_indirect" model="examination.entry">
+        <field name="name">Serum Bilirubin (Total, Direct &amp; Indirect)</field>
+        <field name="department" ref="dept_biochemistry"/>
+        <field name="accounts_id" ref="account_income_biochemistry"/>
+        <field name="rate">1200</field>
+        <field name="base_rate">1200</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">pathology</field>
+        <field name="report_layout">tabular</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_gold_sst"/>
+        <field name="sample_type" ref="sample_serum"/>
+        <field name="default_method_id" ref="method_photometry"/>
+        <field name="default_instrument_id" ref="instrument_chem_analyzer"/>
+        <field name="sample_req" eval="True"/>
+    </record>
+
+    <record id="serum_bilirubin_total_direct_indirect_c01" model="examination.entry.line">
+        <field name="name">SERUM BILIRUBIN</field>
+        <field name="examinationentry_id" ref="serum_bilirubin_total_direct_indirect"/>
+        <field name="sequence">10</field>
+        <field name="is_group_header" eval="True"/>
+        <field name="bold" eval="True"/>
+        <field name="result_type">text</field>
+    </record>
+
+    <record id="serum_bilirubin_total_direct_indirect_c02" model="examination.entry.line">
+        <field name="name">Bilirubin (Total)</field>
+        <field name="examinationentry_id" ref="serum_bilirubin_total_direct_indirect"/>
+        <field name="sequence">20</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">mg/dL</field>
+        <field name="reference_value">0.2 - 1.2</field>
+        <field name="ref_low">0.2</field>
+        <field name="ref_high">1.2</field>
+        <field name="critical_high">15.0</field>
+    </record>
+
+    <record id="serum_bilirubin_total_direct_indirect_c03" model="examination.entry.line">
+        <field name="name">Bilirubin (Direct)</field>
+        <field name="examinationentry_id" ref="serum_bilirubin_total_direct_indirect"/>
+        <field name="sequence">30</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">mg/dL</field>
+        <field name="reference_value">0.0 - 0.3</field>
+        <field name="ref_high">0.3</field>
+    </record>
+
+    <record id="serum_bilirubin_total_direct_indirect_c04" model="examination.entry.line">
+        <field name="name">Bilirubin (Indirect)</field>
+        <field name="examinationentry_id" ref="serum_bilirubin_total_direct_indirect"/>
+        <field name="sequence">40</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">mg/dL</field>
+        <field name="reference_value">0.2 - 0.9</field>
+        <field name="ref_low">0.2</field>
+        <field name="ref_high">0.9</field>
+    </record>
+
+    <!-- Serum Bilirubin (Total) -->
+    <record id="serum_bilirubin_total" model="examination.entry">
+        <field name="name">Serum Bilirubin (Total)</field>
+        <field name="department" ref="dept_biochemistry"/>
+        <field name="accounts_id" ref="account_income_biochemistry"/>
+        <field name="rate">600</field>
+        <field name="base_rate">600</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">pathology</field>
+        <field name="report_layout">tabular</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_gold_sst"/>
+        <field name="sample_type" ref="sample_serum"/>
+        <field name="default_method_id" ref="method_photometry"/>
+        <field name="default_instrument_id" ref="instrument_chem_analyzer"/>
+        <field name="sample_req" eval="True"/>
+    </record>
+
+    <record id="serum_bilirubin_total_c01" model="examination.entry.line">
+        <field name="name">Bilirubin (Total)</field>
+        <field name="examinationentry_id" ref="serum_bilirubin_total"/>
+        <field name="sequence">10</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">mg/dL</field>
+        <field name="reference_value">0.2 - 1.2</field>
+        <field name="ref_low">0.2</field>
+        <field name="ref_high">1.2</field>
+        <field name="critical_high">15.0</field>
+    </record>
+
+    <!-- Serum Bilirubin (Direct) -->
+    <record id="serum_bilirubin_direct" model="examination.entry">
+        <field name="name">Serum Bilirubin (Direct)</field>
+        <field name="department" ref="dept_biochemistry"/>
+        <field name="accounts_id" ref="account_income_biochemistry"/>
+        <field name="rate">300</field>
+        <field name="base_rate">300</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">pathology</field>
+        <field name="report_layout">tabular</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_gold_sst"/>
+        <field name="sample_type" ref="sample_serum"/>
+        <field name="default_method_id" ref="method_photometry"/>
+        <field name="default_instrument_id" ref="instrument_chem_analyzer"/>
+        <field name="sample_req" eval="True"/>
+    </record>
+
+    <record id="serum_bilirubin_direct_c01" model="examination.entry.line">
+        <field name="name">Bilirubin (Direct)</field>
+        <field name="examinationentry_id" ref="serum_bilirubin_direct"/>
+        <field name="sequence">10</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">mg/dL</field>
+        <field name="reference_value">0.0 - 0.3</field>
+        <field name="ref_high">0.3</field>
+    </record>
+
+    <!-- Serum Bilirubin (Indirect) -->
+    <record id="serum_bilirubin_indirect" model="examination.entry">
+        <field name="name">Serum Bilirubin (Indirect)</field>
+        <field name="department" ref="dept_biochemistry"/>
+        <field name="accounts_id" ref="account_income_biochemistry"/>
+        <field name="rate">300</field>
+        <field name="base_rate">300</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">pathology</field>
+        <field name="report_layout">tabular</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_gold_sst"/>
+        <field name="sample_type" ref="sample_serum"/>
+        <field name="default_method_id" ref="method_photometry"/>
+        <field name="default_instrument_id" ref="instrument_chem_analyzer"/>
+        <field name="sample_req" eval="True"/>
+    </record>
+
+    <record id="serum_bilirubin_indirect_c01" model="examination.entry.line">
+        <field name="name">Bilirubin (Indirect)</field>
+        <field name="examinationentry_id" ref="serum_bilirubin_indirect"/>
+        <field name="sequence">10</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">mg/dL</field>
+        <field name="reference_value">0.2 - 0.9</field>
+        <field name="ref_low">0.2</field>
+        <field name="ref_high">0.9</field>
+    </record>
+
+    <!-- Serum Bilirubin (Direct & Indirect) -->
+    <record id="serum_bilirubin_direct_indirect" model="examination.entry">
+        <field name="name">Serum Bilirubin (Direct &amp; Indirect)</field>
+        <field name="department" ref="dept_biochemistry"/>
+        <field name="accounts_id" ref="account_income_biochemistry"/>
+        <field name="rate">600</field>
+        <field name="base_rate">600</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">pathology</field>
+        <field name="report_layout">tabular</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_gold_sst"/>
+        <field name="sample_type" ref="sample_serum"/>
+        <field name="default_method_id" ref="method_photometry"/>
+        <field name="default_instrument_id" ref="instrument_chem_analyzer"/>
+        <field name="sample_req" eval="True"/>
+    </record>
+
+    <record id="serum_bilirubin_direct_indirect_c01" model="examination.entry.line">
+        <field name="name">SERUM BILIRUBIN</field>
+        <field name="examinationentry_id" ref="serum_bilirubin_direct_indirect"/>
+        <field name="sequence">10</field>
+        <field name="is_group_header" eval="True"/>
+        <field name="bold" eval="True"/>
+        <field name="result_type">text</field>
+    </record>
+
+    <record id="serum_bilirubin_direct_indirect_c02" model="examination.entry.line">
+        <field name="name">Bilirubin (Direct)</field>
+        <field name="examinationentry_id" ref="serum_bilirubin_direct_indirect"/>
+        <field name="sequence">20</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">mg/dL</field>
+        <field name="reference_value">0.0 - 0.3</field>
+        <field name="ref_high">0.3</field>
+    </record>
+
+    <record id="serum_bilirubin_direct_indirect_c03" model="examination.entry.line">
+        <field name="name">Bilirubin (Indirect)</field>
+        <field name="examinationentry_id" ref="serum_bilirubin_direct_indirect"/>
+        <field name="sequence">30</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">mg/dL</field>
+        <field name="reference_value">0.2 - 0.9</field>
+        <field name="ref_low">0.2</field>
+        <field name="ref_high">0.9</field>
+    </record>
+
+    <!-- Serum Ammonia -->
+    <record id="serum_ammonia" model="examination.entry">
+        <field name="name">Serum Ammonia</field>
+        <field name="department" ref="dept_biochemistry"/>
+        <field name="accounts_id" ref="account_income_biochemistry"/>
+        <field name="rate">1400</field>
+        <field name="base_rate">1400</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">pathology</field>
+        <field name="report_layout">tabular</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_green"/>
+        <field name="sample_type" ref="sample_plasma"/>
+        <field name="default_method_id" ref="method_photometry"/>
+        <field name="default_instrument_id" ref="instrument_chem_analyzer"/>
+        <field name="sample_req" eval="True"/>
+        <field name="lab_not_required" eval="True"/>
+    </record>
+
+    <record id="serum_ammonia_c01" model="examination.entry.line">
+        <field name="name">Serum Ammonia</field>
+        <field name="examinationentry_id" ref="serum_ammonia"/>
+        <field name="sequence">10</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">umol/L</field>
+        <field name="reference_value">15 - 45</field>
+        <field name="ref_low">15</field>
+        <field name="ref_high">45</field>
+        <field name="critical_high">100</field>
+    </record>
+
+    <!-- Total Protein -->
+    <record id="total_protein" model="examination.entry">
+        <field name="name">Total Protein</field>
+        <field name="department" ref="dept_biochemistry"/>
+        <field name="accounts_id" ref="account_income_biochemistry"/>
+        <field name="rate">600</field>
+        <field name="base_rate">600</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">pathology</field>
+        <field name="report_layout">tabular</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_gold_sst"/>
+        <field name="sample_type" ref="sample_serum"/>
+        <field name="default_method_id" ref="method_photometry"/>
+        <field name="default_instrument_id" ref="instrument_chem_analyzer"/>
+        <field name="sample_req" eval="True"/>
+    </record>
+
+    <record id="total_protein_c01" model="examination.entry.line">
+        <field name="name">Total Protein</field>
+        <field name="examinationentry_id" ref="total_protein"/>
+        <field name="sequence">10</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">g/dL</field>
+        <field name="reference_value">6.4 - 8.3</field>
+        <field name="ref_low">6.4</field>
+        <field name="ref_high">8.3</field>
+    </record>
+
+    <!-- Serum Albumin -->
+    <record id="serum_albumin" model="examination.entry">
+        <field name="name">Serum Albumin</field>
+        <field name="department" ref="dept_biochemistry"/>
+        <field name="accounts_id" ref="account_income_biochemistry"/>
+        <field name="rate">500</field>
+        <field name="base_rate">500</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">pathology</field>
+        <field name="report_layout">tabular</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_gold_sst"/>
+        <field name="sample_type" ref="sample_serum"/>
+        <field name="default_method_id" ref="method_photometry"/>
+        <field name="default_instrument_id" ref="instrument_chem_analyzer"/>
+        <field name="sample_req" eval="True"/>
+    </record>
+
+    <record id="serum_albumin_c01" model="examination.entry.line">
+        <field name="name">Serum Albumin</field>
+        <field name="examinationentry_id" ref="serum_albumin"/>
+        <field name="sequence">10</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">g/dL</field>
+        <field name="reference_value">3.5 - 5.2</field>
+        <field name="ref_low">3.5</field>
+        <field name="ref_high">5.2</field>
+    </record>
+
+    <!-- Serum Globulin -->
+    <record id="serum_globulin" model="examination.entry">
+        <field name="name">Serum Globulin</field>
+        <field name="department" ref="dept_biochemistry"/>
+        <field name="accounts_id" ref="account_income_biochemistry"/>
+        <field name="rate">800</field>
+        <field name="base_rate">800</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">pathology</field>
+        <field name="report_layout">tabular</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_gold_sst"/>
+        <field name="sample_type" ref="sample_serum"/>
+        <field name="default_method_id" ref="method_photometry"/>
+        <field name="default_instrument_id" ref="instrument_chem_analyzer"/>
+        <field name="sample_req" eval="True"/>
+    </record>
+
+    <record id="serum_globulin_c01" model="examination.entry.line">
+        <field name="name">Serum Globulin</field>
+        <field name="examinationentry_id" ref="serum_globulin"/>
+        <field name="sequence">10</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">g/dL</field>
+        <field name="reference_value">2.0 - 3.5</field>
+        <field name="ref_low">2.0</field>
+        <field name="ref_high">3.5</field>
+    </record>
+
+    <!-- Serum A / G Ratio -->
+    <record id="serum_a_g_ratio" model="examination.entry">
+        <field name="name">Serum A / G Ratio</field>
+        <field name="department" ref="dept_biochemistry"/>
+        <field name="accounts_id" ref="account_income_biochemistry"/>
+        <field name="rate">800</field>
+        <field name="base_rate">800</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">pathology</field>
+        <field name="report_layout">tabular</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_gold_sst"/>
+        <field name="sample_type" ref="sample_serum"/>
+        <field name="default_method_id" ref="method_photometry"/>
+        <field name="default_instrument_id" ref="instrument_chem_analyzer"/>
+        <field name="sample_req" eval="True"/>
+    </record>
+
+    <record id="serum_a_g_ratio_c01" model="examination.entry.line">
+        <field name="name">PROTEIN STUDIES</field>
+        <field name="examinationentry_id" ref="serum_a_g_ratio"/>
+        <field name="sequence">10</field>
+        <field name="is_group_header" eval="True"/>
+        <field name="bold" eval="True"/>
+        <field name="result_type">text</field>
+    </record>
+
+    <record id="serum_a_g_ratio_c02" model="examination.entry.line">
+        <field name="name">Total Protein</field>
+        <field name="examinationentry_id" ref="serum_a_g_ratio"/>
+        <field name="sequence">20</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">g/dL</field>
+        <field name="reference_value">6.4 - 8.3</field>
+        <field name="ref_low">6.4</field>
+        <field name="ref_high">8.3</field>
+    </record>
+
+    <record id="serum_a_g_ratio_c03" model="examination.entry.line">
+        <field name="name">Serum Albumin</field>
+        <field name="examinationentry_id" ref="serum_a_g_ratio"/>
+        <field name="sequence">30</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">g/dL</field>
+        <field name="reference_value">3.5 - 5.2</field>
+        <field name="ref_low">3.5</field>
+        <field name="ref_high">5.2</field>
+    </record>
+
+    <record id="serum_a_g_ratio_c04" model="examination.entry.line">
+        <field name="name">Serum Globulin</field>
+        <field name="examinationentry_id" ref="serum_a_g_ratio"/>
+        <field name="sequence">40</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">g/dL</field>
+        <field name="reference_value">2.0 - 3.5</field>
+        <field name="ref_low">2.0</field>
+        <field name="ref_high">3.5</field>
+    </record>
+
+    <record id="serum_a_g_ratio_c05" model="examination.entry.line">
+        <field name="name">A / G Ratio</field>
+        <field name="examinationentry_id" ref="serum_a_g_ratio"/>
+        <field name="sequence">50</field>
+        <field name="result_type">numeric</field>
+        <field name="reference_value">1.1 - 2.5</field>
+        <field name="ref_low">1.1</field>
+        <field name="ref_high">2.5</field>
+    </record>
+
+    <!-- Protein Electrophoresis -->
+    <record id="protein_electrophoresis" model="examination.entry">
+        <field name="name">Protein Electrophoresis</field>
+        <field name="department" ref="dept_biochemistry"/>
+        <field name="accounts_id" ref="account_income_biochemistry"/>
+        <field name="rate">2000</field>
+        <field name="base_rate">2000</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">pathology</field>
+        <field name="report_layout">tabular</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_gold_sst"/>
+        <field name="sample_type" ref="sample_serum"/>
+        <field name="default_method_id" ref="method_electrophoresis"/>
+        <field name="default_instrument_id" ref="instrument_chem_analyzer"/>
+        <field name="sample_req" eval="True"/>
+        <field name="required_time">3</field>
+    </record>
+
+    <record id="protein_electrophoresis_c01" model="examination.entry.line">
+        <field name="name">SERUM PROTEIN ELECTROPHORESIS</field>
+        <field name="examinationentry_id" ref="protein_electrophoresis"/>
+        <field name="sequence">10</field>
+        <field name="is_group_header" eval="True"/>
+        <field name="bold" eval="True"/>
+        <field name="result_type">text</field>
+    </record>
+
+    <record id="protein_electrophoresis_c02" model="examination.entry.line">
+        <field name="name">Total Protein</field>
+        <field name="examinationentry_id" ref="protein_electrophoresis"/>
+        <field name="sequence">20</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">g/dL</field>
+        <field name="reference_value">6.4 - 8.3</field>
+        <field name="ref_low">6.4</field>
+        <field name="ref_high">8.3</field>
+    </record>
+
+    <record id="protein_electrophoresis_c03" model="examination.entry.line">
+        <field name="name">Albumin</field>
+        <field name="examinationentry_id" ref="protein_electrophoresis"/>
+        <field name="sequence">30</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">%</field>
+        <field name="reference_value">55.8 - 66.1</field>
+        <field name="ref_low">55.8</field>
+        <field name="ref_high">66.1</field>
+    </record>
+
+    <record id="protein_electrophoresis_c04" model="examination.entry.line">
+        <field name="name">Alpha-1 Globulin</field>
+        <field name="examinationentry_id" ref="protein_electrophoresis"/>
+        <field name="sequence">40</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">%</field>
+        <field name="reference_value">2.9 - 4.9</field>
+        <field name="ref_low">2.9</field>
+        <field name="ref_high">4.9</field>
+    </record>
+
+    <record id="protein_electrophoresis_c05" model="examination.entry.line">
+        <field name="name">Alpha-2 Globulin</field>
+        <field name="examinationentry_id" ref="protein_electrophoresis"/>
+        <field name="sequence">50</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">%</field>
+        <field name="reference_value">7.1 - 11.8</field>
+        <field name="ref_low">7.1</field>
+        <field name="ref_high">11.8</field>
+    </record>
+
+    <record id="protein_electrophoresis_c06" model="examination.entry.line">
+        <field name="name">Beta Globulin</field>
+        <field name="examinationentry_id" ref="protein_electrophoresis"/>
+        <field name="sequence">60</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">%</field>
+        <field name="reference_value">8.4 - 13.1</field>
+        <field name="ref_low">8.4</field>
+        <field name="ref_high">13.1</field>
+    </record>
+
+    <record id="protein_electrophoresis_c07" model="examination.entry.line">
+        <field name="name">Gamma Globulin</field>
+        <field name="examinationentry_id" ref="protein_electrophoresis"/>
+        <field name="sequence">70</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">%</field>
+        <field name="reference_value">11.1 - 18.8</field>
+        <field name="ref_low">11.1</field>
+        <field name="ref_high">18.8</field>
+    </record>
+
+    <record id="protein_electrophoresis_c08" model="examination.entry.line">
+        <field name="name">M-Band</field>
+        <field name="examinationentry_id" ref="protein_electrophoresis"/>
+        <field name="sequence">80</field>
+        <field name="result_type">selection</field>
+        <field name="reference_value">Not Detected</field>
+    </record>
+
+    <record id="protein_electrophoresis_c08_v01" model="examination.possible.value">
+        <field name="name">Not Detected</field>
+        <field name="examination_line_id" ref="protein_electrophoresis_c08"/>
+        <field name="sequence">10</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="protein_electrophoresis_c08_v02" model="examination.possible.value">
+        <field name="name">Detected</field>
+        <field name="examination_line_id" ref="protein_electrophoresis_c08"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="protein_electrophoresis_c09" model="examination.entry.line">
+        <field name="name">Interpretation</field>
+        <field name="examinationentry_id" ref="protein_electrophoresis"/>
+        <field name="sequence">90</field>
+        <field name="result_type">text</field>
+    </record>
+
+    <!-- Serum Electrolytes -->
+    <record id="serum_electrolytes" model="examination.entry">
+        <field name="name">Serum Electrolytes</field>
+        <field name="department" ref="dept_biochemistry"/>
+        <field name="accounts_id" ref="account_income_biochemistry"/>
+        <field name="rate">1200</field>
+        <field name="base_rate">1200</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">pathology</field>
+        <field name="report_layout">tabular</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_gold_sst"/>
+        <field name="sample_type" ref="sample_serum"/>
+        <field name="default_method_id" ref="method_ise"/>
+        <field name="default_instrument_id" ref="instrument_electrolyte"/>
+        <field name="sample_req" eval="True"/>
+    </record>
+
+    <record id="serum_electrolytes_c01" model="examination.entry.line">
+        <field name="name">SERUM ELECTROLYTES</field>
+        <field name="examinationentry_id" ref="serum_electrolytes"/>
+        <field name="sequence">10</field>
+        <field name="is_group_header" eval="True"/>
+        <field name="bold" eval="True"/>
+        <field name="result_type">text</field>
+    </record>
+
+    <record id="serum_electrolytes_c02" model="examination.entry.line">
+        <field name="name">Sodium (Na+)</field>
+        <field name="examinationentry_id" ref="serum_electrolytes"/>
+        <field name="sequence">20</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">mmol/L</field>
+        <field name="reference_value">135 - 145</field>
+        <field name="ref_low">135</field>
+        <field name="ref_high">145</field>
+        <field name="critical_low">120</field>
+        <field name="critical_high">160</field>
+    </record>
+
+    <record id="serum_electrolytes_c03" model="examination.entry.line">
+        <field name="name">Potassium (K+)</field>
+        <field name="examinationentry_id" ref="serum_electrolytes"/>
+        <field name="sequence">30</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">mmol/L</field>
+        <field name="reference_value">3.5 - 5.1</field>
+        <field name="ref_low">3.5</field>
+        <field name="ref_high">5.1</field>
+        <field name="critical_low">2.8</field>
+        <field name="critical_high">6.2</field>
+    </record>
+
+    <record id="serum_electrolytes_c04" model="examination.entry.line">
+        <field name="name">Chloride (Cl-)</field>
+        <field name="examinationentry_id" ref="serum_electrolytes"/>
+        <field name="sequence">40</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">mmol/L</field>
+        <field name="reference_value">98 - 107</field>
+        <field name="ref_low">98</field>
+        <field name="ref_high">107</field>
+    </record>
+
+    <record id="serum_electrolytes_c05" model="examination.entry.line">
+        <field name="name">Bicarbonate (HCO3-)</field>
+        <field name="examinationentry_id" ref="serum_electrolytes"/>
+        <field name="sequence">50</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">mmol/L</field>
+        <field name="reference_value">22 - 29</field>
+        <field name="ref_low">22</field>
+        <field name="ref_high">29</field>
+    </record>
+
+    <!-- Serum Potassium -->
+    <record id="serum_potassium" model="examination.entry">
+        <field name="name">Serum Potassium</field>
+        <field name="department" ref="dept_biochemistry"/>
+        <field name="accounts_id" ref="account_income_biochemistry"/>
+        <field name="rate">400</field>
+        <field name="base_rate">400</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">pathology</field>
+        <field name="report_layout">tabular</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_gold_sst"/>
+        <field name="sample_type" ref="sample_serum"/>
+        <field name="default_method_id" ref="method_ise"/>
+        <field name="default_instrument_id" ref="instrument_electrolyte"/>
+        <field name="sample_req" eval="True"/>
+    </record>
+
+    <record id="serum_potassium_c01" model="examination.entry.line">
+        <field name="name">Potassium (K+)</field>
+        <field name="examinationentry_id" ref="serum_potassium"/>
+        <field name="sequence">10</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">mmol/L</field>
+        <field name="reference_value">3.5 - 5.1</field>
+        <field name="ref_low">3.5</field>
+        <field name="ref_high">5.1</field>
+        <field name="critical_low">2.8</field>
+        <field name="critical_high">6.2</field>
+    </record>
+
+    <!-- Serum Calcium -->
+    <record id="serum_calcium" model="examination.entry">
+        <field name="name">Serum Calcium</field>
+        <field name="department" ref="dept_biochemistry"/>
+        <field name="accounts_id" ref="account_income_biochemistry"/>
+        <field name="rate">500</field>
+        <field name="base_rate">500</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">pathology</field>
+        <field name="report_layout">tabular</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_gold_sst"/>
+        <field name="sample_type" ref="sample_serum"/>
+        <field name="default_method_id" ref="method_photometry"/>
+        <field name="default_instrument_id" ref="instrument_chem_analyzer"/>
+        <field name="sample_req" eval="True"/>
+    </record>
+
+    <record id="serum_calcium_c01" model="examination.entry.line">
+        <field name="name">Serum Calcium (Total)</field>
+        <field name="examinationentry_id" ref="serum_calcium"/>
+        <field name="sequence">10</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">mg/dL</field>
+        <field name="reference_value">8.6 - 10.2</field>
+        <field name="ref_low">8.6</field>
+        <field name="ref_high">10.2</field>
+        <field name="critical_low">6.5</field>
+        <field name="critical_high">13.0</field>
+    </record>
+
+    <!-- Serum Inorganic Phosphate -->
+    <record id="serum_inorganic_phosphate" model="examination.entry">
+        <field name="name">Serum Inorganic Phosphate</field>
+        <field name="department" ref="dept_biochemistry"/>
+        <field name="accounts_id" ref="account_income_biochemistry"/>
+        <field name="rate">1200</field>
+        <field name="base_rate">1200</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">pathology</field>
+        <field name="report_layout">tabular</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_gold_sst"/>
+        <field name="sample_type" ref="sample_serum"/>
+        <field name="default_method_id" ref="method_photometry"/>
+        <field name="default_instrument_id" ref="instrument_chem_analyzer"/>
+        <field name="sample_req" eval="True"/>
+    </record>
+
+    <record id="serum_inorganic_phosphate_c01" model="examination.entry.line">
+        <field name="name">Inorganic Phosphate</field>
+        <field name="examinationentry_id" ref="serum_inorganic_phosphate"/>
+        <field name="sequence">10</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">mg/dL</field>
+        <field name="reference_value">2.5 - 4.5</field>
+        <field name="reference_value_child">4.0 - 7.0</field>
+        <field name="ref_low">2.5</field>
+        <field name="ref_high">4.5</field>
+    </record>
+
+    <!-- Serum Magnesium -->
+    <record id="serum_magnesium" model="examination.entry">
+        <field name="name">Serum Magnesium</field>
+        <field name="department" ref="dept_biochemistry"/>
+        <field name="accounts_id" ref="account_income_biochemistry"/>
+        <field name="rate">1200</field>
+        <field name="base_rate">1200</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">pathology</field>
+        <field name="report_layout">tabular</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_gold_sst"/>
+        <field name="sample_type" ref="sample_serum"/>
+        <field name="default_method_id" ref="method_photometry"/>
+        <field name="default_instrument_id" ref="instrument_chem_analyzer"/>
+        <field name="sample_req" eval="True"/>
+    </record>
+
+    <record id="serum_magnesium_c01" model="examination.entry.line">
+        <field name="name">Serum Magnesium</field>
+        <field name="examinationentry_id" ref="serum_magnesium"/>
+        <field name="sequence">10</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">mg/dL</field>
+        <field name="reference_value">1.7 - 2.4</field>
+        <field name="ref_low">1.7</field>
+        <field name="ref_high">2.4</field>
+        <field name="critical_low">1.0</field>
+    </record>
+
+    <!-- Serum Lactate -->
+    <record id="serum_lactate" model="examination.entry">
+        <field name="name">Serum Lactate</field>
+        <field name="department" ref="dept_biochemistry"/>
+        <field name="accounts_id" ref="account_income_biochemistry"/>
+        <field name="rate">1400</field>
+        <field name="base_rate">1400</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">pathology</field>
+        <field name="report_layout">tabular</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_green"/>
+        <field name="sample_type" ref="sample_plasma"/>
+        <field name="default_method_id" ref="method_photometry"/>
+        <field name="default_instrument_id" ref="instrument_chem_analyzer"/>
+        <field name="sample_req" eval="True"/>
+    </record>
+
+    <record id="serum_lactate_c01" model="examination.entry.line">
+        <field name="name">Serum Lactate</field>
+        <field name="examinationentry_id" ref="serum_lactate"/>
+        <field name="sequence">10</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">mmol/L</field>
+        <field name="reference_value">0.5 - 2.2</field>
+        <field name="ref_low">0.5</field>
+        <field name="ref_high">2.2</field>
+        <field name="critical_high">4.0</field>
+    </record>
+
+    <!-- Serum Iron Profile -->
+    <record id="serum_iron_profile" model="examination.entry">
+        <field name="name">Serum Iron Profile</field>
+        <field name="department" ref="dept_biochemistry"/>
+        <field name="accounts_id" ref="account_income_biochemistry"/>
+        <field name="rate">4200</field>
+        <field name="base_rate">4200</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">pathology</field>
+        <field name="report_layout">tabular</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_gold_sst"/>
+        <field name="sample_type" ref="sample_serum"/>
+        <field name="default_method_id" ref="method_photometry"/>
+        <field name="default_instrument_id" ref="instrument_chem_analyzer"/>
+        <field name="sample_req" eval="True"/>
+    </record>
+
+    <record id="serum_iron_profile_c01" model="examination.entry.line">
+        <field name="name">IRON PROFILE</field>
+        <field name="examinationentry_id" ref="serum_iron_profile"/>
+        <field name="sequence">10</field>
+        <field name="is_group_header" eval="True"/>
+        <field name="bold" eval="True"/>
+        <field name="result_type">text</field>
+    </record>
+
+    <record id="serum_iron_profile_c02" model="examination.entry.line">
+        <field name="name">Serum Iron</field>
+        <field name="examinationentry_id" ref="serum_iron_profile"/>
+        <field name="sequence">20</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">ug/dL</field>
+        <field name="reference_value">65 - 175</field>
+        <field name="reference_value_male">65 - 175</field>
+        <field name="reference_value_female">50 - 170</field>
+        <field name="ref_low">65</field>
+        <field name="ref_high">175</field>
+    </record>
+
+    <record id="serum_iron_profile_c03" model="examination.entry.line">
+        <field name="name">TIBC</field>
+        <field name="examinationentry_id" ref="serum_iron_profile"/>
+        <field name="sequence">30</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">ug/dL</field>
+        <field name="reference_value">250 - 450</field>
+        <field name="ref_low">250</field>
+        <field name="ref_high">450</field>
+    </record>
+
+    <record id="serum_iron_profile_c04" model="examination.entry.line">
+        <field name="name">Transferrin Saturation</field>
+        <field name="examinationentry_id" ref="serum_iron_profile"/>
+        <field name="sequence">40</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">%</field>
+        <field name="reference_value">20 - 50</field>
+        <field name="ref_low">20</field>
+        <field name="ref_high">50</field>
+    </record>
+
+    <record id="serum_iron_profile_c05" model="examination.entry.line">
+        <field name="name">Serum Ferritin</field>
+        <field name="examinationentry_id" ref="serum_iron_profile"/>
+        <field name="sequence">50</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">ng/mL</field>
+        <field name="reference_value">30 - 400</field>
+        <field name="reference_value_male">30 - 400</field>
+        <field name="reference_value_female">13 - 150</field>
+        <field name="ref_low">30</field>
+        <field name="ref_high">400</field>
+    </record>
+
+    <!-- Serum Iron -->
+    <record id="serum_iron" model="examination.entry">
+        <field name="name">Serum Iron</field>
+        <field name="department" ref="dept_biochemistry"/>
+        <field name="accounts_id" ref="account_income_biochemistry"/>
+        <field name="rate">1200</field>
+        <field name="base_rate">1200</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">pathology</field>
+        <field name="report_layout">tabular</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_gold_sst"/>
+        <field name="sample_type" ref="sample_serum"/>
+        <field name="default_method_id" ref="method_photometry"/>
+        <field name="default_instrument_id" ref="instrument_chem_analyzer"/>
+        <field name="sample_req" eval="True"/>
+    </record>
+
+    <record id="serum_iron_c01" model="examination.entry.line">
+        <field name="name">Serum Iron</field>
+        <field name="examinationentry_id" ref="serum_iron"/>
+        <field name="sequence">10</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">ug/dL</field>
+        <field name="reference_value">65 - 175</field>
+        <field name="reference_value_male">65 - 175</field>
+        <field name="reference_value_female">50 - 170</field>
+        <field name="ref_low">65</field>
+        <field name="ref_high">175</field>
+    </record>
+
+    <!-- TIBC (Total Iron Binding Capacity) -->
+    <record id="tibc" model="examination.entry">
+        <field name="name">TIBC (Total Iron Binding Capacity)</field>
+        <field name="department" ref="dept_biochemistry"/>
+        <field name="accounts_id" ref="account_income_biochemistry"/>
+        <field name="rate">900</field>
+        <field name="base_rate">900</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">pathology</field>
+        <field name="report_layout">tabular</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_gold_sst"/>
+        <field name="sample_type" ref="sample_serum"/>
+        <field name="default_method_id" ref="method_photometry"/>
+        <field name="default_instrument_id" ref="instrument_chem_analyzer"/>
+        <field name="sample_req" eval="True"/>
+    </record>
+
+    <record id="tibc_c01" model="examination.entry.line">
+        <field name="name">TIBC</field>
+        <field name="examinationentry_id" ref="tibc"/>
+        <field name="sequence">10</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">ug/dL</field>
+        <field name="reference_value">250 - 450</field>
+        <field name="ref_low">250</field>
+        <field name="ref_high">450</field>
+    </record>
+
+    <!-- Transferrin Saturation (TSAT) -->
+    <record id="transferrin_saturation_tsat" model="examination.entry">
+        <field name="name">Transferrin Saturation (TSAT)</field>
+        <field name="department" ref="dept_biochemistry"/>
+        <field name="accounts_id" ref="account_income_biochemistry"/>
+        <field name="rate">1800</field>
+        <field name="base_rate">1800</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">pathology</field>
+        <field name="report_layout">tabular</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_gold_sst"/>
+        <field name="sample_type" ref="sample_serum"/>
+        <field name="default_method_id" ref="method_photometry"/>
+        <field name="default_instrument_id" ref="instrument_chem_analyzer"/>
+        <field name="sample_req" eval="True"/>
+    </record>
+
+    <record id="transferrin_saturation_tsat_c01" model="examination.entry.line">
+        <field name="name">IRON STUDIES</field>
+        <field name="examinationentry_id" ref="transferrin_saturation_tsat"/>
+        <field name="sequence">10</field>
+        <field name="is_group_header" eval="True"/>
+        <field name="bold" eval="True"/>
+        <field name="result_type">text</field>
+    </record>
+
+    <record id="transferrin_saturation_tsat_c02" model="examination.entry.line">
+        <field name="name">Serum Iron</field>
+        <field name="examinationentry_id" ref="transferrin_saturation_tsat"/>
+        <field name="sequence">20</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">ug/dL</field>
+        <field name="reference_value">65 - 175</field>
+        <field name="reference_value_male">65 - 175</field>
+        <field name="reference_value_female">50 - 170</field>
+        <field name="ref_low">65</field>
+        <field name="ref_high">175</field>
+    </record>
+
+    <record id="transferrin_saturation_tsat_c03" model="examination.entry.line">
+        <field name="name">TIBC</field>
+        <field name="examinationentry_id" ref="transferrin_saturation_tsat"/>
+        <field name="sequence">30</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">ug/dL</field>
+        <field name="reference_value">250 - 450</field>
+        <field name="ref_low">250</field>
+        <field name="ref_high">450</field>
+    </record>
+
+    <record id="transferrin_saturation_tsat_c04" model="examination.entry.line">
+        <field name="name">Transferrin Saturation</field>
+        <field name="examinationentry_id" ref="transferrin_saturation_tsat"/>
+        <field name="sequence">40</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">%</field>
+        <field name="reference_value">20 - 50</field>
+        <field name="ref_low">20</field>
+        <field name="ref_high">50</field>
+    </record>
+
+    <!-- Serum Ferritin -->
+    <record id="serum_ferritin" model="examination.entry">
+        <field name="name">Serum Ferritin</field>
+        <field name="department" ref="dept_biochemistry"/>
+        <field name="accounts_id" ref="account_income_biochemistry"/>
+        <field name="rate">1400</field>
+        <field name="base_rate">1400</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">pathology</field>
+        <field name="report_layout">tabular</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_gold_sst"/>
+        <field name="sample_type" ref="sample_serum"/>
+        <field name="default_method_id" ref="method_photometry"/>
+        <field name="default_instrument_id" ref="instrument_chem_analyzer"/>
+        <field name="sample_req" eval="True"/>
+    </record>
+
+    <record id="serum_ferritin_c01" model="examination.entry.line">
+        <field name="name">Serum Ferritin</field>
+        <field name="examinationentry_id" ref="serum_ferritin"/>
+        <field name="sequence">10</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">ng/mL</field>
+        <field name="reference_value">30 - 400</field>
+        <field name="reference_value_male">30 - 400</field>
+        <field name="reference_value_female">13 - 150</field>
+        <field name="ref_low">30</field>
+        <field name="ref_high">400</field>
+    </record>
+
+    <!-- Serum Folic Acid -->
+    <record id="serum_folic_acid" model="examination.entry">
+        <field name="name">Serum Folic Acid</field>
+        <field name="department" ref="dept_biochemistry"/>
+        <field name="accounts_id" ref="account_income_biochemistry"/>
+        <field name="rate">1200</field>
+        <field name="base_rate">1200</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">pathology</field>
+        <field name="report_layout">tabular</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_gold_sst"/>
+        <field name="sample_type" ref="sample_serum"/>
+        <field name="default_method_id" ref="method_photometry"/>
+        <field name="default_instrument_id" ref="instrument_chem_analyzer"/>
+        <field name="sample_req" eval="True"/>
+    </record>
+
+    <record id="serum_folic_acid_c01" model="examination.entry.line">
+        <field name="name">Folic Acid</field>
+        <field name="examinationentry_id" ref="serum_folic_acid"/>
+        <field name="sequence">10</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">ng/mL</field>
+        <field name="reference_value">3.0 - 17.0</field>
+        <field name="ref_low">3.0</field>
+        <field name="ref_high">17.0</field>
+    </record>
+
+    <!-- Serum Amylase -->
+    <record id="serum_amylase" model="examination.entry">
+        <field name="name">Serum Amylase</field>
+        <field name="department" ref="dept_biochemistry"/>
+        <field name="accounts_id" ref="account_income_biochemistry"/>
+        <field name="rate">1200</field>
+        <field name="base_rate">1200</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">pathology</field>
+        <field name="report_layout">tabular</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_gold_sst"/>
+        <field name="sample_type" ref="sample_serum"/>
+        <field name="default_method_id" ref="method_photometry"/>
+        <field name="default_instrument_id" ref="instrument_chem_analyzer"/>
+        <field name="sample_req" eval="True"/>
+    </record>
+
+    <record id="serum_amylase_c01" model="examination.entry.line">
+        <field name="name">Serum Amylase</field>
+        <field name="examinationentry_id" ref="serum_amylase"/>
+        <field name="sequence">10</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">U/L</field>
+        <field name="reference_value">25 - 125</field>
+        <field name="ref_low">25</field>
+        <field name="ref_high">125</field>
+        <field name="critical_high">500</field>
+    </record>
+
+    <!-- Serum Lipase -->
+    <record id="serum_lipase" model="examination.entry">
+        <field name="name">Serum Lipase</field>
+        <field name="department" ref="dept_biochemistry"/>
+        <field name="accounts_id" ref="account_income_biochemistry"/>
+        <field name="rate">1200</field>
+        <field name="base_rate">1200</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">pathology</field>
+        <field name="report_layout">tabular</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_gold_sst"/>
+        <field name="sample_type" ref="sample_serum"/>
+        <field name="default_method_id" ref="method_photometry"/>
+        <field name="default_instrument_id" ref="instrument_chem_analyzer"/>
+        <field name="sample_req" eval="True"/>
+    </record>
+
+    <record id="serum_lipase_c01" model="examination.entry.line">
+        <field name="name">Serum Lipase</field>
+        <field name="examinationentry_id" ref="serum_lipase"/>
+        <field name="sequence">10</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">U/L</field>
+        <field name="reference_value">13 - 60</field>
+        <field name="ref_low">13</field>
+        <field name="ref_high">60</field>
+        <field name="critical_high">180</field>
+    </record>
+
+    <!-- Troponin-I -->
+    <record id="troponin_i" model="examination.entry">
+        <field name="name">Troponin-I</field>
+        <field name="department" ref="dept_biochemistry"/>
+        <field name="accounts_id" ref="account_income_biochemistry"/>
+        <field name="rate">1000</field>
+        <field name="base_rate">1000</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">pathology</field>
+        <field name="report_layout">tabular</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_gold_sst"/>
+        <field name="sample_type" ref="sample_serum"/>
+        <field name="default_method_id" ref="method_photometry"/>
+        <field name="default_instrument_id" ref="instrument_chem_analyzer"/>
+        <field name="sample_req" eval="True"/>
+    </record>
+
+    <record id="troponin_i_c01" model="examination.entry.line">
+        <field name="name">Troponin-I</field>
+        <field name="examinationentry_id" ref="troponin_i"/>
+        <field name="sequence">10</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">ng/mL</field>
+        <field name="reference_value">&lt; 0.04</field>
+        <field name="ref_high">0.04</field>
+        <field name="critical_high">0.5</field>
+    </record>
+
+    <!-- CK-MB -->
+    <record id="ck_mb" model="examination.entry">
+        <field name="name">CK-MB</field>
+        <field name="department" ref="dept_biochemistry"/>
+        <field name="accounts_id" ref="account_income_biochemistry"/>
+        <field name="rate">1200</field>
+        <field name="base_rate">1200</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">pathology</field>
+        <field name="report_layout">tabular</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_gold_sst"/>
+        <field name="sample_type" ref="sample_serum"/>
+        <field name="default_method_id" ref="method_photometry"/>
+        <field name="default_instrument_id" ref="instrument_chem_analyzer"/>
+        <field name="sample_req" eval="True"/>
+    </record>
+
+    <record id="ck_mb_c01" model="examination.entry.line">
+        <field name="name">CK-MB</field>
+        <field name="examinationentry_id" ref="ck_mb"/>
+        <field name="sequence">10</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">U/L</field>
+        <field name="reference_value">&lt; 25</field>
+        <field name="ref_high">25</field>
+    </record>
+
+    <!-- CPK (Creatine Phosphokinase) -->
+    <record id="cpk_creatine_phosphokinase" model="examination.entry">
+        <field name="name">CPK (Creatine Phosphokinase)</field>
+        <field name="department" ref="dept_biochemistry"/>
+        <field name="accounts_id" ref="account_income_biochemistry"/>
+        <field name="rate">1200</field>
+        <field name="base_rate">1200</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">pathology</field>
+        <field name="report_layout">tabular</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_gold_sst"/>
+        <field name="sample_type" ref="sample_serum"/>
+        <field name="default_method_id" ref="method_photometry"/>
+        <field name="default_instrument_id" ref="instrument_chem_analyzer"/>
+        <field name="sample_req" eval="True"/>
+    </record>
+
+    <record id="cpk_creatine_phosphokinase_c01" model="examination.entry.line">
+        <field name="name">CPK Total</field>
+        <field name="examinationentry_id" ref="cpk_creatine_phosphokinase"/>
+        <field name="sequence">10</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">U/L</field>
+        <field name="reference_value">M: 39 - 308  F: 26 - 192</field>
+        <field name="reference_value_male">39 - 308</field>
+        <field name="reference_value_female">26 - 192</field>
+        <field name="ref_low">26</field>
+        <field name="ref_high">308</field>
+    </record>
+
+    <!-- LDH (Lactate Dehydrogenase) -->
+    <record id="ldh_lactate_dehydrogenase" model="examination.entry">
+        <field name="name">LDH (Lactate Dehydrogenase)</field>
+        <field name="department" ref="dept_biochemistry"/>
+        <field name="accounts_id" ref="account_income_biochemistry"/>
+        <field name="rate">1400</field>
+        <field name="base_rate">1400</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">pathology</field>
+        <field name="report_layout">tabular</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_gold_sst"/>
+        <field name="sample_type" ref="sample_serum"/>
+        <field name="default_method_id" ref="method_photometry"/>
+        <field name="default_instrument_id" ref="instrument_chem_analyzer"/>
+        <field name="sample_req" eval="True"/>
+        <field name="lab_not_required" eval="True"/>
+    </record>
+
+    <record id="ldh_lactate_dehydrogenase_c01" model="examination.entry.line">
+        <field name="name">LDH</field>
+        <field name="examinationentry_id" ref="ldh_lactate_dehydrogenase"/>
+        <field name="sequence">10</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">U/L</field>
+        <field name="reference_value">140 - 280</field>
+        <field name="ref_low">140</field>
+        <field name="ref_high">280</field>
+    </record>
+
+    <!-- Urine Albumin -->
+    <record id="urine_albumin" model="examination.entry">
+        <field name="name">Urine Albumin</field>
+        <field name="department" ref="dept_biochemistry"/>
+        <field name="accounts_id" ref="account_income_biochemistry"/>
+        <field name="rate">400</field>
+        <field name="base_rate">400</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">pathology</field>
+        <field name="report_layout">tabular</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_urine_container"/>
+        <field name="sample_type" ref="sample_urine"/>
+        <field name="default_method_id" ref="method_photometry"/>
+        <field name="default_instrument_id" ref="instrument_urine_analyzer"/>
+        <field name="sample_req" eval="True"/>
+    </record>
+
+    <record id="urine_albumin_c01" model="examination.entry.line">
+        <field name="name">Urine Albumin</field>
+        <field name="examinationentry_id" ref="urine_albumin"/>
+        <field name="sequence">10</field>
+        <field name="result_type">selection</field>
+        <field name="reference_value">Nil</field>
+    </record>
+
+    <record id="urine_albumin_c01_v01" model="examination.possible.value">
+        <field name="name">Nil</field>
+        <field name="examination_line_id" ref="urine_albumin_c01"/>
+        <field name="sequence">10</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="urine_albumin_c01_v02" model="examination.possible.value">
+        <field name="name">Trace</field>
+        <field name="examination_line_id" ref="urine_albumin_c01"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="urine_albumin_c01_v03" model="examination.possible.value">
+        <field name="name">+</field>
+        <field name="examination_line_id" ref="urine_albumin_c01"/>
+        <field name="sequence">30</field>
+    </record>
+
+    <record id="urine_albumin_c01_v04" model="examination.possible.value">
+        <field name="name">++</field>
+        <field name="examination_line_id" ref="urine_albumin_c01"/>
+        <field name="sequence">40</field>
+    </record>
+
+    <record id="urine_albumin_c01_v05" model="examination.possible.value">
+        <field name="name">+++</field>
+        <field name="examination_line_id" ref="urine_albumin_c01"/>
+        <field name="sequence">50</field>
+    </record>
+
+    <record id="urine_albumin_c01_v06" model="examination.possible.value">
+        <field name="name">++++</field>
+        <field name="examination_line_id" ref="urine_albumin_c01"/>
+        <field name="sequence">60</field>
+    </record>
+
+    <!-- Urine Micro-Albumin -->
+    <record id="urine_micro_albumin" model="examination.entry">
+        <field name="name">Urine Micro-Albumin</field>
+        <field name="department" ref="dept_biochemistry"/>
+        <field name="accounts_id" ref="account_income_biochemistry"/>
+        <field name="rate">1200</field>
+        <field name="base_rate">1200</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">pathology</field>
+        <field name="report_layout">tabular</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_urine_container"/>
+        <field name="sample_type" ref="sample_urine"/>
+        <field name="default_method_id" ref="method_photometry"/>
+        <field name="default_instrument_id" ref="instrument_chem_analyzer"/>
+        <field name="sample_req" eval="True"/>
+    </record>
+
+    <record id="urine_micro_albumin_c01" model="examination.entry.line">
+        <field name="name">Urine Micro-Albumin</field>
+        <field name="examinationentry_id" ref="urine_micro_albumin"/>
+        <field name="sequence">10</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">mg/L</field>
+        <field name="reference_value">&lt; 30</field>
+        <field name="ref_high">30</field>
+    </record>
+
+    <!-- Urine ACR (Albumin Creatinine Ratio) -->
+    <record id="urine_acr_albumin_creatinine_ratio" model="examination.entry">
+        <field name="name">Urine ACR (Albumin Creatinine Ratio)</field>
+        <field name="department" ref="dept_biochemistry"/>
+        <field name="accounts_id" ref="account_income_biochemistry"/>
+        <field name="rate">1200</field>
+        <field name="base_rate">1200</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">pathology</field>
+        <field name="report_layout">tabular</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_urine_container"/>
+        <field name="sample_type" ref="sample_urine"/>
+        <field name="default_method_id" ref="method_photometry"/>
+        <field name="default_instrument_id" ref="instrument_chem_analyzer"/>
+        <field name="sample_req" eval="True"/>
+    </record>
+
+    <record id="urine_acr_albumin_creatinine_ratio_c01" model="examination.entry.line">
+        <field name="name">URINE ALBUMIN CREATININE RATIO</field>
+        <field name="examinationentry_id" ref="urine_acr_albumin_creatinine_ratio"/>
+        <field name="sequence">10</field>
+        <field name="is_group_header" eval="True"/>
+        <field name="bold" eval="True"/>
+        <field name="result_type">text</field>
+    </record>
+
+    <record id="urine_acr_albumin_creatinine_ratio_c02" model="examination.entry.line">
+        <field name="name">Urine Albumin</field>
+        <field name="examinationentry_id" ref="urine_acr_albumin_creatinine_ratio"/>
+        <field name="sequence">20</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">mg/L</field>
+        <field name="reference_value">&lt; 30</field>
+        <field name="ref_high">30</field>
+    </record>
+
+    <record id="urine_acr_albumin_creatinine_ratio_c03" model="examination.entry.line">
+        <field name="name">Urine Creatinine</field>
+        <field name="examinationentry_id" ref="urine_acr_albumin_creatinine_ratio"/>
+        <field name="sequence">30</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">mg/dL</field>
+    </record>
+
+    <record id="urine_acr_albumin_creatinine_ratio_c04" model="examination.entry.line">
+        <field name="name">Albumin / Creatinine Ratio</field>
+        <field name="examinationentry_id" ref="urine_acr_albumin_creatinine_ratio"/>
+        <field name="sequence">40</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">mg/g</field>
+        <field name="reference_value">Normal: &lt; 30 | Microalbuminuria: 30 - 300 | Macroalbuminuria: &gt; 300</field>
+        <field name="ref_high">30</field>
+    </record>
+
+    <record id="urine_acr_albumin_creatinine_ratio_c05" model="examination.entry.line">
+        <field name="name">Interpretation</field>
+        <field name="examinationentry_id" ref="urine_acr_albumin_creatinine_ratio"/>
+        <field name="sequence">50</field>
+        <field name="result_type">text</field>
+    </record>
+
+    <!-- Urine PCR (Protein Creatinine Ratio) -->
+    <record id="urine_pcr_protein_creatinine_ratio" model="examination.entry">
+        <field name="name">Urine PCR (Protein Creatinine Ratio)</field>
+        <field name="department" ref="dept_biochemistry"/>
+        <field name="accounts_id" ref="account_income_biochemistry"/>
+        <field name="rate">500</field>
+        <field name="base_rate">500</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">pathology</field>
+        <field name="report_layout">tabular</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_urine_container"/>
+        <field name="sample_type" ref="sample_urine"/>
+        <field name="default_method_id" ref="method_photometry"/>
+        <field name="default_instrument_id" ref="instrument_chem_analyzer"/>
+        <field name="sample_req" eval="True"/>
+    </record>
+
+    <record id="urine_pcr_protein_creatinine_ratio_c01" model="examination.entry.line">
+        <field name="name">URINE PROTEIN CREATININE RATIO</field>
+        <field name="examinationentry_id" ref="urine_pcr_protein_creatinine_ratio"/>
+        <field name="sequence">10</field>
+        <field name="is_group_header" eval="True"/>
+        <field name="bold" eval="True"/>
+        <field name="result_type">text</field>
+    </record>
+
+    <record id="urine_pcr_protein_creatinine_ratio_c02" model="examination.entry.line">
+        <field name="name">Urine Total Protein</field>
+        <field name="examinationentry_id" ref="urine_pcr_protein_creatinine_ratio"/>
+        <field name="sequence">20</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">mg/dL</field>
+    </record>
+
+    <record id="urine_pcr_protein_creatinine_ratio_c03" model="examination.entry.line">
+        <field name="name">Urine Creatinine</field>
+        <field name="examinationentry_id" ref="urine_pcr_protein_creatinine_ratio"/>
+        <field name="sequence">30</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">mg/dL</field>
+    </record>
+
+    <record id="urine_pcr_protein_creatinine_ratio_c04" model="examination.entry.line">
+        <field name="name">Protein / Creatinine Ratio</field>
+        <field name="examinationentry_id" ref="urine_pcr_protein_creatinine_ratio"/>
+        <field name="sequence">40</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">mg/g</field>
+        <field name="reference_value">&lt; 150</field>
+        <field name="ref_high">150</field>
+    </record>
+
+    <!-- Protein (Albumin) Creatinine Ratio -->
+    <record id="protein_albumin_creatinine_ratio" model="examination.entry">
+        <field name="name">Protein (Albumin) Creatinine Ratio</field>
+        <field name="department" ref="dept_biochemistry"/>
+        <field name="accounts_id" ref="account_income_biochemistry"/>
+        <field name="rate">800</field>
+        <field name="base_rate">800</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">pathology</field>
+        <field name="report_layout">tabular</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_urine_container"/>
+        <field name="sample_type" ref="sample_urine"/>
+        <field name="default_method_id" ref="method_photometry"/>
+        <field name="default_instrument_id" ref="instrument_chem_analyzer"/>
+        <field name="sample_req" eval="True"/>
+    </record>
+
+    <record id="protein_albumin_creatinine_ratio_c01" model="examination.entry.line">
+        <field name="name">URINE PROTEIN / ALBUMIN CREATININE RATIO</field>
+        <field name="examinationentry_id" ref="protein_albumin_creatinine_ratio"/>
+        <field name="sequence">10</field>
+        <field name="is_group_header" eval="True"/>
+        <field name="bold" eval="True"/>
+        <field name="result_type">text</field>
+    </record>
+
+    <record id="protein_albumin_creatinine_ratio_c02" model="examination.entry.line">
+        <field name="name">Urine Albumin</field>
+        <field name="examinationentry_id" ref="protein_albumin_creatinine_ratio"/>
+        <field name="sequence">20</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">mg/L</field>
+        <field name="reference_value">&lt; 30</field>
+        <field name="ref_high">30</field>
+    </record>
+
+    <record id="protein_albumin_creatinine_ratio_c03" model="examination.entry.line">
+        <field name="name">Urine Total Protein</field>
+        <field name="examinationentry_id" ref="protein_albumin_creatinine_ratio"/>
+        <field name="sequence">30</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">mg/dL</field>
+    </record>
+
+    <record id="protein_albumin_creatinine_ratio_c04" model="examination.entry.line">
+        <field name="name">Urine Creatinine</field>
+        <field name="examinationentry_id" ref="protein_albumin_creatinine_ratio"/>
+        <field name="sequence">40</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">mg/dL</field>
+    </record>
+
+    <record id="protein_albumin_creatinine_ratio_c05" model="examination.entry.line">
+        <field name="name">Protein / Creatinine Ratio</field>
+        <field name="examinationentry_id" ref="protein_albumin_creatinine_ratio"/>
+        <field name="sequence">50</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">mg/g</field>
+        <field name="reference_value">&lt; 150</field>
+        <field name="ref_high">150</field>
+    </record>
+
+    <!-- 24 Hours Urinary Total Protein -->
+    <record id="24_hours_urinary_total_protein" model="examination.entry">
+        <field name="name">24 Hours Urinary Total Protein</field>
+        <field name="department" ref="dept_biochemistry"/>
+        <field name="accounts_id" ref="account_income_biochemistry"/>
+        <field name="rate">750</field>
+        <field name="base_rate">750</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">pathology</field>
+        <field name="report_layout">tabular</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_urine_container"/>
+        <field name="sample_type" ref="sample_urine_24h"/>
+        <field name="default_method_id" ref="method_photometry"/>
+        <field name="default_instrument_id" ref="instrument_chem_analyzer"/>
+        <field name="sample_req" eval="True"/>
+        <field name="required_time">1</field>
+    </record>
+
+    <record id="24_hours_urinary_total_protein_c01" model="examination.entry.line">
+        <field name="name">24 HOUR URINE COLLECTION</field>
+        <field name="examinationentry_id" ref="24_hours_urinary_total_protein"/>
+        <field name="sequence">10</field>
+        <field name="is_group_header" eval="True"/>
+        <field name="bold" eval="True"/>
+        <field name="result_type">text</field>
+    </record>
+
+    <record id="24_hours_urinary_total_protein_c02" model="examination.entry.line">
+        <field name="name">Total Volume</field>
+        <field name="examinationentry_id" ref="24_hours_urinary_total_protein"/>
+        <field name="sequence">20</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">mL</field>
+    </record>
+
+    <record id="24_hours_urinary_total_protein_c03" model="examination.entry.line">
+        <field name="name">Urine Protein Concentration</field>
+        <field name="examinationentry_id" ref="24_hours_urinary_total_protein"/>
+        <field name="sequence">30</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">mg/dL</field>
+    </record>
+
+    <record id="24_hours_urinary_total_protein_c04" model="examination.entry.line">
+        <field name="name">24 Hour Total Protein</field>
+        <field name="examinationentry_id" ref="24_hours_urinary_total_protein"/>
+        <field name="sequence">40</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">mg/24h</field>
+        <field name="reference_value">&lt; 150</field>
+        <field name="ref_high">150</field>
+    </record>
+
+    <!-- Urinary Electrolytes -->
+    <record id="urinary_electrolytes" model="examination.entry">
+        <field name="name">Urinary Electrolytes</field>
+        <field name="department" ref="dept_biochemistry"/>
+        <field name="accounts_id" ref="account_income_biochemistry"/>
+        <field name="rate">1200</field>
+        <field name="base_rate">1200</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">pathology</field>
+        <field name="report_layout">tabular</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_urine_container"/>
+        <field name="sample_type" ref="sample_urine"/>
+        <field name="default_method_id" ref="method_ise"/>
+        <field name="default_instrument_id" ref="instrument_electrolyte"/>
+        <field name="sample_req" eval="True"/>
+    </record>
+
+    <record id="urinary_electrolytes_c01" model="examination.entry.line">
+        <field name="name">URINARY ELECTROLYTES</field>
+        <field name="examinationentry_id" ref="urinary_electrolytes"/>
+        <field name="sequence">10</field>
+        <field name="is_group_header" eval="True"/>
+        <field name="bold" eval="True"/>
+        <field name="result_type">text</field>
+    </record>
+
+    <record id="urinary_electrolytes_c02" model="examination.entry.line">
+        <field name="name">Urinary Sodium</field>
+        <field name="examinationentry_id" ref="urinary_electrolytes"/>
+        <field name="sequence">20</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">mmol/L</field>
+        <field name="reference_value">40 - 220 (diet dependent)</field>
+    </record>
+
+    <record id="urinary_electrolytes_c03" model="examination.entry.line">
+        <field name="name">Urinary Potassium</field>
+        <field name="examinationentry_id" ref="urinary_electrolytes"/>
+        <field name="sequence">30</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">mmol/L</field>
+        <field name="reference_value">25 - 125 (diet dependent)</field>
+    </record>
+
+    <record id="urinary_electrolytes_c04" model="examination.entry.line">
+        <field name="name">Urinary Chloride</field>
+        <field name="examinationentry_id" ref="urinary_electrolytes"/>
+        <field name="sequence">40</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">mmol/L</field>
+        <field name="reference_value">110 - 250 (diet dependent)</field>
+    </record>
+
+    <!-- Urinary Osmolality -->
+    <record id="urinary_osmolality" model="examination.entry">
+        <field name="name">Urinary Osmolality</field>
+        <field name="department" ref="dept_biochemistry"/>
+        <field name="accounts_id" ref="account_income_biochemistry"/>
+        <field name="rate">1200</field>
+        <field name="base_rate">1200</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">pathology</field>
+        <field name="report_layout">tabular</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_urine_container"/>
+        <field name="sample_type" ref="sample_urine"/>
+        <field name="default_method_id" ref="method_photometry"/>
+        <field name="default_instrument_id" ref="instrument_chem_analyzer"/>
+        <field name="sample_req" eval="True"/>
+    </record>
+
+    <record id="urinary_osmolality_c01" model="examination.entry.line">
+        <field name="name">Urinary Osmolality</field>
+        <field name="examinationentry_id" ref="urinary_osmolality"/>
+        <field name="sequence">10</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">mOsm/kg</field>
+        <field name="reference_value">50 - 1200</field>
+        <field name="ref_low">50</field>
+        <field name="ref_high">1200</field>
+    </record>
+
+    <!-- Serum Osmolality -->
+    <record id="serum_osmolality" model="examination.entry">
+        <field name="name">Serum Osmolality</field>
+        <field name="department" ref="dept_biochemistry"/>
+        <field name="accounts_id" ref="account_income_biochemistry"/>
+        <field name="rate">1200</field>
+        <field name="base_rate">1200</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">pathology</field>
+        <field name="report_layout">tabular</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_gold_sst"/>
+        <field name="sample_type" ref="sample_serum"/>
+        <field name="default_method_id" ref="method_photometry"/>
+        <field name="default_instrument_id" ref="instrument_chem_analyzer"/>
+        <field name="sample_req" eval="True"/>
+    </record>
+
+    <record id="serum_osmolality_c01" model="examination.entry.line">
+        <field name="name">Serum Osmolality</field>
+        <field name="examinationentry_id" ref="serum_osmolality"/>
+        <field name="sequence">10</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">mOsm/kg</field>
+        <field name="reference_value">275 - 295</field>
+        <field name="ref_low">275</field>
+        <field name="ref_high">295</field>
+    </record>
+
+    <!-- Urine for Ketone Bodies -->
+    <record id="urine_for_ketone_bodies" model="examination.entry">
+        <field name="name">Urine for Ketone Bodies</field>
+        <field name="department" ref="dept_biochemistry"/>
+        <field name="accounts_id" ref="account_income_biochemistry"/>
+        <field name="rate">450</field>
+        <field name="base_rate">450</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">pathology</field>
+        <field name="report_layout">tabular</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_urine_container"/>
+        <field name="sample_type" ref="sample_urine"/>
+        <field name="default_method_id" ref="method_photometry"/>
+        <field name="default_instrument_id" ref="instrument_chem_analyzer"/>
+        <field name="sample_req" eval="True"/>
+        <field name="lab_not_required" eval="True"/>
+    </record>
+
+    <record id="urine_for_ketone_bodies_c01" model="examination.entry.line">
+        <field name="name">Ketone Bodies</field>
+        <field name="examinationentry_id" ref="urine_for_ketone_bodies"/>
+        <field name="sequence">10</field>
+        <field name="result_type">selection</field>
+        <field name="reference_value">Absent</field>
+    </record>
+
+    <record id="urine_for_ketone_bodies_c01_v01" model="examination.possible.value">
+        <field name="name">Absent</field>
+        <field name="examination_line_id" ref="urine_for_ketone_bodies_c01"/>
+        <field name="sequence">10</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="urine_for_ketone_bodies_c01_v02" model="examination.possible.value">
+        <field name="name">Trace</field>
+        <field name="examination_line_id" ref="urine_for_ketone_bodies_c01"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="urine_for_ketone_bodies_c01_v03" model="examination.possible.value">
+        <field name="name">+</field>
+        <field name="examination_line_id" ref="urine_for_ketone_bodies_c01"/>
+        <field name="sequence">30</field>
+    </record>
+
+    <record id="urine_for_ketone_bodies_c01_v04" model="examination.possible.value">
+        <field name="name">++</field>
+        <field name="examination_line_id" ref="urine_for_ketone_bodies_c01"/>
+        <field name="sequence">40</field>
+    </record>
+
+    <record id="urine_for_ketone_bodies_c01_v05" model="examination.possible.value">
+        <field name="name">+++</field>
+        <field name="examination_line_id" ref="urine_for_ketone_bodies_c01"/>
+        <field name="sequence">50</field>
+    </record>
+
+    <!-- Ascitic / CSF / Pleural Fluid for Biochemistry -->
+    <record id="ascitic_csf_pleural_fluid_for_biochemistry" model="examination.entry">
+        <field name="name">Ascitic / CSF / Pleural Fluid for Biochemistry</field>
+        <field name="department" ref="dept_biochemistry"/>
+        <field name="accounts_id" ref="account_income_biochemistry"/>
+        <field name="rate">2000</field>
+        <field name="base_rate">2000</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">pathology</field>
+        <field name="report_layout">tabular</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_sterile_pot"/>
+        <field name="sample_type" ref="sample_body_fluid"/>
+        <field name="default_method_id" ref="method_photometry"/>
+        <field name="default_instrument_id" ref="instrument_chem_analyzer"/>
+        <field name="sample_req" eval="True"/>
+    </record>
+
+    <record id="ascitic_csf_pleural_fluid_for_biochemistry_c01" model="examination.entry.line">
+        <field name="name">FLUID BIOCHEMISTRY</field>
+        <field name="examinationentry_id" ref="ascitic_csf_pleural_fluid_for_biochemistry"/>
+        <field name="sequence">10</field>
+        <field name="is_group_header" eval="True"/>
+        <field name="bold" eval="True"/>
+        <field name="result_type">text</field>
+    </record>
+
+    <record id="ascitic_csf_pleural_fluid_for_biochemistry_c02" model="examination.entry.line">
+        <field name="name">Fluid Total Protein</field>
+        <field name="examinationentry_id" ref="ascitic_csf_pleural_fluid_for_biochemistry"/>
+        <field name="sequence">20</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">g/dL</field>
+    </record>
+
+    <record id="ascitic_csf_pleural_fluid_for_biochemistry_c03" model="examination.entry.line">
+        <field name="name">Fluid Albumin</field>
+        <field name="examinationentry_id" ref="ascitic_csf_pleural_fluid_for_biochemistry"/>
+        <field name="sequence">30</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">g/dL</field>
+    </record>
+
+    <record id="ascitic_csf_pleural_fluid_for_biochemistry_c04" model="examination.entry.line">
+        <field name="name">Fluid Glucose</field>
+        <field name="examinationentry_id" ref="ascitic_csf_pleural_fluid_for_biochemistry"/>
+        <field name="sequence">40</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">mmol/L</field>
+    </record>
+
+    <record id="ascitic_csf_pleural_fluid_for_biochemistry_c05" model="examination.entry.line">
+        <field name="name">Fluid LDH</field>
+        <field name="examinationentry_id" ref="ascitic_csf_pleural_fluid_for_biochemistry"/>
+        <field name="sequence">50</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">U/L</field>
+    </record>
+
+    <record id="ascitic_csf_pleural_fluid_for_biochemistry_c06" model="examination.entry.line">
+        <field name="name">Serum Albumin (paired)</field>
+        <field name="examinationentry_id" ref="ascitic_csf_pleural_fluid_for_biochemistry"/>
+        <field name="sequence">60</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">g/dL</field>
+    </record>
+
+    <record id="ascitic_csf_pleural_fluid_for_biochemistry_c07" model="examination.entry.line">
+        <field name="name">SAAG (Serum-Ascites Albumin Gradient)</field>
+        <field name="examinationentry_id" ref="ascitic_csf_pleural_fluid_for_biochemistry"/>
+        <field name="sequence">70</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">g/dL</field>
+        <field name="reference_value">&gt;= 1.1 suggests portal hypertension</field>
+    </record>
+
+    <record id="ascitic_csf_pleural_fluid_for_biochemistry_c08" model="examination.entry.line">
+        <field name="name">Interpretation</field>
+        <field name="examinationentry_id" ref="ascitic_csf_pleural_fluid_for_biochemistry"/>
+        <field name="sequence">80</field>
+        <field name="result_type">text</field>
+    </record>
+
+    <!-- CSF for Protein, Glucose, TC, DC & ADA -->
+    <record id="csf_for_protein_glucose_tc_dc_ada" model="examination.entry">
+        <field name="name">CSF for Protein, Glucose, TC, DC &amp; ADA</field>
+        <field name="department" ref="dept_biochemistry"/>
+        <field name="accounts_id" ref="account_income_biochemistry"/>
+        <field name="rate">3500</field>
+        <field name="base_rate">3500</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">pathology</field>
+        <field name="report_layout">tabular</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_sterile_pot"/>
+        <field name="sample_type" ref="sample_csf"/>
+        <field name="default_method_id" ref="method_photometry"/>
+        <field name="default_instrument_id" ref="instrument_chem_analyzer"/>
+        <field name="sample_req" eval="True"/>
+        <field name="needs_separate_tube" eval="True"/>
+    </record>
+
+    <record id="csf_for_protein_glucose_tc_dc_ada_c01" model="examination.entry.line">
+        <field name="name">CEREBROSPINAL FLUID</field>
+        <field name="examinationentry_id" ref="csf_for_protein_glucose_tc_dc_ada"/>
+        <field name="sequence">10</field>
+        <field name="is_group_header" eval="True"/>
+        <field name="bold" eval="True"/>
+        <field name="result_type">text</field>
+    </record>
+
+    <record id="csf_for_protein_glucose_tc_dc_ada_c02" model="examination.entry.line">
+        <field name="name">CSF Protein</field>
+        <field name="examinationentry_id" ref="csf_for_protein_glucose_tc_dc_ada"/>
+        <field name="sequence">20</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">mg/dL</field>
+        <field name="reference_value">15 - 45</field>
+        <field name="ref_low">15</field>
+        <field name="ref_high">45</field>
+    </record>
+
+    <record id="csf_for_protein_glucose_tc_dc_ada_c03" model="examination.entry.line">
+        <field name="name">CSF Glucose</field>
+        <field name="examinationentry_id" ref="csf_for_protein_glucose_tc_dc_ada"/>
+        <field name="sequence">30</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">mmol/L</field>
+        <field name="reference_value">2.2 - 3.9 (about 60% of plasma)</field>
+        <field name="ref_low">2.2</field>
+        <field name="ref_high">3.9</field>
+    </record>
+
+    <record id="csf_for_protein_glucose_tc_dc_ada_c04" model="examination.entry.line">
+        <field name="name">Total Cell Count</field>
+        <field name="examinationentry_id" ref="csf_for_protein_glucose_tc_dc_ada"/>
+        <field name="sequence">40</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">/cmm</field>
+        <field name="reference_value">0 - 5</field>
+        <field name="ref_high">5</field>
+    </record>
+
+    <record id="csf_for_protein_glucose_tc_dc_ada_c05" model="examination.entry.line">
+        <field name="name">DIFFERENTIAL COUNT</field>
+        <field name="examinationentry_id" ref="csf_for_protein_glucose_tc_dc_ada"/>
+        <field name="sequence">50</field>
+        <field name="is_group_header" eval="True"/>
+        <field name="bold" eval="True"/>
+        <field name="result_type">text</field>
+    </record>
+
+    <record id="csf_for_protein_glucose_tc_dc_ada_c06" model="examination.entry.line">
+        <field name="name">Lymphocytes</field>
+        <field name="examinationentry_id" ref="csf_for_protein_glucose_tc_dc_ada"/>
+        <field name="sequence">60</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">%</field>
+    </record>
+
+    <record id="csf_for_protein_glucose_tc_dc_ada_c07" model="examination.entry.line">
+        <field name="name">Neutrophils</field>
+        <field name="examinationentry_id" ref="csf_for_protein_glucose_tc_dc_ada"/>
+        <field name="sequence">70</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">%</field>
+    </record>
+
+    <record id="csf_for_protein_glucose_tc_dc_ada_c08" model="examination.entry.line">
+        <field name="name">ADA (Adenosine Deaminase)</field>
+        <field name="examinationentry_id" ref="csf_for_protein_glucose_tc_dc_ada"/>
+        <field name="sequence">80</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">U/L</field>
+        <field name="reference_value">&lt; 10</field>
+        <field name="ref_high">10</field>
+    </record>
+
+    <record id="csf_for_protein_glucose_tc_dc_ada_c09" model="examination.entry.line">
+        <field name="name">Interpretation</field>
+        <field name="examinationentry_id" ref="csf_for_protein_glucose_tc_dc_ada"/>
+        <field name="sequence">90</field>
+        <field name="result_type">text</field>
+    </record>
+
+    <!-- Serum ACE (Angiotensin Converting Enzyme) -->
+    <record id="serum_ace_angiotensin_converting_enzyme" model="examination.entry">
+        <field name="name">Serum ACE (Angiotensin Converting Enzyme)</field>
+        <field name="department" ref="dept_biochemistry"/>
+        <field name="accounts_id" ref="account_income_biochemistry"/>
+        <field name="rate">5000</field>
+        <field name="base_rate">5000</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">pathology</field>
+        <field name="report_layout">tabular</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_gold_sst"/>
+        <field name="sample_type" ref="sample_serum"/>
+        <field name="default_method_id" ref="method_photometry"/>
+        <field name="default_instrument_id" ref="instrument_chem_analyzer"/>
+        <field name="sample_req" eval="True"/>
+    </record>
+
+    <record id="serum_ace_angiotensin_converting_enzyme_c01" model="examination.entry.line">
+        <field name="name">Serum ACE</field>
+        <field name="examinationentry_id" ref="serum_ace_angiotensin_converting_enzyme"/>
+        <field name="sequence">10</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">U/L</field>
+        <field name="reference_value">8 - 52</field>
+        <field name="ref_low">8</field>
+        <field name="ref_high">52</field>
+    </record>
+
+    <!-- Homocysteine -->
+    <record id="homocysteine" model="examination.entry">
+        <field name="name">Homocysteine</field>
+        <field name="department" ref="dept_biochemistry"/>
+        <field name="accounts_id" ref="account_income_biochemistry"/>
+        <field name="rate">3500</field>
+        <field name="base_rate">3500</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">pathology</field>
+        <field name="report_layout">tabular</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_gold_sst"/>
+        <field name="sample_type" ref="sample_serum"/>
+        <field name="default_method_id" ref="method_photometry"/>
+        <field name="default_instrument_id" ref="instrument_chem_analyzer"/>
+        <field name="sample_req" eval="True"/>
+    </record>
+
+    <record id="homocysteine_c01" model="examination.entry.line">
+        <field name="name">Homocysteine</field>
+        <field name="examinationentry_id" ref="homocysteine"/>
+        <field name="sequence">10</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">umol/L</field>
+        <field name="reference_value">5 - 15</field>
+        <field name="ref_low">5</field>
+        <field name="ref_high">15</field>
+    </record>
+
+    <!-- Homa IR (Insulin Resistance Index) -->
+    <record id="homa_ir_insulin_resistance_index" model="examination.entry">
+        <field name="name">Homa IR (Insulin Resistance Index)</field>
+        <field name="department" ref="dept_biochemistry"/>
+        <field name="accounts_id" ref="account_income_biochemistry"/>
+        <field name="rate">2000</field>
+        <field name="base_rate">2000</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">pathology</field>
+        <field name="report_layout">tabular</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_gold_sst"/>
+        <field name="sample_type" ref="sample_serum"/>
+        <field name="default_method_id" ref="method_photometry"/>
+        <field name="default_instrument_id" ref="instrument_chem_analyzer"/>
+        <field name="sample_req" eval="True"/>
+    </record>
+
+    <record id="homa_ir_insulin_resistance_index_c01" model="examination.entry.line">
+        <field name="name">INSULIN RESISTANCE</field>
+        <field name="examinationentry_id" ref="homa_ir_insulin_resistance_index"/>
+        <field name="sequence">10</field>
+        <field name="is_group_header" eval="True"/>
+        <field name="bold" eval="True"/>
+        <field name="result_type">text</field>
+    </record>
+
+    <record id="homa_ir_insulin_resistance_index_c02" model="examination.entry.line">
+        <field name="name">Fasting Blood Sugar</field>
+        <field name="examinationentry_id" ref="homa_ir_insulin_resistance_index"/>
+        <field name="sequence">20</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">mmol/L</field>
+        <field name="reference_value">3.9 - 6.1</field>
+        <field name="ref_low">3.9</field>
+        <field name="ref_high">6.1</field>
+    </record>
+
+    <record id="homa_ir_insulin_resistance_index_c03" model="examination.entry.line">
+        <field name="name">Fasting Insulin</field>
+        <field name="examinationentry_id" ref="homa_ir_insulin_resistance_index"/>
+        <field name="sequence">30</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">uIU/mL</field>
+        <field name="reference_value">2.6 - 24.9</field>
+        <field name="ref_low">2.6</field>
+        <field name="ref_high">24.9</field>
+    </record>
+
+    <record id="homa_ir_insulin_resistance_index_c04" model="examination.entry.line">
+        <field name="name">HOMA-IR</field>
+        <field name="examinationentry_id" ref="homa_ir_insulin_resistance_index"/>
+        <field name="sequence">40</field>
+        <field name="result_type">numeric</field>
+        <field name="reference_value">&lt; 2.5 (insulin sensitive)</field>
+        <field name="ref_high">2.5</field>
+    </record>
+
+    <!-- Random Insulin -->
+    <record id="random_insulin" model="examination.entry">
+        <field name="name">Random Insulin</field>
+        <field name="department" ref="dept_biochemistry"/>
+        <field name="accounts_id" ref="account_income_biochemistry"/>
+        <field name="rate">1400</field>
+        <field name="base_rate">1400</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">pathology</field>
+        <field name="report_layout">tabular</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_gold_sst"/>
+        <field name="sample_type" ref="sample_serum"/>
+        <field name="default_method_id" ref="method_photometry"/>
+        <field name="default_instrument_id" ref="instrument_chem_analyzer"/>
+        <field name="sample_req" eval="True"/>
+    </record>
+
+    <record id="random_insulin_c01" model="examination.entry.line">
+        <field name="name">Insulin (Random)</field>
+        <field name="examinationentry_id" ref="random_insulin"/>
+        <field name="sequence">10</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">uIU/mL</field>
+        <field name="reference_value">2.6 - 24.9</field>
+        <field name="ref_low">2.6</field>
+        <field name="ref_high">24.9</field>
+    </record>
+
+    <!-- C-Peptide -->
+    <record id="c_peptide" model="examination.entry">
+        <field name="name">C-Peptide</field>
+        <field name="department" ref="dept_biochemistry"/>
+        <field name="accounts_id" ref="account_income_biochemistry"/>
+        <field name="rate">1600</field>
+        <field name="base_rate">1600</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">pathology</field>
+        <field name="report_layout">tabular</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_gold_sst"/>
+        <field name="sample_type" ref="sample_serum"/>
+        <field name="default_method_id" ref="method_photometry"/>
+        <field name="default_instrument_id" ref="instrument_chem_analyzer"/>
+        <field name="sample_req" eval="True"/>
+    </record>
+
+    <record id="c_peptide_c01" model="examination.entry.line">
+        <field name="name">C-Peptide (Fasting)</field>
+        <field name="examinationentry_id" ref="c_peptide"/>
+        <field name="sequence">10</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">ng/mL</field>
+        <field name="reference_value">0.8 - 3.9</field>
+        <field name="ref_low">0.8</field>
+        <field name="ref_high">3.9</field>
+    </record>
+
+</odoo>

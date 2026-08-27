@@ -1,0 +1,579 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Dental - 44 catalogue items.
+
+    GENERATED FILE - do not edit by hand.
+    Source: tools/items/dental.py    Rebuild: python3 tools/build_catalogue.py
+
+    Rates carried over from the legacy export are PROVISIONAL and are expected
+    to be revised before go-live.
+-->
+<odoo noupdate="1">
+    <!-- Normal Scaling -->
+    <record id="dental_normal_scaling" model="examination.entry">
+        <field name="name">Normal Scaling</field>
+        <field name="department" ref="dept_dental"/>
+        <field name="accounts_id" ref="account_income_dental"/>
+        <field name="rate">1200</field>
+        <field name="base_rate">1200</field>
+        <field name="service_group">dental</field>
+        <field name="report_type">other</field>
+        <field name="sample_req" eval="False"/>
+        <field name="lab_not_required" eval="True"/>
+    </record>
+
+    <!-- Scaling with Polishing (SP) -->
+    <record id="dental_scaling_polishing" model="examination.entry">
+        <field name="name">Scaling with Polishing (SP)</field>
+        <field name="department" ref="dept_dental"/>
+        <field name="accounts_id" ref="account_income_dental"/>
+        <field name="rate">1500</field>
+        <field name="base_rate">1500</field>
+        <field name="service_group">dental</field>
+        <field name="report_type">other</field>
+        <field name="sample_req" eval="False"/>
+        <field name="lab_not_required" eval="True"/>
+    </record>
+
+    <!-- Scaling & Polishing with Curettage and Deep Curettage -->
+    <record id="dental_scaling_curettage" model="examination.entry">
+        <field name="name">Scaling &amp; Polishing with Curettage and Deep Curettage</field>
+        <field name="department" ref="dept_dental"/>
+        <field name="accounts_id" ref="account_income_dental"/>
+        <field name="rate">2500</field>
+        <field name="base_rate">2500</field>
+        <field name="service_group">dental</field>
+        <field name="report_type">other</field>
+        <field name="sample_req" eval="False"/>
+    </record>
+
+    <!-- Treatment Filling (TF) -->
+    <record id="dental_treatment_filling" model="examination.entry">
+        <field name="name">Treatment Filling (TF)</field>
+        <field name="department" ref="dept_dental"/>
+        <field name="accounts_id" ref="account_income_dental"/>
+        <field name="rate">300</field>
+        <field name="base_rate">300</field>
+        <field name="service_group">dental</field>
+        <field name="report_type">other</field>
+        <field name="sample_req" eval="False"/>
+        <field name="lab_not_required" eval="True"/>
+    </record>
+
+    <!-- Light Cure Filling Type-1 (LCF) -->
+    <record id="dental_lcf_type1" model="examination.entry">
+        <field name="name">Light Cure Filling Type-1 (LCF)</field>
+        <field name="department" ref="dept_dental"/>
+        <field name="accounts_id" ref="account_income_dental"/>
+        <field name="rate">1200</field>
+        <field name="base_rate">1200</field>
+        <field name="service_group">dental</field>
+        <field name="report_type">other</field>
+        <field name="sample_req" eval="False"/>
+        <field name="lab_not_required" eval="True"/>
+    </record>
+
+    <!-- Light Cure Filling Type-2 (LCF) -->
+    <record id="dental_lcf_type2" model="examination.entry">
+        <field name="name">Light Cure Filling Type-2 (LCF)</field>
+        <field name="department" ref="dept_dental"/>
+        <field name="accounts_id" ref="account_income_dental"/>
+        <field name="rate">1500</field>
+        <field name="base_rate">1500</field>
+        <field name="service_group">dental</field>
+        <field name="report_type">other</field>
+        <field name="sample_req" eval="False"/>
+        <field name="lab_not_required" eval="True"/>
+    </record>
+
+    <!-- Light Cure Filling Type-3 (LCF) -->
+    <record id="dental_lcf_type3" model="examination.entry">
+        <field name="name">Light Cure Filling Type-3 (LCF)</field>
+        <field name="department" ref="dept_dental"/>
+        <field name="accounts_id" ref="account_income_dental"/>
+        <field name="rate">2000</field>
+        <field name="base_rate">2000</field>
+        <field name="service_group">dental</field>
+        <field name="report_type">other</field>
+        <field name="sample_req" eval="False"/>
+        <field name="lab_not_required" eval="True"/>
+    </record>
+
+    <!-- Tooth Colour Filling (Glass Ionomer) -->
+    <record id="dental_tooth_colour_gi" model="examination.entry">
+        <field name="name">Tooth Colour Filling (Glass Ionomer)</field>
+        <field name="department" ref="dept_dental"/>
+        <field name="accounts_id" ref="account_income_dental"/>
+        <field name="rate">800</field>
+        <field name="base_rate">800</field>
+        <field name="service_group">dental</field>
+        <field name="report_type">other</field>
+        <field name="sample_req" eval="False"/>
+        <field name="lab_not_required" eval="True"/>
+    </record>
+
+    <!-- Permanent Teeth - Glass Ionomer Filling -->
+    <record id="dental_permanent_gi_filling" model="examination.entry">
+        <field name="name">Permanent Teeth - Glass Ionomer Filling</field>
+        <field name="department" ref="dept_dental"/>
+        <field name="accounts_id" ref="account_income_dental"/>
+        <field name="rate">1500</field>
+        <field name="base_rate">1500</field>
+        <field name="service_group">dental</field>
+        <field name="report_type">other</field>
+        <field name="sample_req" eval="False"/>
+        <field name="lab_not_required" eval="True"/>
+    </record>
+
+    <!-- Dental Dressing -->
+    <record id="dental_dressing" model="examination.entry">
+        <field name="name">Dental Dressing</field>
+        <field name="department" ref="dept_dental"/>
+        <field name="accounts_id" ref="account_income_dental"/>
+        <field name="rate">300</field>
+        <field name="base_rate">300</field>
+        <field name="service_group">dental</field>
+        <field name="report_type">other</field>
+        <field name="sample_req" eval="False"/>
+        <field name="lab_not_required" eval="True"/>
+    </record>
+
+    <!-- RCT (Anterior) -->
+    <record id="dental_rct_anterior" model="examination.entry">
+        <field name="name">RCT (Anterior)</field>
+        <field name="department" ref="dept_dental"/>
+        <field name="accounts_id" ref="account_income_dental"/>
+        <field name="rate">2500</field>
+        <field name="base_rate">2500</field>
+        <field name="service_group">dental</field>
+        <field name="report_type">other</field>
+        <field name="sample_req" eval="False"/>
+        <field name="lab_not_required" eval="True"/>
+    </record>
+
+    <!-- RCT (Posterior) -->
+    <record id="dental_rct_posterior" model="examination.entry">
+        <field name="name">RCT (Posterior)</field>
+        <field name="department" ref="dept_dental"/>
+        <field name="accounts_id" ref="account_income_dental"/>
+        <field name="rate">3000</field>
+        <field name="base_rate">3000</field>
+        <field name="service_group">dental</field>
+        <field name="report_type">other</field>
+        <field name="sample_req" eval="False"/>
+        <field name="lab_not_required" eval="True"/>
+    </record>
+
+    <!-- Re-RCT -->
+    <record id="dental_re_rct" model="examination.entry">
+        <field name="name">Re-RCT</field>
+        <field name="department" ref="dept_dental"/>
+        <field name="accounts_id" ref="account_income_dental"/>
+        <field name="rate">7000</field>
+        <field name="base_rate">7000</field>
+        <field name="service_group">dental</field>
+        <field name="report_type">other</field>
+        <field name="sample_req" eval="False"/>
+        <field name="lab_not_required" eval="True"/>
+    </record>
+
+    <!-- RCT Anterior - Each Visit -->
+    <record id="dental_rct_ant_each_visit" model="examination.entry">
+        <field name="name">RCT Anterior - Each Visit</field>
+        <field name="department" ref="dept_dental"/>
+        <field name="accounts_id" ref="account_income_dental"/>
+        <field name="rate">500</field>
+        <field name="base_rate">500</field>
+        <field name="service_group">dental</field>
+        <field name="report_type">other</field>
+        <field name="sample_req" eval="False"/>
+        <field name="lab_not_required" eval="True"/>
+    </record>
+
+    <!-- RCT Anterior - 2nd Visit -->
+    <record id="dental_rct_ant_2nd_visit" model="examination.entry">
+        <field name="name">RCT Anterior - 2nd Visit</field>
+        <field name="department" ref="dept_dental"/>
+        <field name="accounts_id" ref="account_income_dental"/>
+        <field name="rate">1000</field>
+        <field name="base_rate">1000</field>
+        <field name="service_group">dental</field>
+        <field name="report_type">other</field>
+        <field name="sample_req" eval="False"/>
+        <field name="lab_not_required" eval="True"/>
+    </record>
+
+    <!-- RCT Anterior - 4th Visit -->
+    <record id="dental_rct_ant_4th_visit" model="examination.entry">
+        <field name="name">RCT Anterior - 4th Visit</field>
+        <field name="department" ref="dept_dental"/>
+        <field name="accounts_id" ref="account_income_dental"/>
+        <field name="rate">2000</field>
+        <field name="base_rate">2000</field>
+        <field name="service_group">dental</field>
+        <field name="report_type">other</field>
+        <field name="sample_req" eval="False"/>
+        <field name="lab_not_required" eval="True"/>
+    </record>
+
+    <!-- RCT (Endo Motor) - Each Visit -->
+    <record id="dental_rct_endo_each_visit" model="examination.entry">
+        <field name="name">RCT (Endo Motor) - Each Visit</field>
+        <field name="department" ref="dept_dental"/>
+        <field name="accounts_id" ref="account_income_dental"/>
+        <field name="rate">500</field>
+        <field name="base_rate">500</field>
+        <field name="service_group">dental</field>
+        <field name="report_type">other</field>
+        <field name="sample_req" eval="False"/>
+        <field name="lab_not_required" eval="True"/>
+    </record>
+
+    <!-- RCT (Endo Motor) - Visit 1 -->
+    <record id="dental_rct_endo_visit1" model="examination.entry">
+        <field name="name">RCT (Endo Motor) - Visit 1</field>
+        <field name="department" ref="dept_dental"/>
+        <field name="accounts_id" ref="account_income_dental"/>
+        <field name="rate">1000</field>
+        <field name="base_rate">1000</field>
+        <field name="service_group">dental</field>
+        <field name="report_type">other</field>
+        <field name="sample_req" eval="False"/>
+        <field name="lab_not_required" eval="True"/>
+    </record>
+
+    <!-- RCT (Endo Motor) - Visit 2 -->
+    <record id="dental_rct_endo_visit2" model="examination.entry">
+        <field name="name">RCT (Endo Motor) - Visit 2</field>
+        <field name="department" ref="dept_dental"/>
+        <field name="accounts_id" ref="account_income_dental"/>
+        <field name="rate">2000</field>
+        <field name="base_rate">2000</field>
+        <field name="service_group">dental</field>
+        <field name="report_type">other</field>
+        <field name="sample_req" eval="False"/>
+        <field name="lab_not_required" eval="True"/>
+    </record>
+
+    <!-- RCT (Endo Motor) - Visit 4 -->
+    <record id="dental_rct_endo_visit4" model="examination.entry">
+        <field name="name">RCT (Endo Motor) - Visit 4</field>
+        <field name="department" ref="dept_dental"/>
+        <field name="accounts_id" ref="account_income_dental"/>
+        <field name="rate">4000</field>
+        <field name="base_rate">4000</field>
+        <field name="service_group">dental</field>
+        <field name="report_type">other</field>
+        <field name="sample_req" eval="False"/>
+        <field name="lab_not_required" eval="True"/>
+    </record>
+
+    <!-- RCT (Endo Motor) - Complete Treatment -->
+    <record id="dental_rct_endo_complete" model="examination.entry">
+        <field name="name">RCT (Endo Motor) - Complete Treatment</field>
+        <field name="department" ref="dept_dental"/>
+        <field name="accounts_id" ref="account_income_dental"/>
+        <field name="rate">4000</field>
+        <field name="base_rate">4000</field>
+        <field name="service_group">dental</field>
+        <field name="report_type">other</field>
+        <field name="sample_req" eval="False"/>
+        <field name="lab_not_required" eval="True"/>
+    </record>
+
+    <!-- RCT with Infection -->
+    <record id="dental_rct_infection" model="examination.entry">
+        <field name="name">RCT with Infection</field>
+        <field name="department" ref="dept_dental"/>
+        <field name="accounts_id" ref="account_income_dental"/>
+        <field name="rate">6500</field>
+        <field name="base_rate">6500</field>
+        <field name="service_group">dental</field>
+        <field name="report_type">other</field>
+        <field name="sample_req" eval="False"/>
+        <field name="lab_not_required" eval="True"/>
+    </record>
+
+    <!-- Pulpectomy -->
+    <record id="dental_pulpectomy" model="examination.entry">
+        <field name="name">Pulpectomy</field>
+        <field name="department" ref="dept_dental"/>
+        <field name="accounts_id" ref="account_income_dental"/>
+        <field name="rate">3000</field>
+        <field name="base_rate">3000</field>
+        <field name="service_group">dental</field>
+        <field name="report_type">other</field>
+        <field name="sample_req" eval="False"/>
+        <field name="lab_not_required" eval="True"/>
+    </record>
+
+    <!-- Pulpotomy -->
+    <record id="dental_pulpotomy" model="examination.entry">
+        <field name="name">Pulpotomy</field>
+        <field name="department" ref="dept_dental"/>
+        <field name="accounts_id" ref="account_income_dental"/>
+        <field name="rate">2500</field>
+        <field name="base_rate">2500</field>
+        <field name="service_group">dental</field>
+        <field name="report_type">other</field>
+        <field name="sample_req" eval="False"/>
+        <field name="lab_not_required" eval="True"/>
+    </record>
+
+    <!-- Apicectomy - 2 Teeth -->
+    <record id="dental_apicectomy_2" model="examination.entry">
+        <field name="name">Apicectomy - 2 Teeth</field>
+        <field name="department" ref="dept_dental"/>
+        <field name="accounts_id" ref="account_income_dental"/>
+        <field name="rate">3500</field>
+        <field name="base_rate">3500</field>
+        <field name="service_group">dental</field>
+        <field name="report_type">other</field>
+        <field name="sample_req" eval="False"/>
+    </record>
+
+    <!-- Apicectomy - 4 Teeth -->
+    <record id="dental_apicectomy_4" model="examination.entry">
+        <field name="name">Apicectomy - 4 Teeth</field>
+        <field name="department" ref="dept_dental"/>
+        <field name="accounts_id" ref="account_income_dental"/>
+        <field name="rate">7000</field>
+        <field name="base_rate">7000</field>
+        <field name="service_group">dental</field>
+        <field name="report_type">other</field>
+        <field name="sample_req" eval="False"/>
+    </record>
+
+    <!-- Milk Teeth Extraction -->
+    <record id="dental_milk_teeth_extraction" model="examination.entry">
+        <field name="name">Milk Teeth Extraction</field>
+        <field name="department" ref="dept_dental"/>
+        <field name="accounts_id" ref="account_income_dental"/>
+        <field name="rate">500</field>
+        <field name="base_rate">500</field>
+        <field name="service_group">dental</field>
+        <field name="report_type">other</field>
+        <field name="sample_req" eval="False"/>
+        <field name="lab_not_required" eval="True"/>
+    </record>
+
+    <!-- Permanent Teeth Extraction (Anterior) - Simple -->
+    <record id="dental_extraction_anterior_simple" model="examination.entry">
+        <field name="name">Permanent Teeth Extraction (Anterior) - Simple</field>
+        <field name="department" ref="dept_dental"/>
+        <field name="accounts_id" ref="account_income_dental"/>
+        <field name="rate">2000</field>
+        <field name="base_rate">2000</field>
+        <field name="service_group">dental</field>
+        <field name="report_type">other</field>
+        <field name="sample_req" eval="False"/>
+        <field name="lab_not_required" eval="True"/>
+    </record>
+
+    <!-- Permanent Teeth Extraction (Posterior) - Simple -->
+    <record id="dental_extraction_posterior_simple" model="examination.entry">
+        <field name="name">Permanent Teeth Extraction (Posterior) - Simple</field>
+        <field name="department" ref="dept_dental"/>
+        <field name="accounts_id" ref="account_income_dental"/>
+        <field name="rate">3000</field>
+        <field name="base_rate">3000</field>
+        <field name="service_group">dental</field>
+        <field name="report_type">other</field>
+        <field name="sample_req" eval="False"/>
+        <field name="lab_not_required" eval="True"/>
+    </record>
+
+    <!-- Surgical Extraction - Upper -->
+    <record id="dental_surgical_extraction_upper" model="examination.entry">
+        <field name="name">Surgical Extraction - Upper</field>
+        <field name="department" ref="dept_dental"/>
+        <field name="accounts_id" ref="account_income_dental"/>
+        <field name="rate">3500</field>
+        <field name="base_rate">3500</field>
+        <field name="service_group">dental</field>
+        <field name="report_type">other</field>
+        <field name="sample_req" eval="False"/>
+        <field name="lab_not_required" eval="True"/>
+    </record>
+
+    <!-- Surgical Extraction - Lower -->
+    <record id="dental_surgical_extraction_lower" model="examination.entry">
+        <field name="name">Surgical Extraction - Lower</field>
+        <field name="department" ref="dept_dental"/>
+        <field name="accounts_id" ref="account_income_dental"/>
+        <field name="rate">6000</field>
+        <field name="base_rate">6000</field>
+        <field name="service_group">dental</field>
+        <field name="report_type">other</field>
+        <field name="sample_req" eval="False"/>
+        <field name="lab_not_required" eval="True"/>
+    </record>
+
+    <!-- Surgical Extraction - Lower Mesio-Angular -->
+    <record id="dental_surgical_extraction_mesioangular" model="examination.entry">
+        <field name="name">Surgical Extraction - Lower Mesio-Angular</field>
+        <field name="department" ref="dept_dental"/>
+        <field name="accounts_id" ref="account_income_dental"/>
+        <field name="rate">7000</field>
+        <field name="base_rate">7000</field>
+        <field name="service_group">dental</field>
+        <field name="report_type">other</field>
+        <field name="sample_req" eval="False"/>
+        <field name="lab_not_required" eval="True"/>
+    </record>
+
+    <!-- Surgical Extraction - Horizontal / Angular / Vertical -->
+    <record id="dental_surgical_extraction_hav" model="examination.entry">
+        <field name="name">Surgical Extraction - Horizontal / Angular / Vertical</field>
+        <field name="department" ref="dept_dental"/>
+        <field name="accounts_id" ref="account_income_dental"/>
+        <field name="rate">7000</field>
+        <field name="base_rate">7000</field>
+        <field name="service_group">dental</field>
+        <field name="report_type">other</field>
+        <field name="sample_req" eval="False"/>
+        <field name="lab_not_required" eval="True"/>
+    </record>
+
+    <!-- Cap Visit -->
+    <record id="dental_cap_visit" model="examination.entry">
+        <field name="name">Cap Visit</field>
+        <field name="department" ref="dept_dental"/>
+        <field name="accounts_id" ref="account_income_dental"/>
+        <field name="rate">1000</field>
+        <field name="base_rate">1000</field>
+        <field name="service_group">dental</field>
+        <field name="report_type">other</field>
+        <field name="sample_req" eval="False"/>
+        <field name="lab_not_required" eval="True"/>
+    </record>
+
+    <!-- Cast Post & Crown (Each Unit) -->
+    <record id="dental_cast_post_crown" model="examination.entry">
+        <field name="name">Cast Post &amp; Crown (Each Unit)</field>
+        <field name="department" ref="dept_dental"/>
+        <field name="accounts_id" ref="account_income_dental"/>
+        <field name="rate">7000</field>
+        <field name="base_rate">7000</field>
+        <field name="service_group">dental</field>
+        <field name="report_type">other</field>
+        <field name="sample_req" eval="False"/>
+        <field name="lab_not_required" eval="True"/>
+    </record>
+
+    <!-- Porcelain Cap (1 Unit) -->
+    <record id="dental_porcelain_cap" model="examination.entry">
+        <field name="name">Porcelain Cap (1 Unit)</field>
+        <field name="department" ref="dept_dental"/>
+        <field name="accounts_id" ref="account_income_dental"/>
+        <field name="rate">4500</field>
+        <field name="base_rate">4500</field>
+        <field name="service_group">dental</field>
+        <field name="report_type">other</field>
+        <field name="sample_req" eval="False"/>
+        <field name="lab_not_required" eval="True"/>
+    </record>
+
+    <!-- Zirconia Crown -->
+    <record id="dental_zirconia_crown" model="examination.entry">
+        <field name="name">Zirconia Crown</field>
+        <field name="department" ref="dept_dental"/>
+        <field name="accounts_id" ref="account_income_dental"/>
+        <field name="rate">20000</field>
+        <field name="base_rate">20000</field>
+        <field name="service_group">dental</field>
+        <field name="report_type">other</field>
+        <field name="sample_req" eval="False"/>
+    </record>
+
+    <!-- Partial Denture (Per Unit) -->
+    <record id="dental_partial_denture" model="examination.entry">
+        <field name="name">Partial Denture (Per Unit)</field>
+        <field name="department" ref="dept_dental"/>
+        <field name="accounts_id" ref="account_income_dental"/>
+        <field name="rate">1000</field>
+        <field name="base_rate">1000</field>
+        <field name="service_group">dental</field>
+        <field name="report_type">other</field>
+        <field name="sample_req" eval="False"/>
+        <field name="lab_not_required" eval="True"/>
+    </record>
+
+    <!-- Complete Denture (Upper) -->
+    <record id="dental_complete_denture_upper" model="examination.entry">
+        <field name="name">Complete Denture (Upper)</field>
+        <field name="department" ref="dept_dental"/>
+        <field name="accounts_id" ref="account_income_dental"/>
+        <field name="rate">12000</field>
+        <field name="base_rate">12000</field>
+        <field name="service_group">dental</field>
+        <field name="report_type">other</field>
+        <field name="sample_req" eval="False"/>
+    </record>
+
+    <!-- Complete Denture (Lower) -->
+    <record id="dental_complete_denture_lower" model="examination.entry">
+        <field name="name">Complete Denture (Lower)</field>
+        <field name="department" ref="dept_dental"/>
+        <field name="accounts_id" ref="account_income_dental"/>
+        <field name="rate">12000</field>
+        <field name="base_rate">12000</field>
+        <field name="service_group">dental</field>
+        <field name="report_type">other</field>
+        <field name="sample_req" eval="False"/>
+    </record>
+
+    <!-- Complete Denture (Upper & Lower) -->
+    <record id="dental_complete_denture_both" model="examination.entry">
+        <field name="name">Complete Denture (Upper &amp; Lower)</field>
+        <field name="department" ref="dept_dental"/>
+        <field name="accounts_id" ref="account_income_dental"/>
+        <field name="rate">24000</field>
+        <field name="base_rate">24000</field>
+        <field name="service_group">dental</field>
+        <field name="report_type">other</field>
+        <field name="sample_req" eval="False"/>
+    </record>
+
+    <!-- Gingivectomy (Per Tooth) -->
+    <record id="dental_gingivectomy" model="examination.entry">
+        <field name="name">Gingivectomy (Per Tooth)</field>
+        <field name="department" ref="dept_dental"/>
+        <field name="accounts_id" ref="account_income_dental"/>
+        <field name="rate">1500</field>
+        <field name="base_rate">1500</field>
+        <field name="service_group">dental</field>
+        <field name="report_type">other</field>
+        <field name="sample_req" eval="False"/>
+    </record>
+
+    <!-- Dental X-Ray (IOPA) -->
+    <record id="dental_xray" model="examination.entry">
+        <field name="name">Dental X-Ray (IOPA)</field>
+        <field name="department" ref="dept_dental"/>
+        <field name="accounts_id" ref="account_income_dental"/>
+        <field name="rate">200</field>
+        <field name="base_rate">200</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">radiology</field>
+        <field name="report_layout">narrative</field>
+        <field name="report_type">radiology</field>
+        <field name="sample_req" eval="False"/>
+        <field name="lab_not_required" eval="True"/>
+    </record>
+
+    <!-- RVG Dental X-Ray -->
+    <record id="dental_rvg_xray" model="examination.entry">
+        <field name="name">RVG Dental X-Ray</field>
+        <field name="department" ref="dept_dental"/>
+        <field name="accounts_id" ref="account_income_dental"/>
+        <field name="rate">300</field>
+        <field name="base_rate">300</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">radiology</field>
+        <field name="report_layout">narrative</field>
+        <field name="report_type">radiology</field>
+        <field name="sample_req" eval="False"/>
+    </record>
+
+</odoo>

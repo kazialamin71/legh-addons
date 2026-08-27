@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Transfusion Medicine - 2 catalogue items.
+
+    GENERATED FILE - do not edit by hand.
+    Source: tools/items/transfusion.py    Rebuild: python3 tools/build_catalogue.py
+
+    Rates carried over from the legacy export are PROVISIONAL and are expected
+    to be revised before go-live.
+-->
+<odoo noupdate="1">
+    <!-- Cross Matching + Screening + Drawing -->
+    <record id="cross_matching_screening_drawing" model="examination.entry">
+        <field name="name">Cross Matching + Screening + Drawing</field>
+        <field name="department" ref="dept_transfusion"/>
+        <field name="accounts_id" ref="account_income_transfusion"/>
+        <field name="rate">1500</field>
+        <field name="base_rate">1500</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">pathology</field>
+        <field name="report_layout">transfusion</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_lavender"/>
+        <field name="sample_type" ref="sample_whole_blood"/>
+        <field name="default_method_id" ref="method_agglutination"/>
+        <field name="default_instrument_id" ref="instrument_microscope"/>
+        <field name="sample_req" eval="True"/>
+        <field name="needs_separate_tube" eval="True"/>
+    </record>
+
+    <record id="cross_matching_screening_drawing_c01" model="examination.entry.line">
+        <field name="name">COMPATIBILITY TESTING</field>
+        <field name="examinationentry_id" ref="cross_matching_screening_drawing"/>
+        <field name="sequence">10</field>
+        <field name="is_group_header" eval="True"/>
+        <field name="bold" eval="True"/>
+        <field name="result_type">text</field>
+    </record>
+
+    <record id="cross_matching_screening_drawing_c02" model="examination.entry.line">
+        <field name="name">Cross Match (Immediate Spin)</field>
+        <field name="examinationentry_id" ref="cross_matching_screening_drawing"/>
+        <field name="sequence">20</field>
+        <field name="result_type">selection</field>
+        <field name="reference_value">Compatible</field>
+    </record>
+
+    <record id="cross_matching_screening_drawing_c02_v01" model="examination.possible.value">
+        <field name="name">Compatible</field>
+        <field name="examination_line_id" ref="cross_matching_screening_drawing_c02"/>
+        <field name="sequence">10</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="cross_matching_screening_drawing_c02_v02" model="examination.possible.value">
+        <field name="name">Incompatible</field>
+        <field name="examination_line_id" ref="cross_matching_screening_drawing_c02"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="cross_matching_screening_drawing_c03" model="examination.entry.line">
+        <field name="name">Cross Match (37 C / AHG Phase)</field>
+        <field name="examinationentry_id" ref="cross_matching_screening_drawing"/>
+        <field name="sequence">30</field>
+        <field name="result_type">selection</field>
+        <field name="reference_value">Compatible</field>
+    </record>
+
+    <record id="cross_matching_screening_drawing_c03_v01" model="examination.possible.value">
+        <field name="name">Compatible</field>
+        <field name="examination_line_id" ref="cross_matching_screening_drawing_c03"/>
+        <field name="sequence">10</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="cross_matching_screening_drawing_c03_v02" model="examination.possible.value">
+        <field name="name">Incompatible</field>
+        <field name="examination_line_id" ref="cross_matching_screening_drawing_c03"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="cross_matching_screening_drawing_c04" model="examination.entry.line">
+        <field name="name">MANDATORY DONOR SCREENING</field>
+        <field name="examinationentry_id" ref="cross_matching_screening_drawing"/>
+        <field name="sequence">40</field>
+        <field name="is_group_header" eval="True"/>
+        <field name="bold" eval="True"/>
+        <field name="result_type">text</field>
+    </record>
+
+    <record id="cross_matching_screening_drawing_c05" model="examination.entry.line">
+        <field name="name">HBsAg</field>
+        <field name="examinationentry_id" ref="cross_matching_screening_drawing"/>
+        <field name="sequence">50</field>
+        <field name="result_type">selection</field>
+        <field name="reference_value">Negative</field>
+    </record>
+
+    <record id="cross_matching_screening_drawing_c05_v01" model="examination.possible.value">
+        <field name="name">Negative</field>
+        <field name="examination_line_id" ref="cross_matching_screening_drawing_c05"/>
+        <field name="sequence">10</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="cross_matching_screening_drawing_c05_v02" model="examination.possible.value">
+        <field name="name">Positive</field>
+        <field name="examination_line_id" ref="cross_matching_screening_drawing_c05"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="cross_matching_screening_drawing_c06" model="examination.entry.line">
+        <field name="name">Anti-HCV</field>
+        <field name="examinationentry_id" ref="cross_matching_screening_drawing"/>
+        <field name="sequence">60</field>
+        <field name="result_type">selection</field>
+        <field name="reference_value">Negative</field>
+    </record>
+
+    <record id="cross_matching_screening_drawing_c06_v01" model="examination.possible.value">
+        <field name="name">Negative</field>
+        <field name="examination_line_id" ref="cross_matching_screening_drawing_c06"/>
+        <field name="sequence">10</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="cross_matching_screening_drawing_c06_v02" model="examination.possible.value">
+        <field name="name">Positive</field>
+        <field name="examination_line_id" ref="cross_matching_screening_drawing_c06"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="cross_matching_screening_drawing_c07" model="examination.entry.line">
+        <field name="name">Anti-HIV 1 &amp; 2</field>
+        <field name="examinationentry_id" ref="cross_matching_screening_drawing"/>
+        <field name="sequence">70</field>
+        <field name="result_type">selection</field>
+        <field name="reference_value">Negative</field>
+    </record>
+
+    <record id="cross_matching_screening_drawing_c07_v01" model="examination.possible.value">
+        <field name="name">Negative</field>
+        <field name="examination_line_id" ref="cross_matching_screening_drawing_c07"/>
+        <field name="sequence">10</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="cross_matching_screening_drawing_c07_v02" model="examination.possible.value">
+        <field name="name">Positive</field>
+        <field name="examination_line_id" ref="cross_matching_screening_drawing_c07"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="cross_matching_screening_drawing_c08" model="examination.entry.line">
+        <field name="name">VDRL / Syphilis</field>
+        <field name="examinationentry_id" ref="cross_matching_screening_drawing"/>
+        <field name="sequence">80</field>
+        <field name="result_type">selection</field>
+        <field name="reference_value">Negative</field>
+    </record>
+
+    <record id="cross_matching_screening_drawing_c08_v01" model="examination.possible.value">
+        <field name="name">Negative</field>
+        <field name="examination_line_id" ref="cross_matching_screening_drawing_c08"/>
+        <field name="sequence">10</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="cross_matching_screening_drawing_c08_v02" model="examination.possible.value">
+        <field name="name">Positive</field>
+        <field name="examination_line_id" ref="cross_matching_screening_drawing_c08"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="cross_matching_screening_drawing_c09" model="examination.entry.line">
+        <field name="name">Malarial Parasite</field>
+        <field name="examinationentry_id" ref="cross_matching_screening_drawing"/>
+        <field name="sequence">90</field>
+        <field name="result_type">selection</field>
+        <field name="reference_value">Negative</field>
+    </record>
+
+    <record id="cross_matching_screening_drawing_c09_v01" model="examination.possible.value">
+        <field name="name">Negative</field>
+        <field name="examination_line_id" ref="cross_matching_screening_drawing_c09"/>
+        <field name="sequence">10</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="cross_matching_screening_drawing_c09_v02" model="examination.possible.value">
+        <field name="name">Positive</field>
+        <field name="examination_line_id" ref="cross_matching_screening_drawing_c09"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="cross_matching_screening_drawing_c10" model="examination.entry.line">
+        <field name="name">Note</field>
+        <field name="examinationentry_id" ref="cross_matching_screening_drawing"/>
+        <field name="sequence">100</field>
+        <field name="result_type">text</field>
+        <field name="default_value">Blood issued only after all five mandatory screening tests are non-reactive and the cross match is compatible in both phases.</field>
+    </record>
+
+    <!-- Blood Grouping & Rh (Donor) -->
+    <record id="blood_grouping_donor" model="examination.entry">
+        <field name="name">Blood Grouping &amp; Rh (Donor)</field>
+        <field name="department" ref="dept_transfusion"/>
+        <field name="accounts_id" ref="account_income_transfusion"/>
+        <field name="rate">200</field>
+        <field name="base_rate">200</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">pathology</field>
+        <field name="report_layout">tabular</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_lavender"/>
+        <field name="sample_type" ref="sample_whole_blood"/>
+        <field name="default_method_id" ref="method_agglutination"/>
+        <field name="sample_req" eval="True"/>
+    </record>
+
+    <record id="blood_grouping_donor_c01" model="examination.entry.line">
+        <field name="name">DONOR BLOOD GROUPING</field>
+        <field name="examinationentry_id" ref="blood_grouping_donor"/>
+        <field name="sequence">10</field>
+        <field name="is_group_header" eval="True"/>
+        <field name="bold" eval="True"/>
+        <field name="result_type">text</field>
+    </record>
+
+    <record id="blood_grouping_donor_c02" model="examination.entry.line">
+        <field name="name">ABO Group</field>
+        <field name="examinationentry_id" ref="blood_grouping_donor"/>
+        <field name="sequence">20</field>
+        <field name="result_type">selection</field>
+    </record>
+
+    <record id="blood_grouping_donor_c02_v01" model="examination.possible.value">
+        <field name="name">A</field>
+        <field name="examination_line_id" ref="blood_grouping_donor_c02"/>
+        <field name="sequence">10</field>
+    </record>
+
+    <record id="blood_grouping_donor_c02_v02" model="examination.possible.value">
+        <field name="name">B</field>
+        <field name="examination_line_id" ref="blood_grouping_donor_c02"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="blood_grouping_donor_c02_v03" model="examination.possible.value">
+        <field name="name">AB</field>
+        <field name="examination_line_id" ref="blood_grouping_donor_c02"/>
+        <field name="sequence">30</field>
+    </record>
+
+    <record id="blood_grouping_donor_c02_v04" model="examination.possible.value">
+        <field name="name">O</field>
+        <field name="examination_line_id" ref="blood_grouping_donor_c02"/>
+        <field name="sequence">40</field>
+    </record>
+
+    <record id="blood_grouping_donor_c03" model="examination.entry.line">
+        <field name="name">Rh (D) Factor</field>
+        <field name="examinationentry_id" ref="blood_grouping_donor"/>
+        <field name="sequence">30</field>
+        <field name="result_type">selection</field>
+        <field name="reference_value">Positive</field>
+    </record>
+
+    <record id="blood_grouping_donor_c03_v01" model="examination.possible.value">
+        <field name="name">Positive</field>
+        <field name="examination_line_id" ref="blood_grouping_donor_c03"/>
+        <field name="sequence">10</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="blood_grouping_donor_c03_v02" model="examination.possible.value">
+        <field name="name">Negative</field>
+        <field name="examination_line_id" ref="blood_grouping_donor_c03"/>
+        <field name="sequence">20</field>
+    </record>
+
+</odoo>

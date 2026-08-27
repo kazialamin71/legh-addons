@@ -17,8 +17,10 @@
   <menuitem id="menu_leis_requisition" name="Requisition" parent="menu_leis_root" sequence="140"/>
   <menuitem id="menu_leis_inventory_product_entry" name="Inventory Product Entry" parent="menu_leis_root" sequence="150"/>
   <menuitem id="menu_leis_others" name="Others" parent="menu_leis_root" sequence="160"/>
+  <menuitem id="menu_leis_reports" name="Reports" parent="menu_leis_root" sequence="165"/>
+  <menuitem id="menu_collection_report_user" name="User wise Cash Collection" parent="menu_leis_reports" action="leih_collection_report_action" sequence="10"/>
+  <menuitem id="menu_collection_report_detail" name="Cash Collection Details" parent="menu_leis_reports" action="leih_collection_detail_action" sequence="20"/>
   <menuitem id="menu_lab_sample_collection" name="Sample Collection" parent="menu_leis_lab" action="action_lab_sample_collection" sequence="10"/>
-  <menuitem id="menu_lab_pending" name="Pending in Lab" parent="menu_leis_lab" action="diagnosis_sticker_lab_action" sequence="11"/>
   <menuitem id="menu_lab_specimens" name="Lab Specimens" parent="menu_leis_lab" action="lab_specimen_action" sequence="11"/>
   <menuitem id="menu_lab_results" name="Lab Results" parent="menu_leis_lab" action="examination_result_action" sequence="12"/>
   <menuitem id="menu_discount_pending" name="Pending Discount" parent="menu_leis_discount" action="discount_pending_action" sequence="10"/>
@@ -33,6 +35,7 @@
   <menuitem id="menu_brokers_info" name="BrokersInfo" parent="menu_leis_profile" action="brokers_info_action" sequence="1"/>
   <menuitem id="menu_doctors_profile" name="DoctorsProfile" parent="menu_leis_profile" action="doctors_profile_action" sequence="2"/>
   <menuitem id="menu_diagnosis_group" name="Group" parent="menu_leis_configuration" action="diagnosis_group_action" sequence="12"/>
+  <menuitem id="menu_admission_charge_item" name="Admission Charge Items" parent="menu_leis_configuration" action="admission_charge_item_action" sequence="13"/>
   <menuitem id="menu_patient_info" name="Patient Info" parent="menu_leis_profile" action="patient_info_action" sequence="3"/>
  <menuitem id="menu_leih_admission" name="Add new" parent="menu_leis_admission" action="leih_admission_action" sequence="15"/>
   <menuitem id="menu_leih_admission_line" name="LeihAdmissionLine" parent="menu_leis_others" action="leih_admission_line_action" sequence="18"/>
@@ -49,8 +52,11 @@
   <menuitem id="menu_ambulance_booking" name="AmbulanceBooking" parent="menu_leis_others" action="ambulance_booking_action" sequence="28"/>
   <menuitem id="menu_ambulance_expense" name="AmbulanceExpense" parent="menu_leis_others" action="ambulance_expense_action" sequence="29"/>
   <menuitem id="menu_appointment_booking" name="Appointment Booking" parent="menu_leis_appointment" action="appointment_booking_action" sequence="10"/>
-  <menuitem id="menu_appointment_paid" name="Appointment Paid" parent="menu_leis_appointment" action="appointment_paid_action" sequence="11"/>
-  <menuitem id="menu_appointment_payment" name="Appointment payment" parent="menu_leis_appointment" action="appointment_payment_action" sequence="12"/>
+  <!-- Appointment Paid / Appointment payment: legacy leih19 models, never used
+       (both tables empty). Off the menu; the models and their data are untouched,
+       so uncommenting these lines brings them straight back. -->
+  <!-- <menuitem id="menu_appointment_paid" name="Appointment Paid" parent="menu_leis_appointment" action="appointment_paid_action" sequence="11"/> -->
+  <!-- <menuitem id="menu_appointment_payment" name="Appointment payment" parent="menu_leis_appointment" action="appointment_payment_action" sequence="12"/> -->
   <!-- <menuitem id="menu_appointment_payment_line" name="AppointmentPaymentLine" parent="menu_leis_others" action="appointment_payment_line_action" sequence="33"/> -->
   <!-- <menuitem id="menu_add_bill" name="AddBill" parent="menu_leis_others" action="add_bill_action" sequence="34"/> -->
   

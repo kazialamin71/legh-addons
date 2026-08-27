@@ -102,6 +102,10 @@ class HospitalAdmission(models.Model):
         'hospital.admission.line', 'hospital.bill.line', 'hospital.bed.line',
         'doctor.profile.admission.line', 'hospital.medicine.line',
     )
+    # admission.charge.item.charge_type -> charge.service_type (1:1)
+    _CHARGE_TYPE_MAP = {
+        'admission': 'admission', 'icu': 'icu', 'nicu': 'nicu', 'other': 'other',
+    }
 
     @api.onchange('other_discount')
     def _onchange_other_discount(self):
@@ -215,16 +219,15 @@ class HospitalAdmission(models.Model):
         self.charge_ids.filtered(lambda c: c.source_model in self._FEEDER_MODELS).unlink()
         vals_list = []
 
-        # 1) Investigations entered directly on the admission
+        # 1) Admission / ICU / NICU / other charges entered on the admission
+        #    lines, billed from the admission charge catalogue.
         for il in self.leih_admission_line_id:
-            entry = il.name
-            sg = (entry.service_group if entry else 'diagnostic') or 'diagnostic'
+            item = il.name
             vals_list.append({
                 'admission_id': self.id,
-                'service_type': self._SERVICE_GROUP_MAP.get(sg, 'other'),
-                'item_id': entry.id if entry else False,
-                'description': entry.name if entry else (il.department or 'Item'),
-                'unit_id': entry.department.id if entry and entry.department else False,
+                'service_type': self._CHARGE_TYPE_MAP.get(il.charge_type, 'other'),
+                'description': item.name if item else (il.department or 'Charge'),
+                'unit_id': item.department.id if item and item.department else False,
                 'qty': il.product_qty or 1.0,
                 'unit_price': il.price,
                 'discount': il.total_discount or 0.0,
@@ -274,6 +277,7 @@ class HospitalAdmission(models.Model):
                 'qty': dl.doctor_visit_qty or 1.0,
                 'unit_price': dl.visit_fee,
                 'discount': 0.0,
+                'date': dl.visit_datetime or self.date,
                 'source_model': 'doctor.profile.admission.line', 'source_res_id': dl.id,
             })
 

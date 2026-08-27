@@ -122,6 +122,16 @@ class HospitalAdmission(models.Model):
     to_be_paid = fields.Float(string="To be Paid")
     account_number = fields.Char(string="Account Number")
 
+    # --- Guardian / attendant (shown on its own notebook page) ---
+    guardian_name = fields.Char(string="Guardian Name")
+    guardian_relation = fields.Char(string="Relation with Patient")
+    guardian_occupation = fields.Char(string="Guardian Occupation")
+    guardian_contact = fields.Char(string="Guardian Contact No")
+
+    # Investigation bills raised for this admitted patient.
+    investigation_bill_ids = fields.One2many(
+        'bill.register', 'general_admission_id', string='Investigation Bills')
+
     father_name = fields.Char(string="Father's Name")
     mother_name = fields.Char(string="Mother's Name")
     spouse_name = fields.Char(string="Spouse Name")
@@ -251,10 +261,14 @@ class HospitalAdmission(models.Model):
             line_commands = [(5, 0, 0)]
             rec.other_discount = rec.package_name.total_without_discount - rec.package_name.total
 
+            ChargeItem = self.env["admission.charge.item"]
             for item in rec.package_name.examine_package_line_id:
+                # Package lines are examination entries; admission lines bill
+                # from the charge catalogue, so mirror the entry into it.
+                charge_item = ChargeItem._from_examination_entry(item.name)
                 line_commands.append(
                     (0, 0, {
-                        "name": item.name.id,
+                        "name": charge_item.id,
                         "total_amount": item.total_amount,
                         "price": item.price,
                         "flat_discount": item.discount,

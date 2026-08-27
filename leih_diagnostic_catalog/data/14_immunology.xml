@@ -1,0 +1,2107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Immunology - 45 catalogue items.
+
+    GENERATED FILE - do not edit by hand.
+    Source: tools/items/immunology.py    Rebuild: python3 tools/build_catalogue.py
+
+    Rates carried over from the legacy export are PROVISIONAL and are expected
+    to be revised before go-live.
+-->
+<odoo noupdate="1">
+    <!-- HBsAg (Quantitative) -->
+    <record id="hbsag_quantitative" model="examination.entry">
+        <field name="name">HBsAg (Quantitative)</field>
+        <field name="department" ref="dept_immunology"/>
+        <field name="accounts_id" ref="account_income_immunology"/>
+        <field name="rate">1200</field>
+        <field name="base_rate">1200</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">pathology</field>
+        <field name="report_layout">tabular</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_gold_sst"/>
+        <field name="sample_type" ref="sample_serum"/>
+        <field name="default_method_id" ref="method_clia"/>
+        <field name="default_instrument_id" ref="instrument_immunoassay"/>
+        <field name="sample_req" eval="True"/>
+    </record>
+
+    <record id="hbsag_quantitative_c01" model="examination.entry.line">
+        <field name="name">HBsAg</field>
+        <field name="examinationentry_id" ref="hbsag_quantitative"/>
+        <field name="sequence">10</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">IU/mL</field>
+        <field name="reference_value">&lt; 0.05 (Non-reactive)</field>
+        <field name="ref_high">0.05</field>
+    </record>
+
+    <record id="hbsag_quantitative_c02" model="examination.entry.line">
+        <field name="name">Interpretation</field>
+        <field name="examinationentry_id" ref="hbsag_quantitative"/>
+        <field name="sequence">20</field>
+        <field name="result_type">selection</field>
+        <field name="reference_value">Non-Reactive</field>
+    </record>
+
+    <record id="hbsag_quantitative_c02_v01" model="examination.possible.value">
+        <field name="name">Non-Reactive</field>
+        <field name="examination_line_id" ref="hbsag_quantitative_c02"/>
+        <field name="sequence">10</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="hbsag_quantitative_c02_v02" model="examination.possible.value">
+        <field name="name">Reactive</field>
+        <field name="examination_line_id" ref="hbsag_quantitative_c02"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <!-- Anti-HCV -->
+    <record id="anti_hcv" model="examination.entry">
+        <field name="name">Anti-HCV</field>
+        <field name="department" ref="dept_immunology"/>
+        <field name="accounts_id" ref="account_income_immunology"/>
+        <field name="rate">1200</field>
+        <field name="base_rate">1200</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">pathology</field>
+        <field name="report_layout">tabular</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_gold_sst"/>
+        <field name="sample_type" ref="sample_serum"/>
+        <field name="default_method_id" ref="method_elisa"/>
+        <field name="default_instrument_id" ref="instrument_immunoassay"/>
+        <field name="sample_req" eval="True"/>
+    </record>
+
+    <record id="anti_hcv_c01" model="examination.entry.line">
+        <field name="name">Anti-HCV</field>
+        <field name="examinationentry_id" ref="anti_hcv"/>
+        <field name="sequence">10</field>
+        <field name="result_type">selection</field>
+        <field name="reference_value">Negative</field>
+    </record>
+
+    <record id="anti_hcv_c01_v01" model="examination.possible.value">
+        <field name="name">Negative</field>
+        <field name="examination_line_id" ref="anti_hcv_c01"/>
+        <field name="sequence">10</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="anti_hcv_c01_v02" model="examination.possible.value">
+        <field name="name">Equivocal</field>
+        <field name="examination_line_id" ref="anti_hcv_c01"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="anti_hcv_c01_v03" model="examination.possible.value">
+        <field name="name">Positive</field>
+        <field name="examination_line_id" ref="anti_hcv_c01"/>
+        <field name="sequence">30</field>
+    </record>
+
+    <!-- Anti-HBs (Antibody to HBsAg) -->
+    <record id="anti_hbs" model="examination.entry">
+        <field name="name">Anti-HBs (Antibody to HBsAg)</field>
+        <field name="department" ref="dept_immunology"/>
+        <field name="accounts_id" ref="account_income_immunology"/>
+        <field name="rate">1500</field>
+        <field name="base_rate">1500</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">pathology</field>
+        <field name="report_layout">tabular</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_gold_sst"/>
+        <field name="sample_type" ref="sample_serum"/>
+        <field name="default_method_id" ref="method_elisa"/>
+        <field name="default_instrument_id" ref="instrument_immunoassay"/>
+        <field name="sample_req" eval="True"/>
+    </record>
+
+    <record id="anti_hbs_c01" model="examination.entry.line">
+        <field name="name">Anti-HBs</field>
+        <field name="examinationentry_id" ref="anti_hbs"/>
+        <field name="sequence">10</field>
+        <field name="result_type">selection</field>
+        <field name="reference_value">Negative</field>
+    </record>
+
+    <record id="anti_hbs_c01_v01" model="examination.possible.value">
+        <field name="name">Negative</field>
+        <field name="examination_line_id" ref="anti_hbs_c01"/>
+        <field name="sequence">10</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="anti_hbs_c01_v02" model="examination.possible.value">
+        <field name="name">Equivocal</field>
+        <field name="examination_line_id" ref="anti_hbs_c01"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="anti_hbs_c01_v03" model="examination.possible.value">
+        <field name="name">Positive</field>
+        <field name="examination_line_id" ref="anti_hbs_c01"/>
+        <field name="sequence">30</field>
+    </record>
+
+    <!-- Anti-HBc Total -->
+    <record id="anti_hbc_total" model="examination.entry">
+        <field name="name">Anti-HBc Total</field>
+        <field name="department" ref="dept_immunology"/>
+        <field name="accounts_id" ref="account_income_immunology"/>
+        <field name="rate">1200</field>
+        <field name="base_rate">1200</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">pathology</field>
+        <field name="report_layout">tabular</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_gold_sst"/>
+        <field name="sample_type" ref="sample_serum"/>
+        <field name="default_method_id" ref="method_elisa"/>
+        <field name="default_instrument_id" ref="instrument_immunoassay"/>
+        <field name="sample_req" eval="True"/>
+    </record>
+
+    <record id="anti_hbc_total_c01" model="examination.entry.line">
+        <field name="name">Anti-HBc Total</field>
+        <field name="examinationentry_id" ref="anti_hbc_total"/>
+        <field name="sequence">10</field>
+        <field name="result_type">selection</field>
+        <field name="reference_value">Negative</field>
+    </record>
+
+    <record id="anti_hbc_total_c01_v01" model="examination.possible.value">
+        <field name="name">Negative</field>
+        <field name="examination_line_id" ref="anti_hbc_total_c01"/>
+        <field name="sequence">10</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="anti_hbc_total_c01_v02" model="examination.possible.value">
+        <field name="name">Equivocal</field>
+        <field name="examination_line_id" ref="anti_hbc_total_c01"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="anti_hbc_total_c01_v03" model="examination.possible.value">
+        <field name="name">Positive</field>
+        <field name="examination_line_id" ref="anti_hbc_total_c01"/>
+        <field name="sequence">30</field>
+    </record>
+
+    <!-- Anti-HBe Total -->
+    <record id="anti_hbe_total" model="examination.entry">
+        <field name="name">Anti-HBe Total</field>
+        <field name="department" ref="dept_immunology"/>
+        <field name="accounts_id" ref="account_income_immunology"/>
+        <field name="rate">1200</field>
+        <field name="base_rate">1200</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">pathology</field>
+        <field name="report_layout">tabular</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_gold_sst"/>
+        <field name="sample_type" ref="sample_serum"/>
+        <field name="default_method_id" ref="method_elisa"/>
+        <field name="default_instrument_id" ref="instrument_immunoassay"/>
+        <field name="sample_req" eval="True"/>
+    </record>
+
+    <record id="anti_hbe_total_c01" model="examination.entry.line">
+        <field name="name">Anti-HBe</field>
+        <field name="examinationentry_id" ref="anti_hbe_total"/>
+        <field name="sequence">10</field>
+        <field name="result_type">selection</field>
+        <field name="reference_value">Negative</field>
+    </record>
+
+    <record id="anti_hbe_total_c01_v01" model="examination.possible.value">
+        <field name="name">Negative</field>
+        <field name="examination_line_id" ref="anti_hbe_total_c01"/>
+        <field name="sequence">10</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="anti_hbe_total_c01_v02" model="examination.possible.value">
+        <field name="name">Equivocal</field>
+        <field name="examination_line_id" ref="anti_hbe_total_c01"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="anti_hbe_total_c01_v03" model="examination.possible.value">
+        <field name="name">Positive</field>
+        <field name="examination_line_id" ref="anti_hbe_total_c01"/>
+        <field name="sequence">30</field>
+    </record>
+
+    <!-- HBeAg -->
+    <record id="hbeag" model="examination.entry">
+        <field name="name">HBeAg</field>
+        <field name="department" ref="dept_immunology"/>
+        <field name="accounts_id" ref="account_income_immunology"/>
+        <field name="rate">1000</field>
+        <field name="base_rate">1000</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">pathology</field>
+        <field name="report_layout">tabular</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_gold_sst"/>
+        <field name="sample_type" ref="sample_serum"/>
+        <field name="default_method_id" ref="method_elisa"/>
+        <field name="default_instrument_id" ref="instrument_immunoassay"/>
+        <field name="sample_req" eval="True"/>
+    </record>
+
+    <record id="hbeag_c01" model="examination.entry.line">
+        <field name="name">HBeAg</field>
+        <field name="examinationentry_id" ref="hbeag"/>
+        <field name="sequence">10</field>
+        <field name="result_type">selection</field>
+        <field name="reference_value">Negative</field>
+    </record>
+
+    <record id="hbeag_c01_v01" model="examination.possible.value">
+        <field name="name">Negative</field>
+        <field name="examination_line_id" ref="hbeag_c01"/>
+        <field name="sequence">10</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="hbeag_c01_v02" model="examination.possible.value">
+        <field name="name">Equivocal</field>
+        <field name="examination_line_id" ref="hbeag_c01"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="hbeag_c01_v03" model="examination.possible.value">
+        <field name="name">Positive</field>
+        <field name="examination_line_id" ref="hbeag_c01"/>
+        <field name="sequence">30</field>
+    </record>
+
+    <!-- Anti-HAV (Total) -->
+    <record id="anti_hav" model="examination.entry">
+        <field name="name">Anti-HAV (Total)</field>
+        <field name="department" ref="dept_immunology"/>
+        <field name="accounts_id" ref="account_income_immunology"/>
+        <field name="rate">1200</field>
+        <field name="base_rate">1200</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">pathology</field>
+        <field name="report_layout">tabular</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_gold_sst"/>
+        <field name="sample_type" ref="sample_serum"/>
+        <field name="default_method_id" ref="method_elisa"/>
+        <field name="default_instrument_id" ref="instrument_immunoassay"/>
+        <field name="sample_req" eval="True"/>
+    </record>
+
+    <record id="anti_hav_c01" model="examination.entry.line">
+        <field name="name">Anti-HAV Total</field>
+        <field name="examinationentry_id" ref="anti_hav"/>
+        <field name="sequence">10</field>
+        <field name="result_type">selection</field>
+        <field name="reference_value">Negative</field>
+    </record>
+
+    <record id="anti_hav_c01_v01" model="examination.possible.value">
+        <field name="name">Negative</field>
+        <field name="examination_line_id" ref="anti_hav_c01"/>
+        <field name="sequence">10</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="anti_hav_c01_v02" model="examination.possible.value">
+        <field name="name">Equivocal</field>
+        <field name="examination_line_id" ref="anti_hav_c01"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="anti_hav_c01_v03" model="examination.possible.value">
+        <field name="name">Positive</field>
+        <field name="examination_line_id" ref="anti_hav_c01"/>
+        <field name="sequence">30</field>
+    </record>
+
+    <!-- Anti-HAV IgM -->
+    <record id="anti_hav_igm" model="examination.entry">
+        <field name="name">Anti-HAV IgM</field>
+        <field name="department" ref="dept_immunology"/>
+        <field name="accounts_id" ref="account_income_immunology"/>
+        <field name="rate">1200</field>
+        <field name="base_rate">1200</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">pathology</field>
+        <field name="report_layout">tabular</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_gold_sst"/>
+        <field name="sample_type" ref="sample_serum"/>
+        <field name="default_method_id" ref="method_elisa"/>
+        <field name="default_instrument_id" ref="instrument_immunoassay"/>
+        <field name="sample_req" eval="True"/>
+    </record>
+
+    <record id="anti_hav_igm_c01" model="examination.entry.line">
+        <field name="name">Anti-HAV IgM</field>
+        <field name="examinationentry_id" ref="anti_hav_igm"/>
+        <field name="sequence">10</field>
+        <field name="result_type">selection</field>
+        <field name="reference_value">Negative</field>
+    </record>
+
+    <record id="anti_hav_igm_c01_v01" model="examination.possible.value">
+        <field name="name">Negative</field>
+        <field name="examination_line_id" ref="anti_hav_igm_c01"/>
+        <field name="sequence">10</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="anti_hav_igm_c01_v02" model="examination.possible.value">
+        <field name="name">Equivocal</field>
+        <field name="examination_line_id" ref="anti_hav_igm_c01"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="anti_hav_igm_c01_v03" model="examination.possible.value">
+        <field name="name">Positive</field>
+        <field name="examination_line_id" ref="anti_hav_igm_c01"/>
+        <field name="sequence">30</field>
+    </record>
+
+    <!-- Anti-HEV (Total) -->
+    <record id="anti_hev" model="examination.entry">
+        <field name="name">Anti-HEV (Total)</field>
+        <field name="department" ref="dept_immunology"/>
+        <field name="accounts_id" ref="account_income_immunology"/>
+        <field name="rate">1200</field>
+        <field name="base_rate">1200</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">pathology</field>
+        <field name="report_layout">tabular</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_gold_sst"/>
+        <field name="sample_type" ref="sample_serum"/>
+        <field name="default_method_id" ref="method_elisa"/>
+        <field name="default_instrument_id" ref="instrument_immunoassay"/>
+        <field name="sample_req" eval="True"/>
+    </record>
+
+    <record id="anti_hev_c01" model="examination.entry.line">
+        <field name="name">Anti-HEV Total</field>
+        <field name="examinationentry_id" ref="anti_hev"/>
+        <field name="sequence">10</field>
+        <field name="result_type">selection</field>
+        <field name="reference_value">Negative</field>
+    </record>
+
+    <record id="anti_hev_c01_v01" model="examination.possible.value">
+        <field name="name">Negative</field>
+        <field name="examination_line_id" ref="anti_hev_c01"/>
+        <field name="sequence">10</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="anti_hev_c01_v02" model="examination.possible.value">
+        <field name="name">Equivocal</field>
+        <field name="examination_line_id" ref="anti_hev_c01"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="anti_hev_c01_v03" model="examination.possible.value">
+        <field name="name">Positive</field>
+        <field name="examination_line_id" ref="anti_hev_c01"/>
+        <field name="sequence">30</field>
+    </record>
+
+    <!-- Anti-HEV IgM -->
+    <record id="anti_hev_igm" model="examination.entry">
+        <field name="name">Anti-HEV IgM</field>
+        <field name="department" ref="dept_immunology"/>
+        <field name="accounts_id" ref="account_income_immunology"/>
+        <field name="rate">1200</field>
+        <field name="base_rate">1200</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">pathology</field>
+        <field name="report_layout">tabular</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_gold_sst"/>
+        <field name="sample_type" ref="sample_serum"/>
+        <field name="default_method_id" ref="method_elisa"/>
+        <field name="default_instrument_id" ref="instrument_immunoassay"/>
+        <field name="sample_req" eval="True"/>
+    </record>
+
+    <record id="anti_hev_igm_c01" model="examination.entry.line">
+        <field name="name">Anti-HEV IgM</field>
+        <field name="examinationentry_id" ref="anti_hev_igm"/>
+        <field name="sequence">10</field>
+        <field name="result_type">selection</field>
+        <field name="reference_value">Negative</field>
+    </record>
+
+    <record id="anti_hev_igm_c01_v01" model="examination.possible.value">
+        <field name="name">Negative</field>
+        <field name="examination_line_id" ref="anti_hev_igm_c01"/>
+        <field name="sequence">10</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="anti_hev_igm_c01_v02" model="examination.possible.value">
+        <field name="name">Equivocal</field>
+        <field name="examination_line_id" ref="anti_hev_igm_c01"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="anti_hev_igm_c01_v03" model="examination.possible.value">
+        <field name="name">Positive</field>
+        <field name="examination_line_id" ref="anti_hev_igm_c01"/>
+        <field name="sequence">30</field>
+    </record>
+
+    <!-- AFP (Alpha Feto Protein) -->
+    <record id="afp" model="examination.entry">
+        <field name="name">AFP (Alpha Feto Protein)</field>
+        <field name="department" ref="dept_immunology"/>
+        <field name="accounts_id" ref="account_income_immunology"/>
+        <field name="rate">1200</field>
+        <field name="base_rate">1200</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">pathology</field>
+        <field name="report_layout">tabular</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_gold_sst"/>
+        <field name="sample_type" ref="sample_serum"/>
+        <field name="default_method_id" ref="method_clia"/>
+        <field name="default_instrument_id" ref="instrument_immunoassay"/>
+        <field name="sample_req" eval="True"/>
+    </record>
+
+    <record id="afp_c01" model="examination.entry.line">
+        <field name="name">AFP</field>
+        <field name="examinationentry_id" ref="afp"/>
+        <field name="sequence">10</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">ng/mL</field>
+        <field name="reference_value">&lt; 10</field>
+        <field name="ref_high">10</field>
+    </record>
+
+    <!-- CEA (Carcinoembryonic Antigen) -->
+    <record id="cea" model="examination.entry">
+        <field name="name">CEA (Carcinoembryonic Antigen)</field>
+        <field name="department" ref="dept_immunology"/>
+        <field name="accounts_id" ref="account_income_immunology"/>
+        <field name="rate">1200</field>
+        <field name="base_rate">1200</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">pathology</field>
+        <field name="report_layout">tabular</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_gold_sst"/>
+        <field name="sample_type" ref="sample_serum"/>
+        <field name="default_method_id" ref="method_clia"/>
+        <field name="default_instrument_id" ref="instrument_immunoassay"/>
+        <field name="sample_req" eval="True"/>
+    </record>
+
+    <record id="cea_c01" model="examination.entry.line">
+        <field name="name">CEA</field>
+        <field name="examinationentry_id" ref="cea"/>
+        <field name="sequence">10</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">ng/mL</field>
+        <field name="reference_value">Non-smoker: &lt; 3.0 | Smoker: &lt; 5.0</field>
+        <field name="ref_high">3.0</field>
+    </record>
+
+    <!-- CA-125 -->
+    <record id="ca_125" model="examination.entry">
+        <field name="name">CA-125</field>
+        <field name="department" ref="dept_immunology"/>
+        <field name="accounts_id" ref="account_income_immunology"/>
+        <field name="rate">1200</field>
+        <field name="base_rate">1200</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">pathology</field>
+        <field name="report_layout">tabular</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_gold_sst"/>
+        <field name="sample_type" ref="sample_serum"/>
+        <field name="default_method_id" ref="method_clia"/>
+        <field name="default_instrument_id" ref="instrument_immunoassay"/>
+        <field name="sample_req" eval="True"/>
+    </record>
+
+    <record id="ca_125_c01" model="examination.entry.line">
+        <field name="name">CA-125</field>
+        <field name="examinationentry_id" ref="ca_125"/>
+        <field name="sequence">10</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">U/mL</field>
+        <field name="reference_value">&lt; 35</field>
+        <field name="ref_high">35</field>
+    </record>
+
+    <!-- CA-15.3 -->
+    <record id="ca_15_3" model="examination.entry">
+        <field name="name">CA-15.3</field>
+        <field name="department" ref="dept_immunology"/>
+        <field name="accounts_id" ref="account_income_immunology"/>
+        <field name="rate">1200</field>
+        <field name="base_rate">1200</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">pathology</field>
+        <field name="report_layout">tabular</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_gold_sst"/>
+        <field name="sample_type" ref="sample_serum"/>
+        <field name="default_method_id" ref="method_clia"/>
+        <field name="default_instrument_id" ref="instrument_immunoassay"/>
+        <field name="sample_req" eval="True"/>
+    </record>
+
+    <record id="ca_15_3_c01" model="examination.entry.line">
+        <field name="name">CA-15.3</field>
+        <field name="examinationentry_id" ref="ca_15_3"/>
+        <field name="sequence">10</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">U/mL</field>
+        <field name="reference_value">&lt; 25</field>
+        <field name="ref_high">25</field>
+    </record>
+
+    <!-- CA-19.9 -->
+    <record id="ca_19_9" model="examination.entry">
+        <field name="name">CA-19.9</field>
+        <field name="department" ref="dept_immunology"/>
+        <field name="accounts_id" ref="account_income_immunology"/>
+        <field name="rate">1200</field>
+        <field name="base_rate">1200</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">pathology</field>
+        <field name="report_layout">tabular</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_gold_sst"/>
+        <field name="sample_type" ref="sample_serum"/>
+        <field name="default_method_id" ref="method_clia"/>
+        <field name="default_instrument_id" ref="instrument_immunoassay"/>
+        <field name="sample_req" eval="True"/>
+    </record>
+
+    <record id="ca_19_9_c01" model="examination.entry.line">
+        <field name="name">CA-19.9</field>
+        <field name="examinationentry_id" ref="ca_19_9"/>
+        <field name="sequence">10</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">U/mL</field>
+        <field name="reference_value">&lt; 37</field>
+        <field name="ref_high">37</field>
+    </record>
+
+    <!-- Beta-hCG (Quantitative) -->
+    <record id="beta_hcg" model="examination.entry">
+        <field name="name">Beta-hCG (Quantitative)</field>
+        <field name="department" ref="dept_immunology"/>
+        <field name="accounts_id" ref="account_income_immunology"/>
+        <field name="rate">1200</field>
+        <field name="base_rate">1200</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">pathology</field>
+        <field name="report_layout">tabular</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_gold_sst"/>
+        <field name="sample_type" ref="sample_serum"/>
+        <field name="default_method_id" ref="method_clia"/>
+        <field name="default_instrument_id" ref="instrument_immunoassay"/>
+        <field name="sample_req" eval="True"/>
+    </record>
+
+    <record id="beta_hcg_c01" model="examination.entry.line">
+        <field name="name">Beta-hCG</field>
+        <field name="examinationentry_id" ref="beta_hcg"/>
+        <field name="sequence">10</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">mIU/mL</field>
+        <field name="reference_value">Non-pregnant: &lt; 5 | Pregnancy: rises with gestational age</field>
+        <field name="ref_high">5</field>
+    </record>
+
+    <record id="beta_hcg_c02" model="examination.entry.line">
+        <field name="name">Comment</field>
+        <field name="examinationentry_id" ref="beta_hcg"/>
+        <field name="sequence">20</field>
+        <field name="result_type">text</field>
+    </record>
+
+    <!-- ANA (Anti Nuclear Antibody) -->
+    <record id="ana" model="examination.entry">
+        <field name="name">ANA (Anti Nuclear Antibody)</field>
+        <field name="department" ref="dept_immunology"/>
+        <field name="accounts_id" ref="account_income_immunology"/>
+        <field name="rate">1200</field>
+        <field name="base_rate">1200</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">pathology</field>
+        <field name="report_layout">tabular</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_gold_sst"/>
+        <field name="sample_type" ref="sample_serum"/>
+        <field name="default_method_id" ref="method_elisa"/>
+        <field name="default_instrument_id" ref="instrument_immunoassay"/>
+        <field name="sample_req" eval="True"/>
+    </record>
+
+    <record id="ana_c01" model="examination.entry.line">
+        <field name="name">ANA</field>
+        <field name="examinationentry_id" ref="ana"/>
+        <field name="sequence">10</field>
+        <field name="result_type">selection</field>
+        <field name="reference_value">Negative</field>
+    </record>
+
+    <record id="ana_c01_v01" model="examination.possible.value">
+        <field name="name">Negative</field>
+        <field name="examination_line_id" ref="ana_c01"/>
+        <field name="sequence">10</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="ana_c01_v02" model="examination.possible.value">
+        <field name="name">Equivocal</field>
+        <field name="examination_line_id" ref="ana_c01"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="ana_c01_v03" model="examination.possible.value">
+        <field name="name">Positive</field>
+        <field name="examination_line_id" ref="ana_c01"/>
+        <field name="sequence">30</field>
+    </record>
+
+    <!-- Anti-dsDNA -->
+    <record id="anti_ds_dna" model="examination.entry">
+        <field name="name">Anti-dsDNA</field>
+        <field name="department" ref="dept_immunology"/>
+        <field name="accounts_id" ref="account_income_immunology"/>
+        <field name="rate">1600</field>
+        <field name="base_rate">1600</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">pathology</field>
+        <field name="report_layout">tabular</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_gold_sst"/>
+        <field name="sample_type" ref="sample_serum"/>
+        <field name="default_method_id" ref="method_elisa"/>
+        <field name="default_instrument_id" ref="instrument_immunoassay"/>
+        <field name="sample_req" eval="True"/>
+    </record>
+
+    <record id="anti_ds_dna_c01" model="examination.entry.line">
+        <field name="name">Anti-dsDNA</field>
+        <field name="examinationentry_id" ref="anti_ds_dna"/>
+        <field name="sequence">10</field>
+        <field name="result_type">selection</field>
+        <field name="reference_value">Negative</field>
+    </record>
+
+    <record id="anti_ds_dna_c01_v01" model="examination.possible.value">
+        <field name="name">Negative</field>
+        <field name="examination_line_id" ref="anti_ds_dna_c01"/>
+        <field name="sequence">10</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="anti_ds_dna_c01_v02" model="examination.possible.value">
+        <field name="name">Equivocal</field>
+        <field name="examination_line_id" ref="anti_ds_dna_c01"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="anti_ds_dna_c01_v03" model="examination.possible.value">
+        <field name="name">Positive</field>
+        <field name="examination_line_id" ref="anti_ds_dna_c01"/>
+        <field name="sequence">30</field>
+    </record>
+
+    <!-- Anti-CCP -->
+    <record id="anti_ccp" model="examination.entry">
+        <field name="name">Anti-CCP</field>
+        <field name="department" ref="dept_immunology"/>
+        <field name="accounts_id" ref="account_income_immunology"/>
+        <field name="rate">2200</field>
+        <field name="base_rate">2200</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">pathology</field>
+        <field name="report_layout">tabular</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_gold_sst"/>
+        <field name="sample_type" ref="sample_serum"/>
+        <field name="default_method_id" ref="method_clia"/>
+        <field name="default_instrument_id" ref="instrument_immunoassay"/>
+        <field name="sample_req" eval="True"/>
+    </record>
+
+    <record id="anti_ccp_c01" model="examination.entry.line">
+        <field name="name">Anti-CCP</field>
+        <field name="examinationentry_id" ref="anti_ccp"/>
+        <field name="sequence">10</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">U/mL</field>
+        <field name="reference_value">&lt; 17</field>
+        <field name="ref_high">17</field>
+    </record>
+
+    <!-- RA Test (Quantitative) -->
+    <record id="ra_test_quantitative" model="examination.entry">
+        <field name="name">RA Test (Quantitative)</field>
+        <field name="department" ref="dept_immunology"/>
+        <field name="accounts_id" ref="account_income_immunology"/>
+        <field name="rate">800</field>
+        <field name="base_rate">800</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">pathology</field>
+        <field name="report_layout">tabular</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_gold_sst"/>
+        <field name="sample_type" ref="sample_serum"/>
+        <field name="default_method_id" ref="method_clia"/>
+        <field name="default_instrument_id" ref="instrument_immunoassay"/>
+        <field name="sample_req" eval="True"/>
+    </record>
+
+    <record id="ra_test_quantitative_c01" model="examination.entry.line">
+        <field name="name">Rheumatoid Factor</field>
+        <field name="examinationentry_id" ref="ra_test_quantitative"/>
+        <field name="sequence">10</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">IU/mL</field>
+        <field name="reference_value">&lt; 14</field>
+        <field name="ref_high">14</field>
+    </record>
+
+    <!-- c-ANCA -->
+    <record id="canca" model="examination.entry">
+        <field name="name">c-ANCA</field>
+        <field name="department" ref="dept_immunology"/>
+        <field name="accounts_id" ref="account_income_immunology"/>
+        <field name="rate">1300</field>
+        <field name="base_rate">1300</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">pathology</field>
+        <field name="report_layout">tabular</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_gold_sst"/>
+        <field name="sample_type" ref="sample_serum"/>
+        <field name="default_method_id" ref="method_elisa"/>
+        <field name="default_instrument_id" ref="instrument_immunoassay"/>
+        <field name="sample_req" eval="True"/>
+    </record>
+
+    <record id="canca_c01" model="examination.entry.line">
+        <field name="name">c-ANCA (PR3)</field>
+        <field name="examinationentry_id" ref="canca"/>
+        <field name="sequence">10</field>
+        <field name="result_type">selection</field>
+        <field name="reference_value">Negative</field>
+    </record>
+
+    <record id="canca_c01_v01" model="examination.possible.value">
+        <field name="name">Negative</field>
+        <field name="examination_line_id" ref="canca_c01"/>
+        <field name="sequence">10</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="canca_c01_v02" model="examination.possible.value">
+        <field name="name">Equivocal</field>
+        <field name="examination_line_id" ref="canca_c01"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="canca_c01_v03" model="examination.possible.value">
+        <field name="name">Positive</field>
+        <field name="examination_line_id" ref="canca_c01"/>
+        <field name="sequence">30</field>
+    </record>
+
+    <!-- p-ANCA -->
+    <record id="panca" model="examination.entry">
+        <field name="name">p-ANCA</field>
+        <field name="department" ref="dept_immunology"/>
+        <field name="accounts_id" ref="account_income_immunology"/>
+        <field name="rate">1300</field>
+        <field name="base_rate">1300</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">pathology</field>
+        <field name="report_layout">tabular</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_gold_sst"/>
+        <field name="sample_type" ref="sample_serum"/>
+        <field name="default_method_id" ref="method_elisa"/>
+        <field name="default_instrument_id" ref="instrument_immunoassay"/>
+        <field name="sample_req" eval="True"/>
+    </record>
+
+    <record id="panca_c01" model="examination.entry.line">
+        <field name="name">p-ANCA (MPO)</field>
+        <field name="examinationentry_id" ref="panca"/>
+        <field name="sequence">10</field>
+        <field name="result_type">selection</field>
+        <field name="reference_value">Negative</field>
+    </record>
+
+    <record id="panca_c01_v01" model="examination.possible.value">
+        <field name="name">Negative</field>
+        <field name="examination_line_id" ref="panca_c01"/>
+        <field name="sequence">10</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="panca_c01_v02" model="examination.possible.value">
+        <field name="name">Equivocal</field>
+        <field name="examination_line_id" ref="panca_c01"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="panca_c01_v03" model="examination.possible.value">
+        <field name="name">Positive</field>
+        <field name="examination_line_id" ref="panca_c01"/>
+        <field name="sequence">30</field>
+    </record>
+
+    <!-- Anti SS-A (Ro) Antibody -->
+    <record id="anti_ss_a" model="examination.entry">
+        <field name="name">Anti SS-A (Ro) Antibody</field>
+        <field name="department" ref="dept_immunology"/>
+        <field name="accounts_id" ref="account_income_immunology"/>
+        <field name="rate">4000</field>
+        <field name="base_rate">4000</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">pathology</field>
+        <field name="report_layout">tabular</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_gold_sst"/>
+        <field name="sample_type" ref="sample_serum"/>
+        <field name="default_method_id" ref="method_elisa"/>
+        <field name="default_instrument_id" ref="instrument_immunoassay"/>
+        <field name="sample_req" eval="True"/>
+    </record>
+
+    <record id="anti_ss_a_c01" model="examination.entry.line">
+        <field name="name">Anti SS-A (Ro)</field>
+        <field name="examinationentry_id" ref="anti_ss_a"/>
+        <field name="sequence">10</field>
+        <field name="result_type">selection</field>
+        <field name="reference_value">Negative</field>
+    </record>
+
+    <record id="anti_ss_a_c01_v01" model="examination.possible.value">
+        <field name="name">Negative</field>
+        <field name="examination_line_id" ref="anti_ss_a_c01"/>
+        <field name="sequence">10</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="anti_ss_a_c01_v02" model="examination.possible.value">
+        <field name="name">Equivocal</field>
+        <field name="examination_line_id" ref="anti_ss_a_c01"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="anti_ss_a_c01_v03" model="examination.possible.value">
+        <field name="name">Positive</field>
+        <field name="examination_line_id" ref="anti_ss_a_c01"/>
+        <field name="sequence">30</field>
+    </record>
+
+    <!-- Anti SS-B (La) Antibody -->
+    <record id="anti_ss_b" model="examination.entry">
+        <field name="name">Anti SS-B (La) Antibody</field>
+        <field name="department" ref="dept_immunology"/>
+        <field name="accounts_id" ref="account_income_immunology"/>
+        <field name="rate">4000</field>
+        <field name="base_rate">4000</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">pathology</field>
+        <field name="report_layout">tabular</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_gold_sst"/>
+        <field name="sample_type" ref="sample_serum"/>
+        <field name="default_method_id" ref="method_elisa"/>
+        <field name="default_instrument_id" ref="instrument_immunoassay"/>
+        <field name="sample_req" eval="True"/>
+    </record>
+
+    <record id="anti_ss_b_c01" model="examination.entry.line">
+        <field name="name">Anti SS-B (La)</field>
+        <field name="examinationentry_id" ref="anti_ss_b"/>
+        <field name="sequence">10</field>
+        <field name="result_type">selection</field>
+        <field name="reference_value">Negative</field>
+    </record>
+
+    <record id="anti_ss_b_c01_v01" model="examination.possible.value">
+        <field name="name">Negative</field>
+        <field name="examination_line_id" ref="anti_ss_b_c01"/>
+        <field name="sequence">10</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="anti_ss_b_c01_v02" model="examination.possible.value">
+        <field name="name">Equivocal</field>
+        <field name="examination_line_id" ref="anti_ss_b_c01"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="anti_ss_b_c01_v03" model="examination.possible.value">
+        <field name="name">Positive</field>
+        <field name="examination_line_id" ref="anti_ss_b_c01"/>
+        <field name="sequence">30</field>
+    </record>
+
+    <!-- Anti-Cardiolipin Antibody -->
+    <record id="anti_cardiolipin" model="examination.entry">
+        <field name="name">Anti-Cardiolipin Antibody</field>
+        <field name="department" ref="dept_immunology"/>
+        <field name="accounts_id" ref="account_income_immunology"/>
+        <field name="rate">4000</field>
+        <field name="base_rate">4000</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">pathology</field>
+        <field name="report_layout">tabular</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_gold_sst"/>
+        <field name="sample_type" ref="sample_serum"/>
+        <field name="default_method_id" ref="method_elisa"/>
+        <field name="default_instrument_id" ref="instrument_immunoassay"/>
+        <field name="sample_req" eval="True"/>
+    </record>
+
+    <record id="anti_cardiolipin_c01" model="examination.entry.line">
+        <field name="name">ANTI-CARDIOLIPIN ANTIBODY</field>
+        <field name="examinationentry_id" ref="anti_cardiolipin"/>
+        <field name="sequence">10</field>
+        <field name="is_group_header" eval="True"/>
+        <field name="bold" eval="True"/>
+        <field name="result_type">text</field>
+    </record>
+
+    <record id="anti_cardiolipin_c02" model="examination.entry.line">
+        <field name="name">aCL IgG</field>
+        <field name="examinationentry_id" ref="anti_cardiolipin"/>
+        <field name="sequence">20</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">GPL-U/mL</field>
+        <field name="reference_value">&lt; 12</field>
+        <field name="ref_high">12</field>
+    </record>
+
+    <record id="anti_cardiolipin_c03" model="examination.entry.line">
+        <field name="name">aCL IgM</field>
+        <field name="examinationentry_id" ref="anti_cardiolipin"/>
+        <field name="sequence">30</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">MPL-U/mL</field>
+        <field name="reference_value">&lt; 12</field>
+        <field name="ref_high">12</field>
+    </record>
+
+    <!-- Anti-Thyroid Antibody (Anti-TPO) -->
+    <record id="anti_tpo" model="examination.entry">
+        <field name="name">Anti-Thyroid Antibody (Anti-TPO)</field>
+        <field name="department" ref="dept_immunology"/>
+        <field name="accounts_id" ref="account_income_immunology"/>
+        <field name="rate">2500</field>
+        <field name="base_rate">2500</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">pathology</field>
+        <field name="report_layout">tabular</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_gold_sst"/>
+        <field name="sample_type" ref="sample_serum"/>
+        <field name="default_method_id" ref="method_clia"/>
+        <field name="default_instrument_id" ref="instrument_immunoassay"/>
+        <field name="sample_req" eval="True"/>
+    </record>
+
+    <record id="anti_tpo_c01" model="examination.entry.line">
+        <field name="name">Anti-TPO</field>
+        <field name="examinationentry_id" ref="anti_tpo"/>
+        <field name="sequence">10</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">IU/mL</field>
+        <field name="reference_value">&lt; 34</field>
+        <field name="ref_high">34</field>
+    </record>
+
+    <!-- Anti-Thyroid Antibody Panel -->
+    <record id="anti_thyroid_ab_panel" model="examination.entry">
+        <field name="name">Anti-Thyroid Antibody Panel</field>
+        <field name="department" ref="dept_immunology"/>
+        <field name="accounts_id" ref="account_income_immunology"/>
+        <field name="rate">2600</field>
+        <field name="base_rate">2600</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">pathology</field>
+        <field name="report_layout">tabular</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_gold_sst"/>
+        <field name="sample_type" ref="sample_serum"/>
+        <field name="default_method_id" ref="method_clia"/>
+        <field name="default_instrument_id" ref="instrument_immunoassay"/>
+        <field name="sample_req" eval="True"/>
+        <field name="lab_not_required" eval="True"/>
+    </record>
+
+    <record id="anti_thyroid_ab_panel_c01" model="examination.entry.line">
+        <field name="name">Anti-TPO</field>
+        <field name="examinationentry_id" ref="anti_thyroid_ab_panel"/>
+        <field name="sequence">10</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">IU/mL</field>
+        <field name="reference_value">&lt; 34</field>
+        <field name="ref_high">34</field>
+    </record>
+
+    <!-- TRAB (TSH Receptor Antibody) -->
+    <record id="trab" model="examination.entry">
+        <field name="name">TRAB (TSH Receptor Antibody)</field>
+        <field name="department" ref="dept_immunology"/>
+        <field name="accounts_id" ref="account_income_immunology"/>
+        <field name="rate">6000</field>
+        <field name="base_rate">6000</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">pathology</field>
+        <field name="report_layout">tabular</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_gold_sst"/>
+        <field name="sample_type" ref="sample_serum"/>
+        <field name="default_method_id" ref="method_clia"/>
+        <field name="default_instrument_id" ref="instrument_immunoassay"/>
+        <field name="sample_req" eval="True"/>
+    </record>
+
+    <record id="trab_c01" model="examination.entry.line">
+        <field name="name">TRAB</field>
+        <field name="examinationentry_id" ref="trab"/>
+        <field name="sequence">10</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">IU/L</field>
+        <field name="reference_value">&lt; 1.75</field>
+        <field name="ref_high">1.75</field>
+    </record>
+
+    <!-- ACh Receptor Antibody -->
+    <record id="ach_receptor_antibody" model="examination.entry">
+        <field name="name">ACh Receptor Antibody</field>
+        <field name="department" ref="dept_immunology"/>
+        <field name="accounts_id" ref="account_income_immunology"/>
+        <field name="rate">10090</field>
+        <field name="base_rate">10090</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">pathology</field>
+        <field name="report_layout">tabular</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_gold_sst"/>
+        <field name="sample_type" ref="sample_serum"/>
+        <field name="default_method_id" ref="method_clia"/>
+        <field name="default_instrument_id" ref="instrument_immunoassay"/>
+        <field name="sample_req" eval="True"/>
+    </record>
+
+    <record id="ach_receptor_antibody_c01" model="examination.entry.line">
+        <field name="name">ACh Receptor Antibody</field>
+        <field name="examinationentry_id" ref="ach_receptor_antibody"/>
+        <field name="sequence">10</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">nmol/L</field>
+        <field name="reference_value">&lt; 0.4</field>
+        <field name="ref_high">0.4</field>
+    </record>
+
+    <!-- HLA-B27 -->
+    <record id="hla_b27" model="examination.entry">
+        <field name="name">HLA-B27</field>
+        <field name="department" ref="dept_immunology"/>
+        <field name="accounts_id" ref="account_income_immunology"/>
+        <field name="rate">4000</field>
+        <field name="base_rate">4000</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">pathology</field>
+        <field name="report_layout">special</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_gold_sst"/>
+        <field name="sample_type" ref="sample_serum"/>
+        <field name="default_method_id" ref="method_pcr"/>
+        <field name="default_instrument_id" ref="instrument_immunoassay"/>
+        <field name="sample_req" eval="True"/>
+    </record>
+
+    <record id="hla_b27_c01" model="examination.entry.line">
+        <field name="name">HLA-B27 TYPING</field>
+        <field name="examinationentry_id" ref="hla_b27"/>
+        <field name="sequence">10</field>
+        <field name="is_group_header" eval="True"/>
+        <field name="bold" eval="True"/>
+        <field name="result_type">text</field>
+    </record>
+
+    <record id="hla_b27_c02" model="examination.entry.line">
+        <field name="name">HLA-B27</field>
+        <field name="examinationentry_id" ref="hla_b27"/>
+        <field name="sequence">20</field>
+        <field name="result_type">selection</field>
+        <field name="reference_value">Negative</field>
+    </record>
+
+    <record id="hla_b27_c02_v01" model="examination.possible.value">
+        <field name="name">Negative</field>
+        <field name="examination_line_id" ref="hla_b27_c02"/>
+        <field name="sequence">10</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="hla_b27_c02_v02" model="examination.possible.value">
+        <field name="name">Positive</field>
+        <field name="examination_line_id" ref="hla_b27_c02"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="hla_b27_c03" model="examination.entry.line">
+        <field name="name">Method</field>
+        <field name="examinationentry_id" ref="hla_b27"/>
+        <field name="sequence">30</field>
+        <field name="result_type">text</field>
+        <field name="default_value">Flow cytometry / PCR-SSP</field>
+    </record>
+
+    <record id="hla_b27_c04" model="examination.entry.line">
+        <field name="name">Comment</field>
+        <field name="examinationentry_id" ref="hla_b27"/>
+        <field name="sequence">40</field>
+        <field name="result_type">text</field>
+        <field name="default_value">A positive result supports, but does not by itself establish, a diagnosis of ankylosing spondylitis.</field>
+    </record>
+
+    <!-- Serum C3 -->
+    <record id="serum_c3" model="examination.entry">
+        <field name="name">Serum C3</field>
+        <field name="department" ref="dept_immunology"/>
+        <field name="accounts_id" ref="account_income_immunology"/>
+        <field name="rate">1500</field>
+        <field name="base_rate">1500</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">pathology</field>
+        <field name="report_layout">tabular</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_gold_sst"/>
+        <field name="sample_type" ref="sample_serum"/>
+        <field name="default_method_id" ref="method_clia"/>
+        <field name="default_instrument_id" ref="instrument_immunoassay"/>
+        <field name="sample_req" eval="True"/>
+    </record>
+
+    <record id="serum_c3_c01" model="examination.entry.line">
+        <field name="name">Complement C3</field>
+        <field name="examinationentry_id" ref="serum_c3"/>
+        <field name="sequence">10</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">mg/dL</field>
+        <field name="reference_value">90 - 180</field>
+        <field name="ref_low">90</field>
+        <field name="ref_high">180</field>
+    </record>
+
+    <!-- Serum C4 -->
+    <record id="serum_c4" model="examination.entry">
+        <field name="name">Serum C4</field>
+        <field name="department" ref="dept_immunology"/>
+        <field name="accounts_id" ref="account_income_immunology"/>
+        <field name="rate">1500</field>
+        <field name="base_rate">1500</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">pathology</field>
+        <field name="report_layout">tabular</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_gold_sst"/>
+        <field name="sample_type" ref="sample_serum"/>
+        <field name="default_method_id" ref="method_clia"/>
+        <field name="default_instrument_id" ref="instrument_immunoassay"/>
+        <field name="sample_req" eval="True"/>
+    </record>
+
+    <record id="serum_c4_c01" model="examination.entry.line">
+        <field name="name">Complement C4</field>
+        <field name="examinationentry_id" ref="serum_c4"/>
+        <field name="sequence">10</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">mg/dL</field>
+        <field name="reference_value">10 - 40</field>
+        <field name="ref_low">10</field>
+        <field name="ref_high">40</field>
+    </record>
+
+    <!-- Total IgE -->
+    <record id="total_ige" model="examination.entry">
+        <field name="name">Total IgE</field>
+        <field name="department" ref="dept_immunology"/>
+        <field name="accounts_id" ref="account_income_immunology"/>
+        <field name="rate">1200</field>
+        <field name="base_rate">1200</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">pathology</field>
+        <field name="report_layout">tabular</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_gold_sst"/>
+        <field name="sample_type" ref="sample_serum"/>
+        <field name="default_method_id" ref="method_clia"/>
+        <field name="default_instrument_id" ref="instrument_immunoassay"/>
+        <field name="sample_req" eval="True"/>
+    </record>
+
+    <record id="total_ige_c01" model="examination.entry.line">
+        <field name="name">Total IgE</field>
+        <field name="examinationentry_id" ref="total_ige"/>
+        <field name="sequence">10</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">IU/mL</field>
+        <field name="reference_value">&lt; 100</field>
+        <field name="ref_high">100</field>
+    </record>
+
+    <!-- Procalcitonin -->
+    <record id="procalcitonin" model="examination.entry">
+        <field name="name">Procalcitonin</field>
+        <field name="department" ref="dept_immunology"/>
+        <field name="accounts_id" ref="account_income_immunology"/>
+        <field name="rate">2000</field>
+        <field name="base_rate">2000</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">pathology</field>
+        <field name="report_layout">tabular</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_gold_sst"/>
+        <field name="sample_type" ref="sample_serum"/>
+        <field name="default_method_id" ref="method_clia"/>
+        <field name="default_instrument_id" ref="instrument_immunoassay"/>
+        <field name="sample_req" eval="True"/>
+    </record>
+
+    <record id="procalcitonin_c01" model="examination.entry.line">
+        <field name="name">Procalcitonin</field>
+        <field name="examinationentry_id" ref="procalcitonin"/>
+        <field name="sequence">10</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">ng/mL</field>
+        <field name="reference_value">Normal: &lt; 0.05 | Systemic infection likely: &gt; 0.5</field>
+        <field name="ref_high">0.05</field>
+    </record>
+
+    <!-- Interleukin-6 (IL-6) -->
+    <record id="interleukin_6" model="examination.entry">
+        <field name="name">Interleukin-6 (IL-6)</field>
+        <field name="department" ref="dept_immunology"/>
+        <field name="accounts_id" ref="account_income_immunology"/>
+        <field name="rate">2540</field>
+        <field name="base_rate">2540</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">pathology</field>
+        <field name="report_layout">tabular</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_gold_sst"/>
+        <field name="sample_type" ref="sample_serum"/>
+        <field name="default_method_id" ref="method_clia"/>
+        <field name="default_instrument_id" ref="instrument_immunoassay"/>
+        <field name="sample_req" eval="True"/>
+    </record>
+
+    <record id="interleukin_6_c01" model="examination.entry.line">
+        <field name="name">IL-6</field>
+        <field name="examinationentry_id" ref="interleukin_6"/>
+        <field name="sequence">10</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">pg/mL</field>
+        <field name="reference_value">&lt; 7</field>
+        <field name="ref_high">7</field>
+    </record>
+
+    <!-- ADA (Adenosine Deaminase) -->
+    <record id="ada" model="examination.entry">
+        <field name="name">ADA (Adenosine Deaminase)</field>
+        <field name="department" ref="dept_immunology"/>
+        <field name="accounts_id" ref="account_income_immunology"/>
+        <field name="rate">2000</field>
+        <field name="base_rate">2000</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">pathology</field>
+        <field name="report_layout">tabular</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_gold_sst"/>
+        <field name="sample_type" ref="sample_serum"/>
+        <field name="default_method_id" ref="method_clia"/>
+        <field name="default_instrument_id" ref="instrument_immunoassay"/>
+        <field name="sample_req" eval="True"/>
+    </record>
+
+    <record id="ada_c01" model="examination.entry.line">
+        <field name="name">ADA</field>
+        <field name="examinationentry_id" ref="ada"/>
+        <field name="sequence">10</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">U/L</field>
+        <field name="reference_value">&lt; 40</field>
+        <field name="ref_high">40</field>
+    </record>
+
+    <!-- NT-proBNP -->
+    <record id="nt_pro_bnp" model="examination.entry">
+        <field name="name">NT-proBNP</field>
+        <field name="department" ref="dept_immunology"/>
+        <field name="accounts_id" ref="account_income_immunology"/>
+        <field name="rate">3000</field>
+        <field name="base_rate">3000</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">pathology</field>
+        <field name="report_layout">tabular</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_gold_sst"/>
+        <field name="sample_type" ref="sample_serum"/>
+        <field name="default_method_id" ref="method_clia"/>
+        <field name="default_instrument_id" ref="instrument_immunoassay"/>
+        <field name="sample_req" eval="True"/>
+    </record>
+
+    <record id="nt_pro_bnp_c01" model="examination.entry.line">
+        <field name="name">NT-proBNP</field>
+        <field name="examinationentry_id" ref="nt_pro_bnp"/>
+        <field name="sequence">10</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">pg/mL</field>
+        <field name="reference_value">&lt; 125 (age &lt; 75) | &lt; 450 (age &gt;= 75)</field>
+        <field name="ref_high">125</field>
+    </record>
+
+    <!-- Vitamin B12 -->
+    <record id="vitamin_b12" model="examination.entry">
+        <field name="name">Vitamin B12</field>
+        <field name="department" ref="dept_immunology"/>
+        <field name="accounts_id" ref="account_income_immunology"/>
+        <field name="rate">2500</field>
+        <field name="base_rate">2500</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">pathology</field>
+        <field name="report_layout">tabular</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_gold_sst"/>
+        <field name="sample_type" ref="sample_serum"/>
+        <field name="default_method_id" ref="method_clia"/>
+        <field name="default_instrument_id" ref="instrument_immunoassay"/>
+        <field name="sample_req" eval="True"/>
+    </record>
+
+    <record id="vitamin_b12_c01" model="examination.entry.line">
+        <field name="name">Vitamin B12</field>
+        <field name="examinationentry_id" ref="vitamin_b12"/>
+        <field name="sequence">10</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">pg/mL</field>
+        <field name="reference_value">197 - 771</field>
+        <field name="ref_low">197</field>
+        <field name="ref_high">771</field>
+    </record>
+
+    <!-- Vitamin D (25-OH) -->
+    <record id="vitamin_d" model="examination.entry">
+        <field name="name">Vitamin D (25-OH)</field>
+        <field name="department" ref="dept_immunology"/>
+        <field name="accounts_id" ref="account_income_immunology"/>
+        <field name="rate">3000</field>
+        <field name="base_rate">3000</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">pathology</field>
+        <field name="report_layout">tabular</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_gold_sst"/>
+        <field name="sample_type" ref="sample_serum"/>
+        <field name="default_method_id" ref="method_clia"/>
+        <field name="default_instrument_id" ref="instrument_immunoassay"/>
+        <field name="sample_req" eval="True"/>
+    </record>
+
+    <record id="vitamin_d_c01" model="examination.entry.line">
+        <field name="name">25-OH Vitamin D</field>
+        <field name="examinationentry_id" ref="vitamin_d"/>
+        <field name="sequence">10</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">ng/mL</field>
+        <field name="reference_value">Deficient: &lt; 20 | Insufficient: 20 - 29 | Sufficient: 30 - 100</field>
+        <field name="ref_low">30</field>
+        <field name="ref_high">100</field>
+    </record>
+
+    <record id="vitamin_d_c02" model="examination.entry.line">
+        <field name="name">Interpretation</field>
+        <field name="examinationentry_id" ref="vitamin_d"/>
+        <field name="sequence">20</field>
+        <field name="result_type">selection</field>
+        <field name="reference_value">Sufficient</field>
+    </record>
+
+    <record id="vitamin_d_c02_v01" model="examination.possible.value">
+        <field name="name">Sufficient</field>
+        <field name="examination_line_id" ref="vitamin_d_c02"/>
+        <field name="sequence">10</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="vitamin_d_c02_v02" model="examination.possible.value">
+        <field name="name">Insufficient</field>
+        <field name="examination_line_id" ref="vitamin_d_c02"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="vitamin_d_c02_v03" model="examination.possible.value">
+        <field name="name">Deficient</field>
+        <field name="examination_line_id" ref="vitamin_d_c02"/>
+        <field name="sequence">30</field>
+    </record>
+
+    <record id="vitamin_d_c02_v04" model="examination.possible.value">
+        <field name="name">Toxic</field>
+        <field name="examination_line_id" ref="vitamin_d_c02"/>
+        <field name="sequence">40</field>
+    </record>
+
+    <!-- Toxoplasma IgG & IgM -->
+    <record id="toxoplasma_igg_igm" model="examination.entry">
+        <field name="name">Toxoplasma IgG &amp; IgM</field>
+        <field name="department" ref="dept_immunology"/>
+        <field name="accounts_id" ref="account_income_immunology"/>
+        <field name="rate">2800</field>
+        <field name="base_rate">2800</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">pathology</field>
+        <field name="report_layout">tabular</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_gold_sst"/>
+        <field name="sample_type" ref="sample_serum"/>
+        <field name="default_method_id" ref="method_elisa"/>
+        <field name="default_instrument_id" ref="instrument_immunoassay"/>
+        <field name="sample_req" eval="True"/>
+    </record>
+
+    <record id="toxoplasma_igg_igm_c01" model="examination.entry.line">
+        <field name="name">TOXOPLASMA ANTIBODY</field>
+        <field name="examinationentry_id" ref="toxoplasma_igg_igm"/>
+        <field name="sequence">10</field>
+        <field name="is_group_header" eval="True"/>
+        <field name="bold" eval="True"/>
+        <field name="result_type">text</field>
+    </record>
+
+    <record id="toxoplasma_igg_igm_c02" model="examination.entry.line">
+        <field name="name">Toxo IgM</field>
+        <field name="examinationentry_id" ref="toxoplasma_igg_igm"/>
+        <field name="sequence">20</field>
+        <field name="result_type">selection</field>
+        <field name="reference_value">Negative</field>
+    </record>
+
+    <record id="toxoplasma_igg_igm_c02_v01" model="examination.possible.value">
+        <field name="name">Negative</field>
+        <field name="examination_line_id" ref="toxoplasma_igg_igm_c02"/>
+        <field name="sequence">10</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="toxoplasma_igg_igm_c02_v02" model="examination.possible.value">
+        <field name="name">Equivocal</field>
+        <field name="examination_line_id" ref="toxoplasma_igg_igm_c02"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="toxoplasma_igg_igm_c02_v03" model="examination.possible.value">
+        <field name="name">Positive</field>
+        <field name="examination_line_id" ref="toxoplasma_igg_igm_c02"/>
+        <field name="sequence">30</field>
+    </record>
+
+    <record id="toxoplasma_igg_igm_c03" model="examination.entry.line">
+        <field name="name">Toxo IgG</field>
+        <field name="examinationentry_id" ref="toxoplasma_igg_igm"/>
+        <field name="sequence">30</field>
+        <field name="result_type">selection</field>
+        <field name="reference_value">Negative</field>
+    </record>
+
+    <record id="toxoplasma_igg_igm_c03_v01" model="examination.possible.value">
+        <field name="name">Negative</field>
+        <field name="examination_line_id" ref="toxoplasma_igg_igm_c03"/>
+        <field name="sequence">10</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="toxoplasma_igg_igm_c03_v02" model="examination.possible.value">
+        <field name="name">Equivocal</field>
+        <field name="examination_line_id" ref="toxoplasma_igg_igm_c03"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="toxoplasma_igg_igm_c03_v03" model="examination.possible.value">
+        <field name="name">Positive</field>
+        <field name="examination_line_id" ref="toxoplasma_igg_igm_c03"/>
+        <field name="sequence">30</field>
+    </record>
+
+    <record id="toxoplasma_igg_igm_c04" model="examination.entry.line">
+        <field name="name">Interpretation</field>
+        <field name="examinationentry_id" ref="toxoplasma_igg_igm"/>
+        <field name="sequence">40</field>
+        <field name="result_type">text</field>
+    </record>
+
+    <!-- Anti HSV-1 IgG & IgM -->
+    <record id="anti_hsv1_igg_igm" model="examination.entry">
+        <field name="name">Anti HSV-1 IgG &amp; IgM</field>
+        <field name="department" ref="dept_immunology"/>
+        <field name="accounts_id" ref="account_income_immunology"/>
+        <field name="rate">2800</field>
+        <field name="base_rate">2800</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">pathology</field>
+        <field name="report_layout">tabular</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_gold_sst"/>
+        <field name="sample_type" ref="sample_serum"/>
+        <field name="default_method_id" ref="method_elisa"/>
+        <field name="default_instrument_id" ref="instrument_immunoassay"/>
+        <field name="sample_req" eval="True"/>
+    </record>
+
+    <record id="anti_hsv1_igg_igm_c01" model="examination.entry.line">
+        <field name="name">HERPES SIMPLEX VIRUS 1 ANTIBODY</field>
+        <field name="examinationentry_id" ref="anti_hsv1_igg_igm"/>
+        <field name="sequence">10</field>
+        <field name="is_group_header" eval="True"/>
+        <field name="bold" eval="True"/>
+        <field name="result_type">text</field>
+    </record>
+
+    <record id="anti_hsv1_igg_igm_c02" model="examination.entry.line">
+        <field name="name">HSV-1 IgM</field>
+        <field name="examinationentry_id" ref="anti_hsv1_igg_igm"/>
+        <field name="sequence">20</field>
+        <field name="result_type">selection</field>
+        <field name="reference_value">Negative</field>
+    </record>
+
+    <record id="anti_hsv1_igg_igm_c02_v01" model="examination.possible.value">
+        <field name="name">Negative</field>
+        <field name="examination_line_id" ref="anti_hsv1_igg_igm_c02"/>
+        <field name="sequence">10</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="anti_hsv1_igg_igm_c02_v02" model="examination.possible.value">
+        <field name="name">Equivocal</field>
+        <field name="examination_line_id" ref="anti_hsv1_igg_igm_c02"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="anti_hsv1_igg_igm_c02_v03" model="examination.possible.value">
+        <field name="name">Positive</field>
+        <field name="examination_line_id" ref="anti_hsv1_igg_igm_c02"/>
+        <field name="sequence">30</field>
+    </record>
+
+    <record id="anti_hsv1_igg_igm_c03" model="examination.entry.line">
+        <field name="name">HSV-1 IgG</field>
+        <field name="examinationentry_id" ref="anti_hsv1_igg_igm"/>
+        <field name="sequence">30</field>
+        <field name="result_type">selection</field>
+        <field name="reference_value">Negative</field>
+    </record>
+
+    <record id="anti_hsv1_igg_igm_c03_v01" model="examination.possible.value">
+        <field name="name">Negative</field>
+        <field name="examination_line_id" ref="anti_hsv1_igg_igm_c03"/>
+        <field name="sequence">10</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="anti_hsv1_igg_igm_c03_v02" model="examination.possible.value">
+        <field name="name">Equivocal</field>
+        <field name="examination_line_id" ref="anti_hsv1_igg_igm_c03"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="anti_hsv1_igg_igm_c03_v03" model="examination.possible.value">
+        <field name="name">Positive</field>
+        <field name="examination_line_id" ref="anti_hsv1_igg_igm_c03"/>
+        <field name="sequence">30</field>
+    </record>
+
+    <!-- Herpes Simplex IgM -->
+    <record id="herpes_simplex_igm" model="examination.entry">
+        <field name="name">Herpes Simplex IgM</field>
+        <field name="department" ref="dept_immunology"/>
+        <field name="accounts_id" ref="account_income_immunology"/>
+        <field name="rate">1400</field>
+        <field name="base_rate">1400</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">pathology</field>
+        <field name="report_layout">tabular</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_gold_sst"/>
+        <field name="sample_type" ref="sample_serum"/>
+        <field name="default_method_id" ref="method_elisa"/>
+        <field name="default_instrument_id" ref="instrument_immunoassay"/>
+        <field name="sample_req" eval="True"/>
+    </record>
+
+    <record id="herpes_simplex_igm_c01" model="examination.entry.line">
+        <field name="name">HSV IgM</field>
+        <field name="examinationentry_id" ref="herpes_simplex_igm"/>
+        <field name="sequence">10</field>
+        <field name="result_type">selection</field>
+        <field name="reference_value">Negative</field>
+    </record>
+
+    <record id="herpes_simplex_igm_c01_v01" model="examination.possible.value">
+        <field name="name">Negative</field>
+        <field name="examination_line_id" ref="herpes_simplex_igm_c01"/>
+        <field name="sequence">10</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="herpes_simplex_igm_c01_v02" model="examination.possible.value">
+        <field name="name">Equivocal</field>
+        <field name="examination_line_id" ref="herpes_simplex_igm_c01"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="herpes_simplex_igm_c01_v03" model="examination.possible.value">
+        <field name="name">Positive</field>
+        <field name="examination_line_id" ref="herpes_simplex_igm_c01"/>
+        <field name="sequence">30</field>
+    </record>
+
+    <!-- Herpes Simplex IgG -->
+    <record id="herpes_simplex_igg" model="examination.entry">
+        <field name="name">Herpes Simplex IgG</field>
+        <field name="department" ref="dept_immunology"/>
+        <field name="accounts_id" ref="account_income_immunology"/>
+        <field name="rate">1400</field>
+        <field name="base_rate">1400</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">pathology</field>
+        <field name="report_layout">tabular</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_gold_sst"/>
+        <field name="sample_type" ref="sample_serum"/>
+        <field name="default_method_id" ref="method_elisa"/>
+        <field name="default_instrument_id" ref="instrument_immunoassay"/>
+        <field name="sample_req" eval="True"/>
+    </record>
+
+    <record id="herpes_simplex_igg_c01" model="examination.entry.line">
+        <field name="name">HSV IgG</field>
+        <field name="examinationentry_id" ref="herpes_simplex_igg"/>
+        <field name="sequence">10</field>
+        <field name="result_type">selection</field>
+        <field name="reference_value">Negative</field>
+    </record>
+
+    <record id="herpes_simplex_igg_c01_v01" model="examination.possible.value">
+        <field name="name">Negative</field>
+        <field name="examination_line_id" ref="herpes_simplex_igg_c01"/>
+        <field name="sequence">10</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="herpes_simplex_igg_c01_v02" model="examination.possible.value">
+        <field name="name">Equivocal</field>
+        <field name="examination_line_id" ref="herpes_simplex_igg_c01"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="herpes_simplex_igg_c01_v03" model="examination.possible.value">
+        <field name="name">Positive</field>
+        <field name="examination_line_id" ref="herpes_simplex_igg_c01"/>
+        <field name="sequence">30</field>
+    </record>
+
+    <!-- TORCH Antibody Panel -->
+    <record id="torch_panel" model="examination.entry">
+        <field name="name">TORCH Antibody Panel</field>
+        <field name="department" ref="dept_immunology"/>
+        <field name="accounts_id" ref="account_income_immunology"/>
+        <field name="rate">9680</field>
+        <field name="base_rate">9680</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">pathology</field>
+        <field name="report_layout">tabular</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_gold_sst"/>
+        <field name="sample_type" ref="sample_serum"/>
+        <field name="default_method_id" ref="method_elisa"/>
+        <field name="default_instrument_id" ref="instrument_immunoassay"/>
+        <field name="sample_req" eval="True"/>
+        <field name="lab_not_required" eval="True"/>
+        <field name="required_time">3</field>
+    </record>
+
+    <record id="torch_panel_c01" model="examination.entry.line">
+        <field name="name">TOXOPLASMA</field>
+        <field name="examinationentry_id" ref="torch_panel"/>
+        <field name="sequence">10</field>
+        <field name="is_group_header" eval="True"/>
+        <field name="bold" eval="True"/>
+        <field name="result_type">text</field>
+    </record>
+
+    <record id="torch_panel_c02" model="examination.entry.line">
+        <field name="name">Toxo IgM</field>
+        <field name="examinationentry_id" ref="torch_panel"/>
+        <field name="sequence">20</field>
+        <field name="result_type">selection</field>
+        <field name="reference_value">Negative</field>
+    </record>
+
+    <record id="torch_panel_c02_v01" model="examination.possible.value">
+        <field name="name">Negative</field>
+        <field name="examination_line_id" ref="torch_panel_c02"/>
+        <field name="sequence">10</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="torch_panel_c02_v02" model="examination.possible.value">
+        <field name="name">Equivocal</field>
+        <field name="examination_line_id" ref="torch_panel_c02"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="torch_panel_c02_v03" model="examination.possible.value">
+        <field name="name">Positive</field>
+        <field name="examination_line_id" ref="torch_panel_c02"/>
+        <field name="sequence">30</field>
+    </record>
+
+    <record id="torch_panel_c03" model="examination.entry.line">
+        <field name="name">Toxo IgG</field>
+        <field name="examinationentry_id" ref="torch_panel"/>
+        <field name="sequence">30</field>
+        <field name="result_type">selection</field>
+        <field name="reference_value">Negative</field>
+    </record>
+
+    <record id="torch_panel_c03_v01" model="examination.possible.value">
+        <field name="name">Negative</field>
+        <field name="examination_line_id" ref="torch_panel_c03"/>
+        <field name="sequence">10</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="torch_panel_c03_v02" model="examination.possible.value">
+        <field name="name">Equivocal</field>
+        <field name="examination_line_id" ref="torch_panel_c03"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="torch_panel_c03_v03" model="examination.possible.value">
+        <field name="name">Positive</field>
+        <field name="examination_line_id" ref="torch_panel_c03"/>
+        <field name="sequence">30</field>
+    </record>
+
+    <record id="torch_panel_c04" model="examination.entry.line">
+        <field name="name">RUBELLA</field>
+        <field name="examinationentry_id" ref="torch_panel"/>
+        <field name="sequence">40</field>
+        <field name="is_group_header" eval="True"/>
+        <field name="bold" eval="True"/>
+        <field name="result_type">text</field>
+    </record>
+
+    <record id="torch_panel_c05" model="examination.entry.line">
+        <field name="name">Rubella IgM</field>
+        <field name="examinationentry_id" ref="torch_panel"/>
+        <field name="sequence">50</field>
+        <field name="result_type">selection</field>
+        <field name="reference_value">Negative</field>
+    </record>
+
+    <record id="torch_panel_c05_v01" model="examination.possible.value">
+        <field name="name">Negative</field>
+        <field name="examination_line_id" ref="torch_panel_c05"/>
+        <field name="sequence">10</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="torch_panel_c05_v02" model="examination.possible.value">
+        <field name="name">Equivocal</field>
+        <field name="examination_line_id" ref="torch_panel_c05"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="torch_panel_c05_v03" model="examination.possible.value">
+        <field name="name">Positive</field>
+        <field name="examination_line_id" ref="torch_panel_c05"/>
+        <field name="sequence">30</field>
+    </record>
+
+    <record id="torch_panel_c06" model="examination.entry.line">
+        <field name="name">Rubella IgG</field>
+        <field name="examinationentry_id" ref="torch_panel"/>
+        <field name="sequence">60</field>
+        <field name="result_type">selection</field>
+        <field name="reference_value">Negative</field>
+    </record>
+
+    <record id="torch_panel_c06_v01" model="examination.possible.value">
+        <field name="name">Negative</field>
+        <field name="examination_line_id" ref="torch_panel_c06"/>
+        <field name="sequence">10</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="torch_panel_c06_v02" model="examination.possible.value">
+        <field name="name">Equivocal</field>
+        <field name="examination_line_id" ref="torch_panel_c06"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="torch_panel_c06_v03" model="examination.possible.value">
+        <field name="name">Positive</field>
+        <field name="examination_line_id" ref="torch_panel_c06"/>
+        <field name="sequence">30</field>
+    </record>
+
+    <record id="torch_panel_c07" model="examination.entry.line">
+        <field name="name">CYTOMEGALOVIRUS</field>
+        <field name="examinationentry_id" ref="torch_panel"/>
+        <field name="sequence">70</field>
+        <field name="is_group_header" eval="True"/>
+        <field name="bold" eval="True"/>
+        <field name="result_type">text</field>
+    </record>
+
+    <record id="torch_panel_c08" model="examination.entry.line">
+        <field name="name">CMV IgM</field>
+        <field name="examinationentry_id" ref="torch_panel"/>
+        <field name="sequence">80</field>
+        <field name="result_type">selection</field>
+        <field name="reference_value">Negative</field>
+    </record>
+
+    <record id="torch_panel_c08_v01" model="examination.possible.value">
+        <field name="name">Negative</field>
+        <field name="examination_line_id" ref="torch_panel_c08"/>
+        <field name="sequence">10</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="torch_panel_c08_v02" model="examination.possible.value">
+        <field name="name">Equivocal</field>
+        <field name="examination_line_id" ref="torch_panel_c08"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="torch_panel_c08_v03" model="examination.possible.value">
+        <field name="name">Positive</field>
+        <field name="examination_line_id" ref="torch_panel_c08"/>
+        <field name="sequence">30</field>
+    </record>
+
+    <record id="torch_panel_c09" model="examination.entry.line">
+        <field name="name">CMV IgG</field>
+        <field name="examinationentry_id" ref="torch_panel"/>
+        <field name="sequence">90</field>
+        <field name="result_type">selection</field>
+        <field name="reference_value">Negative</field>
+    </record>
+
+    <record id="torch_panel_c09_v01" model="examination.possible.value">
+        <field name="name">Negative</field>
+        <field name="examination_line_id" ref="torch_panel_c09"/>
+        <field name="sequence">10</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="torch_panel_c09_v02" model="examination.possible.value">
+        <field name="name">Equivocal</field>
+        <field name="examination_line_id" ref="torch_panel_c09"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="torch_panel_c09_v03" model="examination.possible.value">
+        <field name="name">Positive</field>
+        <field name="examination_line_id" ref="torch_panel_c09"/>
+        <field name="sequence">30</field>
+    </record>
+
+    <record id="torch_panel_c10" model="examination.entry.line">
+        <field name="name">HERPES SIMPLEX VIRUS</field>
+        <field name="examinationentry_id" ref="torch_panel"/>
+        <field name="sequence">100</field>
+        <field name="is_group_header" eval="True"/>
+        <field name="bold" eval="True"/>
+        <field name="result_type">text</field>
+    </record>
+
+    <record id="torch_panel_c11" model="examination.entry.line">
+        <field name="name">HSV IgM</field>
+        <field name="examinationentry_id" ref="torch_panel"/>
+        <field name="sequence">110</field>
+        <field name="result_type">selection</field>
+        <field name="reference_value">Negative</field>
+    </record>
+
+    <record id="torch_panel_c11_v01" model="examination.possible.value">
+        <field name="name">Negative</field>
+        <field name="examination_line_id" ref="torch_panel_c11"/>
+        <field name="sequence">10</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="torch_panel_c11_v02" model="examination.possible.value">
+        <field name="name">Equivocal</field>
+        <field name="examination_line_id" ref="torch_panel_c11"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="torch_panel_c11_v03" model="examination.possible.value">
+        <field name="name">Positive</field>
+        <field name="examination_line_id" ref="torch_panel_c11"/>
+        <field name="sequence">30</field>
+    </record>
+
+    <record id="torch_panel_c12" model="examination.entry.line">
+        <field name="name">HSV IgG</field>
+        <field name="examinationentry_id" ref="torch_panel"/>
+        <field name="sequence">120</field>
+        <field name="result_type">selection</field>
+        <field name="reference_value">Negative</field>
+    </record>
+
+    <record id="torch_panel_c12_v01" model="examination.possible.value">
+        <field name="name">Negative</field>
+        <field name="examination_line_id" ref="torch_panel_c12"/>
+        <field name="sequence">10</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="torch_panel_c12_v02" model="examination.possible.value">
+        <field name="name">Equivocal</field>
+        <field name="examination_line_id" ref="torch_panel_c12"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="torch_panel_c12_v03" model="examination.possible.value">
+        <field name="name">Positive</field>
+        <field name="examination_line_id" ref="torch_panel_c12"/>
+        <field name="sequence">30</field>
+    </record>
+
+    <record id="torch_panel_c13" model="examination.entry.line">
+        <field name="name">Interpretation</field>
+        <field name="examinationentry_id" ref="torch_panel"/>
+        <field name="sequence">130</field>
+        <field name="result_type">text</field>
+    </record>
+
+    <!-- QuantiFERON-TB Gold (IGRA) -->
+    <record id="quantiferon_tb_gold" model="examination.entry">
+        <field name="name">QuantiFERON-TB Gold (IGRA)</field>
+        <field name="department" ref="dept_immunology"/>
+        <field name="accounts_id" ref="account_income_immunology"/>
+        <field name="rate">8000</field>
+        <field name="base_rate">8000</field>
+        <field name="service_group">diagnostic</field>
+        <field name="category">pathology</field>
+        <field name="report_layout">special</field>
+        <field name="report_type">pathology</field>
+        <field name="tube_color_id" ref="tube_gold_sst"/>
+        <field name="sample_type" ref="sample_serum"/>
+        <field name="default_method_id" ref="method_elisa"/>
+        <field name="default_instrument_id" ref="instrument_immunoassay"/>
+        <field name="sample_req" eval="True"/>
+        <field name="required_time">3</field>
+    </record>
+
+    <record id="quantiferon_tb_gold_c01" model="examination.entry.line">
+        <field name="name">INTERFERON GAMMA RELEASE ASSAY</field>
+        <field name="examinationentry_id" ref="quantiferon_tb_gold"/>
+        <field name="sequence">10</field>
+        <field name="is_group_header" eval="True"/>
+        <field name="bold" eval="True"/>
+        <field name="result_type">text</field>
+    </record>
+
+    <record id="quantiferon_tb_gold_c02" model="examination.entry.line">
+        <field name="name">TB1 Antigen - Nil</field>
+        <field name="examinationentry_id" ref="quantiferon_tb_gold"/>
+        <field name="sequence">20</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">IU/mL</field>
+    </record>
+
+    <record id="quantiferon_tb_gold_c03" model="examination.entry.line">
+        <field name="name">TB2 Antigen - Nil</field>
+        <field name="examinationentry_id" ref="quantiferon_tb_gold"/>
+        <field name="sequence">30</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">IU/mL</field>
+    </record>
+
+    <record id="quantiferon_tb_gold_c04" model="examination.entry.line">
+        <field name="name">Mitogen - Nil</field>
+        <field name="examinationentry_id" ref="quantiferon_tb_gold"/>
+        <field name="sequence">40</field>
+        <field name="result_type">numeric</field>
+        <field name="uom">IU/mL</field>
+        <field name="reference_value">&gt; 0.5 (valid control)</field>
+        <field name="ref_low">0.5</field>
+    </record>
+
+    <record id="quantiferon_tb_gold_c05" model="examination.entry.line">
+        <field name="name">Result</field>
+        <field name="examinationentry_id" ref="quantiferon_tb_gold"/>
+        <field name="sequence">50</field>
+        <field name="result_type">selection</field>
+        <field name="reference_value">Negative</field>
+    </record>
+
+    <record id="quantiferon_tb_gold_c05_v01" model="examination.possible.value">
+        <field name="name">Negative</field>
+        <field name="examination_line_id" ref="quantiferon_tb_gold_c05"/>
+        <field name="sequence">10</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="quantiferon_tb_gold_c05_v02" model="examination.possible.value">
+        <field name="name">Positive</field>
+        <field name="examination_line_id" ref="quantiferon_tb_gold_c05"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="quantiferon_tb_gold_c05_v03" model="examination.possible.value">
+        <field name="name">Indeterminate</field>
+        <field name="examination_line_id" ref="quantiferon_tb_gold_c05"/>
+        <field name="sequence">30</field>
+    </record>
+
+    <record id="quantiferon_tb_gold_c06" model="examination.entry.line">
+        <field name="name">Comment</field>
+        <field name="examinationentry_id" ref="quantiferon_tb_gold"/>
+        <field name="sequence">60</field>
+        <field name="result_type">text</field>
+        <field name="default_value">A positive IGRA indicates M. tuberculosis infection; it does not distinguish latent from active disease.</field>
+    </record>
+
+</odoo>

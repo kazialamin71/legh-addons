@@ -1,0 +1,20 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <!--
+        Consultation Number.
+
+        Format follows the counter slips already in use: C + 2-digit year +
+        2-digit month + a 7-digit running number, e.g. C26080182455. The
+        running number does NOT reset with the month - the year/month prefix is
+        there to make the number readable at a glance, not to scope it - so a
+        CN is unique for the life of the system and can never point at two
+        different consultations.
+    -->
+    <record id="seq_appointment_cn" model="ir.sequence">
+        <field name="name">Consultation Number (CN)</field>
+        <field name="code">appointment.consultation.number</field>
+        <field name="prefix">C%(y)s%(month)s</field>
+        <field name="padding">7</field>
+        <field name="company_id" eval="False"/>
+    </record>
+</odoo>

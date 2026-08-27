@@ -30,6 +30,14 @@
                         groups="base.group_user"/>
             </button>
 
+            <xpath expr="//field[@name='investigation_bill_ids']" position="before">
+                <div class="mb-2">
+                    <button string="New Investigation Bill" type="object"
+                            name="action_new_investigation_bill" class="btn-primary"
+                            groups="base.group_user"/>
+                </div>
+            </xpath>
+
             <xpath expr="//notebook/page[1]" position="before">
                 <page string="Charges">
                     <field name="charge_ids">

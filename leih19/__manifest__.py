@@ -1,7 +1,7 @@
 {
     'name': 'LEIS Migrated Models',
     'summary': 'Odoo 19 (fields only)',
-    'version': '19.0.2',
+    'version': '19.0.4',
     'sequence': 100,
     'author': 'Mufti Muntasir Ahmed',
     'depends': ['base', 'hr', 'account', 'stock'],
@@ -18,6 +18,7 @@
         'views/examination_result_views.xml',
         'views/lab_print_confirm_views.xml',
         'views/add_bill_views.xml',
+        'views/admission_charge_item_views.xml',
         'views/admission_payment_configuration_line_views.xml',
         'views/admission_payment_configuration_views.xml',
         'views/admission_payment_line_views.xml',
@@ -138,6 +139,7 @@
         'views/product_lens_views.xml',
         'views/sample_type_views.xml',
         'views/ward_managment_views.xml',
+        'views/leih_collection_report_views.xml',
         'views/menus.xml',
         
     ],

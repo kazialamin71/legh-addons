@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Specimen material actually collected, independent of the container used. -->
+<odoo noupdate="1">
+    <record id="sample_whole_blood" model="sample.type"><field name="name">Whole Blood</field></record>
+    <record id="sample_serum" model="sample.type"><field name="name">Serum</field></record>
+    <record id="sample_plasma" model="sample.type"><field name="name">Plasma</field></record>
+    <record id="sample_urine" model="sample.type"><field name="name">Urine (Random)</field></record>
+    <record id="sample_urine_24h" model="sample.type"><field name="name">Urine (24 Hour Collection)</field></record>
+    <record id="sample_stool" model="sample.type"><field name="name">Stool</field></record>
+    <record id="sample_sputum" model="sample.type"><field name="name">Sputum</field></record>
+    <record id="sample_semen" model="sample.type"><field name="name">Semen</field></record>
+    <record id="sample_csf" model="sample.type"><field name="name">CSF</field></record>
+    <record id="sample_body_fluid" model="sample.type"><field name="name">Body Fluid (Ascitic / Pleural / Synovial)</field></record>
+    <record id="sample_swab" model="sample.type"><field name="name">Swab</field></record>
+    <record id="sample_tissue" model="sample.type"><field name="name">Tissue / Biopsy</field></record>
+    <record id="sample_smear" model="sample.type"><field name="name">Cytology Smear</field></record>
+    <record id="sample_corneal_scraping" model="sample.type"><field name="name">Corneal Scraping</field></record>
+    <record id="sample_catheter_tip" model="sample.type"><field name="name">Catheter Tip</field></record>
+</odoo>

@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Clean two-level department hierarchy.
+
+    The legacy export had `Diagonistic`, `Radiolgy & Imaging`, `Micro-biology`,
+    a `Hospital > Diagnostic` pair and 47 items with no department at all. Those
+    names are replaced here by a consistent tree.
+
+    `modality` is what lab result access control keys off (see
+    leih19/security/lab_modality_security.xml): a user only sees results whose
+    department modality matches a lab group they belong to. Service departments
+    are 'other' so they never surface in a lab technician's result queue.
+-->
+<odoo noupdate="1">
+
+    <!-- ========================= ROOT DEPARTMENTS ======================== -->
+    <record id="dept_pathology" model="diagnosis.department">
+        <field name="name">Pathology</field>
+        <field name="modality">pathology</field>
+    </record>
+
+    <record id="dept_radiology_imaging" model="diagnosis.department">
+        <field name="name">Radiology &amp; Imaging</field>
+        <field name="modality">radiology</field>
+    </record>
+
+    <record id="dept_cardiac" model="diagnosis.department">
+        <field name="name">Cardiac Investigations</field>
+        <field name="modality">other</field>
+    </record>
+
+    <record id="dept_clinical_services" model="diagnosis.department">
+        <field name="name">Clinical Services</field>
+        <field name="modality">other</field>
+    </record>
+
+    <!-- ======================= PATHOLOGY SUB-DEPTS ======================= -->
+    <record id="dept_biochemistry" model="diagnosis.department">
+        <field name="name">Biochemistry</field>
+        <field name="parent" ref="dept_pathology"/>
+        <field name="modality">pathology</field>
+    </record>
+
+    <record id="dept_haematology" model="diagnosis.department">
+        <field name="name">Haematology</field>
+        <field name="parent" ref="dept_pathology"/>
+        <field name="modality">pathology</field>
+    </record>
+
+    <record id="dept_clinical_pathology" model="diagnosis.department">
+        <field name="name">Clinical Pathology</field>
+        <field name="parent" ref="dept_pathology"/>
+        <field name="modality">pathology</field>
+    </record>
+
+    <record id="dept_serology" model="diagnosis.department">
+        <field name="name">Serology</field>
+        <field name="parent" ref="dept_pathology"/>
+        <field name="modality">pathology</field>
+    </record>
+
+    <record id="dept_immunology" model="diagnosis.department">
+        <field name="name">Immunology</field>
+        <field name="parent" ref="dept_pathology"/>
+        <field name="modality">pathology</field>
+    </record>
+
+    <record id="dept_hormone" model="diagnosis.department">
+        <field name="name">Hormone &amp; Endocrinology</field>
+        <field name="parent" ref="dept_pathology"/>
+        <field name="modality">pathology</field>
+    </record>
+
+    <record id="dept_microbiology" model="diagnosis.department">
+        <field name="name">Microbiology</field>
+        <field name="parent" ref="dept_pathology"/>
+        <field name="modality">pathology</field>
+    </record>
+
+    <record id="dept_histocytopathology" model="diagnosis.department">
+        <field name="name">Histopathology &amp; Cytopathology</field>
+        <field name="parent" ref="dept_pathology"/>
+        <field name="modality">pathology</field>
+    </record>
+
+    <record id="dept_transfusion" model="diagnosis.department">
+        <field name="name">Transfusion Medicine</field>
+        <field name="parent" ref="dept_pathology"/>
+        <field name="modality">pathology</field>
+    </record>
+
+    <!-- ==================== RADIOLOGY &amp; IMAGING SUB-DEPTS ================= -->
+    <record id="dept_xray" model="diagnosis.department">
+        <field name="name">X-Ray</field>
+        <field name="parent" ref="dept_radiology_imaging"/>
+        <field name="modality">radiology</field>
+    </record>
+
+    <record id="dept_usg" model="diagnosis.department">
+        <field name="name">Ultrasonography (USG)</field>
+        <field name="parent" ref="dept_radiology_imaging"/>
+        <field name="modality">usg</field>
+    </record>
+
+    <record id="dept_ct" model="diagnosis.department">
+        <field name="name">CT Scan</field>
+        <field name="parent" ref="dept_radiology_imaging"/>
+        <field name="modality">radiology</field>
+    </record>
+
+    <record id="dept_mri" model="diagnosis.department">
+        <field name="name">MRI</field>
+        <field name="parent" ref="dept_radiology_imaging"/>
+        <field name="modality">radiology</field>
+    </record>
+
+    <!-- ======================== CARDIAC SUB-DEPTS ======================== -->
+    <record id="dept_ecg" model="diagnosis.department">
+        <field name="name">ECG</field>
+        <field name="parent" ref="dept_cardiac"/>
+        <field name="modality">other</field>
+    </record>
+
+    <record id="dept_echo" model="diagnosis.department">
+        <field name="name">Echocardiography</field>
+        <field name="parent" ref="dept_cardiac"/>
+        <field name="modality">other</field>
+    </record>
+
+    <!-- =================== CLINICAL SERVICE SUB-DEPTS ==================== -->
+    <record id="dept_dental" model="diagnosis.department">
+        <field name="name">Dental</field>
+        <field name="parent" ref="dept_clinical_services"/>
+        <field name="modality">other</field>
+    </record>
+
+    <record id="dept_ot" model="diagnosis.department">
+        <field name="name">Operation Theatre &amp; Procedures</field>
+        <field name="parent" ref="dept_clinical_services"/>
+        <field name="modality">other</field>
+    </record>
+
+    <record id="dept_indoor" model="diagnosis.department">
+        <field name="name">Indoor / Bed &amp; Cabin</field>
+        <field name="parent" ref="dept_clinical_services"/>
+        <field name="modality">other</field>
+    </record>
+
+    <record id="dept_emergency" model="diagnosis.department">
+        <field name="name">Emergency &amp; Observation</field>
+        <field name="parent" ref="dept_clinical_services"/>
+        <field name="modality">other</field>
+    </record>
+
+    <record id="dept_dialysis" model="diagnosis.department">
+        <field name="name">Dialysis</field>
+        <field name="parent" ref="dept_clinical_services"/>
+        <field name="modality">other</field>
+    </record>
+
+    <record id="dept_nursing" model="diagnosis.department">
+        <field name="name">Nursing &amp; General Services</field>
+        <field name="parent" ref="dept_clinical_services"/>
+        <field name="modality">other</field>
+    </record>
+
+    <record id="dept_package" model="diagnosis.department">
+        <field name="name">Health Checkup Packages</field>
+        <field name="parent" ref="dept_clinical_services"/>
+        <field name="modality">other</field>
+    </record>
+
+    <record id="dept_consumable" model="diagnosis.department">
+        <field name="name">Consumables &amp; Disposables</field>
+        <field name="parent" ref="dept_clinical_services"/>
+        <field name="modality">other</field>
+    </record>
+
+</odoo>

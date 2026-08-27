@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    One income account per diagnostic / service department.
+
+    Every catalogue item points at the account for its department, so the
+    general ledger yields a department-wise revenue breakdown with no extra
+    reporting layer. leih_accounting._income_account() reads the item's
+    accounts_id first and only falls back to the configured default, so these
+    accounts are what actually gets credited when a bill is posted.
+
+    Codes sit in the 4011xx-4019xx block, clear of the l10n_bd chart's own
+    401xx sales accounts.
+-->
+<odoo noupdate="1">
+
+    <!-- ============================ PATHOLOGY ============================ -->
+    <record id="account_income_biochemistry" model="account.account">
+        <field name="code">401101</field>
+        <field name="name">Diagnostic Income - Biochemistry</field>
+        <field name="account_type">income</field>
+        <field name="company_ids" eval="[(4, ref('base.main_company'))]"/>
+    </record>
+
+    <record id="account_income_haematology" model="account.account">
+        <field name="code">401102</field>
+        <field name="name">Diagnostic Income - Haematology</field>
+        <field name="account_type">income</field>
+        <field name="company_ids" eval="[(4, ref('base.main_company'))]"/>
+    </record>
+
+    <record id="account_income_clinical_pathology" model="account.account">
+        <field name="code">401103</field>
+        <field name="name">Diagnostic Income - Clinical Pathology</field>
+        <field name="account_type">income</field>
+        <field name="company_ids" eval="[(4, ref('base.main_company'))]"/>
+    </record>
+
+    <record id="account_income_serology" model="account.account">
+        <field name="code">401104</field>
+        <field name="name">Diagnostic Income - Serology</field>
+        <field name="account_type">income</field>
+        <field name="company_ids" eval="[(4, ref('base.main_company'))]"/>
+    </record>
+
+    <record id="account_income_immunology" model="account.account">
+        <field name="code">401105</field>
+        <field name="name">Diagnostic Income - Immunology</field>
+        <field name="account_type">income</field>
+        <field name="company_ids" eval="[(4, ref('base.main_company'))]"/>
+    </record>
+
+    <record id="account_income_hormone" model="account.account">
+        <field name="code">401106</field>
+        <field name="name">Diagnostic Income - Hormone &amp; Endocrinology</field>
+        <field name="account_type">income</field>
+        <field name="company_ids" eval="[(4, ref('base.main_company'))]"/>
+    </record>
+
+    <record id="account_income_microbiology" model="account.account">
+        <field name="code">401107</field>
+        <field name="name">Diagnostic Income - Microbiology</field>
+        <field name="account_type">income</field>
+        <field name="company_ids" eval="[(4, ref('base.main_company'))]"/>
+    </record>
+
+    <record id="account_income_histocytopathology" model="account.account">
+        <field name="code">401108</field>
+        <field name="name">Diagnostic Income - Histopathology &amp; Cytopathology</field>
+        <field name="account_type">income</field>
+        <field name="company_ids" eval="[(4, ref('base.main_company'))]"/>
+    </record>
+
+    <record id="account_income_transfusion" model="account.account">
+        <field name="code">401109</field>
+        <field name="name">Diagnostic Income - Transfusion Medicine</field>
+        <field name="account_type">income</field>
+        <field name="company_ids" eval="[(4, ref('base.main_company'))]"/>
+    </record>
+
+    <!-- ======================= RADIOLOGY &amp; IMAGING ====================== -->
+    <record id="account_income_xray" model="account.account">
+        <field name="code">401201</field>
+        <field name="name">Imaging Income - X-Ray</field>
+        <field name="account_type">income</field>
+        <field name="company_ids" eval="[(4, ref('base.main_company'))]"/>
+    </record>
+
+    <record id="account_income_usg" model="account.account">
+        <field name="code">401202</field>
+        <field name="name">Imaging Income - Ultrasonography</field>
+        <field name="account_type">income</field>
+        <field name="company_ids" eval="[(4, ref('base.main_company'))]"/>
+    </record>
+
+    <record id="account_income_ct" model="account.account">
+        <field name="code">401203</field>
+        <field name="name">Imaging Income - CT Scan</field>
+        <field name="account_type">income</field>
+        <field name="company_ids" eval="[(4, ref('base.main_company'))]"/>
+    </record>
+
+    <record id="account_income_mri" model="account.account">
+        <field name="code">401204</field>
+        <field name="name">Imaging Income - MRI</field>
+        <field name="account_type">income</field>
+        <field name="company_ids" eval="[(4, ref('base.main_company'))]"/>
+    </record>
+
+    <!-- ====================== CARDIAC INVESTIGATIONS ===================== -->
+    <record id="account_income_ecg" model="account.account">
+        <field name="code">401301</field>
+        <field name="name">Cardiac Investigation Income - ECG</field>
+        <field name="account_type">income</field>
+        <field name="company_ids" eval="[(4, ref('base.main_company'))]"/>
+    </record>
+
+    <record id="account_income_echo" model="account.account">
+        <field name="code">401302</field>
+        <field name="name">Cardiac Investigation Income - Echocardiography</field>
+        <field name="account_type">income</field>
+        <field name="company_ids" eval="[(4, ref('base.main_company'))]"/>
+    </record>
+
+    <!-- ========================= CLINICAL SERVICES ======================== -->
+    <record id="account_income_dental" model="account.account">
+        <field name="code">401401</field>
+        <field name="name">Service Income - Dental</field>
+        <field name="account_type">income</field>
+        <field name="company_ids" eval="[(4, ref('base.main_company'))]"/>
+    </record>
+
+    <record id="account_income_ot" model="account.account">
+        <field name="code">401501</field>
+        <field name="name">Service Income - Operation Theatre &amp; Procedures</field>
+        <field name="account_type">income</field>
+        <field name="company_ids" eval="[(4, ref('base.main_company'))]"/>
+    </record>
+
+    <record id="account_income_indoor" model="account.account">
+        <field name="code">401502</field>
+        <field name="name">Service Income - Indoor / Bed &amp; Cabin Charges</field>
+        <field name="account_type">income</field>
+        <field name="company_ids" eval="[(4, ref('base.main_company'))]"/>
+    </record>
+
+    <record id="account_income_emergency" model="account.account">
+        <field name="code">401503</field>
+        <field name="name">Service Income - Emergency &amp; Observation</field>
+        <field name="account_type">income</field>
+        <field name="company_ids" eval="[(4, ref('base.main_company'))]"/>
+    </record>
+
+    <record id="account_income_dialysis" model="account.account">
+        <field name="code">401504</field>
+        <field name="name">Service Income - Dialysis</field>
+        <field name="account_type">income</field>
+        <field name="company_ids" eval="[(4, ref('base.main_company'))]"/>
+    </record>
+
+    <record id="account_income_nursing" model="account.account">
+        <field name="code">401505</field>
+        <field name="name">Service Income - Nursing &amp; General Services</field>
+        <field name="account_type">income</field>
+        <field name="company_ids" eval="[(4, ref('base.main_company'))]"/>
+    </record>
+
+    <record id="account_income_package" model="account.account">
+        <field name="code">401601</field>
+        <field name="name">Service Income - Health Checkup Packages</field>
+        <field name="account_type">income</field>
+        <field name="company_ids" eval="[(4, ref('base.main_company'))]"/>
+    </record>
+
+    <record id="account_income_consumable" model="account.account">
+        <field name="code">401701</field>
+        <field name="name">Service Income - Consumables &amp; Disposables</field>
+        <field name="account_type">income</field>
+        <field name="company_ids" eval="[(4, ref('base.main_company'))]"/>
+    </record>
+
+    <record id="account_income_other" model="account.account">
+        <field name="code">401901</field>
+        <field name="name">Service Income - Other Hospital Charges</field>
+        <field name="account_type">income</field>
+        <field name="company_ids" eval="[(4, ref('base.main_company'))]"/>
+    </record>
+
+</odoo>

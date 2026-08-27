@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Methods and analysers. These print in the report header ("Method: ... |
+    Instrument: ...") and are seeded per test as `default_method_id` /
+    `default_instrument_id`, which the technician may override on an individual
+    result when a backup analyser is used.
+-->
+<odoo noupdate="1">
+
+    <!-- ============================= METHODS ============================= -->
+    <record id="method_photometry" model="lab.method">
+        <field name="name">Spectrophotometry</field><field name="code">SPEC</field><field name="sequence">10</field>
+        <field name="description">Enzymatic / colourimetric end-point and kinetic assays</field>
+    </record>
+    <record id="method_ise" model="lab.method">
+        <field name="name">Ion Selective Electrode (ISE)</field><field name="code">ISE</field><field name="sequence">20</field>
+        <field name="description">Direct potentiometry for electrolytes</field>
+    </record>
+    <record id="method_clia" model="lab.method">
+        <field name="name">CLIA (Chemiluminescence)</field><field name="code">CLIA</field><field name="sequence">30</field>
+        <field name="description">Chemiluminescent immunoassay - hormones, tumour markers, cardiac markers</field>
+    </record>
+    <record id="method_elisa" model="lab.method">
+        <field name="name">ELISA</field><field name="code">ELISA</field><field name="sequence">40</field>
+        <field name="description">Enzyme linked immunosorbent assay</field>
+    </record>
+    <record id="method_ict" model="lab.method">
+        <field name="name">ICT / Immunochromatography</field><field name="code">ICT</field><field name="sequence">50</field>
+        <field name="description">Rapid lateral-flow cassette test</field>
+    </record>
+    <record id="method_agglutination" model="lab.method">
+        <field name="name">Slide / Tube Agglutination</field><field name="code">AGGL</field><field name="sequence">60</field>
+        <field name="description">Latex or antisera agglutination - blood grouping, Widal, RA, ASO</field>
+    </record>
+    <record id="method_impedance" model="lab.method">
+        <field name="name">Electrical Impedance + Flow Cytometry</field><field name="code">IMP</field><field name="sequence">70</field>
+        <field name="description">Automated cell counting for CBC</field>
+    </record>
+    <record id="method_microscopy" model="lab.method">
+        <field name="name">Light Microscopy</field><field name="code">MICRO</field><field name="sequence">80</field>
+        <field name="description">Manual microscopic examination of a stained or wet preparation</field>
+    </record>
+    <record id="method_culture" model="lab.method">
+        <field name="name">Culture &amp; Sensitivity (Disc Diffusion)</field><field name="code">CS</field><field name="sequence">90</field>
+        <field name="description">Isolation on selective media with modified Kirby-Bauer disc diffusion, read against CLSI breakpoints</field>
+    </record>
+    <record id="method_gram_stain" model="lab.method">
+        <field name="name">Gram Staining</field><field name="code">GRAM</field><field name="sequence">100</field>
+    </record>
+    <record id="method_zn_stain" model="lab.method">
+        <field name="name">Ziehl-Neelsen (AFB) Staining</field><field name="code">ZN</field><field name="sequence">110</field>
+    </record>
+    <record id="method_koh" model="lab.method">
+        <field name="name">KOH Wet Mount</field><field name="code">KOH</field><field name="sequence">120</field>
+    </record>
+    <record id="method_pcr" model="lab.method">
+        <field name="name">Real-Time PCR</field><field name="code">RTPCR</field><field name="sequence">130</field>
+    </record>
+    <record id="method_hplc" model="lab.method">
+        <field name="name">HPLC</field><field name="code">HPLC</field><field name="sequence">140</field>
+        <field name="description">High performance liquid chromatography - HbA1c, Hb electrophoresis</field>
+    </record>
+    <record id="method_electrophoresis" model="lab.method">
+        <field name="name">Capillary Electrophoresis</field><field name="code">CE</field><field name="sequence">150</field>
+    </record>
+    <record id="method_coagulometry" model="lab.method">
+        <field name="name">Coagulometry (Clot Detection)</field><field name="code">COAG</field><field name="sequence">160</field>
+    </record>
+    <record id="method_papanicolaou" model="lab.method">
+        <field name="name">Papanicolaou Stain</field><field name="code">PAP</field><field name="sequence">170</field>
+    </record>
+    <record id="method_manual" model="lab.method">
+        <field name="name">Manual / Bedside</field><field name="code">MAN</field><field name="sequence">200</field>
+        <field name="description">Performed at the bedside or chairside, no analyser involved</field>
+    </record>
+
+    <!-- =========================== INSTRUMENTS =========================== -->
+    <record id="instrument_chem_analyzer" model="lab.instrument">
+        <field name="name">Automated Chemistry Analyser</field><field name="code">CHEM-01</field>
+        <field name="location">Biochemistry Bench</field><field name="sequence">10</field>
+    </record>
+    <record id="instrument_electrolyte" model="lab.instrument">
+        <field name="name">Electrolyte Analyser</field><field name="code">ISE-01</field>
+        <field name="location">Biochemistry Bench</field><field name="sequence">20</field>
+    </record>
+    <record id="instrument_immunoassay" model="lab.instrument">
+        <field name="name">Immunoassay Analyser (CLIA)</field><field name="code">IMM-01</field>
+        <field name="location">Immunology Bench</field><field name="sequence">30</field>
+    </record>
+    <record id="instrument_haematology" model="lab.instrument">
+        <field name="name">Haematology Cell Counter</field><field name="code">HEM-01</field>
+        <field name="location">Haematology Bench</field><field name="sequence">40</field>
+    </record>
+    <record id="instrument_coagulometer" model="lab.instrument">
+        <field name="name">Coagulometer</field><field name="code">COAG-01</field>
+        <field name="location">Haematology Bench</field><field name="sequence">50</field>
+    </record>
+    <record id="instrument_urine_analyzer" model="lab.instrument">
+        <field name="name">Urine Strip Analyser</field><field name="code">URI-01</field>
+        <field name="location">Clinical Pathology Bench</field><field name="sequence">60</field>
+    </record>
+    <record id="instrument_microscope" model="lab.instrument">
+        <field name="name">Binocular Microscope</field><field name="code">MIC-01</field>
+        <field name="location">Clinical Pathology Bench</field><field name="sequence">70</field>
+    </record>
+    <record id="instrument_incubator" model="lab.instrument">
+        <field name="name">Bacteriological Incubator</field><field name="code">INC-01</field>
+        <field name="location">Microbiology Bench</field><field name="sequence">80</field>
+    </record>
+    <record id="instrument_hba1c" model="lab.instrument">
+        <field name="name">HbA1c / HPLC Analyser</field><field name="code">HPLC-01</field>
+        <field name="location">Biochemistry Bench</field><field name="sequence">90</field>
+    </record>
+    <record id="instrument_pcr" model="lab.instrument">
+        <field name="name">Real-Time PCR Thermocycler</field><field name="code">PCR-01</field>
+        <field name="location">Molecular Room</field><field name="sequence">100</field>
+    </record>
+    <record id="instrument_glucometer" model="lab.instrument">
+        <field name="name">Glucometer (Strip)</field><field name="code">GLU-01</field>
+        <field name="location">Collection Room</field><field name="sequence">110</field>
+    </record>
+
+</odoo>

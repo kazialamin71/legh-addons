@@ -20,6 +20,7 @@ class HospitalAdmissionCharge(models.Model):
          ('dental', 'Dental'),
          ('consultation', 'Consultation'),
          ('procedure', 'Procedure'),
+         ('admission', 'Admission Charge'),
          ('bed', 'Bed'),
          ('cabin', 'Cabin'),
          ('icu', 'ICU'),

@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!--
+        POS / thermal consultation token, 80 mm roll.
+
+        Height is fixed at 140 mm because a thermal printer advances the paper
+        to the end of the page: too tall wastes a strip on every patient, too
+        short truncates the notes box. 140 mm fits the consultation token plus
+        the tear-off token slip with a little slack. If your roll or font size
+        changes, this is the number to tune.
+
+        Everything is inline-styled on purpose. Bootstrap leaves table cells
+        with border-style:solid and width:0, which wkhtmltopdf still paints as a
+        1 px grid, and flexbox does not survive the wkhtmltopdf engine at all.
+    -->
+    <record id="paperformat_appointment_token" model="report.paperformat">
+        <field name="name">Consultation Token 80mm</field>
+        <field name="format">custom</field>
+        <field name="page_width">80</field>
+        <field name="page_height">140</field>
+        <field name="orientation">Portrait</field>
+        <field name="margin_top">3</field>
+        <field name="margin_bottom">3</field>
+        <field name="margin_left">3</field>
+        <field name="margin_right">3</field>
+        <field name="header_spacing">0</field>
+        <field name="header_line" eval="False"/>
+        <field name="dpi">96</field>
+    </record>
+
+    <record id="action_report_appointment_token" model="ir.actions.report">
+        <field name="name">Consultation Token (POS)</field>
+        <field name="model">appointment.booking</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">leih_opd.report_appointment_token</field>
+        <field name="report_file">leih_opd.report_appointment_token</field>
+        <field name="print_report_name">'Token - %s' % (object.token_no or object.name or '')</field>
+        <field name="paperformat_id" ref="paperformat_appointment_token"/>
+        <field name="binding_model_id" ref="leih19.model_appointment_booking"/>
+        <field name="binding_type">report</field>
+    </record>
+
+    <!-- One label/value row of the identity grid. -->
+    <template id="report_token_row">
+        <tr>
+            <td style="padding:0.6mm 0; vertical-align:top; white-space:nowrap;"
+                t-attf-style="padding:0.6mm 0; vertical-align:top; white-space:nowrap; width:#{label_width or '17mm'};">
+                <t t-out="label"/>
+            </td>
+            <td style="padding:0.6mm 1mm 0.6mm 0; vertical-align:top; white-space:nowrap;">:</td>
+            <td style="padding:0.6mm 0; vertical-align:top; font-weight:bold; word-break:break-word;">
+                <t t-out="value or '-'"/>
+            </td>
+        </tr>
+    </template>
+
+    <template id="report_appointment_token">
+        <t t-call="web.basic_layout">
+            <t t-foreach="docs" t-as="o">
+                <!-- appointment.booking is not company-scoped, so the active company is
+                     the right source for the letterhead and the boilerplate. -->
+                <t t-set="company" t-value="env.company"/>
+                <t t-set="doctor" t-value="o.doctor_name"/>
+                <t t-set="doctor_line"
+                   t-value="', '.join(filter(None, [doctor.name, ' - '.join(filter(None, [doctor.designation, doctor.department]))]))"/>
+
+                <div class="page"
+                     t-attf-style="#{not o_first and 'page-break-before: always; ' or ''}width:74mm; font-family:Arial, Helvetica, sans-serif; color:#000; font-size:9px; line-height:1.25;">
+
+                    <!-- ==================== HOSPITAL HEADER ==================== -->
+                    <table style="width:100%; border-collapse:collapse; border:0 none;">
+                        <tr>
+                            <td style="width:14mm; vertical-align:middle; border:0 none; padding:0;">
+                                <img t-if="company.logo"
+                                     t-att-src="image_data_uri(company.logo)"
+                                     style="max-width:13mm; max-height:11mm;"/>
+                            </td>
+                            <td style="vertical-align:middle; border:0 none; padding:0 0 0 1.5mm;">
+                                <div style="font-size:13px; font-weight:bold; line-height:1.15;">
+                                    <t t-out="company.name"/>
+                                </div>
+                                <div style="font-size:8px; line-height:1.2;">
+                                    <t t-out="', '.join(filter(None, [company.street, company.street2]))"/>
+                                    <t t-if="company.city or company.zip">
+                                        <br/>
+                                        <t t-out="', '.join(filter(None, [company.city, company.zip]))"/>
+                                    </t>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+
+                    <div style="border-top:1px solid #000; margin:1.5mm 0 1.5mm 0;"/>
+
+                    <!-- ================== TITLE + TOKEN NUMBER ================== -->
+                    <table style="width:100%; border-collapse:collapse; border:0 none;">
+                        <tr>
+                            <td style="border:0 none; padding:0; vertical-align:middle; font-size:12px; font-weight:bold;">
+                                Consultation Token
+                            </td>
+                            <td style="border:0 none; padding:0; vertical-align:middle; text-align:right; width:24mm;">
+                                <span style="border:1.2px solid #000; padding:0.8mm 3mm; font-size:16px; font-weight:bold;">
+                                    <t t-out="o.token_no or '-'"/>
+                                </span>
+                            </td>
+                        </tr>
+                    </table>
+
+                    <div style="border-top:1px solid #000; margin:1.5mm 0 1.5mm 0;"/>
+
+                    <!-- ===================== IDENTITY GRID ====================== -->
+                    <table style="width:100%; border-collapse:collapse; border:0 none; font-size:9px;">
+                        <t t-call="leih_opd.report_token_row">
+                            <t t-set="label">Name</t>
+                            <t t-set="value" t-value="o.patient_id.name or o.patient_name"/>
+                        </t>
+                    </table>
+
+                    <!-- Paired columns: left identifier, right identifier. -->
+                    <table style="width:100%; border-collapse:collapse; border:0 none; font-size:9px;">
+                        <tr>
+                            <td style="border:0 none; padding:0; width:50%; vertical-align:top;">
+                                <table style="width:100%; border-collapse:collapse; border:0 none;">
+                                    <t t-call="leih_opd.report_token_row">
+                                        <t t-set="label">HN</t>
+                                        <t t-set="label_width">12mm</t>
+                                        <t t-set="value" t-value="o.hn_number"/>
+                                    </t>
+                                    <t t-call="leih_opd.report_token_row">
+                                        <t t-set="label">DOB</t>
+                                        <t t-set="label_width">12mm</t>
+                                        <t t-set="value"
+                                           t-value="(o.date_of_birth or o.patient_id.date_of_birth) and (o.date_of_birth or o.patient_id.date_of_birth).strftime('%Y-%m-%d')"/>
+                                    </t>
+                                    <t t-call="leih_opd.report_token_row">
+                                        <t t-set="label">Gender</t>
+                                        <t t-set="label_width">12mm</t>
+                                        <t t-set="value"
+                                           t-value="dict(o.patient_id._fields['sex'].selection).get(o.patient_id.sex) if o.patient_id.sex else (o.sex or '')"/>
+                                    </t>
+                                    <t t-call="leih_opd.report_token_row">
+                                        <t t-set="label">SL</t>
+                                        <t t-set="label_width">12mm</t>
+                                        <t t-set="value"
+                                           t-value="'%s%s' % (o.serial_no or '-', o.time and ('   Time %s' % o.time) or '')"/>
+                                    </t>
+                                </table>
+                            </td>
+                            <td style="border:0 none; padding:0 0 0 1.5mm; width:50%; vertical-align:top;">
+                                <table style="width:100%; border-collapse:collapse; border:0 none;">
+                                    <t t-call="leih_opd.report_token_row">
+                                        <t t-set="label">CN</t>
+                                        <t t-set="label_width">13mm</t>
+                                        <t t-set="value" t-value="o.cn_number"/>
+                                    </t>
+                                    <t t-call="leih_opd.report_token_row">
+                                        <t t-set="label">AGE</t>
+                                        <t t-set="label_width">13mm</t>
+                                        <t t-set="value" t-value="o.age_display"/>
+                                    </t>
+                                    <t t-call="leih_opd.report_token_row">
+                                        <t t-set="label">VN Date</t>
+                                        <t t-set="label_width">13mm</t>
+                                        <t t-set="value" t-value="o.vn_date and o.vn_date.strftime('%d/%m/%Y')"/>
+                                    </t>
+                                    <t t-call="leih_opd.report_token_row">
+                                        <t t-set="label">CN Date</t>
+                                        <t t-set="label_width">13mm</t>
+                                        <t t-set="value" t-value="o.cn_date and o.cn_date.strftime('%d/%m/%Y')"/>
+                                    </t>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+
+                    <table style="width:100%; border-collapse:collapse; border:0 none; font-size:9px;">
+                        <t t-call="leih_opd.report_token_row">
+                            <t t-set="label">Location</t>
+                            <t t-set="value" t-value="o.location"/>
+                        </t>
+                    </table>
+
+                    <!-- ======================== BARCODE ========================= -->
+                    <div t-if="o.cn_number" style="text-align:center; margin:2mm 0 0.5mm 0;">
+                        <img t-att-src="o._barcode_data_uri(o.cn_number, 'Code128', width=660, height=110)"
+                             style="width:66mm; height:11mm;"/>
+                    </div>
+
+                    <div style="border-top:1px solid #000; margin:1.5mm 0 1.5mm 0;"/>
+
+                    <!-- ========================= DOCTOR ========================= -->
+                    <table style="width:100%; border-collapse:collapse; border:0 none; font-size:9px;">
+                        <t t-call="leih_opd.report_token_row">
+                            <t t-set="label">Doctor</t>
+                            <t t-set="value" t-value="doctor_line"/>
+                        </t>
+                    </table>
+
+                    <div style="border-top:1px solid #000; margin:1.5mm 0 1.5mm 0;"/>
+
+                    <!-- ========================== QR ============================ -->
+                    <table style="width:100%; border-collapse:collapse; border:0 none;">
+                        <tr>
+                            <td style="border:0 none; padding:0; vertical-align:middle; font-size:9px; font-weight:bold;">
+                                <t t-foreach="(company.appointment_token_qr_label or '').split('\n')" t-as="qr_line">
+                                    <t t-out="qr_line"/><br/>
+                                </t>
+                            </td>
+                            <td style="border:0 none; padding:0; text-align:right; width:20mm;">
+                                <img t-att-src="o._barcode_data_uri(o.cn_number or o.name or '-', 'QR', width=220, height=220)"
+                                     style="width:18mm; height:18mm;"/>
+                            </td>
+                        </tr>
+                    </table>
+
+                    <!-- ======================== NOTES BOX ======================== -->
+                    <t t-set="notes"
+                       t-value="[n.strip() for n in (company.appointment_token_notes or '').split('\n') if n.strip()]"/>
+                    <table t-if="notes"
+                           style="width:100%; border-collapse:collapse; border:1px solid #000; margin:2mm 0 1.5mm 0;">
+                        <tr>
+                            <td style="border:0 none; padding:1.5mm;">
+                                <table style="width:100%; border-collapse:collapse; border:0 none; font-size:8px; line-height:1.3;">
+                                    <t t-foreach="notes" t-as="note">
+                                        <tr>
+                                            <td style="border:0 none; padding:0 1mm 0.8mm 0; vertical-align:top; width:5mm; font-weight:bold;">
+                                                <t t-out="note_index + 1"/>.
+                                            </td>
+                                            <td style="border:0 none; padding:0 0 0.8mm 0; vertical-align:top; font-weight:bold;">
+                                                <t t-out="note"/>
+                                            </td>
+                                        </tr>
+                                    </t>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+
+                    <!-- ===================== PRINT DATE / N.B. =================== -->
+                    <div style="font-size:9px; margin-top:1mm;">
+                        Print Date :
+                        <t t-out="context_timestamp(o.token_printed_on or o.write_date).strftime('%d/%m/%Y %I.%M %p')"/>
+                    </div>
+                    <div t-if="company.appointment_token_footer"
+                         style="font-size:8px; font-style:italic; margin-top:1.5mm; line-height:1.3;">
+                        <t t-out="company.appointment_token_footer"/>
+                    </div>
+
+                    <!-- ==================== TEAR-OFF TOKEN SLIP ================== -->
+                    <div style="border-top:1px dashed #000; margin:5mm 0 1mm 0;"/>
+                    <div style="text-align:center; font-size:7px; margin-bottom:2mm;">- - -  cut here  - - -</div>
+
+                    <table style="width:100%; border-collapse:collapse; border:0 none;">
+                        <tr>
+                            <td style="border:0 none; padding:0; vertical-align:middle; font-size:14px;">Token No</td>
+                            <td style="border:0 none; padding:0; vertical-align:middle; text-align:right; font-size:34px; font-weight:bold; line-height:1;">
+                                <t t-out="o.token_no or '-'"/>
+                            </td>
+                        </tr>
+                    </table>
+
+                    <table style="width:100%; border-collapse:collapse; border:0 none; font-size:11px; margin-top:1.5mm;">
+                        <t t-call="leih_opd.report_token_row">
+                            <t t-set="label">Name</t>
+                            <t t-set="label_width">15mm</t>
+                            <t t-set="value" t-value="o.patient_id.name or o.patient_name"/>
+                        </t>
+                        <t t-call="leih_opd.report_token_row">
+                            <t t-set="label">CN</t>
+                            <t t-set="label_width">15mm</t>
+                            <t t-set="value" t-value="o.cn_number"/>
+                        </t>
+                        <t t-call="leih_opd.report_token_row">
+                            <t t-set="label">CN Date</t>
+                            <t t-set="label_width">15mm</t>
+                            <t t-set="value" t-value="o.cn_date and o.cn_date.strftime('%d/%m/%Y')"/>
+                        </t>
+                        <t t-call="leih_opd.report_token_row">
+                            <t t-set="label">Doctor</t>
+                            <t t-set="label_width">15mm</t>
+                            <t t-set="value" t-value="doctor_line"/>
+                        </t>
+                    </table>
+                </div>
+            </t>
+        </t>
+    </template>
+
+</odoo>

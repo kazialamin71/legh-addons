@@ -1,0 +1,79 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <record id="admission_charge_item_list_view" model="ir.ui.view">
+        <field name="name">admission.charge.item.list</field>
+        <field name="model">admission.charge.item</field>
+        <field name="arch" type="xml">
+            <list string="Admission Charge Items" editable="bottom">
+                <field name="charge_type" widget="badge"/>
+                <field name="name"/>
+                <field name="department"/>
+                <field name="rate"/>
+                <field name="accounts_id" optional="hide"/>
+                <field name="note" optional="hide"/>
+                <field name="active" optional="hide" widget="boolean_toggle"/>
+            </list>
+        </field>
+    </record>
+    <record id="admission_charge_item_form_view" model="ir.ui.view">
+        <field name="name">admission.charge.item.form</field>
+        <field name="model">admission.charge.item</field>
+        <field name="arch" type="xml">
+            <form string="Admission Charge Item">
+                <sheet>
+                    <widget name="web_ribbon" title="Archived" bg_color="text-bg-danger"
+                            invisible="active"/>
+                    <div class="oe_title">
+                        <label for="name" string="Charge"/>
+                        <h1><field name="name" class="oe_inline" placeholder="e.g. ICU Bed Rent"/></h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="charge_type"/>
+                            <field name="rate"/>
+                        </group>
+                        <group>
+                            <field name="department"/>
+                            <field name="accounts_id"/>
+                            <field name="active" invisible="1"/>
+                        </group>
+                    </group>
+                    <group>
+                        <field name="note" placeholder="Internal note"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="admission_charge_item_search_view" model="ir.ui.view">
+        <field name="name">admission.charge.item.search</field>
+        <field name="model">admission.charge.item</field>
+        <field name="arch" type="xml">
+            <search string="Admission Charge Items">
+                <field name="name"/>
+                <field name="department"/>
+                <separator/>
+                <filter string="Admission Charge" name="t_admission" domain="[('charge_type', '=', 'admission')]"/>
+                <filter string="ICU" name="t_icu" domain="[('charge_type', '=', 'icu')]"/>
+                <filter string="NICU" name="t_nicu" domain="[('charge_type', '=', 'nicu')]"/>
+                <filter string="Other Charge" name="t_other" domain="[('charge_type', '=', 'other')]"/>
+                <separator/>
+                <filter string="Archived" name="inactive" domain="[('active', '=', False)]"/>
+                <filter string="Group by Charge Type" name="group_type" context="{'group_by': 'charge_type'}"/>
+                <filter string="Group by Income Unit" name="group_unit" context="{'group_by': 'department'}"/>
+            </search>
+        </field>
+    </record>
+    <record id="admission_charge_item_action" model="ir.actions.act_window">
+        <field name="name">Admission Charge Items</field>
+        <field name="res_model">admission.charge.item</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="admission_charge_item_search_view"/>
+        <field name="context">{'search_default_group_type': 1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Create an admission charge item</p>
+            <p>Admission, ICU, NICU and other ward charges live here, separate from
+               the diagnostic catalogue (Examination Entry).</p>
+        </field>
+    </record>
+</odoo>

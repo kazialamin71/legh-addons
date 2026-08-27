@@ -30,6 +30,11 @@ class DoctorSchedule(models.Model):
     end_time = fields.Float('End Time')
     capacity = fields.Integer('Capacity (max serials/day)', default=20)
     consultation_fee = fields.Float('Consultation Fee')
+    room_location = fields.Char(
+        'Room / Location',
+        help='Where this session is held - wing, floor and room number, e.g. '
+             '"Extension Wing-2, 10th Floor-EW2, 1018". Printed on the '
+             'consultation token so the patient knows where to go.')
     consultation_entry_id = fields.Many2one(
         'opd.ticket.entry', string='Consultation Item',
         help='OPD billing item used for the consultation line created when a '
