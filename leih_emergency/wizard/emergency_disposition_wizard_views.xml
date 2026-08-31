@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <record id="emergency_disposition_wizard_form" model="ir.ui.view">
+        <field name="name">emergency.disposition.wizard.form</field>
+        <field name="model">emergency.disposition.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Disposition">
+                <field name="case_id" invisible="1"/>
+                <group>
+                    <group string="Outcome">
+                        <field name="disposition"/>
+                        <field name="transferred_to"
+                               invisible="disposition != 'transferred'"
+                               required="disposition == 'transferred'"/>
+                        <field name="note" placeholder="Advice, follow-up, remarks..."/>
+                    </group>
+                    <group string="Settlement">
+                        <field name="due"/>
+                        <field name="collect_now" invisible="due &lt;= 0"/>
+                        <field name="payment_type" invisible="due &lt;= 0"
+                               options="{'no_quick_create': True, 'no_create_edit': True}"/>
+                        <field name="waive_due" invisible="due &lt;= 0"/>
+                        <field name="waive_reason" invisible="not waive_due"
+                               required="waive_due"/>
+                    </group>
+                </group>
+                <div class="alert alert-info" role="status"
+                     invisible="disposition != 'admitted'">
+                    A draft ward admission will be created and opened, seeded from this
+                    ED case. The ward assigns the bed and confirms it - an admission
+                    cannot be confirmed without one.
+                </div>
+                <footer>
+                    <button name="action_confirm" type="object" string="Close Case"
+                            class="btn-primary" data-hotkey="q"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"
+                            data-hotkey="x"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

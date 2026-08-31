@@ -21,21 +21,53 @@
                         groups="base.group_user"/>
             </button>
 
+            <!-- Front of the header: the ward prints this the moment the
+                 patient is on the record, so it must not sit behind the
+                 billing buttons. -->
+            <button name="hospital_change_status" position="before">
+                <button string="Print Admission Form" type="object"
+                        name="action_print_admission_form" class="btn-primary"
+                        icon="fa-print" groups="base.group_user"/>
+            </button>
+
             <button name="btn_bill" position="after">
-                <button string="New Investigation Bill" type="object"
-                        name="action_new_investigation_bill" class="btn-secondary"
-                        groups="base.group_user"/>
                 <button string="Print Statement" type="object"
                         name="action_print_statement" class="btn-secondary"
                         groups="base.group_user"/>
             </button>
 
-            <xpath expr="//field[@name='investigation_bill_ids']" position="before">
-                <div class="mb-2">
-                    <button string="New Investigation Bill" type="object"
-                            name="action_new_investigation_bill" class="btn-primary"
-                            groups="base.group_user"/>
-                </div>
+            <!-- Header cleanup. The legacy investigation buttons pulled bills in
+                 through the pre-Phase-A path that "Calculate Payable" replaced,
+                 so keeping them offered two routes to the same numbers; the
+                 prescription buttons belong to the OPD flow, not the ward.
+
+                 Hidden, NOT removed. Three other modules graft themselves onto
+                 these exact nodes - leih_accounting and leih_pharmacy both use
+                 <button name="btn_bill" position="after">, and indoor_management
+                 xpaths onto action_view_prescriptions. Deleting a node from an
+                 inherited view breaks every module that anchors to it, so the
+                 buttons stay in the arch and simply never render. The methods
+                 remain on the model either way. -->
+            <button name="calculate_bill" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </button>
+            <button name="btn_bill" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </button>
+            <button name="action_create_prescription" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </button>
+            <button name="action_view_prescriptions" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </button>
+            <!-- Orphaned once its two buttons went: a count with nothing to open. -->
+            <field name="prescription_count" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
+
+            <!-- Hook for the per-state statusbar colours in admission.css. -->
+            <xpath expr="//form" position="attributes">
+                <attribute name="class">o_admission_form</attribute>
             </xpath>
 
             <xpath expr="//notebook/page[1]" position="before">
@@ -57,6 +89,25 @@
                     </field>
                 </page>
             </xpath>
+        </field>
+    </record>
+
+    <!-- Colour the state in the list too, where it is scanned rather than read. -->
+    <record id="hospital_admission_list_state" model="ir.ui.view">
+        <field name="name">hospital.admission.list.state</field>
+        <field name="model">hospital.admission</field>
+        <field name="inherit_id" ref="leih19.hospital_admission_tree_view"/>
+        <field name="arch" type="xml">
+            <field name="state" position="attributes">
+                <attribute name="widget">badge</attribute>
+                <attribute name="decoration-warning">state == 'pending'</attribute>
+                <attribute name="decoration-success">state == 'activated'</attribute>
+                <attribute name="decoration-info">state == 'released'</attribute>
+                <attribute name="decoration-danger">state == 'cancelled'</attribute>
+            </field>
+            <field name="prescription_count" position="attributes">
+                <attribute name="column_invisible">1</attribute>
+            </field>
         </field>
     </record>
 </odoo>

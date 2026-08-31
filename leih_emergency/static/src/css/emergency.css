@@ -1,0 +1,17 @@
+/*
+    Triage colours for the ED board.
+
+    Triage is read as colour before it is read as text -- that is the whole
+    point of the scale -- so the kanban column headers carry the colour, not
+    just the cards.
+*/
+.o_emergency_board .o_kanban_group[data-id="critical"] .o_column_title,
+.o_emergency_board .o_kanban_header .o_column_title.o_ed_critical { color: #b3352c; }
+
+.o_ed_dot { display:inline-block; width:10px; height:10px; border-radius:50%; margin-right:4px; }
+.o_ed_dot_critical { background:#b3352c; }
+.o_ed_dot_urgent   { background:#d9822b; }
+.o_ed_dot_standard { background:#1f9254; }
+
+/* A patient past their time-to-be-seen target. */
+.o_ed_breach { border-left: 4px solid #b3352c !important; }

@@ -35,14 +35,14 @@
                                 <td><span class="lbl">Patient</span>
                                     <span t-out="o.patient_name or '-'"/></td>
                                 <td><span class="lbl">Age / Sex</span>
-                                    <span t-out="o.age or '-'"/> / <span t-out="o.sex or '-'"/></td>
+                                    <span t-out="o.age or '-'"/> / <t t-if="o.sex"><span t-field="o.sex"/></t><t t-else="">-</t></td>
                             </tr>
                             <tr>
                                 <td><span class="lbl">Mobile</span>
                                     <span t-out="o.phone or '-'"/></td>
                                 <td><span class="lbl">Date / Time</span>
                                     <span t-field="o.date" t-options="{'widget': 'date'}"/>
-                                    <t t-if="o.time"> — <span t-out="o.time"/></t></td>
+                                    <t t-if="o.time_display"> — <span t-out="o.time_display"/></t></td>
                             </tr>
                             <tr>
                                 <td><span class="lbl">Address</span>

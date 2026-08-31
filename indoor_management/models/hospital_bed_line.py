@@ -2,7 +2,8 @@ from datetime import timedelta
 
 import pytz
 
-from odoo import api, fields, models
+from odoo import _, api, fields, models
+from odoo.exceptions import ValidationError
 
 DEFAULT_TZ = "Asia/Dhaka"
 CYCLE_START_HOUR = 12   # cycle begins at 12:00 (noon) local time
@@ -179,6 +180,50 @@ class HospitalBedLine(models.Model):
             cs += timedelta(days=1)
         return result
 
+    @api.constrains("bed_no", "start_date", "end_date", "hospital_bed_item_id")
+    def _check_bed_not_double_booked(self):
+        """One patient per bed at a time.
+
+        Enforced here rather than in the shift wizard because a bed can be
+        allocated from three places -- the wizard, the admission's Bed tab, and
+        code -- and only a constraint covers all of them. Overlap is compared on
+        the dates, not just "is there an open line", so back-dating a stay onto a
+        period the bed was already occupied is caught too. A missing end_date
+        means "still in it", i.e. an open-ended interval.
+        """
+        for rec in self:
+            if not rec.bed_no or not rec.start_date:
+                continue
+            if rec.hospital_bed_item_id.state == "cancelled":
+                continue
+            domain = [
+                ("id", "!=", rec.id),
+                ("bed_no", "=", rec.bed_no.id),
+                ("start_date", "!=", False),
+                ("hospital_bed_item_id.state", "!=", "cancelled"),
+            ]
+            # other.start < this.end  (no end = runs forever, so no upper bound)
+            if rec.end_date:
+                domain.append(("start_date", "<", rec.end_date))
+            # ...and this.start < other.end
+            clash = self.search(domain).filtered(
+                lambda o: (not o.end_date or o.end_date > rec.start_date)
+                # A stay closed before it began occupies nothing. These appear
+                # when an admission is cancelled while its bed line is still
+                # future-dated; without this they would block the bed for good.
+                and not (o.end_date and o.start_date and o.end_date <= o.start_date))
+            if clash:
+                other = clash[0]
+                raise ValidationError(_(
+                    "Bed %(bed)s is already allocated to %(patient)s "
+                    "(admission %(adm)s) from %(start)s.\n\n"
+                    "Release or shift that patient first, or choose another bed.",
+                    bed=rec.bed_no.display_name,
+                    patient=other.hospital_bed_item_id.patient_name.name or "-",
+                    adm=other.hospital_bed_item_id.name or "-",
+                    start=other.start_date,
+                ))
+
     @api.model_create_multi
     def create(self, vals_list):
         records = super().create(vals_list)
@@ -186,7 +231,22 @@ class HospitalBedLine(models.Model):
         # the initial compute to see start_date=False (when manual_override is set
         # before start_date in cache). Re-run once after all fields are populated.
         records._compute_charges()
+        records.mapped("bed_no")._sync_state()
         return records
+
+    def write(self, vals):
+        # Beds touched before the write matter as much as the ones touched after:
+        # moving a line to a different bed has to free the one it left.
+        before = self.mapped("bed_no")
+        res = super().write(vals)
+        (before | self.mapped("bed_no"))._sync_state()
+        return res
+
+    def unlink(self):
+        beds = self.mapped("bed_no")
+        res = super().unlink()
+        beds._sync_state()
+        return res
 
     @api.onchange("bed_no")
     def _onchange_bed_indoor(self):

@@ -8,3 +8,5 @@ access_doctor_prescription,doctor.prescription,model_doctor_prescription,base.gr
 access_doctor_prescription_medicine,doctor.prescription.medicine,model_doctor_prescription_medicine,base.group_user,1,1,1,1
 access_doctor_prescription_advice,doctor.prescription.advice,model_doctor_prescription_advice,base.group_user,1,1,1,1
 access_doctor_prescription_test,doctor.prescription.test,model_doctor_prescription_test,base.group_user,1,1,1,1
+access_appointment_arrival_wizard,appointment.arrival.wizard,model_appointment_arrival_wizard,base.group_user,1,1,1,1
+access_doctor_collection_wizard,appointment.doctor.collection.wizard,model_appointment_doctor_collection_wizard,base.group_user,1,1,1,1

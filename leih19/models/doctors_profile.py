@@ -20,3 +20,10 @@ class DoctorsProfile(models.Model):
     referral_id = fields.Many2one('doctors.profile', string='Referral ID')
     broker_ids = fields.Many2many('brokers.info', 'referral_relation')
     is_referral = fields.Boolean('Is Referral?')
+    # Which login belongs to this doctor. Lives here rather than in a satellite
+    # module because every satellite needs it to answer "is this my patient?" -
+    # the OPD doctor queue and the ED board both filter on it.
+    user_id = fields.Many2one(
+        'res.users', string='Login User', ondelete='set null', index=True,
+        help='The Odoo login this doctor uses. Set it and the "My Patients" '
+             'filters show only their own patients.')

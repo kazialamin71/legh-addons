@@ -1,0 +1,157 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <!--
+        Two desks, two screens.
+
+        Both run on appointment.booking; what separates them is the domain and
+        the columns, because the two people are asking different questions.
+        The serial desk asks "who is booked and who has turned up"; the doctor
+        asks "who is next".
+    -->
+
+    <!-- ==================== SERIAL / BILLING DESK ==================== -->
+    <record id="appointment_desk_list" model="ir.ui.view">
+        <field name="name">appointment.booking.desk.list</field>
+        <field name="model">appointment.booking</field>
+        <field name="arch" type="xml">
+            <!-- Ordered the way the queue is called, not newest-first: the desk
+                 reads down this list. -->
+            <list string="Serials" default_order="appointment_date desc, serial_no asc"
+                  decoration-info="status == 'arrived'"
+                  decoration-warning="status == 'in_consultation'"
+                  decoration-muted="status == 'converted'">
+                <field name="serial_no" string="SL"/>
+                <field name="token_no" string="Token" optional="show"/>
+                <field name="patient_name" string="Patient"/>
+                <field name="age" optional="show"/>
+                <field name="phone" string="Mobile"/>
+                <field name="hn_number" string="Hospital No." optional="show"/>
+                <field name="doctor_name" string="Doctor"/>
+                <field name="schedule_id" string="Session" optional="show"/>
+                <field name="appointment_date" string="Date"/>
+                <field name="amount" string="Fee" sum="Fee Collected"/>
+                <field name="payment_done" string="Paid" widget="boolean_toggle" readonly="1"/>
+                <field name="collected_by" optional="hide"/>
+                <field name="arrived_on" optional="hide"/>
+                <field name="status" widget="badge"
+                       decoration-info="status == 'arrived'"
+                       decoration-warning="status == 'in_consultation'"
+                       decoration-success="status == 'converted'"/>
+                <button name="action_confirm_serial" type="object" title="Confirm Serial"
+                        icon="fa-hashtag" invisible="serial_no != 0"/>
+                <button name="action_print_token" type="object" title="Print Token"
+                        icon="fa-print" invisible="not doctor_name"/>
+                <button name="action_register_arrival" type="object" string="Arrival"
+                        class="btn-primary" icon="fa-sign-in"
+                        invisible="status in ('arrived', 'in_consultation', 'converted')"/>
+                <button name="action_print_id_card" type="object" title="Print ID Card"
+                        icon="fa-id-card" invisible="not patient_id"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="appointment_desk_action" model="ir.actions.act_window">
+        <field name="name">Serial Desk</field>
+        <field name="res_model">appointment.booking</field>
+        <field name="view_mode">list,form</field>
+        <field name="view_id" ref="appointment_desk_list"/>
+        <field name="search_view_id" ref="appointment_booking_search_opd"/>
+        <field name="context">{'search_default_today': 1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Take a serial</p>
+            <p>
+                Ask for the doctor, the date, and the patient's name, age and
+                mobile number. That is all a serial needs - the patient record
+                is created when they actually turn up.
+            </p>
+        </field>
+    </record>
+
+    <!-- ======================= DOCTOR'S QUEUE ======================= -->
+    <record id="appointment_queue_kanban" model="ir.ui.view">
+        <field name="name">appointment.booking.queue.kanban</field>
+        <field name="model">appointment.booking</field>
+        <field name="arch" type="xml">
+            <!-- First come, first served: ordered by when they reported at the
+                 desk, falling back to the serial for anyone not yet stamped. -->
+            <kanban default_order="arrived_on asc, serial_no asc"
+                    default_group_by="status" class="o_kanban_small_column"
+                    records_draggable="false" group_create="false">
+                <field name="status"/>
+                <field name="waiting_time"/>
+                <templates>
+                    <t t-name="card">
+                        <div class="d-flex align-items-start">
+                            <span class="badge text-bg-primary fs-5 me-2">
+                                <field name="serial_no"/>
+                            </span>
+                            <div class="flex-grow-1">
+                                <div class="fw-bold fs-5"><field name="patient_name"/></div>
+                                <div class="text-muted">
+                                    <field name="age"/> ·
+                                    <field name="sex"/> ·
+                                    <field name="phone"/>
+                                </div>
+                                <div t-if="record.hn_number.raw_value" class="text-muted small">
+                                    HN <field name="hn_number"/>
+                                </div>
+                                <div class="mt-1">
+                                    <field name="doctor_name"/>
+                                </div>
+                                <div t-if="record.waiting_time.raw_value" class="mt-1">
+                                    <span class="badge text-bg-warning">
+                                        Waiting <field name="waiting_time"/>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <footer class="pt-2">
+                            <button name="action_start_consultation" type="object"
+                                    class="btn btn-primary btn-sm"
+                                    invisible="status != 'arrived'">
+                                Start Consultation
+                            </button>
+                            <button name="action_start_consultation" type="object"
+                                    class="btn btn-secondary btn-sm"
+                                    invisible="status != 'in_consultation'">
+                                Open Prescription
+                            </button>
+                            <button name="action_complete_consultation" type="object"
+                                    class="btn btn-outline-secondary btn-sm ms-1"
+                                    invisible="status not in ('arrived', 'in_consultation')">
+                                Done
+                            </button>
+                        </footer>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record id="appointment_queue_action" model="ir.actions.act_window">
+        <field name="name">Doctor Queue</field>
+        <field name="res_model">appointment.booking</field>
+        <field name="view_mode">kanban,list,form</field>
+        <field name="view_id" ref="appointment_queue_kanban"/>
+        <field name="search_view_id" ref="appointment_booking_search_opd"/>
+        <!-- Only patients who have reported and paid; today only. -->
+        <field name="domain">[('status', 'in', ('arrived', 'in_consultation'))]</field>
+        <field name="context">{'search_default_today': 1, 'search_default_my_patients': 1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Nobody is waiting</p>
+            <p>
+                Patients appear here as soon as the front desk registers their
+                arrival. If the queue looks empty but shouldn't be, clear the
+                <b>My Patients</b> filter - it matches the doctor whose
+                <i>Login User</i> is set to you.
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="menu_appointment_desk" name="Serial Desk"
+              parent="leih19.menu_leis_appointment"
+              action="appointment_desk_action" sequence="5"/>
+    <menuitem id="menu_appointment_queue" name="Doctor Queue"
+              parent="leih19.menu_leis_appointment"
+              action="appointment_queue_action" sequence="6"/>
+</odoo>

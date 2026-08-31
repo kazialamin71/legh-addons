@@ -1,0 +1,109 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <record id="printing_printer_list" model="ir.ui.view">
+        <field name="name">printing.printer.list</field>
+        <field name="model">printing.printer</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="system_name"/>
+                <field name="location"/>
+                <field name="info"/>
+                <button name="action_print_test_page" type="object" icon="fa-print"
+                        string="Test Page" title="Send a test page to this printer"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="printing_printer_form" model="ir.ui.view">
+        <field name="name">printing.printer.form</field>
+        <field name="model">printing.printer</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_print_test_page" type="object"
+                            string="Print Test Page" class="btn-primary" icon="fa-print"/>
+                </header>
+                <sheet>
+                    <widget name="web_ribbon" title="Archived" bg_color="text-bg-danger"
+                            invisible="active"/>
+                    <div class="oe_title">
+                        <label for="name"/>
+                        <h1><field name="name" placeholder="e.g. Billing Counter 1"/></h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="system_name" placeholder="HP_LaserJet_Pro_4003_B65769"/>
+                            <field name="location" placeholder="Ground floor, billing desk"/>
+                            <field name="active" invisible="1"/>
+                        </group>
+                        <group>
+                            <field name="info"/>
+                            <field name="options" placeholder="media=A4 sides=one-sided"/>
+                        </group>
+                    </group>
+                    <div class="alert alert-info" role="status">
+                        Only printers the <strong>server itself</strong> can reach can be
+                        used here. A printer plugged into a counter PC by USB cannot -
+                        set that user's <em>Print via</em> to <em>This computer</em> instead.
+                    </div>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="printing_printer_action" model="ir.actions.act_window">
+        <field name="name">Printers</field>
+        <field name="res_model">printing.printer</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Find the printers on this server</p>
+            <p>Press <b>Sync from CUPS</b> to list every printer the Odoo server can reach.</p>
+        </field>
+    </record>
+
+    <record id="printing_printer_action_sync" model="ir.actions.server">
+        <field name="name">Sync from CUPS</field>
+        <field name="model_id" ref="model_printing_printer"/>
+        <field name="binding_model_id" ref="model_printing_printer"/>
+        <field name="binding_view_types">list</field>
+        <field name="state">code</field>
+        <field name="code">action = model.action_sync_from_cups()</field>
+    </record>
+
+    <menuitem id="menu_printing_printer" name="Printers"
+              parent="base.menu_administration"
+              action="printing_printer_action" sequence="90"
+              groups="base.group_system"/>
+    <!-- Its own menu, not just the list's Actions menu: that menu is out of
+         reach when the list is empty, which is the one moment you need it. -->
+    <menuitem id="menu_printing_printer_sync" name="Sync Printers from CUPS"
+              parent="base.menu_administration"
+              action="printing_printer_action_sync" sequence="91"
+              groups="base.group_system"/>
+
+    <!-- Deliberately plain: this page exists to prove that Odoo, CUPS, the
+         network and the paper tray all work, so nothing on it may depend on a
+         report layout that might itself be the thing that is broken. -->
+    <template id="test_page">
+        <div style="font-family:sans-serif; padding:20mm;">
+            <h1 style="margin:0 0 8mm 0;">Odoo test page</h1>
+            <p style="font-size:14px;">
+                If you are holding this, printing works end to end:
+                Odoo rendered it, CUPS accepted it and this printer produced it.
+            </p>
+            <table style="border-collapse:collapse; font-size:13px; margin-top:8mm;">
+                <tr><td style="padding:2mm 6mm 2mm 0;"><b>Printer</b></td>
+                    <td style="padding:2mm 0;"><span t-out="printer.name"/></td></tr>
+                <tr><td style="padding:2mm 6mm 2mm 0;"><b>CUPS queue</b></td>
+                    <td style="padding:2mm 0;"><span t-out="printer.system_name"/></td></tr>
+                <tr><td style="padding:2mm 6mm 2mm 0;"><b>Location</b></td>
+                    <td style="padding:2mm 0;"><span t-out="printer.location or '-'"/></td></tr>
+                <tr><td style="padding:2mm 6mm 2mm 0;"><b>Sent by</b></td>
+                    <td style="padding:2mm 0;"><span t-out="user.name"/></td></tr>
+                <tr><td style="padding:2mm 6mm 2mm 0;"><b>Sent at</b></td>
+                    <td style="padding:2mm 0;"><span t-out="now"/></td></tr>
+            </table>
+        </div>
+    </template>
+</odoo>

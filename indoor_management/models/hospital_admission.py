@@ -98,29 +98,35 @@ class HospitalAdmission(models.Model):
         self._recompute_bed_charges()
         return super().calculate_bill()
 
+    def _close_open_bed_lines(self):
+        """End every open stay and hand the beds back.
+
+        Closing the line is all that is needed: hospital.bed.line.write syncs the
+        bed's status from its lines, so the bed is freed whatever state it was
+        sitting in. The old code only freed a bed that happened to read
+        'occupied', which meant a bed left 'reserved' -- or one whose status had
+        drifted -- stayed blocked after the patient went home.
+        """
+        now = fields.Datetime.now()
+        for rec in self:
+            for line in rec.hospital_bed_line_id.filtered(lambda l: not l.end_date):
+                # Never end a stay before it started: cancelling an admission
+                # whose bed line is future-dated would otherwise leave a
+                # negative-length interval behind.
+                line.end_date = max(now, line.start_date) if line.start_date else now
+
     def hospital_change_status(self):
         res = super().hospital_change_status()
-        for rec in self:
-            for line in rec.hospital_bed_line_id.filtered(lambda l: not l.end_date and l.bed_no):
-                if line.bed_no.state == "available":
-                    line.bed_no.state = "occupied"
+        # Confirming turns held beds into occupied ones.
+        self.mapped("hospital_bed_line_id.bed_no")._sync_state()
         return res
 
     def btn_final_settlement(self):
         res = super().btn_final_settlement()
-        for rec in self:
-            if rec.state == "released":
-                for line in rec.hospital_bed_line_id.filtered(lambda l: not l.end_date):
-                    line.end_date = fields.Datetime.now()
-                    if line.bed_no and line.bed_no.state == "occupied":
-                        line.bed_no.state = "available"
+        self.filtered(lambda r: r.state == "released")._close_open_bed_lines()
         return res
 
     def admission_cancel(self):
         res = super().admission_cancel()
-        for rec in self:
-            for line in rec.hospital_bed_line_id.filtered(lambda l: not l.end_date):
-                line.end_date = fields.Datetime.now()
-                if line.bed_no and line.bed_no.state == "occupied":
-                    line.bed_no.state = "available"
+        self._close_open_bed_lines()
         return res

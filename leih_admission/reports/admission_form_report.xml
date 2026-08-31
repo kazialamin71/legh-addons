@@ -1,0 +1,424 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--
+        Patient Admission Form.
+
+        Printed the moment a patient is on the admission, long before beds,
+        charges or a bill exist - the ward needs it in hand to take the
+        guardian's details and the consent signature. Every value that is not
+        known yet therefore prints as a ruled line rather than a blank gap, so
+        one document works both as a record of what the system holds and as a
+        paper form to complete by hand.
+
+        Tables, never flexbox: wkhtmltopdf ignores flex, which is why the
+        signature row of the discharge summary collapses.
+    -->
+    <record id="paperformat_admission_form" model="report.paperformat">
+        <field name="name">Admission Form A4</field>
+        <field name="format">A4</field>
+        <field name="orientation">Portrait</field>
+        <field name="margin_top">6</field>
+        <field name="margin_bottom">6</field>
+        <field name="margin_left">7</field>
+        <field name="margin_right">7</field>
+        <field name="header_spacing">0</field>
+        <field name="header_line" eval="False"/>
+        <field name="dpi">96</field>
+    </record>
+
+    <record id="action_report_admission_form" model="ir.actions.report">
+        <field name="name">Admission Form</field>
+        <field name="model">hospital.admission</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">leih_admission.report_admission_form</field>
+        <field name="report_file">leih_admission.report_admission_form</field>
+        <field name="print_report_name">'Admission Form - %s' % (object.name or object.patient_name.name)</field>
+        <field name="paperformat_id" ref="paperformat_admission_form"/>
+        <field name="binding_model_id" ref="leih19.model_hospital_admission"/>
+        <field name="binding_type">report</field>
+    </record>
+
+    <!-- One label + value cell. An empty value becomes a dotted rule to write on. -->
+    <template id="adm_cell">
+        <td t-att-colspan="span or 1"
+            t-attf-style="padding:5px 7px; vertical-align:top; border:0.5px solid #d5d5d5; #{extra or ''}">
+            <span style="display:block; color:#777; font-size:8.5px; text-transform:uppercase; letter-spacing:0.4px;">
+                <t t-out="label"/>
+            </span>
+            <span t-if="value" style="display:block; font-size:11.5px; font-weight:bold; min-height:17px;">
+                <t t-out="value"/>
+            </span>
+            <span t-else="" style="display:block; border-bottom:1px dotted #999; height:17px; margin-top:1px;"/>
+        </td>
+    </template>
+
+    <!-- A full-width ruled row for the hospital-use block. -->
+    <template id="adm_rule_row">
+        <tr>
+            <td style="padding:7px 7px; border:0.5px solid #d5d5d5; width:32%; font-size:10.5px; font-weight:bold; background:#fafafa;">
+                <t t-out="label"/>
+            </td>
+            <td style="padding:7px 7px; border:0.5px solid #d5d5d5;">
+                <span t-if="value" style="font-size:11.5px; font-weight:bold;"><t t-out="value"/></span>
+                <span t-else="" style="display:block; border-bottom:1px dotted #999; height:18px;"/>
+            </td>
+        </tr>
+    </template>
+
+    <template id="report_admission_form">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.basic_layout">
+                    <t t-set="company" t-value="env.company"/>
+                    <t t-set="doctor" t-value="o.admitting_doctor or o.ref_doctors"/>
+                    <t t-set="dob" t-value="o._admission_dob()"/>
+
+                    <div class="page"
+                         t-attf-style="#{not o_first and 'page-break-before: always; ' or ''}font-family:Arial, Helvetica, sans-serif; color:#111; font-size:11px;">
+
+                        <!-- ==================== LETTERHEAD ==================== -->
+                        <table style="width:100%; border-collapse:collapse; border:0 none;">
+                            <tr>
+                                <td style="width:62px; border:0 none; padding:0; vertical-align:middle;">
+                                    <img t-if="company.logo" t-att-src="image_data_uri(company.logo)"
+                                         style="max-width:58px; max-height:48px;"/>
+                                </td>
+                                <td style="border:0 none; padding:0 0 0 8px; vertical-align:middle;">
+                                    <div style="font-size:19px; font-weight:bold; line-height:1.15;">
+                                        <t t-out="company.name"/>
+                                    </div>
+                                    <div style="font-size:9px; line-height:1.35; color:#333;">
+                                        <t t-out="', '.join(filter(None, [company.street, company.street2, company.city, company.zip]))"/>
+                                        <t t-if="company.phone or company.email">
+                                            <br/>
+                                            <t t-out="' | '.join(filter(None, [company.phone, company.email, company.website]))"/>
+                                        </t>
+                                    </div>
+                                </td>
+                                <!-- Barcode inlined as a data: URI - see
+                                     _admission_barcode_uri for why the usual
+                                     /report/barcode src prints an empty box here. -->
+                                <td style="width:150px; border:0 none; padding:0; text-align:right; vertical-align:middle;">
+                                    <img t-if="o.name and o.name != 'New'"
+                                         t-att-src="o._admission_barcode_uri(o.name, 'Code128', width=600, height=90)"
+                                         style="width:140px; height:21px;"/>
+                                    <div style="font-size:11px; font-weight:bold; letter-spacing:0.5px; margin-top:1px;">
+                                        <t t-out="o.name or 'NEW'"/>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <div style="border-top:1.6px solid #000; margin:5px 0 0 0;"/>
+                        <table style="width:100%; border-collapse:collapse; border:0 none; margin:5px 0 7px 0;">
+                            <tr>
+                                <td style="border:0 none; padding:0; font-size:16px; font-weight:bold; letter-spacing:1.5px;">
+                                    PATIENT ADMISSION FORM
+                                </td>
+                                <td style="border:0 none; padding:0; text-align:right; font-size:9.5px;">
+                                    <span t-if="o.emergency"
+                                          style="border:1.2px solid #000; padding:1px 8px; font-weight:bold; letter-spacing:1px;">
+                                        EMERGENCY
+                                    </span>
+                                    <span t-else=""
+                                          style="border:1px solid #888; padding:1px 8px; color:#555; letter-spacing:1px;">
+                                        REGULAR
+                                    </span>
+                                    <span style="margin-left:8px;">
+                                        Date:
+                                        <b><t t-out="o.date" t-options="{'widget': 'datetime', 'format': 'dd/MM/yyyy hh:mm a'}"/></b>
+                                    </span>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <!-- ================= PATIENT PARTICULARS ================= -->
+                        <div style="background:#222; color:#fff; padding:4px 7px; font-size:10.5px; font-weight:bold; letter-spacing:1px;">
+                            1. PATIENT PARTICULARS
+                        </div>
+                        <table style="width:100%; border-collapse:collapse; margin-bottom:7px;">
+                            <tr>
+                                <t t-call="leih_admission.adm_cell">
+                                    <t t-set="label">Patient ID</t>
+                                    <t t-set="value" t-value="o.patient_id"/>
+                                    <t t-set="extra">width:18%;</t>
+                                </t>
+                                <t t-call="leih_admission.adm_cell">
+                                    <t t-set="label">Patient Name</t>
+                                    <t t-set="value" t-value="o.patient_name.name"/>
+                                    <t t-set="span" t-value="2"/>
+                                </t>
+                                <t t-call="leih_admission.adm_cell">
+                                    <t t-set="label">Age</t>
+                                    <!-- The old form printed "6Yy": it appended a
+                                         'y' to an age string that already said Y. -->
+                                    <t t-set="value" t-value="o.age"/>
+                                    <t t-set="extra">width:12%;</t>
+                                </t>
+                                <t t-call="leih_admission.adm_cell">
+                                    <t t-set="label">Sex</t>
+                                    <t t-set="value" t-value="o.sex and o.sex.title()"/>
+                                    <t t-set="extra">width:12%;</t>
+                                </t>
+                            </tr>
+                            <tr>
+                                <t t-call="leih_admission.adm_cell">
+                                    <t t-set="label">Date of Birth</t>
+                                    <t t-set="value" t-value="dob and dob.strftime('%d/%m/%Y')"/>
+                                </t>
+                                <t t-call="leih_admission.adm_cell">
+                                    <t t-set="label">Blood Group</t>
+                                    <t t-set="value" t-value="o.blood_group"/>
+                                </t>
+                                <t t-call="leih_admission.adm_cell">
+                                    <t t-set="label">Religion</t>
+                                    <t t-set="value" t-value="o._admission_religion_label()"/>
+                                </t>
+                                <t t-call="leih_admission.adm_cell">
+                                    <t t-set="label">Mobile No.</t>
+                                    <t t-set="value" t-value="o.mobile"/>
+                                    <t t-set="span" t-value="2"/>
+                                </t>
+                            </tr>
+                            <tr>
+                                <t t-call="leih_admission.adm_cell">
+                                    <t t-set="label">Father's Name</t>
+                                    <t t-set="value" t-value="o.father_name"/>
+                                    <t t-set="span" t-value="2"/>
+                                </t>
+                                <t t-call="leih_admission.adm_cell">
+                                    <t t-set="label">Mother's Name</t>
+                                    <t t-set="value" t-value="o.mother_name"/>
+                                    <t t-set="span" t-value="2"/>
+                                </t>
+                                <t t-call="leih_admission.adm_cell">
+                                    <t t-set="label">Spouse's Name</t>
+                                    <t t-set="value" t-value="o.spouse_name"/>
+                                </t>
+                            </tr>
+                            <tr>
+                                <t t-call="leih_admission.adm_cell">
+                                    <t t-set="label">Occupation</t>
+                                    <t t-set="value" t-value="o.occupation"/>
+                                    <t t-set="span" t-value="2"/>
+                                </t>
+                                <t t-call="leih_admission.adm_cell">
+                                    <t t-set="label">Business / Office Address</t>
+                                    <t t-set="value" t-value="o.business_address"/>
+                                    <t t-set="span" t-value="3"/>
+                                </t>
+                            </tr>
+                            <tr>
+                                <t t-call="leih_admission.adm_cell">
+                                    <t t-set="label">Present Address</t>
+                                    <t t-set="value" t-value="o.address"/>
+                                    <t t-set="span" t-value="5"/>
+                                </t>
+                            </tr>
+                        </table>
+
+                        <!-- ================ ADMISSION PARTICULARS ================ -->
+                        <div style="background:#222; color:#fff; padding:4px 7px; font-size:10.5px; font-weight:bold; letter-spacing:1px;">
+                            2. ADMISSION PARTICULARS
+                        </div>
+                        <table style="width:100%; border-collapse:collapse; margin-bottom:7px;">
+                            <tr>
+                                <t t-call="leih_admission.adm_cell">
+                                    <t t-set="label">Admission No.</t>
+                                    <t t-set="value" t-value="o.name if o.name != 'New' else False"/>
+                                    <t t-set="extra">width:20%;</t>
+                                </t>
+                                <t t-call="leih_admission.adm_cell">
+                                    <t t-set="label">Admitting Doctor</t>
+                                    <t t-set="value" t-value="o.admitting_doctor.name"/>
+                                    <t t-set="span" t-value="2"/>
+                                </t>
+                                <t t-call="leih_admission.adm_cell">
+                                    <t t-set="label">Department</t>
+                                    <t t-set="value" t-value="doctor.department"/>
+                                </t>
+                            </tr>
+                            <tr>
+                                <t t-call="leih_admission.adm_cell">
+                                    <t t-set="label">Referred by (Doctor)</t>
+                                    <t t-set="value" t-value="o.ref_doctors.name"/>
+                                    <t t-set="span" t-value="2"/>
+                                </t>
+                                <t t-call="leih_admission.adm_cell">
+                                    <t t-set="label">Referred to Hospital by</t>
+                                    <t t-set="value" t-value="o.reffered_to_hospital.broker_name"/>
+                                    <t t-set="span" t-value="2"/>
+                                </t>
+                            </tr>
+                            <tr>
+                                <t t-call="leih_admission.adm_cell">
+                                    <t t-set="label">Ward / Cabin / Bed</t>
+                                    <t t-set="value" t-value="o.bed"/>
+                                </t>
+                                <t t-call="leih_admission.adm_cell">
+                                    <t t-set="label">Package</t>
+                                    <t t-set="value" t-value="o.package_name.name"/>
+                                    <t t-set="span" t-value="2"/>
+                                </t>
+                                <t t-call="leih_admission.adm_cell">
+                                    <t t-set="label">Date of Operation</t>
+                                    <t t-set="value" t-value="o.operation_date and o.operation_date.strftime('%d/%m/%Y')"/>
+                                </t>
+                            </tr>
+                            <tr>
+                                <t t-call="leih_admission.adm_cell">
+                                    <t t-set="label">Provisional Diagnosis</t>
+                                    <t t-set="value" t-value="o.clinic_diagnosis"/>
+                                    <t t-set="span" t-value="4"/>
+                                    <t t-set="extra">height:34px;</t>
+                                </t>
+                            </tr>
+                        </table>
+
+                        <!-- ============== GUARDIAN / EMERGENCY CONTACT ============== -->
+                        <div style="background:#222; color:#fff; padding:4px 7px; font-size:10.5px; font-weight:bold; letter-spacing:1px;">
+                            3. GUARDIAN / PERSON TO NOTIFY IN AN EMERGENCY
+                        </div>
+                        <table style="width:100%; border-collapse:collapse; margin-bottom:7px;">
+                            <tr>
+                                <t t-call="leih_admission.adm_cell">
+                                    <t t-set="label">Guardian Name</t>
+                                    <t t-set="value" t-value="o.guardian_name"/>
+                                    <t t-set="span" t-value="2"/>
+                                </t>
+                                <t t-call="leih_admission.adm_cell">
+                                    <t t-set="label">Relation with Patient</t>
+                                    <t t-set="value" t-value="o.guardian_relation"/>
+                                </t>
+                                <t t-call="leih_admission.adm_cell">
+                                    <t t-set="label">Contact No.</t>
+                                    <t t-set="value" t-value="o.guardian_contact"/>
+                                </t>
+                            </tr>
+                            <tr>
+                                <t t-call="leih_admission.adm_cell">
+                                    <t t-set="label">Guardian Occupation</t>
+                                    <t t-set="value" t-value="o.guardian_occupation"/>
+                                    <t t-set="span" t-value="2"/>
+                                </t>
+                                <t t-call="leih_admission.adm_cell">
+                                    <t t-set="label">National ID / Passport No.</t>
+                                    <t t-set="value" t-value="False"/>
+                                    <t t-set="span" t-value="2"/>
+                                </t>
+                            </tr>
+                        </table>
+
+                        <!-- Guarantors already on file; otherwise two blank rows
+                             so the desk can write them in. -->
+                        <table style="width:100%; border-collapse:collapse; margin-bottom:7px;">
+                            <tr>
+                                <td style="padding:3px 6px; border:0.5px solid #d5d5d5; background:#f2f2f2; font-size:9px; text-transform:uppercase; font-weight:bold; width:34%;">Guarantor Name</td>
+                                <td style="padding:3px 6px; border:0.5px solid #d5d5d5; background:#f2f2f2; font-size:9px; text-transform:uppercase; font-weight:bold; width:20%;">Relationship</td>
+                                <td style="padding:3px 6px; border:0.5px solid #d5d5d5; background:#f2f2f2; font-size:9px; text-transform:uppercase; font-weight:bold; width:20%;">Contact</td>
+                                <td style="padding:3px 6px; border:0.5px solid #d5d5d5; background:#f2f2f2; font-size:9px; text-transform:uppercase; font-weight:bold;">Address</td>
+                            </tr>
+                            <t t-if="o.guarantor_line_id">
+                                <tr t-foreach="o.guarantor_line_id" t-as="g">
+                                    <td style="padding:6px 7px; border:0.5px solid #d5d5d5; font-size:11px;"><t t-out="g.name or ''"/></td>
+                                    <td style="padding:6px 7px; border:0.5px solid #d5d5d5; font-size:11px;"><t t-out="g.relationship or ''"/></td>
+                                    <td style="padding:6px 7px; border:0.5px solid #d5d5d5; font-size:11px;"><t t-out="g.contact or ''"/></td>
+                                    <td style="padding:6px 7px; border:0.5px solid #d5d5d5; font-size:11px;"><t t-out="g.address or ''"/></td>
+                                </tr>
+                            </t>
+                            <t t-else="">
+                                <tr t-foreach="[1, 2]" t-as="blank_row">
+                                    <td style="padding:6px 7px; border:0.5px solid #d5d5d5; height:22px;"/>
+                                    <td style="padding:6px 7px; border:0.5px solid #d5d5d5;"/>
+                                    <td style="padding:6px 7px; border:0.5px solid #d5d5d5;"/>
+                                    <td style="padding:6px 7px; border:0.5px solid #d5d5d5;"/>
+                                </tr>
+                            </t>
+                        </table>
+
+                        <!-- ================ DECLARATION & CONSENT ================ -->
+                        <div style="background:#222; color:#fff; padding:4px 7px; font-size:10.5px; font-weight:bold; letter-spacing:1px;">
+                            4. DECLARATION AND CONSENT
+                        </div>
+                        <div style="border:0.5px solid #d5d5d5; border-top:0 none; padding:9px 10px; font-size:10px; line-height:1.65; text-align:justify;">
+                            I request the admission of the above-named patient to this hospital and confirm that the
+                            particulars given above are correct to the best of my knowledge. I consent to the
+                            examinations, investigations, anaesthesia and treatment considered necessary by the
+                            attending physician. I agree to abide by the rules of the hospital, and I undertake to pay
+                            all charges for bed, treatment, investigations, medicines and other services as they fall
+                            due, including any amount outstanding at the time of discharge. I understand that the
+                            hospital is not responsible for money or valuables retained by the patient or attendants.
+                        </div>
+                        <table style="width:100%; border-collapse:collapse; margin:42px 0 12px 0; border:0 none;">
+                            <tr>
+                                <td style="border:0 none; padding:0 12px 0 0; width:33%;">
+                                    <div style="border-top:0.9px solid #333; padding-top:4px; font-size:9.5px; text-align:center;">
+                                        Signature of Patient / Guardian
+                                    </div>
+                                </td>
+                                <td style="border:0 none; padding:0 12px; width:33%;">
+                                    <div style="border-top:0.9px solid #333; padding-top:4px; font-size:9.5px; text-align:center;">
+                                        Name &amp; Relation
+                                    </div>
+                                </td>
+                                <td style="border:0 none; padding:0 0 0 12px; width:34%;">
+                                    <div style="border-top:0.9px solid #333; padding-top:4px; font-size:9.5px; text-align:center;">
+                                        Date &amp; Time
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <!-- ================= FOR HOSPITAL USE ================= -->
+                        <div style="background:#222; color:#fff; padding:4px 7px; font-size:10.5px; font-weight:bold; letter-spacing:1px;">
+                            5. FOR HOSPITAL USE ONLY
+                        </div>
+                        <table style="width:100%; border-collapse:collapse; margin-bottom:8px;">
+                            <t t-call="leih_admission.adm_rule_row">
+                                <t t-set="label">Received / Registered By</t>
+                                <t t-set="value" t-value="o.received_by or o.user_id.name"/>
+                            </t>
+                            <t t-call="leih_admission.adm_rule_row">
+                                <t t-set="label">Bed / Ward Allotted</t>
+                                <t t-set="value" t-value="o.bed"/>
+                            </t>
+                            <t t-call="leih_admission.adm_rule_row">
+                                <t t-set="label">Advance Received</t>
+                                <t t-set="value" t-value="o.paid and ('%.2f' % o.paid)"/>
+                            </t>
+                            <t t-call="leih_admission.adm_rule_row">
+                                <t t-set="label">Clinical Diagnosis</t>
+                                <t t-set="value" t-value="False"/>
+                            </t>
+                            <t t-call="leih_admission.adm_rule_row">
+                                <t t-set="label">Consultant Signature &amp; Date</t>
+                                <t t-set="value" t-value="False"/>
+                            </t>
+                            <t t-call="leih_admission.adm_rule_row">
+                                <t t-set="label">Date of Discharge</t>
+                                <t t-set="value" t-value="False"/>
+                            </t>
+                            <t t-call="leih_admission.adm_rule_row">
+                                <t t-set="label">Transferred To</t>
+                                <t t-set="value" t-value="False"/>
+                            </t>
+                        </table>
+
+                        <table style="width:100%; border-collapse:collapse; border:0 none; font-size:8px; color:#666;">
+                            <tr>
+                                <td style="border:0 none; padding:0;">
+                                    Printed by <t t-out="env.user.name"/> on
+                                    <t t-out="context_timestamp(datetime.datetime.now()).strftime('%d/%m/%Y %I:%M %p')"/>
+                                </td>
+                                <td style="border:0 none; padding:0; text-align:right;">
+                                    <t t-out="o.name or ''"/>
+                                    <t t-if="o.patient_id"> &#183; <t t-out="o.patient_id"/></t>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <menuitem id="menu_emergency_board" name="ED Board"
+              parent="leih19.menu_leis_emergency"
+              action="emergency_board_action" sequence="1"/>
+    <menuitem id="menu_emergency_cases" name="Emergency Cases"
+              parent="leih19.menu_leis_emergency"
+              action="emergency_case_action" sequence="2"/>
+
+    <!--
+        The three menus leih19 ships under Emergency (Pending / Activated /
+        Released) all point at leih.admission - the abandoned model, not
+        hospital.admission - so they open empty lists that nothing writes to.
+        Left visible they are three wrong doors next to the right one.
+
+        Deactivated rather than deleted: to bring one back, set active = True on
+        the menu in Settings > Technical > User Interface > Menu Items.
+    -->
+    <record id="leih19.menu_emergency_pending" model="ir.ui.menu">
+        <field name="active" eval="False"/>
+    </record>
+    <record id="leih19.menu_emergency_activated" model="ir.ui.menu">
+        <field name="active" eval="False"/>
+    </record>
+    <record id="leih19.menu_emergency_released" model="ir.ui.menu">
+        <field name="active" eval="False"/>
+    </record>
+</odoo>

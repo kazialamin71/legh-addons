@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="paperformat_emergency_case" model="report.paperformat">
+        <field name="name">ED Slip A5</field>
+        <field name="format">A5</field>
+        <field name="orientation">Portrait</field>
+        <field name="margin_top">6</field>
+        <field name="margin_bottom">6</field>
+        <field name="margin_left">7</field>
+        <field name="margin_right">7</field>
+        <field name="header_spacing">0</field>
+        <field name="header_line" eval="False"/>
+        <field name="dpi">96</field>
+    </record>
+
+    <record id="action_report_emergency_case" model="ir.actions.report">
+        <field name="name">ED Slip</field>
+        <field name="model">emergency.case</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">leih_emergency.report_emergency_case</field>
+        <field name="report_file">leih_emergency.report_emergency_case</field>
+        <field name="print_report_name">'ED Slip - %s' % (object.name or '')</field>
+        <field name="paperformat_id" ref="paperformat_emergency_case"/>
+        <field name="binding_model_id" ref="model_emergency_case"/>
+        <field name="binding_type">report</field>
+    </record>
+
+    <template id="ed_cell">
+        <td t-att-colspan="span or 1"
+            t-attf-style="padding:3px 5px; vertical-align:top; border:0.5px solid #d5d5d5; #{extra or ''}">
+            <span style="display:block; color:#777; font-size:7px; text-transform:uppercase;">
+                <t t-out="label"/>
+            </span>
+            <span t-if="value" style="display:block; font-size:10px; font-weight:bold;">
+                <t t-out="value"/>
+            </span>
+            <span t-else="" style="display:block; border-bottom:1px dotted #999; height:12px;"/>
+        </td>
+    </template>
+
+    <template id="report_emergency_case">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.basic_layout">
+                    <t t-set="company" t-value="env.company"/>
+                    <t t-set="triage" t-value="dict(o._fields['triage_level'].selection).get(o.triage_level)"/>
+                    <t t-set="triage_bg"
+                       t-value="{'critical': '#b3352c', 'urgent': '#d9822b', 'standard': '#1f9254'}.get(o.triage_level, '#777')"/>
+
+                    <div class="page"
+                         t-attf-style="#{not o_first and 'page-break-before: always; ' or ''}font-family:Arial, Helvetica, sans-serif; color:#111; font-size:10px;">
+
+                        <table style="width:100%; border-collapse:collapse; border:0 none;">
+                            <tr>
+                                <td style="border:0 none; padding:0; vertical-align:middle;">
+                                    <div style="font-size:14px; font-weight:bold;"><t t-out="company.name"/></div>
+                                    <div style="font-size:8px; color:#444;">
+                                        <t t-out="', '.join(filter(None, [company.street, company.city]))"/>
+                                    </div>
+                                </td>
+                                <td style="border:0 none; padding:0; text-align:right; vertical-align:middle;">
+                                    <div style="font-size:13px; font-weight:bold; letter-spacing:1px;">EMERGENCY</div>
+                                    <div style="font-size:11px; font-weight:bold;"><t t-out="o.name"/></div>
+                                </td>
+                            </tr>
+                        </table>
+                        <div style="border-top:1.5px solid #000; margin:4px 0 6px 0;"/>
+
+                        <table style="width:100%; border-collapse:collapse; border:0 none; margin-bottom:6px;">
+                            <tr>
+                                <td style="border:0 none; padding:0; font-size:12px; font-weight:bold;">ED SLIP</td>
+                                <td style="border:0 none; padding:0; text-align:right;">
+                                    <span t-if="o.triage_level"
+                                          t-attf-style="background:#{triage_bg}; color:#fff; padding:2px 10px; font-weight:bold; font-size:10px;">
+                                        <t t-out="triage"/>
+                                    </span>
+                                    <span t-if="o.is_medico_legal"
+                                          style="border:1.2px solid #000; padding:2px 8px; font-weight:bold; font-size:10px; margin-left:5px;">MLC</span>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <table style="width:100%; border-collapse:collapse; margin-bottom:6px;">
+                            <tr>
+                                <t t-call="leih_emergency.ed_cell">
+                                    <t t-set="label">Patient</t>
+                                    <t t-set="value" t-value="o.patient_name"/>
+                                    <t t-set="span" t-value="2"/>
+                                </t>
+                                <t t-call="leih_emergency.ed_cell">
+                                    <t t-set="label">Age / Sex</t>
+                                    <t t-set="value" t-value="'%s / %s' % (o.age or '-', (o.sex or '').title() or '-')"/>
+                                </t>
+                            </tr>
+                            <tr>
+                                <t t-call="leih_emergency.ed_cell">
+                                    <t t-set="label">Hospital No.</t>
+                                    <t t-set="value" t-value="o.hn_number"/>
+                                </t>
+                                <t t-call="leih_emergency.ed_cell">
+                                    <t t-set="label">Mobile</t>
+                                    <t t-set="value" t-value="o.mobile"/>
+                                </t>
+                                <t t-call="leih_emergency.ed_cell">
+                                    <t t-set="label">Arrival</t>
+                                    <t t-set="value" t-value="o.arrival_time and o.arrival_time.strftime('%d/%m/%y %H:%M')"/>
+                                </t>
+                            </tr>
+                            <tr>
+                                <t t-call="leih_emergency.ed_cell">
+                                    <t t-set="label">Attending Doctor</t>
+                                    <t t-set="value" t-value="o.attending_doctor.name"/>
+                                    <t t-set="span" t-value="2"/>
+                                </t>
+                                <t t-call="leih_emergency.ed_cell">
+                                    <t t-set="label">Attendant</t>
+                                    <t t-set="value" t-value="o.attendant_name"/>
+                                </t>
+                            </tr>
+                            <tr>
+                                <t t-call="leih_emergency.ed_cell">
+                                    <t t-set="label">Chief Complaint</t>
+                                    <t t-set="value" t-value="o.chief_complaint"/>
+                                    <t t-set="span" t-value="3"/>
+                                </t>
+                            </tr>
+                            <tr>
+                                <t t-call="leih_emergency.ed_cell">
+                                    <t t-set="label">Vitals</t>
+                                    <t t-set="value"
+                                       t-value="' | '.join(filter(None, [
+                                            (o.bp_systolic or o.bp_diastolic) and 'BP %s/%s' % (o.bp_systolic, o.bp_diastolic),
+                                            o.pulse and 'Pulse %s' % o.pulse,
+                                            o.temperature and 'Temp %.1f' % o.temperature,
+                                            o.spo2 and 'SpO2 %s%%' % o.spo2,
+                                            o.gcs and 'GCS %s' % o.gcs]))"/>
+                                    <t t-set="span" t-value="3"/>
+                                </t>
+                            </tr>
+                            <tr>
+                                <t t-call="leih_emergency.ed_cell">
+                                    <t t-set="label">Provisional Diagnosis</t>
+                                    <t t-set="value" t-value="o.provisional_diagnosis"/>
+                                    <t t-set="span" t-value="3"/>
+                                </t>
+                            </tr>
+                        </table>
+
+                        <t t-if="o.charge_ids">
+                            <div style="background:#222; color:#fff; padding:2px 6px; font-size:9px; font-weight:bold;">CHARGES</div>
+                            <table style="width:100%; border-collapse:collapse; margin-bottom:6px;">
+                                <tr>
+                                    <td style="padding:2px 5px; border:0.5px solid #d5d5d5; background:#f2f2f2; font-size:8px; text-transform:uppercase;">Item</td>
+                                    <td style="padding:2px 5px; border:0.5px solid #d5d5d5; background:#f2f2f2; font-size:8px; text-transform:uppercase; width:16%;">Type</td>
+                                    <td style="padding:2px 5px; border:0.5px solid #d5d5d5; background:#f2f2f2; font-size:8px; text-transform:uppercase; width:10%; text-align:right;">Qty</td>
+                                    <td style="padding:2px 5px; border:0.5px solid #d5d5d5; background:#f2f2f2; font-size:8px; text-transform:uppercase; width:18%; text-align:right;">Amount</td>
+                                </tr>
+                                <tr t-foreach="o.charge_ids" t-as="c">
+                                    <td style="padding:2px 5px; border:0.5px solid #e2e2e2;"><t t-out="c.description or '-'"/></td>
+                                    <td style="padding:2px 5px; border:0.5px solid #e2e2e2;">
+                                        <t t-out="dict(c._fields['charge_type'].selection).get(c.charge_type)"/>
+                                    </td>
+                                    <td style="padding:2px 5px; border:0.5px solid #e2e2e2; text-align:right;"><t t-out="'%g' % c.qty"/></td>
+                                    <td style="padding:2px 5px; border:0.5px solid #e2e2e2; text-align:right;"><t t-out="'%.2f' % c.total_amount"/></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3" style="padding:3px 5px; border:0.5px solid #d5d5d5; text-align:right; font-weight:bold;">Total</td>
+                                    <td style="padding:3px 5px; border:0.5px solid #d5d5d5; text-align:right; font-weight:bold;"><t t-out="'%.2f' % o.total_charges"/></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3" style="padding:3px 5px; border:0.5px solid #d5d5d5; text-align:right;">Paid</td>
+                                    <td style="padding:3px 5px; border:0.5px solid #d5d5d5; text-align:right;"><t t-out="'%.2f' % o.paid"/></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3" style="padding:3px 5px; border:0.5px solid #d5d5d5; text-align:right; font-weight:bold;">Due</td>
+                                    <td style="padding:3px 5px; border:0.5px solid #d5d5d5; text-align:right; font-weight:bold;"><t t-out="'%.2f' % o.due"/></td>
+                                </tr>
+                            </table>
+                        </t>
+
+                        <t t-if="o.state == 'closed'">
+                            <table style="width:100%; border-collapse:collapse; margin-bottom:6px;">
+                                <tr>
+                                    <t t-call="leih_emergency.ed_cell">
+                                        <t t-set="label">Disposition</t>
+                                        <t t-set="value"
+                                           t-value="dict(o._fields['disposition'].selection).get(o.disposition)"/>
+                                    </t>
+                                    <t t-call="leih_emergency.ed_cell">
+                                        <t t-set="label">At</t>
+                                        <t t-set="value" t-value="o.disposition_time and o.disposition_time.strftime('%d/%m/%y %H:%M')"/>
+                                    </t>
+                                    <t t-call="leih_emergency.ed_cell">
+                                        <t t-set="label">Note</t>
+                                        <t t-set="value" t-value="o.disposition_note or o.transferred_to"/>
+                                    </t>
+                                </tr>
+                            </table>
+                        </t>
+
+                        <table style="width:100%; border-collapse:collapse; border:0 none; margin-top:26px;">
+                            <tr>
+                                <td style="border:0 none; padding:0 10px 0 0; width:50%;">
+                                    <div style="border-top:0.9px solid #333; padding-top:3px; font-size:8px; text-align:center;">Attending Doctor</div>
+                                </td>
+                                <td style="border:0 none; padding:0 0 0 10px; width:50%;">
+                                    <div style="border-top:0.9px solid #333; padding-top:3px; font-size:8px; text-align:center;">Patient / Attendant</div>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

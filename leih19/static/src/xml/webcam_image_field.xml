@@ -9,9 +9,15 @@
                 <div t-else=""
                      class="border rounded text-muted d-inline-flex align-items-center justify-content-center"
                      style="width:130px; height:160px;">No Photo</div>
-                <div class="mt-2 d-flex gap-1">
+                <div t-if="!readonly" class="mt-2 d-flex gap-1 flex-wrap">
                     <button type="button" class="btn btn-sm btn-primary" t-on-click="start">
                         <i class="fa fa-camera me-1"/>Webcam
+                    </button>
+                    <!-- The device's own camera app. Works over plain http, so
+                         this is the one that always succeeds on a phone. -->
+                    <button type="button" class="btn btn-sm btn-outline-primary"
+                            t-on-click="triggerDeviceCamera">
+                        <i class="fa fa-mobile me-1"/>Take Photo
                     </button>
                     <button type="button" class="btn btn-sm btn-secondary" t-on-click="triggerUpload">
                         <i class="fa fa-upload me-1"/>Upload
@@ -20,14 +26,69 @@
                             t-on-click="clear">Remove</button>
                     <input type="file" accept="image/*" class="d-none"
                            t-ref="fileInput" t-on-change="onFileChange"/>
+                    <input type="file" accept="image/*" capture="environment" class="d-none"
+                           t-ref="captureInput" t-on-change="onFileChange"/>
+                </div>
+
+                <!-- Up front, before they click and wonder why nothing happened. -->
+                <div t-if="!readonly &amp;&amp; !cameraSupported" class="mt-2">
+                    <small class="text-muted">
+                        <i class="fa fa-info-circle me-1"/>Live webcam is blocked by this browser
+                        because the site is not on https.
+                        <a href="#" t-on-click.prevent="toggleHelp">How to enable it</a>
+                    </small>
+                </div>
+
+                <div t-if="state.help" class="alert alert-warning mt-2 mb-0 p-2"
+                     style="max-width:520px; font-size:12px;">
+                    <div class="d-flex justify-content-between align-items-start">
+                        <strong>Enabling the webcam on this computer</strong>
+                        <button type="button" class="btn-close btn-sm" aria-label="Close"
+                                t-on-click="toggleHelp"/>
+                    </div>
+                    <p class="mb-1 mt-1">
+                        Browsers only hand over a camera on a secure page. This one is served over
+                        plain http, so the camera has to be allowed for this address once, per
+                        computer. It takes a minute and it sticks.
+                    </p>
+                    <p class="mb-1"><strong>Chrome / Edge</strong></p>
+                    <ol class="mb-1 ps-3">
+                        <li>Open <code>chrome://flags/#unsafely-treat-insecure-origin-as-secure</code></li>
+                        <li>Paste <code t-esc="origin"/> into the box</li>
+                        <li>Set the dropdown to <strong>Enabled</strong>, then <strong>Relaunch</strong></li>
+                    </ol>
+                    <p class="mb-1"><strong>Firefox</strong></p>
+                    <ol class="mb-1 ps-3">
+                        <li>Open <code>about:config</code> and accept the warning</li>
+                        <li>Set <code>media.devices.insecure.enabled</code> to <strong>true</strong></li>
+                        <li>Set <code>media.getusermedia.insecure.enabled</code> to <strong>true</strong></li>
+                        <li>Reload this page</li>
+                    </ol>
+                    <p class="mb-0">
+                        Safari and iPhone/iPad have no such setting. On those, use
+                        <strong>Take Photo</strong> above - it opens the device camera and works as
+                        it is. The permanent fix for every browser is to put this Odoo behind https.
+                    </p>
                 </div>
             </div>
+
             <div t-else="">
                 <video t-ref="video" autoplay="autoplay" playsinline="playsinline" muted="muted"
-                       style="max-width:240px; border:1px solid #ccc; border-radius:4px;"/>
-                <div class="mt-2 d-flex gap-1">
-                    <button type="button" class="btn btn-sm btn-success" t-on-click="snap">
+                       style="width:240px; min-height:180px; background:#000;
+                              border:1px solid #ccc; border-radius:4px;"/>
+                <div t-if="!state.ready" class="text-muted small mt-1">
+                    <i class="fa fa-spinner fa-spin me-1"/>Starting the camera...
+                </div>
+                <div class="mt-2 d-flex gap-1 flex-wrap">
+                    <!-- Disabled until a frame has actually arrived: capturing
+                         before that is what produced a black photo. -->
+                    <button type="button" class="btn btn-sm btn-success"
+                            t-att-disabled="!state.ready" t-on-click="snap">
                         <i class="fa fa-camera me-1"/>Capture
+                    </button>
+                    <button t-if="state.hasMultipleCameras" type="button"
+                            class="btn btn-sm btn-outline-secondary" t-on-click="flip">
+                        <i class="fa fa-refresh me-1"/>Flip
                     </button>
                     <button type="button" class="btn btn-sm btn-secondary" t-on-click="stop">Cancel</button>
                 </div>

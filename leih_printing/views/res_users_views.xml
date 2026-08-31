@@ -1,0 +1,66 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <record id="res_users_form_printing" model="ir.ui.view">
+        <field name="name">res.users.form.printing</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="base.view_users_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page string="Printing" name="printing">
+                    <group>
+                        <group string="Where this user's documents come out">
+                            <field name="print_mode" widget="radio"/>
+                            <field name="printer_id"
+                                   invisible="print_mode != 'server'"
+                                   required="print_mode == 'server'"
+                                   options="{'no_quick_create': True}"/>
+                        </group>
+                        <group>
+                            <div class="text-muted" invisible="print_mode != 'client'">
+                                The browser prints on whatever printer this PC is set to
+                                use, so a printer plugged in by USB works. Start Chrome
+                                with <code>--kiosk-printing</code> and there is no dialog
+                                at all - the paper simply comes out.
+                            </div>
+                            <div class="text-muted" invisible="print_mode != 'server'">
+                                Odoo sends the job straight to a shared printer. Nothing
+                                reaches the browser, so this also lets a document be
+                                printed somewhere else - a lab report on the lab printer,
+                                sent from the front desk.
+                            </div>
+                            <div class="text-muted" invisible="print_mode != 'download'">
+                                The old behaviour: a PDF file is saved to this computer.
+                            </div>
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- The Preferences dialog (avatar > My Profile) is a *different* view from
+         the admin user form, so the Printing page above does not appear there.
+         Without this, a counter cannot say which printer is next to them without
+         an administrator doing it for them. `readonly="0"` because this form is
+         otherwise read-only for self-editing. -->
+    <record id="res_users_preferences_printing" model="ir.ui.view">
+        <field name="name">res.users.preferences.printing</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="base.view_users_form_simple_modif"/>
+        <field name="arch" type="xml">
+            <group name="other_preferences" position="inside">
+                <label for="print_mode" string="Print via"/>
+                <div>
+                    <field name="print_mode" readonly="0" nolabel="1"/>
+                    <field name="printer_id" readonly="0" nolabel="1" class="mt-1"
+                           invisible="print_mode != 'server'"
+                           required="print_mode == 'server'"
+                           options="{'no_quick_create': True, 'no_create_edit': True}"/>
+                    <div class="text-muted small" invisible="print_mode != 'client'">
+                        Prints on whatever printer this computer is set to use.
+                    </div>
+                </div>
+            </group>
+        </field>
+    </record>
+</odoo>

@@ -1,3 +1,5 @@
+import base64
+
 from odoo import api, fields, models, _
 from odoo.exceptions import UserError
 
@@ -23,6 +25,13 @@ class HospitalAdmission(models.Model):
 
     charge_ids = fields.One2many(
         'hospital.admission.charge', 'admission_id', string='Charges')
+
+    # Relabelled, not redefined: selection_add updates the label of a key that
+    # already exists as well as adding new ones, so 'pending' can read the way
+    # the ward talks about it without touching leih19 or orphaning stored rows.
+    # "Pending" sounded like a queue the hospital was working through; what it
+    # actually means is that the admission record is not finished yet.
+    state = fields.Selection(selection_add=[('pending', 'Incomplete')])
 
     @api.depends('money_receipt_ids.amount', 'money_receipt_ids.state')
     def _compute_paid_amount(self):
@@ -179,9 +188,92 @@ class HospitalAdmission(models.Model):
         rows.sort(key=lambda r: r['label'])
         return rows
 
+    def _assigned_bed_label(self):
+        """What bed this admission is on, from either place one can be recorded.
+
+        The form's "Ward / Cabin / Bed" is a free-text field, while charging uses
+        structured ``hospital.bed.line`` rows. Either counts as a bed having been
+        assigned - requiring the structured line would block wards that only ever
+        type the cabin number.
+        """
+        self.ensure_one()
+        if self.bed and self.bed.strip():
+            return self.bed.strip()
+        beds = self.hospital_bed_line_id.mapped('bed_no.name')
+        return ', '.join(filter(None, beds))
+
+    def hospital_change_status(self):
+        """Confirm the admission, but not before the patient has a bed.
+
+        An admission confirmed with no bed is a patient nobody can find: the
+        ward list, the bed-occupancy count and the per-day bed charge all key off
+        it, and each of them silently skips a record that has none.
+        """
+        for rec in self:
+            if rec.state in ('activated', 'released'):
+                # Left to the base method, which raises the "already confirmed"
+                # error with its own wording.
+                continue
+            if not rec._assigned_bed_label():
+                raise UserError(_(
+                    'Assign a bed before confirming this admission.\n\n'
+                    'Set "Ward / Cabin / Bed" on the admission, or add a bed on '
+                    'the Bed tab. Without one the patient will not appear on the '
+                    'ward list and no bed charge can be raised.'))
+        return super().hospital_change_status()
+
     def action_print_statement(self):
         self.ensure_one()
         return self.env.ref('leih_admission.action_report_admission_statement').report_action(self)
+
+    def action_print_admission_form(self):
+        """Print the admission form.
+
+        Deliberately available from the moment a patient is on the record: the
+        ward needs the form in hand to take the guardian's details and consent
+        signature, and that happens long before beds, charges or a bill exist.
+        Everything still unknown prints as a ruled line to write on.
+        """
+        self.ensure_one()
+        if not self.patient_name:
+            raise UserError(_('Select a patient before printing the admission form.'))
+        return self.env.ref(
+            'leih_admission.action_report_admission_form').report_action(self)
+
+    def _admission_barcode_uri(self, value, barcode_type='Code128',
+                               width=600, height=100, humanreadable=False):
+        """Render a barcode as an embedded data: URI.
+
+        The usual ``/report/barcode/...`` src makes wkhtmltopdf take an HTTP
+        round trip back into Odoo. This server hosts several databases with no
+        db_filter, so that unauthenticated request cannot resolve a database and
+        answers 404 -- and a 404 on an <img> prints as a silent empty box rather
+        than an error, which is how the old form ended up with a broken barcode.
+        Rendering the PNG here removes the round trip entirely.
+        """
+        if not value:
+            return ''
+        png = self.env['ir.actions.report'].barcode(
+            barcode_type, value, width=width, height=height,
+            humanreadable=humanreadable)
+        return 'data:image/png;base64,%s' % base64.b64encode(png).decode()
+
+    def _admission_religion_label(self):
+        """The religion's printed label, not the stored key ('islam' -> 'Islam')."""
+        self.ensure_one()
+        return dict(self._fields['religion'].selection).get(self.religion) or ''
+
+    def _admission_dob(self):
+        """Date of birth, when leih_patient is installed to provide it.
+
+        Guarded rather than referenced directly: this module depends on leih19
+        only, and patient.info gains date_of_birth from leih_patient.
+        """
+        self.ensure_one()
+        patient = self.patient_name
+        if patient and 'date_of_birth' in patient._fields:
+            return patient.date_of_birth
+        return False
 
     def action_new_investigation_bill(self):
         """Open a new Bill Register pre-linked to this admission and patient, so

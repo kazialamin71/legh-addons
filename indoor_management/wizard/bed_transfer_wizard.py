@@ -33,7 +33,11 @@ class HospitalBedTransfer(models.TransientModel):
     )
     new_bed_id = fields.Many2one(
         "hospital.bed", string="New Bed", required=True,
-        domain="[('ward_id', '=', new_ward_id), ('active', '=', True)]",
+        # An occupied or out-of-service bed is not somewhere a patient can be
+        # moved, so it is not offered. The constraint on hospital.bed.line is
+        # still the real guard - this only keeps the list honest.
+        domain="[('ward_id', '=', new_ward_id), ('active', '=', True), "
+               "('state', 'in', ('available', 'reserved'))]",
     )
     new_bed_state = fields.Selection(related="new_bed_id.state", readonly=True)
     new_bed_warning = fields.Char(compute="_compute_new_bed_warning")
@@ -51,10 +55,10 @@ class HospitalBedTransfer(models.TransientModel):
     @api.depends("new_bed_id")
     def _compute_new_bed_warning(self):
         for rec in self:
-            if rec.new_bed_id and rec.new_bed_id.state != "available":
+            if rec.new_bed_id and rec.new_bed_id.state == "reserved":
                 rec.new_bed_warning = _(
-                    "Warning: selected bed is currently '%s'. You can still proceed."
-                ) % dict(rec.new_bed_id._fields["state"].selection).get(rec.new_bed_id.state, rec.new_bed_id.state)
+                    "This bed is marked Reserved. Moving the patient in will take it."
+                )
             else:
                 rec.new_bed_warning = False
 
@@ -81,12 +85,25 @@ class HospitalBedTransfer(models.TransientModel):
         if self.shift_datetime < self.current_bed_line_id.start_date:
             raise UserError(_("Shift time cannot be earlier than the current bed's start time."))
 
-        old_bed = self.current_bed_line_id.bed_no
-        self.current_bed_line_id.end_date = self.shift_datetime
-        if old_bed and old_bed.state == "occupied":
-            old_bed.state = "available"
+        if self.new_bed_id.state == "occupied":
+            occupant = self.new_bed_id.current_admission_id
+            raise UserError(_(
+                "Bed %(bed)s is occupied%(by)s. Release or shift that patient "
+                "before moving someone into it.",
+                bed=self.new_bed_id.display_name,
+                by=(" by %s" % occupant.patient_name.name) if occupant.patient_name else "",
+            ))
+        if self.new_bed_id.state == "maintenance":
+            raise UserError(_(
+                "Bed %s is under maintenance.", self.new_bed_id.display_name))
 
-        new_line = self.env["hospital.bed.line"].create({
+        # Close the old stay first, then open the new one. Both writes sync the
+        # bed status from the lines, so no status is set by hand here -- and
+        # doing it in this order means the constraint sees the old bed already
+        # released if the patient is being moved back into a bed they had before.
+        self.current_bed_line_id.end_date = self.shift_datetime
+
+        self.env["hospital.bed.line"].create({
             "hospital_bed_item_id": self.admission_id.id,
             "bed_no": self.new_bed_id.id,
             "start_date": self.shift_datetime,
@@ -94,8 +111,6 @@ class HospitalBedTransfer(models.TransientModel):
             "perday_charge": self.override_charge or self.new_bed_id.get_effective_charge(),
             "shift_reason": self.reason,
         })
-        if self.new_bed_id.state == "available":
-            self.new_bed_id.state = "occupied"
 
         return {
             "type": "ir.actions.act_window",

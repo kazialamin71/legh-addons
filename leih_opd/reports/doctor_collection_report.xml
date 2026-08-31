@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--
+        Doctor-wise consultation collection, A4.
+
+        Inline-styled throughout, like the token slip: Bootstrap leaves table
+        cells with border-style:solid and width:0, which wkhtmltopdf still paints
+        as a faint grid, and flexbox does not survive the engine at all.
+    -->
+    <!-- The template carries its own letterhead, so the page needs no header
+         band: the stock A4 format leaves ~40 mm of dead paper above the logo. -->
+    <record id="paperformat_doctor_collection" model="report.paperformat">
+        <field name="name">Doctor Collection A4</field>
+        <field name="format">A4</field>
+        <field name="orientation">Portrait</field>
+        <field name="margin_top">8</field>
+        <field name="margin_bottom">8</field>
+        <field name="margin_left">8</field>
+        <field name="margin_right">8</field>
+        <field name="header_spacing">0</field>
+        <field name="header_line" eval="False"/>
+        <field name="dpi">96</field>
+    </record>
+
+    <record id="action_report_doctor_collection" model="ir.actions.report">
+        <field name="name">Doctor-wise Collection</field>
+        <field name="model">appointment.doctor.collection.wizard</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">leih_opd.report_doctor_collection</field>
+        <field name="report_file">leih_opd.report_doctor_collection</field>
+        <field name="print_report_name">'Doctor Collection - %s to %s' % (object.date_from, object.date_to)</field>
+        <field name="paperformat_id" ref="paperformat_doctor_collection"/>
+    </record>
+
+    <!-- One heading cell of the summary table. -->
+    <template id="report_collection_th">
+        <td t-attf-style="padding:4px 6px; border-bottom:1.2px solid #000; font-weight:bold; text-align:#{align or 'left'}; #{extra or ''}">
+            <t t-out="label"/>
+        </td>
+    </template>
+
+    <template id="report_doctor_collection">
+        <t t-call="web.basic_layout">
+            <t t-foreach="docs" t-as="o">
+                <t t-set="company" t-value="env.company"/>
+                <t t-set="currency" t-value="company.currency_id"/>
+                <t t-set="rows" t-value="o._collect()"/>
+                <t t-set="money" t-value="{'widget': 'monetary', 'display_currency': currency}"/>
+
+                <div class="page"
+                     t-attf-style="#{not o_first and 'page-break-before: always; ' or ''}font-family:Arial, Helvetica, sans-serif; color:#000; font-size:11px;">
+
+                    <!-- ===================== HEADER ===================== -->
+                    <table style="width:100%; border-collapse:collapse; border:0 none;">
+                        <tr>
+                            <td style="width:70px; vertical-align:middle; border:0 none; padding:0;">
+                                <img t-if="company.logo" t-att-src="image_data_uri(company.logo)"
+                                     style="max-width:65px; max-height:55px;"/>
+                            </td>
+                            <td style="vertical-align:middle; border:0 none; padding:0 0 0 8px;">
+                                <div style="font-size:18px; font-weight:bold; line-height:1.2;">
+                                    <t t-out="company.name"/>
+                                </div>
+                                <div style="font-size:10px; line-height:1.3;">
+                                    <t t-out="', '.join(filter(None, [company.street, company.street2, company.city, company.zip]))"/>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+
+                    <div style="border-top:1.5px solid #000; margin:6px 0 8px 0;"/>
+
+                    <div style="text-align:center; font-size:14px; font-weight:bold; margin-bottom:2px;">
+                        Doctor-wise Consultation Collection
+                    </div>
+                    <div style="text-align:center; font-size:11px; margin-bottom:8px;">
+                        <t t-out="o.date_from" t-options="{'widget': 'date'}"/>
+                        &#160;to&#160;
+                        <t t-out="o.date_to" t-options="{'widget': 'date'}"/>
+                        <span t-if="o.doctor_ids">
+                            &#160;&#183;&#160;<t t-out="', '.join(o.doctor_ids.mapped('name'))"/>
+                        </span>
+                        <span t-else="">&#160;&#183;&#160;All Doctors</span>
+                    </div>
+
+                    <!-- ==================== SUMMARY ==================== -->
+                    <table style="width:100%; border-collapse:collapse; border:0 none; margin-bottom:10px;">
+                        <thead>
+                            <tr>
+                                <t t-call="leih_opd.report_collection_th">
+                                    <t t-set="label">#</t><t t-set="extra">width:24px;</t>
+                                </t>
+                                <t t-call="leih_opd.report_collection_th">
+                                    <t t-set="label">Doctor</t>
+                                </t>
+                                <t t-call="leih_opd.report_collection_th">
+                                    <t t-set="label">Department</t>
+                                </t>
+                                <t t-call="leih_opd.report_collection_th">
+                                    <t t-set="label">Patients</t>
+                                    <t t-set="align">right</t><t t-set="extra">width:70px;</t>
+                                </t>
+                                <t t-call="leih_opd.report_collection_th">
+                                    <t t-set="label">Visits</t>
+                                    <t t-set="align">right</t><t t-set="extra">width:60px;</t>
+                                </t>
+                                <t t-call="leih_opd.report_collection_th">
+                                    <t t-set="label">Total Collected</t>
+                                    <t t-set="align">right</t><t t-set="extra">width:110px;</t>
+                                </t>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr t-foreach="rows" t-as="row">
+                                <td style="padding:3px 6px; border-bottom:0.5px solid #bbb;">
+                                    <t t-out="row_index + 1"/>
+                                </td>
+                                <td style="padding:3px 6px; border-bottom:0.5px solid #bbb; font-weight:bold;">
+                                    <t t-out="row['doctor'].name"/>
+                                </td>
+                                <td style="padding:3px 6px; border-bottom:0.5px solid #bbb;">
+                                    <t t-out="row['doctor'].department or '-'"/>
+                                </td>
+                                <td style="padding:3px 6px; border-bottom:0.5px solid #bbb; text-align:right;">
+                                    <t t-out="row['patients']"/>
+                                </td>
+                                <td style="padding:3px 6px; border-bottom:0.5px solid #bbb; text-align:right;">
+                                    <t t-out="row['visits']"/>
+                                </td>
+                                <td style="padding:3px 6px; border-bottom:0.5px solid #bbb; text-align:right;">
+                                    <t t-out="row['total']" t-options="money"/>
+                                </td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="3" style="padding:5px 6px; border-top:1.2px solid #000; font-weight:bold;">
+                                    Grand Total
+                                </td>
+                                <td style="padding:5px 6px; border-top:1.2px solid #000; text-align:right; font-weight:bold;">
+                                    <t t-out="sum(r['patients'] for r in rows)"/>
+                                </td>
+                                <td style="padding:5px 6px; border-top:1.2px solid #000; text-align:right; font-weight:bold;">
+                                    <t t-out="sum(r['visits'] for r in rows)"/>
+                                </td>
+                                <td style="padding:5px 6px; border-top:1.2px solid #000; text-align:right; font-weight:bold;">
+                                    <t t-out="sum(r['total'] for r in rows)" t-options="money"/>
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+
+                    <!-- ============ PER-DOCTOR DETAIL (optional) ============ -->
+                    <t t-if="o.include_detail">
+                        <t t-foreach="rows" t-as="row">
+                            <!-- Two cells rather than a float: wkhtmltopdf drops
+                                 the floated span onto its own line. -->
+                            <table style="width:100%; border-collapse:collapse; border:0 none; margin-top:12px; background:#eee;">
+                                <tr>
+                                    <td style="border:0 none; padding:4px 6px; font-weight:bold; font-size:12px;">
+                                        <t t-out="row['doctor'].name"/>
+                                        <span t-if="row['doctor'].department" style="font-weight:normal; font-size:10px;">
+                                            &#160;&#183;&#160;<t t-out="row['doctor'].department"/>
+                                        </span>
+                                    </td>
+                                    <td style="border:0 none; padding:4px 6px; text-align:right; font-weight:bold; font-size:12px; white-space:nowrap;">
+                                        <t t-out="row['visits']"/> visit(s) &#183;
+                                        <t t-out="row['total']" t-options="money"/>
+                                    </td>
+                                </tr>
+                            </table>
+                            <table style="width:100%; border-collapse:collapse; border:0 none; font-size:10px;">
+                                <thead>
+                                    <tr>
+                                        <t t-call="leih_opd.report_collection_th">
+                                            <t t-set="label">Date</t><t t-set="extra">width:80px;</t>
+                                        </t>
+                                        <t t-call="leih_opd.report_collection_th">
+                                            <t t-set="label">SL</t>
+                                            <t t-set="align">right</t><t t-set="extra">width:30px;</t>
+                                        </t>
+                                        <t t-call="leih_opd.report_collection_th">
+                                            <t t-set="label">Patient</t>
+                                        </t>
+                                        <t t-call="leih_opd.report_collection_th">
+                                            <t t-set="label">Hospital No.</t><t t-set="extra">width:80px;</t>
+                                        </t>
+                                        <t t-call="leih_opd.report_collection_th">
+                                            <t t-set="label">Mobile</t><t t-set="extra">width:85px;</t>
+                                        </t>
+                                        <t t-call="leih_opd.report_collection_th">
+                                            <t t-set="label">Collected By</t><t t-set="extra">width:90px;</t>
+                                        </t>
+                                        <t t-call="leih_opd.report_collection_th">
+                                            <t t-set="label">Amount</t>
+                                            <t t-set="align">right</t><t t-set="extra">width:80px;</t>
+                                        </t>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr t-foreach="row['bookings']" t-as="b">
+                                        <td style="padding:2px 6px; border-bottom:0.5px solid #ddd;">
+                                            <t t-out="b.arrived_on" t-options="{'widget': 'datetime', 'format': 'dd/MM/yy HH:mm'}"/>
+                                        </td>
+                                        <td style="padding:2px 6px; border-bottom:0.5px solid #ddd; text-align:right;">
+                                            <t t-out="b.serial_no or '-'"/>
+                                        </td>
+                                        <td style="padding:2px 6px; border-bottom:0.5px solid #ddd;">
+                                            <t t-out="b.patient_id.name or b.patient_name or '-'"/>
+                                        </td>
+                                        <td style="padding:2px 6px; border-bottom:0.5px solid #ddd;">
+                                            <t t-out="b.hn_number or '-'"/>
+                                        </td>
+                                        <td style="padding:2px 6px; border-bottom:0.5px solid #ddd;">
+                                            <t t-out="b.phone or '-'"/>
+                                        </td>
+                                        <td style="padding:2px 6px; border-bottom:0.5px solid #ddd;">
+                                            <t t-out="b.collected_by.name or '-'"/>
+                                        </td>
+                                        <td style="padding:2px 6px; border-bottom:0.5px solid #ddd; text-align:right;">
+                                            <t t-out="b.amount" t-options="money"/>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </t>
+                    </t>
+
+                    <!-- ===================== FOOTER ===================== -->
+                    <div style="margin-top:18px; font-size:9px; color:#555;">
+                        Printed by <t t-out="env.user.name"/> on
+                        <t t-out="context_timestamp(datetime.datetime.now()).strftime('%d/%m/%Y %I:%M %p')"/>.
+                        Consultation fees are recorded at the appointment desk and are
+                        not part of the accounting ledger.
+                    </div>
+                    <table style="width:100%; border-collapse:collapse; border:0 none; margin-top:34px; font-size:10px;">
+                        <tr>
+                            <td style="border:0 none; padding:0; width:50%;">
+                                <div style="border-top:0.8px solid #000; width:150px; padding-top:3px;">
+                                    Prepared By
+                                </div>
+                            </td>
+                            <td style="border:0 none; padding:0; width:50%; text-align:right;">
+                                <div style="border-top:0.8px solid #000; width:150px; padding-top:3px; margin-left:auto;">
+                                    Received By
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </t>
+        </t>
+    </template>
+</odoo>

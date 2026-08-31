@@ -19,10 +19,17 @@ class DoctorPrescription(models.Model):
     department = fields.Char(string='Department')
     template_id = fields.Many2one('prescription.template', string='Template')
     source_model = fields.Selection([
+        ('appointment.booking', 'Appointment'),
         ('opd.ticket', 'OPD Ticket'),
         ('hospital.admission', 'Hospital Admission'),
     ], string='Source Document', readonly=True)
     opd_ticket_id = fields.Many2one('opd.ticket', string='OPD Ticket', readonly=True)
+    # The visit this prescription was written for. Set when the doctor picks the
+    # patient off the waiting queue, which is what lets the queue show who has
+    # already been seen.
+    appointment_id = fields.Many2one(
+        'appointment.booking', string='Appointment', readonly=True, index=True,
+        ondelete='set null')
     admission_id = fields.Many2one('hospital.admission', string='Admission', readonly=True)
     chief_complaint = fields.Text(string='Chief Complaint')
     diagnosis = fields.Text(string='Diagnosis')

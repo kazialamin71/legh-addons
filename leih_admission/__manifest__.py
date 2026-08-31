@@ -6,11 +6,17 @@
     'depends': ['leih19'],
     'data': [
         'security/ir.model.access.csv',
+        'reports/admission_form_report.xml',
         'reports/admission_statement_report.xml',
         'reports/admission_discharge_report.xml',
         'views/hospital_admission_charge_views.xml',
         'views/hospital_admission_views.xml',
     ],
+    'assets': {
+        'web.assets_backend': [
+            'leih_admission/static/src/css/admission.css',
+        ],
+    },
     'license': 'LGPL-3',
     'application': False,
 }

@@ -9,50 +9,95 @@
                 <button name="action_confirm_serial" type="object"
                         string="Confirm Serial" class="btn-primary"
                         invisible="serial_no != 0"/>
-                <button name="action_register_arrival" type="object"
-                        string="Register Arrival" class="btn-primary"
-                        invisible="status in ('arrived', 'converted')"/>
-                <button name="action_open_opd_ticket" type="object"
-                        string="Open OPD Ticket"
-                        invisible="not opd_ticket_id"/>
                 <button name="action_print_token" type="object"
-                        string="Print Token" class="btn-primary" icon="fa-print"
-                        invisible="not doctor_name"/>
+                        string="Print Token" icon="fa-print"
+                        class="btn-primary" invisible="not doctor_name"/>
+                <!-- The arrival desk's one button: completes the identity,
+                     registers the patient and takes the fee. -->
+                <button name="action_register_arrival" type="object"
+                        string="Register Arrival &amp; Payment" class="btn-primary"
+                        invisible="status in ('arrived', 'in_consultation', 'converted')"/>
+                <button name="action_start_consultation" type="object"
+                        string="Start Consultation" class="btn-primary"
+                        invisible="status != 'arrived'"/>
+                <button name="action_start_consultation" type="object"
+                        string="Open Prescription"
+                        invisible="status != 'in_consultation'"/>
+                <button name="action_complete_consultation" type="object"
+                        string="Mark Completed"
+                        invisible="status not in ('arrived', 'in_consultation')"/>
+                <button name="action_print_id_card" type="object"
+                        string="Print ID Card" icon="fa-id-card"
+                        invisible="not patient_id"/>
+                <button name="action_open_opd_ticket" type="object"
+                        string="Open OPD Ticket" invisible="not opd_ticket_id"/>
             </header>
+            <!-- The button box belongs inside the sheet; the base form opens
+                 straight onto a group, so anchor it there. -->
+            <xpath expr="//sheet/group[1]" position="before">
+                <!-- Stays on screen for as long as the mismatch does, so it
+                     cannot be dismissed and forgotten like the dialog can. -->
+                <div class="alert alert-warning" role="alert"
+                     invisible="not schedule_warning">
+                    <i class="fa fa-calendar-times-o me-1"/>
+                    <field name="schedule_warning" class="oe_inline" readonly="1" nolabel="1"/>
+                </div>
+                <div class="oe_button_box" name="button_box">
+                    <button name="action_view_prescriptions" type="object"
+                            class="oe_stat_button" icon="fa-stethoscope"
+                            invisible="prescription_count == 0">
+                        <field name="prescription_count" widget="statinfo" string="Prescriptions"/>
+                    </button>
+                </div>
+            </xpath>
+
+            <!-- ============ what the serial desk actually types ============ -->
+            <field name="name" position="attributes">
+                <attribute name="readonly">1</attribute>
+                <attribute name="placeholder">Assigned automatically on save</attribute>
+            </field>
             <field name="doctor_name" position="after">
                 <field name="schedule_id"/>
                 <field name="appointment_date"/>
                 <field name="serial_no"/>
             </field>
-            <!-- Same patient lookup as the Bill Register: search by name,
-                 mobile or patient id; "Create and edit..." opens the full
-                 patient form for someone genuinely new. -->
-            <field name="patient_name" position="before">
-                <field name="patient_id" required="1"
-                       context="{'patient_display_contact': 1}"
-                       options="{'no_quick_create': True}"
-                       placeholder="Search by name, mobile or patient id..."/>
-            </field>
             <field name="patient_name" position="attributes">
-                <attribute name="readonly">1</attribute>
+                <attribute name="required">1</attribute>
+                <attribute name="placeholder">Name as the patient gives it</attribute>
             </field>
             <field name="age" position="attributes">
-                <attribute name="readonly">1</attribute>
+                <attribute name="required">1</attribute>
             </field>
             <field name="phone" position="attributes">
-                <attribute name="readonly">1</attribute>
+                <attribute name="placeholder">01XXXXXXXXX</attribute>
             </field>
-            <field name="sex" position="attributes">
-                <attribute name="readonly">1</attribute>
-            </field>
+            <!-- Address is collected at the arrival desk, not over the counter
+                 at booking, so it must not look like a required field here. -->
             <field name="address" position="attributes">
-                <attribute name="readonly">1</attribute>
+                <attribute name="placeholder">Taken at arrival</attribute>
             </field>
+
+            <!-- The patient record, once one exists. Read-only on purpose: it is
+                 created by the arrival wizard, not typed here. -->
             <field name="patient_status" position="after">
+                <field name="patient_id" readonly="1" invisible="not patient_id"
+                       context="{'patient_display_contact': 1}"/>
                 <field name="opd_ticket_id" invisible="not opd_ticket_id"/>
                 <field name="date_of_birth"/>
                 <field name="age_display"/>
             </field>
+
+            <!-- Fee record. Non-accounting: registering the arrival is the
+                 payment, these three fields are the whole audit trail. -->
+            <field name="payment_done" position="attributes">
+                <attribute name="readonly">1</attribute>
+            </field>
+            <field name="payment_done" position="after">
+                <field name="arrived_on" readonly="1" invisible="not arrived_on"/>
+                <field name="collected_by" readonly="1" invisible="not collected_by"/>
+                <field name="payment_note" invisible="not payment_done"/>
+            </field>
+
             <!-- The printed identifiers, grouped together so reception can read
                  back what is on the slip in the patient's hand. -->
             <field name="opd_ticket_id" position="after">
@@ -79,7 +124,8 @@
         <field name="inherit_id" ref="leih19.appointment_booking_tree_view"/>
         <field name="arch" type="xml">
             <list position="attributes">
-                <attribute name="decoration-success">status == 'arrived'</attribute>
+                <attribute name="decoration-info">status == 'arrived'</attribute>
+                <attribute name="decoration-warning">status == 'in_consultation'</attribute>
                 <attribute name="decoration-muted">status == 'converted'</attribute>
             </list>
             <field name="doctor_name" position="after">
@@ -94,7 +140,8 @@
                 <attribute name="widget">badge</attribute>
             </field>
             <field name="patient_status" position="after">
-                <field name="patient_id" optional="show"/>
+                <field name="patient_id" optional="hide"/>
+                <field name="collected_by" optional="hide"/>
                 <field name="opd_ticket_id" optional="hide"/>
             </field>
         </field>
@@ -107,31 +154,41 @@
         <field name="model">appointment.booking</field>
         <field name="arch" type="xml">
             <search string="Appointments">
-                <field name="patient_name" string="Patient / Mobile / Ref"
-                       filter_domain="['|', '|', ('patient_name', 'ilike', self), ('phone', 'ilike', self), ('name', 'ilike', self)]"/>
+                <!-- "Ask the patient their name" is the arrival desk's whole
+                     lookup, so name/mobile/serial/token all answer one box. -->
+                <field name="patient_name" string="Patient / Mobile / Serial"
+                       filter_domain="['|', '|', '|', ('patient_name', 'ilike', self), ('phone', 'ilike', self), ('name', 'ilike', self), ('cn_number', 'ilike', self)]"/>
                 <field name="patient_id"/>
                 <field name="doctor_name"/>
                 <field name="schedule_id"/>
                 <field name="serial_no"/>
-                <field name="opd_ticket_id"/>
+                <field name="token_no"/>
                 <separator/>
                 <filter string="Today" name="today"
                         domain="[('appointment_date', '=', context_today().strftime('%Y-%m-%d'))]"/>
                 <filter string="Upcoming" name="upcoming"
                         domain="[('appointment_date', '&gt;', context_today().strftime('%Y-%m-%d'))]"/>
                 <separator/>
-                <filter string="Waiting" name="waiting"
-                        domain="[('status', 'not in', ('arrived', 'converted'))]"/>
-                <filter string="Arrived" name="arrived" domain="[('status', '=', 'arrived')]"/>
-                <filter string="Converted" name="converted" domain="[('status', '=', 'converted')]"/>
+                <filter string="Not Arrived Yet" name="waiting"
+                        domain="[('status', 'in', ('pending', 'reached', 'paid'))]"/>
+                <filter string="In Queue" name="in_queue"
+                        domain="[('status', 'in', ('arrived', 'in_consultation'))]"/>
+                <filter string="Completed" name="completed" domain="[('status', '=', 'converted')]"/>
                 <separator/>
                 <filter string="Serial Not Issued" name="no_serial" domain="[('serial_no', '=', 0)]"/>
-                <filter string="Payment Done" name="paid" domain="[('payment_done', '=', True)]"/>
+                <filter string="Fee Collected" name="paid_filter" domain="[('payment_done', '=', True)]"/>
+                <filter string="Fee Not Collected" name="unpaid" domain="[('payment_done', '=', False)]"/>
+                <separator/>
+                <filter string="My Patients" name="my_patients"
+                        domain="[('doctor_name.user_id', '=', uid)]"/>
+                <filter string="Collected by Me" name="my_collections"
+                        domain="[('collected_by', '=', uid)]"/>
                 <separator/>
                 <filter string="Group by Doctor" name="group_doctor" context="{'group_by': 'doctor_name'}"/>
                 <filter string="Group by Session" name="group_session" context="{'group_by': 'schedule_id'}"/>
                 <filter string="Group by Appointment Date" name="group_date" context="{'group_by': 'appointment_date'}"/>
                 <filter string="Group by Status" name="group_status" context="{'group_by': 'status'}"/>
+                <filter string="Group by Collector" name="group_collector" context="{'group_by': 'collected_by'}"/>
             </search>
         </field>
     </record>

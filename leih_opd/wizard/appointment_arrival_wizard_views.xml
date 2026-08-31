@@ -1,0 +1,84 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <record id="appointment_arrival_wizard_form" model="ir.ui.view">
+        <field name="name">appointment.arrival.wizard.form</field>
+        <field name="model">appointment.arrival.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Register Arrival">
+                <div class="alert alert-info" role="status">
+                    <strong>Serial <field name="serial_no" class="oe_inline" readonly="1"/></strong>
+                    &#160;&#183;&#160;Token <field name="token_no" class="oe_inline" readonly="1"/>
+                    &#160;&#183;&#160;<field name="doctor_name" class="oe_inline" readonly="1"/>
+                    <field name="appointment_id" invisible="1"/>
+                </div>
+
+                <!-- Put the duplicates in front of the desk before they type
+                     anything else: a second hospital number for the same person
+                     is not something you can quietly undo later. -->
+                <div class="alert alert-warning" role="alert"
+                     invisible="match_count == 0 or mode == 'existing'">
+                    <strong>
+                        <field name="match_count" class="oe_inline" readonly="1"/>
+                        existing patient(s) look like this person.
+                    </strong>
+                    Check the list below - if one of them is the patient, switch
+                    <em>Patient Record</em> to <em>Use an existing patient record</em>
+                    and pick them, so they keep the hospital number they already have.
+                    <field name="match_ids" readonly="1" nolabel="1" class="mt-2">
+                        <list create="false" delete="false" edit="false">
+                            <field name="patient_id" string="Hospital No."/>
+                            <field name="name"/>
+                            <field name="age"/>
+                            <field name="mobile"/>
+                            <field name="address"/>
+                        </list>
+                    </field>
+                </div>
+
+                <group>
+                    <group string="Patient Record">
+                        <field name="mode" widget="radio"/>
+                        <field name="patient_id"
+                               invisible="mode != 'existing'"
+                               required="mode == 'existing'"
+                               context="{'patient_display_contact': 1}"
+                               options="{'no_quick_create': True, 'no_create_edit': True}"
+                               placeholder="Search by name, mobile or patient id..."/>
+                    </group>
+                    <group string="Consultation Fee">
+                        <field name="amount"/>
+                        <field name="payment_note" placeholder="e.g. waived, staff rate, bKash"/>
+                        <!-- Opt-in: confirming an arrival sends the patient to
+                             the doctor, it does not queue a print job. The card
+                             is printed from the appointment when it is wanted. -->
+                        <field name="print_id_card"/>
+                    </group>
+                </group>
+
+                <group string="Identity">
+                    <group>
+                        <field name="patient_name" required="1"/>
+                        <field name="age"/>
+                        <field name="date_of_birth"/>
+                        <field name="sex" widget="radio" options="{'horizontal': true}"/>
+                    </group>
+                    <group>
+                        <field name="mobile"/>
+                        <field name="address" required="1"
+                               placeholder="Village / road, thana, district"/>
+                        <!-- Live capture from the desk's webcam, with an upload
+                             and a device-camera fallback for the browsers that
+                             refuse getUserMedia over plain http. -->
+                        <field name="photo" widget="image_webcam" nolabel="0"/>
+                    </group>
+                </group>
+
+                <footer>
+                    <button name="action_confirm" type="object" string="Confirm Arrival &amp; Payment"
+                            class="btn-primary" data-hotkey="q"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel" data-hotkey="x"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

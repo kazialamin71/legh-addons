@@ -1,0 +1,30 @@
+/*
+    Colour the admission statusbar by state.
+
+    The statusbar widget has no decoration-* support (unlike badge), so the only
+    way to colour it is CSS. It renders each step as a button carrying
+    data-value="<state key>", and marks the active one o_arrow_button_current --
+    both are stable parts of the widget's markup, so we target those rather than
+    positions in the bar.
+
+    Scoped to .o_admission_form so no other model's statusbar is affected.
+*/
+.o_admission_form .o_statusbar_status button.o_arrow_button_current[data-value="pending"] {
+    background-color: #d9822b !important;
+    color: #fff !important;
+}
+
+.o_admission_form .o_statusbar_status button.o_arrow_button_current[data-value="activated"] {
+    background-color: #1f9254 !important;
+    color: #fff !important;
+}
+
+.o_admission_form .o_statusbar_status button.o_arrow_button_current[data-value="released"] {
+    background-color: #3c6f9c !important;
+    color: #fff !important;
+}
+
+.o_admission_form .o_statusbar_status button.o_arrow_button_current[data-value="cancelled"] {
+    background-color: #b3352c !important;
+    color: #fff !important;
+}

@@ -137,13 +137,13 @@
                                         <t t-set="label">Gender</t>
                                         <t t-set="label_width">12mm</t>
                                         <t t-set="value"
-                                           t-value="dict(o.patient_id._fields['sex'].selection).get(o.patient_id.sex) if o.patient_id.sex else (o.sex or '')"/>
+                                           t-value="dict(o._fields['sex'].selection).get(o.patient_id.sex or o.sex, '')"/>
                                     </t>
                                     <t t-call="leih_opd.report_token_row">
                                         <t t-set="label">SL</t>
                                         <t t-set="label_width">12mm</t>
                                         <t t-set="value"
-                                           t-value="'%s%s' % (o.serial_no or '-', o.time and ('   Time %s' % o.time) or '')"/>
+                                           t-value="'%s%s' % (o.serial_no or '-', o.time_display and ('   Time %s' % o.time_display) or '')"/>
                                     </t>
                                 </table>
                             </td>

@@ -69,6 +69,41 @@ class HospitalBed(models.Model):
             )
             bed.current_admission_id = line.hospital_bed_item_id.id if line else False
 
+    def _sync_state(self):
+        """Derive availability from the accommodation lines that reference this bed.
+
+        The status used to be nudged by hand in five different places, each
+        guarded with ``if bed.state == 'occupied'``. Any drift -- a bed line added
+        straight on the admission's Bed tab, a bed left 'reserved', a release that
+        ran while the state said something unexpected -- and the guard silently
+        did nothing, so beds stayed occupied forever or were freed while a patient
+        was still in them. Occupancy is a fact about the bed lines, so it is read
+        from them rather than tracked separately.
+
+        'maintenance' is the one sticky state: a bed out for repair is a decision
+        about the bed itself, so occupancy never clears it (and the shift wizard
+        refuses to move anyone into one).
+
+        Everything else is derived. 'reserved' is NOT preserved here, because
+        this only ever runs for beds a stay was just opened or closed on -- and a
+        hold that someone has been lying in is a hold already spent. Leaving it
+        reserved would keep the bed blocked after the patient went home, which is
+        the exact bug this is meant to end. A genuinely reserved empty bed is
+        never passed through here, so its hold survives untouched.
+        """
+        Line = self.env['hospital.bed.line']
+        for bed in self:
+            if bed.state == 'maintenance':
+                continue
+            occupied = Line.search_count([
+                ('bed_no', '=', bed.id),
+                ('end_date', '=', False),
+                ('hospital_bed_item_id.state', 'not in', ('cancelled', 'released')),
+            ])
+            new_state = 'occupied' if occupied else 'available'
+            if bed.state != new_state:
+                bed.state = new_state
+
     def get_effective_charge(self):
         """Return the per-day charge to apply: bed > ward > category."""
         self.ensure_one()
