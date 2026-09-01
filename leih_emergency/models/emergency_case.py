@@ -444,7 +444,7 @@ class EmergencyCase(models.Model):
             'due_amount': (self.due or 0.0) - amount,
             'p_type': 'due_payment' if (self.paid or 0.0) > 0 else 'advance',
             'already_collected': True,
-            'type': ptype.id if ptype else False,
+            'payment_type': ptype.id if ptype else False,
             'user_id': self.env.user.id,
         })
         return receipt

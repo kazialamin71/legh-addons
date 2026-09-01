@@ -24,7 +24,6 @@
                 <field name="paid" />
                 <field name="due" />
 
-                <field name="type" />
                 <field name="card_no" />
                 <field name="bank_name" />
                 <field name="payment_type" />
@@ -60,7 +59,6 @@
                             <field name="after_discount" readonly="1" />
                             <field name="total" readonly="1" />
                             <field name="paid" />
-                            <field name="type" />
                             <field name="bank_name" />
                             <field name="service_charge" readonly="1" />
                             <field name="account_number" />
@@ -107,7 +105,7 @@
                                 <list>
                                     <field name="date" />
                                     <field name="amount" />
-                                    <field name="type" />
+                                    <field name="payment_type" />
                                     <field name="money_receipt_id" />
                                 </list>
                             </field>

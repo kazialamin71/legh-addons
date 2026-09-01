@@ -30,7 +30,7 @@
                 <field name="advance" />
                 <field name="paid" />
                 <field name="due" />
-                <field name="type" />
+                <field name="payment_type" />
                 <field name="card_no" />
                 <field name="bank_name" />
                 <field name="date" />
@@ -238,7 +238,7 @@
                                     <field name="date" />
                                     <field name="amount" />
                                     <field name="p_type" />
-                                    <field name="type" />
+                                    <field name="payment_type" />
                                     <field name="bill_total_amount" />
                                     <field name="due_amount" />
                                     <field name="state" />
@@ -261,10 +261,10 @@
                             </group>
                             <group string="Payment Details" name="payment_details">
                                 <field name="payment_type"/>
-                                <field name="type"/>
-                                <field name="bank_name" invisible="type != 'bank'"/>
-                                <field name="card_no" invisible="type != 'bank'"/>
-                                <field name="account_number" invisible="type != 'bank'"/>
+                                <field name="payment_is_cash" invisible="1"/>
+                                <field name="bank_name" invisible="payment_is_cash or not payment_type"/>
+                                <field name="card_no" invisible="payment_is_cash or not payment_type"/>
+                                <field name="account_number" invisible="payment_is_cash or not payment_type"/>
                             </group>
                         </group>
                         <group class="oe_subtotal_footer" colspan="2" name="admission_totals">

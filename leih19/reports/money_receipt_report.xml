@@ -35,7 +35,7 @@
                                 <td style="width:33%"><span class="lbl">Date</span>
                                     <span t-field="o.date" t-options="{'widget': 'date'}"/></td>
                                 <td style="width:33%"><span class="lbl">Payment Type</span>
-                                    <span t-out="o.type.name if o.type else '-'"/></td>
+                                    <span t-out="o.payment_type.name if o.payment_type else '-'"/></td>
                             </tr>
                             <tr>
                                 <td><span class="lbl">Patient</span>

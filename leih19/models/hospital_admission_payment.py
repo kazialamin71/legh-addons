@@ -76,7 +76,7 @@ class HospitalAdmissionPayment(models.Model):
             service_line_vals = {
                 "date": rec.date,
                 "amount": pay_amount,
-                "type": rec.payment_type.name if rec.payment_type else False,
+                "payment_type": rec.payment_type.id if rec.payment_type else False,
                 "card_no": rec.account_number,
                 "admission_payment_line_id": admission.id,
                 "money_receipt_id": rec.money_receipt_id.id,

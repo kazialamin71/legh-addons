@@ -38,7 +38,6 @@
                 <field name="other_discount" />
                 <field name="grand_total" />
                 <field name="paid" />
-                <field name="type" />
                 <field name="card_no" />
                 <field name="bank_name" />
                 <field name="due" />
@@ -101,7 +100,6 @@
                             <field name="total" />
                             <field name="after_discount" />
                             <field name="grand_total" />
-                            <field name="type" />
                             <field name="bank_name" />
                             <field name="date" />
                             <field name="service_charge" />

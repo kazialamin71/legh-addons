@@ -167,7 +167,7 @@
                                     <field name="name"/>
                                     <field name="date"/>
                                     <field name="amount" sum="Collected"/>
-                                    <field name="type"/>
+                                    <field name="payment_type"/>
                                     <field name="user_id"/>
                                     <field name="state" widget="badge"/>
                                 </list>

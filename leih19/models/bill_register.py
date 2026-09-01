@@ -69,7 +69,6 @@ class BillRegister(models.Model):
              "Generates the first money receipt automatically. Later payments use the Pay button.")
     due = fields.Float("Due", compute="_compute_totals", store=True)
 
-    type = fields.Selection([('cash', 'Cash'), ('bank', 'Bank')], string='Payment Type')
     card_no = fields.Char('Card No.')
     bank_name = fields.Char('Bank Name')
 
@@ -77,6 +76,9 @@ class BillRegister(models.Model):
         "payment.type", string="Payment Type",
         default=lambda self: self.env['payment.type'].search([('name', '=', 'Cash')], limit=1)
     )
+    # Drives the card / bank / account fields in the form: cash collects none of
+    # them, every other payment type does.
+    payment_is_cash = fields.Boolean(related='payment_type.is_cash', string="Cash Payment")
     service_charge = fields.Float("Service Charge", compute="_compute_service_charge", store=True)
     to_be_paid = fields.Float("To be Paid", compute="_compute_service_charge", store=True)
     account_number = fields.Char("Account Number")
@@ -389,14 +391,14 @@ class BillRegister(models.Model):
             'p_type': 'due_payment' if (self.paid or 0.0) > 0 else 'advance',
             'already_collected': True,
             'diagonostic_bill': self.diagonostic_bill,
-            'type': ptype.id if ptype else False,
+            'payment_type': ptype.id if ptype else False,
             'user_id': self.env.user.id,
         })
         self.env['bill.register.payment.line'].create({
             'bill_register_payment_line_id': self.id,
             'date': date,
             'amount': amount,
-            'type': ptype.name if ptype else '',
+            'payment_type': ptype.id if ptype else False,
             'card_no': self.card_no if card_no is None else card_no,
             'bank_name': self.bank_name if bank_name is None else bank_name,
             'money_receipt_id': money_receipt.id,
@@ -845,7 +847,7 @@ class BillRegisterPaymentLine(models.Model):
     bill_register_payment_line_id = fields.Many2one('bill.register', string='Bill register payment', ondelete='cascade')
     date = fields.Date("Date")
     amount = fields.Float('Amount')
-    type = fields.Char("Type")
+    payment_type = fields.Many2one('payment.type', string='Payment Type')
     card_no = fields.Char('Card Number')
     bank_name = fields.Char('Bank Name')
     money_receipt_id = fields.Many2one('leih.money.receipt', string='Money Receipt ID')

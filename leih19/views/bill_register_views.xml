@@ -23,7 +23,6 @@
                 <field name="grand_total" />
                 <field name="paid" />
                 <field name="due" />
-                <field name="type" />
                 <field name="card_no" />
                 <field name="bank_name" />
                 <field name="payment_type" />
@@ -146,7 +145,7 @@
                                 <list>
                                     <field name="date" />
                                     <field name="amount" />
-                                    <field name="type" />
+                                    <field name="payment_type" />
                                     <field name="money_receipt_id" />
                                 </list>
                             </field>
@@ -174,10 +173,10 @@
                             </group>
                             <group string="Payment Details" name="payment_details">
                                 <field name="payment_type"/>
-                                <field name="type"/>
-                                <field name="bank_name" invisible="type != 'bank'"/>
-                                <field name="card_no" invisible="type != 'bank'"/>
-                                <field name="account_number" invisible="type != 'bank'"/>
+                                <field name="payment_is_cash" invisible="1"/>
+                                <field name="bank_name" invisible="payment_is_cash or not payment_type"/>
+                                <field name="card_no" invisible="payment_is_cash or not payment_type"/>
+                                <field name="account_number" invisible="payment_is_cash or not payment_type"/>
                                 <field name="down_payment" readonly="state != 'pending'"/>
                             </group>
                         </group>

@@ -121,7 +121,7 @@
                                     <t t-foreach="payments" t-as="p">
                                         <tr>
                                             <td><span t-field="p.date"/></td>
-                                            <td><span t-out="p.type or '-'"/></td>
+                                            <td><span t-out="p.payment_type.name or '-'"/></td>
                                             <td><span t-out="p.card_no or p.bank_name or '-'"/></td>
                                             <td class="num"><span t-out="'%.2f' % (p.amount or 0)"/></td>
                                         </tr>

@@ -1,7 +1,7 @@
 {
     'name': 'LEIS Migrated Models',
     'summary': 'Odoo 19 (fields only)',
-    'version': '19.0.5',
+    'version': '19.0.6',
     'sequence': 100,
     'author': 'Mufti Muntasir Ahmed',
     'depends': ['base', 'hr', 'account', 'stock'],

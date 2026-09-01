@@ -90,10 +90,6 @@ class HospitalAdmission(models.Model):
     paid = fields.Float(string="Paid", default=0.0)
     due = fields.Float(string="Due", compute="_compute_totals", store=True)
 
-    type = fields.Selection(
-        [("cash", "Cash"), ("bank", "Bank")],
-        string="Payment Type",
-    )
     card_no = fields.Char(string="Card No.")
     bank_name = fields.Char(string="Bank Name")
     date = fields.Datetime(string="Date", default=fields.Datetime.now, readonly=True)
@@ -118,6 +114,7 @@ class HospitalAdmission(models.Model):
         string="Payment Type",
         default=lambda self: self._default_payment_type(),
     )
+    payment_is_cash = fields.Boolean(related="payment_type.is_cash", string="Cash Payment")
     service_charge = fields.Float(string="Service Charge")
     to_be_paid = fields.Float(string="To be Paid")
     account_number = fields.Char(string="Account Number")

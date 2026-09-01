@@ -65,14 +65,14 @@ class HospitalAdmission(models.Model):
             'due_amount': (self.due or 0.0) - amount,
             'p_type': 'due_payment' if (self.paid or 0.0) > 0 else 'advance',
             'already_collected': True,
-            'type': ptype.id if ptype else False,
+            'payment_type': ptype.id if ptype else False,
             'user_id': self.env.user.id,
         })
         self.env['general.admission.payment.line'].create({
             'admission_payment_line_id': self.id,
             'date': date,
             'amount': amount,
-            'type': ptype.name if ptype else '',
+            'payment_type': ptype.id if ptype else False,
             'card_no': account_number or '',
             'money_receipt_id': money_receipt.id,
         })

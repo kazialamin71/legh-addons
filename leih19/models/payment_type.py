@@ -1,4 +1,4 @@
-from odoo import models, fields
+from odoo import api, models, fields
 
 class PaymentType(models.Model):
     _name = 'payment.type'
@@ -10,3 +10,11 @@ class PaymentType(models.Model):
     service_charge = fields.Float('Service Charge', required=True)
     service_charge_flat = fields.Char('Service Charge(Flat)')
     active = fields.Boolean('Active')
+    # Cash needs no card / bank / account number at the counter; every other
+    # type does. Derived from the name so no extra configuration is required.
+    is_cash = fields.Boolean('Cash Payment', compute='_compute_is_cash')
+
+    @api.depends('name')
+    def _compute_is_cash(self):
+        for rec in self:
+            rec.is_cash = (rec.name or '').strip().lower() == 'cash'

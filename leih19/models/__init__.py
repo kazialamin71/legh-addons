@@ -23,7 +23,6 @@ from . import appointment_payment
 from . import appointment_payment_line
 from . import add_bill
 from . import bill_register
-from . import bill_register_payment_line
 from . import bill_journal_relation
 from . import investigation_payment
 from . import investigation_payment_line

@@ -17,7 +17,7 @@
                 <field name="p_type" />
                 <field name="already_collected" />
                 <field name="diagonostic_bill" />
-                <field name="type" />
+                <field name="payment_type" />
                 <field name="user_id" />
                 <field name="state" />
             </list>
@@ -40,7 +40,7 @@
                             <field name="amount" />
                             <field name="due_amount" />
                             <field name="already_collected" />
-                            <field name="type" />
+                            <field name="payment_type" />
                         </group>
                         <group>
                             <field name="date" />

@@ -8,7 +8,7 @@
                 <field name="bill_register_payment_line_id" />
                 <field name="date" />
                 <field name="amount" />
-                <field name="type" />
+                <field name="payment_type" />
                 <field name="card_no" />
                 <field name="bank_name" />
                 <field name="money_receipt_id" />
@@ -30,7 +30,7 @@
                         </group>
                         <group>
                             <field name="date" />
-                            <field name="type" />
+                            <field name="payment_type" />
                             <field name="bank_name" />
                         </group>
                     </group>

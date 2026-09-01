@@ -17,7 +17,7 @@ class LeihMoneyReceipt(models.Model):
     p_type = fields.Selection([('advance', 'Advance'), ('due_payment', 'Due Payment')], 'Payment Method')
     already_collected = fields.Boolean('Collected', default=False)
     diagonostic_bill = fields.Boolean('Diagonstic Bill')
-    type = fields.Many2one('payment.type', string='Type')
+    payment_type = fields.Many2one('payment.type', string='Payment Type')
     user_id = fields.Many2one('res.users', string='Current User', default=None)
     state = fields.Selection([('confirm', 'confirm'), ('cancel', 'Cancelled')], 'State', default='confirm')
 

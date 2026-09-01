@@ -88,7 +88,7 @@ class LeihCollectionReport(models.Model):
                    r.name AS reference,
                    r.amount AS amount
               FROM leih_money_receipt r
-         LEFT JOIN payment_type pt ON pt.id = r.type
+         LEFT JOIN payment_type pt ON pt.id = r.payment_type
          LEFT JOIN bill_register b ON b.id = r.bill_id
          LEFT JOIN hospital_admission ha ON ha.id = r.general_admission_id
          LEFT JOIN leih_admission la ON la.id = r.admission_id

@@ -26,7 +26,7 @@
                 <field name="advance" />
                 <field name="paid" />
                 <field name="due" />
-                <field name="type" />
+                <field name="payment_type" />
                 <field name="card_no" />
                 <field name="bank_name" />
                 <field name="date" />
@@ -98,7 +98,7 @@
                             <field name="after_discount" />
                             <field name="grand_total" />
                             <field name="paid" />
-                            <field name="type" />
+                            <field name="payment_type" />
                             <field name="bank_name" />
                             <field name="user_id" />
                             <field name="old_journal" />
