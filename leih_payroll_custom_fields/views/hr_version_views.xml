@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="hr_version_form_view_legh_fields" model="ir.ui.view">
+        <field name="name">hr.version.view.form.inherit.legh.fields</field>
+        <field name="model">hr.version</field>
+        <field name="inherit_id" ref="hr_payroll_community.hr_contract_template_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='allowances']" position="inside">
+                <label for="supplementary_allowance"/>
+                <div class="o_row">
+                    <field name="supplementary_allowance" nolabel="1"/>
+                    <span>/ month</span>
+                </div>
+            </xpath>
+            <xpath expr="//group[@name='contract']" position="after">
+                <group string="Legacy Payroll Fields (GM migration)" name="legh_payroll_fields">
+                    <field name="driver_salay"/>
+                    <field name="medical_insurance"/>
+                    <field name="tds"/>
+                    <field name="voluntary_provident_fund"/>
+                    <field name="x_ins"/>
+                    <field name="x_pf"/>
+                    <field name="x_tax"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="res_company_form_view_legh_dearness" model="ir.ui.view">
+        <field name="name">res.company.view.form.inherit.legh.dearness</field>
+        <field name="model">res.company</field>
+        <field name="inherit_id" ref="base.view_company_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//sheet" position="inside">
+                <group string="Payroll">
+                    <field name="dearness_allowance"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>
