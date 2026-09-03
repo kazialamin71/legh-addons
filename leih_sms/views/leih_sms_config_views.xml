@@ -1,0 +1,78 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <record id="leih_sms_config_form" model="ir.ui.view">
+        <field name="name">leih.sms.config.form</field>
+        <field name="model">leih.sms.config</field>
+        <field name="arch" type="xml">
+            <form string="SMS Gateway">
+                <header>
+                    <button name="action_send_test" type="object" string="Send Test Message"
+                            class="btn-primary" icon="fa-paper-plane"/>
+                </header>
+                <sheet>
+                    <div class="oe_title"><h1><field name="name"/></h1></div>
+                    <group>
+                        <group string="Gateway">
+                            <field name="active"/>
+                            <field name="test_mode"/>
+                            <field name="endpoint_url" widget="url"/>
+                            <field name="timeout"/>
+                            <field name="country_code"/>
+                            <field name="company_id" groups="base.group_multi_company"/>
+                        </group>
+                        <group string="Credentials">
+                            <field name="sender_id"/>
+                            <field name="api_key" password="True"/>
+                            <field name="client_id" password="True"/>
+                        </group>
+                    </group>
+                    <div class="alert alert-warning" role="alert" invisible="not test_mode">
+                        <b>Test mode is on.</b> Messages are composed and logged but
+                        never handed to the gateway, so no patient receives anything.
+                    </div>
+                    <group string="Appointment Confirmation">
+                        <field name="send_on_appointment_confirm"/>
+                        <field name="appointment_template" nolabel="1" colspan="2"
+                               placeholder="Dear {patient}, your appointment with {doctor} on {date} is confirmed. Serial: {serial}."
+                               invisible="not send_on_appointment_confirm"/>
+                        <div class="text-muted" colspan="2"
+                             invisible="not send_on_appointment_confirm">
+                            <div class="mb-1"><b>Placeholders</b> - one that does not
+                                exist is left blank rather than breaking the message:</div>
+                            <table class="table table-sm mb-1" style="max-width:520px;">
+                                <tr><td><code>{patient}</code></td><td>Patient's name</td>
+                                    <td><code>{doctor}</code></td><td>Doctor</td></tr>
+                                <tr><td><code>{date}</code></td><td>03-09-2026</td>
+                                    <td><code>{day}</code></td><td>Thursday</td></tr>
+                                <tr><td><code>{time}</code></td><td>Their time, or the session window</td>
+                                    <td><code>{session}</code></td><td>Morning / Evening</td></tr>
+                                <tr><td><code>{serial}</code></td><td>Serial number</td>
+                                    <td><code>{token}</code></td><td>Daily token</td></tr>
+                                <tr><td><code>{fee}</code></td><td>Consultation fee</td>
+                                    <td><code>{hn}</code></td><td>Hospital number</td></tr>
+                                <tr><td><code>{hospital}</code></td><td>Hospital name</td>
+                                    <td><code>{location}</code></td><td>Room / floor</td></tr>
+                            </table>
+                            <div>Keep it under <b>160 characters</b> or the gateway
+                                charges it as two messages.</div>
+                        </div>
+                    </group>
+                    <group string="Try It">
+                        <field name="test_number" placeholder="01712345678"/>
+                        <field name="test_message"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- A server action, not an act_window: the settings record has to be
+         looked up (and created on first use), and an act_window pointing at a
+         form view with no res_id just opens an empty one. -->
+    <record id="leih_sms_config_open" model="ir.actions.server">
+        <field name="name">SMS Gateway</field>
+        <field name="model_id" ref="model_leih_sms_config"/>
+        <field name="state">code</field>
+        <field name="code">action = model.action_open_settings()</field>
+    </record>
+</odoo>

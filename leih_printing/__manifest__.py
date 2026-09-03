@@ -33,7 +33,7 @@ through it:
 Nothing about the reports themselves changes: the same wkhtmltopdf output is
 produced either way, so every existing layout prints exactly as it did.
 """,
-    'version': '19.0.1.0.0',
+    'version': '19.0.1.0.1',
     'author': 'Kazi Alamin',
     'category': 'Technical',
     # `web` for the backend assets and the widgets used in the views. Nothing

@@ -1,0 +1,60 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <!-- Set the share once on the item and every charge built from it inherits
+         the rate, on the ward and at the counter alike. -->
+    <record id="examination_entry_form_team" model="ir.ui.view">
+        <field name="name">examination.entry.form.team</field>
+        <field name="model">examination.entry</field>
+        <field name="inherit_id" ref="leih19.examination_entry_form_view"/>
+        <field name="arch" type="xml">
+            <sheet position="inside">
+                <group string="Doctor's Share">
+                    <group>
+                        <field name="team_share_method" widget="radio"/>
+                        <field name="team_share_value" string="Doctor's Rate"
+                               invisible="team_share_method not in ('percent', 'fixed')"
+                               required="team_share_method in ('percent', 'fixed')"/>
+                        <field name="team_share_value" string="Hospital Keeps"
+                               invisible="team_share_method != 'hospital_fixed'"
+                               required="team_share_method == 'hospital_fixed'"/>
+                    </group>
+                    <group>
+                        <div class="text-muted" invisible="team_share_method != 'percent'">
+                            A percentage of the price <b>before</b> discount, so a
+                            goodwill discount comes out of the hospital's share and
+                            not the doctor's.
+                        </div>
+                        <div class="text-muted" invisible="team_share_method != 'fixed'">
+                            The doctor takes a flat amount <b>per unit</b> and the
+                            hospital keeps the rest. A dressing at 2,000 with a flat
+                            1,000 leaves the hospital 1,000.
+                        </div>
+                        <div class="text-muted" invisible="team_share_method != 'hospital_fixed'">
+                            The other way round: the <b>hospital</b> keeps this
+                            amount per unit and the doctor takes whatever the line
+                            is worth above it. Enter 1,000 and a 3,000 dressing
+                            pays the doctor 2,000, a 4,000 dressing pays 3,000, and
+                            the hospital keeps 1,000 either way. A line worth less
+                            than the keep leaves the doctor nothing.
+                        </div>
+                        <div class="text-muted" invisible="team_share_method != 'none'">
+                            The whole charge is hospital income.
+                        </div>
+                    </group>
+                </group>
+            </sheet>
+        </field>
+    </record>
+
+    <record id="examination_entry_list_team" model="ir.ui.view">
+        <field name="name">examination.entry.list.team</field>
+        <field name="model">examination.entry</field>
+        <field name="inherit_id" ref="leih19.examination_entry_tree_view"/>
+        <field name="arch" type="xml">
+            <list position="inside">
+                <field name="team_share_method" optional="show"/>
+                <field name="team_share_value" optional="show"/>
+            </list>
+        </field>
+    </record>
+</odoo>

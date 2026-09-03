@@ -1,0 +1,22 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <record id="leih_accounting_config_form_team" model="ir.ui.view">
+        <field name="name">leih.accounting.config.form.team</field>
+        <field name="model">leih.accounting.config</field>
+        <field name="inherit_id" ref="leih_accounting.leih_accounting_config_form"/>
+        <field name="arch" type="xml">
+            <!-- Anchored on a field and stepped up to its group: Odoo 19 refuses
+                 `string` as an inheritance selector. -->
+            <xpath expr="//field[@name='advance_account_id']/.." position="after">
+                <group string="Doctor's Share">
+                    <field name="team_charge_treatment" widget="radio"/>
+                    <field name="team_payable_account_id"
+                           invisible="team_charge_treatment != 'liability'"
+                           required="team_charge_treatment == 'liability'"/>
+                    <field name="team_allocation" widget="radio"/>
+                    <field name="discount_account_id"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>

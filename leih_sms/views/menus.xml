@@ -1,0 +1,9 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <menuitem id="menu_leih_sms_log" name="SMS Log"
+              parent="leih19.menu_leis_reports" action="leih_sms_message_action"
+              sequence="90"/>
+    <menuitem id="menu_leih_sms_config" name="SMS Gateway"
+              parent="base.menu_administration" action="leih_sms_config_open"
+              sequence="95" groups="base.group_system"/>
+</odoo>

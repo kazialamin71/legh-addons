@@ -1,0 +1,112 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <record id="seq_team_charge_settlement" model="ir.sequence">
+        <field name="name">Doctor Share Settlement</field>
+        <field name="code">team.charge.settlement</field>
+        <field name="prefix">DS/%(year)s/</field>
+        <field name="padding">5</field>
+        <field name="company_id" eval="False"/>
+    </record>
+
+    <record id="team_charge_settlement_form" model="ir.ui.view">
+        <field name="name">team.charge.settlement.form</field>
+        <field name="model">team.charge.settlement</field>
+        <field name="arch" type="xml">
+            <form string="Doctor's Share Settlement">
+                <header>
+                    <button name="action_collect" type="object" string="Gather Charges"
+                            class="btn-primary" invisible="state != 'draft'"/>
+                    <button name="action_done" type="object" string="Mark Paid"
+                            class="btn-primary"
+                            invisible="state != 'draft' or charge_count == 0"/>
+                    <button name="action_cancel" type="object" string="Cancel"
+                            invisible="state == 'cancel'"
+                            confirm="This releases every charge on this settlement so it can be paid again. Continue?"/>
+                    <button name="action_draft" type="object" string="Reset to Draft"
+                            invisible="state != 'cancel'"/>
+                    <field name="state" widget="statusbar"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1><field name="name" readonly="1"/></h1>
+                    </div>
+                    <group>
+                        <group string="Doctor">
+                            <field name="doctor_id" readonly="charge_count > 0"
+                                   options="{'no_create': True}"/>
+                            <field name="date"/>
+                            <field name="payment_note" placeholder="e.g. cash, bKash, cheque no."/>
+                        </group>
+                        <group string="Charges to Settle">
+                            <field name="date_from" readonly="charge_count > 0"/>
+                            <field name="date_to" readonly="charge_count > 0"/>
+                            <field name="collected_only" readonly="charge_count > 0"/>
+                            <field name="charge_count"/>
+                            <field name="amount"/>
+                        </group>
+                    </group>
+                    <div class="alert alert-info" role="status" invisible="charge_count != 0">
+                        Choose the doctor and the date range, then press
+                        <b>Gather Charges</b>. Only shares that have not already
+                        been paid are picked up, so the same money cannot go out twice.
+                    </div>
+                    <notebook invisible="charge_count == 0">
+                        <page string="Ward Charges" name="ward">
+                            <field name="admission_charge_ids" readonly="1">
+                                <list create="false" delete="false">
+                                    <field name="date"/>
+                                    <field name="admission_id"/>
+                                    <field name="description"/>
+                                    <field name="total_amount" sum="Charged"/>
+                                    <field name="hospital_amount" sum="Hospital"/>
+                                    <field name="team_amount" sum="Doctor"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Counter Charges" name="counter">
+                            <field name="bill_line_ids" readonly="1">
+                                <list create="false" delete="false">
+                                    <field name="bill_register_id"/>
+                                    <field name="name"/>
+                                    <field name="total_amount" sum="Charged"/>
+                                    <field name="hospital_amount" sum="Hospital"/>
+                                    <field name="team_amount" sum="Doctor"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="team_charge_settlement_list" model="ir.ui.view">
+        <field name="name">team.charge.settlement.list</field>
+        <field name="model">team.charge.settlement</field>
+        <field name="arch" type="xml">
+            <list decoration-muted="state == 'cancel'" decoration-success="state == 'done'">
+                <field name="name"/>
+                <field name="date"/>
+                <field name="doctor_id"/>
+                <field name="date_from"/>
+                <field name="date_to"/>
+                <field name="charge_count"/>
+                <field name="amount" sum="Paid"/>
+                <field name="state" widget="badge"
+                       decoration-success="state == 'done'"
+                       decoration-muted="state == 'cancel'"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="team_charge_settlement_action" model="ir.actions.act_window">
+        <field name="name">Doctor Settlements</field>
+        <field name="res_model">team.charge.settlement</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Pay a doctor what was collected for them</p>
+            <p>Each settlement gathers the shares not yet paid and stamps them, so
+               the same money cannot be handed over twice.</p>
+        </field>
+    </record>
+</odoo>

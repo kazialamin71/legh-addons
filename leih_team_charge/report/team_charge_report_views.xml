@@ -1,0 +1,89 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <record id="team_charge_report_list" model="ir.ui.view">
+        <field name="name">team.charge.report.list</field>
+        <field name="model">team.charge.report</field>
+        <field name="arch" type="xml">
+            <!-- Reads as a reconciliation left to right: what was charged, how
+                 it split, how much of it actually arrived, and what is still
+                 owed to the doctor. -->
+            <list string="Doctor Share Reconciliation" create="false"
+                  decoration-muted="is_settled">
+                <field name="date"/>
+                <field name="source"/>
+                <field name="reference"/>
+                <field name="patient_id" optional="show"/>
+                <field name="doctor_id"/>
+                <field name="item" optional="hide"/>
+                <field name="charged" sum="Charged"/>
+                <field name="hospital_amount" sum="Hospital"/>
+                <field name="team_amount" sum="Doctor"/>
+                <field name="paid_ratio" widget="percentage" optional="hide"/>
+                <field name="collected" sum="Collected" optional="show"/>
+                <field name="hospital_collected" sum="Hospital cash" optional="show"/>
+                <field name="team_collected" sum="Doctor cash" optional="show"/>
+                <field name="team_settled" sum="Paid out" optional="hide"/>
+                <field name="team_payable" sum="Still owed"/>
+                <field name="settlement_id" optional="hide"/>
+                <field name="is_settled" column_invisible="1"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="team_charge_report_pivot" model="ir.ui.view">
+        <field name="name">team.charge.report.pivot</field>
+        <field name="model">team.charge.report</field>
+        <field name="arch" type="xml">
+            <pivot string="Doctor Share Reconciliation">
+                <field name="doctor_id" type="row"/>
+                <field name="charged" type="measure"/>
+                <field name="hospital_collected" type="measure"/>
+                <field name="team_collected" type="measure"/>
+                <field name="team_payable" type="measure"/>
+            </pivot>
+        </field>
+    </record>
+
+    <record id="team_charge_report_search" model="ir.ui.view">
+        <field name="name">team.charge.report.search</field>
+        <field name="model">team.charge.report</field>
+        <field name="arch" type="xml">
+            <search string="Doctor Share">
+                <field name="doctor_id"/>
+                <field name="patient_id"/>
+                <field name="reference"/>
+                <separator/>
+                <filter string="Still Owed" name="owed"
+                        domain="[('is_settled', '=', False), ('team_payable', '>', 0)]"/>
+                <filter string="Already Paid Out" name="settled"
+                        domain="[('is_settled', '=', True)]"/>
+                <separator/>
+                <filter string="Fully Collected" name="collected"
+                        domain="[('paid_ratio', '>=', 0.9999)]"/>
+                <filter string="Not Yet Collected" name="uncollected"
+                        domain="[('paid_ratio', '&lt;', 0.9999)]"/>
+                <separator/>
+                <filter string="Admissions" name="src_adm" domain="[('source', '=', 'admission')]"/>
+                <filter string="Bills" name="src_bill" domain="[('source', '=', 'bill')]"/>
+                <separator/>
+                <filter string="Today" name="today"
+                        domain="[('date', '=', context_today().strftime('%Y-%m-%d'))]"/>
+                <filter string="This Month" name="this_month"
+                        domain="[('date', '&gt;=', (context_today().replace(day=1)).strftime('%Y-%m-%d'))]"/>
+                <separator/>
+                <filter string="Group by Doctor" name="g_doc" context="{'group_by': 'doctor_id'}"/>
+                <filter string="Group by Date" name="g_date" context="{'group_by': 'date'}"/>
+                <filter string="Group by Source" name="g_src" context="{'group_by': 'source'}"/>
+                <filter string="Group by Patient" name="g_pat" context="{'group_by': 'patient_id'}"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="team_charge_report_action" model="ir.actions.act_window">
+        <field name="name">Doctor Share Reconciliation</field>
+        <field name="res_model">team.charge.report</field>
+        <field name="view_mode">list,pivot</field>
+        <field name="search_view_id" ref="team_charge_report_search"/>
+        <field name="context">{'search_default_g_doc': 1}</field>
+    </record>
+</odoo>

@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <record id="bill_register_form_team" model="ir.ui.view">
+        <field name="name">bill.register.form.team</field>
+        <field name="model">bill.register</field>
+        <field name="inherit_id" ref="leih19.view_bill_register_form"/>
+        <field name="arch" type="xml">
+            <!-- A configured share with nobody named is the one mistake this
+                 design absorbs silently. Say so, on the form, while it can
+                 still be fixed. -->
+            <xpath expr="//field[@name='bill_register_line_id']" position="before">
+                <div class="alert alert-warning" role="alert"
+                     invisible="team_unassigned_count == 0">
+                    <field name="team_unassigned_count" class="oe_inline" readonly="1"/>
+                    line(s) have a doctor's share configured on the item but
+                    <b>no doctor named</b>, so the hospital is keeping the whole
+                    charge. Set <em>Referred by</em> above, or <em>Share To</em>
+                    on the line.
+                </div>
+            </xpath>
+            <xpath expr="//field[@name='bill_register_line_id']/list" position="inside">
+                <field name="team_provider_id" optional="show"
+                       options="{'no_create': True}"/>
+                <field name="team_share_method" optional="hide"/>
+                <field name="team_share_value" optional="hide"/>
+                <field name="team_amount" optional="show" sum="Doctor"/>
+                <field name="hospital_amount" optional="show" sum="Hospital"/>
+                <field name="team_settled" optional="hide" widget="boolean_toggle"/>
+                <field name="team_unassigned" column_invisible="1"/>
+            </xpath>
+            <xpath expr="//field[@name='bill_register_line_id']" position="after">
+                <group class="oe_subtotal_footer">
+                    <field name="hospital_charge_total"/>
+                    <field name="team_charge_total"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="bill_register_list_team" model="ir.ui.view">
+        <field name="name">bill.register.list.team</field>
+        <field name="model">bill.register</field>
+        <field name="inherit_id" ref="leih19.view_bill_register_list"/>
+        <field name="arch" type="xml">
+            <list position="inside">
+                <field name="hospital_charge_total" optional="hide" sum="Hospital"/>
+                <field name="team_charge_total" optional="hide" sum="Doctor"/>
+            </list>
+        </field>
+    </record>
+</odoo>

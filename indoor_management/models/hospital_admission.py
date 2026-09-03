@@ -43,6 +43,48 @@ class HospitalAdmission(models.Model):
             rec.current_bed_id = line.bed_no.id if line else False
             rec.current_ward_id = line.ward_id.id if line else False
             rec.current_category_id = line.category_id.id if line else False
+            parts = [p for p in (line.ward_id.display_name,
+                                 line.category_id.display_name,
+                                 line.bed_no.display_name) if p]
+            rec.current_location = " / ".join(parts) if parts else ""
+
+    current_location = fields.Char(
+        string="Current Location", compute="_compute_current_bed",
+        help="Where the patient is right now, as one readable line.")
+
+    def action_open_current_bed(self):
+        """Open the bed the patient is in."""
+        self.ensure_one()
+        if not self.current_bed_id:
+            raise UserError(_("This patient has no bed assigned right now."))
+        return {
+            "type": "ir.actions.act_window",
+            "name": self.current_bed_id.display_name,
+            "res_model": "hospital.bed",
+            "res_id": self.current_bed_id.id,
+            "view_mode": "form",
+            "target": "current",
+        }
+
+    def action_open_current_ward(self):
+        """Show the whole ward, so the desk can see what is free next door.
+
+        The board is grouped and colour-coded by state, which is the question
+        actually being asked when someone looks up where a patient is: not just
+        "which bed", but "what else is free around them".
+        """
+        self.ensure_one()
+        if not self.current_ward_id:
+            raise UserError(_("This patient is not in a ward right now."))
+        return {
+            "type": "ir.actions.act_window",
+            "name": self.current_ward_id.display_name,
+            "res_model": "hospital.bed",
+            "view_mode": "kanban,list,form",
+            "domain": [("ward_id", "=", self.current_ward_id.id)],
+            "context": {"search_default_group_category": 1},
+            "target": "current",
+        }
 
     @api.depends("hospital_bed_line_id")
     def _compute_bed_line_count(self):

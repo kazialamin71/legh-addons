@@ -13,8 +13,13 @@ _logger = logging.getLogger(__name__)
 # stands at a counter and prints. Falls back to the normal download.
 MAX_INLINE_PDF = 8 * 1024 * 1024
 
-# The action type our own JS handler is registered against.
-PRINT_ACTION_TYPE = 'leih_printing.print'
+# A real action type with our own tag, NOT a made-up type. `clean_action`
+# (addons/web/controllers/utils.py) does `env[action['type']]` to find the
+# readable fields, so a type that is not a model raises KeyError the moment a
+# report is launched from a button rather than a menu. ir.actions.client keeps
+# `tag` and `params` through that cleaning, and a *function* client action runs
+# without navigating away from the record.
+PRINT_ACTION_TAG = 'leih_printing.print'
 
 
 class IrActionsReport(models.Model):
@@ -121,8 +126,12 @@ class IrActionsReport(models.Model):
                          'instead.', self.report_name, len(pdf))
             return action
         return {
-            'type': PRINT_ACTION_TYPE,
+            'type': 'ir.actions.client',
+            'tag': PRINT_ACTION_TAG,
             'name': title,
-            'pdf': base64.b64encode(pdf).decode(),
-            'close': bool(action.get('close_on_report_download')),
+            'params': {
+                'pdf': base64.b64encode(pdf).decode(),
+                'name': title,
+                'close': bool(action.get('close_on_report_download')),
+            },
         }

@@ -69,7 +69,10 @@
                     <button string="Payment" type="object" name="btn_pay" groups="base.group_user" />
                     <button string="Calculate" type="object" name="calculate_bill" groups="base.group_user" />
                     <button string="Bill Investigation" type="object" name="btn_bill" groups="base.group_user" />
-                    <button string="Cancel" type="object" name="admission_cancel" groups="leih.group_admission_button_cancel" />
+                    <!-- Unbound for now: it pointed at leih.group_admission_button_cancel,
+                         which is defined in no addon, so Odoo warned on every view load
+                         and the button was unreachable. Access control to be added. -->
+                    <button string="Cancel" type="object" name="admission_cancel" />
                     <button string="Create Prescription" type="object" name="action_create_prescription" class="btn-primary" />
                     <button string="Prescriptions" type="object" name="action_view_prescriptions" class="btn-secondary" />
                     <field name="state" widget="statusbar" />

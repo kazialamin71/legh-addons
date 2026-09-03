@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <menuitem id="menu_team_charge_root" name="Doctor Share"
+              parent="account.menu_finance" sequence="42"
+              groups="account.group_account_readonly,account.group_account_manager"/>
+    <menuitem id="menu_team_charge_report" name="Reconciliation"
+              parent="menu_team_charge_root"
+              action="team_charge_report_action" sequence="10"/>
+    <menuitem id="menu_team_charge_settlement" name="Settlements"
+              parent="menu_team_charge_root"
+              action="team_charge_settlement_action" sequence="20"/>
+</odoo>

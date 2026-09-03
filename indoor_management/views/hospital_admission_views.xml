@@ -40,6 +40,33 @@
                 </field>
             </xpath>
 
+            <!-- "Where is this patient?" is asked far more often than anything
+                 else on this form, so it is answered in one line at the top and
+                 leads straight to the bed and to the rest of the ward, rather
+                 than being three read-only boxes halfway down. -->
+            <xpath expr="//sheet" position="before">
+                <div class="alert alert-info d-flex align-items-center flex-wrap gap-2 mb-0"
+                     role="status" invisible="not current_bed_id">
+                    <i class="fa fa-bed me-1" title="Current location"/>
+                    <strong class="me-2"><field name="current_location" readonly="1" nolabel="1"/></strong>
+                    <button name="action_open_current_bed" type="object"
+                            class="btn btn-sm btn-secondary" icon="fa-arrow-right"
+                            string="Open Bed"/>
+                    <button name="action_open_current_ward" type="object"
+                            class="btn btn-sm btn-secondary" icon="fa-th"
+                            string="See the Ward"/>
+                    <button name="action_shift_bed" type="object"
+                            class="btn btn-sm btn-primary" icon="fa-exchange"
+                            string="Shift Bed" invisible="state != 'activated'"/>
+                </div>
+                <div class="alert alert-warning mb-0" role="alert"
+                     invisible="current_bed_id or state != 'activated'">
+                    <i class="fa fa-exclamation-triangle me-1"/>
+                    This patient is admitted but has <b>no bed assigned</b>, so they
+                    will not appear on the ward board and no bed charge can be raised.
+                </div>
+            </xpath>
+
             <xpath expr="//field[@name='admitting_doctor']" position="after">
                 <field name="current_category_id" readonly="1"/>
                 <field name="current_ward_id" readonly="1"/>

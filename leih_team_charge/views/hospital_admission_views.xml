@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <record id="hospital_admission_form_team" model="ir.ui.view">
+        <field name="name">hospital.admission.form.team</field>
+        <field name="model">hospital.admission</field>
+        <field name="inherit_id" ref="leih_admission.hospital_admission_form_payments"/>
+        <field name="arch" type="xml">
+            <!-- The split, on every ward charge. The doctor defaults to the
+                 admitting doctor and is overridable per line. -->
+            <xpath expr="//field[@name='charge_ids']" position="before">
+                <div class="alert alert-warning" role="alert"
+                     invisible="team_unassigned_count == 0">
+                    <field name="team_unassigned_count" class="oe_inline" readonly="1"/>
+                    charge(s) have a doctor's share configured on the item but
+                    <b>no doctor named</b>, so the hospital is keeping them in
+                    full. Set the <em>Admitting Doctor</em>, or <em>Share To</em>
+                    on the charge.
+                </div>
+            </xpath>
+            <xpath expr="//field[@name='charge_ids']/list" position="inside">
+                <field name="team_provider_id" optional="show"
+                       options="{'no_create': True}"/>
+                <field name="team_share_method" optional="hide"/>
+                <field name="team_share_value" optional="hide"/>
+                <field name="team_amount" optional="show" sum="Doctor"/>
+                <field name="hospital_amount" optional="show" sum="Hospital"/>
+                <field name="team_settled" optional="hide" widget="boolean_toggle"/>
+                <field name="team_unassigned" column_invisible="1"/>
+            </xpath>
+            <xpath expr="//field[@name='charge_ids']" position="after">
+                <group class="oe_subtotal_footer">
+                    <field name="hospital_charge_total"/>
+                    <field name="team_charge_total"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>

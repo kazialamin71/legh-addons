@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_leih_sms_config_manager,leih.sms.config manager,model_leih_sms_config,base.group_system,1,1,1,1
+access_leih_sms_message_user,leih.sms.message user,model_leih_sms_message,base.group_user,1,0,0,0
+access_leih_sms_message_manager,leih.sms.message manager,model_leih_sms_message,base.group_system,1,1,1,1

@@ -1,0 +1,54 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <!-- The ward catalogue needs the same configuration as the diagnostic one,
+         or every bed, ICU and procedure charge splits nothing. -->
+    <record id="admission_charge_item_form_team" model="ir.ui.view">
+        <field name="name">admission.charge.item.form.team</field>
+        <field name="model">admission.charge.item</field>
+        <field name="inherit_id" ref="leih19.admission_charge_item_form_view"/>
+        <field name="arch" type="xml">
+            <sheet position="inside">
+                <group string="Doctor's Share">
+                    <group>
+                        <field name="team_share_method" widget="radio"/>
+                        <field name="team_share_value" string="Doctor's Rate"
+                               invisible="team_share_method not in ('percent', 'fixed')"
+                               required="team_share_method in ('percent', 'fixed')"/>
+                        <field name="team_share_value" string="Hospital Keeps"
+                               invisible="team_share_method != 'hospital_fixed'"
+                               required="team_share_method == 'hospital_fixed'"/>
+                    </group>
+                    <group>
+                        <div class="text-muted" invisible="team_share_method != 'percent'">
+                            A percentage of the price <b>before</b> discount, so a
+                            discount comes out of the hospital's share.
+                        </div>
+                        <div class="text-muted" invisible="team_share_method != 'fixed'">
+                            The doctor takes a flat amount <b>per unit</b>; the
+                            hospital keeps the rest.
+                        </div>
+                        <div class="text-muted" invisible="team_share_method != 'hospital_fixed'">
+                            The <b>hospital</b> keeps this amount per unit and the
+                            doctor takes whatever the charge is worth above it.
+                        </div>
+                        <div class="text-muted" invisible="team_share_method != 'none'">
+                            The whole charge is hospital income.
+                        </div>
+                    </group>
+                </group>
+            </sheet>
+        </field>
+    </record>
+
+    <record id="admission_charge_item_list_team" model="ir.ui.view">
+        <field name="name">admission.charge.item.list.team</field>
+        <field name="model">admission.charge.item</field>
+        <field name="inherit_id" ref="leih19.admission_charge_item_list_view"/>
+        <field name="arch" type="xml">
+            <list position="inside">
+                <field name="team_share_method" optional="show"/>
+                <field name="team_share_value" optional="show"/>
+            </list>
+        </field>
+    </record>
+</odoo>

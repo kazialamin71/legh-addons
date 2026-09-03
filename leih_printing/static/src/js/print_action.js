@@ -92,9 +92,19 @@ export function printPdfInBrowser(pdfBase64, name) {
     });
 }
 
-registry.category("action_handlers").add("leih_printing.print", async ({ env, action }) => {
+/**
+ * Registered as a *function* client action, not a Component: the action service
+ * calls it and only navigates if it returns something, so printing happens over
+ * the record the user is looking at rather than replacing it.
+ *
+ * It must be a real `ir.actions.client` rather than a custom action type --
+ * `clean_action` on the server resolves `action.type` as a model name, so a
+ * made-up type raises KeyError as soon as a report is launched from a button.
+ */
+registry.category("actions").add("leih_printing.print", async (env, action) => {
+    const params = action.params || {};
     try {
-        await printPdfInBrowser(action.pdf, action.name);
+        await printPdfInBrowser(params.pdf, params.name);
     } catch (err) {
         // Never leave the desk with nothing: if the browser would not print,
         // hand them the document anyway so the counter keeps moving.
@@ -105,14 +115,15 @@ registry.category("action_handlers").add("leih_printing.print", async ({ env, ac
             { type: "warning" }
         );
         const link = document.createElement("a");
-        link.href = URL.createObjectURL(base64ToBlob(action.pdf));
-        link.download = `${action.name || "document"}.pdf`;
+        link.href = URL.createObjectURL(base64ToBlob(params.pdf));
+        link.download = `${params.name || "document"}.pdf`;
         link.click();
         setTimeout(() => URL.revokeObjectURL(link.href), 60000);
     }
-    if (action.close) {
-        // The report was launched from a wizard that expects to close itself.
-        return env.services.action.doAction({ type: "ir.actions.act_window_close" });
+    if (params.close) {
+        // Launched from a wizard that expects to close itself. Returning an
+        // action is how a function client action asks for one more step.
+        return { type: "ir.actions.act_window_close" };
     }
-    return true;
+    // Nothing returned means "stay exactly where you are".
 });

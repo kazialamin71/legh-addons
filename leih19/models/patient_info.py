@@ -1,3 +1,5 @@
+import base64
+
 from odoo import models, fields, api
 
 
@@ -17,6 +19,25 @@ class PatientInfo(models.Model):
     ], string='Sex', default='male')
 
     photo = fields.Image('Photo')
+
+    def _id_card_barcode_uri(self, width=600, height=100):
+        """The patient id as a Code128 barcode, inlined as a data: URI.
+
+        The obvious `/report/barcode/...` src makes wkhtmltopdf take an HTTP
+        round trip back into Odoo. This server hosts several databases with no
+        db_filter, so that unauthenticated request cannot resolve one and
+        answers 404 -- and a 404 on an <img> prints as a silent empty box
+        rather than an error, which is exactly how a card comes off the printer
+        with a blank strip where the barcode should be. Rendering the PNG here
+        removes the round trip entirely.
+        """
+        self.ensure_one()
+        if not self.patient_id:
+            return ''
+        png = self.env['ir.actions.report'].barcode(
+            'Code128', self.patient_id, width=width, height=height,
+            humanreadable=False)
+        return 'data:image/png;base64,%s' % base64.b64encode(png).decode()
     bills = fields.One2many('bill.register', 'patient_name', required=False)
     testname = fields.Char('Test Name')
     state = fields.Selection([

@@ -1,0 +1,80 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <record id="leih_sms_message_list" model="ir.ui.view">
+        <field name="name">leih.sms.message.list</field>
+        <field name="model">leih.sms.message</field>
+        <field name="arch" type="xml">
+            <list create="false" decoration-danger="state == 'failed'"
+                  decoration-muted="state == 'test'" decoration-success="state == 'sent'">
+                <field name="create_date" string="Attempted"/>
+                <field name="number"/>
+                <field name="number_raw" optional="hide"/>
+                <field name="body"/>
+                <field name="source_model" optional="hide"/>
+                <field name="state" widget="badge"
+                       decoration-success="state == 'sent'"
+                       decoration-danger="state == 'failed'"/>
+                <field name="error" optional="show"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="leih_sms_message_form" model="ir.ui.view">
+        <field name="name">leih.sms.message.form</field>
+        <field name="model">leih.sms.message</field>
+        <field name="arch" type="xml">
+            <form create="false" edit="false">
+                <header>
+                    <button name="action_open_source" type="object" string="Open Source"
+                            invisible="not source_res_id"/>
+                    <field name="state" widget="statusbar"
+                           statusbar_visible="draft,sent"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="number"/>
+                            <field name="number_raw"/>
+                            <field name="sent_on"/>
+                        </group>
+                        <group>
+                            <field name="source_model"/>
+                            <field name="source_res_id"/>
+                        </group>
+                    </group>
+                    <group string="Message"><field name="body" nolabel="1"/></group>
+                    <group string="Why It Failed" invisible="state != 'failed'">
+                        <field name="error" nolabel="1"/>
+                    </group>
+                    <group string="Gateway Reply" invisible="not response">
+                        <field name="response" nolabel="1"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="leih_sms_message_search" model="ir.ui.view">
+        <field name="name">leih.sms.message.search</field>
+        <field name="model">leih.sms.message</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="number"/>
+                <field name="body"/>
+                <filter string="Failed" name="failed" domain="[('state','=','failed')]"/>
+                <filter string="Sent" name="sent" domain="[('state','=','sent')]"/>
+                <separator/>
+                <filter string="Today" name="today"
+                        domain="[('create_date','&gt;=', context_today().strftime('%Y-%m-%d'))]"/>
+                <filter string="Group by Status" name="g_state" context="{'group_by':'state'}"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="leih_sms_message_action" model="ir.actions.act_window">
+        <field name="name">SMS Log</field>
+        <field name="res_model">leih.sms.message</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="leih_sms_message_search"/>
+    </record>
+</odoo>

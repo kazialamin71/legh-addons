@@ -1,0 +1,26 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <record id="doctors_profile_form_team" model="ir.ui.view">
+        <field name="name">doctors.profile.form.team</field>
+        <field name="model">doctors.profile</field>
+        <field name="inherit_id" ref="leih19.doctors_profile_form_view"/>
+        <field name="arch" type="xml">
+            <sheet position="inside">
+                <group string="Share of Charges">
+                    <group>
+                        <field name="default_team_method"/>
+                        <field name="default_team_value"
+                               invisible="default_team_method == 'none'"/>
+                    </group>
+                    <group>
+                        <field name="partner_id" readonly="1"/>
+                        <div class="text-muted">
+                            Used only for items that carry no share of their own.
+                            The item's setting always wins.
+                        </div>
+                    </group>
+                </group>
+            </sheet>
+        </field>
+    </record>
+</odoo>

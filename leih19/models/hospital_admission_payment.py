@@ -154,4 +154,7 @@ class HospitalAdmissionPayment(models.Model):
                 "general_admission_journal_relation_id": admission.id,
             })
 
+        import pdb
+        pdb.set_trace()
+
         return True
