@@ -1,3 +1,5 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_leih_accounting_config_user,leih.accounting.config.user,model_leih_accounting_config,base.group_user,1,0,0,0
 access_leih_accounting_config_manager,leih.accounting.config.manager,model_leih_accounting_config,account.group_account_manager,1,1,1,1
+access_leih_accounting_income_map_user,leih.accounting.income.map.user,model_leih_accounting_income_map,base.group_user,1,0,0,0
+access_leih_accounting_income_map_manager,leih.accounting.income.map.manager,model_leih_accounting_income_map,account.group_account_manager,1,1,1,1

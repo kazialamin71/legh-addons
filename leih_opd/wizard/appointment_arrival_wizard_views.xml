@@ -55,22 +55,25 @@
                     </group>
                 </group>
 
+                <!-- One column, not two. The identity is typed straight
+                     through from the patient standing at the desk, and Tab
+                     follows the DOM: split across two columns it ran name, age,
+                     date of birth, sex and then jumped back up to mobile, so the
+                     desk had to reach for the mouse in the middle of a sentence.
+                     Keep the fields in the order they are asked for. -->
                 <group string="Identity">
-                    <group>
-                        <field name="patient_name" required="1"/>
-                        <field name="age"/>
-                        <field name="date_of_birth"/>
-                        <field name="sex" widget="radio" options="{'horizontal': true}"/>
-                    </group>
-                    <group>
-                        <field name="mobile"/>
-                        <field name="address" required="1"
-                               placeholder="Village / road, thana, district"/>
-                        <!-- Live capture from the desk's webcam, with an upload
-                             and a device-camera fallback for the browsers that
-                             refuse getUserMedia over plain http. -->
-                        <field name="photo" widget="image_webcam" nolabel="0"/>
-                    </group>
+                    <field name="patient_name" required="1"/>
+                    <field name="age"/>
+                    <field name="date_of_birth"/>
+                    <field name="sex" widget="radio" options="{'horizontal': true}"/>
+                    <field name="mobile"/>
+                    <field name="address" required="1"
+                           placeholder="Village / road, thana, district"/>
+                    <!-- Live capture from the desk's webcam, with an upload
+                         and a device-camera fallback for the browsers that
+                         refuse getUserMedia over plain http. Last, because it is
+                         the one step that needs the mouse. -->
+                    <field name="photo" widget="image_webcam" nolabel="0"/>
                 </group>
 
                 <footer>

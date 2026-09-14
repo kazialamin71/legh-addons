@@ -24,9 +24,19 @@
         <field name="arch" type="xml">
             <button name="btn_bill" position="after">
                 <field name="acc_move_count" invisible="1"/>
+                <field name="acc_revenue_posted" invisible="1"/>
                 <button string="Journal Entries" type="object"
                         name="action_view_acc_moves" class="btn-secondary"
                         invisible="acc_move_count == 0"/>
+                <!-- Income heads are usually got right *after* the first
+                     admission is released. This rebuilds the settlement entry
+                     from the corrected configuration instead of leaving the
+                     ledger describing the old one. -->
+                <button string="Re-post Revenue" type="object"
+                        name="action_acc_repost_revenue" class="btn-secondary"
+                        groups="account.group_account_manager"
+                        confirm="The current settlement entry will be reversed and posted again from the charge lines. Continue?"
+                        invisible="not acc_revenue_posted"/>
             </button>
         </field>
     </record>

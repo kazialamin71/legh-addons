@@ -147,6 +147,8 @@
         'web.assets_backend': [
             'leih19/static/src/js/webcam_image_field.js',
             'leih19/static/src/xml/webcam_image_field.xml',
+            'leih19/static/src/js/float_time_12h_field.js',
+            'leih19/static/src/xml/float_time_12h_field.xml',
         ],
     },
     'license': 'LGPL-3',

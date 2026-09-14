@@ -8,6 +8,22 @@ class BillRegister(models.Model):
                 Cr Income (per item account)        grand_total (net, scaled)
       Payment:  Dr Cash/Bank                        amount
                 Cr Accounts Receivable (patient)    amount
+
+    **Counter bills only.** A bill raised against an admission
+    (``general_admission_id`` set) posts nothing here: the admission recognises
+    all of its income once, at final settlement, out of the charge ledger that
+    ``calculate_bill`` pulls these very lines into.
+
+    Posting both would double-count, and it already did. The bill booked
+    ``Dr AR / Cr Income`` at confirm while the admission booked its money to
+    Patient Advances and then deliberately *excluded* those same charges from the
+    release entry -- so the bill's receivable and the admission's advance
+    liability both sat open on the balance sheet for ever, pointing at one amount
+    the patient had already paid.
+
+    Money taken on an admission bill is an admission advance for the same reason,
+    and is posted as one: ``calculate_bill`` folds ``bill.paid`` into the
+    admission's ``investigation_paid``, which is what settles the admission.
     """
     _inherit = 'bill.register'
 
@@ -52,10 +68,17 @@ class BillRegister(models.Model):
         return mr
 
     # ---------------------------------------------------------------- posting
+    def _acc_is_admission_borne(self):
+        """True when this bill's income belongs to an admission's settlement."""
+        self.ensure_one()
+        return bool(self.general_admission_id)
+
     def _acc_post_revenue(self):
         self.ensure_one()
         cfg = self.env['leih.accounting.config']._get()
         if not cfg._enabled() or self.acc_revenue_posted:
+            return
+        if self._acc_is_admission_borne():
             return
         partner = self.patient_name.partner_id
         receivable = cfg._receivable_account(partner) if partner else False
@@ -87,6 +110,16 @@ class BillRegister(models.Model):
         self.ensure_one()
         cfg = self.env['leih.accounting.config']._get()
         if not cfg._enabled() or amount <= 0:
+            return
+        # Money on an admission bill is an advance against the admission, not a
+        # settlement of a receivable this bill never raised. Book it the way the
+        # admission's own payments are booked, so the settlement entry can apply
+        # it; otherwise it would credit a receivable with no debit behind it.
+        if self._acc_is_admission_borne():
+            move = self.general_admission_id._acc_post_advance(
+                amount, payment_type, date)
+            if move:
+                self.acc_move_ids = [(4, move.id)]
             return
         partner = self.patient_name.partner_id
         receivable = cfg._receivable_account(partner) if partner else False

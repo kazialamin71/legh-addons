@@ -15,6 +15,26 @@
                 <field name="down_payment" readonly="state != 'pending'"/>
             </xpath>
 
+            <!-- Discount, made answerable. "Discount Amount" now includes the
+                 per-charge discounts as well as the two admission-level ones, so
+                 it reconciles against Total without discount; and a discount the
+                 ledger will carry as a contra-revenue debit needs a name against
+                 it, which is what the approver and remarks are for. -->
+            <field name="after_discount" position="after">
+                <field name="line_discount" readonly="1"
+                       invisible="line_discount == 0"/>
+                <field name="bill_discount" readonly="1"
+                       invisible="bill_discount == 0"/>
+                <field name="discount_approved_by"
+                       invisible="after_discount == 0"
+                       required="after_discount != 0"
+                       options="{'no_quick_create': True, 'no_create_edit': True}"/>
+                <field name="discount_remarks"
+                       invisible="after_discount == 0"
+                       required="after_discount != 0"
+                       placeholder="Why the discount was given"/>
+            </field>
+
             <button name="calculate_bill" position="after">
                 <button string="Calculate Payable" type="object"
                         name="action_calculate_payable" class="btn-primary"
@@ -70,6 +90,31 @@
                 <attribute name="class">o_admission_form</attribute>
             </xpath>
 
+            <!-- The one way to raise an investigation for an inpatient had no
+                 button. The list of bills is readonly (a bill.register has to be
+                 created through its own form to get its sequence and to enter the
+                 lab pipeline - specimen, sample collection, result), so with no
+                 button there was nothing to click at all, and
+                 action_new_investigation_bill sat on the model unreachable. -->
+            <xpath expr="//page[@name='page_investigation']/field[@name='investigation_bill_ids']" position="before">
+                <div class="oe_button_box_inline mb-2">
+                    <button string="New Investigation Bill" type="object"
+                            name="action_new_investigation_bill" class="btn-primary"
+                            icon="fa-plus" groups="base.group_user"
+                            invisible="state in ('pending', 'cancelled')"/>
+                    <span class="text-muted ms-2"
+                          invisible="state not in ('pending', 'cancelled')">
+                        Confirm the admission before raising investigation bills.
+                    </span>
+                </div>
+                <div class="text-muted mb-2">
+                    Bills raised here follow the lab pipeline and come back onto
+                    this admission's charges via <b>Calculate Payable</b>. Their
+                    income is recognised with the rest of the admission at final
+                    settlement, not when the bill is confirmed.
+                </div>
+            </xpath>
+
             <xpath expr="//notebook/page[1]" position="before">
                 <page string="Charges">
                     <field name="charge_ids">
@@ -81,8 +126,16 @@
                             <field name="provider_id" optional="show"/>
                             <field name="qty"/>
                             <field name="unit_price"/>
-                            <field name="discount"/>
+                            <field name="gross_amount" sum="Gross" optional="hide"/>
+                            <field name="discount" sum="Discount"/>
                             <field name="total_amount" sum="Total"/>
+                            <!-- What this line credits at settlement. Seeded from
+                                 the catalogue item; blank falls back to the
+                                 service-type map, then the default income
+                                 account, both in Hospital Accounting Settings. -->
+                            <field name="income_account_id" optional="show"
+                                   options="{'no_create': True}"/>
+                            <field name="charge_item_id" optional="hide"/>
                             <field name="is_auto" optional="hide"/>
                             <field name="source_model" optional="hide"/>
                         </list>

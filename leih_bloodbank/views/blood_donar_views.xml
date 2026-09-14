@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="blood_donar_form_bb" model="ir.ui.view">
+        <field name="name">blood.donar.form.bloodbank</field>
+        <field name="model">blood.donar</field>
+        <field name="inherit_id" ref="leih19.blood_donar_form_view"/>
+        <field name="arch" type="xml">
+            <field name="group" position="after">
+                <field name="blood_group"/>
+                <field name="age"/>
+                <field name="sex"/>
+                <field name="donation_count" readonly="1"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="blood_donar_list_bb" model="ir.ui.view">
+        <field name="name">blood.donar.list.bloodbank</field>
+        <field name="model">blood.donar</field>
+        <field name="inherit_id" ref="leih19.blood_donar_tree_view"/>
+        <field name="arch" type="xml">
+            <field name="group" position="after">
+                <field name="blood_group" optional="show"/>
+                <field name="age" optional="hide"/>
+                <field name="sex" optional="hide"/>
+            </field>
+        </field>
+    </record>
+</odoo>

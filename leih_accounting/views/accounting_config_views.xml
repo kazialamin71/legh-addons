@@ -5,6 +5,15 @@
         <field name="model">leih.accounting.config</field>
         <field name="arch" type="xml">
             <form string="Hospital Accounting Settings">
+                <header>
+                    <!-- Builds the hospital income chart (ward, ICU, NICU, HDU,
+                         doctor fee, pharmacy...) as a parent/child hierarchy and
+                         maps every service type onto its leaf. Safe to press on
+                         a chart already in use: it matches by code, creates only
+                         what is missing and never renames or re-maps anything. -->
+                    <button name="action_setup_income_heads" type="object"
+                            string="Set Up Income Heads" class="btn-primary"/>
+                </header>
                 <sheet>
                     <div class="oe_title">
                         <h1><field name="name"/></h1>
@@ -22,12 +31,53 @@
                             <field name="default_income_account_id"/>
                             <field name="receivable_account_id"/>
                             <field name="advance_account_id"/>
+                            <field name="discount_account_id"/>
                         </group>
                     </group>
+                    <!-- Bed, cabin, ICU, doctor fee and pharmacy have no
+                         catalogue item carrying an account, so this is where
+                         they get one. It is also the single place to set the
+                         pharmacy sales account. -->
+                    <group string="Income by Service Type">
+                        <field name="income_map_ids" nolabel="1">
+                            <list editable="bottom">
+                                <field name="service_type"/>
+                                <field name="account_id" options="{'no_create': True}"/>
+                            </list>
+                        </field>
+                    </group>
                     <div class="text-muted">
-                        Posting is off until <b>Post to General Ledger</b> is enabled and the
-                        journals/accounts above are set. Income account per item comes from the
-                        item's account first, then the default income account here.
+                        <p>
+                            Posting is off until <b>Post to General Ledger</b> is enabled and the
+                            journals/accounts above are set.
+                        </p>
+                        <p>
+                            A charge's income account is resolved in four steps:
+                            the <b>catalogue item's</b> own account
+                            (Examination Entry or Admission Charge Item), then the
+                            account on the <b>bed</b> or the <b>doctor</b> the charge
+                            came from, then the <b>service type</b> mapped above, then
+                            the <b>Default Income Account</b>. Settlement refuses to post
+                            rather than dropping a charge none of the three can account for.
+                        </p>
+                        <p>
+                            Pharmacy: a medicine's own income account wins if the product
+                            (or its category) has one; otherwise map <b>Medicine</b> above.
+                        </p>
+                        <p>
+                            With a <b>Discount Allowed Account</b> set, revenue is credited
+                            gross and discounts are debited there, so the discount given in a
+                            period is reportable. Admission settlement requires it once a
+                            discount has been given.
+                        </p>
+                        <p>
+                            <b>Set Up Income Heads</b> creates the standard hospital
+                            income chart as a hierarchy -- <i>NICU Bed Charge</i> under
+                            <i>NICU Income</i> under <i>Indoor (IPD) Income</i> -- and
+                            maps every service type onto a leaf of it. Parent heads are
+                            roll-ups only: nothing can be mapped or posted to one, so
+                            the hierarchy report never counts the same taka twice.
+                        </p>
                     </div>
                 </sheet>
             </form>

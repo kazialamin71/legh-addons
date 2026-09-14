@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="admission_charge_type_list" model="ir.ui.view">
+        <field name="name">admission.charge.type.list</field>
+        <field name="model">admission.charge.type</field>
+        <field name="arch" type="xml">
+            <list string="Admission Charge Types" editable="bottom">
+                <field name="sequence" widget="handle"/>
+                <field name="name"/>
+                <field name="code"/>
+                <field name="service_type"/>
+                <field name="income_account_id" optional="show"/>
+                <field name="note" optional="hide"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="admission_charge_type_form" model="ir.ui.view">
+        <field name="name">admission.charge.type.form</field>
+        <field name="model">admission.charge.type</field>
+        <field name="arch" type="xml">
+            <form string="Admission Charge Type">
+                <sheet>
+                    <div class="oe_title">
+                        <label for="name" string="Charge Type"/>
+                        <h1><field name="name" placeholder="e.g. Team Charge"/></h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="code" placeholder="e.g. team_charge"/>
+                            <field name="sequence"/>
+                        </group>
+                        <group>
+                            <field name="service_type"/>
+                            <field name="income_account_id" options="{'no_create': True}"/>
+                        </group>
+                    </group>
+                    <group>
+                        <field name="note" placeholder="Internal note"/>
+                    </group>
+                    <div class="text-muted">
+                        <p>
+                            <b>Behaves Like</b> is how the charge ledger, the income
+                            map and the P&amp;L classify this bucket. A new bucket still
+                            prints under its own name on the patient's bill; this only
+                            says which existing kind of charge it is accounted for as.
+                        </p>
+                        <p>
+                            <b>Code</b> is what is stored on every charge item, so it is
+                            locked once items point at it.
+                        </p>
+                    </div>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="admission_charge_type_action" model="ir.actions.act_window">
+        <field name="name">Admission Charge Types</field>
+        <field name="res_model">admission.charge.type</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Create a charge type</p>
+            <p>Buckets ward charges are billed and printed under: Admission Charge,
+               ICU, NICU, Team Charge, Ambulance, OT Package...</p>
+        </field>
+    </record>
+
+    <menuitem id="menu_admission_charge_type" name="Admission Charge Types"
+              parent="leih19.menu_leis_configuration"
+              action="admission_charge_type_action" sequence="12"/>
+
+    <!-- The item search view hard-coded one filter per charge type, which stops
+         being true the moment a type can be created. A search field on the
+         column covers every type, present and future. -->
+    <record id="admission_charge_item_search_dynamic" model="ir.ui.view">
+        <field name="name">admission.charge.item.search.dynamic</field>
+        <field name="model">admission.charge.item</field>
+        <field name="inherit_id" ref="leih19.admission_charge_item_search_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//filter[@name='t_admission']" position="replace"/>
+            <xpath expr="//filter[@name='t_icu']" position="replace"/>
+            <xpath expr="//filter[@name='t_nicu']" position="replace"/>
+            <xpath expr="//filter[@name='t_other']" position="replace"/>
+            <field name="name" position="after">
+                <field name="charge_type"/>
+            </field>
+        </field>
+    </record>
+</odoo>

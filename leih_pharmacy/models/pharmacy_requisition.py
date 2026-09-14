@@ -23,7 +23,11 @@ class PharmacyRequisition(models.Model):
     line_ids = fields.One2many('pharmacy.requisition.line', 'requisition_id', string='Medicines')
     picking_ids = fields.Many2many('stock.picking', string='Stock Transfers', copy=False)
     picking_count = fields.Integer(compute='_compute_picking_count')
-    charge_id = fields.Many2one('hospital.admission.charge', string='Admission Charge', copy=False, readonly=True)
+    charge_id = fields.Many2one(
+        'hospital.admission.charge', string='Admission Charge', copy=False, readonly=True,
+        help='The admission charge this requisition raised. When the medicines '
+             'issued credit more than one income account there is one charge per '
+             'account and this points at the first of them.')
 
     net_amount = fields.Float('Net Amount', compute='_compute_net_amount', store=True,
                               help='Charged to the admission = sum of (issued - returned) x price.')
@@ -110,25 +114,88 @@ class PharmacyRequisition(models.Model):
         return picking
 
     # ------------------------------------------------------------------ charge
+    def _charges(self):
+        """Every admission charge this requisition owns.
+
+        Searched by source rather than read off ``charge_id``, because a
+        requisition can now raise more than one charge (one per income account)
+        and ``charge_id`` only ever holds the first.
+        """
+        self.ensure_one()
+        return self.env['hospital.admission.charge'].search([
+            ('source_model', '=', 'pharmacy.requisition'),
+            ('source_res_id', '=', self.id),
+        ])
+
+    def _line_income_account(self, line):
+        """Income account for one dispensed medicine, or blank to fall back.
+
+        Only an account set *explicitly* on the medicine counts -- deliberately
+        not ``get_product_accounts()``, which falls through to the product
+        category and therefore always answers something. Letting that win would
+        quietly send every dispense to the category's generic sales account and
+        make the pharmacy account configured under Hospital Accounting dead
+        configuration, which is the opposite of useful.
+
+        So: a per-medicine override if someone set one, otherwise blank, which
+        lets the poster resolve the 'Medicine' row of the service-type map and
+        then the default income account. One place to configure, one place to
+        override.
+        """
+        self.ensure_one()
+        product = line.product_id
+        if not product:
+            return self.env['account.account']
+        return (product.property_account_income_id
+                or product.product_tmpl_id.property_account_income_id
+                or self.env['account.account'])
+
     def _sync_charge(self):
-        """Create/update the single medicine charge on the admission = net amount."""
+        """Rebuild this requisition's admission charges = net amount per account.
+
+        One charge per income account. With a single pharmacy income account
+        configured -- the normal case -- that is one charge, exactly as before;
+        it only splits when the medicines issued genuinely post to different
+        accounts, which is the only way the general ledger can be right.
+
+        Rebuilt rather than written in place because a return changes which
+        products are still chargeable, so the set of accounts can change too.
+        """
         self.ensure_one()
         Charge = self.env['hospital.admission.charge']
-        vals = {
-            'admission_id': self.admission_id.id,
-            'service_type': 'medicine',
-            'description': _('Pharmacy: %s') % self.name,
-            'qty': 1.0,
-            'unit_price': self.net_amount,
-            'discount': 0.0,
-            'date': self.date or fields.Datetime.now(),
-            'source_model': 'pharmacy.requisition',
-            'source_res_id': self.id,
-        }
-        if self.charge_id:
-            self.charge_id.write(vals)
-        else:
-            self.charge_id = Charge.create(vals)
+        buckets = {}
+        for line in self.line_ids:
+            subtotal = line.subtotal or 0.0
+            if not subtotal:
+                continue
+            account = self._line_income_account(line)
+            buckets.setdefault(account, 0.0)
+            buckets[account] += subtotal
+
+        self._charges().unlink()
+        if not buckets:
+            self.charge_id = False
+            return
+
+        multiple = len(buckets) > 1
+        charges = Charge
+        for account, amount in buckets.items():
+            label = _('Pharmacy: %s') % self.name
+            if multiple and account:
+                label = '%s [%s]' % (label, account.display_name)
+            charges |= Charge.create({
+                'admission_id': self.admission_id.id,
+                'service_type': 'medicine',
+                'description': label,
+                'qty': 1.0,
+                'unit_price': amount,
+                'discount': 0.0,
+                'income_account_id': account.id if account else False,
+                'date': self.date or fields.Datetime.now(),
+                'source_model': 'pharmacy.requisition',
+                'source_res_id': self.id,
+            })
+        self.charge_id = charges[:1].id
 
     # ------------------------------------------------------------------ buttons
     def action_issue(self):
@@ -188,8 +255,8 @@ class PharmacyRequisition(models.Model):
                     "Only the creator (%s) or a Pharmacy Dispenser can cancel "
                     "this requisition."
                 ) % rec.create_uid.name)
-            if rec.charge_id:
-                rec.charge_id.unlink()
+            rec._charges().unlink()
+            rec.charge_id = False
             rec.state = 'cancelled'
         return True
 

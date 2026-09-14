@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Replaces the transfusion block of the lab report. The surrounding
+         report is unchanged: same header, same footer, same verification
+         signature, because a crossmatch slip IS a lab report and printing it
+         from a second report would let the two drift apart. -->
+    <template id="report_transfusion_block"
+              inherit_id="leih19.report_examination_result">
+        <xpath expr="//t[@t-if=&quot;layout == 'transfusion'&quot;]" position="replace">
+            <t t-if="layout == 'transfusion'">
+                <style>
+                    .bb-kv td { padding:2px 4px; vertical-align:top; }
+                    .bb-sec { text-decoration:underline; margin:14px 0 4px 0;
+                        font-size:13px; font-weight:bold; }
+                    .bb-verdict { margin-top:14px; padding:7px 10px; text-align:center;
+                        font-weight:bold; letter-spacing:1px; border:1.5px solid #000; }
+                    .bb-fit { border-color:#1c7c3c; color:#1c7c3c; }
+                    .bb-unfit { border-color:#b00020; color:#b00020; }
+                    .bb-flag { color:#b00020; font-weight:bold; }
+                </style>
+
+                <table class="lp-kv bb-kv" style="width:100%;">
+                    <tr>
+                        <td style="width:22%;"><strong>Donor Name</strong></td>
+                        <td style="width:38%;">: <t t-out="result.donor_name or ''"/></td>
+                        <td style="width:18%;"><strong>Bag No</strong></td>
+                        <td>: <strong t-out="result.bag_no or ''"/></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Age</strong></td>
+                        <td>: <t t-out="result.donor_age or ''"/></td>
+                        <td><strong>Gender</strong></td>
+                        <td>: <span t-field="result.donor_sex"/></td>
+                    </tr>
+                </table>
+
+                <table class="lp-kv bb-kv" style="width:100%; margin-top:10px;">
+                    <tr>
+                        <td style="width:40%;">Patient's Blood Group (ABO/Rh):</td>
+                        <td><strong t-field="result.patient_blood_group"/></td>
+                    </tr>
+                    <tr>
+                        <td>Donor's Blood Group (ABO/Rh):</td>
+                        <td>
+                            <strong t-field="result.donor_blood_group"/>
+                            <span t-if="result.group_mismatch" class="bb-flag">
+                                &#160;&#8212; group differs from patient
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Type of Donation:</td>
+                        <td><span t-field="result.donation_type"/></td>
+                    </tr>
+                    <tr>
+                        <td>Type of Blood Component:</td>
+                        <td><strong t-field="result.blood_component"/></td>
+                    </tr>
+                    <tr t-if="result.cross_match_status">
+                        <td>Cross Match Status at RT &amp; 37°C ICT Method:</td>
+                        <td><strong t-field="result.cross_match_status"/></td>
+                    </tr>
+                </table>
+
+                <!-- One section per group header on the catalogue item:
+                     COMPATIBILITY TESTING, MANDATORY DONOR SCREENING, and
+                     whatever else the hospital adds later. -->
+                <t t-foreach="result._transfusion_sections()" t-as="section">
+                    <div t-if="section['title']" class="bb-sec">
+                        <t t-out="section['title']"/>
+                    </div>
+                    <table t-if="section['lines']" class="lp-kv bb-kv" style="width:80%;">
+                        <t t-foreach="section['lines']" t-as="line">
+                            <tr>
+                                <td style="width:7%;"><t t-out="line_index + 1"/>.</td>
+                                <td style="width:48%;"><t t-out="line.name"/></td>
+                                <td style="width:25%; font-weight:bold;"
+                                    t-att-class="result._value_is_unsafe(line) and 'bb-flag' or ''">
+                                    <t t-out="line.display_value or '—'"/>
+                                </td>
+                                <td style="color:#666; font-size:11px;">
+                                    <t t-if="line.reference_value">
+                                        (Expected: <t t-out="line.reference_value"/>)
+                                    </t>
+                                </td>
+                            </tr>
+                        </t>
+                    </table>
+                    <p t-foreach="section['notes']" t-as="note"
+                       style="margin:4px 0 0 0; font-size:11px; color:#444;">
+                        <t t-out="note"/>
+                    </p>
+                </t>
+
+                <!-- The one line the ward actually acts on. Printed as a verdict
+                     rather than left to whoever reads the panel, because a slip
+                     that lists five non-reactive results and says nothing else
+                     still needs someone to add them up correctly at 3 a.m. -->
+                <div t-if="result.fit_for_issue" class="bb-verdict bb-fit">
+                    COMPATIBLE &#8212; FIT FOR ISSUE
+                </div>
+                <div t-else="" class="bb-verdict bb-unfit">
+                    NOT FIT FOR ISSUE &#8212; DO NOT TRANSFUSE
+                    <div t-if="result.unfit_reason"
+                         style="font-weight:normal; letter-spacing:0; font-size:11px; margin-top:3px;">
+                        <t t-out="result.unfit_reason"/>
+                    </div>
+                </div>
+
+                <p t-if="result.transfusion_note" style="margin-top:12px;">
+                    <strong>Note: </strong><t t-out="result.transfusion_note"/>
+                </p>
+            </t>
+        </xpath>
+    </template>
+</odoo>

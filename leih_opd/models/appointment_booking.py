@@ -42,6 +42,14 @@ class AppointmentBooking(models.Model):
     appointment_date = fields.Date('Appointment Date', default=fields.Date.context_today)
     serial_no = fields.Integer('Serial No', readonly=True, copy=False)
 
+    # The base module's `date` is the only date leih19 knows about and its
+    # booking report still prints it, but nothing in the OPD flow reads it --
+    # serial, capacity, token and VN all work off `appointment_date`. Seeding it
+    # from `appointment_date` keeps that report right without asking the desk to
+    # type the same day twice into two fields that look identical on the form.
+    # store + readonly=False is the usual "seeded, still overridable" pattern.
+    date = fields.Date(compute='_compute_date', store=True, readonly=False)
+
     patient_id = fields.Many2one(
         'patient.info', string='Patient', copy=False, index=True, readonly=True,
         help='The hospital patient record. Empty until the patient turns up and '
@@ -132,6 +140,14 @@ class AppointmentBooking(models.Model):
         'Schedule Warning', compute='_compute_schedule_warning',
         help='Set when the appointment date is not a day the chosen session '
              'runs on. A warning only -- the booking is never blocked.')
+
+    @api.depends('appointment_date')
+    def _compute_date(self):
+        # Assigned unconditionally: a mirror that kept a stale day when the
+        # appointment was moved would be worse than no mirror at all, and a
+        # compute that leaves a stored field unassigned raises on a new record.
+        for rec in self:
+            rec.date = rec.appointment_date
 
     @api.depends('patient_id.patient_id')
     def _compute_hn_number(self):
@@ -352,10 +368,17 @@ class AppointmentBooking(models.Model):
 
     @api.onchange('schedule_id')
     def _onchange_schedule_id(self):
+        if not self.schedule_id:
+            return
         # Only when the doctor has no fee on file, so a session-specific fee
         # still gets a chance to fill an otherwise empty amount.
-        if self.schedule_id and not self.amount:
+        if not self.amount:
             self.amount = self.schedule_id.consultation_fee
+        # The session already says when it starts, so the desk should not have to
+        # retype it. Only proposed, never imposed: a patient given a slot later
+        # in the session keeps whatever time was typed.
+        if not self.time and self.schedule_id.start_time:
+            self.time = self.schedule_id.start_time
 
     def _booked_serials(self):
         """How many serials are already issued for this session + date."""

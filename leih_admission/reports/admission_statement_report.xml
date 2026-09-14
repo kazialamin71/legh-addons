@@ -40,7 +40,8 @@
                         <thead>
                             <tr>
                                 <th style="background:#ececec; border:1px solid #c8c8c8; padding:8px 10px; text-align:left;">Service</th>
-                                <th style="background:#ececec; border:1px solid #c8c8c8; padding:8px 10px; text-align:right; width:30%;">Amount</th>
+                                <th style="background:#ececec; border:1px solid #c8c8c8; padding:8px 10px; text-align:right; width:20%;">Amount</th>
+                                <th style="background:#ececec; border:1px solid #c8c8c8; padding:8px 10px; text-align:right; width:20%;">Discount</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -48,6 +49,7 @@
                                 <tr>
                                     <td style="border:1px solid #ddd; padding:8px 10px;"><t t-out="row['label']"/></td>
                                     <td style="border:1px solid #ddd; padding:8px 10px; text-align:right;"><t t-out="'%.2f' % row['amount']"/></td>
+                                    <td style="border:1px solid #ddd; padding:8px 10px; text-align:right;"><t t-out="row['discount'] and '%.2f' % row['discount'] or '-'"/></td>
                                 </tr>
                             </t>
                         </tbody>
@@ -55,7 +57,10 @@
 
                     <!-- Totals -->
                     <table style="width:55%; border-collapse:collapse; font-size:13px; margin-top:12px; margin-left:auto;">
-                        <tr><td style="padding:4px 9px;">Total Charges</td><td style="padding:4px 9px; text-align:right;"><t t-out="'%.2f' % o.total"/></td></tr>
+                        <!-- Gross, because the Discount row below it is the whole
+                             discount (line discounts included). Netting one into
+                             the other made the column stop adding up. -->
+                        <tr><td style="padding:4px 9px;">Total Charges</td><td style="padding:4px 9px; text-align:right;"><t t-out="'%.2f' % o.total_without_discount"/></td></tr>
                         <tr><td style="padding:4px 9px;">Discount</td><td style="padding:4px 9px; text-align:right;"><t t-out="'%.2f' % o.after_discount"/></td></tr>
                         <tr style="font-weight:bold; border-top:1px solid #999;"><td style="padding:6px 9px;">Grand Total</td><td style="padding:6px 9px; text-align:right;"><t t-out="'%.2f' % o.grand_total"/></td></tr>
                         <tr><td style="padding:4px 9px;">Paid (Admission)</td><td style="padding:4px 9px; text-align:right;"><t t-out="'%.2f' % o.paid"/></td></tr>

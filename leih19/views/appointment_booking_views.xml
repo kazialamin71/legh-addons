@@ -12,7 +12,7 @@
                 <field name="phone" />
                 <field name="address" />
                 <field name="doctor_name" />
-                <field name="time" widget="float_time" />
+                <field name="time" widget="float_time_12h" />
                 <field name="date" />
                 <field name="status" />
                 <field name="patient_status" />
@@ -30,23 +30,33 @@
                     <field name="status" widget="statusbar" />
                 </header>
                 <sheet>
-                    <group string="Information">
-                        <group>
-                            <field name="name" />
-                            <field name="age" />
-                            <field name="phone" />
-                            <field name="doctor_name" />
-                            <field name="date" />
-                            <field name="amount" />
-                        </group>
-                        <group>
-                            <field name="patient_name" />
-                            <field name="sex" />
-                            <field name="address" />
-                            <field name="time" widget="float_time" />
-                            <field name="patient_status" />
-                            <field name="payment_done" />
-                        </group>
+                    <!-- Single column, stacked groups, on purpose.
+                         This form is filled in from a patient standing at the
+                         counter, so the whole of it has to be reachable with Tab
+                         alone. Side-by-side groups look tidier but Tab follows
+                         the DOM, so it walks the left column to the bottom of
+                         the sheet and then jumps back up to the top of the
+                         right one, which is how the desk ended up reaching for
+                         the mouse halfway through every booking. Keep each
+                         group one column and keep the identity fields together
+                         and in the order they are asked for. -->
+                    <group name="group_appointment" string="Appointment">
+                        <field name="name" />
+                        <field name="doctor_name" />
+                        <field name="date" />
+                        <field name="time" widget="float_time_12h" />
+                    </group>
+                    <group name="group_patient" string="Patient Information">
+                        <field name="patient_name" />
+                        <field name="age" />
+                        <field name="sex" />
+                        <field name="phone" />
+                        <field name="address" />
+                        <field name="patient_status" />
+                    </group>
+                    <group name="group_fee" string="Consultation Fee">
+                        <field name="amount" />
+                        <field name="payment_done" />
                     </group>
                 </sheet>
             </form>

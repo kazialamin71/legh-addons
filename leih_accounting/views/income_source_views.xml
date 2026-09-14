@@ -1,0 +1,140 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <!-- Ward income is configured the same way its rate is: on the category,
+         with the ward and the individual bed as exceptions. Category is the
+         level a hospital actually reports by — AC Cabin, VIP Cabin, ICU,
+         NICU — so that is where the account normally goes. -->
+    <record id="bed_category_form_income" model="ir.ui.view">
+        <field name="name">bed.category.form.income</field>
+        <field name="model">bed.category</field>
+        <field name="inherit_id" ref="indoor_management.view_bed_category_form"/>
+        <field name="arch" type="xml">
+            <field name="perday_charge" position="after">
+                <field name="income_account_id" options="{'no_create': True}"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="bed_category_list_income" model="ir.ui.view">
+        <field name="name">bed.category.list.income</field>
+        <field name="model">bed.category</field>
+        <field name="inherit_id" ref="indoor_management.view_bed_category_list"/>
+        <field name="arch" type="xml">
+            <field name="perday_charge" position="after">
+                <field name="income_account_id" optional="show"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="hospital_ward_form_income" model="ir.ui.view">
+        <field name="name">hospital.ward.form.income</field>
+        <field name="model">hospital.ward</field>
+        <field name="inherit_id" ref="indoor_management.view_hospital_ward_form"/>
+        <field name="arch" type="xml">
+            <field name="perday_charge" position="after">
+                <field name="income_account_id" options="{'no_create': True}"
+                       placeholder="Category default"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="hospital_ward_list_income" model="ir.ui.view">
+        <field name="name">hospital.ward.list.income</field>
+        <field name="model">hospital.ward</field>
+        <field name="inherit_id" ref="indoor_management.view_hospital_ward_list"/>
+        <field name="arch" type="xml">
+            <field name="perday_charge" position="after">
+                <field name="income_account_id" optional="hide"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="hospital_bed_form_indoor_income" model="ir.ui.view">
+        <field name="name">hospital.bed.form.indoor.income</field>
+        <field name="model">hospital.bed</field>
+        <field name="inherit_id" ref="indoor_management.view_hospital_bed_form_indoor"/>
+        <field name="arch" type="xml">
+            <field name="perday_charge" position="after">
+                <field name="income_account_id" options="{'no_create': True}"
+                       placeholder="Ward, then category"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="hospital_bed_list_indoor_income" model="ir.ui.view">
+        <field name="name">hospital.bed.list.indoor.income</field>
+        <field name="model">hospital.bed</field>
+        <field name="inherit_id" ref="indoor_management.view_hospital_bed_list_indoor"/>
+        <field name="arch" type="xml">
+            <field name="perday_charge" position="after">
+                <field name="income_account_id" optional="hide"/>
+            </field>
+        </field>
+    </record>
+
+    <!-- leih19 keeps its own, simpler bed form; the field belongs on both so it
+         is visible whichever menu the ward clerk came in through. -->
+    <record id="hospital_bed_form_income" model="ir.ui.view">
+        <field name="name">hospital.bed.form.income</field>
+        <field name="model">hospital.bed</field>
+        <field name="inherit_id" ref="leih19.hospital_bed_form_view"/>
+        <field name="arch" type="xml">
+            <sheet position="inside">
+                <group string="Accounting">
+                    <field name="income_account_id" options="{'no_create': True}"/>
+                </group>
+            </sheet>
+        </field>
+    </record>
+
+    <record id="hospital_bed_list_income" model="ir.ui.view">
+        <field name="name">hospital.bed.list.income</field>
+        <field name="model">hospital.bed</field>
+        <field name="inherit_id" ref="leih19.hospital_bed_tree_view"/>
+        <field name="arch" type="xml">
+            <field name="perday_charge" position="after">
+                <field name="income_account_id" optional="show"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="doctors_profile_form_income" model="ir.ui.view">
+        <field name="name">doctors.profile.form.income</field>
+        <field name="model">doctors.profile</field>
+        <field name="inherit_id" ref="leih19.doctors_profile_form_view"/>
+        <field name="arch" type="xml">
+            <sheet position="inside">
+                <group string="Accounting">
+                    <field name="income_account_id" options="{'no_create': True}"/>
+                </group>
+            </sheet>
+        </field>
+    </record>
+
+    <!-- "Posts To" on every charge line: the desk can see which head each
+         service will credit before Release, rather than finding out from the
+         journal entry afterwards. -->
+    <record id="view_admission_charge_list_income" model="ir.ui.view">
+        <field name="name">hospital.admission.charge.report.list.income</field>
+        <field name="model">hospital.admission.charge</field>
+        <field name="inherit_id" ref="leih_admission.view_admission_charge_report_list"/>
+        <field name="arch" type="xml">
+            <field name="total_amount" position="after">
+                <field name="income_account_id" optional="hide"/>
+                <field name="effective_income_account_id" optional="show"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="view_admission_charge_search_income" model="ir.ui.view">
+        <field name="name">hospital.admission.charge.search.income</field>
+        <field name="model">hospital.admission.charge</field>
+        <field name="inherit_id" ref="leih_admission.view_admission_charge_search"/>
+        <field name="arch" type="xml">
+            <filter name="group_provider" position="after">
+                <filter name="group_income_account" string="Income Head"
+                        context="{'group_by': 'effective_income_account_id'}"/>
+            </filter>
+        </field>
+    </record>
+</odoo>

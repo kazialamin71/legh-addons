@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+
+    <t t-name="leih19.FloatTime12Field">
+        <span t-if="props.readonly" t-esc="formattedValue"/>
+        <div t-else="" class="o_field_time_12h d-inline-flex align-items-center">
+            <input type="text" class="o_input" t-ref="input" autocomplete="off"
+                   t-att-id="props.id"
+                   t-att-placeholder="props.placeholder or 'hh:mm AM'"/>
+            <!-- Out of the Tab path on purpose (see toggleMeridiem): it is a
+                 mouse affordance and a reminder of which half of the day the
+                 stored value is in, not a field to step through. -->
+            <button type="button" tabindex="-1"
+                    class="btn btn-link btn-sm px-1 py-0 text-nowrap"
+                    title="Switch between AM and PM"
+                    t-on-click="toggleMeridiem"
+                    t-esc="meridiem"/>
+        </div>
+    </t>
+
+</templates>

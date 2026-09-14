@@ -1,12 +1,13 @@
 {
     'name': 'LEIS Accounting',
     'summary': 'Post bill & admission revenue/payments to the GL (journal entries)',
-    'version': '19.0.1.0',
+    'version': '19.0.1.2',
     'author': 'Mufti Muntasir Ahmed',
-    'depends': ['leih_admission', 'leih_patient', 'account'],
+    'depends': ['leih19', 'indoor_management', 'leih_admission', 'leih_patient', 'account'],
     'data': [
         'security/ir.model.access.csv',
         'views/accounting_config_views.xml',
+        'views/income_source_views.xml',
         'views/account_buttons_views.xml',
     ],
     'license': 'LGPL-3',

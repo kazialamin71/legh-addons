@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- The payment dialog's confirm button is the print button: a counter
+         hands over a receipt for every payment taken, so making it a separate
+         step only creates payments with no receipt handed over. A custom footer
+         replaces the dialog's default Save/Discard; it renders only in dialog
+         mode, so the full form view is unaffected. -->
+    <record id="hospital_admission_payment_form_print" model="ir.ui.view">
+        <field name="name">hospital.admission.payment.form.print</field>
+        <field name="model">hospital.admission.payment</field>
+        <field name="inherit_id" ref="leih19.hospital_admission_payment_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//sheet" position="after">
+                <footer>
+                    <button string="Receive &amp; Print Receipt" type="object"
+                            name="action_receive_and_print" class="btn-primary"
+                            data-hotkey="q"/>
+                    <button string="Discard" special="cancel" class="btn-secondary"
+                            data-hotkey="x"/>
+                </footer>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Reprint: the patient lost it, the printer jammed, the ward wants a copy
+         for the file. One button per payment already taken. -->
+    <record id="general_admission_payment_line_list_print" model="ir.ui.view">
+        <field name="name">general.admission.payment.line.list.print</field>
+        <field name="model">general.admission.payment.line</field>
+        <field name="inherit_id" ref="leih19.general_admission_payment_line_tree_view"/>
+        <field name="arch" type="xml">
+            <field name="money_receipt_id" position="after">
+                <button name="action_print_receipt" type="object"
+                        string="Print" icon="fa-print" title="Print money receipt"
+                        invisible="not money_receipt_id"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="hospital_admission_form_receipt_print" model="ir.ui.view">
+        <field name="name">hospital.admission.form.receipt.print</field>
+        <field name="model">hospital.admission</field>
+        <field name="inherit_id" ref="leih19.hospital_admission_form_view"/>
+        <field name="arch" type="xml">
+            <button name="btn_pay" position="after">
+                <button string="Print Last Receipt" type="object"
+                        name="action_print_last_receipt" class="btn-secondary"
+                        invisible="paid == 0"/>
+            </button>
+        </field>
+    </record>
+</odoo>

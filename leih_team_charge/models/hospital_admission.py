@@ -1,6 +1,7 @@
 import logging
 
-from odoo import api, fields, models
+from odoo import _, api, fields, models
+from odoo.exceptions import UserError
 
 _logger = logging.getLogger(__name__)
 
@@ -69,14 +70,33 @@ class HospitalAdmission(models.Model):
         native = self.charge_ids.filtered(
             lambda c: c.source_model != 'hospital.bill.line')
         income = {}
+        unaccounted = self.env['hospital.admission.charge']
         for charge in native:
             if charge.hospital_amount <= 0:
                 continue
-            acct = cfg._income_account(charge.item_id) or cfg.default_income_account_id
+            # Full resolution, same as the base poster: the charge's own head
+            # (catalogue item, bed or doctor), then the service-type map, then
+            # the default. Reading only ``item_id`` -- which bed, ward and
+            # pharmacy charges never have -- sent every one of them to the
+            # default income account and collapsed the whole ward P&L into it.
+            acct = cfg._charge_income_account(charge)
             if not acct:
+                unaccounted |= charge
                 continue
             income.setdefault(acct, 0.0)
             income[acct] += charge.hospital_amount
+        if unaccounted:
+            raise UserError(_(
+                'These charges have no income account, so admission %(name)s '
+                'cannot be posted to the general ledger:\n\n%(rows)s\n\n'
+                'Set an account on the catalogue item, the bed or the doctor, or '
+                'map the service type under Accounting > Configuration > '
+                'Hospital Accounting.',
+                name=self.name or '',
+                rows='\n'.join(
+                    '  - %s (%s)' % (c.description or '/',
+                                     dict(c._fields['service_type'].selection).get(c.service_type))
+                    for c in unaccounted)))
         native_total = sum(income.values())
         if native_total <= 0:
             self.acc_revenue_posted = True

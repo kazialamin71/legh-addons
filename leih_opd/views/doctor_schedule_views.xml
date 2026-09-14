@@ -7,8 +7,8 @@
             <list>
                 <field name="doctor_id"/>
                 <field name="name"/>
-                <field name="start_time" widget="float_time"/>
-                <field name="end_time" widget="float_time"/>
+                <field name="start_time" widget="float_time_12h"/>
+                <field name="end_time" widget="float_time_12h"/>
                 <field name="capacity"/>
                 <field name="consultation_fee"/>
                 <field name="room_location" optional="show"/>
@@ -26,8 +26,8 @@
                         <group string="Session">
                             <field name="doctor_id"/>
                             <field name="name"/>
-                            <field name="start_time" widget="float_time"/>
-                            <field name="end_time" widget="float_time"/>
+                            <field name="start_time" widget="float_time_12h"/>
+                            <field name="end_time" widget="float_time_12h"/>
                             <field name="active"/>
                         </group>
                         <group string="Booking">

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="examination_result_form_bb" model="ir.ui.view">
+        <field name="name">examination.result.form.bloodbank</field>
+        <field name="model">examination.result</field>
+        <field name="inherit_id" ref="leih19.examination_result_form_view"/>
+        <field name="arch" type="xml">
+            <!-- The donor comes first because picking one fills in the three
+                 fields under it. Typing them by hand stays possible for a
+                 walk-in donor who has not been registered yet. -->
+            <field name="donor_name" position="before">
+                <field name="donor_id" options="{'no_quick_create': True}"/>
+            </field>
+
+            <field name="transfusion_note" position="before">
+                <field name="is_transfusion" invisible="1"/>
+                <field name="group_mismatch" invisible="1"/>
+                <field name="fit_for_issue" invisible="1"/>
+                <div colspan="2" class="alert alert-warning" role="alert"
+                     invisible="not group_mismatch">
+                    Donor and patient blood groups differ. Confirm this is a
+                    deliberate compatible substitution before the unit is issued.
+                </div>
+                <div colspan="2" class="alert alert-danger" role="alert"
+                     invisible="fit_for_issue">
+                    <strong>Not fit for issue.</strong>
+                    <field name="unfit_reason" readonly="1" nolabel="1" class="oe_inline"/>
+                </div>
+                <div colspan="2" class="alert alert-success" role="alert"
+                     invisible="not fit_for_issue">
+                    Cross match compatible and all mandatory screening non-reactive.
+                </div>
+            </field>
+        </field>
+    </record>
+
+    <record id="examination_result_search_bb" model="ir.ui.view">
+        <field name="name">examination.result.search.bloodbank</field>
+        <field name="model">examination.result</field>
+        <field name="inherit_id" ref="leih19.examination_result_search_view"/>
+        <field name="arch" type="xml">
+            <search position="inside">
+                <field name="bag_no" string="Bag No"/>
+                <field name="donor_id"/>
+                <separator/>
+                <filter name="bb_cross_match" string="Cross Matching"
+                        domain="[('report_layout', '=', 'transfusion')]"/>
+                <filter name="bb_unfit" string="Not Fit for Issue"
+                        domain="[('report_layout', '=', 'transfusion'), ('fit_for_issue', '=', False)]"/>
+            </search>
+        </field>
+    </record>
+</odoo>

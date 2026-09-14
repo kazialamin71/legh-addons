@@ -1,2 +1,3 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_hospital_admission_charge,hospital.admission.charge,model_hospital_admission_charge,base.group_user,1,1,1,1
+access_admission_charge_type,admission.charge.type,model_admission_charge_type,base.group_user,1,1,1,1

@@ -422,14 +422,15 @@ class HospitalAdmission(models.Model):
 
     def admission_cancel(self):
         for rec in self:
-            moves = self.env["account.move"].search([("ref", "=", rec.name)])
+            # Draft entries only. This used to force posted entries back to draft
+            # and delete them, which destroys the audit trail the general ledger
+            # exists to be -- and in a locked period it cannot be undone at all.
+            # A posted entry is cancelled by posting its reverse, which
+            # leih_accounting.admission_cancel does before calling this.
+            moves = self.env["account.move"].search([
+                ("ref", "=", rec.name), ("state", "=", "draft"),
+            ])
             if moves:
-                for move in moves:
-                    try:
-                        if move.state == "posted":
-                            move.button_draft()
-                    except Exception:
-                        pass
                 moves.unlink()
 
             rec.state = "cancelled"

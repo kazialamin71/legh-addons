@@ -1,7 +1,7 @@
 import base64
 
 from odoo import api, fields, models, _
-from odoo.exceptions import UserError
+from odoo.exceptions import UserError, ValidationError
 
 
 class HospitalAdmission(models.Model):
@@ -25,6 +25,21 @@ class HospitalAdmission(models.Model):
 
     charge_ids = fields.One2many(
         'hospital.admission.charge', 'admission_id', string='Charges')
+
+    # The two halves of after_discount, split out because they are given for
+    # different reasons and are approved by different people: a line discount is
+    # the billing desk waiving one item, a bill discount is management waiving a
+    # slice of the whole admission.
+    line_discount = fields.Float(
+        'Line Discounts', compute='_compute_totals', store=True,
+        help='Sum of the per-charge discounts in the charge ledger.')
+    bill_discount = fields.Float(
+        'Bill Discount', compute='_compute_totals', store=True,
+        help='Admission-level discount: the Discount(%) on the net plus Other Discount.')
+    discount_approved_by = fields.Many2one(
+        'res.users', string='Discount Approved By', copy=False,
+        help='Who authorised the admission-level discount. Required once one is '
+             'given, so the discount account in the ledger can be accounted for.')
 
     # Relabelled, not redefined: selection_add updates the label of a key that
     # already exists as well as adding new ones, so 'pending' can read the way
@@ -111,7 +126,9 @@ class HospitalAdmission(models.Model):
         'hospital.admission.line', 'hospital.bill.line', 'hospital.bed.line',
         'doctor.profile.admission.line', 'hospital.medicine.line',
     )
-    # admission.charge.item.charge_type -> charge.service_type (1:1)
+    # Fallback only. The mapping lives on admission.charge.type now; this is
+    # what answers for the four seeded codes if that table has not been
+    # populated yet (a database mid-upgrade, or a code with no record).
     _CHARGE_TYPE_MAP = {
         'admission': 'admission', 'icu': 'icu', 'nicu': 'nicu', 'other': 'other',
     }
@@ -154,8 +171,16 @@ class HospitalAdmission(models.Model):
             doctor_disc = subtotal * (rec.doctors_discounts or 0.0) / 100.0
             rec.total_without_discount = gross
             rec.total = subtotal
-            rec.after_discount = doctor_disc + (rec.other_discount or 0.0)
-            rec.grand_total = subtotal - doctor_disc - (rec.other_discount or 0.0)
+            # "Discount Amount" is what the patient was actually let off, so it
+            # has to include the per-charge discounts as well as the two
+            # admission-level ones. It used to report only the admission-level
+            # pair, which understated every bill that had a line discount on it
+            # and left total_without_discount - grand_total unexplained on the
+            # printed statement.
+            rec.line_discount = gross - subtotal
+            rec.bill_discount = doctor_disc + (rec.other_discount or 0.0)
+            rec.after_discount = rec.line_discount + rec.bill_discount
+            rec.grand_total = gross - rec.after_discount
             rec.due = rec.grand_total - (rec.paid + rec.investigation_paid)
 
     @staticmethod
@@ -178,14 +203,71 @@ class HospitalAdmission(models.Model):
     def _statement_summary(self):
         """Charges summarized to ONE line per service type (e.g. all physio
         items roll up to a single 'Physiotherapy' total) for the printed
-        statement. Returns a sorted list of {label, amount}."""
+        statement. Returns a sorted list of {label, amount, discount}.
+
+        ``amount`` is **gross**, and the discount is reported alongside rather
+        than netted into it, for two reasons. The statement's own arithmetic has
+        to work -- it prints Total Charges, then Discount, then Grand Total, and
+        "Discount" is the whole discount, so the figure above it must be the
+        whole charge or the reader cannot add the column up. And it makes the
+        statement reconcile line for line against the settlement journal entry,
+        which credits income gross and debits the discount separately.
+        """
         self.ensure_one()
         labels = dict(self.env['hospital.admission.charge']._fields['service_type'].selection)
         groups = {}
         for c in self.charge_ids:
-            groups[c.service_type] = groups.get(c.service_type, 0.0) + (c.total_amount or 0.0)
-        rows = [{'label': labels.get(k, k), 'amount': v} for k, v in groups.items()]
+            gross, disc = groups.get(c.service_type, (0.0, 0.0))
+            groups[c.service_type] = (gross + (c.gross_amount or 0.0),
+                                      disc + (c.discount or 0.0))
+        rows = [{'label': labels.get(k, k), 'amount': gross, 'discount': disc}
+                for k, (gross, disc) in groups.items()]
         rows.sort(key=lambda r: r['label'])
+        return rows
+
+    def _bill_detail_groups(self):
+        """Every charge, itemised, grouped under the heading it was billed as.
+
+        The summary statement rolls a whole admission up to one line per service
+        type, which answers "what do I owe" and nothing else. A patient querying
+        a bill wants the opposite: which dressing, which visit, which day of bed
+        rent, at what rate.
+
+        Headings come from the **charge type** where the charge came from the
+        ward catalogue -- so a "Team Charge" bucket prints as Team Charge rather
+        than being swallowed into Admission Charge -- and fall back to the
+        service type for everything else (diagnostics, pharmacy, bed days, doctor
+        visits), which is the only classification those have.
+
+        Gross and discount are kept apart for the same reason the statement keeps
+        them apart: the printed column has to add up.
+        """
+        self.ensure_one()
+        svc_labels = dict(self.env['hospital.admission.charge']._fields['service_type'].selection)
+        types = self.env['admission.charge.type'].search([])
+        type_by_code = {t.code: t for t in types}
+
+        groups = {}
+        for charge in self.charge_ids.sorted(lambda c: (c.date or fields.Datetime.now(), c.id)):
+            code = charge.charge_item_id.charge_type
+            ctype = type_by_code.get(code)
+            if ctype:
+                # (0, sequence) keeps the catalogue's own order, and puts every
+                # named bucket above the generic service-type headings.
+                key, label, sort = ctype.code, ctype.name, (0, ctype.sequence, ctype.name)
+            else:
+                label = svc_labels.get(charge.service_type, charge.service_type or 'Other')
+                key, sort = 's:%s' % charge.service_type, (1, 0, label)
+            group = groups.setdefault(key, {
+                'label': label, 'sort': sort, 'lines': [],
+                'gross': 0.0, 'discount': 0.0, 'net': 0.0,
+            })
+            group['lines'].append(charge)
+            group['gross'] += charge.gross_amount or 0.0
+            group['discount'] += charge.discount or 0.0
+            group['net'] += charge.total_amount or 0.0
+
+        rows = sorted(groups.values(), key=lambda g: g['sort'])
         return rows
 
     def _assigned_bed_label(self):
@@ -295,6 +377,63 @@ class HospitalAdmission(models.Model):
             },
         }
 
+    def btn_final_settlement(self):
+        """Recalculate the whole bill before letting anyone release the patient.
+
+        The due check in the base method was reading a stale ledger. Bed, cabin
+        and ICU charges accrue per day and are only recomputed by Calculate
+        Payable, so an admission whose ledger was last rebuilt two days ago shows
+        a due of zero while two more days of bed rent are owed -- and the patient
+        walks out settled. Any investigation bill confirmed since the last
+        rebuild is missing for the same reason.
+
+        So the settlement *is* the recalculation: rebuild, then check. This also
+        guarantees the general ledger entry posted after this point is raised
+        against final figures rather than a snapshot.
+        """
+        self.action_calculate_payable()
+        for rec in self:
+            if rec.state not in ('activated', 'released'):
+                continue  # left to the base method to refuse, with its wording
+            # Replaces the base's bare "Please Pay the Due Bill", which named no
+            # figure -- the desk could not tell whether it was 50 or 50,000, nor
+            # that the number had just moved under them.
+            if rec.due > 0:
+                raise UserError(_(
+                    'This admission cannot be settled yet.\n\n'
+                    'Charges (gross):  %(gross).2f\n'
+                    'Discount:         %(discount).2f\n'
+                    'Payable:          %(payable).2f\n'
+                    'Received:         %(paid).2f\n'
+                    'Outstanding:      %(due).2f\n\n'
+                    'Figures were just recalculated, so bed/cabin days and any '
+                    'newly confirmed investigation bill are included. Collect '
+                    'the outstanding amount with the Payment button, or reduce '
+                    'it with a discount, then settle again.',
+                    gross=rec.total_without_discount or 0.0,
+                    discount=rec.after_discount or 0.0,
+                    payable=rec.grand_total or 0.0,
+                    paid=(rec.paid or 0.0) + (rec.investigation_paid or 0.0),
+                    due=rec.due,
+                ))
+        return super().btn_final_settlement()
+
+    @api.constrains('doctors_discounts', 'other_discount', 'charge_ids')
+    def _check_discount_not_over_total(self):
+        """A discount may take the bill to zero, never below it.
+
+        Without this a mistyped "Other Discount" produces a negative payable,
+        which then posts negative revenue to the general ledger and hands the
+        patient a refund nobody authorised.
+        """
+        for rec in self:
+            if (rec.after_discount or 0.0) - (rec.total_without_discount or 0.0) > 0.01:
+                raise ValidationError(_(
+                    'The discount (%(discount).2f) is larger than the total '
+                    'charges (%(total).2f) on admission %(name)s.',
+                    discount=rec.after_discount, total=rec.total_without_discount,
+                    name=rec.name or ''))
+
     def action_calculate_payable(self):
         """Rebuild the charge ledger from every service source, then totals/due
         recompute. Recurring (bed) charges are recomputed to today on each run."""
@@ -306,6 +445,18 @@ class HospitalAdmission(models.Model):
     def _rebuild_charges(self):
         self.ensure_one()
         Charge = self.env['hospital.admission.charge']
+        # Charge types are records now, so the bucket -> service_type mapping is
+        # a query. Resolved once per rebuild and memoised: a long admission can
+        # carry a hundred lines and they are nearly all the same handful of types.
+        ChargeType = self.env['admission.charge.type']
+        _service_cache = {}
+
+        def charge_type_service(code):
+            if code not in _service_cache:
+                _service_cache[code] = (ChargeType._service_type_of(code)
+                                        or self._CHARGE_TYPE_MAP.get(code, 'other'))
+            return _service_cache[code]
+
         # wipe only the charges this model owns; keep manual ones (no source)
         # and charges managed by other modules (e.g. pharmacy).
         self.charge_ids.filtered(lambda c: c.source_model in self._FEEDER_MODELS).unlink()
@@ -317,9 +468,11 @@ class HospitalAdmission(models.Model):
             item = il.name
             vals_list.append({
                 'admission_id': self.id,
-                'service_type': self._CHARGE_TYPE_MAP.get(il.charge_type, 'other'),
+                'service_type': charge_type_service(il.charge_type),
                 'description': item.name if item else (il.department or 'Charge'),
                 'unit_id': item.department.id if item and item.department else False,
+                'charge_item_id': item.id if item else False,
+                'income_account_id': item.accounts_id.id if item and item.accounts_id else False,
                 'qty': il.product_qty or 1.0,
                 'unit_price': il.price,
                 'discount': il.total_discount or 0.0,
@@ -336,6 +489,7 @@ class HospitalAdmission(models.Model):
                 'item_id': entry.id if entry else False,
                 'description': entry.name if entry else (bl.name or bl.department or 'Item'),
                 'unit_id': entry.department.id if entry and entry.department else False,
+                'income_account_id': entry.accounts_id.id if entry and entry.accounts_id else False,
                 'qty': bl.product_qty or 1.0,
                 'unit_price': bl.price,
                 'discount': bl.total_discount or 0.0,

@@ -32,14 +32,14 @@
                 <button name="action_open_opd_ticket" type="object"
                         string="Open OPD Ticket" invisible="not opd_ticket_id"/>
             </header>
-            <!-- The button box belongs inside the sheet; the base form opens
-                 straight onto a group, so anchor it there. -->
-            <xpath expr="//sheet/group[1]" position="before">
+
+            <!-- The banner and the button box belong above the first group. -->
+            <group name="group_appointment" position="before">
                 <!-- Stays on screen for as long as the mismatch does, so it
                      cannot be dismissed and forgotten like the dialog can. -->
                 <div class="alert alert-warning" role="alert"
                      invisible="not schedule_warning">
-                    <i class="fa fa-calendar-times-o me-1"/>
+                    <i class="fa fa-calendar-times-o me-1" title="Schedule warning"/>
                     <field name="schedule_warning" class="oe_inline" readonly="1" nolabel="1"/>
                 </div>
                 <div class="oe_button_box" name="button_box">
@@ -49,9 +49,14 @@
                         <field name="prescription_count" widget="statinfo" string="Prescriptions"/>
                     </button>
                 </div>
-            </xpath>
+            </group>
 
-            <!-- ============ what the serial desk actually types ============ -->
+            <!-- ============ Appointment: what session, what day, what time ===========
+                 Every group on this form is one column and the groups are
+                 stacked, so Tab walks the form top to bottom without ever
+                 jumping back up. The order inside each group is the order the
+                 desk asks the questions in.
+            -->
             <field name="name" position="attributes">
                 <attribute name="readonly">1</attribute>
                 <attribute name="placeholder">Assigned automatically on save</attribute>
@@ -59,14 +64,31 @@
             <field name="doctor_name" position="after">
                 <field name="schedule_id"/>
                 <field name="appointment_date"/>
-                <field name="serial_no"/>
             </field>
+            <!-- `date` is the base module's single date field and nothing in the
+                 OPD flow reads it; `appointment_date` is what the serial,
+                 capacity, token and VN all work off. It is kept (and kept in
+                 step with appointment_date by a compute) because the leih19
+                 booking report still prints it, but showing both would put two
+                 date fields in the desk's Tab path, one of which does nothing. -->
+            <field name="date" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
+            <field name="time" position="attributes">
+                <attribute name="placeholder">e.g. 05:30 PM</attribute>
+            </field>
+
+            <!-- ============ Patient Information: one uninterrupted column ============ -->
             <field name="patient_name" position="attributes">
                 <attribute name="required">1</attribute>
                 <attribute name="placeholder">Name as the patient gives it</attribute>
             </field>
             <field name="age" position="attributes">
                 <attribute name="required">1</attribute>
+            </field>
+            <field name="age" position="after">
+                <field name="date_of_birth"/>
+                <field name="age_display"/>
             </field>
             <field name="phone" position="attributes">
                 <attribute name="placeholder">01XXXXXXXXX</attribute>
@@ -76,45 +98,50 @@
             <field name="address" position="attributes">
                 <attribute name="placeholder">Taken at arrival</attribute>
             </field>
-
             <!-- The patient record, once one exists. Read-only on purpose: it is
-                 created by the arrival wizard, not typed here. -->
+                 created by the arrival wizard, not typed here, so it also falls
+                 out of the Tab path instead of interrupting the identity. -->
             <field name="patient_status" position="after">
                 <field name="patient_id" readonly="1" invisible="not patient_id"
                        context="{'patient_display_contact': 1}"/>
-                <field name="opd_ticket_id" invisible="not opd_ticket_id"/>
-                <field name="date_of_birth"/>
-                <field name="age_display"/>
             </field>
 
-            <!-- Fee record. Non-accounting: registering the arrival is the
-                 payment, these three fields are the whole audit trail. -->
+            <!-- ============ Fee ============
+                 Non-accounting: registering the arrival is the payment, these
+                 fields are the whole audit trail. -->
             <field name="payment_done" position="attributes">
                 <attribute name="readonly">1</attribute>
             </field>
             <field name="payment_done" position="after">
+                <field name="payment_note" invisible="not payment_done"/>
                 <field name="arrived_on" readonly="1" invisible="not arrived_on"/>
                 <field name="collected_by" readonly="1" invisible="not collected_by"/>
-                <field name="payment_note" invisible="not payment_done"/>
             </field>
 
-            <!-- The printed identifiers, grouped together so reception can read
-                 back what is on the slip in the patient's hand. -->
-            <field name="opd_ticket_id" position="after">
-                <label for="token_no" string="Consultation Token"/>
-                <div>
-                    <field name="token_no" class="oe_inline" readonly="1"/>
-                    <span class="text-muted" invisible="not token_date">
-                        &#160;(for <field name="token_date" class="oe_inline" readonly="1"/>)
-                    </span>
-                </div>
-                <field name="cn_number" readonly="1"/>
-                <field name="cn_date" readonly="1"/>
-                <field name="vn_date"/>
-                <field name="hn_number"/>
-                <field name="location"/>
-                <field name="token_printed_on" readonly="1" invisible="not token_printed_on"/>
-            </field>
+            <!-- ============ Numbers ============
+                 All allocated by buttons, never typed, so this group sits last
+                 and below the data entry: reception reads it back off the slip
+                 in the patient's hand. Two columns is fine here precisely
+                 because nothing in it is a Tab stop. -->
+            <group name="group_fee" position="after">
+                <group name="group_numbers" string="Serial, Token &amp; Identifiers" col="4">
+                    <field name="serial_no"/>
+                    <label for="token_no" string="Consultation Token"/>
+                    <div>
+                        <field name="token_no" class="oe_inline" readonly="1"/>
+                        <span class="text-muted" invisible="not token_date">
+                            &#160;(for <field name="token_date" class="oe_inline" readonly="1"/>)
+                        </span>
+                    </div>
+                    <field name="cn_number" readonly="1"/>
+                    <field name="cn_date" readonly="1"/>
+                    <field name="hn_number"/>
+                    <field name="vn_date"/>
+                    <field name="location"/>
+                    <field name="opd_ticket_id" invisible="not opd_ticket_id"/>
+                    <field name="token_printed_on" readonly="1" invisible="not token_printed_on"/>
+                </group>
+            </group>
         </field>
     </record>
 
@@ -135,6 +162,10 @@
                 <field name="serial_no" optional="show"/>
                 <field name="cn_number" optional="hide"/>
                 <field name="hn_number" optional="hide"/>
+            </field>
+            <!-- Mirrors appointment_date, so it is noise next to it. -->
+            <field name="date" position="attributes">
+                <attribute name="optional">hide</attribute>
             </field>
             <field name="status" position="attributes">
                 <attribute name="widget">badge</attribute>

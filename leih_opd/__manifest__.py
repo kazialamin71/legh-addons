@@ -2,7 +2,7 @@
     'name': 'LEIS OPD Flow',
     'summary': 'Doctor sessions, serial appointments, arrival -> patient -> OPD '
                'billing, prescription templates and pharmacy/lab fulfilment',
-    'version': '19.0.1.0',
+    'version': '19.0.1.1',
     'author': 'Mufti Muntasir Ahmed',
     'depends': ['leih19', 'leih_patient', 'point_of_sale'],
     'data': [

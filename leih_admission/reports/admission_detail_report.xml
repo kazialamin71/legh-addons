@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="action_report_admission_detail" model="ir.actions.report">
+        <field name="name">Detailed Bill</field>
+        <field name="model">hospital.admission</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">leih_admission.report_admission_detail</field>
+        <field name="report_file">leih_admission.report_admission_detail</field>
+        <field name="print_report_name">'Detailed Bill - %s' % (object.name or object.patient_name.name)</field>
+        <field name="binding_model_id" ref="leih19.model_hospital_admission"/>
+        <field name="binding_type">report</field>
+    </record>
+
+    <template id="report_admission_detail">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.external_layout">
+                    <div class="page leih">
+                        <t t-call="leih19.leih_report_styles"/>
+                        <style>
+                            .leih table.items td.idx { width:26px; text-align:center; color:#888; }
+                            .leih tr.grp td { background:#eaf1f7; font-weight:600;
+                                text-transform:uppercase; letter-spacing:0.5px; font-size:11px; }
+                            .leih tr.sub td { border-top:1px solid #c8c8c8; font-weight:600; }
+                            .leih td.dt { white-space:nowrap; color:#555; font-size:11px; }
+                        </style>
+
+                        <h2 class="doc_title">DETAILED BILL</h2>
+                        <div class="doc_sub">
+                            <t t-out="o.name or ''"/>
+                            <t t-if="o.state == 'released'"> &#8226; Final</t>
+                            <t t-else=""> &#8226; Provisional</t>
+                        </div>
+
+                        <table class="meta">
+                            <tr>
+                                <td style="width:34%"><span class="lbl">Patient</span>
+                                    <span t-out="o.patient_name.name or '-'"/></td>
+                                <td style="width:33%"><span class="lbl">Patient ID</span>
+                                    <span t-out="o.patient_name.patient_id or '-'"/></td>
+                                <td style="width:33%"><span class="lbl">Admission No</span>
+                                    <span t-out="o.name or '-'"/></td>
+                            </tr>
+                            <tr>
+                                <td><span class="lbl">Age / Sex</span>
+                                    <span t-out="o.age or '-'"/> / <span t-out="o.sex or '-'"/></td>
+                                <td><span class="lbl">Mobile</span>
+                                    <span t-out="o.mobile or '-'"/></td>
+                                <td><span class="lbl">Ward / Bed</span>
+                                    <span t-out="o._assigned_bed_label() or '-'"/></td>
+                            </tr>
+                            <tr>
+                                <td><span class="lbl">Admitting Doctor</span>
+                                    <span t-out="o.admitting_doctor.name or o.ref_doctors.name or '-'"/></td>
+                                <td><span class="lbl">Admitted</span>
+                                    <span t-field="o.date" t-options="{'widget': 'datetime'}"/></td>
+                                <td><span class="lbl">Printed</span>
+                                    <span t-out="datetime.datetime.now().strftime('%d-%m-%Y %H:%M')"/></td>
+                            </tr>
+                        </table>
+
+                        <t t-set="groups" t-value="o._bill_detail_groups()"/>
+
+                        <div class="sec_title">Charges</div>
+                        <table class="items">
+                            <thead>
+                                <tr>
+                                    <th class="ctr" style="width:26px">#</th>
+                                    <th>Particulars</th>
+                                    <th style="width:78px">Date</th>
+                                    <th class="num" style="width:44px">Qty</th>
+                                    <th class="num" style="width:70px">Rate</th>
+                                    <th class="num" style="width:80px">Amount</th>
+                                    <th class="num" style="width:70px">Disc.</th>
+                                    <th class="num" style="width:80px">Net</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-if="not groups">
+                                    <tr><td colspan="8" class="ctr" style="color:#888; padding:14px;">
+                                        No charges have been raised on this admission yet.
+                                    </td></tr>
+                                </t>
+                                <t t-foreach="groups" t-as="g">
+                                    <tr class="grp"><td colspan="8" t-out="g['label']"/></tr>
+                                    <t t-set="n" t-value="0"/>
+                                    <t t-foreach="g['lines']" t-as="l">
+                                        <t t-set="n" t-value="n + 1"/>
+                                        <tr>
+                                            <td class="idx"><t t-out="n"/></td>
+                                            <td>
+                                                <t t-out="l.description or '-'"/>
+                                                <t t-if="l.provider_id">
+                                                    <span style="color:#666; font-size:11px;">
+                                                        &#8212; <t t-out="l.provider_id.name"/>
+                                                    </span>
+                                                </t>
+                                            </td>
+                                            <td class="dt">
+                                                <span t-if="l.date" t-field="l.date"
+                                                      t-options="{'widget': 'date'}"/>
+                                                <t t-else="">-</t>
+                                            </td>
+                                            <td class="num"><t t-out="'%g' % (l.qty or 0.0)"/></td>
+                                            <td class="num"><t t-out="'%.2f' % (l.unit_price or 0.0)"/></td>
+                                            <td class="num"><t t-out="'%.2f' % (l.gross_amount or 0.0)"/></td>
+                                            <td class="num">
+                                                <t t-if="l.discount" t-out="'%.2f' % l.discount"/>
+                                                <t t-else="">-</t>
+                                            </td>
+                                            <td class="num"><t t-out="'%.2f' % (l.total_amount or 0.0)"/></td>
+                                        </tr>
+                                    </t>
+                                    <tr class="sub">
+                                        <td colspan="5" style="text-align:right;">
+                                            <t t-out="g['label']"/> total
+                                        </td>
+                                        <td class="num"><t t-out="'%.2f' % g['gross']"/></td>
+                                        <td class="num">
+                                            <t t-if="g['discount']" t-out="'%.2f' % g['discount']"/>
+                                            <t t-else="">-</t>
+                                        </td>
+                                        <td class="num"><t t-out="'%.2f' % g['net']"/></td>
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
+
+                        <!-- Gross first, then every discount, then the grand total:
+                             the same shape as the settlement journal entry, which
+                             credits income gross and debits the discount apart from
+                             it. A patient querying the bill can add the column up. -->
+                        <table class="totals">
+                            <tr><td>Total Charges</td>
+                                <td class="num"><t t-out="'%.2f' % o.total_without_discount"/></td></tr>
+                            <tr t-if="o.line_discount"><td>Line Discounts</td>
+                                <td class="num">- <t t-out="'%.2f' % o.line_discount"/></td></tr>
+                            <tr t-if="o.bill_discount"><td>Bill Discount</td>
+                                <td class="num">- <t t-out="'%.2f' % o.bill_discount"/></td></tr>
+                            <tr class="grand"><td>Grand Total</td>
+                                <td class="num"><t t-out="'%.2f' % o.grand_total"/></td></tr>
+                            <tr><td>Paid (Admission)</td>
+                                <td class="num"><t t-out="'%.2f' % o.paid"/></td></tr>
+                            <tr t-if="o.investigation_paid"><td>Investigation Paid</td>
+                                <td class="num"><t t-out="'%.2f' % o.investigation_paid"/></td></tr>
+                            <tr class="due"><td>Due</td>
+                                <td class="num"><t t-out="'%.2f' % o.due"/></td></tr>
+                        </table>
+
+                        <t t-set="receipts" t-value="o.money_receipt_ids.filtered(lambda m: m.state == 'confirm').sorted('id')"/>
+                        <div t-if="receipts">
+                            <div class="sec_title">Payments Received</div>
+                            <table class="items">
+                                <thead>
+                                    <tr>
+                                        <th>Receipt No</th>
+                                        <th style="width:90px">Date</th>
+                                        <th>Mode</th>
+                                        <th>Received By</th>
+                                        <th class="num" style="width:90px">Amount</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr t-foreach="receipts" t-as="r">
+                                        <td><t t-out="r.name or '-'"/></td>
+                                        <td class="dt"><span t-field="r.date" t-options="{'widget': 'date'}"/></td>
+                                        <td><t t-out="r.payment_type.name if r.payment_type else '-'"/></td>
+                                        <td><t t-out="r.user_id.name if r.user_id else '-'"/></td>
+                                        <td class="num"><t t-out="'%.2f' % (r.amount or 0.0)"/></td>
+                                    </tr>
+                                    <tr class="sub">
+                                        <td colspan="4" style="text-align:right;">Total Received</td>
+                                        <td class="num"><t t-out="'%.2f' % sum(receipts.mapped('amount'))"/></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="sign_row" style="display:flex; justify-content:space-between;">
+                            <div class="sign_box">Prepared By</div>
+                            <div class="sign_box">Checked By</div>
+                            <div class="sign_box">Patient / Attendant</div>
+                        </div>
+
+                        <div class="foot_note">
+                            This is a detailed statement of every charge raised on this
+                            admission. Please report any discrepancy at the billing counter
+                            before settlement.
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>
