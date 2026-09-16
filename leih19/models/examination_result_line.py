@@ -18,6 +18,7 @@ class ExaminationResultLine(models.Model):
     sequence = fields.Integer(related='entry_line_id.sequence', store=True, readonly=True)
     result_type = fields.Selection(related='entry_line_id.result_type', readonly=True)
     uom = fields.Char(related='entry_line_id.uom', readonly=True)
+    method_id = fields.Many2one(related='entry_line_id.method_id', string='Method', readonly=True)
     reference_value = fields.Char(related='entry_line_id.reference_value', readonly=True)
     reference_value_male = fields.Char(related='entry_line_id.reference_value_male', readonly=True)
     reference_value_female = fields.Char(related='entry_line_id.reference_value_female', readonly=True)
@@ -27,6 +28,9 @@ class ExaminationResultLine(models.Model):
     critical_low = fields.Float(related='entry_line_id.critical_low', readonly=True)
     critical_high = fields.Float(related='entry_line_id.critical_high', readonly=True)
     is_group_header = fields.Boolean(related='entry_line_id.is_group_header', readonly=True)
+    print_style = fields.Selection(related='entry_line_id.print_style', readonly=True)
+    decimals = fields.Integer(related='entry_line_id.decimals', readonly=True)
+    panel_boxed = fields.Boolean(related='entry_line_id.panel_boxed', readonly=True)
     parent_line_id = fields.Many2one(related='entry_line_id.parent_line_id', readonly=True)
     show_when_value_id = fields.Many2one(related='entry_line_id.show_when_value_id', readonly=True)
 
@@ -59,14 +63,21 @@ class ExaminationResultLine(models.Model):
     )
     has_value = fields.Boolean(compute='_compute_display_value')
 
-    @api.depends('result_type', 'value_numeric', 'value_text', 'value_selection_id', 'is_group_header')
+    @api.depends('result_type', 'value_numeric', 'value_text', 'value_selection_id',
+                 'is_group_header', 'decimals')
     def _compute_display_value(self):
         for rec in self:
             value = ''
             if not rec.is_group_header:
                 if rec.result_type == 'numeric':
                     # blank for unfilled (zero) numerics; '%g' drops trailing .0
-                    value = ('%g' % rec.value_numeric) if rec.value_numeric else ''
+                    # unless the component asks for fixed decimals (2.00 pg/mL).
+                    if not rec.value_numeric:
+                        value = ''
+                    elif rec.decimals:
+                        value = '%.*f' % (rec.decimals, rec.value_numeric)
+                    else:
+                        value = '%g' % rec.value_numeric
                 elif rec.result_type == 'selection':
                     value = rec.value_selection_id.name or ''
                 else:

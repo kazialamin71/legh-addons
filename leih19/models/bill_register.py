@@ -65,8 +65,14 @@ class BillRegister(models.Model):
                         help="Total confirmed payments. Sum of all payment lines / money receipts.")
     down_payment = fields.Float(
         "Paid Now",
-        help="Amount collected at the counter when the bill is first saved. "
-             "Generates the first money receipt automatically. Later payments use the Pay button.")
+        help="Amount collected at the counter for this bill. It lowers the due "
+             "as soon as it is typed, and becomes a money receipt (and a journal "
+             "entry) when the bill is confirmed. Later payments use the Pay button.")
+    down_payment_registered = fields.Float(
+        "Paid Now (receipted)", copy=False, readonly=True,
+        help="How much of 'Paid Now' has already been turned into a money receipt. "
+             "Keeps the due right when the amount is edited between saves, and stops "
+             "a second confirm collecting the same money twice.")
     due = fields.Float("Due", compute="_compute_totals", store=True)
 
     card_no = fields.Char('Card No.')
@@ -189,6 +195,9 @@ class BillRegister(models.Model):
         'doctors_discounts',
         'other_discount',
         'paid',
+        'down_payment',
+        'down_payment_registered',
+        'state',
     )
     def _compute_totals(self):
         """
@@ -229,8 +238,32 @@ class BillRegister(models.Model):
             # grand total after doctor discount and goodwill discount
             rec.grand_total = (rec.total or 0.0) - rec.doctor_discount_amt - (rec.other_discount or 0.0)
 
-            # due
-            rec.due = (rec.grand_total or 0.0) - (rec.paid or 0.0)
+            # Due nets off both the money already receipted and the counter
+            # collection typed into "Paid Now" but not receipted yet, so the
+            # cashier reads the real figure before confirming.
+            if rec.state == 'cancelled':
+                # Void: the receipts are cancelled and the journal entries
+                # reversed, so there is nothing left to collect.
+                rec.due = 0.0
+            else:
+                rec.due = (rec.grand_total or 0.0) - (rec.paid or 0.0) - rec._pending_down_payment()
+
+    def _pending_down_payment(self):
+        """Counter money typed into "Paid Now" that has not been receipted yet.
+
+        It turns into a money receipt at confirm; until then it only lowers the
+        displayed due. ``down_payment_registered`` records how much has already
+        been converted, so editing the amount between saves - or confirming a
+        bill twice - can never collect it twice."""
+        self.ensure_one()
+        # Only while the bill is still open. Once it is confirmed the amount has
+        # been receipted, and anything left pending on an old bill is a leftover
+        # of the pre-19.0.7 behaviour - money the counter recorded but never
+        # receipted. Those dues stay as they are rather than silently dropping
+        # against a receipt that does not exist.
+        if self.state != 'pending':
+            return 0.0
+        return max((self.down_payment or 0.0) - (self.down_payment_registered or 0.0), 0.0)
 
     def _find_referral_config(self):
         """Return the active commission/discount agreement for this bill's
@@ -251,10 +284,20 @@ class BillRegister(models.Model):
             config = Config.search([('broker_id', '=', self.referral.id)], limit=1)
         return config
 
-    @api.depends('bill_register_payment_line_id.amount')
+    @api.depends('bill_register_payment_line_id.amount',
+                 'bill_register_payment_line_id.money_receipt_id.state')
     def _compute_paid(self):
+        """Money actually held against this bill.
+
+        A cancelled bill voids its receipts rather than deleting the payment
+        lines - the counter still needs to see what was taken and refunded - so
+        a line whose receipt is cancelled no longer counts as paid."""
         for rec in self:
-            rec.paid = sum(rec.bill_register_payment_line_id.mapped('amount'))
+            rec.paid = sum(
+                line.amount or 0.0
+                for line in rec.bill_register_payment_line_id
+                if line.money_receipt_id.state != 'cancel'
+            )
 
     @api.depends('payment_type', 'paid')
     def _compute_service_charge(self):
@@ -322,11 +365,11 @@ class BillRegister(models.Model):
         records = super().create(vals_list)
         records._reconcile_support_lines()
 
-        # Initial counter payment -> first money receipt
-        for rec in records:
-            if rec.down_payment and rec.down_payment > 0:
-                rec._register_payment(rec.down_payment)
-
+        # "Paid Now" is deliberately NOT receipted here. A bill is edited
+        # several times at the counter before it is confirmed, and a receipt
+        # raised at the first save could not follow those edits. It lowers the
+        # due on screen straight away (see ``_compute_totals``) and becomes a
+        # money receipt in ``bill_confirm``.
         return records
 
     def _reconcile_support_lines(self):
@@ -377,8 +420,12 @@ class BillRegister(models.Model):
         amount = amount or 0.0
         if amount <= 0:
             return self.env['leih.money.receipt']
-        if amount > (self.due or 0.0) + 0.01:
-            raise UserError(_("Payment (%s) exceeds the due amount (%s).") % (amount, self.due or 0.0))
+        # Checked against what the patient still owes, not against ``due``:
+        # ``due`` is already net of a pending "Paid Now", so it would reject the
+        # very payment that clears it at confirm.
+        outstanding = (self.grand_total or 0.0) - (self.paid or 0.0)
+        if amount > outstanding + 0.01:
+            raise UserError(_("Payment (%s) exceeds the due amount (%s).") % (amount, outstanding))
 
         date = date or fields.Date.context_today(self)
         ptype = payment_type or self.payment_type
@@ -387,7 +434,7 @@ class BillRegister(models.Model):
             'bill_id': self.id,
             'amount': amount,
             'bill_total_amount': self.grand_total or 0.0,
-            'due_amount': (self.due or 0.0) - amount,
+            'due_amount': outstanding - amount,
             'p_type': 'due_payment' if (self.paid or 0.0) > 0 else 'advance',
             'already_collected': True,
             'diagonostic_bill': self.diagonostic_bill,
@@ -413,19 +460,39 @@ class BillRegister(models.Model):
         # supporting lines and their quantities in sync.
         if 'bill_register_line_id' in vals and not self.env.context.get('skip_support_reconcile'):
             self._reconcile_support_lines()
+            # ... and the lab work those lines stand for.
+            self._sync_lab_items()
         return res
 
     # -------------------------------------------------------------------------
     # Your existing actions (kept minimal; you can paste your old ones below)
     # -------------------------------------------------------------------------
     def bill_confirm(self):
-        # Keep your original code here if needed.
-        # I am not rewriting it fully since your request was totals + numbering.
-        # raise UserError(_("bill_confirm(): paste your existing confirm logic here (unchanged)."))
+        """Close the bill: receipt the counter money, then raise the lab work."""
         self.ensure_one()
+        self._register_down_payment()
         self.state = 'confirmed'
         self._generate_lab_items()
         return True
+
+    def _register_down_payment(self):
+        """Turn the counter collection into a money receipt, once.
+
+        "Paid Now" is only a figure on the form until the bill is confirmed;
+        this is where it becomes a money receipt, a payment line and - with the
+        accounting module installed - a journal entry."""
+        self.ensure_one()
+        pending = self._pending_down_payment()
+        if pending <= 0:
+            return self.env['leih.money.receipt']
+        outstanding = (self.grand_total or 0.0) - (self.paid or 0.0)
+        if pending > outstanding + 0.01:
+            raise UserError(_(
+                "Paid Now (%s) is more than this bill's unpaid amount (%s).")
+                % (pending, outstanding))
+        receipt = self._register_payment(pending)
+        self.down_payment_registered = (self.down_payment_registered or 0.0) + pending
+        return receipt
 
     def action_generate_lab_items(self):
         """Manual trigger from form button. Idempotent."""
@@ -447,24 +514,14 @@ class BillRegister(models.Model):
         Result = self.env['examination.result']
 
         existing_entry_ids = set(self.lab_result_ids.mapped('entry_id').ids)
-        # Consumables (test tube, bed sheet, ...) are billed but never reported on:
-        # anything configured as somebody's supporting item is excluded, whether it
-        # was pulled in automatically or typed on the bill by hand.
-        support_entry_ids = set(self.env['examination.support.item'].search(
-            []).mapped('support_entry_id').ids)
 
         # Group test lines that share a tube
         groups = {}            # key -> list of (entry, doctor)
         direct_lines = []      # (entry, doctor) — no specimen needed
 
-        for line in self.bill_register_line_id:
+        for line in self._reportable_lines():
             entry = line.name
-            if not entry or entry.id in existing_entry_ids:
-                continue
-            # Only diagnostic/lab items produce lab results & specimens.
-            if (entry.service_group or 'diagnostic') != 'diagnostic':
-                continue
-            if line.is_support_line or entry.lab_not_required or entry.id in support_entry_ids:
+            if entry.id in existing_entry_ids:
                 continue
             if entry.category in ('radiology', 'descriptive') or not entry.tube_color_id:
                 direct_lines.append((entry, line.assign_doctors))
@@ -475,15 +532,34 @@ class BillRegister(models.Model):
                 key = (entry.tube_color_id.id, entry.department.id if entry.department else 0)
             groups.setdefault(key, []).append((entry, line.assign_doctors))
 
+        # A test added to the bill after confirm belongs on the tube its
+        # colleagues are already drawn into, not on a second tube of the same
+        # colour - that would send the phlebotomist back to the patient for a
+        # draw the lab does not need. Only tubes that have not reached the bench
+        # yet can still take a passenger.
+        reusable = {}
+        for spec in self.specimen_ids:
+            if spec.state not in ('draft', 'collected'):
+                continue
+            reusable.setdefault(
+                (spec.tube_color_id.id, spec.department_id.id if spec.department_id else 0),
+                spec)
+
         # Make a specimen per group and a result per test on the specimen
-        for entries in groups.values():
+        for key, entries in groups.items():
             first_entry = entries[0][0]
-            specimen = Specimen.create({
-                'patient_id': self.patient_name.id,
-                'bill_register_id': self.id,
-                'tube_color_id': first_entry.tube_color_id.id,
-                'department_id': first_entry.department.id if first_entry.department else False,
-            })
+            # A test flagged "Requires Own Tube" is grouped under a solo key and
+            # never shares, so it is not offered an existing tube.
+            specimen = reusable.get(key) if key[0] != 'solo' else None
+            if not specimen:
+                specimen = Specimen.create({
+                    'patient_id': self.patient_name.id,
+                    'bill_register_id': self.id,
+                    'tube_color_id': first_entry.tube_color_id.id,
+                    'department_id': first_entry.department.id if first_entry.department else False,
+                })
+                if key[0] != 'solo':
+                    reusable[key] = specimen
             for entry, doctor in entries:
                 Result.create({
                     'patient_id': self.patient_name.id,
@@ -501,6 +577,70 @@ class BillRegister(models.Model):
                 'doctor_id': (doctor or self.ref_doctors).id if (doctor or self.ref_doctors) else False,
                 'bill_register_id': self.id,
             })
+
+    def _reportable_lines(self):
+        """The bill lines that should each have a lab result behind them.
+
+        Consumables (test tube, bed sheet, ...) are billed but never reported on:
+        anything configured as somebody's supporting item is excluded, whether it
+        was pulled in automatically or typed on the bill by hand. Non-diagnostic
+        service groups and items flagged "No Lab Required" are out too.
+        """
+        self.ensure_one()
+        support_entry_ids = set(self.env['examination.support.item'].search(
+            []).mapped('support_entry_id').ids)
+        return self.bill_register_line_id.filtered(
+            lambda line: (
+                line.name
+                and (line.name.service_group or 'diagnostic') == 'diagnostic'
+                and not line.is_support_line
+                and not line.name.lab_not_required
+                and line.name.id not in support_entry_ids
+            )
+        )
+
+    def _sync_lab_items(self):
+        """Keep the lab side in step with the bill's items after an edit.
+
+        Confirming raises the specimens and results; editing the bill afterwards
+        used to leave them behind, so a test removed from the bill stayed on the
+        lab worklist and on the tube sticker for ever. This reconciles both ways -
+        it drops what is no longer billed, adds what now is, and retires a tube
+        once nothing is left on it.
+
+        A result the lab has already started is never removed: the bill has to
+        say so out loud rather than deleting work in progress.
+        """
+        self.ensure_one()
+        if self.state != 'confirmed':
+            return
+
+        wanted = {line.name.id: line for line in self._reportable_lines()}
+        stale = self.lab_result_ids.filtered(
+            lambda r: r.entry_id.id not in wanted and r.state != 'cancelled')
+        started = stale.filtered(lambda r: r.state != 'draft')
+        if started:
+            raise UserError(_(
+                "These tests have already been worked on in the lab and cannot be "
+                "removed from the bill:\n\n%s\n\nCancel the report first, or "
+                "cancel the whole bill."
+            ) % "\n".join("- %s" % (r.entry_id.name or r.name) for r in started))
+        stale.unlink()
+
+        # A doctor changed on the bill should follow onto the untouched report.
+        for result in self.lab_result_ids.filtered(lambda r: r.state == 'draft'):
+            line = wanted.get(result.entry_id.id)
+            doctor = (line.assign_doctors or self.ref_doctors) if line else False
+            if doctor and result.doctor_id != doctor:
+                result.doctor_id = doctor
+
+        self._generate_lab_items()
+
+        # A tube nobody is testing from any more is retired, unless it has
+        # physically reached the lab - that is a real sample on a real bench.
+        empty = self.specimen_ids.filtered(
+            lambda sp: not sp.result_ids and sp.state in ('draft', 'collected'))
+        empty.action_cancel()
 
     def action_view_lab_specimens(self):
         self.ensure_one()
@@ -531,9 +671,10 @@ class BillRegister(models.Model):
     def action_print_tube_stickers(self):
         """Print tube stickers for all specimens of this bill."""
         self.ensure_one()
-        if not self.specimen_ids:
+        specimens = self.specimen_ids.filtered(lambda sp: sp.state != 'cancelled')
+        if not specimens:
             raise UserError(_("No tubes/specimens for this bill yet. Confirm the bill first."))
-        return self.env.ref('leih19.action_report_lab_specimen_sticker').report_action(self.specimen_ids)
+        return self.env.ref('leih19.action_report_lab_specimen_sticker').report_action(specimens)
 
     def action_view_lab_results(self):
         self.ensure_one()
@@ -581,9 +722,59 @@ class BillRegister(models.Model):
         return self.env.ref('leih19.action_report_examination_result').report_action(verified)
 
     def bill_cancel(self):
+        """Void the bill and everything confirming it produced.
+
+        Confirming a bill raises three things: lab work, money receipts and
+        journal entries. Cancelling has to take all three back, or the lab keeps
+        a worklist for tests nobody is paying for and the collection reports keep
+        counting money that was handed back.
+
+        Work already done is not silently thrown away: a report that has been
+        verified or released has left the lab, so the cancellation stops and asks
+        for it to be reset first.
+        """
         self.ensure_one()
+        if self.state == 'cancelled':
+            return True
+        self._cancel_lab_items()
+        self._cancel_payments()
         self.state = 'cancelled'
         return True
+
+    def _cancel_lab_items(self):
+        """Cancel the specimens and results this bill raised.
+
+        Draft results are deleted rather than cancelled - nothing was ever typed
+        into them, and leaving a cancelled shell behind only clutters the lab
+        worklist and the tube sticker."""
+        self.ensure_one()
+        results = self.lab_result_ids
+        released = results.filtered(lambda r: r.state in ('verified', 'released'))
+        if released:
+            raise UserError(_(
+                "These reports are already verified or released and cannot be "
+                "cancelled with the bill:\n\n%s\n\nReset them to draft first."
+            ) % "\n".join("- %s" % (r.entry_id.name or r.name) for r in released))
+
+        in_progress = results.filtered(lambda r: r.state == 'in_progress')
+        in_progress.action_cancel()
+        results.filtered(lambda r: r.state == 'draft').unlink()
+
+        self.specimen_ids.filtered(lambda sp: sp.state != 'cancelled').action_cancel()
+
+    def _cancel_payments(self):
+        """Void the money receipts raised against this bill.
+
+        The payment lines stay: they are the counter's record of what was taken
+        and refunded. ``paid`` ignores a line whose receipt is cancelled, so the
+        bill reads as unpaid without losing the trail. Collection reports already
+        filter on ``state = 'confirm'``, so the money drops out of them too."""
+        self.ensure_one()
+        receipts = self.bill_register_payment_line_id.mapped('money_receipt_id')
+        receipts.filtered(lambda mr: mr.state != 'cancel').write({'state': 'cancel'})
+        # Nothing has been collected any more, so "Paid Now" is pending again
+        # rather than receipted - it just never gets collected, the bill is void.
+        self.down_payment_registered = 0.0
 
     
     

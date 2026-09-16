@@ -88,11 +88,20 @@
                     <button name="action_cancel" type="object" string="Cancel"
                             invisible="state in ('cancelled', 'released')"/>
                     <button name="action_reset_to_draft" type="object" string="Reset to Draft"
-                            invisible="state != 'cancelled'"/>
+                            invisible="state not in ('cancelled', 'released')"
+                            help="Send the report back for re-entry. Any verification signature is cleared."/>
                     <field name="state" widget="statusbar"
                            statusbar_visible="draft,in_progress,verified,released"/>
                 </header>
                 <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_view_patient_history" type="object"
+                                class="oe_stat_button" icon="fa-history"
+                                invisible="patient_history_count == 0"
+                                help="Every other lab test of this patient, newest first.">
+                            <field name="patient_history_count" widget="statinfo" string="Test History"/>
+                        </button>
+                    </div>
                     <div class="oe_title">
                         <h1><field name="name" readonly="1"/></h1>
                     </div>
@@ -108,6 +117,7 @@
                         </group>
                         <group string="Workflow">
                             <field name="doctor_id"/>
+                            <field name="referred_institute"/>
                             <field name="reported_by_id"/>
                             <field name="specimen_id" options="{'no_create': True}"/>
                             <field name="sample_state" readonly="1"/>
@@ -203,6 +213,28 @@
                                     <field name="drug_class" readonly="1"/>
                                     <field name="sensitivity"/>
                                 </list>
+                            </field>
+                        </page>
+                        <page string="Report Notes">
+                            <group>
+                                <field name="print_disclaimer"/>
+                            </group>
+                            <field name="report_block_ids">
+                                <list>
+                                    <field name="sequence" widget="handle"/>
+                                    <field name="name"/>
+                                    <field name="style"/>
+                                </list>
+                                <form>
+                                    <sheet>
+                                        <group>
+                                            <field name="name"/>
+                                            <field name="style"/>
+                                            <field name="sequence"/>
+                                        </group>
+                                        <field name="body_html" widget="html" nolabel="1"/>
+                                    </sheet>
+                                </form>
                             </field>
                         </page>
                         <page string="Clinical Note">

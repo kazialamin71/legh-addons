@@ -20,3 +20,8 @@ class DiagnosisDepartment(models.Model):
         help='Pathologist / consultant whose name, degree and designation print as the '
              'authorizing signature on lab reports for this department.',
     )
+    report_disclaimer_html = fields.Html(
+        'Report Disclaimer (override)', sanitize=False,
+        help='Disclaimer printed on this department\'s lab reports. Leave empty '
+             'to use the company-wide disclaimer.',
+    )

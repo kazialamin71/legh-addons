@@ -102,3 +102,4 @@ access_admission_charge_item,access_admission_charge_item,model_admission_charge
 access_leih_collection_report,access_leih_collection_report,model_leih_collection_report,base.group_user,1,0,0,0
 access_investigation_payment,access_investigation_payment,model_investigation_payment,base.group_user,1,1,1,1
 access_investigation_payment_line,access_investigation_payment_line,model_investigation_payment_line,base.group_user,1,1,1,1
+access_lab_report_block,access_lab_report_block,model_lab_report_block,base.group_user,1,1,1,1

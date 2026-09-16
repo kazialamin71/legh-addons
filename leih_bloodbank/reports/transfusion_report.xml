@@ -5,7 +5,7 @@
          signature, because a crossmatch slip IS a lab report and printing it
          from a second report would let the two drift apart. -->
     <template id="report_transfusion_block"
-              inherit_id="leih19.report_examination_result">
+              inherit_id="leih19.report_examination_result_body">
         <xpath expr="//t[@t-if=&quot;layout == 'transfusion'&quot;]" position="replace">
             <t t-if="layout == 'transfusion'">
                 <style>

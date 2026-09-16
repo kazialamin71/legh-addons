@@ -1,0 +1,333 @@
+test_name,department,rate_imported,all_legacy_rates
+CT Scan of Chest,CT Scan,6000,id 1530 = 5400 | id 3296 = 6000
+Digital X-RAY of Skull & Mandible AP View,Radiolgy & Imaging,1500,id 2492 = 400 | id 4331 = 1500
+Digital X-RAY of Spinal Column B/V,Radiolgy & Imaging,2000,id 2491 = 1400 | id 4330 = 2000
+Digital X-RAY of Sternum AP & Lateral View,Radiolgy & Imaging,1000,id 2490 = 800 | id 4329 = 1000
+Digital X-RAY of Sternum Lateral View,Radiolgy & Imaging,500,id 2488 = 400 | id 4327 = 500
+Digital X-RAY of Sternum Oblique View,Radiolgy & Imaging,500,id 2486 = 400 | id 4325 = 500
+Digital X-RAY of Sternum Oblique View & lateral View,Radiolgy & Imaging,1000,id 2487 = 800 | id 4326 = 1000
+Digital X-RAY of Styloid process B/V,Radiolgy & Imaging,1000,id 2485 = 800 | id 4324 = 1000
+Digital X-RAY of skull Townes View,Radiolgy & Imaging,500,id 2494 = 400 | id 4332 = 500
+Digital X-Ray of Bone Age (Child),Radiolgy & Imaging,1000,id 2684 = 800 | id 4521 = 1000
+Digital X-Ray of Bone age ( Adult Clavicle & Pelvis),Radiolgy & Imaging,1000,id 2683 = 800 | id 4520 = 1000
+Digital X-Ray of Both Knee Joint AP View,Radiolgy & Imaging,500,id 2521 = 400 | id 4359 = 500
+Digital X-Ray of Cervical spine Lateral View,Radiolgy & Imaging,500,id 2528 = 400 | id 4366 = 500
+Digital X-Ray of Chest Apical view,Radiolgy & Imaging,500,id 2530 = 400 | id 4368 = 500
+Digital X-Ray of Chest Inspiratory & Expiratory PA view,Radiolgy & Imaging,1000,id 2707 = 800 | id 4544 = 1000
+Digital X-Ray of Chest PA & left lateral view,Radiolgy & Imaging,1000,id 2709 = 800 | id 4546 = 1000
+Digital X-Ray of Chest for Rib Left Side (Oblique View),Radiolgy & Imaging,500,id 2531 = 400 | id 4369 = 500
+Digital X-Ray of I. V. U.,Radiolgy & Imaging,2200,id 2866 = 2000 | id 4703 = 2200
+Digital X-Ray of I. V. U. with late film,Radiolgy & Imaging,2500,id 2893 = 3000 | id 4730 = 2500
+Digital X-Ray of Left Heel (Calcaneum) Axial & Lateral View,Radiolgy & Imaging,600,id 2564 = 400 | id 4402 = 600
+Digital X-Ray of Left Wrist Joint PA & Lateral View,Radiolgy & Imaging,600,id 2573 = 400 | id 4411 = 600
+Digital X-Ray of Left hip joint Lateral View,Radiolgy & Imaging,600,id 2566 = 400 | id 4404 = 600
+Digital X-Ray of Lt. Knee Joint AP & Lat. View ( Standing Position),Radiolgy & Imaging,600,id 2745 = 800 | id 4582 = 600
+Digital X-Ray of Lt. Middle Finger AP & Lateral View,Radiolgy & Imaging,600,id 2579 = 400 | id 4417 = 600
+Digital X-Ray of Pelvis with both hip joint AP view (Child),Radiolgy & Imaging,500,id 2605 = 400 | id 4443 = 500
+Digital X-Ray of Plain Abdomen Erect & Supine View,Radiolgy & Imaging,1000,id 2765 = 800 | id 4602 = 1000
+"Digital X-Ray of Right Elbow joint AP, Lat. & oblique view",Radiolgy & Imaging,1000,id 2611 = 400 | id 4449 = 1000
+Digital X-Ray of Right hip joint Lateral View,Radiolgy & Imaging,500,id 2620 = 400 | id 4458 = 500
+Digital X-Ray of Right thumb (B/V),Radiolgy & Imaging,500,id 2625 = 400 | id 4463 = 500
+Digital X-Ray of Skull base of the skull,Radiolgy & Imaging,500,id 2646 = 400 | id 4484 = 500
+Digital X-Ray of Skull for Sinuses (PNS O/M View),Radiolgy & Imaging,500,id 2650 = 400 | id 4487 = 500
+"Digital X-Ray of Sternum AP, Lat & Oblique View",Radiolgy & Imaging,1500,id 2489 = 1000 | id 2834 = 1200 | id 4328 = 1500 | id 4671 = 1500
+PORTABLE X-RAY CXR AP & OBLIQUE,Radiolgy & Imaging,1200,id 2471 = 1000 | id 4310 = 1000 | id 4672 = 1200
+PORTABLE X-RAY FEMUR AP & LATERAL,Radiolgy & Imaging,800,id 2469 = 1000 | id 4308 = 1000 | id 4640 = 800
+PORTABLE X-RAY L/S SPINE AP & LATERAL,Radiolgy & Imaging,1200,id 2468 = 1000 | id 4307 = 1000 | id 4673 = 1200
+PORTABLE X-RAY SKULL AP & LATERAL,Radiolgy & Imaging,1200,id 2465 = 1000 | id 4304 = 1000 | id 4674 = 1200
+X-Ray -Hand B/V,Radiolgy & Imaging,400,id 2498 = 200 | id 4336 = 400
+X-Ray Lumbo Sacral Spine B/V,Radiolgy & Imaging,1000,id 2907 = 600 | id 4744 = 1000
+X-Ray Lumbo sacral,Radiolgy & Imaging,1000,id 2497 = 600 | id 4335 = 1000
+X-Ray Showlder B/V,Radiolgy & Imaging,1000,id 2500 = 400 | id 4338 = 1000
+X-Ray for 100% (One Film),Radiolgy & Imaging,600,id 2507 = 400 | id 4345 = 600
+X-Ray for 100% (Three Films),Radiolgy & Imaging,1800,id 2805 = 1200 | id 4642 = 1800
+X-Ray for 100% (Two Films),Radiolgy & Imaging,1200,id 2680 = 800 | id 4517 = 1200
+X-Ray of Abdomen Erect Posture AP & Lat. View,Radiolgy & Imaging,1500,id 2806 = 1200 | id 4643 = 1500
+X-Ray of Abdomen Erect Posture Including Diaphragm (Child),Radiolgy & Imaging,500,id 2509 = 400 | id 4347 = 500
+X-Ray of Acoustic meatus perorbital view,Radiolgy & Imaging,500,id 2510 = 400 | id 4348 = 500
+X-Ray of Atlanto axial joint OM view,Radiolgy & Imaging,500,id 2511 = 400 | id 4349 = 500
+X-Ray of Atlanton Axial O.M & Lateral View ( B / V ),Radiolgy & Imaging,1000,id 2682 = 800 | id 4519 = 1000
+X-Ray of Ba-Followthrough double contrast,Radiolgy & Imaging,2500,id 2855 = 2000 | id 4692 = 2500
+X-Ray of Ba-enema of colon Single contrast of child to examin Hirscha.,Radiolgy & Imaging,2500,id 2854 = 2000 | id 4691 = 2500
+X-Ray of Ba-meal of small intestine and follow thorough,Radiolgy & Imaging,2500,id 2891 = 3000 | id 4728 = 2500
+X-Ray of Both Ankle Joint (B/V),Radiolgy & Imaging,1000,id 2685 = 800 | id 4522 = 1000
+X-Ray of Both Ankle Joint AP View,Radiolgy & Imaging,500,id 2512 = 400 | id 4350 = 500
+X-Ray of Both Ankle Joint Lateral View,Radiolgy & Imaging,500,id 2513 = 400 | id 4346 = 500 | id 4351 = 500
+X-Ray of Both Clavicle AP View,Radiolgy & Imaging,500,id 2514 = 400 | id 4352 = 500
+X-Ray of Both Feet A.P Cat View,Radiolgy & Imaging,800,id 2909 = 400 | id 4746 = 800
+X-Ray of Both Feet AP View,Radiolgy & Imaging,500,id 2515 = 400 | id 4353 = 500
+X-Ray of Both Feet Lateral View,Radiolgy & Imaging,500,id 2516 = 400 | id 4354 = 500
+X-Ray of Both Hand (B/V),Radiolgy & Imaging,1000,id 2688 = 800 | id 4525 = 1000
+X-Ray of Both Hand AP View,Radiolgy & Imaging,500,id 2517 = 400 | id 4355 = 500
+X-Ray of Both Hand B/V,Radiolgy & Imaging,900,id 2689 = 800 | id 4526 = 900
+X-Ray of Both Hand Lateral View,Radiolgy & Imaging,500,id 2518 = 400 | id 4356 = 500
+X-Ray of Both Heel B/V,Radiolgy & Imaging,1000,id 2691 = 800 | id 4528 = 1000
+X-Ray of Both Knee Joint AP View Standing Position,Radiolgy & Imaging,1000,id 2693 = 800 | id 4530 = 1000
+X-Ray of Both Knee Joint B/V (Child),Radiolgy & Imaging,1000,id 2694 = 800 | id 4531 = 1000
+X-Ray of Both Knee Joint Lat. View,Radiolgy & Imaging,500,id 2522 = 400 | id 4360 = 500
+X-Ray of Both Knee Joint and Skyline B/V,Radiolgy & Imaging,2000,id 2808 = 1200 | id 4645 = 2000
+X-Ray of Both Knee Joint skyline position,Radiolgy & Imaging,500,id 2523 = 400 | id 4361 = 500
+X-Ray of Both Knee Joints(BV) AP & Lateral,Radiolgy & Imaging,1000,id 2695 = 800 | id 4532 = 1000
+X-Ray of Both Leg AP,Radiolgy & Imaging,500,id 2462 = 800 | id 4301 = 500
+X-Ray of Both Leg AP View,Radiolgy & Imaging,500,id 2696 = 800 | id 4533 = 500
+X-Ray of Both Leg with Ankle Joint in Standing Position,Radiolgy & Imaging,1600,id 2842 = 1600 | id 4679 = 400 | id 4940 = 1600
+X-Ray of Both Mastoid AP oblique & Lateral Oblique view,Radiolgy & Imaging,1000,id 2697 = 800 | id 4534 = 1000
+X-Ray of Both Shoulder joint AP View,Radiolgy & Imaging,1000,id 2698 = 800 | id 4535 = 1000
+X-Ray of Both Shoulder joint Lateral view,Radiolgy & Imaging,1000,id 2681 = 800 | id 4518 = 1000
+X-Ray of Both T.M. Joint open & close Mouth,Radiolgy & Imaging,2000,id 2844 = 1600 | id 4681 = 2000
+X-Ray of Both Thigh AP,Radiolgy & Imaging,900,id 2461 = 800 | id 4300 = 900
+X-Ray of Both feet both view,Radiolgy & Imaging,1000,id 2686 = 800 | id 4523 = 1000
+X-Ray of Both foot (B/V),Radiolgy & Imaging,1000,id 2687 = 800 | id 4524 = 1000
+X-Ray of Both hand for bone age,Radiolgy & Imaging,1000,id 2690 = 800 | id 4527 = 1000
+X-Ray of Both hand with wrist joint AP view,Radiolgy & Imaging,1000,id 2519 = 400 | id 4357 = 1000
+X-Ray of Both heel lateral view for soft tissue,Radiolgy & Imaging,500,id 2520 = 400 | id 4358 = 500
+X-Ray of Both hip joint (B/V),Radiolgy & Imaging,1000,id 2807 = 1200 | id 4644 = 1000
+X-Ray of Both hip joint Lat view,Radiolgy & Imaging,1000,id 2692 = 800 | id 4529 = 1000
+X-Ray of Both shoulder joint (B/V),Radiolgy & Imaging,2000,id 2843 = 1600 | id 4680 = 2000
+X-Ray of Cervical One Oblique View,Radiolgy & Imaging,500,id 2526 = 400 | id 4364 = 500
+X-Ray of Cervical Spine B/V with Atlanto Axial Joint,Radiolgy & Imaging,1500,id 2813 = 1200 | id 4650 = 1500
+X-Ray of Cervical Spine Both Lateral View,Radiolgy & Imaging,1000,id 2701 = 800 | id 4538 = 1000
+X-Ray of Cervical Spine Both Oblique View,Radiolgy & Imaging,1000,id 2702 = 800 | id 4539 = 1000
+X-Ray of Cervical spine AP & Both oblique View,Radiolgy & Imaging,1500,id 2810 = 1200 | id 4647 = 1500
+X-Ray of Cervical spine AP & Lateral View (B/V),Radiolgy & Imaging,1000,id 2699 = 800 | id 4536 = 1000
+X-Ray of Cervical spine AP & One oblique View,Radiolgy & Imaging,1000,id 2700 = 800 | id 4537 = 1000
+X-Ray of Cervical spine AP & both lat view,Radiolgy & Imaging,1500,id 2809 = 1200 | id 4646 = 1500
+X-Ray of Cervical spine AP View Only,Radiolgy & Imaging,500,id 2527 = 400 | id 4365 = 500
+"X-Ray of Cervical spine AP, Lateral & Both oblique View",Radiolgy & Imaging,2000,id 2845 = 1600 | id 4682 = 2000
+"X-Ray of Cervical spine AP, Lateral & Left oblique View",Radiolgy & Imaging,1500,id 2811 = 1200 | id 4648 = 1500
+"X-Ray of Cervical spine AP, Lateral & Right oblique View",Radiolgy & Imaging,1500,id 2812 = 1200 | id 4649 = 1500
+"X-Ray of Cervical spine AP,Lat,Flexion,Extension, & Rt. oblique view",Radiolgy & Imaging,2500,id 2861 = 2000 | id 4698 = 2500
+X-Ray of Cervical spine Lateral & Both oblique View,Radiolgy & Imaging,1500,id 2815 = 1200 | id 4652 = 1500
+X-Ray of Cervical spine Lateral & One oblique View,Radiolgy & Imaging,1000,id 2703 = 800 | id 4540 = 1000
+X-Ray of Cervical spine One Oblique View Only,Radiolgy & Imaging,500,id 2529 = 400 | id 4367 = 500
+"X-Ray of Cervical spine flexion, extention and open mouth",Radiolgy & Imaging,1500,id 2814 = 1200 | id 4651 = 1500
+X-Ray of Cervico-dorsal spine (Cervico-Thoracic) spine AP & Lateral view,Radiolgy & Imaging,1000,id 2704 = 800 | id 4541 = 1000
+"X-Ray of Chest AP, Rt. Letaral, Oblique View",Radiolgy & Imaging,1500,id 2705 = 800 | id 4542 = 1500
+X-Ray of Chest Lordotic View,Radiolgy & Imaging,500,id 2535 = 400 | id 4373 = 500
+X-Ray of Chest PA & lateral view,Radiolgy & Imaging,1000,id 2708 = 800 | id 4545 = 1000
+X-Ray of Chest PA & right lateral view,Radiolgy & Imaging,1000,id 2710 = 800 | id 4547 = 1000
+X-Ray of Chest PA with Sternum,Radiolgy & Imaging,1350,id 2804 = 1050 | id 4641 = 1350
+X-Ray of Chest Penetrating Lateral View,Radiolgy & Imaging,500,id 2536 = 400 | id 4374 = 500
+X-Ray of Chest Penetrating View,Radiolgy & Imaging,500,id 2537 = 400 | id 4375 = 500
+X-Ray of Chest apical lordotic & Lt. Lat view,Radiolgy & Imaging,1000,id 2706 = 800 | id 4543 = 1000
+X-Ray of Chest for Rib Right Side (Oblique View),Radiolgy & Imaging,500,id 2532 = 400 | id 4370 = 500
+X-Ray of Chest left lateral decubitus view,Radiolgy & Imaging,500,id 2533 = 400 | id 4371 = 500
+X-Ray of Chest left lateral view,Radiolgy & Imaging,500,id 2534 = 400 | id 4372 = 500
+X-Ray of Chest right lateral decubitus view,Radiolgy & Imaging,500,id 2538 = 400 | id 4376 = 500
+X-Ray of Chest right lateral view,Radiolgy & Imaging,500,id 2539 = 400 | id 4377 = 500
+X-Ray of Clavical (B/V),Radiolgy & Imaging,1000,id 2711 = 800 | id 4548 = 1000
+X-Ray of Coccyx Bone Both View,Radiolgy & Imaging,1000,id 2712 = 800 | id 4549 = 1000
+X-Ray of Cone both Lat view of lumbo secral joint,Radiolgy & Imaging,1800,id 2713 = 800 | id 4550 = 1800
+X-Ray of Cone down Lateral View,Radiolgy & Imaging,500,id 2540 = 400 | id 4378 = 500
+X-Ray of Dorsal (Thoracic) spine AP & Lateral View,Radiolgy & Imaging,1000,id 2715 = 800 | id 4552 = 1000
+X-Ray of Dorsal (Thoracic) spine AP View,Radiolgy & Imaging,500,id 2541 = 400 | id 4379 = 500
+"X-Ray of Dorsal (Thoracic) spine AP, Lateral & Both oblique View",Radiolgy & Imaging,2000,id 2846 = 1600 | id 4683 = 2000
+"X-Ray of Dorsal (Thoracic) spine AP, Lateral & One oblique View",Radiolgy & Imaging,1500,id 2816 = 1200 | id 4653 = 1500
+X-Ray of Dorsal (Thoracic) spine Lateral View,Radiolgy & Imaging,500,id 2542 = 400 | id 4380 = 500
+X-Ray of Dorsal Spine both Lateral view,Radiolgy & Imaging,1000,id 2716 = 800 | id 4553 = 1000
+X-Ray of Dorsal Spine both Oblique view,Radiolgy & Imaging,1000,id 2717 = 800 | id 4554 = 1000
+X-Ray of Dorso Lumber (Thoraco-Lumber) Spine AP View,Radiolgy & Imaging,500,id 2544 = 400 | id 4382 = 500
+X-Ray of Dorso lumber ( Thoraco-Lumber ) Spine AP View,Radiolgy & Imaging,500,id 2543 = 400 | id 4381 = 500
+X-Ray of Dorso lumber (Thoraco-Lumber) spine (B/V) AP & Lateral View(874),Radiolgy & Imaging,1000,id 2718 = 800 | id 4555 = 1000
+X-Ray of Dorso lumber (Thoraco-Lumber) spine Lateral View,Radiolgy & Imaging,500,id 2545 = 400 | id 4383 = 500
+X-Ray of Dorso-Lumbar spine both lateral view,Radiolgy & Imaging,1000,id 2719 = 800 | id 4556 = 1000
+X-Ray of Dorso-Lumbar spine both oblique view,Radiolgy & Imaging,1000,id 2720 = 800 | id 4557 = 1000
+"X-Ray of Dorso-Lumber AP, Lat & Oblique View",Radiolgy & Imaging,1800,id 2847 = 1600 | id 4684 = 1800
+X-Ray of Face,Radiolgy & Imaging,500,id 2546 = 400 | id 4384 = 500
+X-Ray of Hysterosalpingography,Radiolgy & Imaging,2500,id 2865 = 2000 | id 4702 = 2500
+X-Ray of I. A. M. Perorbital view,Radiolgy & Imaging,500,id 2548 = 400 | id 4386 = 500
+X-Ray of I. V. U. with M. C. U.,Radiolgy & Imaging,3000,id 2884 = 2500 | id 4721 = 3000
+X-Ray of Invertogram,Radiolgy & Imaging,500,id 2549 = 400 | id 4387 = 500
+X-Ray of Invertogram (Plain abdomen erect lateral with legs uo),Radiolgy & Imaging,600,id 2550 = 400 | id 4388 = 600
+X-Ray of Knee joint oblique view RT (ONE FILM),Radiolgy & Imaging,500,id 2551 = 400 | id 4389 = 500
+X-Ray of L/S Spine Both Oblique View,Radiolgy & Imaging,1000,id 2722 = 800 | id 4559 = 1000
+X-Ray of L/S Spine Left Oblique View,Radiolgy & Imaging,500,id 2552 = 400 | id 4390 = 500
+X-Ray of L/S Spine Rt. Oblique View,Radiolgy & Imaging,500,id 2553 = 400 | id 4391 = 500
+"X-Ray of L/S spine AP,Lat,Flexion,Extension, & Rt. oblique view",Radiolgy & Imaging,2500,id 2867 = 2000 | id 4704 = 2500
+X-Ray of L/S spine Ap & Both Lat view,Radiolgy & Imaging,1500,id 2817 = 1200 | id 4654 = 1500
+"X-Ray of L/S, Spine both lateral view",Radiolgy & Imaging,1000,id 2723 = 800 | id 4560 = 1000
+X-Ray of Left Ankle joint AP & Lateral view,Radiolgy & Imaging,600,id 2554 = 400 | id 4392 = 600
+X-Ray of Left Clavicle AP View,Radiolgy & Imaging,500,id 2555 = 400 | id 4393 = 500
+X-Ray of Left Ear,Radiolgy & Imaging,500,id 2556 = 400 | id 4394 = 500
+X-Ray of Left Elbow joint AP & Lateral view,Radiolgy & Imaging,600,id 2557 = 400 | id 4395 = 600
+"X-Ray of Left Elbow joint AP, Lat. & oblique view",Radiolgy & Imaging,1000,id 2558 = 400 | id 4396 = 1000
+X-Ray of Left Foot AP & Oblique View (B/V),Radiolgy & Imaging,600,id 2559 = 400 | id 4397 = 600
+X-Ray of Left Hand AP & Lateral View,Radiolgy & Imaging,600,id 2562 = 400 | id 4400 = 600
+X-Ray of Left Hand PA & Oblique View,Radiolgy & Imaging,600,id 2563 = 400 | id 4401 = 600
+X-Ray of Left Hip joint oblique view,Radiolgy & Imaging,500,id 2567 = 400 | id 4405 = 500
+X-Ray of Left Humerus (Arm) AP & Lat. View including Shoulder joint(One Film),Radiolgy & Imaging,1000,id 2726 = 800 | id 4563 = 1000
+X-Ray of Left Humerus (Arm)AP &Lat.View including Shoulder &Elbow joint(One Film),Radiolgy & Imaging,1000,id 2727 = 800 | id 4564 = 1000
+X-Ray of Left Leg (Tibia & Fibula) including Knee & Ankle joint,Radiolgy & Imaging,600,id 2729 = 800 | id 4566 = 600
+X-Ray of Left Leg including ankle joint AP & Lat view,Radiolgy & Imaging,900,id 2730 = 800 | id 4567 = 900
+X-Ray of Left Leg including knee joint AP & Lat view,Radiolgy & Imaging,1000,id 2731 = 800 | id 4568 = 1000
+X-Ray of Left Scapula AP & Lateral view with shoulder joint,Radiolgy & Imaging,1000,id 2733 = 800 | id 4570 = 1000
+X-Ray of Left Scapula AP view,Radiolgy & Imaging,500,id 2569 = 400 | id 4407 = 500
+X-Ray of Left T.M. Joint open & close Mouth,Radiolgy & Imaging,1000,id 2734 = 800 | id 4571 = 1000
+X-Ray of Left Thigh (femur) AP & Lateral view including Knee joint,Radiolgy & Imaging,1000,id 2735 = 800 | id 4572 = 1000
+X-Ray of Left Thigh (femur) AP& Lateral view inclu.hip joint in one film,Radiolgy & Imaging,1000,id 2737 = 800 | id 4574 = 1000
+X-Ray of Left Thigh (femur)AP& Lateral view inclu.Knee joint in one film,Radiolgy & Imaging,1000,id 2738 = 800 | id 4575 = 1000
+X-Ray of Left Thigh (femur)AP& Lateral view including hip joint,Radiolgy & Imaging,1000,id 2739 = 800 | id 4576 = 1000
+X-Ray of Left Thumb B/V,Radiolgy & Imaging,500,id 2571 = 400 | id 4409 = 500
+"X-Ray of Left Wrist joint AP, Lateral View & Oblique view",Radiolgy & Imaging,1000,id 2572 = 400 | id 4410 = 1000
+X-Ray of Left hip joint AP & Lateral View(One Film),Radiolgy & Imaging,1000,id 2725 = 800 | id 4562 = 1000
+X-Ray of Left hip joint AP View,Radiolgy & Imaging,500,id 2565 = 400 | id 4403 = 500
+X-Ray of Left knee joint (B/V) AP & Lateral view,Radiolgy & Imaging,600,id 2568 = 400 | id 4406 = 600
+"X-Ray of Left knee joint AP, Lateral & Skyline view",Radiolgy & Imaging,1000,id 2728 = 800 | id 4565 = 1000
+"X-Ray of Left knee joint AP, Lateral, Skyline & Intercondylar view",Radiolgy & Imaging,2000,id 2818 = 1200 | id 4655 = 2000
+"X-Ray of Left lower jaw AP, Lat & Oblique view",Radiolgy & Imaging,1500,id 2819 = 1200 | id 4656 = 1500
+X-Ray of Left shoulder joint AP View,Radiolgy & Imaging,500,id 2662 = 450 | id 4499 = 500
+X-Ray of Left sub-mandibular gland lateral oblique view,Radiolgy & Imaging,500,id 2570 = 400 | id 4408 = 500
+X-Ray of Lower Limb AP,Radiolgy & Imaging,1000,id 2740 = 800 | id 4577 = 1000
+X-Ray of Lt. Foot AP & Lat. View,Radiolgy & Imaging,600,id 2574 = 400 | id 4412 = 600
+X-Ray of Lt. Foot including ankle joint (B/V),Radiolgy & Imaging,1000,id 2743 = 800 | id 4580 = 1000
+X-Ray of Lt. Foot including heel lat view,Radiolgy & Imaging,600,id 2575 = 400 | id 4413 = 600
+X-Ray of Lt. Heel with Ankle AP and Lat View,Radiolgy & Imaging,1000,id 2744 = 800 | id 4581 = 1000
+X-Ray of Lt. Index Finger AP & Lat View,Radiolgy & Imaging,600,id 2576 = 400 | id 4414 = 600
+"X-Ray of Lt. Knee Joint AP, Lat in weight bearing position",Radiolgy & Imaging,900,id 2746 = 800 | id 4583 = 900
+"X-Ray of Lt. Knee joint AP, Lat. & Intercondylar view",Radiolgy & Imaging,1000,id 2747 = 800 | id 4584 = 1000
+X-Ray of Lt. Leg AP & Lateral view (Child),Radiolgy & Imaging,600,id 2577 = 400 | id 4415 = 600
+X-Ray of Lt. Little Finger AP & Lat View,Radiolgy & Imaging,600,id 2578 = 400 | id 4416 = 600
+X-Ray of Lt. Patella Axial View,Radiolgy & Imaging,500,id 2580 = 400 | id 4418 = 500
+X-Ray of Lt. Ring Finger AP & Lat View,Radiolgy & Imaging,600,id 2581 = 400 | id 4419 = 600
+X-Ray of Lt. Shoulder Joint AP & Lateral View,Radiolgy & Imaging,1000,id 2748 = 800 | id 4585 = 1000
+"X-Ray of Lt. Shoulder joint AP, Lat. & oblique view",Radiolgy & Imaging,1500,id 2820 = 1200 | id 4657 = 1500
+X-Ray of Lt. Thight AP & Lateral view (Child),Radiolgy & Imaging,600,id 2582 = 400 | id 4420 = 600
+X-Ray of Lumber Spine AP View,Radiolgy & Imaging,500,id 2583 = 400 | id 4421 = 500
+"X-Ray of Lumber Spine AP, Lat & Both Oblique View",Radiolgy & Imaging,2000,id 2848 = 1600 | id 4685 = 2000
+X-Ray of Lumber Spine lateral view,Radiolgy & Imaging,500,id 2584 = 400 | id 2585 = 400 | id 4422 = 500 | id 4423 = 500
+X-Ray of Lumber spine (B/V) AP & Lateral View,Radiolgy & Imaging,1000,id 2749 = 800 | id 4586 = 1000
+X-Ray of Lumbo Sacral Spine P/A view,Radiolgy & Imaging,500,id 2586 = 400 | id 4424 = 500
+X-Ray of Lumbo-Secral Spine Both Oblique View,Radiolgy & Imaging,100,id 2752 = 800 | id 4589 = 100
+X-Ray of Lumbo-sacral spine AP & Both oblique View,Radiolgy & Imaging,1500,id 2822 = 1200 | id 4659 = 1500
+X-Ray of Lumbo-sacral spine AP View,Radiolgy & Imaging,500,id 2587 = 400 | id 4425 = 500
+X-Ray of Lumbo-sacral spine Lateral View,Radiolgy & Imaging,500,id 2588 = 400 | id 4426 = 500
+"X-Ray of Lumbo-sacral spine PA, Lateral & Both oblique View",Radiolgy & Imaging,2000,id 2849 = 1600 | id 4686 = 2000
+"X-Ray of Lumbo-sacral spine PA, Lateral & One oblique View",Radiolgy & Imaging,1500,id 2823 = 1200 | id 4660 = 1500
+X-Ray of Lumbo-sacral spine flexion and extension View,Radiolgy & Imaging,1000,id 2751 = 800 | id 4588 = 1000
+X-Ray of Mandible PA & both lateral oblique view,Radiolgy & Imaging,1500,id 2824 = 1200 | id 4661 = 1500
+X-Ray of Mandible PA & left lateral oblique view,Radiolgy & Imaging,1000,id 2754 = 800 | id 4591 = 1000
+X-Ray of Mandible PA & right lateral oblique view,Radiolgy & Imaging,1000,id 2755 = 800 | id 4592 = 1000
+X-Ray of Mandible PA view,Radiolgy & Imaging,500,id 2590 = 400 | id 4428 = 500
+X-Ray of Mandible both lateral oblique view,Radiolgy & Imaging,1000,id 2753 = 800 | id 4590 = 1000
+X-Ray of Mandible left lateral oblique view,Radiolgy & Imaging,500,id 2589 = 400 | id 4427 = 500
+X-Ray of Mandible right lateral oblique view,Radiolgy & Imaging,500,id 2591 = 400 | id 4429 = 500
+X-Ray of Mastoid AP oblique & Lateral Oblique view left side,Radiolgy & Imaging,1000,id 2756 = 800 | id 4593 = 1000
+X-Ray of Mastoid AP oblique & Lateral Oblique view right side,Radiolgy & Imaging,1000,id 2757 = 800 | id 4594 = 1000
+X-Ray of Mastoid Towens View(S),Radiolgy & Imaging,500,id 2592 = 400 | id 4430 = 500
+X-Ray of Mastoid Townes & Stenverse View,Radiolgy & Imaging,1000,id 2758 = 800 | id 4595 = 1000
+X-Ray of Mastoid Townes (B/V),Radiolgy & Imaging,1000,id 2759 = 800 | id 4596 = 1000
+"X-Ray of Maxilla, Left Lateral oblique view",Radiolgy & Imaging,500,id 2594 = 400 | id 4432 = 500
+"X-Ray of Maxilla, Right Lateral oblique view",Radiolgy & Imaging,500,id 2595 = 400 | id 4433 = 500
+X-Ray of Mortise view (one film),Radiolgy & Imaging,500,id 2596 = 400 | id 4434 = 500
+X-Ray of Nasal Bones both lateral view,Radiolgy & Imaging,500,id 2597 = 400 | id 4435 = 500
+X-Ray of Nasopharynx lateral view for soft tissues/adenoid,Radiolgy & Imaging,500,id 2598 = 400 | id 4436 = 500
+X-Ray of Neck AP & Lateral View,Radiolgy & Imaging,1000,id 2760 = 800 | id 4597 = 1000
+X-Ray of Neck lateral view for soft tissue/Nasopharynx,Radiolgy & Imaging,500,id 2599 = 400 | id 4437 = 500
+X-Ray of Neck of Cervical Ribs,Radiolgy & Imaging,500,id 2600 = 400 | id 4438 = 500
+X-Ray of Occlusal view for lower jaw (Mandible),Radiolgy & Imaging,600,id 2663 = 500 | id 4500 = 600
+X-Ray of Occlusal view of maxilla,Radiolgy & Imaging,700,id 2665 = 500 | id 4502 = 700
+X-Ray of Optic foramen,Radiolgy & Imaging,500,id 2601 = 400 | id 4439 = 500
+X-Ray of Orbit B/V,Radiolgy & Imaging,1000,id 2910 = 600 | id 4747 = 1000
+X-Ray of P. T. C.,Radiolgy & Imaging,1800,id 2841 = 1500 | id 4678 = 1800
+X-Ray of P.N.S. O/M & Lateral view,Radiolgy & Imaging,1000,id 2761 = 800 | id 4598 = 1000
+X-Ray of P.N.S. O/M view,Radiolgy & Imaging,500,id 2602 = 400 | id 4440 = 500
+X-Ray of Pelvis AP & Both Hip joint Letaral View,Radiolgy & Imaging,1500,id 2825 = 1200 | id 4662 = 1500
+X-Ray of Pelvis AP & Lateral View with Both hip joint,Radiolgy & Imaging,1500,id 2826 = 1200 | id 4663 = 1500
+X-Ray of Pelvis AP View ( Frog-Leg Position-Adult),Radiolgy & Imaging,600,id 2666 = 500 | id 4503 = 600
+X-Ray of Pelvis AP View ( Frog-Leg Position-Child),Radiolgy & Imaging,500,id 2603 = 400 | id 4441 = 500
+X-Ray of Pelvis AP with Both hip joint AP View(One Film),Radiolgy & Imaging,600,id 2762 = 800 | id 4599 = 600
+X-Ray of Pelvis Both Oblique view,Radiolgy & Imaging,1000,id 2763 = 800 | id 4600 = 1000
+X-Ray of Pelvis Lateral View,Radiolgy & Imaging,800,id 2604 = 400 | id 4442 = 800
+X-Ray of Pelvis erect lat view for CPD,Radiolgy & Imaging,900,id 2764 = 800 | id 4601 = 900
+X-Ray of Pelvis erect posture,Radiolgy & Imaging,900,id 2667 = 500 | id 4504 = 900
+X-Ray of Plain Abdomen AP & Lat. View,Radiolgy & Imaging,1350,id 2827 = 1200 | id 4664 = 1350
+X-Ray of Plain Abdomen AP View,Radiolgy & Imaging,700,id 2669 = 500 | id 4506 = 700
+X-Ray of Plain Abdomen AP View (Child),Radiolgy & Imaging,500,id 2606 = 400 | id 4444 = 500
+X-Ray of Plain Abdomen Erect View including Diaphragm,Radiolgy & Imaging,700,id 2670 = 500 | id 4507 = 700
+X-Ray of Plain Abdomen Lateral View,Radiolgy & Imaging,700,id 2671 = 500 | id 4508 = 700
+X-Ray of Plain KUB (Children below 10 yrs) one film,Radiolgy & Imaging,500,id 2607 = 400 | id 4445 = 500
+X-Ray of Plain KUB AP & Lateral View,Radiolgy & Imaging,1350,id 2828 = 1200 | id 4665 = 1350
+X-Ray of Plain KUB AP View,Radiolgy & Imaging,700,id 2672 = 500 | id 4509 = 700
+X-Ray of Plain KUB AP View and Lumber Spine lat-View,Radiolgy & Imaging,1350,id 2829 = 1200 | id 4666 = 1350
+X-Ray of Plain KUB Erect View (Standing),Radiolgy & Imaging,700,id 2673 = 500 | id 4510 = 700
+X-Ray of Right Ankle joint AP & Lateral view,Radiolgy & Imaging,600,id 2608 = 400 | id 4446 = 600
+X-Ray of Right Clavicle AP View,Radiolgy & Imaging,500,id 2609 = 400 | id 4447 = 500
+X-Ray of Right Elbow joint AP & Lateral view,Radiolgy & Imaging,600,id 2610 = 400 | id 4448 = 600
+X-Ray of Right Foot AP & Oblique View (B/V),Radiolgy & Imaging,600,id 2612 = 400 | id 4450 = 600
+X-Ray of Right Forearm (Radius&Ulna) AP & Lat.View including Elbow joint,Radiolgy & Imaging,900,id 2613 = 400 | id 4451 = 900
+X-Ray of Right Forearm (Radius&Ulna) AP & Lat.View including Wrist joint,Radiolgy & Imaging,900,id 2614 = 400 | id 4452 = 900
+X-Ray of Right Forearm(Radius&Ulna)AP &Lat.View inclu.Elbow &Wrist joint,Radiolgy & Imaging,900,id 2615 = 400 | id 4453 = 900
+X-Ray of Right Hand AP & Lateral View,Radiolgy & Imaging,600,id 2616 = 400 | id 4454 = 600
+X-Ray of Right Hand PA & Oblique View,Radiolgy & Imaging,600,id 2617 = 400 | id 4455 = 600
+X-Ray of Right Heel (Calcaneum) Axial & Lateral View,Radiolgy & Imaging,600,id 2618 = 400 | id 4456 = 600
+X-Ray of Right Humerus (Arm) AP & Lat. View including Shoulder joint(One Film),Radiolgy & Imaging,1000,id 2768 = 800 | id 4605 = 1000
+X-Ray of Right Humerus(Arm)AP &Lat.View including Shoulder&Elbow joint(One Film),Radiolgy & Imaging,1000,id 2769 = 800 | id 4606 = 1000
+X-Ray of Right Leg (Tibia & Fibula) including Knee & Ankle joint,Radiolgy & Imaging,600,id 2771 = 800 | id 4608 = 600
+X-Ray of Right Leg including ankle joint AP & Lat view,Radiolgy & Imaging,1000,id 2772 = 800 | id 4609 = 1000
+X-Ray of Right Leg including knee joint AP & Lat view,Radiolgy & Imaging,1000,id 2773 = 800 | id 4610 = 1000
+X-Ray of Right S/C joint AP & Oblique view,Radiolgy & Imaging,900,id 2774 = 800 | id 4611 = 900
+X-Ray of Right Scapula AP & Lateral view with shoulder joint,Radiolgy & Imaging,1000,id 2775 = 800 | id 4612 = 1000
+X-Ray of Right Scapula AP view,Radiolgy & Imaging,500,id 2622 = 400 | id 4460 = 500
+X-Ray of Right T.M. Joint open & close Mouth,Radiolgy & Imaging,1000,id 2776 = 800 | id 4613 = 1000
+X-Ray of Right Thigh (femur) AP & Lateral view including Knee joint,Radiolgy & Imaging,1000,id 2778 = 800 | id 4615 = 1000
+X-Ray of Right Thigh (femur) AP & Lateral view including hip joint,Radiolgy & Imaging,1000,id 2777 = 800 | id 4614 = 1000
+X-Ray of Right Thigh (femur) AP&Lateral view inclu. Knee joint in 1 film,Radiolgy & Imaging,1000,id 2779 = 800 | id 4616 = 1000
+X-Ray of Right Wrist Joint PA & Lateral View,Radiolgy & Imaging,600,id 2627 = 400 | id 4465 = 600
+"X-Ray of Right Wrist joint AP, Lateral View & Oblique view",Radiolgy & Imaging,1000,id 2626 = 400 | id 4464 = 1000
+X-Ray of Right hip joint AP & Lateral View (one Film),Radiolgy & Imaging,1000,id 2767 = 800 | id 4604 = 1000
+X-Ray of Right hip joint AP View,Radiolgy & Imaging,500,id 2619 = 400 | id 4457 = 500
+X-Ray of Right knee joint (B/V) AP & Lateral view,Radiolgy & Imaging,600,id 2621 = 400 | id 4459 = 600
+"X-Ray of Right knee joint AP, Lateral & Skyline view",Radiolgy & Imaging,1000,id 2770 = 800 | id 4607 = 1000
+"X-Ray of Right knee joint AP, Lateral, Skyline & Intercondylar view",Radiolgy & Imaging,1500,id 2830 = 1200 | id 4667 = 1500
+X-Ray of Right shoulder joint AP View,Radiolgy & Imaging,500,id 2623 = 400 | id 4461 = 500
+X-Ray of Right sub-mandibular gland lateral oblique view,Radiolgy & Imaging,500,id 2624 = 400 | id 4462 = 500
+X-Ray of Rt. Arm AP & Lateral View,Radiolgy & Imaging,600,id 2780 = 800 | id 4617 = 600
+X-Ray of Rt. Foot AP & Lat. View,Radiolgy & Imaging,600,id 2628 = 400 | id 4466 = 600
+X-Ray of Rt. Foot including ankle joint (B/V),Radiolgy & Imaging,1000,id 2781 = 800 | id 4618 = 1000
+X-Ray of Rt. Foot including heel lat view,Radiolgy & Imaging,600,id 2629 = 400 | id 4467 = 600
+X-Ray of Rt. Heel with Ankle AP and Lat View,Radiolgy & Imaging,1000,id 2782 = 800 | id 4619 = 1000
+X-Ray of Rt. Index Finger AP & Lat View,Radiolgy & Imaging,600,id 2630 = 400 | id 4468 = 600
+X-Ray of Rt. Knee Joint AP & Lat View (Standing Position),Radiolgy & Imaging,600,id 2783 = 800 | id 4620 = 600
+"X-Ray of Rt. Knee Joint AP, Lat in weight bearing position",Radiolgy & Imaging,1000,id 2784 = 800 | id 4621 = 1000
+"X-Ray of Rt. Knee joint AP, Lat. & Intercondylar view",Radiolgy & Imaging,1000,id 2785 = 800 | id 4622 = 1000
+X-Ray of Rt. Leg AP & Lateral view (Child),Radiolgy & Imaging,600,id 2631 = 400 | id 4469 = 600
+X-Ray of Rt. Little Finger AP & Lat View,Radiolgy & Imaging,600,id 2632 = 400 | id 4470 = 600
+X-Ray of Rt. Middle Finger AP & Lateral View,Radiolgy & Imaging,600,id 2633 = 400 | id 4471 = 600
+"X-Ray of Rt. Middle finger AP, Lat view",Radiolgy & Imaging,600,id 2634 = 400 | id 4472 = 600
+X-Ray of Rt. Orbit AP & Lateral (Up & Down),Radiolgy & Imaging,1000,id 2786 = 600 | id 4623 = 1000
+X-Ray of Rt. Patella Axial View,Radiolgy & Imaging,500,id 2635 = 400 | id 4473 = 500
+X-Ray of Rt. Ring Finger AP & Lat View,Radiolgy & Imaging,600,id 2636 = 400 | id 4474 = 600
+"X-Ray of Rt. Shoulder AP, Lat & Oblique view",Radiolgy & Imaging,1500,id 2831 = 1200 | id 4668 = 1500
+X-Ray of Rt. Shoulder Joint AP & Lateral View,Radiolgy & Imaging,1000,id 2787 = 800 | id 4624 = 1000
+X-Ray of Rt. Thigh AP & Lateral view (Child),Radiolgy & Imaging,500,id 2637 = 400 | id 4475 = 500
+X-Ray of S. I. Joint (B/V),Radiolgy & Imaging,1000,id 2788 = 800 | id 4625 = 1000
+X-Ray of S. I. Joint Both oblique view,Radiolgy & Imaging,1000,id 2789 = 800 | id 4626 = 1000
+X-Ray of S. I. Joint PA view,Radiolgy & Imaging,500,id 2638 = 400 | id 4476 = 500
+X-Ray of Sacro-Coccygeal spine AP & Lateral View,Radiolgy & Imaging,1000,id 2790 = 800 | id 4627 = 1000
+X-Ray of Sacro-Coccygeal spine Lateral View,Radiolgy & Imaging,500,id 2639 = 400 | id 4477 = 500
+X-Ray of Scaphoid view for wrist joint,Radiolgy & Imaging,500,id 2640 = 400 | id 4478 = 500
+X-Ray of Scapula Lateral View,Radiolgy & Imaging,500,id 2641 = 400 | id 2643 = 400 | id 4479 = 500 | id 4481 = 500
+X-Ray of Scapula Oblique View,Radiolgy & Imaging,500,id 2642 = 400 | id 4480 = 500
+X-Ray of Scoliogram (one film),Radiolgy & Imaging,600,id 2674 = 500 | id 4511 = 600
+X-Ray of Sinus (PNS),Radiolgy & Imaging,500,id 2644 = 400 | id 4482 = 500
+X-Ray of Skull AP & Lateral view,Radiolgy & Imaging,1000,id 2791 = 800 | id 4628 = 1000
+X-Ray of Skull AP Rt. and Lt. Lat view,Radiolgy & Imaging,1500,id 2833 = 1200 | id 4670 = 1500
+X-Ray of Skull AP View,Radiolgy & Imaging,500,id 2645 = 400 | id 4483 = 500
+X-Ray of Skull Lateral view,Radiolgy & Imaging,500,id 2651 = 400 | id 4488 = 500
+X-Ray of Skull Left Lat view,Radiolgy & Imaging,500,id 2652 = 400 | id 4489 = 500
+X-Ray of Skull PA & Lateral view,Radiolgy & Imaging,1000,id 2792 = 800 | id 4629 = 1000
+X-Ray of Skull Right Lat view,Radiolgy & Imaging,500,id 2653 = 400 | id 4490 = 500
+X-Ray of Skull Transorbital PA view for internal auditory canal,Radiolgy & Imaging,500,id 2655 = 400 | id 4492 = 500
+X-Ray of Skull for Sella Turcica/Pituitary Fossa Cone down view,Radiolgy & Imaging,500,id 2647 = 400 | id 4485 = 500
+X-Ray of Skull for Sella Turcica/Pituitary Fossa Lateral view,Radiolgy & Imaging,500,id 2648 = 400 | id 4486 = 500
+X-Ray of Skull silla tursica both view,Radiolgy & Imaging,500,id 2654 = 400 | id 4491 = 500
+X-Ray of Skull with Mandible AP view,Radiolgy & Imaging,500,id 2656 = 400 | id 4493 = 500
+X-Ray of Spinal colum B/V,Radiolgy & Imaging,2000,id 2850 = 1600 | id 4687 = 2000
+X-Ray of Sternum Oblique & lateral View,Radiolgy & Imaging,1000,id 2793 = 800 | id 4630 = 1000
+X-Ray of Submento vertical view,Radiolgy & Imaging,500,id 2484 = 400 | id 2657 = 400 | id 4323 = 500 | id 4494 = 500
+X-Ray of Tendo Achilies/Tendo Calcaneum (Only Lateral View),Radiolgy & Imaging,500,id 2482 = 400 | id 2658 = 400 | id 4321 = 500 | id 4495 = 500
+X-Ray of Trans Orbital Patrus view,Radiolgy & Imaging,500,id 2481 = 400 | id 2659 = 400 | id 4320 = 500 | id 4496 = 500
+X-Ray of Upper Limb AP,Radiolgy & Imaging,1000,id 2480 = 800 | id 2794 = 800 | id 4319 = 1000 | id 4631 = 1000
+X-Ray of Upper Limb Lateral,Radiolgy & Imaging,1000,id 2479 = 800 | id 2795 = 800 | id 4318 = 1000 | id 4632 = 1000
+X-Ray of Whole Spine,Radiolgy & Imaging,2000,id 2478 = 2400 | id 2877 = 2400 | id 4317 = 2000 | id 4714 = 2000
+X-ray of Pelvis AP & Inlet & Outlet view,Radiolgy & Imaging,1000,id 2838 = 1200 | id 4675 = 1000

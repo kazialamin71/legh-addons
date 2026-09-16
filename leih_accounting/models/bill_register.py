@@ -50,14 +50,21 @@ class BillRegister(models.Model):
 
     # ---------------------------------------------------------------- hooks
     def bill_confirm(self):
-        res = super().bill_confirm()
+        # Revenue first: confirm now also receipts the counter's "Paid Now",
+        # and that receipt credits the receivable this entry raises. Posting
+        # the other way round leaves the two moves reading backwards on the
+        # ledger.
         self._acc_post_revenue()
-        return res
+        return super().bill_confirm()
 
     def bill_cancel(self):
         res = super().bill_cancel()
         cfg = self.env['leih.accounting.config']._get()
-        cfg._reverse(self.acc_move_ids)
+        # Keep the reversals on the bill: orphaned, they are impossible to trace
+        # back from the document whose entries they undo.
+        reversals = cfg._reverse(self.acc_move_ids)
+        if reversals:
+            self.acc_move_ids = [(4, mv.id) for mv in reversals]
         return res
 
     def _register_payment(self, amount, payment_type=None, date=None, card_no=None, bank_name=None):

@@ -1,7 +1,7 @@
 {
     'name': 'LEIS Migrated Models',
     'summary': 'Odoo 19 (fields only)',
-    'version': '19.0.6',
+    'version': '19.0.7',
     'sequence': 100,
     'author': 'Mufti Muntasir Ahmed',
     'depends': ['base', 'hr', 'account', 'stock'],
@@ -16,6 +16,7 @@
         'views/lab_antibiotic_views.xml',
         'views/lab_specimen_views.xml',
         'views/examination_result_views.xml',
+        'views/res_company_views.xml',
         'views/lab_print_confirm_views.xml',
         'views/add_bill_views.xml',
         'views/admission_charge_item_views.xml',
@@ -107,6 +108,20 @@
         'data/lab_antibiotic_data.xml',
         'data/sample_test_data.xml',
         'data/mantoux_test_data.xml',
+        'data/reference_test_catalogue.xml',
+        # Lab catalogue lifted from the legacy Odoo 8 database (GM): the 185
+        # tests it had that this one did not, with their components, units and
+        # reference values. Departments, sample types and tube colours are
+        # referenced by this database's own names, so nothing is duplicated.
+        'data/examination.entry-gm.csv',
+        'data/examination.entry.line-gm.csv',
+        # Imaging from the same legacy database, deduplicated: it listed many
+        # studies two to four times over, often at different prices. One row per
+        # study is kept, at the most recently created record's rate; every
+        # disagreement is listed in data/imaging_rate_conflicts.csv for pricing
+        # to settle. That report is documentation, not loaded data.
+        'data/examination.entry-gm-imaging.csv',
+        'data/xray_report_templates.xml',
         'reports/report_styles.xml',
         'reports/patient_id_card_report.xml',
         'reports/examination_result_report.xml',

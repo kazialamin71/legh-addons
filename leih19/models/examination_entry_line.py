@@ -16,6 +16,10 @@ class ExaminationEntryLine(models.Model):
     # --- Component configuration (Phase 1) ---
     sequence = fields.Integer('Sequence', default=10)
     uom = fields.Char('Unit')
+    method_id = fields.Many2one(
+        'lab.method', string='Method',
+        help='Method printed on this component\'s row (ELISA, Photometry, '
+             'Calculation...). Falls back to the method of the result itself.')
     result_type = fields.Selection(
         [('numeric', 'Numeric'),
          ('text', 'Free Text'),
@@ -32,6 +36,30 @@ class ExaminationEntryLine(models.Model):
     is_group_header = fields.Boolean(
         'Group Header',
         help='Tick to render this line as a bold section header instead of an editable component.',
+    )
+
+    # --- Printed shape of the component (Special Form layout) ---
+    # Three primitives cover the bespoke assay slips - a bordered panel, a row
+    # of readings side by side, and one emphasised verdict - so a new form of
+    # that kind is catalogue configuration rather than another QWeb template.
+    print_style = fields.Selection(
+        [('row', 'Label / Value Row'),
+         ('band', 'Side by Side in a Band'),
+         ('verdict', 'Boxed Verdict')],
+        string='Print Style', default='row', required=True,
+        help='How this component prints on a Special Form report.\n'
+             '- Label / Value Row: the usual label left, value right.\n'
+             '- Side by Side in a Band: shares one horizontal band with the '
+             'other Band components of its group, label above value (the three '
+             'tube readings of a QuantiFERON assay).\n'
+             '- Boxed Verdict: the line the clinician acts on, printed large in '
+             'its own box (Final Result: POSITIVE).',
+    )
+    panel_boxed = fields.Boolean(
+        'Draw Panel Border',
+        help='On a Group Header: draw a border around that header and every '
+             'component under it, the way the house QuantiFERON slip boxes its '
+             'assay panel.',
     )
 
     # --- Conditional rendering between lines (e.g. show Antibiogram only if Growth) ---
@@ -51,6 +79,13 @@ class ExaminationEntryLine(models.Model):
     )
 
     # --- Numeric reference range + critical thresholds for auto-flagging ---
+    decimals = fields.Integer(
+        'Printed Decimals',
+        help='Fixed decimal places for a numeric result on the printed report: '
+             '2 prints a nil tube reading of 2 as "2.00", the way the assay '
+             'reports it. Leave at 0 to print the value as entered, trailing '
+             'zeros dropped.')
+
     ref_low = fields.Float('Normal Range Low')
     ref_high = fields.Float('Normal Range High')
     critical_low = fields.Float('Critical Low')

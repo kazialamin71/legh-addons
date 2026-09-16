@@ -1,0 +1,698 @@
+id,name,department,rate,required_time,category,sample_req,individual,manual,merge,dependency,lab_not_required,indoor
+gm_img_1443,Ct 3d Imaging,CT Scan,7200,1,radiology,False,False,False,False,False,True,False
+gm_img_1445,Ct Abdomen,CT Scan,1350,1,radiology,False,False,False,False,False,True,False
+gm_img_3342,Ct Abdomen Angiogram,CT Scan,13500,1,radiology,False,False,False,False,False,True,False
+gm_img_1446,Ct Angio Calcium Score,CT Scan,2250,1,radiology,False,False,False,False,False,True,False
+gm_img_1447,Ct Angio Lower Limb,CT Scan,13500,1,radiology,False,False,False,False,False,True,False
+gm_img_3328,CT Angio of Aortogram,CT Scan,12000,1,radiology,False,False,False,False,False,True,False
+gm_img_3320,CT Angio of Brain,CT Scan,10000,1,radiology,False,False,False,False,False,True,False
+gm_img_3321,CT Angio of Brain & Neck Vessel,CT Scan,14000,1,radiology,False,False,False,False,False,True,False
+gm_img_3323,CT Angio of Cardiac,CT Scan,12000,1,radiology,False,False,False,False,False,True,False
+gm_img_3327,CT Angio of Liver/Three Phase Liver,CT Scan,12000,1,radiology,False,False,False,False,False,True,False
+gm_img_3325,CT Angio of Neck Vessel,CT Scan,10000,1,radiology,False,False,False,False,False,True,False
+gm_img_3329,CT Angio of Peripheral Upper/Lower Limbs,CT Scan,12000,1,radiology,False,False,False,False,False,True,False
+gm_img_3330,CT Angio of Pulmonary Vessel,CT Scan,14000,1,radiology,False,False,False,False,False,True,False
+gm_img_3324,CT Angio of Renal,CT Scan,12000,1,radiology,False,False,False,False,False,True,False
+gm_img_3326,CT Angio of Urogram/ IVU,CT Scan,12000,1,radiology,False,False,False,False,False,True,False
+gm_img_1448,Ct Angio Upper Limb,CT Scan,13500,1,radiology,False,False,False,False,False,True,False
+gm_img_1449,Ct Angiogram Syringe,CT Scan,13500,1,radiology,False,False,False,False,False,True,False
+gm_img_1450,Ct Anglo Ct,CT Scan,2250,1,radiology,False,False,False,False,False,True,False
+gm_img_1451,Ct Base Of Skull,CT Scan,5400,1,radiology,False,False,False,False,False,True,False
+gm_img_1452,Ct Biopsy,CT Scan,9000,1,radiology,False,False,False,False,False,True,False
+gm_img_1453,Ct Both Hip Jt,CT Scan,4500,1,radiology,False,False,False,False,False,True,False
+gm_img_1456,Ct Brain,CT Scan,3600,1,radiology,False,False,False,False,False,True,False
+gm_img_1455,Ct Brain Angiogram,CT Scan,10800,1,radiology,False,False,False,False,False,True,False
+gm_img_1457,Ct C.Spine,CT Scan,5400,1,radiology,False,False,False,False,False,True,False
+gm_img_1458,Ct Carotid Angiogram,CT Scan,13500,1,radiology,False,False,False,False,False,True,False
+gm_img_1459,Ct Chest,CT Scan,5400,1,radiology,False,False,False,False,False,True,False
+gm_img_3331,CT Contrast Angio,CT Scan,14000,1,radiology,False,False,False,False,False,True,False
+gm_img_1460,Ct Coronary Angiogram,CT Scan,13500,1,radiology,False,False,False,False,False,True,False
+gm_img_1461,Ct Dors.Spine,CT Scan,5400,1,radiology,False,False,False,False,False,True,False
+gm_img_1462,Ct Dorsal Spine,CT Scan,5400,1,radiology,False,False,False,False,False,True,False
+gm_img_1463,Ct Ear R/L,CT Scan,5400,1,radiology,False,False,False,False,False,True,False
+gm_img_1464,Ct Elbow Joint Rt./Lt.,CT Scan,5400,1,radiology,False,False,False,False,False,True,False
+gm_img_1465,Ct Face,CT Scan,5400,1,radiology,False,False,False,False,False,True,False
+gm_img_1466,Ct Femur,CT Scan,5400,1,radiology,False,False,False,False,False,True,False
+gm_img_3294,CT guided FNAC,CT Scan,4000,1,radiology,False,False,False,False,False,True,False
+gm_img_1467,Ct L/S.Spine,CT Scan,5400,1,radiology,False,False,False,False,False,True,False
+gm_img_1468,Ct Laryngopharynx,CT Scan,5400,1,radiology,False,False,False,False,False,True,False
+gm_img_1469,Ct Leg,CT Scan,5400,1,radiology,False,False,False,False,False,True,False
+gm_img_1471,Ct Lower Abdomen,CT Scan,5400,1,radiology,False,False,False,False,False,True,False
+gm_img_1470,Ct Lower Abdomen Angiogram,CT Scan,13500,1,radiology,False,False,False,False,False,True,False
+gm_img_1472,Ct Lumber Puncher Screening,CT Scan,1800,1,radiology,False,False,False,False,False,True,False
+gm_img_1473,Ct Mastoid,CT Scan,6000,1,radiology,False,False,False,False,False,True,False
+gm_img_1474,Ct Maxilla,CT Scan,5400,1,radiology,False,False,False,False,False,True,False
+gm_img_1475,Ct Nasopharynx,CT Scan,5400,1,radiology,False,False,False,False,False,True,False
+gm_img_1478,Ct Neck,CT Scan,5850,1,radiology,False,False,False,False,False,True,False
+gm_img_1476,Ct Neck & Brain Angiogram,CT Scan,13500,1,radiology,False,False,False,False,False,True,False
+gm_img_1477,Ct Neck Angiogram,CT Scan,13500,1,radiology,False,False,False,False,False,True,False
+gm_img_1454,Ct Of Brain with Orbit,CT Scan,6000,1,radiology,False,False,False,False,False,True,False
+gm_img_1479,Ct Orbit,CT Scan,5400,1,radiology,False,False,False,False,False,True,False
+gm_img_1480,Ct Para Nasal Sinuses,CT Scan,5400,1,radiology,False,False,False,False,False,True,False
+gm_img_1482,Ct Peripheral Angiogram,CT Scan,13500,1,radiology,False,False,False,False,False,True,False
+gm_img_1483,Ct Pituitary Fossa,CT Scan,5400,1,radiology,False,False,False,False,False,True,False
+gm_img_1484,Ct Pns,CT Scan,5400,1,radiology,False,False,False,False,False,True,False
+gm_img_1485,Ct Post.Fossa,CT Scan,5400,1,radiology,False,False,False,False,False,True,False
+gm_img_1486,Ct Renal Angiogram,CT Scan,13500,1,radiology,False,False,False,False,False,True,False
+gm_img_1487,Ct Right Ear/Left Ear,CT Scan,5400,1,radiology,False,False,False,False,False,True,False
+gm_img_1488,Ct S.I. Joint,CT Scan,5400,1,radiology,False,False,False,False,False,True,False
+gm_img_1489,Ct Salivary Glands,CT Scan,5400,1,radiology,False,False,False,False,False,True,False
+gm_img_3343,Ct Scan Ankle Joint,CT Scan,1500,1,radiology,False,False,False,False,False,True,False
+gm_img_1490,Ct Scan Arm/Fore Arm,CT Scan,5400,1,radiology,False,False,False,False,False,True,False
+gm_img_3311,CT Scan Base of Skull,CT Scan,6000,1,radiology,False,False,False,False,False,True,False
+gm_img_1491,Ct Scan Elbow Joint,CT Scan,6000,1,radiology,False,False,False,False,False,True,False
+gm_img_1492,Ct Scan Face & Neck,CT Scan,6000,1,radiology,False,False,False,False,False,True,False
+gm_img_1493,Ct Scan Foot,CT Scan,5400,1,radiology,False,False,False,False,False,True,False
+gm_img_1494,Ct Scan Hip Joint,CT Scan,5400,1,radiology,False,False,False,False,False,True,False
+gm_img_1495,Ct Scan Knee Joint,CT Scan,5400,1,radiology,False,False,False,False,False,True,False
+gm_img_1496,Ct Scan KUB,CT Scan,11700,1,radiology,False,False,False,False,False,True,False
+gm_img_3344,Ct scan of Biopsy,CT Scan,9000,1,radiology,False,False,False,False,False,True,False
+gm_img_5005,Ct Scan Of Both Ankle,CT Scan,12000,0,radiology,False,False,False,False,False,True,False
+gm_img_3345,Ct scan of Both Hip Jt,CT Scan,4500,1,radiology,False,False,False,False,False,True,False
+gm_img_3295,CT Scan of Brain,CT Scan,4000,1,radiology,False,False,False,False,False,True,False
+gm_img_3300,CT Scan of Brain & Orbit/ P.N.S,CT Scan,6000,1,radiology,False,False,False,False,False,True,False
+gm_img_4920,CT Scan of Brain with PNS/Nose,CT Scan,6000,1,radiology,False,False,False,False,False,True,False
+gm_img_3348,CT Scan of Brain/ HEAD,CT Scan,4000,1,radiology,False,False,False,False,False,True,False
+gm_img_3308,CT Scan of Cervical Spine,CT Scan,6000,1,radiology,False,False,False,False,False,True,False
+gm_img_3296,CT Scan of Chest,CT Scan,6000,1,radiology,False,False,False,False,False,True,False
+gm_img_3303,CT Scan of Chest (HRCT),CT Scan,6000,1,radiology,False,False,False,False,False,True,False
+gm_img_3304,CT Scan of Chest/ Lungs,CT Scan,6000,1,radiology,False,False,False,False,False,True,False
+gm_img_4977,CT Scan of Dorso-lumbar Spine,CT Scan,6000,0,radiology,False,False,False,False,False,True,False
+gm_img_4955,CT Scan of Ear,CT Scan,6000,1,radiology,False,False,False,False,False,True,False
+gm_img_3340,CT Scan of Ear / Mastoid,CT Scan,6000,1,radiology,False,False,False,False,False,True,False
+gm_img_3337,CT Scan Of Face,CT Scan,6000,2,radiology,False,False,False,False,False,True,False
+gm_img_3354,CT Scan of HBS AND PENCREAS,CT Scan,6000,1,radiology,False,False,False,False,False,True,False
+gm_img_3305,CT Scan of HBS/Liver,CT Scan,6000,1,radiology,False,False,False,False,False,True,False
+gm_img_3353,CT Scan of HEPATOBILIARY (HBS),CT Scan,6000,1,radiology,False,False,False,False,False,True,False
+gm_img_1497,Ct Scan Of Kidneys,CT Scan,5400,1,radiology,False,False,False,False,False,True,False
+gm_img_3306,CT Scan of Kidnys,CT Scan,6000,1,radiology,False,False,False,False,False,True,False
+gm_img_3307,CT Scan of KUB/URINARY,CT Scan,12000,1,radiology,False,False,False,False,False,True,False
+gm_img_4922,Ct Scan of Left Shoulder Joint,CT Scan,6000,1,radiology,False,False,False,False,False,True,False
+gm_img_3341,CT Scan Of Liver,CT Scan,14000,1,radiology,False,False,False,False,False,True,False
+gm_img_1498,Ct Scan Of Liver Pancreas,CT Scan,5400,1,radiology,False,False,False,False,False,True,False
+gm_img_3298,CT Scan of Lower Abdomen,CT Scan,6000,1,radiology,False,False,False,False,False,True,False
+gm_img_3309,CT Scan of Lumbo Secral Spine,CT Scan,6000,1,radiology,False,False,False,False,False,True,False
+gm_img_3339,CT Scan of Maxidible,CT Scan,6000,1,radiology,False,False,False,False,False,True,False
+gm_img_3338,CT Scan Of Maxilla,CT Scan,6000,1,radiology,False,False,False,False,False,True,False
+gm_img_3352,CT Scan of MEDIASTINUM,CT Scan,6000,1,radiology,False,False,False,False,False,True,False
+gm_img_3302,CT Scan of Neck,CT Scan,6000,1,radiology,False,False,False,False,False,True,False
+gm_img_3346,CT Scan of Non Contrast KUB,CT Scan,6000,0,radiology,False,False,False,False,False,True,False
+gm_img_3333,CT Scan Of Orbits,CT Scan,6000,1,radiology,False,False,False,False,False,True,False
+gm_img_3355,CT Scan of PELVIC ORGANS (L/A),CT Scan,6000,1,radiology,False,False,False,False,False,True,False
+gm_img_1481,Ct Scan of Pelvis,CT Scan,6000,1,radiology,False,False,False,False,False,True,False
+gm_img_3349,CT Scan of PITUITARY,CT Scan,4000,1,radiology,False,False,False,False,False,True,False
+gm_img_3301,CT Scan of Pituitary Gland,CT Scan,6000,1,radiology,False,False,False,False,False,True,False
+gm_img_3299,CT Scan of PNS,CT Scan,6000,1,radiology,False,False,False,False,False,True,False
+gm_img_3356,Ct Scan of PNS/NECK/NASOPHARYNX,CT Scan,6000,1,radiology,False,False,False,False,False,True,False
+gm_img_4919,CT Scan of PNS/Nose,CT Scan,6000,1,radiology,False,False,False,False,False,True,False
+gm_img_4921,Ct Scan of Right Shoulder Joint,CT Scan,6000,1,radiology,False,False,False,False,False,True,False
+gm_img_3318,CT Scan of Right/ Left Ankle,CT Scan,6000,1,radiology,False,False,False,False,False,True,False
+gm_img_3312,CT Scan of Right/ Left Elbow Joint,CT Scan,6000,1,radiology,False,False,False,False,False,True,False
+gm_img_3319,CT Scan of Right/ Left Foot,CT Scan,6000,1,radiology,False,False,False,False,False,True,False
+gm_img_3314,CT Scan of Right/ Left Hip Joint,CT Scan,6000,1,radiology,False,False,False,False,False,True,False
+gm_img_3316,CT Scan of Right/ Left Knee Joint,CT Scan,6000,1,radiology,False,False,False,False,False,True,False
+gm_img_3317,CT Scan of Right/ Left Leg,CT Scan,6000,1,radiology,False,False,False,False,False,True,False
+gm_img_3310,CT Scan of Right/ Left Shoulder Joint,CT Scan,6000,1,radiology,False,False,False,False,False,True,False
+gm_img_3315,CT Scan of Right/ Left Thigh,CT Scan,6000,1,radiology,False,False,False,False,False,True,False
+gm_img_3313,CT Scan of Right/ Left Wrist Joint,CT Scan,6000,1,radiology,False,False,False,False,False,True,False
+gm_img_3351,CT Scan of THYROID GLAND,CT Scan,6000,1,radiology,False,False,False,False,False,True,False
+gm_img_3297,CT Scan of Upper Abdomen,CT Scan,6000,1,radiology,False,False,False,False,False,True,False
+gm_img_4909,Ct Scan Of Urogram,CT Scan,12000,1,radiology,False,False,False,False,False,True,False
+gm_img_3358,CT Scan of Whole Abdomen,CT Scan,12000,1,radiology,False,False,False,False,False,True,False
+gm_img_1499,Ct Scan Shoulder Joint,CT Scan,5400,1,radiology,False,False,False,False,False,True,False
+gm_img_1500,Ct Scan Thigh,CT Scan,5400,1,radiology,False,False,False,False,False,True,False
+gm_img_1501,Ct Scan Thoracic Spine,CT Scan,5400,1,radiology,False,False,False,False,False,True,False
+gm_img_1502,CT Scan Whole Body,CT Scan,24300,1,radiology,False,False,False,False,False,True,False
+gm_img_1503,Ct Sella (Turcica),CT Scan,5400,1,radiology,False,False,False,False,False,True,False
+gm_img_1504,Ct Soft Tissue,CT Scan,5400,1,radiology,False,False,False,False,False,True,False
+gm_img_1505,Ct Tm Joint,CT Scan,5400,1,radiology,False,False,False,False,False,True,False
+gm_img_1506,Ct Tounge,CT Scan,5400,1,radiology,False,False,False,False,False,True,False
+gm_img_1507,Ct Upper Abdomen,CT Scan,5400,1,radiology,False,False,False,False,False,True,False
+gm_img_1508,Ct Urogram,CT Scan,12000,1,radiology,False,False,False,False,False,True,False
+gm_img_3347,CT Urography,CT Scan,12000,1,radiology,False,False,False,False,False,True,False
+gm_img_1509,Ct Whole Abdomen,CT Scan,10800,1,radiology,False,False,False,False,False,True,False
+gm_img_1510,Ct Wrist Rt/Lt,CT Scan,5400,1,radiology,False,False,False,False,False,True,False
+gm_img_3334,CT-Scan Of Base Of Skull,CT Scan,4000,1,radiology,False,False,False,False,False,True,False
+gm_img_3335,CT-Scan Of Brain With Base Of Skull,CT Scan,7000,1,radiology,False,False,False,False,False,True,False
+gm_img_3332,CT-Scan Of PNS,CT Scan,4000,1,radiology,False,False,False,False,False,True,False
+gm_img_3336,CT-Scan Screening Charge,CT Scan,2000,1,radiology,False,False,False,False,False,True,False
+gm_img_4888,HRCT of Petro Mastido CT-Scan,CT Scan,6000,1,radiology,False,False,False,False,False,True,False
+gm_img_3357,MRI of Lumbo Sacral Spine,CT Scan,7000,1,radiology,False,False,False,False,False,True,False
+gm_img_1512,ECG,ECG,400,1,descriptive,False,False,False,False,False,True,False
+gm_img_4856,Echo Color Doppler,Echocardiography,2600,1,descriptive,False,False,False,False,False,True,False
+gm_img_4855,Echo-2D,Echocardiography,1500,1,descriptive,False,False,False,False,False,True,False
+gm_img_4690,Ba-meal study of small bowel Ileo-caecal gut with spot film of Ileo-caecal gut,MRI,2000,1,radiology,False,False,False,False,False,True,False
+gm_img_4732,"Ba-meal study of Stomach, Duodenum, Follow through(G.I. Tract)",MRI,2000,1,radiology,False,False,False,False,False,True,False
+gm_img_4733,"Ba-meal study of Stomach,Duodenum & Followthrough of small gut & Ileo-caecal gut",MRI,2000,1,radiology,False,False,False,False,False,True,False
+gm_img_4716,Barium enema of colon (large gut) Double contrast,MRI,2500,1,radiology,False,False,False,False,False,True,False
+gm_img_4734,Barium meal study of Ileo-caecal gut and appendix,MRI,2000,1,radiology,False,False,False,False,False,True,False
+gm_img_4735,"Barium meal study of Stomach, Duodenum",MRI,2000,1,radiology,False,False,False,False,False,True,False
+gm_img_4736,"Barium meal study of Stomach, Duodenum & Hiatus Hernia",MRI,2000,1,radiology,False,False,False,False,False,True,False
+gm_img_4737,"Barium meal study of Stomach, Duodenum (Double contrast)",MRI,2000,1,radiology,False,False,False,False,False,True,False
+gm_img_4738,"Barium meal study of Stomach, Duodenum including (G.I. Tract)",MRI,2000,1,radiology,False,False,False,False,False,True,False
+gm_img_4739,Barium Swallow of Oesophagus,MRI,2000,1,radiology,False,False,False,False,False,True,False
+gm_img_4740,Barium Swallow of Oesophagus including Hiatus Hernia,MRI,2000,1,radiology,False,False,False,False,False,True,False
+gm_img_4689,Choanogram (Nasal),MRI,2000,1,radiology,False,False,False,False,False,True,False
+gm_img_4717,Cologram/Loopogram (Barium enema) through colostomy opening,MRI,2500,1,radiology,False,False,False,False,False,True,False
+gm_img_3162,CT Additional Per Film Charge Fee,MRI,300,1,radiology,False,False,False,False,False,True,False
+gm_img_4956,Dorsal Spine Scaring of Lumber Spine,MRI,9000,1,radiology,False,False,False,False,False,True,False
+gm_img_3143,DTI MRI Of Brain,MRI,7000,1,radiology,False,False,False,False,False,True,False
+gm_img_4964,Dynamic MRI of Pituitary,MRI,7000,1,radiology,False,False,False,False,False,True,False
+gm_img_4982,Film Charge,MRI,900,1,radiology,False,False,False,False,False,True,False
+gm_img_4314,Loopgram / cologram child,MRI,2500,1,radiology,False,False,False,False,False,True,False
+gm_img_4958,lumber spine scaring of Cervical spine,MRI,9000,1,radiology,False,False,False,False,False,True,False
+gm_img_4715,Micturating Cysto Urethrogram ( M.C. U ),MRI,2500,1,radiology,False,False,False,False,False,True,False
+gm_img_3108,MRA of Brain Vessels,MRI,7000,1,radiology,False,False,False,False,False,True,False
+gm_img_3161,MRI Additional Per Film Charge Fee,MRI,300,1,radiology,False,False,False,False,False,True,False
+gm_img_3158,MRI AND MRV OF BRAIN,MRI,9000,1,radiology,False,False,False,False,False,True,False
+gm_img_3160,MRI Brain with EPILEPSY Protocol,MRI,7000,1,radiology,False,False,False,False,False,True,False
+gm_img_3103,MRI Brain with Stock Protocol,MRI,7000,1,radiology,False,False,False,False,False,True,False
+gm_img_3129,MRI of Abdomen,MRI,14000,1,radiology,False,False,False,False,False,True,False
+gm_img_3163,MRI of both SI Joint,MRI,8000,1,radiology,False,False,False,False,False,True,False
+gm_img_3138,MRI Of Brachial Plexus,MRI,8000,1,radiology,False,False,False,False,False,True,False
+gm_img_3152,MRI of Brain & Orbit with MRA,MRI,11000,1,radiology,False,False,False,False,False,True,False
+gm_img_4963,MRI of Brain & Pituitary,MRI,9000,1,radiology,False,False,False,False,False,True,False
+gm_img_3150,MRI of Brain & Trigiminal Cord Protocol,MRI,9000,1,radiology,False,False,False,False,False,True,False
+gm_img_4887,MRI of Brain with Dementia Protocol,MRI,9000,0,radiology,False,False,False,False,False,True,False
+gm_img_3099,MRI of Brain With MRA,MRI,9000,1,radiology,False,False,False,False,False,True,False
+gm_img_4973,MRI of Brain With MRA & MRS,MRI,11000,1,radiology,False,False,False,False,False,True,False
+gm_img_3100,MRI of Brain With MRA & MRV,MRI,11000,1,radiology,False,False,False,False,False,True,False
+gm_img_4939,MRI of Brain With MRA & neck vesse,MRI,11000,1,radiology,False,False,False,False,False,True,False
+gm_img_3132,MRI Of Brain with MRS,MRI,9000,1,radiology,False,False,False,False,False,True,False
+gm_img_3102,MRI of Brain with MRV,MRI,9000,1,radiology,False,False,False,False,False,True,False
+gm_img_4967,MRI of Brain With neck vessel,MRI,9000,1,radiology,False,False,False,False,False,True,False
+gm_img_3101,MRI of Brain with Orbit,MRI,9000,1,radiology,False,False,False,False,False,True,False
+gm_img_4926,MRI Of Brain with scanning of Cervical spain,MRI,9000,1,radiology,False,False,False,False,False,True,False
+gm_img_3153,MRI of Brain with Scanning of Whole Spine,MRI,9000,1,radiology,False,False,False,False,False,True,False
+gm_img_3106,MRI of Cervical Spine,MRI,7000,1,radiology,False,False,False,False,False,True,False
+gm_img_5117,MRI of Cervical Spine and search of Whole,MRI,7000,1,radiology,False,False,False,False,False,True,False
+gm_img_3146,MRI of Cervitial Spine,MRI,7000,1,radiology,False,False,False,False,False,True,False
+gm_img_3137,MRI Of Chest,MRI,8000,1,radiology,False,False,False,False,False,True,False
+gm_img_3105,MRI of Dorsal-Spine,MRI,7000,1,radiology,False,False,False,False,False,True,False
+gm_img_4943,MRI of Dorsal-Spine With MRS,MRI,9000,1,radiology,False,False,False,False,False,True,False
+gm_img_4983,MRI Of Ear,MRI,7000,1,radiology,False,False,False,False,False,True,False
+gm_img_4999,Mri Of Face & Neck,MRI,7000,1,radiology,False,False,False,False,False,True,False
+gm_img_3154,MRI Of KUB,MRI,14500,1,radiology,False,False,False,False,False,True,False
+gm_img_3156,MRI of Left ARM,MRI,7000,1,radiology,False,False,False,False,False,True,False
+gm_img_3131,MRI of Lower Abdomen,MRI,9000,1,radiology,False,False,False,False,False,True,False
+gm_img_4972,MRI Of Lt Thighs,MRI,8000,1,radiology,False,False,False,False,False,True,False
+gm_img_3122,MRI of Lt. Ankle Joint,MRI,8000,1,radiology,False,False,False,False,False,True,False
+gm_img_3112,MRI of Lt. Elbow Joint,MRI,8000,1,radiology,False,False,False,False,False,True,False
+gm_img_3124,MRI of Lt. Foot Joint,MRI,8000,1,radiology,False,False,False,False,False,True,False
+gm_img_3116,MRI of Lt. Hand Joint,MRI,8000,1,radiology,False,False,False,False,False,True,False
+gm_img_3118,MRI of Lt. Hip Joint,MRI,8000,1,radiology,False,False,False,False,False,True,False
+gm_img_3120,MRI of Lt. Knee Joint,MRI,8000,1,radiology,False,False,False,False,False,True,False
+gm_img_3164,MRI of Lt. leg,MRI,8000,1,radiology,False,False,False,False,False,True,False
+gm_img_3110,MRI of Lt. Shoulder Joint,MRI,8000,1,radiology,False,False,False,False,False,True,False
+gm_img_3114,MRI of Lt. Wrist Joint,MRI,8000,1,radiology,False,False,False,False,False,True,False
+gm_img_3139,MRI Of Lumber Plexus,MRI,7000,1,radiology,False,False,False,False,False,True,False
+gm_img_3147,MRI of Lumber Spine and search of Whole,MRI,7000,1,radiology,False,False,False,False,False,True,False
+gm_img_4970,MRI Of Lumbo-sacral spine with Dorsal Screening,MRI,9000,1,radiology,False,False,False,False,False,True,False
+gm_img_4985,Mri of MRA,MRI,7000,1,radiology,False,False,False,False,False,True,False
+gm_img_3107,MRI of MRCP,MRI,8000,1,radiology,False,False,False,False,False,True,False
+gm_img_3151,MRI of MRCP with CT Scan,MRI,8000,1,radiology,False,False,False,False,False,True,False
+gm_img_4969,MRI Of MRS,MRI,7000,1,radiology,False,False,False,False,False,True,False
+gm_img_3128,MRI of MRV,MRI,7000,1,radiology,False,False,False,False,False,True,False
+gm_img_3125,MRI of Neck,MRI,8000,1,radiology,False,False,False,False,False,True,False
+gm_img_3157,MRI of Orbit,MRI,7000,1,radiology,False,False,False,False,False,True,False
+gm_img_3126,MRI of Pelvis,MRI,8000,1,radiology,False,False,False,False,False,True,False
+gm_img_4975,MRI OF PITUITARY GLAND,MRI,7000,0,radiology,False,False,False,False,False,True,False
+gm_img_3127,MRI of PNS,MRI,9000,1,radiology,False,False,False,False,False,True,False
+gm_img_3155,MRI of Right ARM,MRI,7000,1,radiology,False,False,False,False,False,True,False
+gm_img_4971,MRI Of Rt Thighs,MRI,8000,1,radiology,False,False,False,False,False,True,False
+gm_img_3121,MRI of Rt. Ankle Joint,MRI,8000,1,radiology,False,False,False,False,False,True,False
+gm_img_3111,MRI of Rt. Elbow Joint,MRI,8000,1,radiology,False,False,False,False,False,True,False
+gm_img_3123,MRI of Rt. Foot Joint,MRI,8000,1,radiology,False,False,False,False,False,True,False
+gm_img_3115,MRI of Rt. Hand Joint,MRI,8000,1,radiology,False,False,False,False,False,True,False
+gm_img_3117,MRI of Rt. Hip Joint,MRI,8000,1,radiology,False,False,False,False,False,True,False
+gm_img_3119,MRI of Rt. Knee Joint,MRI,8000,1,radiology,False,False,False,False,False,True,False
+gm_img_3165,MRI of Rt. leg,MRI,8000,1,radiology,False,False,False,False,False,True,False
+gm_img_3109,MRI of Rt. Shoulder Joint,MRI,8000,1,radiology,False,False,False,False,False,True,False
+gm_img_3113,MRI of Rt. Wrist Joint,MRI,8000,1,radiology,False,False,False,False,False,True,False
+gm_img_3145,MRI Of Screening DTI,MRI,3000,1,radiology,False,False,False,False,False,True,False
+gm_img_3130,MRI of Upper Abdomen,MRI,9000,1,radiology,False,False,False,False,False,True,False
+gm_img_3159,MRI of Whole Abdomen,MRI,16000,1,radiology,False,False,False,False,False,True,False
+gm_img_3136,MRI Screening Charge,MRI,2000,1,radiology,False,False,False,False,False,True,False
+gm_img_3140,MRI Screening of Brachial Plexus,MRI,3000,1,radiology,False,False,False,False,False,True,False
+gm_img_3141,MRI Screening Of Lumber Plexus,MRI,3000,1,radiology,False,False,False,False,False,True,False
+gm_img_3144,MRI Screening Of PWI,MRI,3000,1,radiology,False,False,False,False,False,True,False
+gm_img_5142,MRS Of Brain,MRI,7000,1,radiology,False,False,False,False,False,True,False
+gm_img_4677,O.C.G. (Oral Cholecystography),MRI,1500,1,radiology,False,False,False,False,False,True,False
+gm_img_3142,PWI MRI Of Brain,MRI,7000,1,radiology,False,False,False,False,False,True,False
+gm_img_4741,Retrograde Pyelography (Urography),MRI,2000,1,radiology,False,False,False,False,False,True,False
+gm_img_4718,Retrograde Urethrogram (RGU),MRI,2500,1,radiology,False,False,False,False,False,True,False
+gm_img_4742,Retrograde Urethrogram with Antegrade cystogram,MRI,2000,1,radiology,False,False,False,False,False,True,False
+gm_img_4719,Retrograde Urethrogram with MCU,MRI,2500,1,radiology,False,False,False,False,False,True,False
+gm_img_3134,Screening Of MRA,MRI,2000,1,radiology,False,False,False,False,False,True,False
+gm_img_3135,Screening Of MRS,MRI,2000,1,radiology,False,False,False,False,False,True,False
+gm_img_3133,Screening Of MRV,MRI,2000,1,radiology,False,False,False,False,False,True,False
+gm_img_5148,Screening Of Neck Vesel,MRI,2000,0,radiology,False,False,False,False,False,True,False
+gm_img_4727,Sialogram Lefl sub mandibular gland & duct (Digital),MRI,2500,1,radiology,False,False,False,False,False,True,False
+gm_img_4303,Sialogram left parotid gland,MRI,2500,1,radiology,False,False,False,False,False,True,False
+gm_img_4302,Sialogram right parotid gland,MRI,2500,1,radiology,False,False,False,False,False,True,False
+gm_img_1536,Cervical Spine Both View,Radiology & Imaging,600,0,radiology,False,False,True,True,False,True,False
+gm_img_4520,Digital X-Ray of Bone age ( Adult Clavicle & Pelvis),X-Ray,1000,1,radiology,False,False,True,False,False,True,False
+gm_img_4521,Digital X-Ray of Bone Age (Child),X-Ray,1000,1,radiology,False,False,True,False,False,True,False
+gm_img_4359,Digital X-Ray of Both Knee Joint AP View,X-Ray,500,1,radiology,False,False,True,False,False,True,False
+gm_img_4366,Digital X-Ray of Cervical spine Lateral View,X-Ray,500,1,radiology,False,False,True,False,False,True,False
+gm_img_4368,Digital X-Ray of Chest Apical view,X-Ray,500,1,radiology,False,False,True,False,False,True,False
+gm_img_4369,Digital X-Ray of Chest for Rib Left Side (Oblique View),X-Ray,500,1,radiology,False,False,True,False,False,True,False
+gm_img_4544,Digital X-Ray of Chest Inspiratory & Expiratory PA view,X-Ray,1000,1,radiology,False,False,True,False,False,True,False
+gm_img_4546,Digital X-Ray of Chest PA & left lateral view,X-Ray,1000,1,radiology,False,False,True,False,False,True,False
+gm_img_4703,Digital X-Ray of I. V. U.,X-Ray,2200,1,radiology,False,False,True,False,False,True,False
+gm_img_4730,Digital X-Ray of I. V. U. with late film,X-Ray,2500,1,radiology,False,False,True,False,False,True,False
+gm_img_4402,Digital X-Ray of Left Heel (Calcaneum) Axial & Lateral View,X-Ray,600,1,radiology,False,False,True,False,False,True,False
+gm_img_4404,Digital X-Ray of Left hip joint Lateral View,X-Ray,600,1,radiology,False,False,True,False,False,True,False
+gm_img_4411,Digital X-Ray of Left Wrist Joint PA & Lateral View,X-Ray,600,1,radiology,False,False,True,False,False,True,False
+gm_img_4705,"Digital X-Ray of LS Spine AP,Lat,Flexion,Extension,Neutral",X-Ray,2000,1,radiology,False,False,True,False,False,True,False
+gm_img_4582,Digital X-Ray of Lt. Knee Joint AP & Lat. View ( Standing Position),X-Ray,600,1,radiology,False,False,True,False,False,True,False
+gm_img_4417,Digital X-Ray of Lt. Middle Finger AP & Lateral View,X-Ray,600,1,radiology,False,False,True,False,False,True,False
+gm_img_2593,Digital X-Ray of Mastoid Towne`s View(S837),X-Ray,400,1,radiology,False,False,True,False,False,True,False
+gm_img_4505,Digital X-Ray of Pelvis Erect Posture (CPD),X-Ray,500,1,radiology,False,False,True,False,False,True,False
+gm_img_4443,Digital X-Ray of Pelvis with both hip joint AP view (Child),X-Ray,500,1,radiology,False,False,True,False,False,True,False
+gm_img_4602,Digital X-Ray of Plain Abdomen Erect & Supine View,X-Ray,1000,1,radiology,False,False,True,False,False,True,False
+gm_img_4449,"Digital X-Ray of Right Elbow joint AP, Lat. & oblique view",X-Ray,1000,1,radiology,False,False,True,False,False,True,False
+gm_img_4458,Digital X-Ray of Right hip joint Lateral View,X-Ray,500,1,radiology,False,False,True,False,False,True,False
+gm_img_4463,Digital X-Ray of Right thumb (B/V),X-Ray,500,1,radiology,False,False,True,False,False,True,False
+gm_img_4331,Digital X-RAY of Skull & Mandible AP View,X-Ray,1500,1,radiology,False,False,True,False,False,True,False
+gm_img_4484,Digital X-Ray of Skull base of the skull,X-Ray,500,1,radiology,False,False,True,False,False,True,False
+gm_img_4487,Digital X-Ray of Skull for Sinuses (PNS O/M View),X-Ray,500,1,radiology,False,False,True,False,False,True,False
+gm_img_4332,Digital X-RAY of skull Townes View,X-Ray,500,1,radiology,False,False,True,False,False,True,False
+gm_img_4330,Digital X-RAY of Spinal Column B/V,X-Ray,2000,1,radiology,False,False,True,False,False,True,False
+gm_img_4329,Digital X-RAY of Sternum AP & Lateral View,X-Ray,1000,1,radiology,False,False,True,False,False,True,False
+gm_img_4671,"Digital X-Ray of Sternum AP, Lat & Oblique View",X-Ray,1500,1,radiology,False,False,True,False,False,True,False
+gm_img_4327,Digital X-RAY of Sternum Lateral View,X-Ray,500,1,radiology,False,False,True,False,False,True,False
+gm_img_4325,Digital X-RAY of Sternum Oblique View,X-Ray,500,1,radiology,False,False,True,False,False,True,False
+gm_img_4326,Digital X-RAY of Sternum Oblique View & lateral View,X-Ray,1000,1,radiology,False,False,True,False,False,True,False
+gm_img_4324,Digital X-RAY of Styloid process B/V,X-Ray,1000,1,radiology,False,False,True,False,False,True,False
+gm_img_2493,Digital X-RAY of Transorbital PA View for internal Auditory Cana,X-Ray,400,1,radiology,False,False,True,False,False,True,False
+gm_img_4315,"Digital X-RAY of Zygomatic, arcehs",X-Ray,400,1,radiology,False,False,True,False,False,True,False
+gm_img_4633,PORTABLE X-RAY ABDOMEN AP,X-Ray,800,1,radiology,False,False,True,False,False,True,False
+gm_img_4639,PORTABLE X-RAY C/S SPINE BV,X-Ray,1000,1,radiology,False,False,True,False,False,True,False
+gm_img_4311,PORTABLE X-RAY CRX AP,X-Ray,800,1,radiology,False,False,True,False,False,True,False
+gm_img_4634,PORTABLE X-RAY CXR AP,X-Ray,800,1,radiology,False,False,True,False,False,True,False
+gm_img_4672,PORTABLE X-RAY CXR AP & OBLIQUE,X-Ray,1200,1,radiology,False,False,True,False,False,True,False
+gm_img_4635,PORTABLE X-RAY CXR OBLIQUE,X-Ray,800,1,radiology,False,False,True,False,False,True,False
+gm_img_4640,PORTABLE X-RAY FEMUR AP & LATERAL,X-Ray,800,1,radiology,False,False,True,False,False,True,False
+gm_img_4673,PORTABLE X-RAY L/S SPINE AP & LATERAL,X-Ray,1200,1,radiology,False,False,True,False,False,True,False
+gm_img_4636,PORTABLE X-RAY LEG AP & LATERAL,X-Ray,800,1,radiology,False,False,True,False,False,True,False
+gm_img_4637,PORTABLE X-RAY PELVIS AP,X-Ray,800,1,radiology,False,False,True,False,False,True,False
+gm_img_4674,PORTABLE X-RAY SKULL AP & LATERAL,X-Ray,1200,1,radiology,False,False,True,False,False,True,False
+gm_img_2796,PORTABLE XRAY ABDOMEN AP,X-Ray,800,1,radiology,False,False,False,False,False,True,False
+gm_img_2802,PORTABLE XRAY C/S SPINE BV,X-Ray,1000,1,radiology,False,False,False,False,False,True,False
+gm_img_2797,PORTABLE XRAY CXR AP,X-Ray,800,1,radiology,False,False,False,False,False,True,False
+gm_img_2835,PORTABLE XRAY CXR AP & OBLIQUE,X-Ray,1200,1,radiology,False,False,False,False,False,True,False
+gm_img_2798,PORTABLE XRAY CXR OBLIQUE,X-Ray,800,1,radiology,False,False,False,False,False,True,False
+gm_img_2803,PORTABLE XRAY FEMUR AP & LATERAL,X-Ray,800,1,radiology,False,False,False,False,False,True,False
+gm_img_2836,PORTABLE XRAY L/S SPINE AP & LATERAL,X-Ray,1200,1,radiology,False,False,False,False,False,True,False
+gm_img_2799,PORTABLE XRAY LEG AP & LATERAL,X-Ray,800,1,radiology,False,False,False,False,False,True,False
+gm_img_2800,PORTABLE XRAY PELVIS AP,X-Ray,800,1,radiology,False,False,False,False,False,True,False
+gm_img_2837,PORTABLE XRAY SKULL AP & LATERAL,X-Ray,1200,1,radiology,False,False,False,False,False,True,False
+gm_img_4516,X - Ray of Flexion and Extension,X-Ray,800,1,radiology,False,False,False,False,False,True,False
+gm_img_5201,X- Ray OPG,X-Ray,400,0,radiology,False,False,False,False,False,True,False
+gm_img_4336,X-Ray -Hand B/V,X-Ray,400,1,radiology,False,False,True,False,False,True,False
+gm_img_4941,x-ray Both Leg (B/V),X-Ray,2000,1,radiology,False,False,True,False,False,True,False
+gm_img_4340,X-Ray cervical Spine Both View,X-Ray,600,1,radiology,False,False,True,False,False,True,False
+gm_img_4871,X-Ray Cervical Spine Both View and Flexion Extention View,X-Ray,1000,1,radiology,False,False,True,False,False,True,False
+gm_img_4333,X-Ray Chest P/A,X-Ray,600,1,radiology,False,False,True,False,False,True,False
+gm_img_4344,X-Ray Extra film,X-Ray,400,1,radiology,False,False,True,False,False,True,False
+gm_img_4345,X-Ray for 100% (One Film),X-Ray,600,1,radiology,False,False,True,False,False,True,False
+gm_img_4642,X-Ray for 100% (Three Films),X-Ray,1800,1,radiology,False,False,True,False,False,True,False
+gm_img_4517,X-Ray for 100% (Two Films),X-Ray,1200,1,radiology,False,False,True,False,False,True,False
+gm_img_4341,X-Ray knee Both Joint,X-Ray,1200,1,radiology,False,False,True,False,False,True,False
+gm_img_4335,X-Ray Lumbo sacral,X-Ray,1000,1,radiology,False,False,True,False,False,True,False
+gm_img_4744,X-Ray Lumbo Sacral Spine B/V,X-Ray,1000,1,radiology,False,False,True,False,False,True,False
+gm_img_4643,X-Ray of Abdomen Erect Posture AP & Lat. View,X-Ray,1500,1,radiology,False,False,True,False,False,True,False
+gm_img_4347,X-Ray of Abdomen Erect Posture Including Diaphragm (Child),X-Ray,500,1,radiology,False,False,True,False,False,True,False
+gm_img_4348,X-Ray of Acoustic meatus perorbital view,X-Ray,500,1,radiology,False,False,True,False,False,True,False
+gm_img_4349,X-Ray of Atlanto axial joint OM view,X-Ray,500,1,radiology,False,False,True,False,False,True,False
+gm_img_4519,X-Ray of Atlanton Axial O.M & Lateral View ( B / V ),X-Ray,1000,1,radiology,False,False,True,False,False,True,False
+gm_img_4691,X-Ray of Ba-enema of colon Single contrast of child to examin Hirscha.,X-Ray,2500,1,radiology,False,False,True,False,False,True,False
+gm_img_4692,X-Ray of Ba-Followthrough double contrast,X-Ray,2500,1,radiology,False,False,True,False,False,True,False
+gm_img_4728,X-Ray of Ba-meal of small intestine and follow thorough,X-Ray,2500,1,radiology,False,False,True,False,False,True,False
+gm_img_4693,X-Ray of Both Ankle Joint & Both Foot,X-Ray,2000,1,radiology,False,False,True,False,False,True,False
+gm_img_4522,X-Ray of Both Ankle Joint (B/V),X-Ray,1000,1,radiology,False,False,True,False,False,True,False
+gm_img_4350,X-Ray of Both Ankle Joint AP View,X-Ray,500,1,radiology,False,False,True,False,False,True,False
+gm_img_4351,X-Ray of Both Ankle Joint Lateral View,X-Ray,500,1,radiology,False,False,True,False,False,True,False
+gm_img_4352,X-Ray of Both Clavicle AP View,X-Ray,500,1,radiology,False,False,True,False,False,True,False
+gm_img_4746,X-Ray of Both Feet A.P Cat View,X-Ray,800,1,radiology,False,False,True,False,False,True,False
+gm_img_4353,X-Ray of Both Feet AP View,X-Ray,500,1,radiology,False,False,True,False,False,True,False
+gm_img_4523,X-Ray of Both feet both view,X-Ray,1000,1,radiology,False,False,True,False,False,True,False
+gm_img_4354,X-Ray of Both Feet Lateral View,X-Ray,500,1,radiology,False,False,True,False,False,True,False
+gm_img_4524,X-Ray of Both foot (B/V),X-Ray,1000,1,radiology,False,False,True,False,False,True,False
+gm_img_4525,X-Ray of Both Hand (B/V),X-Ray,1000,1,radiology,False,False,True,False,False,True,False
+gm_img_4355,X-Ray of Both Hand AP View,X-Ray,500,1,radiology,False,False,True,False,False,True,False
+gm_img_4526,X-Ray of Both Hand B/V,X-Ray,900,1,radiology,False,False,True,False,False,True,False
+gm_img_4527,X-Ray of Both hand for bone age,X-Ray,1000,1,radiology,False,False,True,False,False,True,False
+gm_img_4356,X-Ray of Both Hand Lateral View,X-Ray,500,1,radiology,False,False,True,False,False,True,False
+gm_img_4357,X-Ray of Both hand with wrist joint AP view,X-Ray,1000,1,radiology,False,False,True,False,False,True,False
+gm_img_4528,X-Ray of Both Heel B/V,X-Ray,1000,1,radiology,False,False,True,False,False,True,False
+gm_img_4358,X-Ray of Both heel lateral view for soft tissue,X-Ray,500,1,radiology,False,False,True,False,False,True,False
+gm_img_4644,X-Ray of Both hip joint (B/V),X-Ray,1000,1,radiology,False,False,True,False,False,True,False
+gm_img_4529,X-Ray of Both hip joint Lat view,X-Ray,1000,1,radiology,False,False,True,False,False,True,False
+gm_img_4694,"X-Ray of Both Knee AP, Lat Rt & Lt. Oblique standing position",X-Ray,2000,1,radiology,False,False,True,False,False,True,False
+gm_img_4695,X-Ray of Both Knee Joint and Oblique View,X-Ray,2000,1,radiology,False,False,True,False,False,True,False
+gm_img_4645,X-Ray of Both Knee Joint and Skyline B/V,X-Ray,2000,1,radiology,False,False,True,False,False,True,False
+gm_img_4530,X-Ray of Both Knee Joint AP View Standing Position,X-Ray,1000,1,radiology,False,False,True,False,False,True,False
+gm_img_4531,X-Ray of Both Knee Joint B/V (Child),X-Ray,1000,1,radiology,False,False,True,False,False,True,False
+gm_img_4360,X-Ray of Both Knee Joint Lat. View,X-Ray,500,1,radiology,False,False,True,False,False,True,False
+gm_img_4361,X-Ray of Both Knee Joint skyline position,X-Ray,500,1,radiology,False,False,True,False,False,True,False
+gm_img_4532,X-Ray of Both Knee Joints(BV) AP & Lateral,X-Ray,1000,1,radiology,False,False,True,False,False,True,False
+gm_img_4301,X-Ray of Both Leg AP,X-Ray,500,1,radiology,False,False,True,False,False,True,False
+gm_img_4533,X-Ray of Both Leg AP View,X-Ray,500,1,radiology,False,False,True,False,False,True,False
+gm_img_4940,X-Ray of Both Leg with Ankle Joint in Standing Position,X-Ray,1600,1,radiology,False,False,True,False,False,True,False
+gm_img_4534,X-Ray of Both Mastoid AP oblique & Lateral Oblique view,X-Ray,1000,1,radiology,False,False,True,False,False,True,False
+gm_img_4696,X-Ray of Both Shoulder AP & Axillary View,X-Ray,2000,1,radiology,False,False,True,False,False,True,False
+gm_img_4680,X-Ray of Both shoulder joint (B/V),X-Ray,2000,1,radiology,False,False,True,False,False,True,False
+gm_img_4535,X-Ray of Both Shoulder joint AP View,X-Ray,1000,1,radiology,False,False,True,False,False,True,False
+gm_img_4518,X-Ray of Both Shoulder joint Lateral view,X-Ray,1000,1,radiology,False,False,True,False,False,True,False
+gm_img_4681,X-Ray of Both T.M. Joint open & close Mouth,X-Ray,2000,1,radiology,False,False,True,False,False,True,False
+gm_img_4300,X-Ray of Both Thigh AP,X-Ray,900,1,radiology,False,False,True,False,False,True,False
+gm_img_4362,X-Ray of Both Wrist AP View,X-Ray,400,1,radiology,False,False,True,False,False,True,False
+gm_img_4363,X-Ray of Both Wrist Lateral View,X-Ray,400,1,radiology,False,False,True,False,False,True,False
+gm_img_4697,"X-Ray of C. Spine AP,Lat,Flexion,Extension,Neutral",X-Ray,2000,1,radiology,False,False,True,False,False,True,False
+gm_img_4364,X-Ray of Cervical One Oblique View,X-Ray,500,1,radiology,False,False,True,False,False,True,False
+gm_img_4646,X-Ray of Cervical spine AP & both lat view,X-Ray,1500,1,radiology,False,False,True,False,False,True,False
+gm_img_4647,X-Ray of Cervical spine AP & Both oblique View,X-Ray,1500,1,radiology,False,False,True,False,False,True,False
+gm_img_4536,X-Ray of Cervical spine AP & Lateral View (B/V),X-Ray,1000,1,radiology,False,False,True,False,False,True,False
+gm_img_4537,X-Ray of Cervical spine AP & One oblique View,X-Ray,1000,1,radiology,False,False,True,False,False,True,False
+gm_img_4365,X-Ray of Cervical spine AP View Only,X-Ray,500,1,radiology,False,False,True,False,False,True,False
+gm_img_4682,"X-Ray of Cervical spine AP, Lateral & Both oblique View",X-Ray,2000,1,radiology,False,False,True,False,False,True,False
+gm_img_4648,"X-Ray of Cervical spine AP, Lateral & Left oblique View",X-Ray,1500,1,radiology,False,False,True,False,False,True,False
+gm_img_4649,"X-Ray of Cervical spine AP, Lateral & Right oblique View",X-Ray,1500,1,radiology,False,False,True,False,False,True,False
+gm_img_4698,"X-Ray of Cervical spine AP,Lat,Flexion,Extension, & Rt. oblique view",X-Ray,2500,1,radiology,False,False,True,False,False,True,False
+gm_img_4650,X-Ray of Cervical Spine B/V with Atlanto Axial Joint,X-Ray,1500,1,radiology,False,False,True,False,False,True,False
+gm_img_4538,X-Ray of Cervical Spine Both Lateral View,X-Ray,1000,1,radiology,False,False,True,False,False,True,False
+gm_img_4539,X-Ray of Cervical Spine Both Oblique View,X-Ray,1000,1,radiology,False,False,True,False,False,True,False
+gm_img_4651,"X-Ray of Cervical spine flexion, extention and open mouth",X-Ray,1500,1,radiology,False,False,True,False,False,True,False
+gm_img_4652,X-Ray of Cervical spine Lateral & Both oblique View,X-Ray,1500,1,radiology,False,False,True,False,False,True,False
+gm_img_4540,X-Ray of Cervical spine Lateral & One oblique View,X-Ray,1000,1,radiology,False,False,True,False,False,True,False
+gm_img_4367,X-Ray of Cervical spine One Oblique View Only,X-Ray,500,1,radiology,False,False,True,False,False,True,False
+gm_img_4541,X-Ray of Cervico-dorsal spine (Cervico-Thoracic) spine AP & Lateral view,X-Ray,1000,1,radiology,False,False,True,False,False,True,False
+gm_img_4513,X-Ray of Chest AP View (100% Equal Size),X-Ray,600,1,radiology,False,False,True,False,False,True,False
+gm_img_4542,"X-Ray of Chest AP, Rt. Letaral, Oblique View",X-Ray,1500,1,radiology,False,False,True,False,False,True,False
+gm_img_4543,X-Ray of Chest apical lordotic & Lt. Lat view,X-Ray,1000,1,radiology,False,False,True,False,False,True,False
+gm_img_4370,X-Ray of Chest for Rib Right Side (Oblique View),X-Ray,500,1,radiology,False,False,True,False,False,True,False
+gm_img_4371,X-Ray of Chest left lateral decubitus view,X-Ray,500,1,radiology,False,False,True,False,False,True,False
+gm_img_4372,X-Ray of Chest left lateral view,X-Ray,500,1,radiology,False,False,True,False,False,True,False
+gm_img_4373,X-Ray of Chest Lordotic View,X-Ray,500,1,radiology,False,False,True,False,False,True,False
+gm_img_4514,X-Ray of Chest P/A View (100% Equal Size),X-Ray,600,1,radiology,False,False,True,False,False,True,False
+gm_img_4545,X-Ray of Chest PA & lateral view,X-Ray,1000,1,radiology,False,False,True,False,False,True,False
+gm_img_4547,X-Ray of Chest PA & right lateral view,X-Ray,1000,1,radiology,False,False,True,False,False,True,False
+gm_img_4641,X-Ray of Chest PA with Sternum,X-Ray,1350,1,radiology,False,False,True,False,False,True,False
+gm_img_4374,X-Ray of Chest Penetrating Lateral View,X-Ray,500,1,radiology,False,False,True,False,False,True,False
+gm_img_4375,X-Ray of Chest Penetrating View,X-Ray,500,1,radiology,False,False,True,False,False,True,False
+gm_img_4376,X-Ray of Chest right lateral decubitus view,X-Ray,500,1,radiology,False,False,True,False,False,True,False
+gm_img_4377,X-Ray of Chest right lateral view,X-Ray,500,1,radiology,False,False,True,False,False,True,False
+gm_img_4548,X-Ray of Clavical (B/V),X-Ray,1000,1,radiology,False,False,True,False,False,True,False
+gm_img_4299,X-Ray of Cloacogram,X-Ray,3000,1,radiology,False,False,True,False,False,True,False
+gm_img_4298,X-Ray of CoanaGram,X-Ray,2500,1,radiology,False,False,True,False,False,True,False
+gm_img_4549,X-Ray of Coccyx Bone Both View,X-Ray,1000,1,radiology,False,False,True,False,False,True,False
+gm_img_4550,X-Ray of Cone both Lat view of lumbo secral joint,X-Ray,1800,1,radiology,False,False,True,False,False,True,False
+gm_img_4551,X-Ray of Cone down AP & Lat view,X-Ray,800,1,radiology,False,False,True,False,False,True,False
+gm_img_4378,X-Ray of Cone down Lateral View,X-Ray,500,1,radiology,False,False,True,False,False,True,False
+gm_img_4729,X-Ray of Dacrocystogram,X-Ray,3000,1,radiology,False,False,True,False,False,True,False
+gm_img_4297,X-Ray of Defecography,X-Ray,3000,1,radiology,False,False,True,False,False,True,False
+gm_img_4720,X-Ray of Distal Cologram,X-Ray,2500,1,radiology,False,False,True,False,False,True,False
+gm_img_4552,X-Ray of Dorsal (Thoracic) spine AP & Lateral View,X-Ray,1000,1,radiology,False,False,True,False,False,True,False
+gm_img_4379,X-Ray of Dorsal (Thoracic) spine AP View,X-Ray,500,1,radiology,False,False,True,False,False,True,False
+gm_img_4683,"X-Ray of Dorsal (Thoracic) spine AP, Lateral & Both oblique View",X-Ray,2000,1,radiology,False,False,True,False,False,True,False
+gm_img_4653,"X-Ray of Dorsal (Thoracic) spine AP, Lateral & One oblique View",X-Ray,1500,1,radiology,False,False,True,False,False,True,False
+gm_img_4380,X-Ray of Dorsal (Thoracic) spine Lateral View,X-Ray,500,1,radiology,False,False,True,False,False,True,False
+gm_img_4699,"X-Ray of Dorsal spine AP, Lat & Both oblique view",X-Ray,2000,1,radiology,False,False,True,False,False,True,False
+gm_img_4553,X-Ray of Dorsal Spine both Lateral view,X-Ray,1000,1,radiology,False,False,True,False,False,True,False
+gm_img_4554,X-Ray of Dorsal Spine both Oblique view,X-Ray,1000,1,radiology,False,False,True,False,False,True,False
+gm_img_4381,X-Ray of Dorso lumber ( Thoraco-Lumber ) Spine AP View,X-Ray,500,1,radiology,False,False,True,False,False,True,False
+gm_img_4555,X-Ray of Dorso lumber (Thoraco-Lumber) spine (B/V) AP & Lateral View(874),X-Ray,1000,1,radiology,False,False,True,False,False,True,False
+gm_img_4382,X-Ray of Dorso Lumber (Thoraco-Lumber) Spine AP View,X-Ray,500,1,radiology,False,False,True,False,False,True,False
+gm_img_4383,X-Ray of Dorso lumber (Thoraco-Lumber) spine Lateral View,X-Ray,500,1,radiology,False,False,True,False,False,True,False
+gm_img_4700,"X-Ray of Dorso Lumber Spine AP,Lat,Flexion,Extension,Neutral",X-Ray,2000,1,radiology,False,False,True,False,False,True,False
+gm_img_4556,X-Ray of Dorso-Lumbar spine both lateral view,X-Ray,1000,1,radiology,False,False,True,False,False,True,False
+gm_img_4557,X-Ray of Dorso-Lumbar spine both oblique view,X-Ray,1000,1,radiology,False,False,True,False,False,True,False
+gm_img_4684,"X-Ray of Dorso-Lumber AP, Lat & Oblique View",X-Ray,1800,1,radiology,False,False,True,False,False,True,False
+gm_img_4384,X-Ray of Face,X-Ray,500,1,radiology,False,False,True,False,False,True,False
+gm_img_4558,X-Ray of Ferguson View,X-Ray,800,1,radiology,False,False,True,False,False,True,False
+gm_img_4701,X-Ray of Fistulogram,X-Ray,2000,1,radiology,False,False,True,False,False,True,False
+gm_img_4385,X-Ray of Fluroscopic Guided Marking of Disc Level,X-Ray,400,1,radiology,False,False,True,False,False,True,False
+gm_img_4296,X-Ray of Genitogram,X-Ray,3000,1,radiology,False,False,True,False,False,True,False
+gm_img_4702,X-Ray of Hysterosalpingography,X-Ray,2500,1,radiology,False,False,True,False,False,True,False
+gm_img_4386,X-Ray of I. A. M. Perorbital view,X-Ray,500,1,radiology,False,False,True,False,False,True,False
+gm_img_4721,X-Ray of I. V. U. with M. C. U.,X-Ray,3000,1,radiology,False,False,True,False,False,True,False
+gm_img_4387,X-Ray of Invertogram,X-Ray,500,1,radiology,False,False,True,False,False,True,False
+gm_img_4388,X-Ray of Invertogram (Plain abdomen erect lateral with legs uo),X-Ray,600,1,radiology,False,False,True,False,False,True,False
+gm_img_4389,X-Ray of Knee joint oblique view RT (ONE FILM),X-Ray,500,1,radiology,False,False,True,False,False,True,False
+gm_img_2501,X-Ray of KUB,X-Ray,600,1,radiology,False,False,True,False,False,True,False
+gm_img_4339,X-Ray of KUB(B/V),X-Ray,400,1,radiology,False,False,True,False,False,True,False
+gm_img_4654,X-Ray of L/S spine Ap & Both Lat view,X-Ray,1500,1,radiology,False,False,True,False,False,True,False
+gm_img_4704,"X-Ray of L/S spine AP,Lat,Flexion,Extension, & Rt. oblique view",X-Ray,2500,1,radiology,False,False,True,False,False,True,False
+gm_img_4559,X-Ray of L/S Spine Both Oblique View,X-Ray,1000,1,radiology,False,False,True,False,False,True,False
+gm_img_4390,X-Ray of L/S Spine Left Oblique View,X-Ray,500,1,radiology,False,False,True,False,False,True,False
+gm_img_4391,X-Ray of L/S Spine Rt. Oblique View,X-Ray,500,1,radiology,False,False,True,False,False,True,False
+gm_img_4560,"X-Ray of L/S, Spine both lateral view",X-Ray,1000,1,radiology,False,False,True,False,False,True,False
+gm_img_4392,X-Ray of Left Ankle joint AP & Lateral view,X-Ray,600,1,radiology,False,False,True,False,False,True,False
+gm_img_4561,X-Ray of Left Clavicle AP & Lateral View,X-Ray,800,1,radiology,False,False,True,False,False,True,False
+gm_img_4393,X-Ray of Left Clavicle AP View,X-Ray,500,1,radiology,False,False,True,False,False,True,False
+gm_img_4394,X-Ray of Left Ear,X-Ray,500,1,radiology,False,False,True,False,False,True,False
+gm_img_4395,X-Ray of Left Elbow joint AP & Lateral view,X-Ray,600,1,radiology,False,False,True,False,False,True,False
+gm_img_4396,"X-Ray of Left Elbow joint AP, Lat. & oblique view",X-Ray,1000,1,radiology,False,False,True,False,False,True,False
+gm_img_4397,X-Ray of Left Foot AP & Oblique View (B/V),X-Ray,600,1,radiology,False,False,True,False,False,True,False
+gm_img_4398,X-Ray of Left Forearm (Radius&Ulna) AP & Lat.View including Wrist joint,X-Ray,400,1,radiology,False,False,True,False,False,True,False
+gm_img_4399,X-Ray of Left Forearm(Radius&Ulna)AP &Lat.View inclu.Elbow &Wrist joint,X-Ray,400,1,radiology,False,False,True,False,False,True,False
+gm_img_4400,X-Ray of Left Hand AP & Lateral View,X-Ray,600,1,radiology,False,False,True,False,False,True,False
+gm_img_4401,X-Ray of Left Hand PA & Oblique View,X-Ray,600,1,radiology,False,False,True,False,False,True,False
+gm_img_4562,X-Ray of Left hip joint AP & Lateral View(One Film),X-Ray,1000,1,radiology,False,False,True,False,False,True,False
+gm_img_4403,X-Ray of Left hip joint AP View,X-Ray,500,1,radiology,False,False,True,False,False,True,False
+gm_img_4405,X-Ray of Left Hip joint oblique view,X-Ray,500,1,radiology,False,False,True,False,False,True,False
+gm_img_4563,X-Ray of Left Humerus (Arm) AP & Lat. View including Shoulder joint(One Film),X-Ray,1000,1,radiology,False,False,True,False,False,True,False
+gm_img_4564,X-Ray of Left Humerus (Arm)AP &Lat.View including Shoulder &Elbow joint(One Film),X-Ray,1000,1,radiology,False,False,True,False,False,True,False
+gm_img_4406,X-Ray of Left knee joint (B/V) AP & Lateral view,X-Ray,600,1,radiology,False,False,True,False,False,True,False
+gm_img_4565,"X-Ray of Left knee joint AP, Lateral & Skyline view",X-Ray,1000,1,radiology,False,False,True,False,False,True,False
+gm_img_4655,"X-Ray of Left knee joint AP, Lateral, Skyline & Intercondylar view",X-Ray,2000,1,radiology,False,False,True,False,False,True,False
+gm_img_4566,X-Ray of Left Leg (Tibia & Fibula) including Knee & Ankle joint,X-Ray,600,1,radiology,False,False,True,False,False,True,False
+gm_img_4567,X-Ray of Left Leg including ankle joint AP & Lat view,X-Ray,900,1,radiology,False,False,True,False,False,True,False
+gm_img_4568,X-Ray of Left Leg including knee joint AP & Lat view,X-Ray,1000,1,radiology,False,False,True,False,False,True,False
+gm_img_4656,"X-Ray of Left lower jaw AP, Lat & Oblique view",X-Ray,1500,1,radiology,False,False,True,False,False,True,False
+gm_img_4569,X-Ray of Left Orbit AP & Lateral (Up & Down),X-Ray,600,1,radiology,False,False,True,False,False,True,False
+gm_img_4570,X-Ray of Left Scapula AP & Lateral view with shoulder joint,X-Ray,1000,1,radiology,False,False,True,False,False,True,False
+gm_img_4407,X-Ray of Left Scapula AP view,X-Ray,500,1,radiology,False,False,True,False,False,True,False
+gm_img_4499,X-Ray of Left shoulder joint AP View,X-Ray,500,1,radiology,False,False,True,False,False,True,False
+gm_img_4408,X-Ray of Left sub-mandibular gland lateral oblique view,X-Ray,500,1,radiology,False,False,True,False,False,True,False
+gm_img_4571,X-Ray of Left T.M. Joint open & close Mouth,X-Ray,1000,1,radiology,False,False,True,False,False,True,False
+gm_img_4572,X-Ray of Left Thigh (femur) AP & Lateral view including Knee joint,X-Ray,1000,1,radiology,False,False,True,False,False,True,False
+gm_img_4574,X-Ray of Left Thigh (femur) AP& Lateral view inclu.hip joint in one film,X-Ray,1000,1,radiology,False,False,True,False,False,True,False
+gm_img_4575,X-Ray of Left Thigh (femur)AP& Lateral view inclu.Knee joint in one film,X-Ray,1000,1,radiology,False,False,True,False,False,True,False
+gm_img_4576,X-Ray of Left Thigh (femur)AP& Lateral view including hip joint,X-Ray,1000,1,radiology,False,False,True,False,False,True,False
+gm_img_4409,X-Ray of Left Thumb B/V,X-Ray,500,1,radiology,False,False,True,False,False,True,False
+gm_img_4410,"X-Ray of Left Wrist joint AP, Lateral View & Oblique view",X-Ray,1000,1,radiology,False,False,True,False,False,True,False
+gm_img_4577,X-Ray of Lower Limb AP,X-Ray,1000,1,radiology,False,False,True,False,False,True,False
+gm_img_4578,X-Ray of Lower Limb Lateral,X-Ray,800,1,radiology,False,False,True,False,False,True,False
+gm_img_4579,X-Ray of Lt. Arm AP & Lateral View,X-Ray,800,1,radiology,False,False,True,False,False,True,False
+gm_img_4412,X-Ray of Lt. Foot AP & Lat. View,X-Ray,600,1,radiology,False,False,True,False,False,True,False
+gm_img_4580,X-Ray of Lt. Foot including ankle joint (B/V),X-Ray,1000,1,radiology,False,False,True,False,False,True,False
+gm_img_4413,X-Ray of Lt. Foot including heel lat view,X-Ray,600,1,radiology,False,False,True,False,False,True,False
+gm_img_4581,X-Ray of Lt. Heel with Ankle AP and Lat View,X-Ray,1000,1,radiology,False,False,True,False,False,True,False
+gm_img_4414,X-Ray of Lt. Index Finger AP & Lat View,X-Ray,600,1,radiology,False,False,True,False,False,True,False
+gm_img_4583,"X-Ray of Lt. Knee Joint AP, Lat in weight bearing position",X-Ray,900,1,radiology,False,False,True,False,False,True,False
+gm_img_4584,"X-Ray of Lt. Knee joint AP, Lat. & Intercondylar view",X-Ray,1000,1,radiology,False,False,True,False,False,True,False
+gm_img_4415,X-Ray of Lt. Leg AP & Lateral view (Child),X-Ray,600,1,radiology,False,False,True,False,False,True,False
+gm_img_4416,X-Ray of Lt. Little Finger AP & Lat View,X-Ray,600,1,radiology,False,False,True,False,False,True,False
+gm_img_4418,X-Ray of Lt. Patella Axial View,X-Ray,500,1,radiology,False,False,True,False,False,True,False
+gm_img_4419,X-Ray of Lt. Ring Finger AP & Lat View,X-Ray,600,1,radiology,False,False,True,False,False,True,False
+gm_img_4585,X-Ray of Lt. Shoulder Joint AP & Lateral View,X-Ray,1000,1,radiology,False,False,True,False,False,True,False
+gm_img_4657,"X-Ray of Lt. Shoulder joint AP, Lat. & oblique view",X-Ray,1500,1,radiology,False,False,True,False,False,True,False
+gm_img_4706,"X-Ray of Lt. Shoulder Jt. AP,Lat,Abduction,Adduction",X-Ray,2000,1,radiology,False,False,True,False,False,True,False
+gm_img_4707,"X-Ray of Lt. Shoulder Jt. AP,Lat,Internal & External rotation",X-Ray,2000,1,radiology,False,False,True,False,False,True,False
+gm_img_4420,X-Ray of Lt. Thight AP & Lateral view (Child),X-Ray,600,1,radiology,False,False,True,False,False,True,False
+gm_img_4586,X-Ray of Lumber spine (B/V) AP & Lateral View,X-Ray,1000,1,radiology,False,False,True,False,False,True,False
+gm_img_4421,X-Ray of Lumber Spine AP View,X-Ray,500,1,radiology,False,False,True,False,False,True,False
+gm_img_4685,"X-Ray of Lumber Spine AP, Lat & Both Oblique View",X-Ray,2000,1,radiology,False,False,True,False,False,True,False
+gm_img_4423,X-Ray of Lumber Spine lateral view,X-Ray,500,1,radiology,False,False,True,False,False,True,False
+gm_img_4424,X-Ray of Lumbo Sacral Spine P/A view,X-Ray,500,1,radiology,False,False,True,False,False,True,False
+gm_img_4658,X-Ray of Lumbo secral lat & oblique view,X-Ray,1200,1,radiology,False,False,True,False,False,True,False
+gm_img_4587,X-Ray of Lumbo-sacral spine (B/V) AP & Lateral View,X-Ray,1000,1,radiology,False,False,True,False,False,True,False
+gm_img_4659,X-Ray of Lumbo-sacral spine AP & Both oblique View,X-Ray,1500,1,radiology,False,False,True,False,False,True,False
+gm_img_4425,X-Ray of Lumbo-sacral spine AP View,X-Ray,500,1,radiology,False,False,True,False,False,True,False
+gm_img_4588,X-Ray of Lumbo-sacral spine flexion and extension View,X-Ray,1000,1,radiology,False,False,True,False,False,True,False
+gm_img_4426,X-Ray of Lumbo-sacral spine Lateral View,X-Ray,500,1,radiology,False,False,True,False,False,True,False
+gm_img_4686,"X-Ray of Lumbo-sacral spine PA, Lateral & Both oblique View",X-Ray,2000,1,radiology,False,False,True,False,False,True,False
+gm_img_4660,"X-Ray of Lumbo-sacral spine PA, Lateral & One oblique View",X-Ray,1500,1,radiology,False,False,True,False,False,True,False
+gm_img_4589,X-Ray of Lumbo-Secral Spine Both Oblique View,X-Ray,100,1,radiology,False,False,True,False,False,True,False
+gm_img_4590,X-Ray of Mandible both lateral oblique view,X-Ray,1000,1,radiology,False,False,True,False,False,True,False
+gm_img_4427,X-Ray of Mandible left lateral oblique view,X-Ray,500,1,radiology,False,False,True,False,False,True,False
+gm_img_4661,X-Ray of Mandible PA & both lateral oblique view,X-Ray,1500,1,radiology,False,False,True,False,False,True,False
+gm_img_4591,X-Ray of Mandible PA & left lateral oblique view,X-Ray,1000,1,radiology,False,False,True,False,False,True,False
+gm_img_4592,X-Ray of Mandible PA & right lateral oblique view,X-Ray,1000,1,radiology,False,False,True,False,False,True,False
+gm_img_4428,X-Ray of Mandible PA view,X-Ray,500,1,radiology,False,False,True,False,False,True,False
+gm_img_4429,X-Ray of Mandible right lateral oblique view,X-Ray,500,1,radiology,False,False,True,False,False,True,False
+gm_img_4593,X-Ray of Mastoid AP oblique & Lateral Oblique view left side,X-Ray,1000,1,radiology,False,False,True,False,False,True,False
+gm_img_4594,X-Ray of Mastoid AP oblique & Lateral Oblique view right side,X-Ray,1000,1,radiology,False,False,True,False,False,True,False
+gm_img_4430,X-Ray of Mastoid Towens View(S),X-Ray,500,1,radiology,False,False,True,False,False,True,False
+gm_img_4595,X-Ray of Mastoid Townes & Stenverse View,X-Ray,1000,1,radiology,False,False,True,False,False,True,False
+gm_img_4596,X-Ray of Mastoid Townes (B/V),X-Ray,1000,1,radiology,False,False,True,False,False,True,False
+gm_img_4431,X-Ray of Mastoid Townes View(s),X-Ray,800,1,radiology,False,False,True,False,False,True,False
+gm_img_4432,"X-Ray of Maxilla, Left Lateral oblique view",X-Ray,500,1,radiology,False,False,True,False,False,True,False
+gm_img_4433,"X-Ray of Maxilla, Right Lateral oblique view",X-Ray,500,1,radiology,False,False,True,False,False,True,False
+gm_img_4295,X-Ray of Meckel's Diverticulam,X-Ray,1800,1,radiology,False,False,True,False,False,True,False
+gm_img_4713,X-ray of Meckel's Diverticulum,X-Ray,2000,1,radiology,False,False,True,False,False,True,False
+gm_img_4722,X-Ray of Micturating Cystogram,X-Ray,2500,1,radiology,False,False,True,False,False,True,False
+gm_img_4434,X-Ray of Mortise view (one film),X-Ray,500,1,radiology,False,False,True,False,False,True,False
+gm_img_4731,X-Ray of Myelogram,X-Ray,3000,1,radiology,False,False,True,False,False,True,False
+gm_img_4435,X-Ray of Nasal Bones both lateral view,X-Ray,500,1,radiology,False,False,True,False,False,True,False
+gm_img_4436,X-Ray of Nasopharynx lateral view for soft tissues/adenoid,X-Ray,500,1,radiology,False,False,True,False,False,True,False
+gm_img_4597,X-Ray of Neck AP & Lateral View,X-Ray,1000,1,radiology,False,False,True,False,False,True,False
+gm_img_4437,X-Ray of Neck lateral view for soft tissue/Nasopharynx,X-Ray,500,1,radiology,False,False,True,False,False,True,False
+gm_img_4438,X-Ray of Neck of Cervical Ribs,X-Ray,500,1,radiology,False,False,True,False,False,True,False
+gm_img_4723,X-Ray of Nephro Urethrogram (Normal),X-Ray,2500,1,radiology,False,False,True,False,False,True,False
+gm_img_4724,X-Ray of Nephrostogram,X-Ray,2500,1,radiology,False,False,True,False,False,True,False
+gm_img_4500,X-Ray of Occlusal view for lower jaw (Mandible),X-Ray,600,1,radiology,False,False,True,False,False,True,False
+gm_img_4501,X-Ray of Occlusal view for upper jaw,X-Ray,500,1,radiology,False,False,True,False,False,True,False
+gm_img_4502,X-Ray of Occlusal view of maxilla,X-Ray,700,1,radiology,False,False,True,False,False,True,False
+gm_img_4439,X-Ray of Optic foramen,X-Ray,500,1,radiology,False,False,True,False,False,True,False
+gm_img_4747,X-Ray of Orbit B/V,X-Ray,1000,1,radiology,False,False,True,False,False,True,False
+gm_img_4678,X-Ray of P. T. C.,X-Ray,1800,1,radiology,False,False,True,False,False,True,False
+gm_img_4598,X-Ray of P.N.S. O/M & Lateral view,X-Ray,1000,1,radiology,False,False,True,False,False,True,False
+gm_img_4440,X-Ray of P.N.S. O/M view,X-Ray,500,1,radiology,False,False,True,False,False,True,False
+gm_img_4662,X-Ray of Pelvis AP & Both Hip joint Letaral View,X-Ray,1500,1,radiology,False,False,True,False,False,True,False
+gm_img_4675,X-ray of Pelvis AP & Inlet & Outlet view,X-Ray,1000,1,radiology,False,False,True,False,False,True,False
+gm_img_4294,X-Ray of Pelvis AP & Intel & Outlet View,X-Ray,1000,1,radiology,False,False,True,False,False,True,False
+gm_img_4663,X-Ray of Pelvis AP & Lateral View with Both hip joint,X-Ray,1500,1,radiology,False,False,True,False,False,True,False
+gm_img_4748,X-ray of pelvis AP view,X-Ray,400,0,radiology,False,False,True,False,False,True,False
+gm_img_4503,X-Ray of Pelvis AP View ( Frog-Leg Position-Adult),X-Ray,600,1,radiology,False,False,True,False,False,True,False
+gm_img_4441,X-Ray of Pelvis AP View ( Frog-Leg Position-Child),X-Ray,500,1,radiology,False,False,True,False,False,True,False
+gm_img_4599,X-Ray of Pelvis AP with Both hip joint AP View(One Film),X-Ray,600,1,radiology,False,False,True,False,False,True,False
+gm_img_4600,X-Ray of Pelvis Both Oblique view,X-Ray,1000,1,radiology,False,False,True,False,False,True,False
+gm_img_4601,X-Ray of Pelvis erect lat view for CPD,X-Ray,900,1,radiology,False,False,True,False,False,True,False
+gm_img_4504,X-Ray of Pelvis erect posture,X-Ray,900,1,radiology,False,False,True,False,False,True,False
+gm_img_4442,X-Ray of Pelvis Lateral View,X-Ray,800,1,radiology,False,False,True,False,False,True,False
+gm_img_4725,X-Ray of Pericathetar Urethogram(X781),X-Ray,2500,1,radiology,False,False,True,False,False,True,False
+gm_img_4708,X-Ray of Phonogram,X-Ray,2000,1,radiology,False,False,True,False,False,True,False
+gm_img_4664,X-Ray of Plain Abdomen AP & Lat. View,X-Ray,1350,1,radiology,False,False,True,False,False,True,False
+gm_img_4506,X-Ray of Plain Abdomen AP View,X-Ray,700,1,radiology,False,False,True,False,False,True,False
+gm_img_4444,X-Ray of Plain Abdomen AP View (Child),X-Ray,500,1,radiology,False,False,True,False,False,True,False
+gm_img_4507,X-Ray of Plain Abdomen Erect View including Diaphragm,X-Ray,700,1,radiology,False,False,True,False,False,True,False
+gm_img_4515,X-Ray of Plain Abdomen in Supine View,X-Ray,600,1,radiology,False,False,True,False,False,True,False
+gm_img_4508,X-Ray of Plain Abdomen Lateral View,X-Ray,700,1,radiology,False,False,True,False,False,True,False
+gm_img_4445,X-Ray of Plain KUB (Children below 10 yrs) one film,X-Ray,500,1,radiology,False,False,True,False,False,True,False
+gm_img_4665,X-Ray of Plain KUB AP & Lateral View,X-Ray,1350,1,radiology,False,False,True,False,False,True,False
+gm_img_4509,X-Ray of Plain KUB AP View,X-Ray,700,1,radiology,False,False,True,False,False,True,False
+gm_img_4666,X-Ray of Plain KUB AP View and Lumber Spine lat-View,X-Ray,1350,1,radiology,False,False,True,False,False,True,False
+gm_img_4510,X-Ray of Plain KUB Erect View (Standing),X-Ray,700,1,radiology,False,False,True,False,False,True,False
+gm_img_4726,X-Ray of Retrograde Urethro Cystogram,X-Ray,2500,1,radiology,False,False,True,False,False,True,False
+gm_img_4446,X-Ray of Right Ankle joint AP & Lateral view,X-Ray,600,1,radiology,False,False,True,False,False,True,False
+gm_img_4603,X-Ray of Right Clavicle AP & Lateral View,X-Ray,800,1,radiology,False,False,True,False,False,True,False
+gm_img_4447,X-Ray of Right Clavicle AP View,X-Ray,500,1,radiology,False,False,True,False,False,True,False
+gm_img_4448,X-Ray of Right Elbow joint AP & Lateral view,X-Ray,600,1,radiology,False,False,True,False,False,True,False
+gm_img_4450,X-Ray of Right Foot AP & Oblique View (B/V),X-Ray,600,1,radiology,False,False,True,False,False,True,False
+gm_img_4451,X-Ray of Right Forearm (Radius&Ulna) AP & Lat.View including Elbow joint,X-Ray,900,1,radiology,False,False,True,False,False,True,False
+gm_img_4452,X-Ray of Right Forearm (Radius&Ulna) AP & Lat.View including Wrist joint,X-Ray,900,1,radiology,False,False,True,False,False,True,False
+gm_img_4453,X-Ray of Right Forearm(Radius&Ulna)AP &Lat.View inclu.Elbow &Wrist joint,X-Ray,900,1,radiology,False,False,True,False,False,True,False
+gm_img_4454,X-Ray of Right Hand AP & Lateral View,X-Ray,600,1,radiology,False,False,True,False,False,True,False
+gm_img_4455,X-Ray of Right Hand PA & Oblique View,X-Ray,600,1,radiology,False,False,True,False,False,True,False
+gm_img_4456,X-Ray of Right Heel (Calcaneum) Axial & Lateral View,X-Ray,600,1,radiology,False,False,True,False,False,True,False
+gm_img_4604,X-Ray of Right hip joint AP & Lateral View (one Film),X-Ray,1000,1,radiology,False,False,True,False,False,True,False
+gm_img_4457,X-Ray of Right hip joint AP View,X-Ray,500,1,radiology,False,False,True,False,False,True,False
+gm_img_4605,X-Ray of Right Humerus (Arm) AP & Lat. View including Shoulder joint(One Film),X-Ray,1000,1,radiology,False,False,True,False,False,True,False
+gm_img_4606,X-Ray of Right Humerus(Arm)AP &Lat.View including Shoulder&Elbow joint(One Film),X-Ray,1000,1,radiology,False,False,True,False,False,True,False
+gm_img_4459,X-Ray of Right knee joint (B/V) AP & Lateral view,X-Ray,600,1,radiology,False,False,True,False,False,True,False
+gm_img_4607,"X-Ray of Right knee joint AP, Lateral & Skyline view",X-Ray,1000,1,radiology,False,False,True,False,False,True,False
+gm_img_4667,"X-Ray of Right knee joint AP, Lateral, Skyline & Intercondylar view",X-Ray,1500,1,radiology,False,False,True,False,False,True,False
+gm_img_4608,X-Ray of Right Leg (Tibia & Fibula) including Knee & Ankle joint,X-Ray,600,1,radiology,False,False,True,False,False,True,False
+gm_img_4609,X-Ray of Right Leg including ankle joint AP & Lat view,X-Ray,1000,1,radiology,False,False,True,False,False,True,False
+gm_img_4610,X-Ray of Right Leg including knee joint AP & Lat view,X-Ray,1000,1,radiology,False,False,True,False,False,True,False
+gm_img_4611,X-Ray of Right S/C joint AP & Oblique view,X-Ray,900,1,radiology,False,False,True,False,False,True,False
+gm_img_4612,X-Ray of Right Scapula AP & Lateral view with shoulder joint,X-Ray,1000,1,radiology,False,False,True,False,False,True,False
+gm_img_4460,X-Ray of Right Scapula AP view,X-Ray,500,1,radiology,False,False,True,False,False,True,False
+gm_img_4461,X-Ray of Right shoulder joint AP View,X-Ray,500,1,radiology,False,False,True,False,False,True,False
+gm_img_4462,X-Ray of Right sub-mandibular gland lateral oblique view,X-Ray,500,1,radiology,False,False,True,False,False,True,False
+gm_img_4613,X-Ray of Right T.M. Joint open & close Mouth,X-Ray,1000,1,radiology,False,False,True,False,False,True,False
+gm_img_4614,X-Ray of Right Thigh (femur) AP & Lateral view including hip joint,X-Ray,1000,1,radiology,False,False,True,False,False,True,False
+gm_img_4615,X-Ray of Right Thigh (femur) AP & Lateral view including Knee joint,X-Ray,1000,1,radiology,False,False,True,False,False,True,False
+gm_img_4616,X-Ray of Right Thigh (femur) AP&Lateral view inclu. Knee joint in 1 film,X-Ray,1000,1,radiology,False,False,True,False,False,True,False
+gm_img_4464,"X-Ray of Right Wrist joint AP, Lateral View & Oblique view",X-Ray,1000,1,radiology,False,False,True,False,False,True,False
+gm_img_4465,X-Ray of Right Wrist Joint PA & Lateral View,X-Ray,600,1,radiology,False,False,True,False,False,True,False
+gm_img_4617,X-Ray of Rt. Arm AP & Lateral View,X-Ray,600,1,radiology,False,False,True,False,False,True,False
+gm_img_4466,X-Ray of Rt. Foot AP & Lat. View,X-Ray,600,1,radiology,False,False,True,False,False,True,False
+gm_img_4618,X-Ray of Rt. Foot including ankle joint (B/V),X-Ray,1000,1,radiology,False,False,True,False,False,True,False
+gm_img_4467,X-Ray of Rt. Foot including heel lat view,X-Ray,600,1,radiology,False,False,True,False,False,True,False
+gm_img_5020,X-ray of rt. heel lateral view,X-Ray,600,0,radiology,False,False,True,False,False,True,True
+gm_img_4619,X-Ray of Rt. Heel with Ankle AP and Lat View,X-Ray,1000,1,radiology,False,False,True,False,False,True,False
+gm_img_4468,X-Ray of Rt. Index Finger AP & Lat View,X-Ray,600,1,radiology,False,False,True,False,False,True,False
+gm_img_4620,X-Ray of Rt. Knee Joint AP & Lat View (Standing Position),X-Ray,600,1,radiology,False,False,True,False,False,True,False
+gm_img_4709,"X-Ray of Rt. Knee Joint AP, Lat & both oblique view in standing position",X-Ray,2000,1,radiology,False,False,True,False,False,True,False
+gm_img_4621,"X-Ray of Rt. Knee Joint AP, Lat in weight bearing position",X-Ray,1000,1,radiology,False,False,True,False,False,True,False
+gm_img_4622,"X-Ray of Rt. Knee joint AP, Lat. & Intercondylar view",X-Ray,1000,1,radiology,False,False,True,False,False,True,False
+gm_img_4469,X-Ray of Rt. Leg AP & Lateral view (Child),X-Ray,600,1,radiology,False,False,True,False,False,True,False
+gm_img_4470,X-Ray of Rt. Little Finger AP & Lat View,X-Ray,600,1,radiology,False,False,True,False,False,True,False
+gm_img_4471,X-Ray of Rt. Middle Finger AP & Lateral View,X-Ray,600,1,radiology,False,False,True,False,False,True,False
+gm_img_4472,"X-Ray of Rt. Middle finger AP, Lat view",X-Ray,600,1,radiology,False,False,True,False,False,True,False
+gm_img_4623,X-Ray of Rt. Orbit AP & Lateral (Up & Down),X-Ray,1000,1,radiology,False,False,True,False,False,True,False
+gm_img_4473,X-Ray of Rt. Patella Axial View,X-Ray,500,1,radiology,False,False,True,False,False,True,False
+gm_img_4474,X-Ray of Rt. Ring Finger AP & Lat View,X-Ray,600,1,radiology,False,False,True,False,False,True,False
+gm_img_4668,"X-Ray of Rt. Shoulder AP, Lat & Oblique view",X-Ray,1500,1,radiology,False,False,True,False,False,True,False
+gm_img_4624,X-Ray of Rt. Shoulder Joint AP & Lateral View,X-Ray,1000,1,radiology,False,False,True,False,False,True,False
+gm_img_4710,"X-Ray of Rt. Shoulder Jt. AP,Lat,Aboduction,Adaction",X-Ray,2000,1,radiology,False,False,True,False,False,True,False
+gm_img_4711,"X-Ray of Rt. Shoulder Jt. AP,Lat,Internal & External rotation",X-Ray,2000,1,radiology,False,False,True,False,False,True,False
+gm_img_4475,X-Ray of Rt. Thigh AP & Lateral view (Child),X-Ray,500,1,radiology,False,False,True,False,False,True,False
+gm_img_4625,X-Ray of S. I. Joint (B/V),X-Ray,1000,1,radiology,False,False,True,False,False,True,False
+gm_img_4626,X-Ray of S. I. Joint Both oblique view,X-Ray,1000,1,radiology,False,False,True,False,False,True,False
+gm_img_4476,X-Ray of S. I. Joint PA view,X-Ray,500,1,radiology,False,False,True,False,False,True,False
+gm_img_4627,X-Ray of Sacro-Coccygeal spine AP & Lateral View,X-Ray,1000,1,radiology,False,False,True,False,False,True,False
+gm_img_4477,X-Ray of Sacro-Coccygeal spine Lateral View,X-Ray,500,1,radiology,False,False,True,False,False,True,False
+gm_img_4293,X-Ray Of Scanogarm,X-Ray,1000,1,radiology,False,False,True,False,False,True,False
+gm_img_4676,X-ray of Scanogram,X-Ray,1200,1,radiology,False,False,True,False,False,True,False
+gm_img_4478,X-Ray of Scaphoid view for wrist joint,X-Ray,500,1,radiology,False,False,True,False,False,True,False
+gm_img_4481,X-Ray of Scapula Lateral View,X-Ray,500,1,radiology,False,False,True,False,False,True,False
+gm_img_4480,X-Ray of Scapula Oblique View,X-Ray,500,1,radiology,False,False,True,False,False,True,False
+gm_img_4511,X-Ray of Scoliogram (one film),X-Ray,600,1,radiology,False,False,True,False,False,True,False
+gm_img_4669,X-Ray of Scoliogram AP & LATERAL VIEW(S1176),X-Ray,1200,1,radiology,False,False,True,False,False,True,False
+gm_img_4712,X-Ray of Sinugram,X-Ray,2000,1,radiology,False,False,True,False,False,True,False
+gm_img_4482,X-Ray of Sinus (PNS),X-Ray,500,1,radiology,False,False,True,False,False,True,False
+gm_img_4638,X-Ray of Skiagram,X-Ray,1000,1,radiology,False,False,True,False,False,True,False
+gm_img_4628,X-Ray of Skull AP & Lateral view,X-Ray,1000,1,radiology,False,False,True,False,False,True,False
+gm_img_4670,X-Ray of Skull AP Rt. and Lt. Lat view,X-Ray,1500,1,radiology,False,False,True,False,False,True,False
+gm_img_4483,X-Ray of Skull AP View,X-Ray,500,1,radiology,False,False,True,False,False,True,False
+gm_img_4485,X-Ray of Skull for Sella Turcica/Pituitary Fossa Cone down view,X-Ray,500,1,radiology,False,False,True,False,False,True,False
+gm_img_4486,X-Ray of Skull for Sella Turcica/Pituitary Fossa Lateral view,X-Ray,500,1,radiology,False,False,True,False,False,True,False
+gm_img_2649,X-Ray of Skull for sinuses (P.N.S. O/M),X-Ray,400,1,radiology,False,False,True,False,False,True,False
+gm_img_4488,X-Ray of Skull Lateral view,X-Ray,500,1,radiology,False,False,True,False,False,True,False
+gm_img_4489,X-Ray of Skull Left Lat view,X-Ray,500,1,radiology,False,False,True,False,False,True,False
+gm_img_4629,X-Ray of Skull PA & Lateral view,X-Ray,1000,1,radiology,False,False,True,False,False,True,False
+gm_img_4490,X-Ray of Skull Right Lat view,X-Ray,500,1,radiology,False,False,True,False,False,True,False
+gm_img_4491,X-Ray of Skull silla tursica both view,X-Ray,500,1,radiology,False,False,True,False,False,True,False
+gm_img_4492,X-Ray of Skull Transorbital PA view for internal auditory canal,X-Ray,500,1,radiology,False,False,True,False,False,True,False
+gm_img_4493,X-Ray of Skull with Mandible AP view,X-Ray,500,1,radiology,False,False,True,False,False,True,False
+gm_img_4687,X-Ray of Spinal colum B/V,X-Ray,2000,1,radiology,False,False,True,False,False,True,False
+gm_img_4630,X-Ray of Sternum Oblique & lateral View,X-Ray,1000,1,radiology,False,False,True,False,False,True,False
+gm_img_4512,X-Ray of Styloid process per-Orbital View (One Film),X-Ray,500,1,radiology,False,False,True,False,False,True,False
+gm_img_4494,X-Ray of Submento vertical view,X-Ray,500,1,radiology,False,False,True,False,False,True,False
+gm_img_4322,X-Ray of T-Tube Choloagiography,X-Ray,2500,1,radiology,False,False,True,False,False,True,False
+gm_img_4495,X-Ray of Tendo Achilies/Tendo Calcaneum (Only Lateral View),X-Ray,500,1,radiology,False,False,True,False,False,True,False
+gm_img_4496,X-Ray of Trans Orbital Patrus view,X-Ray,500,1,radiology,False,False,True,False,False,True,False
+gm_img_4631,X-Ray of Upper Limb AP,X-Ray,1000,1,radiology,False,False,True,False,False,True,False
+gm_img_4632,X-Ray of Upper Limb Lateral,X-Ray,1000,1,radiology,False,False,True,False,False,True,False
+gm_img_4714,X-Ray of Whole Spine,X-Ray,2000,1,radiology,False,False,True,False,False,True,False
+gm_img_4688,X-ray of Whole Spine AP/Lateral & Rt. Lt. Bending,X-Ray,1600,1,radiology,False,False,True,False,False,True,False
+gm_img_4292,X-Ray of Whole Spine AP/Lateral&Rt. Lt. Bending,X-Ray,1400,1,radiology,False,False,True,False,False,True,False
+gm_img_4497,X-Ray of Wrist Joints to Assess Bone Age,X-Ray,400,1,radiology,False,False,True,False,False,True,False
+gm_img_4316,X-RAY of Wrists Joints to Assess Bone Age,X-Ray,400,1,radiology,False,False,True,False,False,True,False
+gm_img_4498,"X-Ray of Zygomatic, arches",X-Ray,400,1,radiology,False,False,True,False,False,True,False
+gm_img_4745,X-Ray Pelvic AP View,X-Ray,400,1,radiology,False,False,True,False,False,True,False
+gm_img_4573,X-Ray Plain Foot B/V,X-Ray,400,1,radiology,False,False,True,False,False,True,False
+gm_img_4337,X-Ray PNS View,X-Ray,400,1,radiology,False,False,True,False,False,True,False
+gm_img_4338,X-Ray Showlder B/V,X-Ray,1000,1,radiology,False,False,True,False,False,True,False
+gm_img_4743,X-Ray SI Joint,X-Ray,400,1,radiology,False,False,True,False,False,True,False
+gm_img_4343,X-Ray single Knee,X-Ray,600,1,radiology,False,False,True,False,False,True,False
+gm_img_4342,X-Ray sky Line view,X-Ray,400,1,radiology,False,False,True,False,False,True,False
+gm_img_4334,X-Ray-PNS View,X-Ray,400,1,radiology,False,False,True,False,False,True,False
+gm_img_5176,Bio-physical Profile,Ultrasonography (USG),1500,0,descriptive,False,False,False,False,False,True,False
+gm_img_4948,Portable USG,Ultrasonography (USG),2500,0,descriptive,False,False,False,False,False,True,False
+gm_img_4896,USG OF ANOMALY SCAN,Ultrasonography (USG),2500,1,descriptive,False,False,False,True,False,True,False
+gm_img_4994,USG OF BOTH AXILLARY REGION,Ultrasonography (USG),1500,0,descriptive,False,False,False,False,False,True,False
+gm_img_4935,Usg Of Both Breast,Ultrasonography (USG),2000,1,descriptive,False,False,False,False,False,True,False
+gm_img_5229,"USG of KUB, Prostate and PVR",Ultrasonography (USG),1500,1,descriptive,False,False,False,False,False,True,False
+gm_img_5230,"USG of KUB, Prostate PVR, MCC",Ultrasonography (USG),1800,1,descriptive,False,False,False,False,False,True,False
+gm_img_4869,USG of Lower Abdomenm,Ultrasonography (USG),1200,1,descriptive,False,False,False,True,False,True,False
+gm_img_5232,USG of Swelling over rt. side of abdomen,Ultrasonography (USG),1200,0,descriptive,False,False,False,False,False,True,False
+gm_img_5126,USG OF THYROID-2D,Ultrasonography (USG),1500,0,descriptive,False,False,False,False,False,True,False
+gm_img_4986,"USG OF W/A, WITH MCC + PVR",Ultrasonography (USG),1800,1,descriptive,False,False,False,True,False,True,False
+gm_img_2911,USG W/A 2D,Ultrasonography (USG),1500,1,descriptive,False,False,False,True,False,True,False

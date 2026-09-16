@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Company-wide lab report disclaimer; a department can override it. -->
+    <record id="res_company_form_lab_disclaimer" model="ir.ui.view">
+        <field name="name">res.company.form.lab.disclaimer</field>
+        <field name="model">res.company</field>
+        <field name="inherit_id" ref="base.view_company_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//sheet" position="inside">
+                <group string="Lab Report Disclaimer">
+                    <field name="lab_report_disclaimer_html" widget="html" nolabel="1"
+                           placeholder="Numbered disclaimer printed at the foot of lab reports."/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

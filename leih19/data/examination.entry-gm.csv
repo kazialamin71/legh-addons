@@ -1,0 +1,185 @@
+id,name,department,sample_type,tube_color_id,rate,required_time,category,sample_req,individual,manual,merge,dependency,lab_not_required,indoor
+gm_entry_3772,BILIRUBIN DIRECT/INDIRECT,Biochemistry,Whole Blood,Red (Plain),600,1,pathology,True,False,False,False,False,False,False
+gm_entry_5150,2Hrs ABF(Strip),Biochemistry,Whole Blood,Red (Plain),100,0,pathology,False,False,False,False,False,False,False
+gm_entry_3829,75 gm Glucose,Biochemistry,,,300,1,pathology,False,False,False,False,False,False,False
+gm_entry_4900,ALP Phosphatase,Biochemistry,,Red (Plain),500,1,pathology,False,False,False,False,False,False,False
+gm_entry_5004,Ammonia,Biochemistry,Whole Blood,Red (Plain),1400,0,pathology,False,False,False,False,False,True,False
+gm_entry_5186,Anti SS-A Antibody,Biochemistry,,,4000,1,pathology,False,False,False,False,False,False,False
+gm_entry_5187,Anti SS-B Antibody,Biochemistry,,,4000,1,pathology,False,False,False,False,False,False,False
+gm_entry_3799,Anti-Cardiolipin AB,Biochemistry,Whole Blood,Red (Plain),4000,1,pathology,True,False,False,False,False,False,False
+gm_entry_3801,Ascitic/CSF/Pleural Fluid for Biochemistry,Biochemistry,Whole Blood,Red (Plain),2000,1,pathology,True,False,False,False,False,False,False
+gm_entry_4944,BILIRUBIN (TOTAL),Biochemistry,,Red (Plain),600,1,pathology,True,False,False,False,False,False,False
+gm_entry_3725,Blood Sugar 2hrs ABF,Biochemistry,Whole Blood,Red (Plain),180,1,pathology,True,False,False,False,False,False,False
+gm_entry_5140,Blood Sugar 2hrs ABF & 2hrs AL (After Lunch),Biochemistry,,Red (Plain),300,1,pathology,False,False,False,False,False,False,False
+gm_entry_5170,Blood Sugar 2hrs After Lunch,Biochemistry,Whole Blood,Red (Plain),180,1,pathology,True,False,False,False,False,False,False
+gm_entry_3751,Blood Sugar Fasting & 2hrs ABF,Biochemistry,Whole Blood,Red (Plain),300,1,pathology,True,False,False,False,False,False,False
+gm_entry_3773,BUN,Biochemistry,Whole Blood,Red (Plain),500,1,pathology,True,False,False,False,False,False,False
+gm_entry_3814,CCR,Biochemistry,Urine (Random),,1000,1,pathology,True,False,False,False,False,False,False
+gm_entry_5178,"CSF for protein, Glucose, TC, DC, ADA",Biochemistry,,Red (Plain),3500,0,pathology,False,False,False,False,False,False,False
+gm_entry_1535,Deprecated by IT (Electrolyte).,Biochemistry,Whole Blood,Red (Plain),1200,1,pathology,True,False,False,True,False,False,False
+gm_entry_5182,DHT,Biochemistry,Whole Blood,Red (Plain),3500,0,pathology,False,False,False,False,False,False,False
+gm_entry_5154,Fasting Blood Sugar and 2 Hours After 75gm Glucose (FBS-2h 75g),Biochemistry,,,300,0,pathology,False,False,False,False,False,True,False
+gm_entry_1534,FBS (Fasting Blood Sugar),Biochemistry,Whole Blood,Red (Plain),180,1,pathology,True,False,False,True,False,False,False
+gm_entry_5149,FBS(Strip),Biochemistry,Whole Blood,Red (Plain),100,0,pathology,False,False,False,False,False,False,False
+gm_entry_4892,Ferritin,Biochemistry,Whole Blood,Red (Plain),1400,1,pathology,True,False,False,True,False,False,False
+gm_entry_4903,Folic Acid,Biochemistry,Whole Blood,Red (Plain),1200,1,pathology,True,False,False,True,False,False,False
+gm_entry_5202,Gamma GT,Biochemistry,,,500,0,pathology,False,False,False,False,False,False,False
+gm_entry_5225,Growth Hormone,Biochemistry,Whole Blood,Red (Plain),1500,0,pathology,False,False,False,False,False,False,False
+gm_entry_4857,HBA1C,Biochemistry,Whole Blood,Red (Plain),1200,1,pathology,True,False,False,True,False,False,False
+gm_entry_5211,IGG for Herpes Simplex,Biochemistry,Whole Blood,Red (Plain),1400,0,pathology,True,False,False,False,False,False,False
+gm_entry_5210,IGM for Herpes Simplex,Biochemistry,Whole Blood,Red (Plain),1400,0,pathology,True,False,False,False,False,False,False
+gm_entry_5139,Inorganic Phoshate,Biochemistry,,,640,1,pathology,False,False,False,False,False,False,False
+gm_entry_5172,Lactate,Biochemistry,,Red (Plain),1400,0,pathology,False,False,False,False,False,False,False
+gm_entry_4917,LFT,Biochemistry,,Red (Plain),1500,1,pathology,False,False,False,False,False,False,False
+gm_entry_3789,Lipase,Biochemistry,Whole Blood,Red (Plain),1200,1,pathology,True,False,False,False,False,False,False
+gm_entry_4914,Magnesium,Biochemistry,Whole Blood,Red (Plain),1200,1,pathology,False,False,False,False,False,False,False
+gm_entry_4863,OGTT,Biochemistry,,Red (Plain),450,1,pathology,False,False,False,False,False,False,False
+gm_entry_3738,OGTT 2Hrs,Biochemistry,Whole Blood,Red (Plain),100,0,pathology,False,False,False,False,False,False,False
+gm_entry_5014,Potassium,Biochemistry,,Red (Plain),400,1,pathology,False,False,False,False,False,False,False
+gm_entry_3819,Protein-Electrophoresis,Biochemistry,,,2000,1,pathology,True,False,False,False,False,False,False
+gm_entry_3721,RBS (Random Blood Sugar),Biochemistry,Whole Blood,Red (Plain),180,1,pathology,True,False,False,False,False,False,False
+gm_entry_3833,RBS (Strip),Biochemistry,,,100,1,pathology,True,False,False,False,False,False,False
+gm_entry_4966,RBS With Corosponding Urine,Biochemistry,Whole Blood,Red (Plain),200,1,pathology,False,False,False,False,False,False,False
+gm_entry_3769,S. AMYLASE,Biochemistry,Whole Blood,Red (Plain),1200,1,pathology,True,False,False,False,False,False,False
+gm_entry_4897,S. Calcium,Biochemistry,Whole Blood,Red (Plain),500,1,pathology,True,False,False,True,False,False,False
+gm_entry_4978,S. eGFR,Biochemistry,Whole Blood,Red (Plain),1280,0,pathology,False,False,False,False,False,False,False
+gm_entry_3826,S. Feritin,Biochemistry,,Red (Plain),1400,1,pathology,True,False,False,False,False,False,False
+gm_entry_5003,S. Phosphate,Biochemistry,,Red (Plain),1200,1,pathology,False,False,False,False,False,False,False
+gm_entry_4898,S. Urea,Biochemistry,Whole Blood,Red (Plain),300,1,pathology,True,False,False,True,False,False,False
+gm_entry_3764,S.Cholesterol,Biochemistry,Whole Blood,Red (Plain),350,1,pathology,True,False,False,False,False,False,False
+gm_entry_3765,S.Electrolytes,Biochemistry,Whole Blood,Red (Plain),1200,1,pathology,True,False,False,False,False,False,False
+gm_entry_3778,S.FREEITIN LEVEL,Biochemistry,Whole Blood,Red (Plain),1000,1,pathology,True,False,False,False,False,False,False
+gm_entry_3777,S.GOT,Biochemistry,Whole Blood,Red (Plain),350,1,pathology,True,False,False,False,False,False,False
+gm_entry_3781,S.IRON,Biochemistry,Whole Blood,Red (Plain),1200,1,pathology,True,False,False,False,False,False,False
+gm_entry_3766,S.Iron Profile,Biochemistry,Whole Blood,Red (Plain),4200,1,pathology,True,False,False,False,False,True,False
+gm_entry_3782,S.TIBC,Biochemistry,Whole Blood,Red (Plain),900,1,pathology,True,False,False,False,False,False,False
+gm_entry_3767,S.Trygleceride,Biochemistry,Whole Blood,Red (Plain),300,1,pathology,True,False,False,False,False,False,False
+gm_entry_3788,SERUM A/G RATIO,Biochemistry,Whole Blood,Red (Plain),800,1,pathology,True,False,False,False,False,False,False
+gm_entry_4997,Serum ACE (Angiotensin Converting Enzime),Biochemistry,Whole Blood,Red (Plain),5000,0,pathology,False,False,False,False,False,False,False
+gm_entry_3728,Serum Bilirubin(total-direct-indirect),Biochemistry,Whole Blood,Red (Plain),1200,1,pathology,True,False,False,False,False,False,False
+gm_entry_3732,Serum: Albumin,Biochemistry,Whole Blood,Red (Plain),500,0,pathology,True,False,False,False,False,False,False
+gm_entry_3810,TIBC,Biochemistry,Whole Blood,Red (Plain),900,1,pathology,True,False,False,False,False,False,False
+gm_entry_5203,Triglycerides,Biochemistry,Whole Blood,Red (Plain),500,0,pathology,False,False,False,False,False,False,False
+gm_entry_1533,Uric Acid,Biochemistry,Whole Blood,Red (Plain),500,1,pathology,True,False,False,True,False,False,False
+gm_entry_4928,Urine ACR,Biochemistry,,,1200,1,pathology,False,False,False,False,False,False,False
+gm_entry_5179,Urine PCR,Biochemistry,,Red (Plain),500,1,pathology,False,False,False,False,False,False,False
+gm_entry_3733,Urine: Albumin,Biochemistry,Urine (Random),Red (Plain),400,0,pathology,True,False,False,False,False,False,False
+gm_entry_3736,Urine: Micro-Albumin,Biochemistry,Urine (Random),,1200,0,pathology,True,False,False,False,False,False,False
+gm_entry_5205,Homa IR,Clinical Pathology,Whole Blood,Red (Plain),2000,0,pathology,True,False,False,False,False,False,False
+gm_entry_5206,HsCRP,Clinical Pathology,Whole Blood,Red (Plain),600,0,pathology,True,False,False,False,False,False,False
+gm_entry_4889,Mantoux Test (MT),Clinical Pathology,,,200,1,pathology,True,True,False,False,False,False,False
+gm_entry_3723,Stool R/M/E,Clinical Pathology,Stool,,200,1,pathology,True,True,False,False,False,False,False
+gm_entry_3828,Stool OBT,Clinical Pathology,,,300,1,pathology,True,False,False,False,False,False,False
+gm_entry_5143,Stool R/s,Clinical Pathology,,,350,1,pathology,True,False,False,False,False,False,False
+gm_entry_3720,Urine R/M/E,Clinical Pathology,Urine (Random),,250,1,pathology,True,True,False,False,False,False,False
+gm_entry_3771,APTT,Haematology,Whole Blood,Lavender (EDTA),1000,1,pathology,True,False,False,False,False,False,False
+gm_entry_3722,"BT, CT",Haematology,Whole Blood,Lavender (EDTA),100,1,pathology,True,False,False,False,False,False,False
+gm_entry_4817,CBC,Haematology,Whole Blood,Red (Plain),400,1,pathology,True,False,False,True,False,False,False
+gm_entry_3734,Circulating Eosinophils (T C E),Haematology,Whole Blood,Lavender (EDTA),300,1,pathology,True,False,False,False,False,False,False
+gm_entry_4884,Haemoglobin,Haematology,Whole Blood,Lavender (EDTA),200,1,pathology,True,False,False,True,False,False,False
+gm_entry_3753,Hb%,Haematology,Whole Blood,Lavender (EDTA),200,1,pathology,True,False,False,False,False,False,False
+gm_entry_3758,HB% Electro Phoresis,Haematology,Whole Blood,Lavender (EDTA),1500,1,pathology,True,False,False,False,False,False,False
+gm_entry_3783,HB-ELECTROPHORESIS,Haematology,Whole Blood,Lavender (EDTA),1500,1,pathology,True,False,False,False,False,False,False
+gm_entry_3784,HCT,Haematology,Whole Blood,Lavender (EDTA),250,1,pathology,True,False,False,False,False,False,False
+gm_entry_4913,Hemoglobin,Haematology,Whole Blood,Lavender (EDTA),250,1,pathology,False,False,False,False,False,False,False
+gm_entry_3760,PBF,Haematology,Whole Blood,Lavender (EDTA),300,1,pathology,True,False,False,False,False,False,False
+gm_entry_3786,PCT,Haematology,Whole Blood,Lavender (EDTA),200,1,pathology,True,False,False,False,False,False,False
+gm_entry_3761,Prothombintime,Haematology,Whole Blood,Light Blue,500,1,pathology,True,False,False,False,False,False,False
+gm_entry_5159,Raticulocyte Count,Haematology,Whole Blood,Red (Plain),400,0,pathology,False,False,False,False,False,False,False
+gm_entry_3794,"TC,DC",Haematology,Whole Blood,Lavender (EDTA),400,1,pathology,True,False,False,False,False,False,False
+gm_entry_3743,AMH,Hormone & Endocrinology,Whole Blood,Red (Plain),3000,0,pathology,True,True,False,False,False,False,False
+gm_entry_5141,CORTISOL (Evening-5:00 PM),Hormone & Endocrinology,,Red (Plain),1200,1,pathology,True,False,False,False,False,False,False
+gm_entry_3779,ESTEOGEN,Hormone & Endocrinology,Whole Blood,Red (Plain),1000,1,pathology,True,False,False,False,False,False,False
+gm_entry_3742,FSH,Hormone & Endocrinology,Whole Blood,Red (Plain),1200,1,pathology,True,False,False,False,False,False,False
+gm_entry_4893,FT3,Hormone & Endocrinology,Whole Blood,Red (Plain),1000,1,pathology,False,False,False,False,False,False,False
+gm_entry_4894,FT4,Hormone & Endocrinology,Whole Blood,Red (Plain),1000,1,pathology,False,False,False,False,False,False,False
+gm_entry_5007,LDH,Hormone & Endocrinology,Whole Blood,Red (Plain),1400,0,pathology,False,False,False,False,False,True,False
+gm_entry_3741,LH,Hormone & Endocrinology,Whole Blood,Red (Plain),1200,0,pathology,True,False,False,False,False,False,False
+gm_entry_3792,OESTROGEN,Hormone & Endocrinology,Whole Blood,Red (Plain),1000,1,pathology,True,False,False,False,False,False,False
+gm_entry_3823,PSA,Hormone & Endocrinology,,Red (Plain),1200,1,pathology,True,False,False,False,False,False,False
+gm_entry_4927,PTH( Parathyroid),Hormone & Endocrinology,,Red (Plain),1200,1,pathology,False,False,False,False,False,False,False
+gm_entry_5136,S. GH,Hormone & Endocrinology,,,1500,2,pathology,False,False,False,False,False,False,False
+gm_entry_4867,T3,Hormone & Endocrinology,Whole Blood,Red (Plain),800,1,pathology,True,False,False,True,False,False,False
+gm_entry_4868,T4,Hormone & Endocrinology,Whole Blood,Red (Plain),800,1,pathology,True,False,False,True,False,False,False
+gm_entry_3768,Testosterone,Hormone & Endocrinology,Whole Blood,Red (Plain),1500,1,pathology,True,False,False,False,False,False,False
+gm_entry_3744,tPSA,Hormone & Endocrinology,Whole Blood,Red (Plain),800,0,pathology,True,False,False,False,False,False,False
+gm_entry_5184,TRAB,Immunochemistry,Whole Blood,Red (Plain),6000,0,pathology,True,False,False,False,False,False,False
+gm_entry_3803,ADA,Immunology,Whole Blood,Lavender (EDTA),2000,1,pathology,True,False,False,False,False,False,False
+gm_entry_4953,AFP,Immunology,Whole Blood,Red (Plain),1200,0,pathology,False,False,False,False,False,True,False
+gm_entry_3806,ANA,Immunology,Whole Blood,Red (Plain),1200,1,pathology,True,False,False,False,False,False,False
+gm_entry_4882,Anti HAV,Immunology,Whole Blood,Red (Plain),1200,1,pathology,True,False,False,True,False,False,False
+gm_entry_3820,Anti Hbs,Immunology,,Red (Plain),1500,1,pathology,True,False,False,False,False,False,False
+gm_entry_3755,Anti HCV,Immunology,Whole Blood,Red (Plain),1200,1,pathology,True,False,False,False,False,False,False
+gm_entry_4883,Anti HEV,Immunology,Whole Blood,Red (Plain),1200,1,pathology,True,False,False,True,False,False,False
+gm_entry_5017,Anti- HBV,Immunology,Whole Blood,Red (Plain),1300,1,pathology,False,False,False,False,False,False,False
+gm_entry_3804,ANTI-DS DNA,Immunology,Whole Blood,Lavender (EDTA),1600,1,pathology,True,False,False,False,False,False,False
+gm_entry_5168,Anti-Thyroid Antibodies (TPO),Immunology,,Red (Plain),2500,0,pathology,False,False,False,False,False,False,False
+gm_entry_3757,B-HCG,Immunology,Whole Blood,Red (Plain),1200,1,pathology,True,True,False,False,False,False,False
+gm_entry_4949,CANCA,Immunology,,Red (Plain),1300,1,pathology,False,False,False,False,False,False,False
+gm_entry_3780,CEA,Immunology,Whole Blood,Red (Plain),1200,1,pathology,True,False,False,False,False,False,False
+gm_entry_3822,CORTISOL (BASAL-9:00 AM),Immunology,,Red (Plain),1200,1,pathology,True,False,False,False,False,False,False
+gm_entry_3825,CPK,Immunology,,Red (Plain),1200,1,pathology,True,False,False,False,False,False,False
+gm_entry_4991,Free Testosteron,Immunology,Whole Blood,Red (Plain),2800,1,pathology,True,False,False,True,False,False,False
+gm_entry_4932,Gene-X-Pert,Immunology,,,6500,1,pathology,False,False,False,False,False,False,False
+gm_entry_4990,"IgG ,IgM for Toxo",Immunology,Whole Blood,Red (Plain),2800,1,pathology,True,False,False,True,False,False,False
+gm_entry_5001,IGRA (Quantiferon TB Gold Test),Immunology,Whole Blood,Lavender (EDTA),8000,0,pathology,False,False,False,False,False,True,False
+gm_entry_4960,NT-Pro BNP,Immunology,Whole Blood,Red (Plain),3000,1,pathology,True,False,False,False,False,False,False
+gm_entry_4950,PANCA,Immunology,,Red (Plain),1300,1,pathology,False,False,False,False,False,False,False
+gm_entry_4998,QuantiFERON-TB Gold,Immunology,,,8000,0,pathology,False,False,False,False,False,False,False
+gm_entry_5002,S. ACE LEVEL,Immunology,Whole Blood,Light Blue,5080,0,pathology,False,False,False,False,False,True,False
+gm_entry_3827,SBNP,Immunology,,,3000,1,pathology,True,False,False,False,False,False,False
+gm_entry_4995,Torch Anti-Body,Immunology,Whole Blood,Red (Plain),9680,0,pathology,False,False,False,False,False,True,False
+gm_entry_3813,VIT B-12,Immunology,Whole Blood,Red (Plain),2200,1,pathology,True,False,False,False,False,False,False
+gm_entry_4924,Vitamin D,Immunology,,Red (Plain),3000,1,pathology,False,False,False,False,False,False,False
+gm_entry_5218,Catheter Tip CS,Microbiology,,Red (Plain),1650,0,microbiology,False,False,False,False,False,False,False
+gm_entry_3718,Conjunctival Swab For C/S(Left Eye),Microbiology,Swab,,400,2,microbiology,True,True,False,False,False,False,False
+gm_entry_5155,Corneal Scrapping for C/S,Microbiology,,,250,0,microbiology,False,True,False,False,False,True,False
+gm_entry_5180,Corneal Scrapping for KOH (Right Eye),Microbiology,Corneal Scraping,Red (Plain),500,0,microbiology,False,False,False,False,False,False,False
+gm_entry_5153,Corneal Scrapping for KOH-Left Eye,Microbiology,Corneal Scraping,Red (Plain),500,0,microbiology,False,False,False,False,False,False,False
+gm_entry_4951,Tracheal aspirate for c/s,Microbiology,,,1200,1,microbiology,False,True,False,False,False,False,False
+gm_entry_5212,Urine for Toxicology,Microbiology,,,5000,0,microbiology,False,False,False,False,False,False,False
+gm_entry_3776,Wound Swab C/s,Microbiology,Swab,,800,1,microbiology,True,True,False,False,False,False,False
+gm_entry_5119,Amphetamine,Pathology,,,1400,1,pathology,False,False,False,False,False,False,False
+gm_entry_5132,Anti - Thyroid Ab Test,Pathology,,,2600,1,pathology,False,False,False,False,False,True,False
+gm_entry_5120,Benzodiazepines,Pathology,,,1400,1,pathology,False,False,False,False,False,False,False
+gm_entry_5121,Cannabinoids,Pathology,,,1400,1,pathology,False,False,False,False,False,False,False
+gm_entry_4858,Disposable for Vacuette-01 Unit,Pathology,Whole Blood,,20,1,pathology,False,False,True,False,False,True,False
+gm_entry_4859,Disposable for Vacuette-02 Unit,Pathology,Whole Blood,,40,1,pathology,True,False,False,True,False,False,False
+gm_entry_4860,Disposable for Vacuette-03 Unit,Pathology,Whole Blood,,60,1,pathology,True,False,True,True,False,True,False
+gm_entry_3746,HBS,Pathology,,Red (Plain),200,1,pathology,True,False,False,False,False,False,False
+gm_entry_3815,LPH,Pathology,,,800,1,pathology,True,False,False,False,False,False,False
+gm_entry_4916,Lumbar Puncher,Pathology,,,4000,1,pathology,False,False,False,False,False,False,False
+gm_entry_3731,Needle for Vacuette- 01 Unit,Pathology,,,20,0,pathology,False,False,False,False,False,False,False
+gm_entry_5122,Opiates,Pathology,,,1400,1,pathology,False,False,False,False,False,False,False
+gm_entry_4947,Portable Echocardiography,Pathology,,,4000,1,pathology,False,False,False,False,False,False,False
+gm_entry_4862,RTR PCR (Covid-19),Pathology,Whole Blood,,3500,1,pathology,True,False,False,True,False,False,False
+gm_entry_4959,Usg Of HBS Panonex,Pathology,,,250,1,pathology,False,False,False,False,False,False,False
+gm_entry_4961,Usg Of TVS,Pathology,,,1500,1,pathology,False,False,False,False,False,False,False
+gm_entry_4993,USG Of Upper Abdomen /HBS,Pathology,,,1200,1,pathology,True,False,False,False,False,False,False
+gm_entry_5193,Anti HIV,Serology,Whole Blood,Red (Plain),2000,0,pathology,False,False,False,False,False,False,False
+gm_entry_3800,ANTI-HPYLORI IGG,Serology,Whole Blood,Red (Plain),1200,1,pathology,True,False,False,False,False,False,False
+gm_entry_3809,ATP-ALPHA-FETO-PROTEIN,Serology,Whole Blood,Red (Plain),1200,1,pathology,True,False,False,False,False,False,False
+gm_entry_3717,Blood Group,Serology,Whole Blood,Lavender (EDTA),200,1,pathology,True,False,False,False,False,False,False
+gm_entry_5157,"Chickungunya igG, igM",Serology,Whole Blood,Red (Plain),1500,0,pathology,False,False,False,False,False,False,False
+gm_entry_3817,Commb's,Serology,,,300,1,pathology,True,False,False,False,False,False,False
+gm_entry_4881,CRP,Serology,Whole Blood,Red (Plain),600,1,pathology,True,False,False,False,False,False,False
+gm_entry_3735,Dengue IgG/IgM,Serology,Whole Blood,Red (Plain),300,1,pathology,True,False,False,False,False,False,False
+gm_entry_3754,Dengue lgM,Serology,Whole Blood,Red (Plain),300,1,pathology,True,False,False,False,False,False,False
+gm_entry_4861,Dengue NS1 Ag (ICT),Serology,Whole Blood,Red (Plain),300,1,pathology,True,False,False,True,False,False,False
+gm_entry_4931,Febrile Antigen,Serology,,Red (Plain),1200,1,pathology,False,False,False,False,False,False,False
+gm_entry_3811,Fibrionogen Level,Serology,Whole Blood,Red (Plain),1500,1,pathology,True,False,False,False,False,False,False
+gm_entry_4934,H.pylori Test,Serology,,Red (Plain),1200,1,pathology,False,False,False,False,False,False,False
+gm_entry_3747,HBs Ag,Serology,Whole Blood,Red (Plain),600,1,pathology,True,False,False,False,False,False,False
+gm_entry_3716,HBsAg (Screening Test),Serology,Whole Blood,Red (Plain),300,1,pathology,True,False,False,False,False,False,False
+gm_entry_3787,HCV(Screening Test),Serology,Whole Blood,Red (Plain),300,1,pathology,True,False,False,False,False,False,False
+gm_entry_4976,"HIV 1,2 ( Screening Test )",Serology,Whole Blood,Red (Plain),300,1,pathology,True,False,False,False,False,False,False
+gm_entry_5009,ICT for Malarial,Serology,,,1200,1,pathology,True,False,False,False,False,True,False
+gm_entry_5188,Interleukin-6 ( IL-6),Serology,,Red (Plain),2540,0,pathology,False,False,False,False,False,False,False
+gm_entry_3791,Malaria Parasite(MP),Serology,Whole Blood,Red (Plain),300,1,pathology,True,False,False,False,False,False,False
+gm_entry_3749,Pregnancy Test,Serology,Urine (Random),,300,1,pathology,True,False,False,False,False,False,False
+gm_entry_4918,R A Test( Rheumatoid Arthritis),Serology,,Red (Plain),200,1,pathology,False,False,False,False,False,False,False
+gm_entry_3729,RA,Serology,Whole Blood,Red (Plain),400,0,pathology,False,False,False,False,False,False,False
+gm_entry_5216,RA Factor,Serology,Whole Blood,Red (Plain),500,0,pathology,True,False,False,False,False,False,False
+gm_entry_5156,RA Test,Serology,Whole Blood,Red (Plain),500,1,pathology,True,False,False,False,False,False,False
+gm_entry_3808,RH-antibody Titre,Serology,Whole Blood,Lavender (EDTA),1200,1,pathology,True,False,False,False,False,False,False
+gm_entry_3797,Triple Antigen,Serology,Whole Blood,Red (Plain),1000,1,pathology,True,False,False,False,False,False,False

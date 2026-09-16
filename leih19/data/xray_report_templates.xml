@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+<data noupdate="1">
+
+    <!-- ================================================================= -->
+    <!-- Plain film reporting templates                                     -->
+    <!--                                                                    -->
+    <!-- Structure only, with blanks for the radiologist to fill, matching  -->
+    <!-- the house style of the USG templates. Deliberately no pre-written  -->
+    <!-- normal findings: a template that already says "lung fields are     -->
+    <!-- clear" can be signed without being read, and the report then       -->
+    <!-- asserts something nobody checked. The headings are the value -      -->
+    <!-- they stop a structure being missed, without claiming it was seen.  -->
+    <!--                                                                    -->
+    <!-- noupdate: once the radiologists edit the wording, an upgrade must  -->
+    <!-- not overwrite it.                                                  -->
+    <!-- ================================================================= -->
+
+    <record id="xray_tpl_generic" model="examination.report.template">
+        <field name="name">X-Ray - Generic Study</field>
+        <field name="report_type">radiology</field>
+        <field name="note">Fallback for plain films with no dedicated template.</field>
+        <field name="body_html"><![CDATA[
+<div>
+    <p><b>TECHNIQUE / VIEWS:</b> ____</p>
+    <p><b>FINDINGS:</b> ____</p>
+    <p><b>IMPRESSION:</b> ____</p>
+</div>]]></field>
+    </record>
+
+    <record id="xray_tpl_chest" model="examination.report.template">
+        <field name="name">X-Ray of Chest (PA / AP)</field>
+        <field name="report_type">radiology</field>
+        <field name="note">Highest volume plain film. Order follows the usual reading sequence.</field>
+        <field name="body_html"><![CDATA[
+<div>
+    <p><b>TECHNIQUE / VIEWS:</b> ____ (PA erect / AP supine / lateral) &#8212; inspiration ____, rotation ____, penetration ____</p>
+    <p><b>LUNG FIELDS:</b> ____</p>
+    <p><b>PLEURA &amp; COSTOPHRENIC ANGLES:</b> ____</p>
+    <p><b>HILA &amp; PULMONARY VASCULATURE:</b> ____</p>
+    <p><b>HEART &amp; MEDIASTINUM:</b> ____ &#8212; cardiothoracic ratio ____</p>
+    <p><b>DIAPHRAGM:</b> ____</p>
+    <p><b>BONES &amp; SOFT TISSUES:</b> ____</p>
+    <p><b>TUBES / LINES / DEVICES:</b> ____</p>
+    <p><b>IMPRESSION:</b> ____</p>
+</div>]]></field>
+    </record>
+
+    <record id="xray_tpl_skull" model="examination.report.template">
+        <field name="name">X-Ray of Skull / Facial Bones / PNS</field>
+        <field name="report_type">radiology</field>
+        <field name="note">Skull, facial bones, sinuses, mandible, mastoid, orbit and TM joint -
+            the largest single group of plain films after the limbs.</field>
+        <field name="body_html"><![CDATA[
+<div>
+    <p><b>REGION &amp; VIEWS:</b> ____ (AP / lateral / Towne&#39;s / occipito-mental / submento-vertical)</p>
+    <p><b>VAULT &amp; SUTURES:</b> ____</p>
+    <p><b>SKULL BASE &amp; SELLA:</b> ____</p>
+    <p><b>FACIAL BONES &amp; ORBITAL MARGINS:</b> ____</p>
+    <p><b>PARANASAL SINUSES:</b> ____ (aeration, mucosal thickening, fluid level)</p>
+    <p><b>NASAL BONES &amp; SEPTUM:</b> ____</p>
+    <p><b>MANDIBLE &amp; TM JOINTS:</b> ____</p>
+    <p><b>MASTOID AIR CELLS:</b> ____</p>
+    <p><b>SOFT TISSUES:</b> ____</p>
+    <p><b>IMPRESSION:</b> ____</p>
+</div>]]></field>
+    </record>
+
+    <record id="xray_tpl_spine" model="examination.report.template">
+        <field name="name">X-Ray of Spine</field>
+        <field name="report_type">radiology</field>
+        <field name="note">Cervical, dorsal, lumbosacral, sacro-coccygeal and whole spine.</field>
+        <field name="body_html"><![CDATA[
+<div>
+    <p><b>REGION &amp; VIEWS:</b> ____ (AP / lateral / oblique / flexion &amp; extension)</p>
+    <p><b>ALIGNMENT &amp; CURVATURE:</b> ____</p>
+    <p><b>VERTEBRAL BODIES:</b> ____ (height, cortical outline, marginal osteophytes)</p>
+    <p><b>INTERVERTEBRAL DISC SPACES:</b> ____</p>
+    <p><b>POSTERIOR ELEMENTS &amp; FACET JOINTS:</b> ____</p>
+    <p><b>SACRO-ILIAC JOINTS:</b> ____</p>
+    <p><b>PARAVERTEBRAL SOFT TISSUES:</b> ____</p>
+    <p><b>IMPRESSION:</b> ____</p>
+</div>]]></field>
+    </record>
+
+    <record id="xray_tpl_extremity" model="examination.report.template">
+        <field name="name">X-Ray of Extremity / Joint</field>
+        <field name="report_type">radiology</field>
+        <field name="note">Limbs, joints, hands, feet, shoulder, pelvis and hip.</field>
+        <field name="body_html"><![CDATA[
+<div>
+    <p><b>PART &amp; VIEWS:</b> ____ (right / left &#8212; AP / lateral / oblique)</p>
+    <p><b>BONES:</b> ____ (cortical outline, medullary pattern, periosteal reaction)</p>
+    <p><b>FRACTURE / DISLOCATION:</b> ____ (site, pattern, displacement, angulation)</p>
+    <p><b>JOINT SPACE &amp; ARTICULAR SURFACES:</b> ____</p>
+    <p><b>SOFT TISSUES:</b> ____ (swelling, radio-opaque foreign body, gas)</p>
+    <p><b>IMPRESSION:</b> ____</p>
+</div>]]></field>
+    </record>
+
+    <record id="xray_tpl_abdomen" model="examination.report.template">
+        <field name="name">X-Ray of Abdomen / KUB</field>
+        <field name="report_type">radiology</field>
+        <field name="note">Plain abdomen and KUB, erect and supine.</field>
+        <field name="body_html"><![CDATA[
+<div>
+    <p><b>TECHNIQUE / VIEWS:</b> ____ (erect / supine / lateral decubitus)</p>
+    <p><b>BOWEL GAS PATTERN:</b> ____</p>
+    <p><b>AIR-FLUID LEVELS:</b> ____</p>
+    <p><b>FREE SUB-DIAPHRAGMATIC GAS:</b> ____</p>
+    <p><b>ORGAN OUTLINES:</b> ____ (liver, spleen, renal, psoas shadows)</p>
+    <p><b>ABNORMAL CALCIFICATION / RADIO-OPAQUE SHADOW:</b> ____</p>
+    <p><b>BONES:</b> ____ (lower ribs, spine, pelvis)</p>
+    <p><b>IMPRESSION:</b> ____</p>
+</div>]]></field>
+    </record>
+
+    <record id="xray_tpl_contrast" model="examination.report.template">
+        <field name="name">Contrast Study (Barium / IVU / Urethrogram)</field>
+        <field name="report_type">radiology</field>
+        <field name="note">Fluoroscopic and contrast work. Carries the consent and reaction line
+            that a plain film does not need.</field>
+        <field name="body_html"><![CDATA[
+<div>
+    <p><b>STUDY:</b> ____</p>
+    <p><b>CONSENT:</b> ____</p>
+    <p><b>CONTRAST:</b> ____ (agent, concentration, volume, route)</p>
+    <p><b>TECHNIQUE:</b> ____ (screening sequence, positions, spot films)</p>
+    <p><b>LUMEN &amp; OUTLINE:</b> ____</p>
+    <p><b>MUCOSAL PATTERN:</b> ____</p>
+    <p><b>FILLING DEFECT / NARROWING / DILATATION:</b> ____</p>
+    <p><b>TRANSIT / DRAINAGE:</b> ____</p>
+    <p><b>ADVERSE REACTION:</b> ____</p>
+    <p><b>IMPRESSION:</b> ____</p>
+</div>]]></field>
+    </record>
+
+</data>
+
+    <!-- Attach each template to the studies it fits. Outside the noupdate
+         block on purpose: a <function> inside one is skipped on upgrade
+         (odoo/tools/convert.py:270), so it would only ever run at first
+         install. It is idempotent and never displaces a template a
+         radiologist has attached by hand. -->
+    <data>
+        <function model="examination.report.template" name="_attach_plain_film_templates"/>
+    </data>
+
+</odoo>

@@ -38,10 +38,13 @@ class LabSpecimen(models.Model):
         for rec in self:
             rec.result_count = len(rec.result_ids)
 
-    @api.depends('result_ids.entry_id.name')
+    @api.depends('result_ids.entry_id.name', 'result_ids.state')
     def _compute_test_names(self):
+        # Drives the tube sticker, so a test cancelled or dropped from the bill
+        # must stop appearing on the label the phlebotomist reads.
         for rec in self:
-            rec.test_names = ', '.join(rec.result_ids.mapped('entry_id.name'))
+            live = rec.result_ids.filtered(lambda r: r.state != 'cancelled')
+            rec.test_names = ', '.join(live.mapped('entry_id.name'))
 
     @api.model_create_multi
     def create(self, vals_list):

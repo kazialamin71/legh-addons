@@ -1,0 +1,511 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+<data noupdate="1">
+
+    <!-- ================================================================= -->
+    <!-- Reference test catalogue                                           -->
+    <!--                                                                    -->
+    <!-- The nine test items on the reference report slips, configured the   -->
+    <!-- way the printed reports show them. Seven catalogue entries, because -->
+    <!-- U.M.Alb / U.Crea / UACR are one requested panel and Anti-HAV /      -->
+    <!-- Anti-HEV are another.                                              -->
+    <!--                                                                    -->
+    <!-- Rates are deliberately left at zero - pricing is the hospital's to  -->
+    <!-- set, and a wrong rate bills a patient wrongly.                      -->
+    <!-- ================================================================= -->
+
+    <!-- ============ Master data ============ -->
+    <!-- This file never creates departments, sample types, methods or
+         instruments. Those lists are the hospital's own and already hold a
+         Serum, an ELISA and a Serology; module-owned copies would leave the
+         pickers showing two of each. The binder below matches them by name
+         and creates only what is genuinely absent. -->
+
+    <!-- ================================================================= -->
+    <!-- 1. QuantiFERON TB Gold / IGRA        (Immunology, panelled form)   -->
+    <!--    One boxed panel: a name row, three tube readings side by side,  -->
+    <!--    and the verdict the ward acts on.                               -->
+    <!-- ================================================================= -->
+    <record id="examination_entry_tb_gold" model="examination.entry">
+        <field name="name">QuantiFERON TB Gold / IGRA</field>
+        <field name="category">pathology</field>
+        <field name="report_type">pathology</field>
+        <field name="report_layout">special</field>
+        <field name="sample_req" eval="True"/>
+        <field name="required_time">7</field>
+    </record>
+
+    <!-- Opens and boxes the panel only. No name, because the assay name is
+         already carried by the "Test Name" row inside the box - naming this
+         row too would print it twice, as the reference slip does not. -->
+    <record id="tbgold_line_panel" model="examination.entry.line">
+        <field name="name"></field>
+        <field name="examinationentry_id" ref="examination_entry_tb_gold"/>
+        <field name="is_group_header" eval="True"/>
+        <field name="panel_boxed" eval="True"/>
+        <field name="sequence">10</field>
+    </record>
+
+    <record id="tbgold_line_test_name" model="examination.entry.line">
+        <field name="name">Test Name</field>
+        <field name="examinationentry_id" ref="examination_entry_tb_gold"/>
+        <field name="result_type">text</field>
+        <field name="default_value">TB-Gold, Interferone Gama Release Assay (IGRA)</field>
+        <field name="print_style">row</field>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="tbgold_line_nil_tube" model="examination.entry.line">
+        <field name="name">Nil Tube(pg/ml)</field>
+        <field name="examinationentry_id" ref="examination_entry_tb_gold"/>
+        <field name="result_type">numeric</field>
+        <field name="uom">pg/mL</field>
+        <field name="decimals">2</field>
+        <field name="print_style">band</field>
+        <field name="sequence">30</field>
+    </record>
+
+    <record id="tbgold_line_testing_tube" model="examination.entry.line">
+        <field name="name">Testing Tube (pg/ml)</field>
+        <field name="examinationentry_id" ref="examination_entry_tb_gold"/>
+        <field name="result_type">numeric</field>
+        <field name="uom">pg/mL</field>
+        <field name="decimals">2</field>
+        <field name="print_style">band</field>
+        <field name="sequence">40</field>
+    </record>
+
+    <record id="tbgold_line_testing_nil" model="examination.entry.line">
+        <field name="name">Testing - Nil Tube (pg/ml)</field>
+        <field name="examinationentry_id" ref="examination_entry_tb_gold"/>
+        <field name="result_type">numeric</field>
+        <field name="uom">pg/mL</field>
+        <field name="decimals">2</field>
+        <field name="print_style">band</field>
+        <field name="sequence">50</field>
+    </record>
+
+    <record id="tbgold_line_final_result" model="examination.entry.line">
+        <field name="name">Final Result</field>
+        <field name="examinationentry_id" ref="examination_entry_tb_gold"/>
+        <field name="result_type">selection</field>
+        <field name="print_style">verdict</field>
+        <field name="sequence">60</field>
+    </record>
+
+    <record id="tbgold_pv_negative" model="examination.possible.value">
+        <field name="name">NEGATIVE</field>
+        <field name="examination_line_id" ref="tbgold_line_final_result"/>
+        <field name="sequence">10</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="tbgold_pv_positive" model="examination.possible.value">
+        <field name="name">POSITIVE</field>
+        <field name="examination_line_id" ref="tbgold_line_final_result"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="tbgold_pv_indeterminate" model="examination.possible.value">
+        <field name="name">INDETERMINATE</field>
+        <field name="examination_line_id" ref="tbgold_line_final_result"/>
+        <field name="sequence">30</field>
+    </record>
+
+    <record id="tbgold_block_matrix" model="lab.report.block">
+        <field name="entry_id" ref="examination_entry_tb_gold"/>
+        <field name="sequence">10</field>
+        <field name="style">plain</field>
+        <field name="body_html"><![CDATA[
+<table style="width:100%; border-collapse:collapse; font-size:12px;">
+  <tr>
+    <td style="border:1px dashed #666; padding:4px 6px; font-weight:bold;">Nil Tube in pg/ml</td>
+    <td style="border:1px dashed #666; padding:4px 6px; font-weight:bold;">Anigen Tube - Nil Tube pg/ml</td>
+    <td style="border:1px dashed #666; padding:4px 6px; font-weight:bold;">Result</td>
+    <td style="border:1px dashed #666; padding:4px 6px; font-weight:bold;">Remark</td>
+  </tr>
+  <tr>
+    <td rowspan="3" style="border:1px dashed #666; padding:4px 6px; text-align:center;">&#8804; 400</td>
+    <td style="border:1px dashed #666; padding:4px 6px;">&lt;14</td>
+    <td rowspan="2" style="border:1px dashed #666; padding:4px 6px; text-align:center;">Negative</td>
+    <td rowspan="2" style="border:1px dashed #666; padding:4px 6px;">No infection with M.Tuberculosis</td>
+  </tr>
+  <tr>
+    <td style="border:1px dashed #666; padding:4px 6px;">&#8805; 14 but &lt; 25% of Nil Value</td>
+  </tr>
+  <tr>
+    <td style="border:1px dashed #666; padding:4px 6px;">&#8805; 14 &amp; &#8805; 25% of Nil Value</td>
+    <td style="border:1px dashed #666; padding:4px 6px; text-align:center;">Positive</td>
+    <td style="border:1px dashed #666; padding:4px 6px;">Infected with M.Tuberculosis (Active or Latent)</td>
+  </tr>
+  <tr>
+    <td style="border:1px dashed #666; padding:4px 6px; text-align:center;">&#8805; 400</td>
+    <td style="border:1px dashed #666; padding:4px 6px;">Any Value</td>
+    <td style="border:1px dashed #666; padding:4px 6px; text-align:center;">Indeterminate</td>
+    <td style="border:1px dashed #666; padding:4px 6px;">Result are indeterminate for TB Responsiveness</td>
+  </tr>
+</table>]]></field>
+    </record>
+
+    <record id="tbgold_block_note" model="lab.report.block">
+        <field name="name">Note</field>
+        <field name="entry_id" ref="examination_entry_tb_gold"/>
+        <field name="sequence">20</field>
+        <field name="style">inline</field>
+        <field name="body_html"><![CDATA[
+<p>This assay cannot differentiate between latent infection and active infection.</p>
+<p>False negative result may be obtained if sample is taken prior to development of immune response.</p>
+<p>Immunocompromised patients can also show false negative.</p>]]></field>
+    </record>
+
+    <record id="tbgold_block_comment" model="lab.report.block">
+        <field name="name">Comment</field>
+        <field name="entry_id" ref="examination_entry_tb_gold"/>
+        <field name="sequence">30</field>
+        <field name="style">inline</field>
+        <field name="body_html"><![CDATA[
+<p>This assay is intended for use as a diagnostic aid for M.Tuberculosis complex patients, whether
+active tuberculosis disease or Latent TB and is intended for use in conjunction with risk assessment,
+Radiography and other medical and diagnostic evaluations.</p>]]></field>
+    </record>
+
+    <!-- ================================================================= -->
+    <!-- 2. Rh Antibody Titre                          (Serology, tabular)  -->
+    <!-- ================================================================= -->
+    <record id="examination_entry_rh_ab_titre" model="examination.entry">
+        <field name="name">Rh Ab Titre</field>
+        <field name="category">pathology</field>
+        <field name="report_type">pathology</field>
+        <field name="report_layout">tabular</field>
+        <field name="sample_req" eval="True"/>
+        <field name="required_time">1</field>
+    </record>
+
+    <record id="rhab_line_titre" model="examination.entry.line">
+        <field name="name">Rh-Antibody Titre(Rh Ab Titre)</field>
+        <field name="examinationentry_id" ref="examination_entry_rh_ab_titre"/>
+        <field name="result_type">selection</field>
+        <field name="sequence">10</field>
+    </record>
+
+    <record id="rhab_pv_not_detected" model="examination.possible.value">
+        <field name="name">Not-detected</field>
+        <field name="examination_line_id" ref="rhab_line_titre"/>
+        <field name="sequence">10</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="rhab_pv_detected" model="examination.possible.value">
+        <field name="name">Detected</field>
+        <field name="examination_line_id" ref="rhab_line_titre"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <!-- ================================================================= -->
+    <!-- 3. Angiotensin Converting Enzyme (ACE)  (Immunochemistry, tabular) -->
+    <!-- ================================================================= -->
+    <record id="examination_entry_ace" model="examination.entry">
+        <field name="name">Angiotensin Converting Enzyme (ACE)</field>
+        <field name="category">pathology</field>
+        <field name="report_type">pathology</field>
+        <field name="report_layout">tabular</field>
+        <field name="sample_req" eval="True"/>
+        <field name="required_time">2</field>
+    </record>
+
+    <record id="ace_line_ace" model="examination.entry.line">
+        <field name="name">Angiotensin converting Enzyme (ACE)</field>
+        <field name="examinationentry_id" ref="examination_entry_ace"/>
+        <field name="result_type">numeric</field>
+        <field name="uom">U/L</field>
+        <field name="decimals">1</field>
+        <field name="reference_value">Adults : 20-70  |  Children : 33-112</field>
+        <field name="ref_low">20</field>
+        <field name="ref_high">70</field>
+        <field name="sequence">10</field>
+    </record>
+
+    <record id="ace_block_precaution" model="lab.report.block">
+        <field name="name">PrecautionaryComments</field>
+        <field name="entry_id" ref="examination_entry_ace"/>
+        <field name="sequence">10</field>
+        <field name="style">stacked</field>
+        <field name="body_html"><![CDATA[<p>Outsource</p>]]></field>
+    </record>
+
+    <record id="ace_block_interpretation" model="lab.report.block">
+        <field name="name">Interpretation Result</field>
+        <field name="entry_id" ref="examination_entry_ace"/>
+        <field name="sequence">20</field>
+        <field name="style">stacked</field>
+        <field name="body_html"><![CDATA[
+<p>Note : Angiotensin converting enzyme(ACE) modulates peripheral vascular resistance as well as renal
+and cardiovascular function. It is responsible for conversion of Angiotensin I to Angiotensin II as well
+as inactivation of bradykinin. Majority of ACE is tissue bound(&gt;90%) found predominantly in lungs and
+testes.</p>
+<p>Increased levels at : Sarcoidosis, Pulmonary diseases, Renal Diseases, Gaucher's disease, Multiple
+sclerosis, Addisons disease, Hyperthyroidism, Alcoholic hepatitis and Peptic ulcer</p>
+<p>Decreased levels at : Chronic liver disease, Anorexia nervosa, Hypothyroidism</p>]]></field>
+    </record>
+
+    <!-- ================================================================= -->
+    <!-- 4. Antinuclear Antibody (ANA)           (Immunochemistry, tabular) -->
+    <!--    ref_high 40 is what turns 130.0 into "130.0 H" on the print.    -->
+    <!-- ================================================================= -->
+    <record id="examination_entry_ana" model="examination.entry">
+        <field name="name">Antinuclear Antibody (ANA)</field>
+        <field name="category">pathology</field>
+        <field name="report_type">pathology</field>
+        <field name="report_layout">tabular</field>
+        <field name="sample_req" eval="True"/>
+        <field name="required_time">2</field>
+    </record>
+
+    <record id="ana_line_ana" model="examination.entry.line">
+        <field name="name">Antinuclear Antibody(ANA)</field>
+        <field name="examinationentry_id" ref="examination_entry_ana"/>
+        <field name="result_type">numeric</field>
+        <field name="uom">AU/mL</field>
+        <field name="decimals">1</field>
+        <field name="reference_value">Negative: &lt;40  |  Positive: &#8805; 40</field>
+        <field name="ref_high">40</field>
+        <field name="sequence">10</field>
+    </record>
+
+    <!-- ================================================================= -->
+    <!-- 5. Urine Albumin Creatinine Ratio panel      (Biochemistry)        -->
+    <!--    Three test items under one requested panel: U.M.Alb, U.Crea,    -->
+    <!--    and the UACR calculated from them.                              -->
+    <!-- ================================================================= -->
+    <record id="examination_entry_uacr" model="examination.entry">
+        <field name="name">U.Crea, U.M.Alb, UACR</field>
+        <field name="category">pathology</field>
+        <field name="report_type">pathology</field>
+        <field name="report_layout">tabular</field>
+        <field name="sample_req" eval="True"/>
+        <field name="required_time">1</field>
+    </record>
+
+    <record id="uacr_line_group" model="examination.entry.line">
+        <field name="name">Urine Albumin Creatinine Ratio (U.M.Alb Ratio)</field>
+        <field name="examinationentry_id" ref="examination_entry_uacr"/>
+        <field name="is_group_header" eval="True"/>
+        <field name="sequence">10</field>
+    </record>
+
+    <record id="uacr_line_microalbumin" model="examination.entry.line">
+        <field name="name">Urine Microalbumin</field>
+        <field name="examinationentry_id" ref="examination_entry_uacr"/>
+        <field name="result_type">numeric</field>
+        <field name="uom">mg/dL</field>
+        <field name="decimals">2</field>
+        <field name="reference_value">Normal: &lt;3  |  Microalbuminuria: 3-30  |  Macroalbuminuria: &gt;30</field>
+        <field name="ref_high">3</field>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="uacr_line_creatinine" model="examination.entry.line">
+        <field name="name">Urine Creatinine</field>
+        <field name="examinationentry_id" ref="examination_entry_uacr"/>
+        <field name="result_type">numeric</field>
+        <field name="uom">mg/dL</field>
+        <field name="decimals">2</field>
+        <field name="sequence">30</field>
+    </record>
+
+    <record id="uacr_line_ratio" model="examination.entry.line">
+        <field name="name">Urine Albumin Creatinine Ratio (UACR)</field>
+        <field name="examinationentry_id" ref="examination_entry_uacr"/>
+        <field name="result_type">numeric</field>
+        <field name="uom">&#181;g/mg creatinine</field>
+        <field name="decimals">2</field>
+        <field name="reference_value">&lt;30</field>
+        <field name="ref_high">30</field>
+        <field name="sequence">40</field>
+    </record>
+
+    <!-- ================================================================= -->
+    <!-- 6. Anti-HAV IgM + Anti-HEV IgM                (Serology, tabular)  -->
+    <!--    Two test items, each printed as a heading over its own          -->
+    <!--    Sample OD / Cut Off / Interpretation rows.                      -->
+    <!-- ================================================================= -->
+    <record id="examination_entry_hav_hev" model="examination.entry">
+        <field name="name">Anti-HAV IgM, Anti-HEV IgM</field>
+        <field name="category">pathology</field>
+        <field name="report_type">pathology</field>
+        <field name="report_layout">tabular</field>
+        <field name="sample_req" eval="True"/>
+        <field name="required_time">1</field>
+    </record>
+
+    <record id="hav_line_group" model="examination.entry.line">
+        <field name="name">Hepatitis-A IgM Antibody(Anti-HAV IgM)</field>
+        <field name="examinationentry_id" ref="examination_entry_hav_hev"/>
+        <field name="is_group_header" eval="True"/>
+        <field name="sequence">10</field>
+    </record>
+
+    <record id="hav_line_sample_od" model="examination.entry.line">
+        <field name="name">Sample OD</field>
+        <field name="examinationentry_id" ref="examination_entry_hav_hev"/>
+        <field name="result_type">numeric</field>
+        <field name="decimals">3</field>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="hav_line_cut_off" model="examination.entry.line">
+        <field name="name">Cut Off</field>
+        <field name="examinationentry_id" ref="examination_entry_hav_hev"/>
+        <field name="result_type">numeric</field>
+        <field name="decimals">3</field>
+        <field name="sequence">30</field>
+    </record>
+
+    <record id="hav_line_interpretation" model="examination.entry.line">
+        <field name="name">Interpretation</field>
+        <field name="examinationentry_id" ref="examination_entry_hav_hev"/>
+        <field name="result_type">selection</field>
+        <field name="sequence">40</field>
+    </record>
+
+    <record id="hav_pv_negative" model="examination.possible.value">
+        <field name="name">Negative</field>
+        <field name="examination_line_id" ref="hav_line_interpretation"/>
+        <field name="sequence">10</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="hav_pv_positive" model="examination.possible.value">
+        <field name="name">Positive</field>
+        <field name="examination_line_id" ref="hav_line_interpretation"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="hev_line_group" model="examination.entry.line">
+        <field name="name">Hepatitis-E Virus IgM Antibody(Anti-HEV IgM)</field>
+        <field name="examinationentry_id" ref="examination_entry_hav_hev"/>
+        <field name="is_group_header" eval="True"/>
+        <field name="sequence">50</field>
+    </record>
+
+    <record id="hev_line_sample_od" model="examination.entry.line">
+        <field name="name">Sample OD</field>
+        <field name="examinationentry_id" ref="examination_entry_hav_hev"/>
+        <field name="result_type">numeric</field>
+        <field name="decimals">3</field>
+        <field name="sequence">60</field>
+    </record>
+
+    <record id="hev_line_cut_off" model="examination.entry.line">
+        <field name="name">Cut off</field>
+        <field name="examinationentry_id" ref="examination_entry_hav_hev"/>
+        <field name="result_type">numeric</field>
+        <field name="decimals">3</field>
+        <field name="sequence">70</field>
+    </record>
+
+    <record id="hev_line_interpretation" model="examination.entry.line">
+        <field name="name">Interpretation</field>
+        <field name="examinationentry_id" ref="examination_entry_hav_hev"/>
+        <field name="result_type">selection</field>
+        <field name="sequence">80</field>
+    </record>
+
+    <record id="hev_pv_negative" model="examination.possible.value">
+        <field name="name">Negative</field>
+        <field name="examination_line_id" ref="hev_line_interpretation"/>
+        <field name="sequence">10</field>
+        <field name="is_default" eval="True"/>
+    </record>
+
+    <record id="hev_pv_positive" model="examination.possible.value">
+        <field name="name">Positive</field>
+        <field name="examination_line_id" ref="hev_line_interpretation"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="hav_hev_block_precaution" model="lab.report.block">
+        <field name="name">PrecautionaryComments</field>
+        <field name="entry_id" ref="examination_entry_hav_hev"/>
+        <field name="sequence">10</field>
+        <field name="style">stacked</field>
+        <field name="body_html"><![CDATA[<p>Outsource</p>]]></field>
+    </record>
+
+    <!-- ================================================================= -->
+    <!-- 7. Prothrombin Time (PT) with INR           (Haematology, tabular) -->
+    <!--    Taken from the outsourced slip, configured as a house test so   -->
+    <!--    it can be run and printed in-house.                             -->
+    <!-- ================================================================= -->
+    <record id="examination_entry_pt_inr" model="examination.entry">
+        <field name="name">Prothrombin Time (PT) with INR</field>
+        <field name="category">pathology</field>
+        <field name="report_type">pathology</field>
+        <field name="report_layout">tabular</field>
+        <field name="sample_req" eval="True"/>
+        <field name="required_time">1</field>
+    </record>
+
+    <record id="pt_line_group" model="examination.entry.line">
+        <field name="name">Prothrombin Time (PT)</field>
+        <field name="examinationentry_id" ref="examination_entry_pt_inr"/>
+        <field name="is_group_header" eval="True"/>
+        <field name="sequence">10</field>
+    </record>
+
+    <record id="pt_line_patient" model="examination.entry.line">
+        <field name="name">Patient</field>
+        <field name="examinationentry_id" ref="examination_entry_pt_inr"/>
+        <field name="result_type">numeric</field>
+        <field name="uom">Second</field>
+        <field name="decimals">1</field>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="pt_line_control" model="examination.entry.line">
+        <field name="name">Control</field>
+        <field name="examinationentry_id" ref="examination_entry_pt_inr"/>
+        <field name="result_type">numeric</field>
+        <field name="uom">Second</field>
+        <field name="decimals">1</field>
+        <field name="sequence">30</field>
+    </record>
+
+    <record id="pt_line_index" model="examination.entry.line">
+        <field name="name">Index</field>
+        <field name="examinationentry_id" ref="examination_entry_pt_inr"/>
+        <field name="result_type">numeric</field>
+        <field name="uom">%</field>
+        <field name="decimals">2</field>
+        <field name="sequence">40</field>
+    </record>
+
+    <record id="pt_line_ratio" model="examination.entry.line">
+        <field name="name">Ratio</field>
+        <field name="examinationentry_id" ref="examination_entry_pt_inr"/>
+        <field name="result_type">numeric</field>
+        <field name="decimals">2</field>
+        <field name="sequence">50</field>
+    </record>
+
+    <record id="pt_line_inr" model="examination.entry.line">
+        <field name="name">INR</field>
+        <field name="examinationentry_id" ref="examination_entry_pt_inr"/>
+        <field name="result_type">numeric</field>
+        <field name="decimals">2</field>
+        <field name="reference_value">0.8-1.2 for people not taking anticoagulants. 2.0-4.0 for people taking anticoagulants.</field>
+        <field name="sequence">60</field>
+    </record>
+
+</data>
+
+    <!-- Wire everything above to the hospital's own master lists.
+         Deliberately outside the noupdate block: a <function> inside one is
+         skipped on upgrade (odoo/tools/convert.py:270) and only ever runs at
+         first install, which would leave a restored database unwired. The
+         binder is idempotent, so running it every upgrade costs nothing. -->
+    <data>
+        <function model="examination.entry" name="_bind_reference_catalogue"/>
+    </data>
+
+</odoo>

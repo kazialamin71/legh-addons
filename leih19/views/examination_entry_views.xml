@@ -59,6 +59,7 @@
                         <group>
                             <field name="reported_by_id" />
                             <field name="default_instrument_id"/>
+                            <field name="print_disclaimer"/>
                         </group>
                     </group>
                     <group string="Microbiology Defaults" invisible="category != 'microbiology'">
@@ -77,6 +78,7 @@
                                     <field name="sequence" widget="handle"/>
                                     <field name="name"/>
                                     <field name="result_type"/>
+                                    <field name="method_id" optional="show"/>
                                     <field name="uom"/>
                                     <field name="reference_value"/>
                                     <field name="reference_value_male"/>
@@ -84,6 +86,9 @@
                                     <field name="reference_value_child"/>
                                     <field name="bold"/>
                                     <field name="is_group_header"/>
+                                    <field name="print_style" optional="show"/>
+                                    <field name="decimals" optional="hide"/>
+                                    <field name="panel_boxed" optional="hide"/>
                                     <field name="group_by"/>
                                 </list>
                                 <form>
@@ -93,6 +98,7 @@
                                                 <field name="name"/>
                                                 <field name="sequence"/>
                                                 <field name="result_type"/>
+                                                <field name="method_id"/>
                                                 <field name="uom"/>
                                                 <field name="reference_value"/>
                                                 <field name="default_value"/>
@@ -107,6 +113,9 @@
                                                 <field name="critical_high" invisible="result_type != 'numeric'"/>
                                                 <field name="bold"/>
                                                 <field name="is_group_header"/>
+                                                <field name="print_style" invisible="is_group_header"/>
+                                                <field name="decimals" invisible="result_type != 'numeric'"/>
+                                                <field name="panel_boxed" invisible="not is_group_header"/>
                                                 <field name="group_by"/>
                                                 <field name="others"/>
                                             </group>
@@ -139,6 +148,31 @@
                                     <field name="rate"/>
                                     <field name="is_active"/>
                                 </list>
+                            </field>
+                        </page>
+                        <page string="Report Notes">
+                            <p class="text-muted">
+                                Blocks printed under the result table on every report of this
+                                test - Interpretation, Note, Comment, Precautionary Comments, or a
+                                whole reference table. They are copied onto each result, where the
+                                technician can still edit them.
+                            </p>
+                            <field name="report_block_ids">
+                                <list>
+                                    <field name="sequence" widget="handle"/>
+                                    <field name="name"/>
+                                    <field name="style"/>
+                                </list>
+                                <form>
+                                    <sheet>
+                                        <group>
+                                            <field name="name"/>
+                                            <field name="style"/>
+                                            <field name="sequence"/>
+                                        </group>
+                                        <field name="body_html" widget="html" nolabel="1"/>
+                                    </sheet>
+                                </form>
                             </field>
                         </page>
                         <page string="Report Templates">

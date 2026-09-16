@@ -26,6 +26,10 @@
                             <field name="modality" />
                         </group>
                     </group>
+                    <group string="Report Disclaimer">
+                        <field name="report_disclaimer_html" widget="html" nolabel="1"
+                               placeholder="Leave empty to use the company-wide disclaimer."/>
+                    </group>
                 </sheet>
             </form>
         </field>

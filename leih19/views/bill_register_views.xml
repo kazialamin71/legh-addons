@@ -59,7 +59,8 @@
                     <button name="btn_pay_bill" type="object" string="Pay"
                             class="oe_highlight" invisible="state != 'confirmed' or due &lt;= 0"/>
                     <button name="bill_cancel" type="object" string="Cancel"
-                            invisible="state in ('cancelled', 'released')"/>
+                            invisible="state in ('cancelled', 'released')"
+                            confirm="Cancelling voids this bill's money receipts, reverses its journal entries and drops its pending lab reports and tubes. Continue?"/>
                     <field name="state" widget="statusbar"
                            statusbar_visible="pending,confirmed,released"/>
                 </header>
@@ -110,7 +111,7 @@
                             <field name="bill_register_line_id">
                                 <list editable="bottom">
                                     <field name="is_support_line" column_invisible="1"/>
-                                    <field name="name" />
+                                    <field name="name" width="320"/>
                                     <field name="department" readonly="1" />
                                     <field name="product_qty" />
                                     <field name="delivery_date" readonly="1" />
@@ -178,6 +179,8 @@
                                 <field name="card_no" invisible="payment_is_cash or not payment_type"/>
                                 <field name="account_number" invisible="payment_is_cash or not payment_type"/>
                                 <field name="down_payment" readonly="state != 'pending'"/>
+                                <field name="down_payment_registered" readonly="1"
+                                       invisible="down_payment_registered == 0"/>
                             </group>
                         </group>
                         <group class="oe_subtotal_footer" colspan="2" name="bill_totals">

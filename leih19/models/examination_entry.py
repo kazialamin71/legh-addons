@@ -108,6 +108,17 @@ class ExaminationEntry(models.Model):
         'lab.instrument', string='Default Instrument',
         help='Routine analyzer for this test; tech can override on individual results.',
     )
+    report_block_ids = fields.One2many(
+        'lab.report.block', 'entry_id', string='Report Notes',
+        help='Text blocks printed under the result table (Interpretation, Note, '
+             'Comment, reference matrix...). Copied onto every result of this '
+             'test, where they stay editable.',
+    )
+    print_disclaimer = fields.Boolean(
+        'Print Disclaimer', default=True,
+        help='Print the department (or company) disclaimer at the bottom of this '
+             "test's report.",
+    )
     report_template_ids = fields.Many2many(
         'examination.report.template', 'examination_entry_template_rel',
         'examination_entry_id', 'template_id',
@@ -125,3 +136,111 @@ class ExaminationEntry(models.Model):
         string='Antibiotic Panel',
         help='Panel of antibiotics the technician will fill at result time when growth is reported.',
     )
+
+    # ------------------------------------------------------------------
+    # Reference catalogue wiring
+    # ------------------------------------------------------------------
+    # Which master record each reference test hangs off. Names are listed
+    # best-first: the hospital's own wording wins, and the fallback is only
+    # reached when that list genuinely has no equivalent yet.
+    _REFERENCE_CATALOGUE = {
+        'examination_entry_tb_gold': {
+            'department': ['Immunology'],
+            'sample_type': ['Lithium Heparin (Plasma)', 'Plasma'],
+            'default_method_id': ['Interferon Gamma Release Assay (IGRA)'],
+        },
+        'examination_entry_rh_ab_titre': {
+            'department': ['Serology'],
+            'sample_type': ['Serum'],
+            'default_method_id': ['Slide / Tube Agglutination', 'Agglutination'],
+        },
+        'examination_entry_ace': {
+            'department': ['Immunochemistry'],
+            'sample_type': ['Serum'],
+            'default_method_id': ['FAPGG (Colorimetric)'],
+        },
+        'examination_entry_ana': {
+            'department': ['Immunochemistry'],
+            'sample_type': ['Serum'],
+            'default_method_id': ['CLIA (Chemiluminescence)', 'CLIA'],
+        },
+        'examination_entry_uacr': {
+            'department': ['Biochemistry'],
+            'sample_type': ['Urine (Random)', 'Urine'],
+            'default_method_id': ['Spectrophotometry', 'Photometry'],
+        },
+        'examination_entry_hav_hev': {
+            'department': ['Serology'],
+            'sample_type': ['Serum'],
+            'default_method_id': ['ELISA'],
+        },
+        'examination_entry_pt_inr': {
+            'department': ['Haematology'],
+            'sample_type': ['Whole Blood', 'Blood'],
+            'default_method_id': ['Viscosity Based (Mechanical) Detection System'],
+            'default_instrument_id': ['Stago STA Compact Max 3'],
+        },
+    }
+
+    # Components whose printed method differs from the test's default.
+    _REFERENCE_CATALOGUE_LINE_METHODS = {
+        'rhab_line_titre': ['Slide / Tube Agglutination', 'Agglutination'],
+        'ace_line_ace': ['FAPGG (Colorimetric)'],
+        'ana_line_ana': ['CLIA (Chemiluminescence)', 'CLIA'],
+        'uacr_line_microalbumin': ['Spectrophotometry', 'Photometry'],
+        'uacr_line_creatinine': ['Spectrophotometry', 'Photometry'],
+        'uacr_line_ratio': ['Calculation'],
+        'hav_line_sample_od': ['ELISA'],
+        'hav_line_cut_off': ['ELISA'],
+        'hav_line_interpretation': ['ELISA'],
+        'hev_line_sample_od': ['ELISA'],
+        'hev_line_cut_off': ['ELISA'],
+        'hev_line_interpretation': ['ELISA'],
+        'pt_line_index': ['Calculation'],
+        'pt_line_ratio': ['Calculation'],
+        'pt_line_inr': ['Calculation'],
+    }
+
+    @api.model
+    def _resolve_master(self, model, names):
+        """First master record matching one of `names`, created if none match.
+
+        Matching is by name because that is the only stable handle: these lists
+        are hospital data the lab typed itself, so their ids differ per database
+        and they carry no external identifier of ours.
+        """
+        Master = self.env[model]
+        for name in names:
+            record = Master.search([('name', '=ilike', name)], limit=1)
+            if record:
+                return record
+        return Master.create({'name': names[0]})
+
+    @api.model
+    def _bind_reference_catalogue(self):
+        """Attach the reference tests to the hospital's own master lists.
+
+        Called from data/reference_test_catalogue.xml after the tests load.
+        Idempotent, and it never overwrites a link someone has since changed by
+        hand - only empty fields are filled, so a lab that re-points a test at
+        its own department keeps that decision through the next upgrade.
+        """
+        field_models = {
+            'department': 'diagnosis.department',
+            'sample_type': 'sample.type',
+            'default_method_id': 'lab.method',
+            'default_instrument_id': 'lab.instrument',
+        }
+        for xmlid, wiring in self._REFERENCE_CATALOGUE.items():
+            entry = self.env.ref('leih19.%s' % xmlid, raise_if_not_found=False)
+            if not entry:
+                continue
+            for fname, names in wiring.items():
+                if entry[fname]:
+                    continue
+                entry[fname] = self._resolve_master(field_models[fname], names)
+
+        for xmlid, names in self._REFERENCE_CATALOGUE_LINE_METHODS.items():
+            line = self.env.ref('leih19.%s' % xmlid, raise_if_not_found=False)
+            if line and not line.method_id:
+                line.method_id = self._resolve_master('lab.method', names)

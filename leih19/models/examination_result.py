@@ -1,3 +1,5 @@
+import base64
+
 from odoo import _, api, fields, models
 from odoo.exceptions import UserError
 
@@ -101,6 +103,20 @@ class ExaminationResult(models.Model):
 
     clinical_note = fields.Text('Clinical Note / Interpretation')
 
+    referred_institute = fields.Char(
+        'Institute Name',
+        help='Referring institute printed in the report header (blank for '
+             'walk-in / self-referred patients).')
+
+    report_block_ids = fields.One2many(
+        'lab.report.block', 'result_id', string='Report Notes', copy=True,
+        help='Text blocks printed under the result table. Seeded from the '
+             'catalogue test; edit freely for this patient.')
+    print_disclaimer = fields.Boolean(
+        'Print Disclaimer', default=True,
+        help='Print the department (or company) disclaimer at the bottom of this report.')
+
+
     # --- Descriptive / Radiology narrative ---
     template_id = fields.Many2one(
         'examination.report.template', string='Template',
@@ -112,6 +128,33 @@ class ExaminationResult(models.Model):
     narrative_html = fields.Html('Narrative / Findings', sanitize=False)
 
     has_antibiogram = fields.Boolean(compute='_compute_has_antibiogram')
+
+    patient_history_count = fields.Integer(
+        'Previous Tests', compute='_compute_patient_history_count',
+        help='Other lab tests recorded for this patient (cancelled ones excluded).')
+
+    @api.depends('patient_id')
+    def _compute_patient_history_count(self):
+        """Count the patient's other lab tests, so the lab user can open the
+        test history straight from the report they are typing."""
+        history = self.filtered('patient_id')
+        (self - history).patient_history_count = 0
+        if not history:
+            return
+        counts = {}
+        if history.patient_id:
+            groups = self._read_group(
+                [('patient_id', 'in', history.patient_id.ids),
+                 ('state', '!=', 'cancelled')],
+                groupby=['patient_id'], aggregates=['__count'],
+            )
+            counts = {patient.id: count for patient, count in groups}
+        for rec in history:
+            count = counts.get(rec.patient_id.id, 0)
+            # The record being edited is itself in that count - don't show it.
+            if rec._origin.id and rec.state != 'cancelled':
+                count -= 1
+            rec.patient_history_count = max(count, 0)
 
     @api.depends('entry_id.report_template_ids')
     def _compute_available_template_ids(self):
@@ -144,6 +187,9 @@ class ExaminationResult(models.Model):
             rec.method_id = rec.entry_id.default_method_id
             rec.instrument_id = rec.entry_id.default_instrument_id
             rec.reported_by_id = rec.entry_id.reported_by_id
+            rec.print_disclaimer = rec.entry_id.print_disclaimer
+            if not rec.report_block_ids:
+                rec.report_block_ids = rec.entry_id.report_block_ids._copy_to_result_vals()
             if rec.entry_id.category == 'microbiology':
                 rec.incubation_hours = rec.entry_id.default_incubation_hours
                 rec.incubation_temp_c = rec.entry_id.default_incubation_temp_c
@@ -165,6 +211,9 @@ class ExaminationResult(models.Model):
                 vals.setdefault('method_id', entry.default_method_id.id if entry.default_method_id else False)
                 vals.setdefault('instrument_id', entry.default_instrument_id.id if entry.default_instrument_id else False)
                 vals.setdefault('reported_by_id', entry.reported_by_id.id if entry.reported_by_id else False)
+                vals.setdefault('print_disclaimer', entry.print_disclaimer)
+                if not vals.get('report_block_ids') and entry.report_block_ids:
+                    vals['report_block_ids'] = entry.report_block_ids._copy_to_result_vals()
                 if entry.category == 'microbiology':
                     vals.setdefault('incubation_hours', entry.default_incubation_hours)
                     vals.setdefault('incubation_temp_c', entry.default_incubation_temp_c)
@@ -230,6 +279,133 @@ class ExaminationResult(models.Model):
             half -= 1
         return lines[:half], lines[half:]
 
+    def _report_panels(self):
+        """Group visible lines into printable panels for the Special layout.
+
+        Each group header opens a panel and everything under it belongs to that
+        panel until the next header; components entered before any header land
+        in one unlabelled panel, which is what a form with no groups at all
+        prints as. Within a panel the components are bucketed by their print
+        style, so the template lays out each kind without walking the list
+        itself.
+
+        The buckets print in a fixed order - rows, then the band, then the
+        verdict - because that is the order every one of these slips reads in:
+        what was measured, then the readings, then the call. Sequence still
+        orders the components inside each bucket, so interleaving a band
+        component between two rows is the one arrangement this cannot express.
+        """
+        self.ensure_one()
+        panels = []
+        current = None
+
+        def open_panel(header=None):
+            return {
+                'header': header,
+                'boxed': bool(header and header.panel_boxed),
+                'rows': [],
+                'band': [],
+                'verdicts': [],
+            }
+
+        lines = self.result_line_ids.filtered(
+            lambda l: l.is_visible and (l.is_group_header or l.name or l.has_value)
+        ).sorted('sequence')
+        for line in lines:
+            if line.is_group_header:
+                if current:
+                    panels.append(current)
+                current = open_panel(line)
+                continue
+            if current is None:
+                current = open_panel()
+            if line.print_style == 'band':
+                current['band'].append(line)
+            elif line.print_style == 'verdict':
+                current['verdicts'].append(line)
+            else:
+                current['rows'].append(line)
+        if current:
+            panels.append(current)
+        return panels
+
+    # ------------------------------------------------------------------
+    # Printing helpers - keep formatting out of the QWeb template so every
+    # layout renders the house style the same way.
+    # ------------------------------------------------------------------
+    def _report_dt(self, value, fmt='%d/%m/%Y %H:%M'):
+        """Datetime in the user's timezone, house format (17/06/2026 16:38)."""
+        if not value:
+            return ''
+        return fields.Datetime.context_timestamp(self, value).strftime(fmt)
+
+    def _report_barcode_uri(self, width=600, height=100):
+        """Specimen (or bill) barcode inlined as a data: URI.
+
+        A `/report/barcode/...` src makes wkhtmltopdf take an HTTP round trip
+        back into Odoo; this server hosts several databases with no db_filter,
+        so that unauthenticated request cannot resolve one and answers 404 -
+        which prints as a silent empty box. Rendering the PNG here removes the
+        round trip. See patient.info._id_card_barcode_uri for the same fix.
+        """
+        self.ensure_one()
+        value = self.specimen_id.name or self.bill_register_id.name or self.name
+        if not value:
+            return ''
+        png = self.env['ir.actions.report'].barcode(
+            'Code128', value, width=width, height=height, humanreadable=False)
+        return 'data:image/png;base64,%s' % base64.b64encode(png).decode()
+
+    def _report_now(self, fmt='%d/%m/%Y %H:%M'):
+        """Print timestamp in the user's timezone."""
+        return self._report_dt(fields.Datetime.now(), fmt)
+
+    def _report_title(self):
+        """Centred report title, e.g. 'Laboratory Report : Serology'."""
+        self.ensure_one()
+        section = self.department_id.name or self.entry_id.name or ''
+        return 'Laboratory Report : %s' % section if section else 'Laboratory Report'
+
+    def _report_age_gender(self):
+        self.ensure_one()
+        sex = dict(self.patient_id._fields['sex'].selection).get(self.patient_sex) or ''
+        parts = [p for p in (self.patient_age or '', sex.upper()) if p]
+        return '/'.join(parts) or '-'
+
+    def _report_patient_name(self):
+        """Patient name with the hospital ID, as the house format prints it."""
+        self.ensure_one()
+        name = self.patient_id.name or '-'
+        return '%s (ID-%s)' % (name, self.patient_id.patient_id) if self.patient_id.patient_id else name
+
+    def _report_patient_ref(self):
+        """Bottom-of-page identity line: 'Mr SADAF (ID-34085)/LAB/2026/00157'."""
+        self.ensure_one()
+        return '%s/%s' % (self._report_patient_name(), self.name or '')
+
+    def _report_line_method(self, line):
+        """Method printed on one component row: the component's own method,
+        else the method of the result."""
+        self.ensure_one()
+        return line.method_id.name or self.method_id.name or ''
+
+    def _report_disclaimer_html(self):
+        """Department disclaimer, else the company-wide one; empty when the
+        test is set not to print one."""
+        self.ensure_one()
+        if not self.print_disclaimer:
+            return ''
+        return self.department_id.report_disclaimer_html or self.env.company.lab_report_disclaimer_html or ''
+
+    def _report_page_disclaimer(self):
+        """Disclaimer for a page of results - printed once, from the first test
+        on the page that asks for one."""
+        for result in self:
+            html = result._report_disclaimer_html()
+            if html:
+                return html
+        return ''
+
     def _default_selection_value(self, entry_line):
         if entry_line.result_type != 'selection':
             return False
@@ -267,7 +443,13 @@ class ExaminationResult(models.Model):
         self.write({'state': 'cancelled'})
 
     def action_reset_to_draft(self):
-        self.write({'state': 'draft'})
+        """Send a cancelled or released report back for re-entry. The old
+        verification stamp no longer applies to what will be typed next."""
+        self.write({
+            'state': 'draft',
+            'verified_at': False,
+            'verified_by_id': False,
+        })
 
     def action_print_report(self):
         """Print just this result."""
@@ -280,3 +462,17 @@ class ExaminationResult(models.Model):
         if not self.bill_register_id:
             return self.action_print_report()
         return self.bill_register_id._print_lab_reports_checked()
+
+    def action_view_patient_history(self):
+        """All other tests of this patient, newest first."""
+        self.ensure_one()
+        return {
+            'type': 'ir.actions.act_window',
+            'name': _('Test History - %s', self.patient_id.name or ''),
+            'res_model': 'examination.result',
+            'view_mode': 'list,form',
+            'domain': [('patient_id', '=', self.patient_id.id),
+                       ('id', '!=', self._origin.id),
+                       ('state', '!=', 'cancelled')],
+            'context': {'default_patient_id': self.patient_id.id},
+        }

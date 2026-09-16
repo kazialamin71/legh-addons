@@ -45,6 +45,7 @@ from . import lab_method
 from . import lab_instrument
 from . import lab_antibiotic
 from . import lab_specimen
+from . import lab_report_block
 from . import examination_report_template
 from . import examination_possible_value
 from . import examination_entry
@@ -99,3 +100,4 @@ from . import cc_collection
 from . import detail_component
 from . import optics_daily_collection
 from . import leih_collection_report
+from . import res_company

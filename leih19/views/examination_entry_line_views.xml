@@ -17,6 +17,9 @@
                 <field name="bold" />
                 <field name="group_by" />
                 <field name="is_group_header"/>
+                <field name="print_style" optional="show"/>
+                <field name="decimals" optional="hide"/>
+                <field name="panel_boxed" optional="hide"/>
             </list>
         </field>
     </record>
@@ -47,6 +50,9 @@
                             <field name="bold" />
                             <field name="group_by" />
                             <field name="is_group_header"/>
+                            <field name="print_style" invisible="is_group_header"/>
+                            <field name="decimals" invisible="result_type != 'numeric'"/>
+                            <field name="panel_boxed" invisible="not is_group_header"/>
                             <field name="others" />
                         </group>
                     </group>
