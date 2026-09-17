@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="action_report_admission_medicine" model="ir.actions.report">
+        <field name="name">Medicine Statement</field>
+        <field name="model">hospital.admission</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">leih_pharmacy.report_admission_medicine_document</field>
+        <field name="report_file">leih_pharmacy.report_admission_medicine_document</field>
+        <field name="print_report_name">'Medicine Statement - %s' % (object.name or '')</field>
+        <field name="binding_model_id" ref="leih19.model_hospital_admission"/>
+        <field name="binding_type">report</field>
+    </record>
+
+    <template id="report_admission_medicine_document">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.external_layout">
+                    <div class="page leih">
+                        <t t-call="leih19.leih_report_styles"/>
+
+                        <h2 class="doc_title">MEDICINE STATEMENT</h2>
+
+                        <table class="meta">
+                            <tr>
+                                <td style="width:34%"><span class="lbl">Admission</span>
+                                    <span t-out="o.name or '-'"/></td>
+                                <td style="width:33%"><span class="lbl">Patient</span>
+                                    <span t-out="o.patient_name.name or '-'"/></td>
+                                <td style="width:33%"><span class="lbl">Printed</span>
+                                    <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%d-%b-%Y %I:%M %p')"/></td>
+                            </tr>
+                        </table>
+
+                        <t t-set="rows" t-value="o._medicine_statement_rows()"/>
+
+                        <h4 class="mt-3">Issued</h4>
+                        <table class="table table-sm" style="width:100%; border-collapse:collapse;">
+                            <thead>
+                                <tr>
+                                    <th style="text-align:left;">Date</th>
+                                    <th style="text-align:left;">Document</th>
+                                    <th style="text-align:left;">Medicine</th>
+                                    <th style="text-align:right;">Qty</th>
+                                    <th style="text-align:right;">Rate</th>
+                                    <th style="text-align:right;">Amount</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr t-foreach="rows['issued']" t-as="r">
+                                    <td><span t-out="r['date']"/></td>
+                                    <td><span t-out="r['doc']"/></td>
+                                    <td><span t-out="r['medicine']"/></td>
+                                    <td style="text-align:right;"><span t-out="r['qty']"/></td>
+                                    <td style="text-align:right;"><span t-out="'%.2f' % r['price']"/></td>
+                                    <td style="text-align:right;"><span t-out="'%.2f' % r['amount']"/></td>
+                                </tr>
+                                <tr t-if="not rows['issued']">
+                                    <td colspan="6" class="text-muted">No medicine issued.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <h4 class="mt-3">Returned</h4>
+                        <table class="table table-sm" style="width:100%; border-collapse:collapse;">
+                            <thead>
+                                <tr>
+                                    <th style="text-align:left;">Date</th>
+                                    <th style="text-align:left;">Document</th>
+                                    <th style="text-align:left;">Medicine</th>
+                                    <th style="text-align:right;">Qty</th>
+                                    <th style="text-align:right;">Rate</th>
+                                    <th style="text-align:right;">Amount</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr t-foreach="rows['returned']" t-as="r">
+                                    <td><span t-out="r['date']"/></td>
+                                    <td><span t-out="r['doc']"/></td>
+                                    <td><span t-out="r['medicine']"/></td>
+                                    <td style="text-align:right;"><span t-out="r['qty']"/></td>
+                                    <td style="text-align:right;"><span t-out="'%.2f' % r['price']"/></td>
+                                    <td style="text-align:right;"><span t-out="'%.2f' % r['amount']"/></td>
+                                </tr>
+                                <tr t-if="not rows['returned']">
+                                    <td colspan="6" class="text-muted">No medicine returned.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <table style="width:45%; margin-left:auto; margin-top:10px; border-collapse:collapse;">
+                            <tr>
+                                <td><span class="lbl">Total Issued</span></td>
+                                <td style="text-align:right;"><span t-out="'%.2f' % o.medicine_issued_total"/></td>
+                            </tr>
+                            <tr>
+                                <td><span class="lbl">Total Returned</span></td>
+                                <td style="text-align:right;"><span t-out="'%.2f' % o.medicine_returned_total"/></td>
+                            </tr>
+                            <tr style="border-top:1px solid #000; font-weight:bold;">
+                                <td><span>Medicine Charge (Adjusted)</span></td>
+                                <td style="text-align:right;"><span t-out="'%.2f' % o.medicine_adjusted_total"/></td>
+                            </tr>
+                        </table>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

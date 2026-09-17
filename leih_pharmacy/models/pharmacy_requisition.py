@@ -8,6 +8,12 @@ class PharmacyRequisition(models.Model):
     _order = 'id desc'
 
     name = fields.Char('Requisition No', default='New', copy=False, readonly=True)
+    doc_type = fields.Selection(
+        [('issue', 'Issue'), ('return', 'Return')],
+        string='Document Type', default='issue', required=True, readonly=True,
+        help='An Issue dispenses medicine to the patient and charges the admission. '
+             'A Return takes medicine back into pharmacy stock and credits the '
+             'admission. The medicine billed is always issued minus returned.')
     admission_id = fields.Many2one(
         'hospital.admission', string='Admission', required=True, ondelete='cascade', index=True)
     patient_id = fields.Many2one(related='admission_id.patient_name', string='Patient', store=True, readonly=True)
@@ -30,7 +36,8 @@ class PharmacyRequisition(models.Model):
              'account and this points at the first of them.')
 
     net_amount = fields.Float('Net Amount', compute='_compute_net_amount', store=True,
-                              help='Charged to the admission = sum of (issued - returned) x price.')
+                              help='What this document does to the admission bill: '
+                                   'positive on an issue, negative on a return.')
     state = fields.Selection(
         [('draft', 'Draft'),
          ('issued', 'Issued'),
@@ -60,7 +67,9 @@ class PharmacyRequisition(models.Model):
     def create(self, vals_list):
         for vals in vals_list:
             if vals.get('name', 'New') in ('New', False):
-                vals['name'] = self.env['ir.sequence'].next_by_code('pharmacy.requisition') or 'New'
+                code = ('pharmacy.return' if vals.get('doc_type') == 'return'
+                        else 'pharmacy.requisition')
+                vals['name'] = self.env['ir.sequence'].next_by_code(code) or 'New'
         return super().create(vals_list)
 
     # ------------------------------------------------------------------ stock
@@ -180,7 +189,8 @@ class PharmacyRequisition(models.Model):
         multiple = len(buckets) > 1
         charges = Charge
         for account, amount in buckets.items():
-            label = _('Pharmacy: %s') % self.name
+            label = (_('Medicine Return: %s') if self.doc_type == 'return'
+                     else _('Pharmacy: %s')) % self.name
             if multiple and account:
                 label = '%s [%s]' % (label, account.display_name)
             charges |= Charge.create({
@@ -204,6 +214,9 @@ class PharmacyRequisition(models.Model):
         if not self.env.user.has_group('leih_pharmacy.group_pharmacy_dispenser'):
             raise UserError(_("Only a Pharmacy Dispenser can issue medicines."))
         for rec in self:
+            if rec.doc_type != 'issue':
+                raise UserError(_(
+                    "%s is a return document and cannot be issued.") % rec.name)
             if rec.state != 'draft':
                 raise UserError(_("Only a draft requisition can be issued."))
             to_issue = [(l.product_id, l.issued_qty) for l in rec.line_ids if l.issued_qty > 0]
@@ -217,30 +230,66 @@ class PharmacyRequisition(models.Model):
             rec._sync_charge()
         return True
 
-    def action_return(self):
-        """Return newly-flagged quantities (returned_qty above what was already
-        returned): reverse stock + reduce the admission charge."""
+    def _check_returnable(self):
+        """Refuse a return of medicine the admission was never issued.
+
+        The check is made against the whole admission, not against one
+        requisition: a ward takes medicine out over many requisitions and hands
+        back a boxful at discharge, so what may be returned is everything issued
+        across all of them, less everything already returned. Anything else
+        would credit the patient for medicine they never received.
+        """
+        self.ensure_one()
+        wanted = {}
+        for line in self.line_ids:
+            if not line.product_id:
+                continue
+            wanted.setdefault(line.product_id, 0.0)
+            wanted[line.product_id] += line.returned_qty or 0.0
+
+        errors = []
+        for product, qty in wanted.items():
+            if qty <= 0:
+                continue
+            available = self.admission_id._pharmacy_returnable_qty(
+                product, exclude_document=self)
+            if qty > available + 0.000001:
+                errors.append(_(
+                    "- %(medicine)s: returning %(want)s but only %(have)s is "
+                    "still returnable on this admission.",
+                    medicine=product.display_name, want=qty, have=available))
+        if errors:
+            raise UserError(_(
+                "These medicines were not issued to this admission in that "
+                "quantity:\n\n%s"
+            ) % "\n".join(errors))
+
+    @api.constrains('line_ids', 'doc_type', 'admission_id')
+    def _check_return_lines(self):
+        """Catch an impossible return at save, not only at validation."""
         for rec in self:
-            if rec.state not in ('issued', 'returned'):
-                raise UserError(_("Only an issued requisition can be returned."))
-            to_return = []
-            for line in rec.line_ids:
-                delta = (line.returned_qty or 0.0) - (line.returned_done_qty or 0.0)
-                if delta < 0:
-                    raise UserError(_("Returned qty cannot be reduced for %s.") % line.product_id.display_name)
-                if delta > (line.issued_qty - line.returned_done_qty):
-                    raise UserError(_("Cannot return more than issued for %s.") % line.product_id.display_name)
-                if delta > 0:
-                    to_return.append((line.product_id, delta))
+            if rec.doc_type == 'return' and rec.state == 'draft':
+                rec._check_returnable()
+
+    def action_return(self):
+        """Validate a return document: medicine back into stock, credit the bill."""
+        for rec in self:
+            if rec.doc_type != 'return':
+                raise UserError(_(
+                    "%s is an issue requisition. Create a Return document to give "
+                    "medicine back.") % rec.name)
+            if rec.state != 'draft':
+                raise UserError(_("This return has already been processed."))
+            to_return = [(l.product_id, l.returned_qty)
+                         for l in rec.line_ids if (l.returned_qty or 0.0) > 0]
             if not to_return:
-                raise UserError(_("Set a higher Returned Qty on at least one line, then click Return."))
+                raise UserError(_("Set a returned quantity on at least one medicine."))
+            rec._check_returnable()
             rec._do_picking(to_return, rec._customer_location(), rec.location_id,
                             rec._picking_type('incoming'))
             for line in rec.line_ids:
                 line.returned_done_qty = line.returned_qty
-            all_returned = all(
-                (l.returned_qty or 0.0) >= (l.issued_qty or 0.0) for l in rec.line_ids)
-            rec.state = 'returned' if all_returned else 'issued'
+            rec.state = 'returned'
             rec._sync_charge()
         return True
 
@@ -249,6 +298,10 @@ class PharmacyRequisition(models.Model):
         for rec in self:
             if rec.state == 'issued':
                 raise UserError(_("Return the issued medicines before cancelling."))
+            if rec.state == 'returned':
+                raise UserError(_(
+                    "The medicine is already back in stock and the bill credited. "
+                    "Issue it again rather than cancelling this return."))
             # The person who created it can cancel it (so can a dispenser).
             if rec.create_uid != self.env.user and not is_dispenser:
                 raise UserError(_(
@@ -284,16 +337,53 @@ class PharmacyRequisitionLine(models.Model):
     returned_done_qty = fields.Float('Returned (processed)', readonly=True, copy=False)
     unit_price = fields.Float('Unit Price')
     subtotal = fields.Float('Subtotal', compute='_compute_subtotal', store=True)
+    returnable_qty = fields.Float(
+        'Returnable', compute='_compute_returnable_qty',
+        help='Still returnable for this medicine on this admission: everything '
+             'issued across all requisitions, less everything already returned.')
 
-    @api.depends('issued_qty', 'returned_qty', 'unit_price')
+    @api.depends('issued_qty', 'returned_qty', 'unit_price', 'requisition_id.doc_type')
     def _compute_subtotal(self):
+        """What this line does to the admission bill, signed.
+
+        An issue adds; a return takes away. Keeping the sign on the line is what
+        lets the admission show issued, returned and the adjusted total the
+        patient actually pays, instead of a single netted figure that hides both
+        halves of the story.
+        """
         for rec in self:
-            rec.subtotal = ((rec.issued_qty or 0.0) - (rec.returned_qty or 0.0)) * (rec.unit_price or 0.0)
+            price = rec.unit_price or 0.0
+            if rec.requisition_id.doc_type == 'return':
+                rec.subtotal = -(rec.returned_qty or 0.0) * price
+            else:
+                rec.subtotal = (rec.issued_qty or 0.0) * price
+
+    @api.depends('product_id', 'requisition_id.admission_id', 'requisition_id.doc_type')
+    def _compute_returnable_qty(self):
+        """How much of this medicine the admission could still give back."""
+        for rec in self:
+            req = rec.requisition_id
+            if req.doc_type != 'return' or not rec.product_id or not req.admission_id:
+                rec.returnable_qty = 0.0
+                continue
+            rec.returnable_qty = req.admission_id._pharmacy_returnable_qty(
+                rec.product_id, exclude_line=rec)
 
     @api.onchange('product_id')
     def _onchange_product_id(self):
         for rec in self:
-            if rec.product_id:
+            if not rec.product_id:
+                continue
+            if rec.requisition_id.doc_type == 'return':
+                # Credit what the patient was actually charged, not today's list
+                # price: the two drift apart the moment a price list changes, and
+                # refunding the difference is money out of the door.
+                admission = rec.requisition_id.admission_id
+                rec.unit_price = (admission._pharmacy_issue_price(rec.product_id)
+                                  if admission else rec.product_id.lst_price)
+                if not rec.returned_qty:
+                    rec.returned_qty = rec.returnable_qty or 0.0
+            else:
                 rec.unit_price = rec.product_id.lst_price
                 if not rec.issued_qty:
                     rec.issued_qty = rec.requested_qty or 1.0

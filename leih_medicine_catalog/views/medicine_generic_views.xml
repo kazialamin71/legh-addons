@@ -1,0 +1,84 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <record id="medicine_generic_list_view" model="ir.ui.view">
+        <field name="name">medicine.generic.list</field>
+        <field name="model">medicine.generic</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="code" optional="show"/>
+                <field name="therapeutic_class" optional="show"/>
+                <field name="strength_note" optional="hide"/>
+                <field name="product_count" string="Brands"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="medicine_generic_form_view" model="ir.ui.view">
+        <field name="name">medicine.generic.form</field>
+        <field name="model">medicine.generic</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_view_products" type="object"
+                                class="oe_stat_button" icon="fa-medkit"
+                                invisible="product_count == 0">
+                            <field name="product_count" widget="statinfo" string="Brands"/>
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <label for="name"/>
+                        <h1><field name="name" placeholder="Paracetamol"/></h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="code"/>
+                            <field name="therapeutic_class" placeholder="Analgesic / Antipyretic"/>
+                        </group>
+                        <group>
+                            <field name="strength_note" placeholder="500 mg / 665 mg / suspension"/>
+                            <field name="active" widget="boolean_toggle"/>
+                        </group>
+                    </group>
+                    <separator string="Brands"/>
+                    <field name="product_tmpl_ids" readonly="1" nolabel="1">
+                        <list>
+                            <field name="name"/>
+                            <field name="default_code" optional="show"/>
+                            <field name="supplier_id"/>
+                            <field name="list_price"/>
+                            <field name="qty_available" string="On Hand"/>
+                        </list>
+                    </field>
+                    <field name="note" placeholder="Notes..."/>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="medicine_generic_search_view" model="ir.ui.view">
+        <field name="name">medicine.generic.search</field>
+        <field name="model">medicine.generic</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="therapeutic_class"/>
+                <filter name="group_class" string="Therapeutic Class"
+                        context="{'group_by': 'therapeutic_class'}"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="medicine_generic_action" model="ir.actions.act_window">
+        <field name="name">Medicine Generics</field>
+        <field name="res_model">medicine.generic</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="medicine_generic_search_view"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Add a generic (molecule)</p>
+            <p>Group every brand of the same molecule together - Napa, Ace and Xpa
+               are all Paracetamol - so the counter can find one when asked for another.</p>
+        </field>
+    </record>
+</odoo>

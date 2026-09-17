@@ -8,4 +8,6 @@
               parent="menu_pharmacy_root" action="pharmacy_requisition_pending_action" sequence="10"/>
     <menuitem id="menu_pharmacy_all" name="All Requisitions"
               parent="menu_pharmacy_root" action="pharmacy_requisition_action" sequence="20"/>
+    <menuitem id="menu_pharmacy_returns" name="Medicine Returns"
+              parent="menu_pharmacy_root" action="pharmacy_return_action" sequence="30"/>
 </odoo>

@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <menuitem id="menu_medicine_generic"
+              name="Medicine Generics"
+              parent="stock.menu_stock_inventory_control"
+              action="medicine_generic_action" sequence="90"/>
+
+    <menuitem id="menu_stock_by_supplier"
+              name="Supplier-wise Stock"
+              parent="stock.menu_warehouse_report"
+              action="stock_quant_supplier_action" sequence="90"/>
+</odoo>

@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <record id="stock_quant_list_supplier" model="ir.ui.view">
+        <field name="name">stock.quant.list.supplier</field>
+        <field name="model">stock.quant</field>
+        <field name="arch" type="xml">
+            <list create="0" edit="0" string="Supplier-wise Stock">
+                <field name="supplier_id"/>
+                <field name="medicine_generic_id" string="Generic"/>
+                <field name="product_id"/>
+                <field name="location_id"/>
+                <field name="warehouse_id" optional="show"/>
+                <field name="lot_id" optional="hide"/>
+                <field name="quantity" string="On Hand" sum="On Hand"/>
+                <field name="available_quantity" string="Available" sum="Available"/>
+                <field name="product_uom_id" string="UoM" optional="show"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="stock_quant_search_supplier" model="ir.ui.view">
+        <field name="name">stock.quant.search.supplier</field>
+        <field name="model">stock.quant</field>
+        <field name="arch" type="xml">
+            <search string="Supplier-wise Stock">
+                <field name="supplier_id"/>
+                <field name="medicine_generic_id" string="Generic (Molecule)"/>
+                <field name="product_id"/>
+                <field name="warehouse_id"/>
+                <field name="location_id"/>
+                <filter name="internal" string="Internal Locations"
+                        domain="[('location_id.usage', '=', 'internal')]"/>
+                <filter name="in_stock" string="In Stock" domain="[('quantity', '>', 0)]"/>
+                <separator/>
+                <filter name="group_supplier" string="Supplier"
+                        context="{'group_by': 'supplier_id'}"/>
+                <filter name="group_warehouse" string="Warehouse"
+                        context="{'group_by': 'warehouse_id'}"/>
+                <filter name="group_generic" string="Generic (Molecule)"
+                        context="{'group_by': 'medicine_generic_id'}"/>
+                <filter name="group_product" string="Product"
+                        context="{'group_by': 'product_id'}"/>
+                <filter name="group_location" string="Location"
+                        context="{'group_by': 'location_id'}"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="stock_quant_supplier_action" model="ir.actions.act_window">
+        <field name="name">Supplier-wise Stock</field>
+        <field name="res_model">stock.quant</field>
+        <field name="view_mode">list</field>
+        <field name="view_id" ref="stock_quant_list_supplier"/>
+        <field name="search_view_id" ref="stock_quant_search_supplier"/>
+        <field name="domain">[('location_id.usage', '=', 'internal')]</field>
+        <field name="context">{'search_default_group_supplier': 1, 'search_default_group_warehouse': 1}</field>
+    </record>
+</odoo>

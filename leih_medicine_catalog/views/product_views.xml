@@ -1,0 +1,49 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <record id="product_template_form_medicine" model="ir.ui.view">
+        <field name="name">product.template.form.medicine</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_form_view"/>
+        <field name="arch" type="xml">
+            <field name="categ_id" position="after">
+                <field name="medicine_generic_id"
+                       options="{'no_quick_create': False}"/>
+                <field name="supplier_id"
+                       options="{'no_quick_create': True}"/>
+                <field name="medicine_generic_name" invisible="1"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="product_template_list_medicine" model="ir.ui.view">
+        <field name="name">product.template.list.medicine</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_tree_view"/>
+        <field name="arch" type="xml">
+            <field name="name" position="after">
+                <field name="medicine_generic_id" optional="show"/>
+                <field name="supplier_id" optional="show"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="product_template_search_medicine" model="ir.ui.view">
+        <field name="name">product.template.search.medicine</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_search_view"/>
+        <field name="arch" type="xml">
+            <field name="name" position="after">
+                <field name="medicine_generic_id" string="Generic (Molecule)"
+                       filter_domain="[('medicine_generic_name', 'ilike', self)]"/>
+                <field name="supplier_id"/>
+            </field>
+            <filter name="filter_to_sell" position="after">
+                <separator/>
+                <filter name="group_generic" string="Generic (Molecule)"
+                        context="{'group_by': 'medicine_generic_id'}"/>
+                <filter name="group_supplier" string="Supplier"
+                        context="{'group_by': 'supplier_id'}"/>
+            </filter>
+        </field>
+    </record>
+</odoo>

@@ -239,7 +239,11 @@ class TeamChargeMixin(models.AbstractModel):
         for rec in self:
             if rec.team_amount < 0:
                 raise ValidationError(_("A doctor's share cannot be negative."))
-            if rec.team_amount > rec._team_net() + 0.01:
+            # A credit line - a medicine return, say - is worth a negative
+            # amount and carries no share at all; ``_compute_team_amount``
+            # already clamps it to zero. Comparing against the raw net would
+            # then read "0 is more than -2,100" and block the credit.
+            if rec.team_amount > max(rec._team_net(), 0.0) + 0.01:
                 raise ValidationError(_(
                     "The doctor's share (%(team)s) is more than the line is "
                     "worth (%(net)s).",
