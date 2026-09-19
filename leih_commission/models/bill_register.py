@@ -2,7 +2,7 @@ from odoo import fields, models
 
 
 class BillRegister(models.Model):
-    """Commission accrual hooks layered onto the base bill.register."""
+    """Commission accrual hooks layered onto the base bill."""
     _inherit = 'bill.register'
 
     def bill_confirm(self):
@@ -37,11 +37,38 @@ class BillRegister(models.Model):
             config = Config.search(base + [('state', '!=', 'cancelled')], limit=1)
         return config
 
+    def _commission_header_discount(self):
+        """Bill-level discount, spread over the lines in proportion to value.
+
+        The doctor/goodwill discounts are entered on the bill, not on the items,
+        so an item's ``total_amount`` is blind to them: a bill of 7000 discounted
+        30% still shows a 7000 line while the patient pays 4900. An MOU that
+        wants commission to follow the money has to be told what that line's
+        share of the giveaway was.
+
+        :returns: dict {bill line id: discount borne by that line}
+        """
+        self.ensure_one()
+        lines = self.bill_register_line_id
+        line_total = sum(lines.mapped('total_amount'))
+        discount = line_total - (self.grand_total or 0.0)
+        if line_total <= 0 or discount <= 0:
+            return {line.id: 0.0 for line in lines}
+        return {line.id: discount * (line.total_amount or 0.0) / line_total
+                for line in lines}
+
     def _accrue_commissions(self):
         """Accrue commission per billed item for EACH referrer that has a rule:
         the doctor (line doctor, else bill referring doctor) and the broker can
         both earn on the same bill. Idempotent per (bill line, referrer)."""
         self.ensure_one()
+        # An investigation raised against an admission is billed twice over:
+        # once here and once on the admission's charge ledger, which
+        # ``_rebuild_charges`` pulls these very lines into. Accruing on both
+        # would pay the referrer twice for one test, so the admission -- which
+        # sees the ward charges as well -- owns the whole admission's accrual.
+        if self.general_admission_id:
+            return True
         # sudo: accrual is system-driven; the confirming user need not be a
         # commission user.
         CommissionLine = self.env['commission.line'].sudo()
@@ -50,6 +77,7 @@ class BillRegister(models.Model):
             (l.bill_line_id.id, l.doctor_id.id, l.broker_id.id) for l in existing
         }
         today = self.date or fields.Datetime.now()
+        header_discount = self._commission_header_discount()
 
         for line in self.bill_register_line_id:
             if not line.name:
@@ -69,8 +97,14 @@ class BillRegister(models.Model):
                 if not config:
                     continue
                 res = config.compute_commission(
-                    line.name, line.product_qty, line.total_amount,
-                    line.gross_amount, line.total_discount,
+                    entry=line.name,
+                    qty=line.product_qty,
+                    net_amount=line.total_amount,
+                    gross_amount=line.gross_amount,
+                    discount_amount=line.total_discount,
+                    header_discount=header_discount.get(line.id, 0.0),
+                    department=line.department_id or (line.name.department if line.name else False),
+                    service_type='diagnostic',
                 )
                 if res['commission'] <= 0:
                     continue
@@ -82,9 +116,10 @@ class BillRegister(models.Model):
                     'commission_configuration_id': config.id,
                     'department_id': line.department_id.id if line.department_id else False,
                     'name': line.name.id,
+                    'service_type': 'diagnostic',
                     'test_amount': res['base'],
-                    'discount_amount': line.total_discount,
-                    'after_discount': line.total_amount,
+                    'discount_amount': (line.total_discount or 0.0) + header_discount.get(line.id, 0.0),
+                    'after_discount': (line.total_amount or 0.0) - header_discount.get(line.id, 0.0),
                     'mou_payable_comm_var': res['rate'],
                     'mou_payable_comm_fixed': res['fixed'],
                     'mou_payable_comm_max_cap': res['cap'],

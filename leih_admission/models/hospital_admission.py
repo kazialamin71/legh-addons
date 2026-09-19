@@ -16,7 +16,7 @@ class HospitalAdmission(models.Model):
 
     # Override: paid is now derived, never typed by hand.
     paid = fields.Float(
-        string="Paid", compute='_compute_paid_amount', store=True, readonly=True,
+        string="Amount Received", compute='_compute_paid_amount', store=True, readonly=True,
         help="Total confirmed admission payments (sum of money receipts).")
     down_payment = fields.Float(
         "Advance (Paid Now)",

@@ -40,9 +40,12 @@ class EmergencyCase(models.Model):
     # Identity -- typed first, linked later
     # ------------------------------------------------------------------
     patient_id = fields.Many2one(
-        'patient.info', string='Patient', copy=False, index=True, readonly=True,
-        help='The hospital patient record. Empty until someone can identify the '
-             'patient; registration never waits for it.')
+        'patient.info', string='Patient', copy=False, index=True,
+        help='The hospital patient record. Pick the existing one when the '
+             'patient already has a hospital number -- a returning patient '
+             'should not collect a second record, and the ED is exactly where '
+             'that happens. Leave it empty when nobody can identify them yet: '
+             'registration never waits for it, and it can be filled in later.')
     hn_number = fields.Char(
         'Hospital No.', related='patient_id.patient_id', readonly=True)
     patient_name = fields.Char(
@@ -362,6 +365,27 @@ class EmergencyCase(models.Model):
         })
         self.patient_id = patient
         return patient
+
+    @api.onchange('patient_id')
+    def _onchange_patient_id(self):
+        """Copy the hospital record's details onto the case when one is picked.
+
+        Only ever fills a blank: a returning patient's stored address should not
+        overwrite the one the attendant just gave, and the ED's own description
+        of an unidentified patient is not replaced by the name on the record it
+        is being reconciled to.
+        """
+        for rec in self:
+            patient = rec.patient_id
+            if not patient:
+                continue
+            if not rec.patient_name or rec.patient_name == _('Unknown'):
+                rec.patient_name = patient.name
+            rec.age = rec.age or patient.age or False
+            rec.mobile = rec.mobile or patient.mobile or False
+            rec.address = rec.address or patient.address or False
+            if rec.sex in (False, 'unknown') and patient.sex in ('male', 'female', 'others'):
+                rec.sex = patient.sex
 
     def action_register_patient(self):
         """Give this ED patient a hospital number once they can be identified."""

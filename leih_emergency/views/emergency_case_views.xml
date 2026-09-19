@@ -58,14 +58,19 @@
                     </div>
                     <div class="alert alert-warning" role="alert"
                          invisible="patient_id or state == 'cancelled'">
-                        No hospital record yet. Treatment does not wait for one - press
-                        <b>Register Patient</b> once somebody can identify them.
+                        No hospital record yet. If the patient has been here before, pick their
+                        existing record in <b>Patient</b> rather than making a second one.
+                        Treatment does not wait for either - press <b>Register Patient</b> to
+                        create a new record once somebody can identify them.
                     </div>
 
                     <group>
                         <group string="Patient" name="patient">
-                            <field name="patient_id" readonly="1" invisible="not patient_id"
-                                   context="{'patient_display_contact': 1}"/>
+                            <field name="patient_id"
+                                   readonly="state in ('closed', 'cancelled')"
+                                   context="{'patient_display_contact': 1}"
+                                   options="{'no_quick_create': True}"
+                                   placeholder="Search an existing patient by name, HN or mobile"/>
                             <field name="hn_number" invisible="not patient_id"/>
                             <field name="patient_name"
                                    placeholder="Name, or a description if unknown"/>

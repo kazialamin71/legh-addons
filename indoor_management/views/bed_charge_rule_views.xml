@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="bed_charge_rule_list_view" model="ir.ui.view">
+        <field name="name">bed.charge.rule.list</field>
+        <field name="model">bed.charge.rule</field>
+        <field name="arch" type="xml">
+            <list string="Bed Charge Rules" decoration-bf="is_default">
+                <field name="sequence" widget="handle"/>
+                <field name="name"/>
+                <field name="is_default"/>
+                <field name="category_ids" widget="many2many_tags"/>
+                <field name="cycle_start_hour"/>
+                <field name="cycle_end_hour"/>
+                <field name="note" optional="show"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="bed_charge_rule_form_view" model="ir.ui.view">
+        <field name="name">bed.charge.rule.form</field>
+        <field name="model">bed.charge.rule</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <widget name="web_ribbon" title="Default" bg_color="text-bg-success"
+                            invisible="not is_default"/>
+                    <div class="oe_title">
+                        <label for="name"/>
+                        <h1><field name="name" placeholder="e.g. ICU / NICU"/></h1>
+                    </div>
+                    <group>
+                        <group string="Applies To">
+                            <field name="is_default"/>
+                            <field name="category_ids" widget="many2many_tags"
+                                   options="{'no_create': True}"
+                                   readonly="is_default"
+                                   placeholder="Leave empty and tick Default to cover everything"/>
+                            <field name="active" widget="boolean_toggle"/>
+                        </group>
+                        <group string="Billing Cycle">
+                            <field name="cycle_start_hour"/>
+                            <field name="cycle_end_hour"/>
+                            <field name="note" placeholder="What this rule is for..."/>
+                        </group>
+                    </group>
+                    <separator string="Charge Bands"/>
+                    <div class="text-muted mb-2">
+                        Hours the patient occupied the accommodation during one billing cycle,
+                        and what fraction of its per-day charge that earns. Bands are read
+                        lowest first; the last one, with <b>Up To Hours</b> left at 0, covers
+                        everything above the highest threshold.
+                    </div>
+                    <field name="band_ids">
+                        <list editable="bottom">
+                            <field name="up_to_hours"/>
+                            <field name="charge_percent"/>
+                            <field name="is_open_ended" column_invisible="1"/>
+                        </list>
+                    </field>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="bed_charge_rule_action" model="ir.actions.act_window">
+        <field name="name">Bed Charge Rules</field>
+        <field name="res_model">bed.charge.rule</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Define how occupancy becomes a charge</p>
+            <p>
+                A rule turns hours in a bed into a fraction of that bed's per-day charge --
+                nothing for a very short stay, half a day for a few hours, a full day beyond
+                that. Categories without a rule of their own follow the default.
+            </p>
+        </field>
+    </record>
+</odoo>

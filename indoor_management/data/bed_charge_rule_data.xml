@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--
+        The default rule. Every bed category that names no rule of its own is
+        billed by this one, so it has to exist before any bed line is computed.
+        noupdate="1": these are the hospital's prices now, not ours, and a
+        module upgrade must not reset thresholds somebody has since tuned.
+    -->
+    <data noupdate="1">
+        <record id="bed_charge_rule_standard" model="bed.charge.rule">
+            <field name="name">Standard</field>
+            <field name="is_default" eval="True"/>
+            <field name="sequence">1</field>
+            <field name="cycle_start_hour">12</field>
+            <field name="cycle_end_hour">11</field>
+            <field name="note">Applies to every category with no rule of its own.</field>
+        </record>
+
+        <record id="bed_charge_band_standard_short" model="bed.charge.rule.band">
+            <field name="rule_id" ref="bed_charge_rule_standard"/>
+            <field name="up_to_hours">2</field>
+            <field name="charge_percent">0</field>
+        </record>
+        <record id="bed_charge_band_standard_half" model="bed.charge.rule.band">
+            <field name="rule_id" ref="bed_charge_rule_standard"/>
+            <field name="up_to_hours">6</field>
+            <field name="charge_percent">50</field>
+        </record>
+        <record id="bed_charge_band_standard_full" model="bed.charge.rule.band">
+            <field name="rule_id" ref="bed_charge_rule_standard"/>
+            <field name="up_to_hours">0</field>
+            <field name="charge_percent">100</field>
+        </record>
+    </data>
+</odoo>

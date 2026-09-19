@@ -54,6 +54,25 @@ class HospitalBed(models.Model):
         "Bed number must be unique.",
     )
 
+    # A many2one dropdown renders display_name and nothing else -- no per-row
+    # decoration reaches it -- so the status travels inside the name. A coloured
+    # disc is legible at a glance in the list someone is picking a bed from,
+    # which is the moment it matters.
+    _STATE_MARK = {
+        "available": "\U0001F7E2",    # green
+        "occupied": "\U0001F534",     # red
+        "reserved": "\U0001F7E1",     # amber
+        "maintenance": "\u26AB",      # grey
+    }
+
+    @api.depends("name", "state", "ward_id")
+    def _compute_display_name(self):
+        for bed in self:
+            mark = self._STATE_MARK.get(bed.state, "")
+            ward = bed.ward_id.name if bed.ward_id else ""
+            label = "%s / %s" % (ward, bed.name) if ward else (bed.name or "")
+            bed.display_name = ("%s %s" % (mark, label)).strip()
+
     @api.depends("state")
     def _compute_current_admission(self):
         Line = self.env["hospital.bed.line"]

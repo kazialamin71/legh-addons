@@ -4,3 +4,7 @@ access_bed_category_manager,bed.category manager,model_bed_category,base.group_s
 access_hospital_ward_user,hospital.ward user,model_hospital_ward,base.group_user,1,0,0,0
 access_hospital_ward_manager,hospital.ward manager,model_hospital_ward,base.group_system,1,1,1,1
 access_hospital_bed_transfer_user,hospital.bed.transfer user,model_hospital_bed_transfer,base.group_user,1,1,1,1
+access_bed_charge_rule_user,bed.charge.rule user,model_bed_charge_rule,base.group_user,1,0,0,0
+access_bed_charge_rule_manager,bed.charge.rule manager,model_bed_charge_rule,base.group_system,1,1,1,1
+access_bed_charge_rule_band_user,bed.charge.rule.band user,model_bed_charge_rule_band,base.group_user,1,0,0,0
+access_bed_charge_rule_band_manager,bed.charge.rule.band manager,model_bed_charge_rule_band,base.group_system,1,1,1,1

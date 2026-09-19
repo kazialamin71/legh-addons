@@ -6,3 +6,4 @@ from . import commission_calculation
 from . import commission_calculation_line
 from . import commission_payment
 from . import bill_register
+from . import hospital_admission

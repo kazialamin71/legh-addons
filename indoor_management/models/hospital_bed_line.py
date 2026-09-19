@@ -6,10 +6,6 @@ from odoo import _, api, fields, models
 from odoo.exceptions import ValidationError
 
 DEFAULT_TZ = "Asia/Dhaka"
-CYCLE_START_HOUR = 12   # cycle begins at 12:00 (noon) local time
-CYCLE_END_HOUR = 11     # cycle ends at 11:00 next day local time
-HALF_DAY_THRESHOLD = 6.0   # hours
-FULL_DAY_THRESHOLD = 12.0  # hours
 
 
 def _tz_of(env):
@@ -24,20 +20,21 @@ def _to_local(dt_utc_naive, tz):
     return pytz.utc.localize(dt_utc_naive).astimezone(tz)
 
 
-def _cycle_start_for(dt_local):
-    """Local-time start (12:00) of the billing cycle covering dt_local."""
-    if dt_local.hour >= CYCLE_START_HOUR:
-        return dt_local.replace(hour=CYCLE_START_HOUR, minute=0, second=0, microsecond=0)
-    if dt_local.hour < CYCLE_END_HOUR:
+def _cycle_start_for(dt_local, start_hour, end_hour):
+    """Local-time start of the billing cycle covering dt_local."""
+    if dt_local.hour >= start_hour:
+        return dt_local.replace(hour=start_hour, minute=0, second=0, microsecond=0)
+    if dt_local.hour < end_hour:
         prev = dt_local - timedelta(days=1)
-        return prev.replace(hour=CYCLE_START_HOUR, minute=0, second=0, microsecond=0)
-    # Grace hour 11:00–12:00 — snap to today's 12 PM cycle (no charge for the grace minutes).
-    return dt_local.replace(hour=CYCLE_START_HOUR, minute=0, second=0, microsecond=0)
+        return prev.replace(hour=start_hour, minute=0, second=0, microsecond=0)
+    # Grace hour (end_hour..start_hour) — snap to today's cycle, so the minutes
+    # a patient takes to actually leave after checkout time are not charged.
+    return dt_local.replace(hour=start_hour, minute=0, second=0, microsecond=0)
 
 
-def _cycle_end_for(cycle_start_local):
+def _cycle_end_for(cycle_start_local, end_hour):
     nxt = cycle_start_local + timedelta(days=1)
-    return nxt.replace(hour=CYCLE_END_HOUR, minute=0, second=0, microsecond=0)
+    return nxt.replace(hour=end_hour, minute=0, second=0, microsecond=0)
 
 
 def _overlap_hours(line_s, line_e, cyc_s, cyc_e):
@@ -46,14 +43,6 @@ def _overlap_hours(line_s, line_e, cyc_s, cyc_e):
     if e <= s:
         return 0.0
     return (e - s).total_seconds() / 3600.0
-
-
-def _classify(hours):
-    if hours < HALF_DAY_THRESHOLD:
-        return 0.0
-    if hours < FULL_DAY_THRESHOLD:
-        return 0.5
-    return 1.0
 
 
 class HospitalBedLine(models.Model):
@@ -66,6 +55,12 @@ class HospitalBedLine(models.Model):
     category_id = fields.Many2one(
         "bed.category", string="Category",
         related="bed_no.category_id", store=True, readonly=True,
+    )
+    # Not stored: a bed's availability changes as other patients come and go,
+    # and a stored copy would be a snapshot of whenever this line was last
+    # written -- green long after somebody else moved in.
+    bed_state = fields.Selection(
+        related="bed_no.state", string="Bed Status", readonly=True,
     )
     days_count = fields.Float(
         string="Days",
@@ -122,17 +117,24 @@ class HospitalBedLine(models.Model):
             if not line.manual_override:
                 line.total_amount = days * (line.perday_charge or 0.0) * (line.bed_qty or 1)
 
+    def _charge_rule(self):
+        """The charge rule billing this line, via its bed's category."""
+        self.ensure_one()
+        return self.env['bed.charge.rule']._for_category(self.bed_no.category_id)
+
     @api.model
     def _calc_solo_days(self, line, tz, now_utc):
         start_local = _to_local(line.start_date, tz)
         end_local = _to_local(line.end_date or now_utc, tz)
         if end_local <= start_local:
             return 0.0
+        rule = line._charge_rule()
+        start_hour, end_hour = rule._cycle_hours()
         days = 0.0
-        cs = _cycle_start_for(start_local)
+        cs = _cycle_start_for(start_local, start_hour, end_hour)
         while cs < end_local:
-            ce = _cycle_end_for(cs)
-            days += _classify(_overlap_hours(start_local, end_local, cs, ce))
+            ce = _cycle_end_for(cs, end_hour)
+            days += rule.day_fraction(_overlap_hours(start_local, end_local, cs, ce))
             cs += timedelta(days=1)
         return days
 
@@ -155,28 +157,40 @@ class HospitalBedLine(models.Model):
         if not intervals:
             return result
 
+        # The cycle grid belongs to the admission, not to one line, so it comes
+        # from the rule of the accommodation the patient started in. Shifting
+        # from a ward to ICU must not re-cut the day under the patient.
+        Rule = self.env['bed.charge.rule']
+        first_line = min(intervals, key=lambda i: i[1])[0]
+        start_hour, end_hour = first_line._charge_rule()._cycle_hours()
+
         min_start = min(i[1] for i in intervals)
         max_end = max(i[2] for i in intervals)
-        cs = _cycle_start_for(min_start)
+        cs = _cycle_start_for(min_start, start_hour, end_hour)
         while cs < max_end:
-            ce = _cycle_end_for(cs)
+            ce = _cycle_end_for(cs, end_hour)
             in_cycle = []
             for line, s, e in intervals:
                 h = _overlap_hours(s, e, cs, ce)
                 if h > 0:
                     in_cycle.append((line, h, s))
-            if len(in_cycle) == 1:
-                line, h, _ = in_cycle[0]
-                result[line.id] += _classify(h)
-            elif len(in_cycle) > 1:
+            if in_cycle:
                 in_cycle.sort(key=lambda x: x[2])
-                old_line, old_hours, _ = in_cycle[0]
-                if old_hours > FULL_DAY_THRESHOLD:
-                    for line, _h, _s in in_cycle:
-                        result[line.id] += 1.0
+                # Whoever the patient is lying in when the cycle closes carries
+                # the day in full -- the bed was theirs for the night whatever
+                # time they moved into it. Each accommodation vacated earlier in
+                # the same cycle is charged by its own category's bands: two
+                # hours in a ward before an ICU transfer is half a ward-day
+                # under the standard rule, six is a whole one.
+                for line, hours, _s in in_cycle[:-1]:
+                    rule = Rule._for_category(line.bed_no.category_id)
+                    result[line.id] += rule.day_fraction(hours)
+                last_line, last_hours, _s = in_cycle[-1]
+                if len(in_cycle) > 1:
+                    result[last_line.id] += 1.0
                 else:
-                    for line, _h, _s in in_cycle[1:]:
-                        result[line.id] += 1.0
+                    rule = Rule._for_category(last_line.bed_no.category_id)
+                    result[last_line.id] += rule.day_fraction(last_hours)
             cs += timedelta(days=1)
         return result
 

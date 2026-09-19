@@ -40,7 +40,7 @@
                 <field name="old_journal" />
                 <field name="payment_type" />
                 <field name="service_charge" />
-                <field name="to_be_paid" />
+                <field name="to_be_paid" optional="hide"/>
                 <field name="account_number" />
                 <field name="father_name" />
                 <field name="mother_name" />
@@ -274,12 +274,11 @@
                             <field name="total_without_discount" readonly="1"/>
                             <field name="total" readonly="1"/>
                             <field name="investigation_total"/>
-                            <field name="service_charge" invisible="service_charge == 0"/>
                             <field name="grand_total" readonly="1" class="oe_subtotal_footer_separator"/>
-                            <field name="to_be_paid" invisible="service_charge == 0"/>
                             <field name="advance"/>
                             <field name="investigation_paid"/>
                             <field name="paid"/>
+                            <field name="service_charge" invisible="service_charge == 0"/>
                             <field name="due" readonly="1" class="oe_subtotal_footer_separator"/>
                         </group>
                     </group>

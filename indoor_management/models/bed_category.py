@@ -10,6 +10,12 @@ class BedCategory(models.Model):
     code = fields.Char(string="Code")
     sequence = fields.Integer(default=10)
     perday_charge = fields.Float(string="Default Per-Day Charge")
+    charge_rule_id = fields.Many2one(
+        "bed.charge.rule",
+        string="Charge Rule",
+        help="How hours of occupancy become a day's charge for this category. "
+             "Blank follows the default rule.",
+    )
     color = fields.Integer(string="Color")
     description = fields.Text(string="Description")
     active = fields.Boolean(default=True)

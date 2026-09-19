@@ -87,7 +87,7 @@ class HospitalAdmission(models.Model):
     investigation_total = fields.Float(string="Investigation Total", default=0.0)
     investigation_paid = fields.Float(string="Investigation Paid", default=0.0)
     advance = fields.Float(string="Advance", default=0.0)
-    paid = fields.Float(string="Paid", default=0.0)
+    paid = fields.Float(string="Amount Received", default=0.0)
     due = fields.Float(string="Due", compute="_compute_totals", store=True)
 
     card_no = fields.Char(string="Card No.")
@@ -115,8 +115,13 @@ class HospitalAdmission(models.Model):
         default=lambda self: self._default_payment_type(),
     )
     payment_is_cash = fields.Boolean(related="payment_type.is_cash", string="Cash Payment")
-    service_charge = fields.Float(string="Service Charge")
-    to_be_paid = fields.Float(string="To be Paid")
+    service_charge = fields.Float(string="Card Service Charge")
+    # Amount Received plus the card surcharge: what the counter actually
+    # takes off the card. Kept because the money receipt and the payment
+    # models compute against it, but off the admission form -- two figures
+    # a hand-breadth apart, one of them "Paid" and the other "To be Paid",
+    # read as a bill and a balance rather than as one payment and its fee.
+    to_be_paid = fields.Float(string="Total to Collect")
     account_number = fields.Char(string="Account Number")
 
     # --- Guardian / attendant (shown on its own notebook page) ---

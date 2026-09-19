@@ -7,7 +7,10 @@
             <list>
                 <field name="commission_line_ids" />
                 <field name="department_id" />
+                <field name="description" />
                 <field name="name" />
+                <field name="charge_item_id" />
+                <field name="service_type" />
                 <field name="discount_amount" />
                 <field name="test_amount" />
                 <field name="mou_payable_comm_var" />
@@ -33,9 +36,12 @@
                             <field name="mou_payable_comm_fixed" />
                             <field name="after_discount" />
                             <field name="bill_line_id" />
+                            <field name="admission_charge_id" />
                         </group>
                         <group>
                             <field name="department_id" />
+                            <field name="charge_item_id" />
+                            <field name="service_type" />
                             <field name="discount_amount" />
                             <field name="mou_payable_comm_var" />
                             <field name="mou_payable_comm_max_cap" />
@@ -64,8 +70,11 @@
                 <field name="doctor_id"/>
                 <field name="broker_id"/>
                 <field name="bill_id"/>
+                <field name="admission_id"/>
                 <field name="department_id"/>
-                <field name="name"/>
+                <field name="service_type"/>
+                <field name="description"/>
+                <field name="name" optional="hide"/>
                 <field name="test_amount" sum="Base"/>
                 <field name="discount_amount" sum="Discount"/>
                 <field name="payable_amount" sum="Payable"/>
@@ -83,6 +92,8 @@
                 <field name="doctor_id"/>
                 <field name="broker_id"/>
                 <field name="bill_id"/>
+                <field name="admission_id"/>
+                <field name="description"/>
                 <field name="name"/>
                 <filter name="accrued" string="Accrued (unsettled)" domain="[('state','=','accrued')]"/>
                 <filter name="settled" string="Settled" domain="[('state','=','settled')]"/>
@@ -90,6 +101,7 @@
                 <separator/>
                 <filter name="group_doctor" string="Doctor" context="{'group_by':'doctor_id'}"/>
                 <filter name="group_borker" string="Broker" context="{'group_by':'broker_id'}"/>
+                <filter name="group_service" string="Service Type" context="{'group_by':'service_type'}"/>
                 <filter name="group_state" string="Status" context="{'group_by':'state'}"/>
             </search>
         </field>

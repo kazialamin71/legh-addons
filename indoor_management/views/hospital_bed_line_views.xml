@@ -9,6 +9,11 @@
                 <field name="category_id"/>
                 <field name="ward_id"/>
                 <field name="bed_no"/>
+                <field name="bed_state" widget="badge"
+                       decoration-success="bed_state == 'available'"
+                       decoration-danger="bed_state == 'occupied'"
+                       decoration-warning="bed_state == 'reserved'"
+                       decoration-muted="bed_state == 'maintenance'"/>
                 <field name="start_date"/>
                 <field name="end_date"/>
                 <field name="days_count"/>
@@ -33,6 +38,7 @@
                             <field name="category_id" readonly="1"/>
                             <field name="ward_id" readonly="1"/>
                             <field name="bed_no"/>
+                            <field name="bed_state"/>
                             <field name="start_date"/>
                             <field name="end_date"/>
                         </group>

@@ -27,6 +27,12 @@
               parent="menu_indoor_root"
               sequence="90"/>
 
+    <menuitem id="menu_indoor_charge_rules"
+              name="Bed Charge Rules"
+              parent="menu_indoor_config"
+              action="bed_charge_rule_action"
+              sequence="5"/>
+
     <menuitem id="menu_indoor_categories"
               name="Bed Categories"
               parent="menu_indoor_config"

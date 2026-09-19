@@ -1,13 +1,15 @@
 {
     "name": "Indoor / Ward Management",
     "summary": "Bed category, ward, dynamic bed allocation and shift with auto charge calculation for LEIH Hospital",
-    "version": "19.0.1.0.0",
+    "version": "19.0.1.1.1",
     "author": "Custom",
     "depends": ["leih19"],
     "category": "Hospital Management",
     "data": [
         "security/ir.model.access.csv",
+        "data/bed_charge_rule_data.xml",
         "data/bed_category_data.xml",
+        "views/bed_charge_rule_views.xml",
         "views/bed_category_views.xml",
         "views/hospital_ward_views.xml",
         "views/hospital_bed_views.xml",

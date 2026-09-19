@@ -26,13 +26,20 @@ class Commission(models.Model):
     def _recompute_settlement_totals(self):
         for rec in self:
             lines = rec.commission_line_ids
+            # Accruals come from counter bills and from admitted patients, and
+            # a settlement routinely holds both. Counting only the bills made
+            # every admission invisible in the totals the payout is checked
+            # against.
             bills = lines.mapped('bill_id')
+            admissions = lines.mapped('admission_id')
             rec.total_amount = sum(lines.mapped('payable_amount'))
             rec.given_discount_amount = sum(lines.mapped('discount_amount'))
             rec.total_payable_amount = (rec.total_amount or 0.0) - (rec.paid_amount or 0.0)
             rec.total_tests = len(lines)
-            rec.total_bill = sum(bills.mapped('grand_total'))
-            rec.total_patient = len(bills.mapped('patient_name'))
+            rec.total_bill = (sum(bills.mapped('grand_total'))
+                              + sum(admissions.mapped('grand_total')))
+            rec.total_patient = len(set(bills.mapped('patient_name').ids)
+                                    | set(admissions.mapped('patient_name').ids))
 
     def action_gather_accruals(self):
         """Pull all un-settled accrued commission lines for this doctor within
