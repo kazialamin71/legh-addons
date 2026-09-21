@@ -10,6 +10,7 @@
                 <field name="test_id" />
                 <field name="charge_item_id" />
                 <field name="service_type" />
+                <field name="accommodation_category_ids" widget="many2many_tags"/>
                 <field name="applicable" />
                 <field name="line_method" />
                 <field name="base_price" />
@@ -35,6 +36,9 @@
                             <field name="charge_item_id" />
                             <field name="department_id" />
                             <field name="service_type" />
+                            <field name="accommodation_category_ids" widget="many2many_tags"
+                                   options="{'no_create': True}"
+                                   placeholder="Empty = every accommodation"/>
                             <field name="applicable" />
                             <field name="line_method" />
                         </group>

@@ -47,24 +47,38 @@ class CommissionConfiguration(models.Model):
     # -------------------------------------------------------------------------
     # RULE MATCHING
     # -------------------------------------------------------------------------
-    def _match_line(self, entry=None, charge_item=None, department=None, service_type=None):
+    def _match_line(self, entry=None, charge_item=None, department=None,
+                    service_type=None, accommodation=None):
         """The scoped rule covering this item, most specific first.
 
         A named test or charge item beats the department it sits in, which in
         turn beats the service bucket. Without that order a blanket "30% on
         diagnostics" would swallow the one test that was negotiated separately.
+
+        Accommodation is checked before any of that: a rule written for ICU and
+        NICU is consulted in full before one that names no accommodation, so
+        "40% on investigations in ICU" wins over "10% on investigations" for a
+        patient in ICU and loses to it everywhere else. A rule naming
+        accommodations is simply not consulted for a charge raised outside them.
         """
         self.ensure_one()
         lines = self.commission_configuration_line_ids
-        for predicate in (
-            lambda l: entry and l.test_id and l.test_id == entry,
-            lambda l: charge_item and l.charge_item_id and l.charge_item_id == charge_item,
-            lambda l: department and l.department_id and l.department_id == department,
-            lambda l: service_type and l.service_type and l.service_type == service_type,
-        ):
-            match = lines.filtered(predicate)[:1]
-            if match:
-                return match
+        scoped = lines.browse()
+        if accommodation:
+            scoped = lines.filtered(
+                lambda l: l.accommodation_category_ids
+                and accommodation in l.accommodation_category_ids)
+        unscoped = lines.filtered(lambda l: not l.accommodation_category_ids)
+        for pool in (scoped, unscoped):
+            for predicate in (
+                lambda l: entry and l.test_id and l.test_id == entry,
+                lambda l: charge_item and l.charge_item_id and l.charge_item_id == charge_item,
+                lambda l: department and l.department_id and l.department_id == department,
+                lambda l: service_type and l.service_type and l.service_type == service_type,
+            ):
+                match = pool.filtered(predicate)[:1]
+                if match:
+                    return match
         return lines.browse()
 
     # -------------------------------------------------------------------------
@@ -73,7 +87,7 @@ class CommissionConfiguration(models.Model):
     def compute_commission(self, entry=None, qty=1.0, net_amount=0.0, gross_amount=0.0,
                            discount_amount=0.0, header_discount=0.0,
                            charge_item=None, department=None, service_type=None,
-                           base_rate=None):
+                           base_rate=None, accommodation=None):
         """Commission payable for one billed item under this rule.
 
         Shared by bill.register and hospital.admission accrual, which is why the
@@ -85,6 +99,9 @@ class CommissionConfiguration(models.Model):
         :param charge_item: admission.charge.item, for a ward/admission charge
         :param department: diagnosis.department the income belongs to
         :param service_type: hospital.admission.charge bucket ('nicu', 'bed'...)
+        :param accommodation: bed.category the patient was in when the charge
+            was raised, which is what separates an ICU investigation rate from
+            a general-ward one
         :param qty: quantity billed
         :param net_amount: item amount after its own discount
         :param gross_amount: list price x qty, before any discount
@@ -105,7 +122,8 @@ class CommissionConfiguration(models.Model):
             base_rate = (entry.base_rate if entry else 0.0) or 0.0
 
         match = self._match_line(entry=entry, charge_item=charge_item,
-                                 department=department, service_type=service_type)
+                                 department=department, service_type=service_type,
+                                 accommodation=accommodation)
 
         # A non-applicable line excludes the item from commission entirely.
         if match and not match.applicable:

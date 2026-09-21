@@ -47,7 +47,7 @@
                 <field name="spouse_name" />
                 <field name="religion" />
                 <field name="blood_group" />
-                <field name="reffered_to_hospital" />
+                <field name="referral" />
                 <field name="occupation" />
                 <field name="business_address" />
                 <field name="admitting_doctor" />
@@ -102,6 +102,8 @@
                             <field name="admitting_doctor"
                                    options="{'no_quick_create': True, 'no_create_edit': True}"/>
                             <field name="ref_doctors" placeholder="Select Doctor Name"
+                                   options="{'no_quick_create': True, 'no_create_edit': True}"/>
+                            <field name="referral" placeholder="Broker who referred the patient"
                                    options="{'no_quick_create': True, 'no_create_edit': True}"/>
                             <field name="bed"/>
                             <field name="package_name"/>
@@ -260,6 +262,8 @@
                                 </div>
                                 <field name="after_discount" readonly="1"/>
                                 <field name="other_discount"/>
+                                <field name="referral_discount"
+                                       invisible="not referral and not ref_doctors"/>
                                 <field name="discount_remarks" placeholder="Reason for the discount..."/>
                             </group>
                             <group string="Payment Details" name="payment_details">

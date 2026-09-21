@@ -1,3 +1,4 @@
+from . import referral_discount_mixin
 from . import commission_configuration
 from . import commission_configuration_line
 from . import commission

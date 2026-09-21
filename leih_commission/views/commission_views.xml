@@ -33,13 +33,17 @@
                     <button name="action_confirm" type="object" string="Confirm"
                             invisible="state != 'pending'"
                             groups="leih_commission.group_commission_manager"/>
-                    <button name="action_mark_paid" type="object" string="Mark Paid"
-                            class="oe_highlight" invisible="state != 'done'"
+                    <button name="action_register_payment" type="object" string="Register Payment"
+                            class="oe_highlight"
+                            invisible="state not in ('done', 'partially_paid')"
+                            groups="leih_commission.group_commission_manager"/>
+                    <button name="action_settle_balance" type="object" string="Settle Balance"
+                            invisible="state not in ('done', 'partially_paid')"
                             groups="leih_commission.group_commission_manager"/>
                     <button name="action_cancel" type="object" string="Cancel"
                             invisible="state in ('paid', 'cancelled')"
                             groups="leih_commission.group_commission_manager"/>
-                    <field name="state" widget="statusbar" statusbar_visible="pending,done,paid"/>
+                    <field name="state" widget="statusbar" statusbar_visible="pending,done,partially_paid,paid"/>
                 </header>
                 <sheet>
                     <div class="oe_title">
@@ -59,16 +63,26 @@
                             <field name="total_bill" readonly="1"/>
                             <field name="given_discount_amount" readonly="1"/>
                             <field name="total_amount" readonly="1"/>
+                            <field name="adjustment_amount"
+                                   readonly="state in ('paid', 'cancelled')"/>
+                            <field name="adjustment_reason"
+                                   required="adjustment_amount > 0"
+                                   readonly="state in ('paid', 'cancelled')"/>
+                            <field name="net_payable_amount" readonly="1"/>
                             <field name="paid_amount" readonly="1"/>
-                            <field name="total_payable_amount" readonly="1"/>
+                            <field name="balance_amount" readonly="1"
+                                   class="oe_subtotal_footer_separator"/>
                         </group>
                     </group>
                     <notebook>
                         <page string="Commission Line">
                             <field name="commission_line_ids">
-                                <list>
+                                <list decoration-danger="is_referral_discount">
                                     <field name="accrual_date"/>
+                                    <field name="is_referral_discount" column_invisible="1"/>
                                     <field name="bill_id"/>
+                                    <field name="admission_id"/>
+                                    <field name="accommodation_category_id"/>
                                     <field name="department_id"/>
                                     <field name="name"/>
                                     <field name="test_amount" sum="Base"/>
@@ -77,6 +91,26 @@
                                     <field name="mou_payable_comm_fixed"/>
                                     <field name="payable_amount" sum="Payable"/>
                                     <field name="state"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Payments">
+                            <field name="payment_ids">
+                                <list editable="bottom"
+                                      decoration-muted="state == 'cancelled'"
+                                      decoration-success="state == 'done'">
+                                    <field name="name" readonly="1"/>
+                                    <field name="date"/>
+                                    <field name="payment_type"/>
+                                    <field name="paid_amount" sum="Paid"/>
+                                    <field name="note"/>
+                                    <field name="state" readonly="1"/>
+                                    <button name="action_confirm" type="object"
+                                            icon="fa-check" title="Confirm"
+                                            invisible="state != 'pending'"/>
+                                    <button name="action_cancel" type="object"
+                                            icon="fa-times" title="Cancel"
+                                            invisible="state == 'cancelled'"/>
                                 </list>
                             </field>
                         </page>

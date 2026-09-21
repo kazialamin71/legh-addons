@@ -10,6 +10,13 @@ class CommissionConfigurationLine(models.Model):
 
         test_id  >  charge_item_id  >  department_id  >  service_type
 
+    Crossed with that is *where the patient was lying*. An investigation is
+    a diagnostic charge whether it was ordered in ICU or on a general ward,
+    so without that second dimension "10% on the ward, 40% in ICU" cannot be
+    written down at all -- the two rules would be the same row. A line naming
+    accommodation categories covers only charges incurred there, and beats an
+    otherwise-equal line that names none.
+
     ``service_type`` is the bucket an admitted patient's charges are filed
     under in ``hospital.admission.charge`` -- bed, ICU, NICU, diagnostic,
     medicine... It is how a ward charge gets a rule at all: NICU bed charges
@@ -26,6 +33,14 @@ class CommissionConfigurationLine(models.Model):
         'admission.charge.item', string='Admission Charge Item',
         help="Ward/admission charge this rule covers (bed, ICU, NICU, oxygen...). "
              "These are catalogued separately from diagnostic tests.")
+    accommodation_category_ids = fields.Many2many(
+        'bed.category', 'commission_config_line_bed_category_rel',
+        'line_id', 'category_id', string='Accommodation',
+        help="Bed categories this rule covers -- ICU and NICU, say. The "
+             "accommodation is the one the patient was in when the charge "
+             "was raised, so a stay that starts in ICU and steps down to a "
+             "ward earns the ICU rate up to the transfer and the ward rate "
+             "after it. Leave empty to cover every accommodation.")
     service_type = fields.Selection(
         selection=lambda self: self.env['hospital.admission.charge']._fields['service_type'].selection,
         string='Service Type',
@@ -52,6 +67,13 @@ class CommissionConfigurationLine(models.Model):
 
     def _scope_label(self):
         """What this line covers, for the form and for error messages."""
+        self.ensure_one()
+        where = ''
+        if self.accommodation_category_ids:
+            where = ' (%s)' % ', '.join(self.accommodation_category_ids.mapped('name'))
+        return self._what_label() + where
+
+    def _what_label(self):
         self.ensure_one()
         if self.test_id:
             return self.test_id.display_name

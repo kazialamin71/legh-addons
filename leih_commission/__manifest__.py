@@ -1,12 +1,13 @@
 {
     'name': 'LEIS Commission Management',
     'summary': 'Doctor / broker commission: configuration, per-bill accrual, settlement',
-    'version': '19.0.1.1',
+    'version': '19.0.1.2',
     'author': 'Mufti Muntasir Ahmed',
-    'depends': ['leih19', 'leih_admission'],
+    'depends': ['leih19', 'leih_admission', 'indoor_management'],
     'data': [
         'security/commission_security.xml',
         'security/ir.model.access.csv',
+        'data/commission_payment_sequence.xml',
         'reports/commission_report.xml',
         'views/commission_configuration_line_views.xml',
         'views/commission_configuration_views.xml',

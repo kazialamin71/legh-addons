@@ -3,7 +3,12 @@ from odoo import fields, models
 
 class BillRegister(models.Model):
     """Commission accrual hooks layered onto the base bill."""
-    _inherit = 'bill.register'
+    _name = 'bill.register'
+    _inherit = ['bill.register', 'commission.referral.discount.mixin']
+
+    def _referral_discount_referrer(self):
+        self.ensure_one()
+        return self.ref_doctors, self.referral
 
     def bill_confirm(self):
         res = super().bill_confirm()
@@ -51,7 +56,10 @@ class BillRegister(models.Model):
         self.ensure_one()
         lines = self.bill_register_line_id
         line_total = sum(lines.mapped('total_amount'))
-        discount = line_total - (self.grand_total or 0.0)
+        # The referral discount is deducted in full on its own charge-back line,
+        # so spreading it across the items as well would take it twice.
+        discount = (line_total - (self.grand_total or 0.0)
+                    - (self.referral_discount or 0.0))
         if line_total <= 0 or discount <= 0:
             return {line.id: 0.0 for line in lines}
         return {line.id: discount * (line.total_amount or 0.0) / line_total
@@ -78,6 +86,7 @@ class BillRegister(models.Model):
         }
         today = self.date or fields.Datetime.now()
         header_discount = self._commission_header_discount()
+        self._accrue_referral_discount('bill_id', today)
 
         for line in self.bill_register_line_id:
             if not line.name:

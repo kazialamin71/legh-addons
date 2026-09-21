@@ -82,6 +82,12 @@ class HospitalAdmission(models.Model):
     doctors_discounts = fields.Float(string="Discount(%)")
     after_discount = fields.Float(string="Discount Amount", compute="_compute_totals", store=True)
     other_discount = fields.Float(string="Other Discount")
+    referral_discount = fields.Float(
+        string="Referral Discount",
+        help="Extra discount given on the referrer's account. The patient pays "
+             "this much less and the same amount is taken off the referrer's "
+             "commission, so it costs the hospital nothing. Needs a referring "
+             "doctor or broker to charge it back to.")
     discount_remarks = fields.Char(string="Discount Remarks")
     grand_total = fields.Float(string="Grand Total", compute="_compute_totals", store=True)
     investigation_total = fields.Float(string="Investigation Total", default=0.0)
@@ -147,7 +153,9 @@ class HospitalAdmission(models.Model):
         string="Religion",
     )
     blood_group = fields.Char(string="Blood Group")
-    reffered_to_hospital = fields.Many2one("brokers.info", string="Referred to this hospital by")
+    referral = fields.Many2one(
+        "brokers.info", string="Referral",
+        help="Broker who sent this patient in. Named to match the same field on bill.register: the commission rules resolve one broker from both documents, and two names for one concept is how this one came to be missing from the form entirely.")
     occupation = fields.Char(string="Occupation")
     business_address = fields.Char(string="Business Address")
     admitting_doctor = fields.Many2one("doctors.profile", string="Admitting Doctor")

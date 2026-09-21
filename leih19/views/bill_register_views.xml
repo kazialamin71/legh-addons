@@ -17,6 +17,7 @@
                 <field name="referral" />
                 <field name="doctors_discounts" />
                 <field name="other_discount" />
+                <field name="referral_discount" optional="hide"/>
                 <field name="after_discount" />
                 <field name="total_without_discount" />
                 <field name="total" />
@@ -170,6 +171,8 @@
                                 <field name="doctor_discount_amt" readonly="1"/>
                                 <field name="scheme_discount_total" readonly="1"/>
                                 <field name="other_discount"/>
+                                <field name="referral_discount"
+                                       invisible="not referral and not ref_doctors"/>
                                 <field name="discount_remarks" placeholder="Reason for the discount..."/>
                             </group>
                             <group string="Payment Details" name="payment_details">

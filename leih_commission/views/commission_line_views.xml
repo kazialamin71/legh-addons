@@ -65,12 +65,14 @@
         <field name="arch" type="xml">
             <list string="Commission Accruals" create="false"
                   decoration-muted="state == 'cancelled'"
+                  decoration-danger="is_referral_discount"
                   decoration-success="state == 'paid'">
                 <field name="accrual_date"/>
                 <field name="doctor_id"/>
                 <field name="broker_id"/>
                 <field name="bill_id"/>
                 <field name="admission_id"/>
+                <field name="accommodation_category_id"/>
                 <field name="department_id"/>
                 <field name="service_type"/>
                 <field name="description"/>
@@ -79,6 +81,7 @@
                 <field name="discount_amount" sum="Discount"/>
                 <field name="payable_amount" sum="Payable"/>
                 <field name="commission_line_ids" string="Settlement"/>
+                <field name="is_referral_discount" optional="show"/>
                 <field name="state"/>
             </list>
         </field>
@@ -101,7 +104,10 @@
                 <separator/>
                 <filter name="group_doctor" string="Doctor" context="{'group_by':'doctor_id'}"/>
                 <filter name="group_borker" string="Broker" context="{'group_by':'broker_id'}"/>
+                <filter name="charge_backs" string="Referral Discounts" domain="[('is_referral_discount','=',True)]"/>
+                <separator/>
                 <filter name="group_service" string="Service Type" context="{'group_by':'service_type'}"/>
+                <filter name="group_accommodation" string="Accommodation" context="{'group_by':'accommodation_category_id'}"/>
                 <filter name="group_state" string="Status" context="{'group_by':'state'}"/>
             </search>
         </field>

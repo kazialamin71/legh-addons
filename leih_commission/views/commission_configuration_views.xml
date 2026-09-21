@@ -61,7 +61,24 @@
                     </group>
                     <notebook>
                         <page string="Commission Configuration Line">
-                            <field name="commission_configuration_line_ids" />
+                            <field name="commission_configuration_line_ids">
+                                <list editable="bottom">
+                                    <field name="accommodation_category_ids"
+                                           widget="many2many_tags"
+                                           options="{'no_create': True}"/>
+                                    <field name="service_type"/>
+                                    <field name="charge_item_id"
+                                           options="{'no_create': True}"/>
+                                    <field name="test_id" options="{'no_create': True}"/>
+                                    <field name="department_id"/>
+                                    <field name="line_method"/>
+                                    <field name="variance_amount"/>
+                                    <field name="fixed_amount" optional="hide"/>
+                                    <field name="base_price" optional="hide"/>
+                                    <field name="max_commission_amount" optional="hide"/>
+                                    <field name="applicable"/>
+                                </list>
+                            </field>
                         </page>
                     </notebook>
                 </sheet>

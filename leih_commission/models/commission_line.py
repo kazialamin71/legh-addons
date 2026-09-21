@@ -15,6 +15,16 @@ class CommissionLine(models.Model):
     department_id = fields.Many2one('diagnosis.department', string='Department')
     name = fields.Many2one('examination.entry', string='Test Name')
     charge_item_id = fields.Many2one('admission.charge.item', string='Charge Item')
+    is_referral_discount = fields.Boolean(
+        'Referral Discount',
+        help='A charge-back rather than an earning: the discount given on the '
+             'referrer\'s account, carried as its own negative line so the '
+             'settlement shows what was deducted and why instead of quietly '
+             'shaving every item.')
+    accommodation_category_id = fields.Many2one(
+        'bed.category', string='Accommodation',
+        help='Where the patient was lying when this charge was raised. Recorded '
+             'because it is half of why this line earned the rate it did.')
     service_type = fields.Selection(
         selection=lambda self: self.env['hospital.admission.charge']._fields['service_type'].selection,
         string='Service Type')

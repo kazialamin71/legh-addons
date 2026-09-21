@@ -246,7 +246,7 @@
                                 </t>
                                 <t t-call="leih_admission.adm_cell">
                                     <t t-set="label">Referred to Hospital by</t>
-                                    <t t-set="value" t-value="o.reffered_to_hospital.broker_name"/>
+                                    <t t-set="value" t-value="o.referral.broker_name"/>
                                     <t t-set="span" t-value="2"/>
                                 </t>
                             </tr>

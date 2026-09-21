@@ -47,6 +47,12 @@ class BillRegister(models.Model):
     doctors_discounts = fields.Float("Doctor Discount(%)")
     doctor_discount_amt = fields.Float("Doctor Discount Amount", compute="_compute_totals", store=True)
     other_discount = fields.Float("Other Discount (Goodwill)")
+    referral_discount = fields.Float(
+        "Referral Discount",
+        help="Extra discount given on the referrer's account. The patient pays "
+             "this much less and the same amount is taken off the referrer's "
+             "commission, so it costs the hospital nothing. Needs a referring "
+             "doctor or broker to charge it back to.")
     after_discount = fields.Float("Discount Amount", compute="_compute_totals", store=True)
     scheme_discount_total = fields.Float("Scheme Discount", compute="_compute_totals", store=True)
 
@@ -194,6 +200,7 @@ class BillRegister(models.Model):
         'bill_register_line_id.scheme_discount_amt',
         'doctors_discounts',
         'other_discount',
+        'referral_discount',
         'paid',
         'down_payment',
         'down_payment_registered',
@@ -232,11 +239,16 @@ class BillRegister(models.Model):
             # doctor discount: % on the line-net subtotal
             rec.doctor_discount_amt = (rec.total or 0.0) * (rec.doctors_discounts or 0.0) / 100.0
 
-            # total discount amount (all line discounts + doctor + goodwill)
-            rec.after_discount = line_discount_total + rec.doctor_discount_amt + (rec.other_discount or 0.0)
+            # total discount amount (all line discounts + doctor + goodwill
+            # + the referral's own)
+            rec.after_discount = (line_discount_total + rec.doctor_discount_amt
+                                  + (rec.other_discount or 0.0)
+                                  + (rec.referral_discount or 0.0))
 
-            # grand total after doctor discount and goodwill discount
-            rec.grand_total = (rec.total or 0.0) - rec.doctor_discount_amt - (rec.other_discount or 0.0)
+            # grand total after doctor, goodwill and referral discounts
+            rec.grand_total = ((rec.total or 0.0) - rec.doctor_discount_amt
+                               - (rec.other_discount or 0.0)
+                               - (rec.referral_discount or 0.0))
 
             # Due nets off both the money already receipted and the counter
             # collection typed into "Paid Now" but not receipted yet, so the

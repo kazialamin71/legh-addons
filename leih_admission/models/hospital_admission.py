@@ -149,7 +149,8 @@ class HospitalAdmission(models.Model):
         'hospital_bed_line_id.total_amount',
         'hospital_bill_line_id.total_amount',
         'hospital_doctor_line_id.total_amount',
-        'doctors_discounts', 'other_discount', 'paid', 'investigation_paid',
+        'doctors_discounts', 'other_discount', 'referral_discount',
+        'paid', 'investigation_paid',
     )
     def _compute_totals(self):
         """Totals come from the unified charge ledger once it is populated
@@ -178,7 +179,8 @@ class HospitalAdmission(models.Model):
             # and left total_without_discount - grand_total unexplained on the
             # printed statement.
             rec.line_discount = gross - subtotal
-            rec.bill_discount = doctor_disc + (rec.other_discount or 0.0)
+            rec.bill_discount = (doctor_disc + (rec.other_discount or 0.0)
+                                 + (rec.referral_discount or 0.0))
             rec.after_discount = rec.line_discount + rec.bill_discount
             rec.grand_total = gross - rec.after_discount
             rec.due = rec.grand_total - (rec.paid + rec.investigation_paid)
