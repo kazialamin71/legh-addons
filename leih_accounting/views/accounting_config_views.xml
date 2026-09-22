@@ -108,4 +108,20 @@
               parent="account.menu_finance_configuration"
               action="action_leih_accounting_config" sequence="100"
               groups="account.group_account_manager"/>
+
+    <!-- Closes the advance/receivable gap on admissions released before the
+         settlement entry existed. Safe to run more than once. -->
+    <record id="action_clear_investigation_receivables" model="ir.actions.server">
+        <field name="name">Clear Investigation Receivables</field>
+        <field name="model_id" ref="leih19.model_hospital_admission"/>
+        <field name="state">code</field>
+        <field name="code">action = model.action_clear_investigation_receivables()</field>
+    </record>
+
+    <menuitem id="menu_clear_investigation_receivables"
+              name="Clear Investigation Receivables"
+              parent="account.menu_finance_configuration"
+              action="action_clear_investigation_receivables"
+              groups="account.group_account_manager"
+              sequence="101"/>
 </odoo>

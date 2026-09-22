@@ -40,4 +40,20 @@
             </button>
         </field>
     </record>
+
+    <!-- OPD ticket: smart button -->
+    <record id="view_opd_ticket_form_acc" model="ir.ui.view">
+        <field name="name">opd.ticket.form.acc</field>
+        <field name="model">opd.ticket</field>
+        <field name="inherit_id" ref="leih19.opd_ticket_form_view"/>
+        <field name="arch" type="xml">
+            <div name="button_box" position="inside">
+                <button name="action_view_acc_moves" type="object"
+                        class="oe_stat_button" icon="fa-book"
+                        invisible="acc_move_count == 0">
+                    <field name="acc_move_count" widget="statinfo" string="Journal Entries"/>
+                </button>
+            </div>
+        </field>
+    </record>
 </odoo>

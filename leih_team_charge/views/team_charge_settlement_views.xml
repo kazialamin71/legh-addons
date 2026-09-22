@@ -14,65 +14,76 @@
         <field name="arch" type="xml">
             <form string="Doctor's Share Settlement">
                 <header>
-                    <button name="action_collect" type="object" string="Gather Charges"
+                    <button name="action_collect" type="object" string="Gather Shares"
                             class="btn-primary" invisible="state != 'draft'"/>
-                    <button name="action_done" type="object" string="Mark Paid"
+                    <button name="action_done" type="object" string="Pay Doctor"
                             class="btn-primary"
-                            invisible="state != 'draft' or charge_count == 0"/>
+                            invisible="state != 'draft' or charge_count == 0"
+                            confirm="This hands the cash over and posts it out of the counter. Continue?"/>
                     <button name="action_cancel" type="object" string="Cancel"
                             invisible="state == 'cancel'"
-                            confirm="This releases every charge on this settlement so it can be paid again. Continue?"/>
+                            confirm="This reverses the journal entries and releases every share so it can be paid again. Continue?"/>
                     <button name="action_draft" type="object" string="Reset to Draft"
                             invisible="state != 'cancel'"/>
                     <field name="state" widget="statusbar"/>
                 </header>
                 <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_view_acc_moves" type="object"
+                                class="oe_stat_button" icon="fa-book"
+                                invisible="acc_move_count == 0">
+                            <field name="acc_move_count" widget="statinfo" string="Journal Entries"/>
+                        </button>
+                    </div>
+                    <widget name="web_ribbon" title="Cancelled" bg_color="text-bg-danger"
+                            invisible="state != 'cancel'"/>
                     <div class="oe_title">
                         <h1><field name="name" readonly="1"/></h1>
                     </div>
                     <group>
-                        <group string="Doctor">
-                            <field name="doctor_id" readonly="charge_count > 0"
+                        <group string="Doctor" name="doctor">
+                            <field name="doctor_id" readonly="state != 'draft'"
                                    options="{'no_create': True}"/>
-                            <field name="date"/>
-                            <field name="payment_note" placeholder="e.g. cash, bKash, cheque no."/>
+                            <field name="date" readonly="state != 'draft'"/>
+                            <field name="payment_type" readonly="state != 'draft'"
+                                   options="{'no_create': True}"/>
+                            <field name="payment_note" readonly="state != 'draft'"
+                                   placeholder="e.g. cash, bKash, cheque no."/>
                         </group>
-                        <group string="Charges to Settle">
-                            <field name="date_from" readonly="charge_count > 0"/>
-                            <field name="date_to" readonly="charge_count > 0"/>
-                            <field name="collected_only" readonly="charge_count > 0"/>
+                        <group string="What to Settle" name="scope">
+                            <field name="admission_id" readonly="state != 'draft'"
+                                   options="{'no_create': True}"/>
+                            <field name="date_from" readonly="state != 'draft'"
+                                   invisible="admission_id"/>
+                            <field name="date_to" readonly="state != 'draft'"
+                                   invisible="admission_id"/>
                             <field name="charge_count"/>
                             <field name="amount"/>
+                            <field name="acc_move_count" invisible="1"/>
                         </group>
                     </group>
                     <div class="alert alert-info" role="status" invisible="charge_count != 0">
-                        Choose the doctor and the date range, then press
-                        <b>Gather Charges</b>. Only shares that have not already
-                        been paid are picked up, so the same money cannot go out twice.
+                        Choose the doctor, then either an <b>admission</b> or a date
+                        range, and press <b>Gather Shares</b>. Only what the patient
+                        has already paid in can be handed over, and only the part
+                        that has not been paid out before.
                     </div>
                     <notebook invisible="charge_count == 0">
-                        <page string="Ward Charges" name="ward">
-                            <field name="admission_charge_ids" readonly="1">
-                                <list create="false" delete="false">
-                                    <field name="date"/>
-                                    <field name="admission_id"/>
-                                    <field name="description"/>
-                                    <field name="total_amount" sum="Charged"/>
-                                    <field name="hospital_amount" sum="Hospital"/>
-                                    <field name="team_amount" sum="Doctor"/>
+                        <page string="Shares Being Paid" name="lines">
+                            <field name="line_ids" readonly="state != 'draft'">
+                                <list editable="bottom" create="false" delete="false">
+                                    <field name="description" readonly="1"/>
+                                    <field name="charge_id" column_invisible="True"/>
+                                    <field name="bill_line_id" column_invisible="True"/>
+                                    <field name="owed" sum="Doctor's Share" readonly="1"/>
+                                    <field name="already_paid" sum="Already Paid" readonly="1"/>
+                                    <field name="amount" sum="Paying Now"/>
                                 </list>
                             </field>
-                        </page>
-                        <page string="Counter Charges" name="counter">
-                            <field name="bill_line_ids" readonly="1">
-                                <list create="false" delete="false">
-                                    <field name="bill_register_id"/>
-                                    <field name="name"/>
-                                    <field name="total_amount" sum="Charged"/>
-                                    <field name="hospital_amount" sum="Hospital"/>
-                                    <field name="team_amount" sum="Doctor"/>
-                                </list>
-                            </field>
+                            <div class="text-muted mt-2">
+                                Reduce "Paying Now" to hand over part of a share; the
+                                rest stays owed and can be paid on a later settlement.
+                            </div>
                         </page>
                     </notebook>
                 </sheet>
@@ -88,8 +99,8 @@
                 <field name="name"/>
                 <field name="date"/>
                 <field name="doctor_id"/>
-                <field name="date_from"/>
-                <field name="date_to"/>
+                <field name="admission_id" optional="show"/>
+                <field name="payment_type" optional="hide"/>
                 <field name="charge_count"/>
                 <field name="amount" sum="Paid"/>
                 <field name="state" widget="badge"
@@ -104,9 +115,26 @@
         <field name="res_model">team.charge.settlement</field>
         <field name="view_mode">list,form</field>
         <field name="help" type="html">
-            <p class="o_view_nocontent_smiling_face">Pay a doctor what was collected for them</p>
-            <p>Each settlement gathers the shares not yet paid and stamps them, so
-               the same money cannot be handed over twice.</p>
+            <p class="o_view_nocontent_smiling_face">Pay a doctor at the counter</p>
+            <p>Each settlement hands over only what the patient has already paid in,
+               posts it out of the counter cash, and shows on the cash collection
+               report as money leaving the drawer.</p>
         </field>
     </record>
+
+    <!-- Brings the old scheme's unposted doctors' shares onto the ledger.
+         Manual and idempotent: read the Doctor's Share report first. -->
+    <record id="action_open_team_payables" model="ir.actions.server">
+        <field name="name">Bring Doctors' Shares onto the Ledger</field>
+        <field name="model_id" ref="model_team_charge_settlement"/>
+        <field name="state">code</field>
+        <field name="code">action = model.action_open_team_payables()</field>
+    </record>
+
+    <menuitem id="menu_open_team_payables"
+              name="Bring Doctors' Shares onto the Ledger"
+              parent="account.menu_finance_configuration"
+              action="action_open_team_payables"
+              groups="account.group_account_manager"
+              sequence="102"/>
 </odoo>

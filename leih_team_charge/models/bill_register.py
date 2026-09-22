@@ -81,32 +81,46 @@ class BillRegister(models.Model):
             rec.hospital_charge_total = sum(rec.bill_register_line_id.mapped('hospital_amount'))
             rec.team_unassigned_count = len(rec.bill_register_line_id.filtered('team_unassigned'))
 
-    # ------------------------------------------------------------------
-    def _team_ratio(self):
-        """Hospital's fraction of this bill, used to split a part payment.
-
-        Pro-rata: every receipt is treated alike, so posted income rises
-        smoothly with collection instead of arriving in a lump at the end, and
-        no intermediate figure can exceed what the bill is worth.
-        """
+    def _team_budget(self):
+        """The patient's money on this bill that no doctor has taken yet."""
         self.ensure_one()
-        total = sum(self.bill_register_line_id.mapped('total_amount'))
-        if total <= 0:
-            return 1.0
-        return (self.hospital_charge_total or 0.0) / total
+        paid_out = sum(self.bill_register_line_id.mapped('team_paid'))
+        return max((self.paid or 0.0) - paid_out, 0.0)
 
+    # ------------------------------------------------------------------
+    # Posting
+    # ------------------------------------------------------------------
     def _acc_post_revenue(self):
-        """Recognise the hospital's share only, when kept off the ledger."""
+        """Recognise the hospital's income and the doctor's payable together.
+
+        A counter bill has no final settlement to wait for -- it recognises its
+        income the moment it is confirmed -- so the doctor's share becomes a
+        payable at the same instant::
+
+            Dr Accounts Receivable   grand total
+            Dr Discount Allowed      bill-level discount
+               Cr Income             hospital's share, per income head
+               Cr Doctor's Payable    doctor's share, per doctor
+
+        The patient owes the whole bill either way; what changes is that the
+        part of it that is the doctor's is a liability rather than income.
+        """
         cfg = self.env['leih.accounting.config']._get()
-        if not cfg._enabled() or not cfg._team_off_ledger():
-            return super()._acc_post_revenue()
+        if not cfg._enabled():
+            return
         self.ensure_one()
         if self.acc_revenue_posted:
             return
+        # Deliberately NOT delegating to the base poster when no doctor share
+        # is involved. The base defers an admission-linked bill's income to the
+        # admission's settlement entry -- but the settlement here excludes
+        # hospital.bill.line charges, because a bill recognises its own income.
+        # Delegating would leave that income recognised in neither place.
         partner = self.patient_name.partner_id
         receivable = cfg._receivable_account(partner) if partner else False
         if not partner or not receivable:
             return
+
         income = {}
         for line in self.bill_register_line_id:
             if line.hospital_amount <= 0:
@@ -116,56 +130,52 @@ class BillRegister(models.Model):
                 continue
             income.setdefault(acct, 0.0)
             income[acct] += line.hospital_amount
+        team = {}
+        for line in self.bill_register_line_id.filtered(lambda l: l.team_amount > 0):
+            if not line.team_provider_id:
+                continue
+            team.setdefault(line.team_provider_id, 0.0)
+            team[line.team_provider_id] += line.team_amount
         hospital_total = sum(income.values())
-        # Same reasoning as the admission side: a bill-level discount that is
-        # never posted quietly becomes an uncollectable receivable.
-        line_total = sum(self.bill_register_line_id.mapped('total_amount'))
-        discount = min(max(line_total - (self.grand_total or 0.0), 0.0), hospital_total)
-        if discount and not cfg.discount_account_id:
-            _logger.warning(
-                '%s: a discount of %s cannot be posted because no "Discount '
-                'Allowed" account is configured.', self.name, discount)
-            discount = 0.0
-        if hospital_total <= 0:
-            # A bill that is entirely the doctor's earns the hospital nothing,
-            # so there is genuinely no entry to make. Logged rather than passed
-            # over in silence: this same branch once swallowed a bug that left
-            # every bill marked posted with no journal entry behind it.
-            _logger.info(
-                '%s: nothing to post -- the hospital share of %s is zero across '
-                '%s line(s).', self.name, self.grand_total,
-                len(self.bill_register_line_id))
+        team_total = sum(team.values())
+        if hospital_total <= 0 and team_total <= 0:
+            _logger.info('%s: nothing to post -- no hospital or doctor share.', self.name)
             self.acc_revenue_posted = True
             return
-        lines = [(receivable, hospital_total - discount, 0.0, partner)]
+
+        line_total = sum(self.bill_register_line_id.mapped('total_amount'))
+        grand = self.grand_total or 0.0
+        discount = max(line_total - grand, 0.0)
+        if discount and not cfg.discount_account_id:
+            # Without a contra account the discount has to come out of income,
+            # which is the netting this design avoids -- but an unbalanced entry
+            # is worse, so it is absorbed and said out loud.
+            _logger.warning(
+                '%s: a discount of %s cannot be posted because no "Discount '
+                'Allowed" account is configured; it is being netted off income.',
+                self.name, discount)
+            if hospital_total > 0:
+                factor = max(hospital_total - discount, 0.0) / hospital_total
+                income = {a: v * factor for a, v in income.items()}
+                hospital_total = sum(income.values())
+            discount = 0.0
+
+        # The patient owes the whole bill: the hospital's share plus the
+        # doctor's, less whatever was let off.
+        lines = [(receivable, hospital_total + team_total - discount, 0.0, partner)]
         if discount > 0:
             lines.append((cfg.discount_account_id, discount, 0.0, partner))
         for acct, amt in income.items():
             lines.append((acct, 0.0, amt, partner))
-        move = cfg._create_move(cfg.sales_journal_id, self.name, self.date,
+        payable = cfg._team_payable_account() if team_total > 0 else False
+        for doctor, amt in team.items():
+            lines.append((payable, 0.0, amt, cfg._team_doctor_partner(doctor)))
+        move = cfg._create_move(cfg.sales_journal_id, self._acc_move_ref(), self.date,
                                 lines, partner=partner)
         if move:
             self.acc_move_ids = [(4, move.id)]
             self.acc_revenue_posted = True
-
-    def _acc_post_payment(self, amount, payment_type, date):
-        """Bank only the hospital's slice of the receipt.
-
-        The patient's receipt still shows the full amount; the doctor's slice
-        never enters the ledger, which is the whole point of the treatment.
-        How a part payment divides is the configured allocation policy -- under
-        "doctor first" an early receipt produces no entry at all.
-        """
-        cfg = self.env['leih.accounting.config']._get()
-        if not cfg._enabled() or not cfg._team_off_ledger():
-            return super()._acc_post_payment(amount, payment_type, date)
-        self.ensure_one()
-        total = sum(self.bill_register_line_id.mapped('total_amount'))
-        paid_now = self.paid or 0.0
-        paid_before = paid_now - (amount or 0.0)
-        team = self.team_charge_total or 0.0
-        hospital_share = (cfg._team_cumulative_hospital(paid_now, total, team)
-                          - cfg._team_cumulative_hospital(paid_before, total, team))
-        if hospital_share <= 0:
-            return
-        return super()._acc_post_payment(hospital_share, payment_type, date)
+            # Recognised now, so a later payout only has to move the cash.
+            for line in self.bill_register_line_id.filtered(
+                    lambda l: l.team_amount > 0 and l.team_provider_id):
+                line.with_context(team_settling=True).team_entitled = line.team_amount

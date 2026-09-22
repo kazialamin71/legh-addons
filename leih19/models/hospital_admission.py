@@ -414,6 +414,29 @@ class HospitalAdmission(models.Model):
                 raise UserError(_("Please give the description about the release note field"))
             if rec.state == "activated":
                 rec.state = "released"
+            rec._settle_investigation_bills()
+        return True
+
+    def _settle_investigation_bills(self):
+        """Close out the investigation bills the released patient has paid for.
+
+        ``calculate_bill`` folds every confirmed investigation bill into this
+        admission's grand total, and the release check above refuses to let the
+        patient go while ``due`` is above zero -- so by the time we get here the
+        patient has paid for those investigations through the admission. The
+        bills themselves knew nothing about it and stayed outstanding at the bill
+        counter for ever.
+
+        Recorded as ``admission_settled`` rather than as a payment: no money was
+        taken at the bill counter, so raising a receipt here would both invent a
+        collection that never happened and count the patient's money twice in the
+        cash collection report.
+        """
+        self.ensure_one()
+        for bill in self.investigation_bill_ids.filtered(lambda b: b.state == 'confirmed'):
+            outstanding = (bill.grand_total or 0.0) - (bill.paid or 0.0) - (bill.admission_settled or 0.0)
+            if outstanding > 0.005:
+                bill.admission_settled = (bill.admission_settled or 0.0) + outstanding
         return True
 
     def hospital_change_status(self):
@@ -447,6 +470,10 @@ class HospitalAdmission(models.Model):
                 moves.unlink()
 
             rec.state = "cancelled"
+
+            # The admission is no longer paying for them, so they go back to
+            # being outstanding at the bill counter.
+            rec.investigation_bill_ids.filtered('admission_settled').admission_settled = 0.0
 
             receipts = self.env["leih.money.receipt"].search([
                 ("general_admission_id", "=", rec.id)

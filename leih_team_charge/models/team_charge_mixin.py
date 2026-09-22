@@ -65,10 +65,27 @@ class TeamChargeMixin(models.AbstractModel):
         help='What the hospital actually earns from this line. Always the line '
              'total less the doctor\'s share, so the two halves cannot drift.')
     team_settlement_id = fields.Many2one(
-        'team.charge.settlement', string='Settled By', readonly=True,
+        'team.charge.settlement', string='Last Settled By', readonly=True,
         copy=False, index=True, ondelete='set null')
+    # A share can be handed over in instalments -- the counter pays what the
+    # patient's money covers and the rest waits -- so what has been paid is an
+    # amount, not a flag. The flag is derived from it.
+    team_paid = fields.Float(
+        'Paid to Doctor', readonly=True, copy=False,
+        help='How much of this share has actually been handed over at the '
+             'counter, across all settlements.')
+    # Three amounts, and the invariant paid <= entitled <= amount. Each doctor's
+    # payable balance is exactly sum(entitled) - sum(paid) over their charges,
+    # so the ledger and the charge rows can always be reconciled to each other.
+    team_entitled = fields.Float(
+        'Recognised as Payable', readonly=True, copy=False,
+        help="How much of this share has been credited to the doctor's payable "
+             'account -- at final settlement, or earlier if the counter paid the '
+             'doctor before then.')
+    team_due = fields.Float(
+        'Still Owed to Doctor', compute='_compute_team_due', store=True)
     team_settled = fields.Boolean(
-        'Paid to Doctor', compute='_compute_team_settled', store=True)
+        'Fully Paid', compute='_compute_team_settled', store=True)
     team_unassigned = fields.Boolean(
         'Share Not Assigned', compute='_compute_team_unassigned', store=True,
         help="The item carries a doctor's share but no doctor is named, so the "
@@ -123,12 +140,7 @@ class TeamChargeMixin(models.AbstractModel):
         return min(max((doc.paid or 0.0) / total, 0.0), 1.0)
 
     def _team_patient_paid(self):
-        """True once the patient has cleared the document in full.
-
-        Deliberately all-or-nothing for settlement: paying a doctor out of a
-        part payment means deciding whose money arrived first, and that is a
-        decision the hospital should make knowingly rather than by default.
-        """
+        """True once the patient has cleared the document in full."""
         self.ensure_one()
         return self._team_paid_ratio() >= 0.9999
 
@@ -136,6 +148,25 @@ class TeamChargeMixin(models.AbstractModel):
         """The doctor's share of what has actually been collected so far."""
         self.ensure_one()
         return (self.team_amount or 0.0) * self._team_paid_ratio()
+
+    def _team_settlement_line_vals(self, settlement_id, amount):
+        """How this carrier appears on a payout document."""
+        self.ensure_one()
+        field = ('charge_id' if self._name == 'hospital.admission.charge'
+                 else 'bill_line_id')
+        return {
+            'settlement_id': settlement_id,
+            field: self.id,
+            'description': self._team_description(),
+            'owed': self.team_amount,
+            'already_paid': self.team_paid,
+            'amount': amount,
+        }
+
+    def _team_description(self):
+        """What this charge is called on a payout document."""
+        self.ensure_one()
+        return self.display_name
 
     # ------------------------------------------------------------------
     def _compute_team_unassigned(self):
@@ -152,10 +183,16 @@ class TeamChargeMixin(models.AbstractModel):
                 not rec.team_provider_id and item
                 and item.team_share_method not in (False, 'none'))
 
-    @api.depends('team_settlement_id')
+    @api.depends('team_amount', 'team_paid')
+    def _compute_team_due(self):
+        for rec in self:
+            rec.team_due = max((rec.team_amount or 0.0) - (rec.team_paid or 0.0), 0.0)
+
+    @api.depends('team_amount', 'team_paid')
     def _compute_team_settled(self):
         for rec in self:
-            rec.team_settled = bool(rec.team_settlement_id)
+            rec.team_settled = (rec.team_amount or 0.0) > 0 and \
+                (rec.team_paid or 0.0) >= (rec.team_amount or 0.0) - 0.005
 
     def _compute_team_provider_id(self):
         for rec in self:
@@ -250,14 +287,15 @@ class TeamChargeMixin(models.AbstractModel):
                     team=rec.team_amount, net=rec._team_net()))
 
     def write(self, vals):
-        """A settled share is a paid-out fact, not an editable figure."""
+        """Money already handed over is a fact, not an editable figure."""
         guarded = {'team_amount', 'team_provider_id', 'team_share_method',
                    'team_share_value'}
         if guarded & set(vals) and not self.env.context.get('team_settling'):
-            settled = self.filtered('team_settlement_id')
+            settled = self.filtered(lambda r: (r.team_paid or 0.0) > 0.005)
             if settled:
                 raise UserError(_(
-                    'This share has already been paid to the doctor on %(ref)s. '
-                    'Cancel that settlement first, or raise an adjusting charge.',
-                    ref=settled[:1].team_settlement_id.name))
+                    'Part of this share has already been paid to the doctor on '
+                    '%(ref)s. Cancel that settlement first, or raise an '
+                    'adjusting charge.',
+                    ref=settled[:1].team_settlement_id.name or '/'))
         return super().write(vals)

@@ -80,6 +80,20 @@ class BillRegister(models.Model):
              "Keeps the due right when the amount is edited between saves, and stops "
              "a second confirm collecting the same money twice.")
     due = fields.Float("Due", compute="_compute_totals", store=True)
+    # An investigation billed to an admitted patient is paid through the
+    # admission, not at the bill counter: calculate_bill folds the bill into the
+    # admission's grand total and the patient settles that. Releasing the
+    # admission records how much of this bill that covered, so the bill stops
+    # reading as outstanding without inventing a counter collection that never
+    # happened.
+    admission_settled = fields.Float(
+        "Settled by Admission", readonly=True, copy=False,
+        help="Cleared when the admitted patient was released -- the admission's "
+             "money covered this bill. No cash was taken at the bill counter for "
+             "it, so it is not a payment and raises no money receipt.")
+    payment_status = fields.Selection(
+        [('unpaid', 'Unpaid'), ('partial', 'Partially Paid'), ('paid', 'Paid')],
+        string='Payment Status', compute='_compute_payment_status', store=True)
 
     card_no = fields.Char('Card No.')
     bank_name = fields.Char('Bank Name')
@@ -204,6 +218,7 @@ class BillRegister(models.Model):
         'paid',
         'down_payment',
         'down_payment_registered',
+        'admission_settled',
         'state',
     )
     def _compute_totals(self):
@@ -258,7 +273,25 @@ class BillRegister(models.Model):
                 # reversed, so there is nothing left to collect.
                 rec.due = 0.0
             else:
-                rec.due = (rec.grand_total or 0.0) - (rec.paid or 0.0) - rec._pending_down_payment()
+                rec.due = ((rec.grand_total or 0.0) - (rec.paid or 0.0)
+                           - rec._pending_down_payment()
+                           - (rec.admission_settled or 0.0))
+
+    @api.depends('grand_total', 'due', 'state')
+    def _compute_payment_status(self):
+        """Whether anything is still owed on this bill.
+
+        ``due`` already nets off counter payments and whatever the admission
+        settled at release, so an investigation paid through the admission reads
+        Paid here rather than sitting Unpaid for ever.
+        """
+        for rec in self:
+            if rec.state == 'cancelled':
+                rec.payment_status = 'unpaid'
+            elif (rec.due or 0.0) > 0.005:
+                rec.payment_status = 'partial' if (rec.grand_total or 0.0) > (rec.due or 0.0) else 'unpaid'
+            else:
+                rec.payment_status = 'paid'
 
     def _pending_down_payment(self):
         """Counter money typed into "Paid Now" that has not been receipted yet.

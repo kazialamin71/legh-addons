@@ -2,3 +2,4 @@ id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_team_charge_settlement_user,team.charge.settlement user,model_team_charge_settlement,base.group_user,1,1,1,0
 access_team_charge_settlement_manager,team.charge.settlement manager,model_team_charge_settlement,account.group_account_manager,1,1,1,1
 access_team_charge_report_user,team.charge.report user,model_team_charge_report,base.group_user,1,0,0,0
+access_team_charge_settlement_line_user,team.charge.settlement.line user,model_team_charge_settlement_line,base.group_user,1,1,1,1

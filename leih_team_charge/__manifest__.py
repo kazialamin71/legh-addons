@@ -28,7 +28,7 @@ This module makes that split explicit, everywhere a charge is raised:
 * **Reconcilable.** One report answers, per doctor and per day: what was charged,
   what was collected, whose money it was, and what is still owed.
 """,
-    'version': '19.0.1.0.9',
+    'version': '19.0.2.0.0',
     'author': 'Kazi Alamin',
     'category': 'Accounting',
     'depends': ['leih_accounting', 'leih_admission', 'leih19'],

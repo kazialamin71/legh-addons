@@ -53,19 +53,17 @@ class LeihCollectionReport(models.Model):
         return bool(self.env.cr.fetchone())
 
     def _select_queries(self):
-        """SELECTs unioned into the view. Override to add a counter.
+        """SELECTs unioned into the view. Override to add a counter."""
+        return [self._select_money_receipts(), self._select_opd_tickets()]
 
-        OPD is deliberately conditional. With leih_cash_collection_auto
-        installed every confirmed OPD ticket issues its own money receipt, so
-        reading the tickets as well would count that money twice; without it,
-        the ticket is the only record of the cash.
+    def _has_legacy_opd_receipts(self):
+        """OPD tickets briefly raised a ``leih.money.receipt`` of their own.
+
+        They no longer do -- the ticket *is* the OPD money document -- but the
+        receipts raised while they did are still in the table, and they have to
+        be kept out of the receipt branch or the ticket branch would report the
+        same money a second time.
         """
-        queries = [self._select_money_receipts()]
-        if not self._opd_goes_through_receipts():
-            queries.append(self._select_opd_tickets())
-        return queries
-
-    def _opd_goes_through_receipts(self):
         return self._has_column('leih_money_receipt', 'opd_ticket_id')
 
     def _select_money_receipts(self):
@@ -80,11 +78,10 @@ class LeihCollectionReport(models.Model):
                         WHEN r.general_admission_id IS NOT NULL
                               OR r.admission_id IS NOT NULL THEN 'admission'
                         WHEN r.optics_sale_id IS NOT NULL THEN 'optics'
-                        %(opd_case)s
                         ELSE 'other' END::varchar AS section,
                    pt.name AS payment_method,
                    COALESCE(b.patient_name, ha.patient_name,
-                            la.patient_name, os.patient_name%(opd_patient)s) AS patient_name,
+                            la.patient_name, os.patient_name) AS patient_name,
                    r.name AS reference,
                    r.amount AS amount
               FROM leih_money_receipt r
@@ -93,19 +90,18 @@ class LeihCollectionReport(models.Model):
          LEFT JOIN hospital_admission ha ON ha.id = r.general_admission_id
          LEFT JOIN leih_admission la ON la.id = r.admission_id
          LEFT JOIN optics_sale os ON os.id = r.optics_sale_id
-                   %(opd_join)s
              WHERE r.state = 'confirm'
                AND COALESCE(r.amount, 0) <> 0
-        """ % ({
-            'opd_case': "WHEN r.opd_ticket_id IS NOT NULL THEN 'opd'",
-            'opd_patient': ', ot.patient_name',
-            'opd_join': 'LEFT JOIN opd_ticket ot ON ot.id = r.opd_ticket_id',
-        } if self._opd_goes_through_receipts() else {
-            'opd_case': '', 'opd_patient': '', 'opd_join': '',
-        })
+               %(opd_exclude)s
+        """ % {'opd_exclude': ('AND r.opd_ticket_id IS NULL'
+                               if self._has_legacy_opd_receipts() else '')}
 
     def _select_opd_tickets(self):
-        """OPD counters mark the ticket collected; they raise no receipt."""
+        """OPD money is read off the ticket, which is the OPD money document.
+
+        It raises no receipt of its own: a confirmed ticket posts its journal
+        entry and goes straight onto the OPD collection sheet.
+        """
         return """
             SELECT t.id AS source_res_id,
                    'opd.ticket'::varchar AS source_model,
@@ -113,15 +109,22 @@ class LeihCollectionReport(models.Model):
                    COALESCE(t.date, t.create_date::date) AS date,
                    COALESCE(t.user_id, t.create_uid) AS user_id,
                    'opd'::varchar AS section,
-                   NULL::varchar AS payment_method,
+                   %(payment_method)s AS payment_method,
                    t.patient_name AS patient_name,
                    t.name AS reference,
                    t.total AS amount
               FROM opd_ticket t
+                   %(payment_join)s
              WHERE t.already_collected = TRUE
                AND COALESCE(t.state, 'confirmed') <> 'cancelled'
                AND COALESCE(t.total, 0) <> 0
-        """
+        """ % ({
+            'payment_method': 'tpt.name',
+            'payment_join': 'LEFT JOIN payment_type tpt ON tpt.id = t.payment_type',
+        } if self._has_column('opd_ticket', 'payment_type') else {
+            'payment_method': 'NULL::varchar',
+            'payment_join': '',
+        })
 
     def init(self):
         tools.drop_view_if_exists(self.env.cr, self._table)

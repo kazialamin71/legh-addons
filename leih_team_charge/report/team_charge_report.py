@@ -64,13 +64,15 @@ class TeamChargeReport(models.Model):
                 c.total_amount    * r.ratio             AS collected,
                 c.hospital_amount * r.ratio             AS hospital_collected,
                 c.team_amount     * r.ratio             AS team_collected,
-                CASE WHEN c.team_settlement_id IS NULL THEN 0.0
-                     ELSE c.team_amount END             AS team_settled,
-                CASE WHEN c.team_settlement_id IS NULL
-                     THEN c.team_amount * r.ratio
-                     ELSE 0.0 END                       AS team_payable,
+                COALESCE(c.team_paid, 0)                AS team_settled,
+                -- Still owed AND already collected from the patient: what the
+                -- counter could actually hand over today.
+                GREATEST(LEAST(c.team_amount * r.ratio,
+                               c.team_amount - COALESCE(c.team_paid, 0)), 0.0)
+                                                        AS team_payable,
                 c.team_settlement_id                    AS settlement_id,
-                (c.team_settlement_id IS NOT NULL)      AS is_settled
+                (COALESCE(c.team_paid, 0)
+                     >= COALESCE(c.team_amount, 0) - 0.005) AS is_settled
               FROM hospital_admission_charge c
               JOIN hospital_admission a ON a.id = c.admission_id
               LEFT JOIN examination_entry e ON e.id = c.item_id
@@ -100,13 +102,15 @@ class TeamChargeReport(models.Model):
                 l.total_amount    * r.ratio             AS collected,
                 l.hospital_amount * r.ratio             AS hospital_collected,
                 l.team_amount     * r.ratio             AS team_collected,
-                CASE WHEN l.team_settlement_id IS NULL THEN 0.0
-                     ELSE l.team_amount END             AS team_settled,
-                CASE WHEN l.team_settlement_id IS NULL
-                     THEN l.team_amount * r.ratio
-                     ELSE 0.0 END                       AS team_payable,
+                COALESCE(l.team_paid, 0)                AS team_settled,
+                -- Still owed AND already collected from the patient: what the
+                -- counter could actually hand over today.
+                GREATEST(LEAST(l.team_amount * r.ratio,
+                               l.team_amount - COALESCE(l.team_paid, 0)), 0.0)
+                                                        AS team_payable,
                 l.team_settlement_id                    AS settlement_id,
-                (l.team_settlement_id IS NOT NULL)      AS is_settled
+                (COALESCE(l.team_paid, 0)
+                     >= COALESCE(l.team_amount, 0) - 0.005) AS is_settled
               FROM bill_register_line l
               JOIN bill_register b ON b.id = l.bill_register_id
               LEFT JOIN examination_entry e ON e.id = l.name

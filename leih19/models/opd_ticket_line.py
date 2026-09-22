@@ -26,3 +26,24 @@ class OpdTicketLine(models.Model):
     def _compute_total_amount(self):
         for rec in self:
             rec.total_amount = rec.price
+
+    # An item added, repriced or removed changes what the ticket is worth, so the
+    # receipt and the journal entry have to be reconsidered -- including when the
+    # line is edited from its own view rather than through the ticket form.
+    @api.model_create_multi
+    def create(self, vals_list):
+        lines = super().create(vals_list)
+        lines.opd_ticket_id._settle_ticket_money()
+        return lines
+
+    def write(self, vals):
+        tickets = self.opd_ticket_id
+        result = super().write(vals)
+        (tickets | self.opd_ticket_id)._settle_ticket_money()
+        return result
+
+    def unlink(self):
+        tickets = self.opd_ticket_id
+        result = super().unlink()
+        tickets.exists()._settle_ticket_money()
+        return result

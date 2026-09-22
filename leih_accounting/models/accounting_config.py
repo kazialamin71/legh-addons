@@ -244,11 +244,19 @@ class LeihAccountingConfig(models.Model):
 
     def _reverse(self, moves):
         """Reverse posted moves and hand the reversals back, so the caller can
-        keep them on the record they belong to instead of orphaning them."""
+        keep them on the record they belong to instead of orphaning them.
+
+        One defaults dict **per move**: ``_reverse_moves`` zips the two together,
+        so a single-element list silently reversed only the first move and left
+        every other entry on the document standing. Cancelling anything with
+        more than one entry behind it -- a payout, an admission, a bill with a
+        payment -- left half of it on the ledger.
+        """
         moves = moves.filtered(lambda m: m.state == 'posted')
         if not moves:
             return self.env['account.move']
-        return moves._reverse_moves([{'date': fields.Date.context_today(self)}], cancel=True)
+        today = fields.Date.context_today(self)
+        return moves._reverse_moves([{'date': today}] * len(moves), cancel=True)
 
 
 class LeihAccountingIncomeMap(models.Model):

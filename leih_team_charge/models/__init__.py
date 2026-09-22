@@ -7,3 +7,4 @@ from . import hospital_admission_charge
 from . import hospital_admission
 from . import bill_register
 from . import team_charge_settlement
+from . import leih_collection_report

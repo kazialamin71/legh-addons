@@ -1,7 +1,7 @@
 {
     'name': 'LEIS Migrated Models',
     'summary': 'Odoo 19 (fields only)',
-    'version': '19.0.8',
+    'version': '19.0.10',
     'sequence': 100,
     'author': 'Mufti Muntasir Ahmed',
     'depends': ['base', 'hr', 'account', 'stock'],
@@ -103,6 +103,7 @@
         'views/optics_sale_views.xml',
         'views/patient_guarantor_views.xml',
         'data/patient_sequence.xml',
+        'data/opd_sequence.xml',
         'data/lab_sequence.xml',
         'data/inventory_sequence.xml',
         'data/lab_antibiotic_data.xml',

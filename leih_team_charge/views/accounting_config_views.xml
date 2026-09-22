@@ -9,12 +9,14 @@
                  `string` as an inheritance selector. -->
             <xpath expr="//field[@name='advance_account_id']/.." position="after">
                 <group string="Doctor's Share">
-                    <field name="team_charge_treatment" widget="radio"/>
-                    <field name="team_payable_account_id"
-                           invisible="team_charge_treatment != 'liability'"
-                           required="team_charge_treatment == 'liability'"/>
-                    <field name="team_allocation" widget="radio"/>
+                    <field name="team_payable_account_id"/>
                     <field name="discount_account_id"/>
+                    <div class="text-muted" colspan="2">
+                        The doctor's share is recognised when the admission is
+                        settled -- or earlier, when the counter pays the doctor
+                        out of money the patient has already handed in. Every
+                        receipt posts the cash in full either way.
+                    </div>
                 </group>
             </xpath>
         </field>
